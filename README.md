@@ -51,12 +51,12 @@ To install gle on your machine afterbuilding
 
 ### options that control the build
 
- * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system.
+ * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
  * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
 
 ### Creating packages with cpack
 
-cpack can be utilized to create distributable pacakges.  These pacakges should be considered preliminary at this time since the manual and library of GLE routines are not included and the GLE package will not be complete.
+cpack can be utilized to create distributable packages.  These packages should be considered preliminary at this time since the manual and library of GLE routines are not included and the GLE package will not be complete.
 
 
 	cd build & cpack -G "WIX;NSIS;ZIP"
