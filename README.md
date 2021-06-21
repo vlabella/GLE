@@ -56,7 +56,7 @@ To install gle on your machine after building
 
 ### Creating packages with cpack
 
-Cpack can be utilized to create distributable packages.  These packages are preliminary since the manual and library of GLE routines are not included, making these packages incomplete at this time.  This will be remidied when the other repos are create for the manual and GLE routines. 
+Cpack can be utilized to create distributable packages.  These packages are preliminary since the manual and library of GLE routines are not included, making these packages incomplete at this time.  This will be remidied when the other repos are created. 
 
 
 	cd build & cpack -G "WIX;NSIS;ZIP"
