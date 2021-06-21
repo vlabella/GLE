@@ -20,7 +20,7 @@ Libraries needed to build GLE are
 * jpeg
 * Qt5 (for GUI)
 
-Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake if not set cmake will look for them in the system specific locations.  For more information consult cmake documentation on find_package.  
+Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake. If not, cmake will look for them in the system default locations.  For more information consult cmake documentation on find_package or find_library.  
 
 * ZLIB_ROOT
 * JPEG_ROOT
