@@ -49,9 +49,9 @@ To install gle on your machine afterbuilding
 
 	cmake -P build/cmake_install.cmake
 
-### options that controll the build
+### options that control the build
 
- * CMAKE_INsTALL_PREFIX - set this to a different install location than the default on your system
+ * CMAKE_INSTALL_PREFIX - set this to a different install location than the default on your system
  * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes /MT instead of /MD.  You must also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries build with /MT as well
 
 ### Creating packages with cpack
