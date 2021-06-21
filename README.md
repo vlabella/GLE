@@ -40,12 +40,12 @@ to install gle on you machine after building
 
 	cd build ; make install
 
-### Building on windows with Visual Studio as 64 bit executable
+### Building on Windows with Visual Studio as 64 bit executable
 
 	cmake -S src -B build -A x64 -T host=x64
 	cmake --build build
 
-To install gle on your machine afterbuilding
+To install gle on your machine after building
 
 	cmake -P build/cmake_install.cmake
 
