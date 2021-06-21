@@ -7,7 +7,7 @@ This repo contains the source code to build the executables for the GLE package.
 
 ## Building with CMAKE
 
-GLE can be build on Windows, Mac and Linux using cmake.
+GLE can be built on Windows, Mac, and Linux using cmake and system specific toolchains: Visual Studio, Xcode, and gcc.
 
 Libraries needed to build GLE are
 
