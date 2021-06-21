@@ -52,7 +52,7 @@ To install gle on your machine after building
 
  * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
  * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
- * ZLIB_USE_STATIC_LIBS - set ON to link to static veriants of zlib: .a .lib instead of .so and .dll
+ * ZLIB_USE_STATIC_LIBS - set ON to link to static variants of zlib: .a .lib instead of .so and .dll
 
 ### Creating packages with cpack
 
