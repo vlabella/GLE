@@ -1,0 +1,204 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                      !
+! GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          !
+!                                                                      !
+! Modified BSD License                                                 !
+!                                                                      !
+! Copyright (C) 2009 GLE.                                              !
+!                                                                      !
+! Redistribution and use in source and binary forms, with or without   !
+! modification, are permitted provided that the following conditions   !
+! are met:                                                             !
+!                                                                      !
+!    1. Redistributions of source code must retain the above copyright !
+! notice, this list of conditions and the following disclaimer.        !
+!                                                                      !
+!    2. Redistributions in binary form must reproduce the above        !
+! copyright notice, this list of conditions and the following          !
+! disclaimer in the documentation and/or other materials provided with !
+! the distribution.                                                    !
+!                                                                      !
+!    3. The name of the author may not be used to endorse or promote   !
+! products derived from this software without specific prior written   !
+! permission.                                                          !
+!                                                                      !
+! THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR   !
+! IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       !
+! WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   !
+! ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY       !
+! DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL   !
+! DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE    !
+! GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS        !
+! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER !
+! IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR      !
+! OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN  !
+! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
+!                                                                      !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!1    Triangle
+!2    Filled Triangle
+!3    White Triangle
+!4    Square
+!5    Filled Square
+!6    White Square
+!7    Circle
+!8    Filled Circle
+!9    White Circle
+!10   Diamond
+!11   Filled Diamond
+!12   White Diamond
+!13   Cross
+!14   Plus
+!15   Minus
+dfont file_name="GLEMARK"
+dfont font_name="GLEMARK"
+dfont design= 10
+dfont x_hei= 5
+dfont quad= 5
+dfont paint="FILL"
+!------------------ end of main parameters
+dfont  char=1
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 0
+	rline 10 0
+	rline -5 10
+	closepath
+stroke
+dfont endchar
+dfont  char=2
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 0
+	rline 10 0
+	rline -5 10
+	closepath
+fill
+stroke
+dfont endchar
+dfont  char=3
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 0
+	rline 10 0
+	rline -5 10
+	closepath
+fillwhite
+stroke
+dfont endchar
+dfont  char=4
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 0
+	rline 10 0
+	rline 0 10
+	rline -10 0
+	closepath
+stroke
+dfont endchar
+dfont  char=5
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 0
+	rline 10 0
+	rline 0 10
+	rline -10 0
+	closepath
+fill
+stroke
+dfont endchar
+dfont  char=6
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 0
+	rline 10 0
+	rline 0 10
+	rline -10 0
+	closepath
+fillwhite
+stroke
+dfont endchar
+dfont  char=7
+dfont  wid=10 hei=10
+size 20 20
+	asetpos 5 5
+	circle 5
+	closepath
+stroke
+dfont endchar
+dfont  char=8
+dfont  wid=10 hei=10
+size 20 20
+	asetpos 5 5
+	circle 5
+	closepath
+fill
+stroke
+dfont endchar
+dfont  char=9
+dfont  wid=10 hei=10
+size 20 20
+	asetpos 5 5
+	circle 5
+	closepath
+fillwhite
+stroke
+dfont endchar
+dfont  char=10
+dfont  wid=10 hei=10
+size 20 20
+	amove 5 0
+	rline 5 5
+	rline -5 5
+	rline -5 -5
+	closepath
+stroke
+dfont endchar
+dfont  char=11
+dfont  wid=10 hei=10
+size 20 20
+	amove 5 0
+	rline 5 5
+	rline -5 5
+	rline -5 -5
+	closepath
+fill
+stroke
+dfont endchar
+dfont  char=12
+dfont  wid=10 hei=10
+size 20 20
+	amove 5 0
+	rline 5 5
+	rline -5 5
+	rline -5 -5
+	closepath
+fillwhite
+stroke
+dfont endchar
+dfont  char=13
+dfont  wid=10 hei=10
+size 20 20
+	amove 0  0
+	aline 10 10
+	amove 0  10
+	aline 10 0
+stroke
+dfont endchar
+dfont  char=14
+dfont  wid=10 hei=10
+size 20 20
+	amove 5  0
+	aline 5  10
+	amove 0  5
+	aline 10 5
+stroke
+dfont endchar
+dfont  char=15
+dfont  wid=10 hei=10
+size 20 20
+	amove 0  5
+	rline 10 0
+stroke
+dfont endchar

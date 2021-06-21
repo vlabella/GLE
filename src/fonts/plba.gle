@@ -1,0 +1,1646 @@
+dfont design= 1428 
+dfont char=33
+amove  181  0 
+aline  181  181 
+aline  363  181 
+aline  363  0 
+aline  181  0 
+amove  181  272 
+aline  181  909 
+aline  363  909 
+aline  363  272 
+aline  181  272 
+stroke 
+dfont endchar
+dfont char=34
+amove  90  727 
+aline  90  909 
+aline  181  909 
+aline  181  727 
+aline  90  727 
+amove  363  727 
+aline  363  909 
+aline  454  909 
+aline  454  727 
+aline  363  727 
+stroke 
+dfont endchar
+dfont char=35
+amove  90  90 
+aline  90  272 
+aline  0  272 
+aline  0  363 
+aline  90  363 
+aline  90  545 
+aline  0  545 
+aline  0  636 
+aline  90  636 
+aline  90  818 
+aline  181  818 
+aline  181  636 
+aline  363  636 
+aline  363  818 
+aline  454  818 
+aline  454  636 
+aline  545  636 
+aline  545  545 
+aline  454  545 
+aline  454  363 
+aline  545  363 
+aline  545  272 
+aline  454  272 
+aline  454  90 
+aline  363  90 
+aline  363  272 
+aline  181  272 
+aline  181  90 
+aline  90  90 
+amove  181  363 
+aline  181  545 
+aline  363  545 
+aline  363  363 
+aline  181  363 
+stroke 
+dfont endchar
+dfont char=36
+amove  0  90 
+aline  0  272 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  363 
+aline  90  363 
+aline -1  454 
+aline -1  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  636 
+aline  363  636 
+aline  363  727 
+aline  181  727 
+aline  181  545 
+aline  454  545 
+aline  545  454 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  272  0 
+aline  272  909 
+stroke 
+dfont endchar
+dfont char=37
+amove  0  636 
+aline  0  909 
+aline  272  909 
+aline  272  636 
+aline  0  636 
+amove  90  727 
+aline  90  818 
+aline  181  818 
+aline  181  727 
+aline  90  727 
+amove  90  90 
+aline  454  909 
+aline  545  909 
+aline  545  818 
+aline  181  0 
+aline  90  0 
+aline  90  90 
+amove  363  0 
+aline  363  272 
+aline  636  272 
+aline  636  0 
+aline  363  0 
+amove  454  90 
+aline  454  181 
+aline  545  181 
+aline  545  90 
+aline  454  90 
+stroke 
+dfont endchar
+dfont char=38
+amove  181  454 
+aline  90  545 
+aline  90  727 
+aline  181  818 
+aline  363  818 
+aline  454  727 
+aline  454  545 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  272 
+aline  545  272 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+aline  0  272 
+aline  272  545 
+aline  272  727 
+amove  363  454 
+aline  454  363 
+aline  363  272 
+aline  272  363 
+stroke 
+dfont endchar
+dfont char=39
+amove  272  636 
+aline  272  909 
+aline  363  909 
+aline  363  636 
+aline  272  636 
+stroke 
+dfont endchar
+dfont char=40
+amove  181  90 
+aline  181  818 
+aline  272  909 
+aline  454  909 
+aline  454  727 
+aline  363  727 
+aline  363  181 
+aline  454  181 
+aline  454  0 
+aline  272  0 
+aline  181  90 
+stroke 
+dfont endchar
+dfont char=41
+amove  90  0 
+aline  90  181 
+aline  181  181 
+aline  181  727 
+aline  90  727 
+aline  90  909 
+aline  272  909 
+aline  363  818 
+aline  363  90 
+aline  272  0 
+aline  90  0 
+stroke 
+dfont endchar
+dfont char=42
+amove  90  272 
+aline  181  363 
+aline  0  363 
+aline  0  454 
+aline  181  454 
+aline  90  545 
+aline  181  636 
+aline  272  454 
+aline  363  636 
+aline  454  545 
+aline  363  454 
+aline  545  454 
+aline  545  363 
+aline  363  363 
+aline  454  272 
+aline  363  181 
+aline  272  363 
+aline  181  181 
+aline  90  272 
+stroke 
+dfont endchar
+dfont char=43
+amove  0  363 
+aline  0  545 
+aline  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  545  545 
+aline  545  363 
+aline  363  363 
+aline  363  181 
+aline  181  181 
+aline  181  363 
+aline  0  363 
+stroke 
+dfont endchar
+dfont char=44
+amove  90  0 
+aline  181  0 
+aline  181  181 
+aline  363  181 
+aline  363 -91 
+aline  90 -91 
+aline  90 -1 
+stroke 
+dfont endchar
+dfont char=45
+amove  0  363 
+aline  0  545 
+aline  545  545 
+aline  545  363 
+aline  0  363 
+stroke 
+dfont endchar
+dfont char=46
+amove  181  0 
+aline  181  181 
+aline  363  181 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=47
+amove  0  0 
+aline  0  90 
+aline  363  909 
+aline  545  909 
+aline  545  818 
+aline  181  0 
+aline -1  0 
+stroke 
+dfont endchar
+dfont char=48
+amove  0  90 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  181 
+aline  181  727 
+aline  363  727 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=49
+amove  181  0 
+aline  181  727 
+aline  90  727 
+aline  90  909 
+aline  363  909 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=50
+amove  0  0 
+aline  0  181 
+aline  363  545 
+aline  363  727 
+aline  181  727 
+aline  181  545 
+aline  0  545 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  454 
+aline  272  181 
+aline  545  181 
+aline  545 -1 
+aline  0 -1 
+stroke 
+dfont endchar
+dfont char=51
+amove  0  90 
+aline  0  272 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  363 
+aline  181  363 
+aline  181  545 
+aline  363  545 
+aline  363  727 
+aline  181  727 
+aline  181  636 
+aline  0  636 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  545 
+aline  454  454 
+aline  545  363 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=52
+amove  0  181 
+aline  0  454 
+aline  181  909 
+aline  454  909 
+aline  454  363 
+aline  545  363 
+aline  545  181 
+aline  454  181 
+aline  454  0 
+aline  272  0 
+aline  272  181 
+aline  0  181 
+amove  181  363 
+aline  272  636 
+aline  272  363 
+aline  181  363 
+stroke 
+dfont endchar
+dfont char=53
+amove  0  90 
+aline  0  272 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  454 
+aline  0  454 
+aline  0  909 
+aline  545  909 
+aline  545  727 
+aline  181  727 
+aline  181  636 
+aline  454  636 
+aline  545  545 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=54
+amove  0  90 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  636 
+aline  363  636 
+aline  363  727 
+aline  181  727 
+aline  181  545 
+aline  454  545 
+aline  545  454 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  181 
+aline  181  363 
+aline  363  363 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=55
+amove  90  0 
+aline  363  727 
+aline  0  727 
+aline  0  909 
+aline  545  909 
+aline  545  727 
+aline  272  0 
+aline  90  0 
+stroke 
+dfont endchar
+dfont char=56
+amove  0  90 
+aline  0  363 
+aline  90  454 
+aline  0  545 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  545 
+aline  454  454 
+aline  545  363 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  181 
+aline  181  363 
+aline  363  363 
+aline  363  181 
+aline  181  181 
+amove  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=57
+amove  0  90 
+aline  0  272 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  363 
+aline  90  363 
+aline -1  454 
+aline -1  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=58
+amove  181  0 
+aline  181  181 
+aline  363  181 
+aline  363  0 
+aline  181  0 
+amove  181  363 
+aline  181  545 
+aline  363  545 
+aline  363  363 
+aline  181  363 
+stroke 
+dfont endchar
+dfont char=59
+amove  90  0 
+aline  181  0 
+aline  181  181 
+aline  363  181 
+aline  363 -91 
+aline  90 -91 
+aline  90 -1 
+amove  181  363 
+aline  181  545 
+aline  363  545 
+aline  363  363 
+aline  181  363 
+stroke 
+dfont endchar
+dfont char=60
+amove  454  0 
+aline  0  454 
+aline  454  909 
+aline  454  727 
+aline  181  454 
+aline  454  181 
+aline  454 -1 
+stroke 
+dfont endchar
+dfont char=61
+amove  0  272 
+aline  0  363 
+aline  545  363 
+aline  545  272 
+aline  0  272 
+amove  0  545 
+aline  0  636 
+aline  545  636 
+aline  545  545 
+aline  0  545 
+stroke 
+dfont endchar
+dfont char=62
+amove  90  0 
+aline  90  181 
+aline  363  454 
+aline  90  727 
+aline  90  909 
+aline  545  454 
+aline  90  0 
+stroke 
+dfont endchar
+dfont char=63
+amove  181  0 
+aline  181  181 
+aline  363  181 
+aline  363  0 
+aline  181  0 
+amove  181  272 
+aline  181  363 
+aline  363  545 
+aline  363  727 
+aline  181  727 
+aline  181  636 
+aline  0  636 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  545 
+aline  363  272 
+aline  181  272 
+stroke 
+dfont endchar
+dfont char=64
+amove  272  363 
+aline  272  545 
+aline  363  545 
+aline  363  363 
+aline  272  363 
+amove  545  363 
+aline  454  363 
+aline  454  545 
+aline  363  636 
+aline  272  636 
+aline  181  545 
+aline  181  363 
+aline  272  272 
+aline  545  272 
+aline  545  636 
+aline  454  727 
+aline  181  727 
+aline  90  636 
+aline  90  272 
+aline  181  181 
+aline  545  181 
+stroke 
+dfont endchar
+dfont char=65
+amove  0  0 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  0 
+aline  363  0 
+aline  363  363 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+amove  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=66
+amove  0  0 
+aline  0  909 
+aline  454  909 
+aline  545  818 
+aline  545  545 
+aline  454  454 
+aline  545  363 
+aline  545  90 
+aline  454 -1 
+aline  0 -1 
+amove  181  181 
+aline  181  363 
+aline  363  363 
+aline  363  181 
+aline  181  181 
+amove  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=67
+amove  0  90 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  636 
+aline  363  636 
+aline  363  727 
+aline  181  727 
+aline  181  181 
+aline  363  181 
+aline  363  272 
+aline  545  272 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=68
+amove  0  0 
+aline  0  909 
+aline  454  909 
+aline  545  818 
+aline  545  90 
+aline  454  0 
+aline  0  0 
+amove  181  181 
+aline  181  727 
+aline  363  727 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=69
+amove  0  0 
+aline  0  909 
+aline  545  909 
+aline  545  727 
+aline  181  727 
+aline  181  545 
+aline  363  545 
+aline  363  363 
+aline  181  363 
+aline  181  181 
+aline  545  181 
+aline  545  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=70
+amove  0  0 
+aline  0  909 
+aline  545  909 
+aline  545  727 
+aline  181  727 
+aline  181  545 
+aline  363  545 
+aline  363  363 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=71
+amove  0  90 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  636 
+aline  363  636 
+aline  363  727 
+aline  181  727 
+aline  181  181 
+aline  363  181 
+aline  363  363 
+aline  272  363 
+aline  272  545 
+aline  545  545 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=72
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  181  545 
+aline  363  545 
+aline  363  909 
+aline  545  909 
+aline  545  0 
+aline  363  0 
+aline  363  363 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=73
+amove  181  0 
+aline  181  909 
+aline  363  909 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=74
+amove  0  90 
+aline  0  272 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  909 
+aline  545  909 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=75
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  181  545 
+aline  363  727 
+aline  363  909 
+aline  545  909 
+aline  545  636 
+aline  363  454 
+aline  545  272 
+aline  545  0 
+aline  363  0 
+aline  363  181 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=76
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  181  181 
+aline  545  181 
+aline  545  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=77
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  272  636 
+aline  363  909 
+aline  545  909 
+aline  545  0 
+aline  363  0 
+aline  363  545 
+aline  272  363 
+aline  181  545 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=78
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  363  454 
+aline  363  909 
+aline  545  909 
+aline  545  0 
+aline  363  0 
+aline  181  454 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=79
+amove  0  90 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  181 
+aline  181  727 
+aline  363  727 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=80
+amove  0  0 
+aline  0  909 
+aline  454  909 
+aline  545  818 
+aline  545  454 
+aline  454  363 
+aline  181  363 
+aline  181  0 
+aline -1  0 
+amove  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=81
+amove  181  181 
+aline  181  727 
+aline  363  727 
+aline  363  181 
+aline  181  181 
+amove  454  0 
+aline  90  0 
+aline  0  90 
+aline  0  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  90 
+aline  636  0 
+aline  545 -91 
+aline  363  90 
+aline  454  181 
+aline  545  90 
+stroke 
+dfont endchar
+dfont char=82
+amove  0  0 
+aline  0  909 
+aline  454  909 
+aline  545  818 
+aline  545  545 
+aline  454  454 
+aline  545  363 
+aline  545  0 
+aline  363  0 
+aline  363  272 
+aline  272  363 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+amove  181  545 
+aline  181  727 
+aline  363  727 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=83
+amove  0  90 
+aline  0  272 
+aline  181  272 
+aline  181  181 
+aline  363  181 
+aline  363  363 
+aline  90  363 
+aline -1  454 
+aline -1  818 
+aline  90  909 
+aline  454  909 
+aline  545  818 
+aline  545  636 
+aline  363  636 
+aline  363  727 
+aline  181  727 
+aline  181  545 
+aline  454  545 
+aline  545  454 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=84
+amove  181  0 
+aline  181  727 
+aline  0  727 
+aline  0  909 
+aline  545  909 
+aline  545  727 
+aline  363  727 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=85
+amove  0  90 
+aline  0  909 
+aline  181  909 
+aline  181  181 
+aline  363  181 
+aline  363  909 
+aline  545  909 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=86
+amove  181  0 
+aline  0  272 
+aline  0  909 
+aline  181  909 
+aline  181  363 
+aline  272  181 
+aline  363  363 
+aline  363  909 
+aline  545  909 
+aline  545  272 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=87
+amove  90  0 
+aline  0  272 
+aline  0  909 
+aline  181  909 
+aline  181  363 
+aline  272  454 
+aline  363  363 
+aline  363  909 
+aline  545  909 
+aline  545  272 
+aline  454  0 
+aline  363  0 
+aline  272  181 
+aline  181  0 
+aline  90  0 
+stroke 
+dfont endchar
+dfont char=88
+amove  0  0 
+aline  0  272 
+aline  181  454 
+aline  0  636 
+aline  0  909 
+aline  181  909 
+aline  181  727 
+aline  272  636 
+aline  363  727 
+aline  363  909 
+aline  545  909 
+aline  545  636 
+aline  363  454 
+aline  545  272 
+aline  545  0 
+aline  363  0 
+aline  363  181 
+aline  272  272 
+aline  181  181 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=89
+amove  181  0 
+aline  181  363 
+aline  0  636 
+aline  0  909 
+aline  181  909 
+aline  181  727 
+aline  272  545 
+aline  363  727 
+aline  363  909 
+aline  545  909 
+aline  545  636 
+aline  363  363 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=90
+amove  0  0 
+aline  0  272 
+aline  363  727 
+aline  0  727 
+aline  0  909 
+aline  545  909 
+aline  545  636 
+aline  181  181 
+aline  545  181 
+aline  545  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=91
+amove  90  0 
+aline  90  909 
+aline  363  909 
+aline  363  818 
+aline  272  818 
+aline  272  90 
+aline  363  90 
+aline  363  0 
+aline  90  0 
+stroke 
+dfont endchar
+dfont char=92
+amove  363  0 
+aline  0  818 
+aline  0  909 
+aline  181  909 
+aline  545  90 
+aline  545  0 
+aline  363  0 
+stroke 
+dfont endchar
+dfont char=93
+amove  181  0 
+aline  181  90 
+aline  272  90 
+aline  272  818 
+aline  181  818 
+aline  181  909 
+aline  454  909 
+aline  454  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=94
+amove  0  272 
+aline  272  636 
+aline  545  272 
+aline  363  272 
+aline  272  363 
+aline  181  272 
+aline  0  272 
+stroke 
+dfont endchar
+dfont char=95
+amove  0  0 
+aline  0  181 
+aline  545  181 
+aline  545  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=96
+amove  272  727 
+aline  90  909 
+aline  181  909 
+aline  363  727 
+aline  272  727 
+stroke 
+dfont endchar
+dfont char=97
+amove  0  90 
+aline  0  272 
+aline  90  363 
+aline  363  363 
+aline  363  454 
+aline  0  454 
+aline  0  545 
+aline  90  636 
+aline  454  636 
+aline  545  545 
+aline  545  0 
+aline  90  0 
+aline  0  90 
+amove  181  181 
+aline  181  272 
+aline  363  272 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=98
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  181  545 
+aline  272  636 
+aline  454  636 
+aline  545  545 
+aline  545  90 
+aline  454  0 
+aline  272  0 
+aline  181  90 
+aline  181  0 
+aline  0  0 
+amove  181  181 
+aline  181  454 
+aline  363  454 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=99
+amove  0  90 
+aline  0  545 
+aline  90  636 
+aline  454  636 
+aline  545  545 
+aline  545  363 
+aline  363  363 
+aline  363  454 
+aline  181  454 
+aline  181  181 
+aline  363  181 
+aline  363  272 
+aline  545  272 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=100
+amove  0  90 
+aline  0  545 
+aline  90  636 
+aline  272  636 
+aline  363  545 
+aline  363  909 
+aline  545  909 
+aline  545  0 
+aline  363  0 
+aline  363  90 
+aline  272  0 
+aline  90  0 
+aline -1  90 
+amove  181  181 
+aline  181  454 
+aline  363  454 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=101
+amove  0  90 
+aline  0  545 
+aline  90  636 
+aline  454  636 
+aline  545  545 
+aline  545  363 
+aline  454  272 
+aline  181  272 
+aline  181  181 
+aline  545  181 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  363 
+aline  181  454 
+aline  363  454 
+aline  363  363 
+aline  181  363 
+stroke 
+dfont endchar
+dfont char=102
+amove  181  0 
+aline  181  545 
+aline  90  545 
+aline  90  636 
+aline  181  636 
+aline  181  818 
+aline  272  909 
+aline  545  909 
+aline  545  818 
+aline  454  818 
+aline  363  727 
+aline  363  636 
+aline  454  636 
+aline  454  545 
+aline  363  545 
+aline  363  0 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=103
+amove  0  90 
+aline  0  545 
+aline  90  636 
+aline  272  636 
+aline  363  545 
+aline  363  636 
+aline  545  636 
+aline  545 -91 
+aline  363 -273 
+aline  90 -273 
+aline -1 -182 
+aline -1  0 
+aline  90 -91 
+aline  272 -91 
+aline  363  0 
+aline  363  90 
+aline  272  0 
+aline  90  0 
+aline -1  90 
+amove  181  181 
+aline  181  454 
+aline  363  454 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=104
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  181  545 
+aline  272  636 
+aline  454  636 
+aline  545  545 
+aline  545  0 
+aline  363  0 
+aline  363  454 
+aline  272  454 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=105
+amove  181  0 
+aline  181  636 
+aline  363  636 
+aline  363  0 
+aline  181  0 
+amove  181  727 
+aline  181  909 
+aline  363  909 
+aline  363  727 
+aline  181  727 
+stroke 
+dfont endchar
+dfont char=106
+amove  0  0 
+aline  90 -91 
+aline  272 -91 
+aline  363  0 
+aline  363  636 
+aline  545  636 
+aline  545 -91 
+aline  363 -273 
+aline  90 -273 
+aline -1 -182 
+aline -1 -1 
+amove  363  727 
+aline  363  909 
+aline  545  909 
+aline  545  727 
+aline  363  727 
+stroke 
+dfont endchar
+dfont char=107
+amove  0  0 
+aline  0  909 
+aline  181  909 
+aline  181  545 
+aline  272  636 
+aline  454  636 
+aline  545  545 
+aline  545  363 
+aline  454  272 
+aline  545  0 
+aline  363  0 
+aline  272  272 
+aline  181  272 
+aline  181  0 
+aline  0  0 
+amove  181  363 
+aline  181  454 
+aline  363  454 
+aline  363  363 
+aline  181  363 
+stroke 
+dfont endchar
+dfont char=108
+amove  181  90 
+aline  181  909 
+aline  363  909 
+aline  363  90 
+aline  454  90 
+aline  454  0 
+aline  272  0 
+aline  181  90 
+stroke 
+dfont endchar
+dfont char=109
+amove  0  0 
+aline  0  636 
+aline  181  636 
+aline  181  545 
+aline  272  636 
+aline  363  545 
+aline  454  636 
+aline  545  636 
+aline  545  0 
+aline  363  0 
+aline  363  454 
+amove  181  454 
+aline  181  0 
+aline  0  0 
+amove  181  0 
+aline  363  0 
+stroke 
+dfont endchar
+dfont char=110
+amove  0  0 
+aline  0  636 
+aline  181  636 
+aline  181  545 
+aline  272  636 
+aline  454  636 
+aline  545  545 
+aline  545  0 
+aline  363  0 
+aline  363  454 
+aline  181  454 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=111
+amove  0  90 
+aline  0  545 
+aline  90  636 
+aline  454  636 
+aline  545  545 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+amove  181  181 
+aline  181  454 
+aline  363  454 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=112
+amove  181  90 
+aline  181 -273 
+aline  0 -273 
+aline  0  636 
+aline  181  636 
+aline  181  545 
+aline  272  636 
+aline  454  636 
+aline  545  545 
+aline  545  90 
+aline  454  0 
+aline  272  0 
+aline  181  90 
+amove  181  181 
+aline  181  454 
+aline  363  454 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=113
+amove  0  90 
+aline  0  545 
+aline  90  636 
+aline  272  636 
+aline  363  545 
+aline  363  636 
+aline  545  636 
+aline  545 -91 
+aline  636 -91 
+aline  636 -182 
+aline  545 -182 
+aline  545 -273 
+aline  363 -273 
+aline  363 -182 
+aline  272 -182 
+aline  272 -91 
+aline  363 -91 
+aline  363  90 
+aline  272  0 
+aline  90  0 
+aline -1  90 
+amove  181  181 
+aline  181  454 
+aline  363  454 
+aline  363  181 
+aline  181  181 
+stroke 
+dfont endchar
+dfont char=114
+amove  0  0 
+aline  0  636 
+aline  181  636 
+aline  181  545 
+aline  272  636 
+aline  454  636 
+aline  454  454 
+aline  272  454 
+aline  181  363 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=115
+amove  0  90 
+aline  0  181 
+aline  363  181 
+aline  363  272 
+aline  90  272 
+aline -1  363 
+aline -1  545 
+aline  90  636 
+aline  454  636 
+aline  545  545 
+aline  545  454 
+aline  181  454 
+aline  181  363 
+aline  454  363 
+aline  545  272 
+aline  545  90 
+aline  454  0 
+aline  90  0 
+aline  0  90 
+stroke 
+dfont endchar
+dfont char=116
+amove  181  90 
+aline  181  636 
+aline  90  636 
+aline  90  727 
+aline  181  727 
+aline  181  909 
+aline  363  909 
+aline  363  727 
+aline  454  727 
+aline  454  636 
+aline  363  636 
+aline  363  90 
+aline  454  90 
+aline  454  0 
+aline  272  0 
+aline  181  90 
+stroke 
+dfont endchar
+dfont char=117
+amove  0  90 
+aline  0  636 
+aline  181  636 
+aline  181  181 
+aline  363  181 
+aline  363  636 
+aline  545  636 
+aline  545  0 
+aline  363  0 
+aline  363  90 
+aline  272  0 
+aline  90  0 
+aline -1  90 
+stroke 
+dfont endchar
+dfont char=118
+amove  272  0 
+aline  0  272 
+aline  0  636 
+aline  181  636 
+aline  181  363 
+aline  272  272 
+aline  363  363 
+aline  363  636 
+aline  545  636 
+aline  545  272 
+aline  272  0 
+stroke 
+dfont endchar
+dfont char=119
+amove  181  0 
+aline  0  272 
+aline  0  636 
+aline  181  636 
+aline  181  272 
+aline  272  363 
+aline  363  272 
+aline  363  636 
+aline  545  636 
+aline  545  272 
+aline  363  0 
+aline  272  181 
+aline  181  0 
+stroke 
+dfont endchar
+dfont char=120
+amove  0  0 
+aline  0  181 
+aline  90  272 
+aline  90  363 
+aline  0  454 
+aline  0  636 
+aline  181  636 
+aline  181  454 
+aline  272  363 
+aline  363  454 
+aline  363  636 
+aline  545  636 
+aline  545  454 
+aline  454  363 
+aline  454  272 
+aline  545  181 
+aline  545  0 
+aline  363  0 
+aline  363  181 
+aline  272  272 
+aline  181  181 
+aline  181  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=121
+amove  0  0 
+aline  90 -91 
+aline  272 -91 
+aline  363  0 
+aline  363  90 
+aline  272  0 
+aline  90  0 
+aline -1  90 
+aline -1  636 
+aline  181  636 
+aline  181  181 
+aline  363  181 
+aline  363  636 
+aline  545  636 
+aline  545 -91 
+aline  363 -273 
+aline  90 -273 
+aline -1 -182 
+aline -1 -1 
+stroke 
+dfont endchar
+dfont char=122
+amove  0  0 
+aline  0  181 
+aline  272  454 
+aline  0  454 
+aline  0  636 
+aline  545  636 
+aline  545  454 
+aline  272  181 
+aline  545  181 
+aline  545  0 
+aline  0  0 
+stroke 
+dfont endchar
+dfont char=123
+amove  272  0 
+aline  181  90 
+aline  181  363 
+aline  0  454 
+aline  181  545 
+aline  181  818 
+aline  272  909 
+aline  454  909 
+aline  454  818 
+aline  363  818 
+aline  272  727 
+aline  272  181 
+aline  363  90 
+aline  454  90 
+aline  454  0 
+aline  272  0 
+stroke 
+dfont endchar
+dfont char=124
+amove  181  0 
+aline  181  363 
+aline  363  363 
+aline  363  0 
+aline  181  0 
+amove  181  545 
+aline  181  909 
+aline  363  909 
+aline  363  545 
+aline  181  545 
+stroke 
+dfont endchar
+dfont char=125
+amove  90  0 
+aline  90  90 
+aline  181  90 
+aline  272  181 
+aline  272  727 
+aline  181  818 
+aline  90  818 
+aline  90  909 
+aline  272  909 
+aline  363  818 
+aline  363  545 
+aline  545  454 
+aline  363  363 
+aline  363  90 
+aline  272 -1 
+aline  90 -1 
+stroke 
+dfont endchar
+dfont char=126
+amove  0  363 
+aline  0  545 
+aline  90  636 
+aline  181  636 
+aline  363  454 
+aline  454  454 
+aline  545  545 
+aline  545  363 
+aline  454  272 
+aline  363  272 
+aline  181  454 
+aline  90  454 
+aline  0  363 
+stroke 
+dfont endchar
+dfont char=127
+amove  272  181 
+aline  0  454 
+aline  272  727 
+aline  272  545 
+aline  545  545 
+aline  545  363 
+aline  272  363 
+aline  272  181 
+stroke 
+dfont endchar

@@ -1,0 +1,28 @@
+
+
+sub test_string_comparison switch1$ switch2$
+  if (switch1$ = 'true') and (switch2$ = 'true') then
+   return 'both'
+  end if
+  if (switch1$ = 'true') and (switch2$ = 'false') then
+   return 'only switch1'
+  end if
+  if ('false' = switch1$) and (switch2$ = 'true') then
+   return 'only switch2'
+  end if
+  if (switch1$ = 'false') and (switch2$ = 'false') then
+   return 'none'
+  end if
+  return 'err'
+end sub
+
+sub test_or_in_boolean_expression
+   a$ = "5"
+   b$ = "6"
+   c = 3
+   d = 5
+   if (a$ = "3") or (d = 5) then
+     return 1
+   end if
+   return 0
+end sub

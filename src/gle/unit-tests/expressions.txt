@@ -1,0 +1,44 @@
+1+2,3
+6-2,4
+2*7,14
+10/5,2
+2^3,8
+7%5,2
+4=5,false
+5<10,true
+5<=5,true
+6>10,false
+6>=6,true
+5<>5,false
+(2 < 6) and (4 = 3),false
+(2 < 6) and (4 = 4),true
+"'hello' + ' ' + 'world'",hello world
+"'ape' < 'zebra'",true
+"'zebra' < 'ape'",false
+"'ape' > 'zebra'",false
+"'zebra' > 'ape'",true
+"'ape' <= 'zebra'",true
+"'zebra' <= 'ape'",false
+"'ape' >= 'zebra'",false
+"'zebra' >= 'ape'",true
+"'APE' >= 'ape'",true
+"'APE' <= 'ape'",true
+"'APE' > 'ape'",false
+"'APE' < 'ape'",false
+"'x' . 'y'",x.y
+"'5 = ' + 5",5 = 5
+"seg$('Hello', 2, 4)",ell
+"seg$('Hello', 1, -1)",Hello
+"seg$('Hello', 2, -2)",ell
+"left$('Hello', 2)",He
+"left$('Hello', 0)",
+"right$('Hello', 0)",
+"right$('Hello', 3)",llo
+chr$(65),A
+"pos('HelloWorldHello', 'Hel', 4)", 11
+"pos('HelloWorldHello', 'Hel', 11)", 11
+"pos('HelloWorldHello', 'Hel', 12)", 0
+"pos('HelloWorldHello', 'Hel', 1)", 1
+"pos('HelloWorldHello', 'Hel', -5)", 11
+
+

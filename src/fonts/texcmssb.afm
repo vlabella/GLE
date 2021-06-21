@@ -1,0 +1,294 @@
+StartFontMetrics 2.0
+Comment	Made from TEX tfm file using TFMTOAFM.bas 
+FontName CMSSBX10
+EncodingScheme TEXENCODING 
+FullName CMSSBX10
+FamilyName CMSSBX10
+Weight Medium
+ItalicAngle  0 
+IsFixedPitch false
+UnderlinePosition -97
+UnderlineThickness 73
+FontBBox 0 -300 1001 1001
+CapHeight 729
+XHeight  161 
+Descender -219
+Ascender 729
+StartCharMetrics  127 
+C  1  ; WX 916  ; N C1  ; B 0  0  916  694 ;
+C  2  ; WX 855  ; N C2  ; B 0  0  855  694 ;
+C  3  ; WX 672  ; N C3  ; B 0  0  672  694 ;
+C  4  ; WX 733  ; N C4  ; B 0  0  733  694 ;
+C  5  ; WX 794  ; N C5  ; B 0  0  794  694 ;
+C  6  ; WX 794  ; N C6  ; B 0  0  794  694 ;
+C  7  ; WX 855  ; N C7  ; B 0  0  855  694 ;
+C  8  ; WX 794  ; N C8  ; B 0  0  794  694 ;
+C  9  ; WX 855  ; N C9  ; B 0  0  855  694 ;
+C  10  ; WX 794  ; N C10  ; B 0  0  794  694 ;
+C  11  ; WX 641  ; N C11  ; B 0  0  641  694 ; L i  C14  L l  C15 
+C  12  ; WX 586  ; N C12  ; B 0  0  586  694 ;
+C  13  ; WX 586  ; N C13  ; B 0  0  586  694 ;
+C  14  ; WX 891  ; N C14  ; B 0  0  891  694 ;
+C  15  ; WX 891  ; N C15  ; B 0  0  891  694 ;
+C  16  ; WX 255  ; N C16  ; B 0  0  255  458 ;
+C  17  ; WX 286  ; N C17  ; B 0 -194  286  458 ;
+C  18  ; WX 550  ; N C18  ; B 0  0  550  694 ;
+C  19  ; WX 550  ; N C19  ; B 0  0  550  694 ;
+C  20  ; WX 550  ; N C20  ; B 0  0  550  635 ;
+C  21  ; WX 550  ; N C21  ; B 0  0  550  694 ;
+C  22  ; WX 550  ; N C22  ; B 0  0  550  637 ;
+C  23  ; WX 733  ; N C23  ; B 0  0  733  694 ;
+C  24  ; WX 488  ; N C24  ; B 0 -170  488  0 ;
+C  25  ; WX 565  ; N C25  ; B 0  0  565  694 ;
+C  26  ; WX 794  ; N C26  ; B 0  0  794  458 ;
+C  27  ; WX 855  ; N C27  ; B 0  0  855  458 ;
+C  28  ; WX 550  ; N C28  ; B 0 -97  550  555 ;
+C  29  ; WX 947  ; N C29  ; B 0  0  947  694 ;
+C  30  ; WX 1069  ; N C30  ; B 0  0  1069  694 ;
+C  31  ; WX 855  ; N C31  ; B 0 -48  855  743 ;
+C  32  ; WX 257  ; N C32  ; B 0  0  257  458 ;
+C  33  ; WX 366  ; N C33  ; B 0  0  366  694 ;
+C  34  ; WX 558  ; N C34  ; B 0  0  558  694 ;
+C  35  ; WX 916  ; N C35  ; B 0 -194  916  694 ;
+C  36  ; WX 550  ; N C36  ; B 0 -55  550  750 ;
+C  37  ; WX 1029  ; N C37  ; B 0 -55  1029  750 ;
+C  38  ; WX 830  ; N C38  ; B 0  0  830  694 ;
+C  39  ; WX 305  ; N C39  ; B 0  0  305  694 ; L C39  C34 
+C  40  ; WX 427  ; N C40  ; B 0 -250  427  750 ;
+C  41  ; WX 427  ; N C41  ; B 0 -250  427  750 ;
+C  42  ; WX 550  ; N C42  ; B 0  0  550  750 ;
+C  43  ; WX 855  ; N C43  ; B 0 -116  855  616 ;
+C  44  ; WX 305  ; N C44  ; B 0 -105  305  130 ;
+C  45  ; WX 366  ; N C45  ; B 0  0  366  458 ;
+C  46  ; WX 305  ; N C46  ; B 0  0  305  130 ;
+C  47  ; WX 550  ; N C47  ; B 0 -250  550  750 ;
+C  48  ; WX 550  ; N C48  ; B 0  0  550  694 ;
+C  49  ; WX 550  ; N C49  ; B 0  0  550  694 ;
+C  50  ; WX 550  ; N C50  ; B 0  0  550  694 ;
+C  51  ; WX 550  ; N C51  ; B 0  0  550  694 ;
+C  52  ; WX 550  ; N C52  ; B 0  0  550  694 ;
+C  53  ; WX 550  ; N C53  ; B 0  0  550  694 ;
+C  54  ; WX 550  ; N C54  ; B 0  0  550  694 ;
+C  55  ; WX 550  ; N C55  ; B 0  0  550  694 ;
+C  56  ; WX 550  ; N C56  ; B 0  0  550  694 ;
+C  57  ; WX 550  ; N C57  ; B 0  0  550  694 ;
+C  58  ; WX 305  ; N C58  ; B 0  0  305  458 ;
+C  59  ; WX 305  ; N C59  ; B 0 -105  305  458 ;
+C  60  ; WX 366  ; N C60  ; B 0 -194  366  500 ;
+C  61  ; WX 855  ; N C61  ; B 0  94  855  406 ;
+C  62  ; WX 519  ; N C62  ; B 0 -194  519  500 ;
+C  63  ; WX 519  ; N C63  ; B 0  0  519  694 ;
+C  64  ; WX 733  ; N C64  ; B 0  0  733  694 ;
+C  65  ; WX 733  ; N A  ; B 0  0  733  694 ;
+C  66  ; WX 733  ; N B  ; B 0  0  733  694 ;
+C  67  ; WX 702  ; N C  ; B 0  0  702  694 ;
+C  68  ; WX 794  ; N D  ; B 0  0  794  694 ;
+C  69  ; WX 641  ; N E  ; B 0  0  641  694 ;
+C  70  ; WX 611  ; N F  ; B 0  0  611  694 ;
+C  71  ; WX 733  ; N G  ; B 0  0  733  694 ;
+C  72  ; WX 794  ; N H  ; B 0  0  794  694 ;
+C  73  ; WX 330  ; N I  ; B 0  0  330  694 ;
+C  74  ; WX 519  ; N J  ; B 0  0  519  694 ;
+C  75  ; WX 763  ; N K  ; B 0  0  763  694 ;
+C  76  ; WX 580  ; N L  ; B 0  0  580  694 ;
+C  77  ; WX 977  ; N M  ; B 0  0  977  694 ;
+C  78  ; WX 794  ; N N  ; B 0  0  794  694 ;
+C  79  ; WX 794  ; N O  ; B 0  0  794  694 ;
+C  80  ; WX 702  ; N P  ; B 0  0  702  694 ;
+C  81  ; WX 794  ; N Q  ; B 0 -105  794  694 ;
+C  82  ; WX 702  ; N R  ; B 0  0  702  694 ;
+C  83  ; WX 611  ; N S  ; B 0  0  611  694 ;
+C  84  ; WX 733  ; N T  ; B 0  0  733  694 ;
+C  85  ; WX 763  ; N U  ; B 0  0  763  694 ;
+C  86  ; WX 733  ; N V  ; B 0  0  733  694 ;
+C  87  ; WX 1038  ; N W  ; B 0  0  1038  694 ;
+C  88  ; WX 733  ; N X  ; B 0  0  733  694 ;
+C  89  ; WX 733  ; N Y  ; B 0  0  733  694 ;
+C  90  ; WX 672  ; N Z  ; B 0  0  672  694 ;
+C  91  ; WX 343  ; N C91  ; B 0 -250  343  750 ;
+C  92  ; WX 558  ; N C92  ; B 0  0  558  694 ;
+C  93  ; WX 343  ; N C93  ; B 0 -250  343  750 ;
+C  94  ; WX 550  ; N C94  ; B 0  0  550  694 ;
+C  95  ; WX 305  ; N C95  ; B 0  0  305  694 ;
+C  96  ; WX 305  ; N C96  ; B 0  0  305  694 ;
+C  97  ; WX 525  ; N a  ; B 0  0  525  458 ;
+C  98  ; WX 561  ; N b  ; B 0  0  561  694 ;
+C  99  ; WX 488  ; N c  ; B 0  0  488  458 ;
+C  100  ; WX 561  ; N d  ; B 0  0  561  694 ;
+C  101  ; WX 511  ; N e  ; B 0  0  511  458 ;
+C  102  ; WX 336  ; N f  ; B 0  0  336  694 ; L f  C11  L i  C12  L l  C13 
+C  103  ; WX 550  ; N g  ; B 0 -194  550  458 ;
+C  104  ; WX 561  ; N h  ; B 0  0  561  694 ;
+C  105  ; WX 255  ; N i  ; B 0  0  255  694 ;
+C  106  ; WX 286  ; N j  ; B 0 -194  286  694 ;
+C  107  ; WX 530  ; N k  ; B 0  0  530  694 ;
+C  108  ; WX 255  ; N l  ; B 0  0  255  694 ;
+C  109  ; WX 866  ; N m  ; B 0  0  866  458 ;
+C  110  ; WX 561  ; N n  ; B 0  0  561  458 ;
+C  111  ; WX 550  ; N o  ; B 0  0  550  458 ;
+C  112  ; WX 561  ; N p  ; B 0 -194  561  458 ;
+C  113  ; WX 561  ; N q  ; B 0 -194  561  458 ;
+C  114  ; WX 372  ; N r  ; B 0  0  372  458 ;
+C  115  ; WX 421  ; N s  ; B 0  0  421  458 ;
+C  116  ; WX 404  ; N t  ; B 0  0  404  589 ;
+C  117  ; WX 561  ; N u  ; B 0  0  561  458 ;
+C  118  ; WX 500  ; N v  ; B 0  0  500  458 ;
+C  119  ; WX 744  ; N w  ; B 0  0  744  458 ;
+C  120  ; WX 500  ; N x  ; B 0  0  500  458 ;
+C  121  ; WX 500  ; N y  ; B 0 -194  500  458 ;
+C  122  ; WX 476  ; N z  ; B 0  0  476  458 ;
+C  123  ; WX 550  ; N C123  ; B 0  0  550  458 ;
+C  124  ; WX 1100  ; N C124  ; B 0  0  1100  458 ;
+C  125  ; WX 550  ; N C125  ; B 0  0  550  694 ;
+C  126  ; WX 550  ; N C126  ; B 0  0  550  694 ;
+C  127  ; WX 550  ; N C127  ; B 0  0  550  694 ;
+EndCharMetrics
+
+StartKernData
+StartKernPairs  143 
+KPX C11  C33   76 
+KPX C11  C39   76 
+KPX C11  C41   76 
+KPX C11  C63   76 
+KPX C11  C93   76 
+KPX C32  L  -294 
+KPX C32  l  -256 
+KPX C39  C33   122 
+KPX C39  C63   122 
+KPX A  C  -31 
+KPX A  G  -31 
+KPX A  O  -31 
+KPX A  Q  -31 
+KPX A  T  -92 
+KPX A  U  -31 
+KPX A  V  -123 
+KPX A  W  -123 
+KPX A  Y  -92 
+KPX A  t  -31 
+KPX D  A  -31 
+KPX D  V  -31 
+KPX D  W  -31 
+KPX D  X  -31 
+KPX D  Y  -31 
+KPX F  A  -92 
+KPX F  C  -31 
+KPX F  G  -31 
+KPX F  O  -31 
+KPX F  Q  -31 
+KPX F  a  -31 
+KPX F  e  -31 
+KPX F  o  -31 
+KPX F  r  -31 
+KPX F  u  -31 
+KPX I  I   30 
+KPX K  C  -31 
+KPX K  G  -31 
+KPX K  O  -31 
+KPX K  Q  -31 
+KPX L  T  -92 
+KPX L  V  -123 
+KPX L  W  -123 
+KPX L  Y  -92 
+KPX O  A  -31 
+KPX O  V  -31 
+KPX O  W  -31 
+KPX O  X  -31 
+KPX O  Y  -31 
+KPX P  C44  -92 
+KPX P  C46  -92 
+KPX P  A  -92 
+KPX P  a  -31 
+KPX P  e  -31 
+KPX P  o  -31 
+KPX T  A  -92 
+KPX T  a  -92 
+KPX T  e  -92 
+KPX T  o  -92 
+KPX T  r  -92 
+KPX T  u  -92 
+KPX T  y  -92 
+KPX V  A  -92 
+KPX V  C  -31 
+KPX V  G  -31 
+KPX V  O  -31 
+KPX V  Q  -31 
+KPX V  a  -31 
+KPX V  e  -31 
+KPX V  o  -31 
+KPX V  r  -31 
+KPX V  u  -31 
+KPX W  A  -92 
+KPX W  C  -31 
+KPX W  G  -31 
+KPX W  O  -31 
+KPX W  Q  -31 
+KPX W  a  -31 
+KPX W  e  -31 
+KPX W  o  -31 
+KPX W  r  -31 
+KPX W  u  -31 
+KPX X  C  -31 
+KPX X  G  -31 
+KPX X  O  -31 
+KPX X  Q  -31 
+KPX Y  A  -92 
+KPX Y  a  -92 
+KPX Y  e  -92 
+KPX Y  o  -92 
+KPX Y  r  -92 
+KPX Y  u  -92 
+KPX a  r  -31 
+KPX a  w  -31 
+KPX a  y  -31 
+KPX b  c   30 
+KPX b  d   30 
+KPX b  e   30 
+KPX b  o   30 
+KPX b  q   30 
+KPX b  r  -31 
+KPX b  w  -31 
+KPX b  x  -31 
+KPX b  y  -31 
+KPX f  C33   76 
+KPX f  C39   76 
+KPX f  C41   76 
+KPX f  C63   76 
+KPX f  C93   76 
+KPX g  j   30 
+KPX k  a  -31 
+KPX k  c  -31 
+KPX k  e  -31 
+KPX k  o  -31 
+KPX o  c   30 
+KPX o  d   30 
+KPX o  e   30 
+KPX o  o   30 
+KPX o  q   30 
+KPX o  r  -31 
+KPX o  w  -31 
+KPX o  x  -31 
+KPX o  y  -31 
+KPX p  c   30 
+KPX p  d   30 
+KPX p  e   30 
+KPX p  o   30 
+KPX p  q   30 
+KPX p  r  -31 
+KPX p  w  -31 
+KPX p  x  -31 
+KPX p  y  -31 
+KPX t  w  -31 
+KPX t  y  -31 
+KPX u  w  -31 
+KPX w  a  -31 
+KPX w  c  -31 
+KPX w  e  -31 
+KPX w  o  -31 
+KPX y  C44  -92 
+KPX y  C46  -92 
+KPX y  a  -31 
+KPX y  e  -31 
+KPX y  o  -31 
+EndKernPairs
+EndKernData
+EndFontMetrics

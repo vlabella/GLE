@@ -1,0 +1,99 @@
+! font		number	metricfile	vectorfile	bitmapfile	name
+rm		1	pstr.fmt	texcmr.fve	tr.fmt		% Times
+rmb		3	pstb.fmt	texcmb.fve	tb.fmt		- B(rm)
+rmi		2	psti.fmt	texcmmi.fve	ti.fmt		- I(rm)
+rmbi		4	pstbi.fmt	texcmb.fve	tbi.fmt		- BI(rm)
+ss		5	psh.fmt		texcmitt.fve	h.fmt		% Sans Serif
+ssb		7	pshb.fmt	texcmitt.fve	hb.fmt		- B(ss)
+ssi		6	psho.fmt	texcmitt.fve	hi.fmt		- I(ss)
+ssbi		8	pshbo.fmt	texcmitt.fve	hbi.fmt		- BI(ss)
+tt		82	psc.fmt		texcmr.fve	tr.fmt		% Typewriter
+ttb		84	pscb.fmt	texcmb.fve	tb.fmt		- B(tt)
+tti		83	psco.fmt	texcmmi.fve	ti.fmt		- I(tt)
+ttbi		85	pscbo.fmt	texcmb.fve	tbi.fmt		- BI(tt)
+pstr		59	pstr.fmt	pstr.fve	pstr.fmt	% PS Times
+pstb		56	pstb.fmt	pstb.fve	pstb.fmt	- B(pstr)
+psti		58	psti.fmt	psti.fve	psti.fmt	- I(pstr)
+pstbi		57	pstbi.fmt	pstbi.fve	pstbi.fmt	- BI(pstr)
+psh		35	psh.fmt		psh.fve		psh.fmt		% PS Helvetica
+pshb		36	pshb.fmt	pshb.fve	pshb.fmt	- B(psh)
+psho		42	psho.fmt	psho.fve	psho.fmt	- I(psh)
+pshbo		37	pshbo.fmt	pshbo.fve	pshbo.fmt	- BI(psh)
+pshc		38	pshc.fmt	pshc.fve	pshc.fmt	% PS Helvetica Condensed
+pshcb		39	pshcb.fmt	pshcb.fve	pshcb.fmt	- B(pshc)
+pshcdo		41	pshcdo.fmt	pshcdo.fve	pshcdo.fmt	- I(pshc)
+pshcbo		40	pshcbo.fmt	pshcbo.fve	pshcbo.fmt	- BI(pshc)
+pshn		43	pshn.fmt	pshn.fve	pshn.fmt	% PS Helvetica Narrow
+pshnb		44	pshnb.fmt	pshnb.fve	pshnb.fmt	- B(pshn)
+pshno		46	pshno.fmt	pshno.fve	pshno.fmt	- I(pshn)
+pshnbo		45	pshnbo.fmt	pshnbo.fve	pshnbo.fmt	- BI(pshn)
+psncsr		50	psncsr.fmt	psncsr.fve	psncsr.fmt	% PS New Century Schoolbook
+psncsb		47	psncsb.fmt	psncsb.fve	psncsb.fmt	- B(psncsr)
+psncsi		49	psncsi.fmt	psncsi.fve	psncsi.fmt	- I(psncsr)
+psncsbi		48	psncsbi.fmt	psncsbi.fve	psncsbi.fmt	- BI(psncsr)
+pspr		54	pspr.fmt	pspr.fve	pspr.fmt	% PS Palatino
+pspb		51	pspb.fmt	pspb.fve	pspb.fmt	- B(pspr)
+pspi		53	pspi.fmt	pspi.fve	pspi.fmt	- I(pspr)
+pspbi		52	pspbi.fmt	pspbi.fve	pspbi.fmt	- BI(pspr)
+psagb		24	psagb.fmt	psagb.fve	psagb.fmt	% PS AvantGarde
+psagd		26	psagd.fmt	psagd.fve	psagd.fmt	- B(psagb)
+psagbo		25	psagbo.fmt	psagbo.fve	psagbo.fmt	- I(psagb)
+psagdo		27	psagdo.fmt	psagdo.fve	psagdo.fmt	- BI(psagb)
+psbl		86	psbl.fmt	psbl.fve	psbl.fmt	% PS Bookman
+psbd		28	psbd.fmt	psbd.fve	psbd.fmt	- B(psbl)
+psbli		30	psbli.fmt	psbli.fve	psbli.fmt	- I(psbl)
+psbdi		29	psbdi.fmt	psbdi.fve	psbdi.fmt	- BI(psbl)
+psc		31	psc.fmt		psc.fve		psc.fmt		% PS Courier
+pscb		32	pscb.fmt	pscb.fve	pscb.fmt	- B(psc)
+psco		34	psco.fmt	psco.fve	psco.fmt	- I(psc)
+pscbo		33	pscbo.fmt	pscbo.fve	pscbo.fmt	- BI(psc)
+pssym		55	pssym.fmt	pssym.fve	pssym.fmt	% PS Symbol
+pszcmi		60	pszcmi.fmt	pszcmi.fve	pszcmi.fmt	% PS ZapfChancery
+pszd		61	pszd.fmt	pszd.fve	pszd.fmt	% PS ZapfDingbats
+glemark		12	glemark.fmt	glemark.fve	glemark.fmt	% GLE Marker
+texcmr		17	texcmr.fmt	texcmr.fve	texcmr.fmt	% TeX CM
+texcmb		13	texcmb.fmt	texcmb.fve	texcmb.fmt	- B(texcmr)
+texcmti		22	texcmti.fmt	texcmti.fve	texcmti.fmt	- I(texcmr)
+texcmss 	18	texcmss.fmt	texcmss.fve	texcmss.fmt	% TeX CM Sans Serif
+texcmssb 	19	texcmssb.fmt	texcmssb.fve	texcmssb.fmt	- B(texcmss)
+texcmssi	20	texcmssi.fmt	texcmssi.fve	texcmssi.fmt	- I(texcmss)
+texcmtt		23	texcmtt.fmt	texcmtt.fve	texcmtt.fmt	% TeX CM Typewriter
+texcmitt	15	texcmitt.fmt	texcmitt.fve	texcmitt.fmt	- I(texcmtt)
+texcmsy		21	texcmsy.fmt	texcmsy.fve	texcmsy.fmt	% TeX CM Symbol
+texcmex		14	texcmex.fmt	texcmex.fve	texcmex.fmt	% TeX CM Extensible
+texcmmi 	16	texcmmi.fmt	texcmmi.fve	texcmmi.fmt	% TeX CM Maths Italic
+texmi 		9	texcmmi.fmt	texcmmi.fve	texcmmi.fmt	% TeX Math Italic
+texsy		10	texcmsy.fmt	texcmsy.fve	texcmsy.fmt	% TeX Math Greek Symbols
+texex		11	texcmex.fmt	texcmex.fve	texcmex.fmt	% TeX Math Extensible Characters
+plba		62	plba.fmt	plba.fve	plba.fmt	% Plotter Block Ascii
+plcr		66	plcr.fmt	plcr.fve	plcr.fmt	% Plotter Complex
+plci		65	plci.fmt	plci.fve	plci.fmt	- I(plcr)
+plcc		63	plcc.fmt	plcc.fve	plcc.fmt	% Plotter Complex Cartographic
+plcg		64	plcg.fmt	plcg.fve	plcg.fmt	% Plotter Complex Gothic
+plcs		67	plcs.fmt	plcs.fve	plcs.fmt	% Plotter Complex Script
+pldr		68	pldr.fmt	pldr.fve	pldr.fmt	% Plotter Duplex
+plge		69	plge.fmt	plge.fve	plge.fmt	% Plotter Gothic English
+plgg		70	plgg.fmt	plgg.fve	plgg.fmt	% Plotter Gothic German
+plgi		71	plgi.fmt	plgi.fve	plgi.fmt	% Plotter Gothic Italian
+plsa		72	plsa.fmt	plsa.fve	plsa.fmt	% Plotter Simplex Ascii
+plsg		73	plsg.fmt	plsg.fve	plsg.fmt	% Plotter Simplex German
+plsr		74	plsr.fmt	plsr.fve	plsr.fmt	% Plotter Simplex
+plss		75	plss.fmt	plss.fve	plss.fmt	% Plotter Simplex Script
+plsym1		76	plsym1.fmt	plsym1.fve	plsym1.fmt	% Plotter Symbols One
+plsym2		77	plsym2.fmt	plsym2.fve	plsym2.fmt	% Plotter Symbols Two
+pltr		79	pltr.fmt	pltr.fve	pltr.fmt	% Plotter Triplex
+plti		78	plti.fmt	plti.fve	plti.fmt	- I(pltr)
+plba		80	plba.fmt	plba.fve	plba.fmt	% Plotter Block Ascii
+plsa		81	plsa.fmt	plsa.fve	plsa.fmt	% Plotter Simplex Ascii
+arial8		87	arial8.fmt	arial8.fve	arial8.fmt	% Arial Cyrillic
+arial8b		88	arialbd8.fmt	arialbd8.fve	arialbd8.fmt	- B(arial8)
+arial8i		89	ariali8.fmt	ariali8.fve	ariali8.fmt	- I(arial8)
+arial8bi	90	arialbi8.fmt	arialbi8.fve	arialbi8.fmt	- BI(arial8)
+cour8		91	cour8.fmt	cour8.fve	cour8.fmt	% Courier Cyrillic
+cour8b		92	courbd8.fmt	courbd8.fve	courbd8.fmt	- B(cour8)
+cour8i		93	couri8.fmt	couri8.fve	couri8.fmt	- I(cour8)
+cour8bi		94	courbi8.fmt	courbi8.fve	courbi8.fmt	- BI(cour8)
+times8		95	times8.fmt	times8.fve	times8.fmt	% Times Cyrillic
+times8b		96	timesbd8.fmt	timesbd8.fve	timesbd8.fmt	- B(times8)
+times8i		97	timesi8.fmt	timesi8.fve	timesi8.fmt	- I(times8)
+times8bi	98	timesbi8.fmt	timesbi8.fve	timesbi8.fmt	- BI(times8)

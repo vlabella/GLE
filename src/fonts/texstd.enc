@@ -1,0 +1,87 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                      !
+! GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          !
+!                                                                      !
+! Modified BSD License                                                 !
+!                                                                      !
+! Copyright (C) 2009 GLE.                                              !
+!                                                                      !
+! Redistribution and use in source and binary forms, with or without   !
+! modification, are permitted provided that the following conditions   !
+! are met:                                                             !
+!                                                                      !
+!    1. Redistributions of source code must retain the above copyright !
+! notice, this list of conditions and the following disclaimer.        !
+!                                                                      !
+!    2. Redistributions in binary form must reproduce the above        !
+! copyright notice, this list of conditions and the following          !
+! disclaimer in the documentation and/or other materials provided with !
+! the distribution.                                                    !
+!                                                                      !
+!    3. The name of the author may not be used to endorse or promote   !
+! products derived from this software without specific prior written   !
+! permission.                                                          !
+!                                                                      !
+! THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR   !
+! IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       !
+! WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   !
+! ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY       !
+! DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL   !
+! DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE    !
+! GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS        !
+! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER !
+! IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR      !
+! OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN  !
+! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
+!                                                                      !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+0; capital gamma
+1; capital delta
+2; capital theta
+3; capital lambda
+4; capital epsilon
+5; capital pi
+6; capital sigma
+7; capital gamma
+8; capital phi
+9; capital psi
+10; capital omega
+11; ligature ff
+12; ligature fi
+13; ligature fl
+14; ligature ffi
+15; ligature ffl
+16; dot-less i
+$0237, 17; dot-less j
+18; accent \
+19; accent /
+20; caron
+21; breve
+22; boriz bar
+23; ring
+24; ognek
+25; german ss
+26; ae
+27; oe
+28; oring
+29; AE
+30; OE
+31; Oring
+123; endash
+124; emdash
+125; accent //
+126; accent ~
+127; accent ë
+
+$2020; dagger
+$2021; double dagger
+$2022; bullet
+$2030; per mille
+
+$00C6, 29; AE
+$00D8, 31; Oslash
+$0153, 27; oe
+$0152, 30; OE
+$00E6, 26; ae
+$00F8, 28; oslash

@@ -1,0 +1,5630 @@
+dfont file_name="CMEX10"
+dfont font_name="CMEX10"
+dfont design= .35146 
+dfont slant= 0 
+dfont space= 0 
+dfont stretch= 0 
+dfont shrink= 0 
+dfont x_hei= .151323 
+dfont quad= .351461 
+dfont extra_space= 0 
+dfont rulethickness= .039999 
+dfont bigop1= .111112 
+dfont bigop2= .166667 
+dfont bigop3= .2 
+dfont bigop4= .6 
+dfont bigop5= .1 
+dfont paint="FILL"
+!------------------ end of main parameters
+dfont  char=0			!-------------- Beginning of new char.
+dfont  wid=.458336 hei=.039999 dep=1.16001 italic=0
+dfont  next_char=16
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .14351  .01143 
+aline  .14478  .01016 
+aline  .14478  .00762 
+bezier  .112221 -.253104E-01  .934872E-01 -.698839E-01  .08509 -.11557 
+aline  .08382 -.11684 
+aline  .08382 -.12319 
+aline  .08255 -.12446 
+aline  .08255 -.13081 
+aline  .08128 -.13208 
+aline  .08128 -.14097 
+aline  .08001 -.14224 
+aline  .08001 -.15367 
+aline  .07874 -.15494 
+aline  .07874 -.17145 
+aline  .07747 -.17272 
+aline  .07747 -.22352 
+aline  .07874 -.22479 
+aline  .07874 -.2413 
+aline  .08001 -.24257 
+bezier  .808793E-01 -.272449  .891178E-01 -.301709  .09906 -.33147 
+bezier  .109521 -.358549  .124779 -.383166  .14478 -.40386 
+aline  .14478 -.4064 
+aline  .14351 -.40767 
+aline  .13843 -.40767 
+bezier  .840611E-01 -.363178  .573401E-01 -.289813  .05588 -.22225 
+aline  .05461 -.22098 
+aline  .05461 -.17526 
+aline  .05588 -.17399 
+bezier  .573401E-01 -.106427  .840611E-01 -.330615E-01  .13843  .01143 
+aline  .14351  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=1			!-------------- Beginning of new char.
+dfont  wid=.458336 hei=.039999 dep=1.16001 italic=0
+dfont  next_char=17
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .02286  .01143 
+bezier  .772289E-01 -.330615E-01  .10395 -.106427  .10541 -.17399 
+aline  .10668 -.17526 
+aline  .10668 -.22098 
+aline  .10541 -.22225 
+bezier  .10395 -.289813  .077229 -.363179  .02286 -.40767 
+aline  .01778 -.40767 
+aline  .01651 -.4064 
+aline  .01651 -.40386 
+bezier  .490686E-01 -.37093  .678028E-01 -.326356  .0762 -.28067 
+aline  .07747 -.2794 
+aline  .07747 -.27305 
+aline  .07874 -.27178 
+aline  .07874 -.26543 
+aline  .08001 -.26416 
+aline  .08001 -.25527 
+aline  .08128 -.254 
+aline  .08128 -.24257 
+aline  .08255 -.2413 
+aline  .08255 -.22479 
+aline  .08382 -.22352 
+aline  .08382 -.17272 
+aline  .08255 -.17145 
+aline  .08255 -.15494 
+aline  .08128 -.15367 
+bezier  .804107E-01 -.123791  .721722E-01 -.094531  .06223 -.06477 
+bezier  .517689E-01 -.376913E-01  .365112E-01 -.130745E-01  .01651  .00762 
+aline  .01651  .01016 
+aline  .01778  .01143 
+aline  .02286  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=2			!-------------- Beginning of new char.
+dfont  wid=.416669 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="h"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13716  .01143 
+aline  .13716 -.00254 
+aline  .08636 -.00254 
+aline  .08509 -.00381 
+aline  .08509 -.39243 
+aline  .08636 -.3937 
+aline  .13716 -.3937 
+aline  .13716 -.40767 
+aline  .07112 -.40767 
+aline  .07112  .01143 
+aline  .13716  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=3			!-------------- Beginning of new char.
+dfont  wid=.416669 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="i"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .07493  .01143 
+aline  .07493 -.40767 
+aline  .00889 -.40767 
+aline  .00889 -.3937 
+aline  .05969 -.3937 
+aline  .06096 -.39243 
+aline  .06096 -.00381 
+aline  .05969 -.00254 
+aline  .00889 -.00254 
+aline  .00889  .01143 
+aline  .07493  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=4			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="j"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .08509  .01143 
+aline  .08509 -.39243 
+aline  .08636 -.3937 
+aline  .15748 -.3937 
+aline  .15748 -.40767 
+aline  .07112 -.40767 
+aline  .07112  .01143 
+aline  .08509  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=5			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="k"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .09525  .01143 
+aline  .09525 -.40767 
+aline  .00889 -.40767 
+aline  .00889 -.3937 
+aline  .08001 -.3937 
+aline  .08128 -.39243 
+aline  .08128  .01143 
+aline  .09525  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=6			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="l"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .15748  .01143 
+aline  .15748 -.00254 
+aline  .08636 -.00254 
+aline  .08509 -.00381 
+aline  .08509 -.40767 
+aline  .07112 -.40767 
+aline  .07112  .01143 
+aline  .15748  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=7			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="m"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .09525  .01143 
+aline  .09525 -.40767 
+aline  .08128 -.40767 
+aline  .08128 -.00381 
+aline  .08001 -.00254 
+aline  .00889 -.00254 
+aline  .00889  .01143 
+aline  .09525  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=8			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="n"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .16129  .01143 
+aline  .16256  .01016 
+aline  .16256  .00508 
+bezier  .143782 -.346585E-02  .120125 -.126029E-01  .11557 -.03556 
+aline  .1143 -.03683 
+aline  .1143 -.1524 
+bezier  .108626 -.178806  .814177E-01 -.190065  .05842 -.19812 
+bezier  .814177E-01 -.206175  .108626 -.217434  .1143 -.24384 
+aline  .1143 -.35941 
+bezier  .120173 -.381093  .140935 -.39338  .16129 -.40005 
+aline  .16256 -.40132 
+aline  .16256 -.4064 
+aline  .16129 -.40767 
+bezier  .137568 -.405256  .11361 -.394104  .09779 -.37592 
+aline  .09271 -.36576 
+aline  .09144 -.36068 
+aline  .09144 -.24511 
+bezier  .873988E-01 -.233039  .805679E-01 -.220699  .06858 -.21463 
+aline  .06731 -.21336 
+aline  .06477 -.21209 
+aline  .0635 -.21082 
+aline  .05334 -.20574 
+aline  .04572 -.2032 
+aline  .04318 -.20193 
+aline  .04191 -.20066 
+aline  .04191 -.19558 
+aline  .04318 -.19431 
+bezier  .632452E-01 -.187029  .858397E-01 -.175268  .09017 -.1524 
+aline  .09144 -.15113 
+aline  .09144 -.03556 
+bezier  .985938E-01 -.710893E-02  .129576  .408575E-02  .15494  .01143 
+aline  .16129  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=9			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="o"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .04953  .01143 
+bezier  .752947E-01  .415885E-02  .106963 -.665241E-02  .1143 -.03556 
+aline  .1143 -.15113 
+bezier  .119586 -.172253  .138609 -.186575  .15875 -.19304 
+aline  .16129 -.19431 
+aline  .16256 -.19558 
+aline  .16256 -.20066 
+bezier  .143311 -.209552  .119563 -.220138  .11557 -.24384 
+aline  .1143 -.24511 
+aline  .1143 -.36068 
+bezier  .106963 -.389588  .752947E-01 -.400399  .04953 -.40767 
+aline  .04318 -.40767 
+aline  .04191 -.4064 
+aline  .04191 -.40132 
+bezier  .607427E-01 -.392297  .856622E-01 -.384241  .09017 -.36068 
+aline  .09144 -.35941 
+aline  .09144 -.24384 
+bezier  .973389E-01 -.217681  .123888 -.205339  .14732 -.19812 
+bezier  .123888 -.190901  .973389E-01 -.178559  .09144 -.1524 
+aline  .09144 -.03683 
+aline  .09017 -.03556 
+bezier  .856622E-01 -.119992E-01  .607427E-01 -.394333E-02  .04191  .00508 
+aline  .04191  .01016 
+aline  .04318  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=10			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="D"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13462  .01143 
+aline  .13843  .00762 
+aline  .13843  .00127 
+bezier  .109164 -.653061E-01  .791816E-01 -.131665  .512763E-01 -.198755 
+bezier  .791816E-01 -.265845  .109164 -.332204  .13843 -.39878 
+aline  .13843 -.40513 
+aline  .13462 -.40894 
+aline  .12827 -.40894 
+bezier  .112248 -.382344  .102986 -.351723  .0889 -.32385 
+bezier  .071457 -.28307  .536771E-01 -.24243  .03556 -.20193 
+aline  .03556 -.19558 
+bezier  .660384E-01 -.127598  .949745E-01 -.589772E-01  .12573  .00889 
+aline  .12827  .01143 
+aline  .13462  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=11			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="E"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0381  .01143 
+bezier  .541224E-01 -.151657E-01  .633837E-01 -.457868E-01  .07747 -.07366 
+bezier  .094913 -.11444  .112693 -.15508  .13081 -.19558 
+aline  .13081 -.20193 
+bezier  .100332 -.269912  .713953E-01 -.338533  .04064 -.4064 
+aline  .0381 -.40894 
+aline  .03175 -.40894 
+aline  .02794 -.40513 
+aline  .02794 -.39878 
+bezier  .572066E-01 -.332204  .087188 -.265845  .115094 -.198755 
+bezier  .087188 -.131665  .572066E-01 -.065306  .02794  .00127 
+aline  .02794  .00762 
+aline  .03175  .01143 
+aline  .0381  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=12			!-------------- Beginning of new char.
+dfont  wid=.333334 hei=0 dep=.600006 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep=12
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .06223  .00508 
+aline  .06604  .00127 
+aline  .06604 -.2159 
+aline  .06223 -.21971 
+aline  .05842 -.22098 
+aline  .05461 -.21971 
+aline  .0508 -.2159 
+aline  .0508  .00127 
+aline  .05461  .00508 
+aline  .05842  .00635 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=13			!-------------- Beginning of new char.
+dfont  wid=.555557 hei=0 dep=.600006 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep=13
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .06223  .00508 
+aline  .06604  .00127 
+aline  .06604 -.2159 
+aline  .06223 -.21971 
+aline  .05842 -.22098 
+aline  .05461 -.21971 
+aline  .0508 -.2159 
+aline  .0508  .00127 
+aline  .05461  .00508 
+aline  .05842  .00635 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .14097  .00508 
+aline  .14478  .00127 
+aline  .14478 -.2159 
+aline  .14097 -.21971 
+aline  .13716 -.22098 
+aline  .13335 -.21971 
+aline  .12954 -.2159 
+aline  .12954  .00127 
+aline  .13335  .00508 
+aline  .13716  .00635 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=14			!-------------- Beginning of new char.
+dfont  wid=.577779 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="."
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .1778  .01143 
+aline  .18034  .01016 
+aline  .18161  .00889 
+aline  .18288  .00635 
+bezier  .179005 -.158341E-01  .167699 -.366185E-01  .16129 -.05842 
+bezier  .117854 -.174084  .777851E-01 -.291525  .03302 -.4064 
+aline  .03048 -.40767 
+aline  .0254 -.40767 
+aline  .02286 -.4064 
+aline  .02159 -.40513 
+aline  .02032 -.40259 
+bezier  .241949E-01 -.380406  .355008E-01 -.359621  .04191 -.33782 
+bezier  .853465E-01 -.222156  .125415 -.104715  .17018  .01016 
+aline  .17272  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=15			!-------------- Beginning of new char.
+dfont  wid=.577779 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="/"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03048  .01143 
+aline  .03302  .01016 
+bezier  .849072E-01 -.124643  .132583 -.26181  .18288 -.39751 
+aline  .18288 -.40259 
+aline  .18161 -.40513 
+aline  .18034 -.4064 
+aline  .1778 -.40767 
+aline  .17272 -.40767 
+aline  .17018 -.4064 
+bezier  .118293 -.271597  .706167E-01 -.13443  .02032  .00127 
+aline  .02032  .00635 
+aline  .02159  .00889 
+aline  .02286  .01016 
+aline  .0254  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=16			!-------------- Beginning of new char.
+dfont  wid=.597224 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=18
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .19558  .01143 
+aline  .19685  .01016 
+aline  .19685  .00762 
+bezier  .176055 -.123387E-01  .159431 -.353033E-01  .14478 -.05969 
+aline  .12954 -.09017 
+bezier  .109044 -.137089  .986175E-01 -.188782  .09271 -.23622 
+aline  .09271 -.25019 
+aline  .09144 -.25146 
+aline  .09144 -.27178 
+aline  .09017 -.27305 
+aline  .09017 -.33401 
+aline  .09144 -.33528 
+aline  .09144 -.3556 
+aline  .09271 -.35687 
+aline  .09271 -.37084 
+aline  .09398 -.37211 
+aline  .09398 -.38227 
+aline  .09525 -.38354 
+aline  .09525 -.39243 
+aline  .09652 -.3937 
+bezier  .101061 -.434451  .112964 -.477558  .12954 -.51689 
+aline  .14478 -.54737 
+bezier  .159431 -.571757  .176055 -.594721  .19685 -.61468 
+aline  .19685 -.61722 
+aline  .19558 -.61849 
+aline  .18415 -.61849 
+bezier  .156719 -.594749  .134783 -.56581  .11684 -.53467 
+aline  .10287 -.50673 
+bezier  .837178E-01 -.462489  .716478E-01 -.414141  .06858 -.3683 
+aline  .06731 -.36703 
+aline  .06731 -.35433 
+aline  .06604 -.35306 
+aline  .06604 -.33401 
+aline  .06477 -.33274 
+aline  .06477 -.27432 
+aline  .06604 -.27305 
+aline  .06604 -.254 
+aline  .06731 -.25273 
+bezier  .673749E-01 -.233159  .712749E-01 -.216112  .07366 -.19685 
+bezier  .794096E-01 -.164474  .896033E-01 -.131086  .10287 -.10033 
+aline  .11684 -.07239 
+bezier  .134783 -.412503E-01  .156719 -.012311  .18415  .01143 
+aline  .19558  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=17			!-------------- Beginning of new char.
+dfont  wid=.597224 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=19
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0254  .01143 
+bezier  .528311E-01 -.012311  .747671E-01 -.412503E-01  .09271 -.07239 
+aline  .10668 -.10033 
+bezier  .125832 -.144571  .137902 -.192919  .14097 -.23876 
+aline  .14224 -.24003 
+aline  .14224 -.25273 
+aline  .14351 -.254 
+aline  .14351 -.27305 
+aline  .14478 -.27432 
+aline  .14478 -.33274 
+aline  .14351 -.33401 
+aline  .14351 -.35306 
+aline  .14224 -.35433 
+bezier  .142175 -.373901  .138275 -.390948  .13589 -.41021 
+bezier  .13014 -.442586  .119947 -.475974  .10668 -.50673 
+aline  .09271 -.53467 
+bezier  .747671E-01 -.56581  .528311E-01 -.594749  .0254 -.61849 
+aline  .01397 -.61849 
+aline  .0127 -.61722 
+aline  .0127 -.61468 
+bezier  .334946E-01 -.594721  .501188E-01 -.571757  .06477 -.54737 
+aline  .08001 -.51689 
+bezier  .100506 -.469971  .110932 -.418278  .11684 -.37084 
+aline  .11684 -.35687 
+aline  .11811 -.3556 
+aline  .11811 -.33528 
+aline  .11938 -.33401 
+aline  .11938 -.27305 
+aline  .11811 -.27178 
+aline  .11811 -.25146 
+aline  .11684 -.25019 
+aline  .11684 -.23622 
+aline  .11557 -.23495 
+aline  .11557 -.22479 
+aline  .1143 -.22352 
+aline  .1143 -.21463 
+aline  .11303 -.21336 
+bezier  .108489 -.172609  .965863E-01 -.129502  .08001 -.09017 
+aline  .06477 -.05969 
+bezier  .501188E-01 -.353033E-01  .334946E-01 -.123387E-01  .0127  .00762 
+aline  .0127  .01016 
+aline  .01397  .01143 
+aline  .0254  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=18			!-------------- Beginning of new char.
+dfont  wid=.736115 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=32
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .24511  .01143 
+aline  .24638  .01016 
+aline  .24638  .00762 
+bezier  .199181 -.375081E-01  .165164 -.935676E-01  .14224 -.15494 
+aline  .13208 -.18542 
+aline  .13081 -.1905 
+aline  .12954 -.19431 
+aline  .12827 -.19939 
+aline  .127 -.2032 
+aline  .12065 -.2286 
+aline  .1143 -.26035 
+aline  .11303 -.26162 
+aline  .11303 -.26797 
+aline  .11176 -.26924 
+aline  .11176 -.27686 
+aline  .11049 -.27813 
+aline  .11049 -.28448 
+aline  .10922 -.28575 
+aline  .10922 -.29464 
+aline  .10795 -.29591 
+aline  .10795 -.3048 
+aline  .10668 -.30607 
+aline  .10668 -.31623 
+aline  .10541 -.3175 
+aline  .10541 -.3302 
+aline  .10414 -.33147 
+aline  .10414 -.34798 
+aline  .10287 -.34925 
+aline  .10287 -.37338 
+aline  .1016 -.37465 
+aline  .1016 -.44323 
+aline  .10287 -.4445 
+aline  .10287 -.46863 
+aline  .10414 -.4699 
+aline  .10414 -.48641 
+aline  .10541 -.48768 
+aline  .10541 -.50038 
+aline  .10668 -.50165 
+aline  .10668 -.51181 
+aline  .10795 -.51308 
+aline  .10795 -.52197 
+aline  .10922 -.52324 
+aline  .10922 -.53213 
+aline  .11049 -.5334 
+aline  .11049 -.53975 
+aline  .11176 -.54102 
+aline  .11176 -.54864 
+aline  .11303 -.54991 
+aline  .11303 -.55626 
+aline  .1143 -.55753 
+aline  .12065 -.58928 
+aline  .127 -.61468 
+aline  .12827 -.61849 
+aline  .12954 -.62357 
+aline  .13081 -.62738 
+aline  .13208 -.63246 
+aline  .14224 -.66294 
+bezier  .165164 -.724312  .199181 -.780372  .24638 -.8255 
+aline  .24638 -.82804 
+aline  .24511 -.82931 
+aline  .23241 -.82931 
+aline  .22733 -.82423 
+aline  .22479 -.82296 
+aline  .2032 -.80137 
+bezier  .127949 -.719718  .869018E-01 -.604203  .07874 -.49657 
+aline  .07747 -.4953 
+aline  .07747 -.48387 
+aline  .0762 -.4826 
+aline  .0762 -.46736 
+aline  .07493 -.46609 
+aline  .07493 -.44323 
+aline  .07366 -.44196 
+aline  .07366 -.37592 
+aline  .07493 -.37465 
+aline  .07493 -.35179 
+aline  .0762 -.35052 
+aline  .0762 -.33528 
+aline  .07747 -.33401 
+aline  .07747 -.32258 
+aline  .07874 -.32131 
+bezier  .792591E-01 -.303203  .828745E-01 -.287295  .08509 -.26924 
+bezier  .101107 -.17698  .139958 -.854838E-01  .2032 -.01651 
+aline  .22479  .00508 
+aline  .22733  .00635 
+aline  .23241  .01143 
+aline  .24511  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=19			!-------------- Beginning of new char.
+dfont  wid=.736115 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=33
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .02667  .01143 
+aline  .03175  .00635 
+aline  .03429  .00508 
+aline  .05588 -.01651 
+bezier  .131131 -.981623E-01  .172178 -.213677  .18034 -.32131 
+aline  .18161 -.32258 
+aline  .18161 -.33401 
+aline  .18288 -.33528 
+aline  .18288 -.35052 
+aline  .18415 -.35179 
+aline  .18415 -.37465 
+aline  .18542 -.37592 
+aline  .18542 -.44196 
+aline  .18415 -.44323 
+aline  .18415 -.46609 
+aline  .18288 -.46736 
+aline  .18288 -.4826 
+aline  .18161 -.48387 
+aline  .18161 -.4953 
+aline  .18034 -.49657 
+bezier  .179821 -.514678  .176205 -.530585  .17399 -.54864 
+bezier  .157973 -.6409  .119122 -.732396  .05588 -.80137 
+aline  .03429 -.82296 
+aline  .03175 -.82423 
+aline  .02667 -.82931 
+aline  .01397 -.82931 
+aline  .0127 -.82804 
+aline  .0127 -.8255 
+bezier  .598985E-01 -.780372  .939161E-01 -.724312  .11684 -.66294 
+aline  .127 -.63246 
+aline  .12827 -.62738 
+aline  .12954 -.62357 
+aline  .13081 -.61849 
+aline  .13208 -.61468 
+aline  .13843 -.58928 
+aline  .14478 -.55753 
+aline  .14605 -.55626 
+aline  .14605 -.54991 
+aline  .14732 -.54864 
+aline  .14732 -.54102 
+aline  .14859 -.53975 
+aline  .14859 -.5334 
+aline  .14986 -.53213 
+aline  .14986 -.52324 
+aline  .15113 -.52197 
+aline  .15113 -.51308 
+aline  .1524 -.51181 
+aline  .1524 -.50165 
+aline  .15367 -.50038 
+aline  .15367 -.48768 
+aline  .15494 -.48641 
+aline  .15494 -.4699 
+aline  .15621 -.46863 
+aline  .15621 -.4445 
+aline  .15748 -.44323 
+aline  .15748 -.37465 
+aline  .15621 -.37338 
+aline  .15621 -.34925 
+aline  .15494 -.34798 
+aline  .15494 -.33147 
+aline  .15367 -.3302 
+aline  .15367 -.3175 
+aline  .1524 -.31623 
+aline  .1524 -.30607 
+aline  .15113 -.3048 
+aline  .15113 -.29591 
+aline  .14986 -.29464 
+aline  .14986 -.28575 
+aline  .14859 -.28448 
+aline  .14859 -.27813 
+aline  .14732 -.27686 
+aline  .14732 -.26924 
+aline  .14605 -.26797 
+aline  .14605 -.26162 
+aline  .14478 -.26035 
+aline  .13843 -.2286 
+aline  .13208 -.2032 
+aline  .13081 -.19939 
+aline  .12954 -.19431 
+aline  .12827 -.1905 
+aline  .127 -.18542 
+aline  .11684 -.15494 
+bezier  .939163E-01 -.935675E-01  .598985E-01 -.375082E-01  .0127  .00762 
+aline  .0127  .01016 
+aline  .01397  .01143 
+aline  .02667  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=20			!-------------- Beginning of new char.
+dfont  wid=.527781 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=34
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17907  .01143 
+aline  .17907 -.00762 
+aline  .10795 -.00762 
+aline  .10668 -.00889 
+aline  .10668 -.80899 
+aline  .10795 -.81026 
+aline  .17907 -.81026 
+aline  .17907 -.82931 
+aline  .08763 -.82931 
+aline  .08763  .01143 
+aline  .17907  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=21			!-------------- Beginning of new char.
+dfont  wid=.527781 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=35
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .09779  .01143 
+aline  .09779 -.82931 
+aline  .00635 -.82931 
+aline  .00635 -.81026 
+aline  .07747 -.81026 
+aline  .07874 -.80899 
+aline  .07874 -.00889 
+aline  .07747 -.00762 
+aline  .00635 -.00762 
+aline  .00635  .01143 
+aline  .09779  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=22			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=36
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10668  .01143 
+aline  .10668 -.80899 
+aline  .10795 -.81026 
+aline  .19812 -.81026 
+aline  .19812 -.82931 
+aline  .08763 -.82931 
+aline  .08763  .01143 
+aline  .10668  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=23			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=37
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11684  .01143 
+aline  .11684 -.82931 
+aline  .00635 -.82931 
+aline  .00635 -.81026 
+aline  .09652 -.81026 
+aline  .09779 -.80899 
+aline  .09779  .01143 
+aline  .11684  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=24			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=38
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .19812  .01143 
+aline  .19812 -.00762 
+aline  .10795 -.00762 
+aline  .10668 -.00889 
+aline  .10668 -.82931 
+aline  .08763 -.82931 
+aline  .08763  .01143 
+aline  .19812  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=25			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=39
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11684  .01143 
+aline  .11684 -.82931 
+aline  .09779 -.82931 
+aline  .09779 -.00889 
+aline  .09652 -.00762 
+aline  .00635 -.00762 
+aline  .00635  .01143 
+aline  .11684  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=26			!-------------- Beginning of new char.
+dfont  wid=.750002 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=40
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .2159  .01143 
+aline  .21717  .01016 
+aline  .21717 -.00254 
+bezier  .186223 -.017221  .156359 -.409045E-01  .14859 -.0762 
+aline  .14732 -.07747 
+aline  .14732 -.08382 
+aline  .14605 -.08509 
+aline  .14605 -.31115 
+bezier  .14375 -.327652  .137779 -.345813  .127 -.35941 
+bezier  .111701 -.38102  .901568E-01 -.398344  .06604 -.40894 
+bezier  .105437 -.426471  .141039 -.462721  .14605 -.50673 
+aline  .14605 -.73279 
+bezier  .151044 -.762452  .171726 -.789835  .19812 -.80518 
+aline  .2159 -.81407 
+aline  .21717 -.81534 
+aline  .21717 -.82804 
+aline  .2159 -.82931 
+aline  .2032 -.82931 
+bezier  .1648 -.813499  .128942 -.78397  .11938 -.74168 
+aline  .11938 -.73533 
+aline  .11811 -.73406 
+aline  .11811 -.50673 
+bezier  .112642 -.478367  .977194E-01 -.448447  .07239 -.4318 
+aline  .06985 -.42926 
+aline  .06731 -.42799 
+aline  .06604 -.42672 
+aline  .0635 -.42545 
+aline  .06223 -.42418 
+aline  .05969 -.42291 
+aline  .05842 -.42164 
+aline  .04826 -.41656 
+aline  .04699 -.41529 
+aline  .04699 -.40259 
+bezier  .797296E-01 -.385903  .108619 -.357725  .11557 -.32004 
+aline  .11684 -.31877 
+aline  .11684 -.31242 
+aline  .11811 -.31115 
+aline  .11811 -.08382 
+bezier  .122763 -.460093E-01  .151886 -.153988E-01  .18415  .00254 
+aline  .19939  .01016 
+aline  .2032  .01143 
+aline  .2159  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=27			!-------------- Beginning of new char.
+dfont  wid=.750002 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=")"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .06096  .01143 
+bezier  .993603E-01 -.43809E-02  .135218 -.339097E-01  .14478 -.0762 
+aline  .14478 -.08255 
+aline  .14605 -.08382 
+aline  .14605 -.31115 
+bezier  .151518 -.339513  .166441 -.369433  .19177 -.38608 
+aline  .19431 -.38862 
+aline  .19685 -.38989 
+aline  .19812 -.39116 
+aline  .20066 -.39243 
+aline  .20193 -.3937 
+aline  .20447 -.39497 
+aline  .20574 -.39624 
+aline  .2159 -.40132 
+aline  .21717 -.40259 
+aline  .21717 -.41529 
+bezier  .18443 -.431977  .155541 -.460155  .14859 -.49784 
+aline  .14732 -.49911 
+aline  .14732 -.50546 
+aline  .14605 -.50673 
+aline  .14605 -.73406 
+bezier  .141397 -.771871  .112274 -.802481  .08001 -.82042 
+aline  .06477 -.82804 
+aline  .06096 -.82931 
+aline  .04826 -.82931 
+aline  .04699 -.82804 
+aline  .04699 -.81534 
+bezier  .779367E-01 -.800659  .107801 -.776975  .11557 -.74168 
+aline  .11684 -.74041 
+aline  .11684 -.73406 
+aline  .11811 -.73279 
+aline  .11811 -.50673 
+bezier  .12041 -.490228  .126381 -.472067  .13716 -.45847 
+bezier  .152459 -.43686  .174003 -.419536  .19812 -.40894 
+bezier  .158723 -.391409  .123121 -.355159  .11811 -.31115 
+aline  .11811 -.08509 
+bezier  .113116 -.554283E-01  .924342E-01 -.280453E-01  .06604 -.0127 
+aline  .04826 -.00381 
+aline  .04699 -.00254 
+aline  .04699  .01016 
+aline  .04826  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=28			!-------------- Beginning of new char.
+dfont  wid=.750002 hei=.039999 dep=2.36003 italic=0
+dfont  next_char="*"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .22225  .01143 
+aline  .22479  .01016 
+aline  .22733  .00889 
+aline  .2286  .00635 
+aline  .22987  .00508 
+bezier  .229107 -.918131E-02  .2198 -.217874E-01  .2159 -.03556 
+bezier  .165578 -.160179  .114312 -.284485  .652462E-01 -.409575 
+bezier  .118958 -.546099  .174755 -.681888  .22987 -.81788 
+aline  .22987 -.82423 
+aline  .2286 -.8255 
+aline  .22733 -.82804 
+aline  .22225 -.83058 
+aline  .21844 -.83058 
+bezier  .205822 -.822387  .205119 -.80488  .19812 -.79248 
+bezier  .147027 -.665849  .961179E-01 -.539142  .04445 -.41275 
+bezier  .452125E-01 -.398489  .05452 -.385883  .05842 -.37211 
+bezier  .110067 -.246132  .159963 -.119429  .21209  .00635 
+aline  .2159  .01016 
+aline  .21844  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=29			!-------------- Beginning of new char.
+dfont  wid=.750002 hei=.039999 dep=2.36003 italic=0
+dfont  next_char="+"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .04572  .01143 
+aline  .04826  .01016 
+bezier  .578837E-01  .856617E-03  .597147E-01 -.147728E-01  .06604 -.02667 
+bezier  .117133 -.153301  .168042 -.280007  .21971 -.4064 
+bezier  .218947 -.420661  .20964 -.433267  .20574 -.44704 
+bezier  .153601 -.573836  .103815 -.701607  .0508 -.82804 
+aline  .04572 -.83058 
+aline  .04191 -.83058 
+aline  .03683 -.82804 
+aline  .03556 -.8255 
+aline  .03429 -.82423 
+bezier  .350525E-01 -.809969  .04436 -.797363  .04826 -.78359 
+bezier  .985824E-01 -.658971  .149848 -.534665  .198914 -.409575 
+bezier  .145202 -.273051  .894052E-01 -.137262  .03429 -.00127 
+aline  .03429  .00508 
+aline  .03556  .00635 
+aline  .03683  .00889 
+aline  .03937  .01016 
+aline  .04191  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=30			!-------------- Beginning of new char.
+dfont  wid=1.04445 hei=.039999 dep=2.36003 italic=0
+dfont  next_char=","
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .34036  .01143 
+aline  .3429  .01016 
+aline  .34544  .00762 
+aline  .34671  .00508 
+bezier  .343011 -.181968E-01  .33069 -.395863E-01  .32385 -.06223 
+bezier  .228203 -.316489  .133612 -.571185  .0381 -.8255 
+aline  .03556 -.82804 
+aline  .03302 -.82931 
+aline  .02667 -.82931 
+aline  .02413 -.82804 
+aline  .02159 -.8255 
+aline  .02032 -.82296 
+bezier  .240191E-01 -.799683  .363405E-01 -.778294  .04318 -.75565 
+bezier  .138827 -.501391  .233418 -.246695  .32893  .00762 
+aline  .33147  .01016 
+aline  .33401  .01143 
+aline  .34036  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=31			!-------------- Beginning of new char.
+dfont  wid=1.04445 hei=.039999 dep=2.36003 italic=0
+dfont  next_char="-"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03302  .01143 
+aline  .03556  .01016 
+bezier  .450574E-01 -.466537E-02  .483408E-01 -.232608E-01  .05588 -.03937 
+bezier  .152497 -.299008  .250259 -.558173  .34671 -.81788 
+aline  .34671 -.82296 
+aline  .34544 -.8255 
+aline  .3429 -.82804 
+aline  .34036 -.82931 
+aline  .33401 -.82931 
+aline  .33147 -.82804 
+bezier  .321973 -.813215  .318689 -.794619  .31115 -.77851 
+bezier  .214533 -.518872  .116771 -.259707  .02032  0 
+aline  .02032  .00508 
+aline  .02159  .00762 
+aline  .02413  .01016 
+aline  .02667  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=32			!-------------- Beginning of new char.
+dfont  wid=.79167 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="0"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .26543  .01143 
+aline  .2667  .01016 
+aline  .2667  .00762 
+bezier  .243254 -.193372E-01  .223609 -.490334E-01  .20574 -.08001 
+aline  .18669 -.11811 
+bezier  .154111 -.189884  .136194 -.271011  .12573 -.34417 
+aline  .12573 -.35433 
+aline  .12446 -.3556 
+aline  .12446 -.36576 
+aline  .12319 -.36703 
+aline  .12319 -.37846 
+aline  .12192 -.37973 
+aline  .12192 -.3937 
+aline  .12065 -.39497 
+aline  .12065 -.41148 
+aline  .11938 -.41275 
+aline  .11938 -.43307 
+aline  .11811 -.43434 
+aline  .11811 -.46609 
+aline  .11684 -.46736 
+aline  .11684 -.56134 
+aline  .11811 -.56261 
+aline  .11811 -.59436 
+aline  .11938 -.59563 
+aline  .11938 -.61595 
+aline  .12065 -.61722 
+aline  .12065 -.63373 
+aline  .12192 -.635 
+aline  .12192 -.64897 
+aline  .12319 -.65024 
+aline  .12319 -.66167 
+aline  .12446 -.66294 
+aline  .12446 -.6731 
+aline  .12573 -.67437 
+aline  .12573 -.68453 
+aline  .127 -.6858 
+aline  .127 -.69342 
+aline  .12827 -.69469 
+aline  .12827 -.70358 
+aline  .12954 -.70485 
+aline  .12954 -.7112 
+aline  .13081 -.71247 
+aline  .13081 -.72009 
+aline  .13208 -.72136 
+bezier  .141653 -.784333  .160014 -.850692  .18669 -.91059 
+aline  .20574 -.94869 
+bezier  .223609 -.979667  .243254 -1.00936  .2667 -1.03632 
+aline  .2667 -1.03886 
+aline  .26543 -1.04013 
+aline  .25146 -1.04013 
+bezier  .220185 -1.00819  .194836 -.971987  .17272 -.93345 
+aline  .15113 -.89027 
+bezier  .137561 -.859389  .126089 -.827556  .11684 -.79502 
+aline  .10795 -.75946 
+bezier  .10129 -.733403  .991904E-01 -.707293  .09398 -.68326 
+aline  .09398 -.67437 
+aline  .09271 -.6731 
+aline  .09271 -.66421 
+aline  .09144 -.66294 
+aline  .09144 -.65278 
+aline  .09017 -.65151 
+aline  .09017 -.64008 
+aline  .0889 -.63881 
+aline  .0889 -.62611 
+aline  .08763 -.62484 
+aline  .08763 -.6096 
+aline  .08636 -.60833 
+aline  .08636 -.58928 
+aline  .08509 -.58801 
+aline  .08509 -.5588 
+aline  .08382 -.55753 
+aline  .08382 -.47117 
+aline  .08509 -.4699 
+aline  .08509 -.44069 
+aline  .08636 -.43942 
+aline  .08636 -.42037 
+aline  .08763 -.4191 
+aline  .08763 -.40386 
+aline  .0889 -.40259 
+aline  .0889 -.38989 
+aline  .09017 -.38862 
+aline  .09017 -.37719 
+aline  .09144 -.37592 
+aline  .09144 -.36576 
+aline  .09271 -.36449 
+aline  .09271 -.3556 
+aline  .09398 -.35433 
+aline  .09398 -.34544 
+aline  .09525 -.34417 
+bezier  .979774E-01 -.319738  .102117 -.294958  .10795 -.26924 
+aline  .11684 -.23368 
+bezier  .126089 -.201144  .137561 -.169311  .15113 -.13843 
+aline  .17272 -.09525 
+bezier  .194836 -.567128E-01  .220185 -.205061E-01  .25146  .01143 
+aline  .26543  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=33			!-------------- Beginning of new char.
+dfont  wid=.79167 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="1"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .02667  .01143 
+bezier  .579446E-01 -.205061E-01  .083294 -.567128E-01  .10541 -.09525 
+aline  .127 -.13843 
+bezier  .140569 -.169311  .152041 -.201144  .16129 -.23368 
+aline  .17018 -.26924 
+bezier  .17684 -.295297  .17894 -.321407  .18415 -.34544 
+aline  .18415 -.35433 
+aline  .18542 -.3556 
+aline  .18542 -.36449 
+aline  .18669 -.36576 
+aline  .18669 -.37592 
+aline  .18796 -.37719 
+aline  .18796 -.38862 
+aline  .18923 -.38989 
+aline  .18923 -.40259 
+aline  .1905 -.40386 
+aline  .1905 -.4191 
+aline  .19177 -.42037 
+aline  .19177 -.43942 
+aline  .19304 -.44069 
+aline  .19304 -.4699 
+aline  .19431 -.47117 
+aline  .19431 -.55753 
+aline  .19304 -.5588 
+aline  .19304 -.58801 
+aline  .19177 -.58928 
+aline  .19177 -.60833 
+aline  .1905 -.6096 
+aline  .1905 -.62484 
+aline  .18923 -.62611 
+aline  .18923 -.63881 
+aline  .18796 -.64008 
+aline  .18796 -.65151 
+aline  .18669 -.65278 
+aline  .18669 -.66294 
+aline  .18542 -.66421 
+aline  .18542 -.6731 
+aline  .18415 -.67437 
+aline  .18415 -.68326 
+aline  .18288 -.68453 
+bezier  .180153 -.708962  .176013 -.733742  .17018 -.75946 
+aline  .16129 -.79502 
+bezier  .152041 -.827556  .140569 -.859389  .127 -.89027 
+aline  .10541 -.93345 
+bezier  .832939E-01 -.971987  .579446E-01 -1.00819  .02667 -1.04013 
+aline  .0127 -1.04013 
+aline  .01143 -1.03886 
+aline  .01143 -1.03632 
+bezier  .348756E-01 -1.00936  .545211E-01 -.979667  .07239 -.94869 
+aline  .09144 -.91059 
+bezier  .124019 -.838816  .141936 -.757689  .1524 -.68453 
+aline  .1524 -.67437 
+aline  .15367 -.6731 
+aline  .15367 -.66294 
+aline  .15494 -.66167 
+aline  .15494 -.65024 
+aline  .15621 -.64897 
+aline  .15621 -.635 
+aline  .15748 -.63373 
+aline  .15748 -.61722 
+aline  .15875 -.61595 
+aline  .15875 -.59563 
+aline  .16002 -.59436 
+aline  .16002 -.56261 
+aline  .16129 -.56134 
+aline  .16129 -.46736 
+aline  .16002 -.46609 
+aline  .16002 -.43434 
+aline  .15875 -.43307 
+aline  .15875 -.41275 
+aline  .15748 -.41148 
+aline  .15748 -.39497 
+aline  .15621 -.3937 
+aline  .15621 -.37973 
+aline  .15494 -.37846 
+aline  .15494 -.36703 
+aline  .15367 -.36576 
+aline  .15367 -.3556 
+aline  .1524 -.35433 
+aline  .1524 -.34417 
+aline  .15113 -.3429 
+aline  .15113 -.33528 
+aline  .14986 -.33401 
+aline  .14986 -.32512 
+aline  .14859 -.32385 
+aline  .14859 -.3175 
+aline  .14732 -.31623 
+aline  .14732 -.30861 
+aline  .14605 -.30734 
+bezier  .136477 -.244367  .118116 -.178008  .09144 -.11811 
+aline  .07239 -.08001 
+bezier  .545211E-01 -.490334E-01  .348756E-01 -.193372E-01  .01143  .00762 
+aline  .01143  .01016 
+aline  .0127  .01143 
+aline  .02667  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=34			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="2"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .19939  .01143 
+aline  .19939 -.00889 
+aline  .11938 -.00889 
+aline  .11811 -.01016 
+aline  .11811 -1.01854 
+aline  .11938 -1.01981 
+aline  .19939 -1.01981 
+aline  .19939 -1.04013 
+aline  .09779 -1.04013 
+aline  .09779  .01143 
+aline  .19939  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=35			!-------------- Beginning of new char.
+dfont  wid=.583336 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="3"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10668  .01143 
+aline  .10668 -1.04013 
+aline  .00508 -1.04013 
+aline  .00508 -1.01981 
+aline  .08509 -1.01981 
+aline  .08636 -1.01854 
+aline  .08636 -.01016 
+aline  .08509 -.00889 
+aline  .00508 -.00889 
+aline  .00508  .01143 
+aline  .10668  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=36			!-------------- Beginning of new char.
+dfont  wid=.638891 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="4"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11811  .01143 
+aline  .11811 -1.01854 
+aline  .11938 -1.01981 
+aline  .21971 -1.01981 
+aline  .21971 -1.04013 
+aline  .09779 -1.04013 
+aline  .09779  .01143 
+aline  .11811  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=37			!-------------- Beginning of new char.
+dfont  wid=.638891 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="5"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .127  .01143 
+aline  .127 -1.04013 
+aline  .00508 -1.04013 
+aline  .00508 -1.01981 
+aline  .10541 -1.01981 
+aline  .10668 -1.01854 
+aline  .10668  .01143 
+aline  .127  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=38			!-------------- Beginning of new char.
+dfont  wid=.638891 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="6"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .21971  .01143 
+aline  .21971 -.00889 
+aline  .11938 -.00889 
+aline  .11811 -.01016 
+aline  .11811 -1.04013 
+aline  .09779 -1.04013 
+aline  .09779  .01143 
+aline  .21971  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=39			!-------------- Beginning of new char.
+dfont  wid=.638891 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="7"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .127  .01143 
+aline  .127 -1.04013 
+aline  .10668 -1.04013 
+aline  .10668 -.01016 
+aline  .10541 -.00889 
+aline  .00508 -.00889 
+aline  .00508  .01143 
+aline  .127  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=40			!-------------- Beginning of new char.
+dfont  wid=.80556 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="8"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .23114  .01143 
+aline  .23241  .01016 
+aline  .23241 -.00381 
+bezier  .196627 -.233359E-01  .16778 -.575996E-01  .16129 -.09906 
+aline  .16002 -.10033 
+aline  .16002 -.10795 
+aline  .15875 -.10922 
+aline  .15875 -.39243 
+bezier  .153515 -.444567  .116916 -.490509  .07112 -.51435 
+bezier  .116916 -.538191  .153515 -.584133  .15875 -.63627 
+aline  .15875 -.91948 
+bezier  .163247 -.943512  .171593 -.970474  .18923 -.98933 
+bezier  .200265 -1.00488  .216799 -1.01488  .23241 -1.02489 
+aline  .23241 -1.03886 
+aline  .23114 -1.04013 
+bezier  .210394 -1.04301  .194688 -1.02655  .17907 -1.016 
+aline  .15748 -.99441 
+bezier  .140742 -.973664  .128404 -.947094  .12573 -.92075 
+aline  .12573 -.63754 
+bezier  .120662 -.592799  .945538E-01 -.546133  .05334 -.52324 
+aline  .0508 -.5207 
+aline  .0508 -.508 
+bezier  .858286E-01 -.486252  .113618 -.45171  .12192 -.41021 
+aline  .12319 -.40894 
+aline  .12319 -.40259 
+aline  .12446 -.40132 
+aline  .12446 -.39243 
+aline  .12573 -.39116 
+aline  .12573 -.10795 
+bezier  .128404 -.816058E-01  .140742 -.550356E-01  .15748 -.03429 
+aline  .17907 -.0127 
+bezier  .194688 -.214517E-02  .210394  .143096E-01  .23114  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=")"			!-------------- Beginning of new char.
+dfont  wid=.80556 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="9"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .06604  .01143 
+bezier  .113376 -.103682E-01  .153135 -.551009E-01  .15875 -.10795 
+aline  .15875 -.39243 
+bezier  .163925 -.421432  .173704 -.454168  .19558 -.47625 
+bezier  .205155 -.489197  .218718 -.498681  .23241 -.50673 
+aline  .23241 -.52197 
+bezier  .191415 -.54413  .164069 -.589002  .16002 -.635 
+aline  .15875 -.63627 
+aline  .15875 -.92075 
+bezier  .155796 -.947196  .143953 -.974484  .12573 -.99441 
+bezier  .109971 -1.01442  .088793 -1.02901  .06604 -1.04013 
+aline  .05207 -1.04013 
+aline  .0508 -1.03886 
+aline  .0508 -1.02489 
+bezier  .866336E-01 -1.0053  .116422 -.971322  .12319 -.92964 
+aline  .12446 -.92837 
+aline  .12446 -.92075 
+aline  .12573 -.91948 
+aline  .12573 -.63627 
+aline  .127 -.635 
+bezier  .127577 -.606373  .142732 -.578611  .16002 -.55626 
+aline  .18161 -.53467 
+bezier  .191346 -.527309  .201347 -.520314  .21209 -.51435 
+bezier  .201347 -.508386  .191346 -.501391  .18161 -.49403 
+aline  .16002 -.47244 
+bezier  .142732 -.450089  .127577 -.422327  .127 -.3937 
+aline  .12573 -.39243 
+aline  .12573 -.10922 
+bezier  .121584 -.856774E-01  .112373 -.599335E-01  .09652 -.04064 
+bezier  .830903E-01 -.258517E-01  .679869E-01 -.133855E-01  .0508 -.00381 
+aline  .0508  .01016 
+aline  .05207  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="*"			!-------------- Beginning of new char.
+dfont  wid=.80556 hei=.039999 dep=2.96003 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .23749  .01143 
+aline  .24003  .01016 
+aline  .24257  .00762 
+aline  .24384  .00508 
+aline  .24384 -.00254 
+aline  .22733 -.05207 
+aline  .22606 -.05461 
+aline  .19177 -.15748 
+aline  .1905 -.16002 
+aline  .15748 -.25908 
+aline  .15621 -.26162 
+aline  .12319 -.36068 
+aline  .12192 -.36322 
+aline  .08763 -.46609 
+aline  .08636 -.46863 
+aline  .07239 -.51054 
+aline  .071628 -.51435 
+aline  .07239 -.51816 
+aline  .08636 -.56007 
+aline  .08763 -.56261 
+aline  .12192 -.66548 
+aline  .12319 -.66802 
+aline  .15621 -.76708 
+aline  .15748 -.76962 
+aline  .1905 -.86868 
+aline  .19177 -.87122 
+aline  .22606 -.97409 
+aline  .22733 -.97663 
+aline  .24384 -1.02616 
+aline  .24384 -1.03378 
+aline  .24257 -1.03632 
+aline  .24003 -1.03886 
+aline  .23749 -1.04013 
+aline  .22987 -1.04013 
+aline  .22352 -1.03378 
+aline  .20701 -.98425 
+aline  .20574 -.98171 
+aline  .17145 -.87884 
+aline  .17018 -.8763 
+aline  .13716 -.77724 
+aline  .13589 -.7747 
+aline  .10287 -.67564 
+aline  .1016 -.6731 
+aline  .06731 -.57023 
+aline  .06604 -.56769 
+aline  .04953 -.51816 
+aline  .04953 -.51054 
+aline  .06604 -.46101 
+aline  .06731 -.45847 
+aline  .1016 -.3556 
+aline  .10287 -.35306 
+aline  .13589 -.254 
+aline  .13716 -.25146 
+aline  .17018 -.1524 
+aline  .17145 -.14986 
+aline  .20574 -.04699 
+aline  .20701 -.04445 
+aline  .22352  .00508 
+aline  .22987  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="+"			!-------------- Beginning of new char.
+dfont  wid=.80556 hei=.039999 dep=2.96003 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .05334  .01143 
+aline  .05588  .01016 
+aline  .05715  .00889 
+aline  .05842  .00635 
+aline  .05969  .00508 
+aline  .0762 -.04445 
+aline  .07747 -.04699 
+aline  .11176 -.14986 
+aline  .11303 -.1524 
+aline  .14605 -.25146 
+aline  .14732 -.254 
+aline  .18034 -.35306 
+aline  .18161 -.3556 
+aline  .2159 -.45847 
+aline  .21717 -.46101 
+aline  .23368 -.51054 
+aline  .23368 -.51816 
+aline  .21717 -.56769 
+aline  .2159 -.57023 
+aline  .18161 -.6731 
+aline  .18034 -.67564 
+aline  .14732 -.7747 
+aline  .14605 -.77724 
+aline  .11303 -.8763 
+aline  .11176 -.87884 
+aline  .07747 -.98171 
+aline  .0762 -.98425 
+aline  .05969 -1.03378 
+aline  .05842 -1.03505 
+aline  .05715 -1.03759 
+aline  .05588 -1.03886 
+aline  .05334 -1.04013 
+aline  .04572 -1.04013 
+aline  .04318 -1.03886 
+aline  .04064 -1.03632 
+aline  .03937 -1.03378 
+aline  .03937 -1.02616 
+aline  .05588 -.97663 
+aline  .05715 -.97409 
+aline  .09144 -.87122 
+aline  .09271 -.86868 
+aline  .12573 -.76962 
+aline  .127 -.76708 
+aline  .16002 -.66802 
+aline  .16129 -.66548 
+aline  .19558 -.56261 
+aline  .19685 -.56007 
+aline  .21082 -.51816 
+aline  .211582 -.51435 
+aline  .21082 -.51054 
+aline  .19685 -.46863 
+aline  .19558 -.46609 
+aline  .16129 -.36322 
+aline  .16002 -.36068 
+aline  .127 -.26162 
+aline  .12573 -.25908 
+aline  .09271 -.16002 
+aline  .09144 -.15748 
+aline  .05715 -.05461 
+aline  .05588 -.05207 
+aline  .03937 -.00254 
+aline  .03937  .00508 
+aline  .04064  .00762 
+aline  .04318  .01016 
+aline  .04572  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=","			!-------------- Beginning of new char.
+dfont  wid=1.27778 hei=.039999 dep=2.96003 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .42164  .01143 
+aline  .42418  .01016 
+aline  .42799  .00635 
+aline  .42926  .00381 
+bezier  .425561 -.194668E-01  .41324 -.408563E-01  .4064 -.0635 
+bezier  .284061 -.387176  .162886 -.711335  .04064 -1.03505 
+aline  .03683 -1.03886 
+aline  .03429 -1.04013 
+aline  .02794 -1.04013 
+aline  .0254 -1.03886 
+aline  .02159 -1.03505 
+aline  .02032 -1.03251 
+bezier  .240191E-01 -1.00923  .363405E-01 -.987844  .04318 -.9652 
+bezier  .165516 -.641522  .286693 -.317364  .40894  .00635 
+aline  .41275  .01016 
+aline  .41529  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="-"			!-------------- Beginning of new char.
+dfont  wid=1.27778 hei=.039999 dep=2.96003 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03429  .01143 
+aline  .03683  .01016 
+aline  .04064  .00635 
+bezier  .170339 -.338178  .300244 -.68262  .42926 -1.02743 
+aline  .42926 -1.03251 
+aline  .42799 -1.03505 
+aline  .42418 -1.03886 
+aline  .42164 -1.04013 
+aline  .41529 -1.04013 
+aline  .41275 -1.03886 
+aline  .40894 -1.03505 
+bezier  .279228 -.690528  .149323 -.346086  .02032 -.00127 
+aline  .02032  .00381 
+aline  .02159  .00635 
+aline  .0254  .01016 
+aline  .02794  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="."			!-------------- Beginning of new char.
+dfont  wid=.811114 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=30
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .25908  .01143 
+aline  .26162  .01016 
+aline  .26289  .00889 
+aline  .26416  .00635 
+aline  .26416  0 
+bezier  .18723 -.205566  .112767 -.412534  .03429 -.61722 
+aline  .03175 -.61849 
+aline  .0254 -.61849 
+aline  .02286 -.61722 
+aline  .02159 -.61595 
+aline  .02032 -.61341 
+aline  .02032 -.60706 
+bezier  .972496E-01 -.401494  .171713 -.194526  .25019  .01016 
+aline  .25273  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="/"			!-------------- Beginning of new char.
+dfont  wid=.811114 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=31
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03175  .01143 
+aline  .03429  .01016 
+bezier  .112767 -.194526  .18723 -.401494  .26416 -.60706 
+aline  .26416 -.61341 
+aline  .26289 -.61595 
+aline  .26162 -.61722 
+aline  .25908 -.61849 
+aline  .25273 -.61849 
+aline  .25019 -.61722 
+bezier  .171713 -.412534  .972498E-01 -.205565  .02032  0 
+aline  .02032  .00635 
+aline  .02159  .00889 
+aline  .02286  .01016 
+aline  .0254  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="0"			!-------------- Beginning of new char.
+dfont  wid=.875003 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top="0" ext_mid=0 ext_bot="@" ext_rep="B"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .29464  .01016 
+aline  .29591  .00889 
+aline  .29591  .00635 
+bezier  .276799 -.187505E-01  .26078 -.460797E-01  .24511 -.07366 
+aline  .22987 -.10414 
+bezier  .187595 -.194523  .164628 -.297075  .1524 -.38989 
+aline  .1524 -.40005 
+aline  .15113 -.40132 
+aline  .15113 -.41148 
+aline  .14986 -.41275 
+aline  .14986 -.42418 
+aline  .14859 -.42545 
+aline  .14859 -.43815 
+aline  .14732 -.43942 
+aline  .14732 -.45339 
+aline  .14605 -.45466 
+aline  .14605 -.47117 
+aline  .14478 -.47244 
+aline  .14478 -.49276 
+aline  .14351 -.49403 
+aline  .14351 -.51943 
+aline  .14224 -.5207 
+aline  .14224 -.56007 
+aline  .14097 -.56134 
+aline  .14097 -.6223 
+aline  .13843 -.62357 
+aline  .10541 -.62357 
+aline  .10287 -.6223 
+aline  .10287 -.56769 
+aline  .10414 -.56642 
+aline  .10414 -.52959 
+aline  .10541 -.52832 
+aline  .10541 -.50546 
+aline  .10668 -.50419 
+aline  .10668 -.48514 
+aline  .10795 -.48387 
+aline  .10795 -.46863 
+aline  .10922 -.46736 
+aline  .10922 -.45466 
+aline  .11049 -.45339 
+aline  .11049 -.44069 
+aline  .11176 -.43942 
+aline  .11176 -.42926 
+aline  .11303 -.42799 
+aline  .11303 -.41783 
+aline  .1143 -.41656 
+aline  .1143 -.40767 
+aline  .11557 -.4064 
+aline  .11557 -.39751 
+aline  .11684 -.39624 
+bezier  .11787 -.380047  .121265 -.365719  .12319 -.34925 
+aline  .12446 -.34798 
+aline  .12446 -.34163 
+aline  .13081 -.30988 
+aline  .13208 -.3048 
+aline  .13335 -.29845 
+aline  .14351 -.25781 
+bezier  .154673 -.217866  .168654 -.178788  .18542 -.14097 
+aline  .20955 -.09271 
+bezier  .230441 -.563905E-01  .253145 -.213782E-01  .28067  .01016 
+aline  .29464  .01016 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="1"			!-------------- Beginning of new char.
+dfont  wid=.875003 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top="1" ext_mid=0 ext_bot="A" ext_rep="C"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .02667  .01016 
+bezier  .541946E-01 -.213782E-01  .768991E-01 -.563905E-01  .09779 -.09271 
+aline  .12192 -.14097 
+bezier  .138686 -.178788  .152667 -.217866  .16383 -.25781 
+aline  .17399 -.29845 
+aline  .17526 -.3048 
+aline  .17653 -.30988 
+aline  .18288 -.34163 
+aline  .18288 -.34798 
+aline  .18415 -.34925 
+bezier  .186075 -.365719  .18947 -.380047  .1905 -.39624 
+aline  .19177 -.39751 
+aline  .19177 -.4064 
+aline  .19304 -.40767 
+aline  .19304 -.41656 
+aline  .19431 -.41783 
+aline  .19431 -.42799 
+aline  .19558 -.42926 
+aline  .19558 -.43942 
+aline  .19685 -.44069 
+aline  .19685 -.45339 
+aline  .19812 -.45466 
+aline  .19812 -.46736 
+aline  .19939 -.46863 
+aline  .19939 -.48387 
+aline  .20066 -.48514 
+aline  .20066 -.50419 
+aline  .20193 -.50546 
+aline  .20193 -.52832 
+aline  .2032 -.52959 
+aline  .2032 -.56642 
+aline  .20447 -.56769 
+aline  .20447 -.6223 
+aline  .20193 -.62357 
+aline  .16891 -.62357 
+aline  .16637 -.6223 
+aline  .16637 -.56134 
+aline  .1651 -.56007 
+aline  .1651 -.5207 
+aline  .16383 -.51943 
+aline  .16383 -.49403 
+aline  .16256 -.49276 
+aline  .16256 -.47244 
+aline  .16129 -.47117 
+aline  .16129 -.45466 
+aline  .16002 -.45339 
+aline  .16002 -.43942 
+aline  .15875 -.43815 
+aline  .15875 -.42545 
+aline  .15748 -.42418 
+aline  .15748 -.41275 
+aline  .15621 -.41148 
+aline  .15621 -.40132 
+aline  .15494 -.40005 
+aline  .15494 -.38989 
+aline  .15367 -.38862 
+aline  .15367 -.37973 
+aline  .1524 -.37846 
+aline  .1524 -.36957 
+aline  .15113 -.3683 
+aline  .15113 -.36068 
+aline  .14986 -.35941 
+aline  .14986 -.35306 
+aline  .14859 -.35179 
+aline  .14859 -.34417 
+aline  .14732 -.3429 
+bezier  .135429 -.263496  .112224 -.179337  .07747 -.10414 
+aline  .06223 -.07366 
+bezier  .465597E-01 -.460797E-01  .305409E-01 -.187505E-01  .01143  .00635 
+aline  .01143  .00889 
+aline  .0127  .01016 
+aline  .02667  .01016 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="2"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top="2" ext_mid=0 ext_bot="4" ext_rep="6"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .22987  .01016 
+aline  .22987 -.0127 
+aline  .1397 -.0127 
+aline  .13843 -.01397 
+aline  .13843 -.61976 
+aline  .11557 -.61976 
+aline  .11557  .01016 
+aline  .22987  .01016 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="3"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top="3" ext_mid=0 ext_bot="5" ext_rep="7"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11811  .01016 
+aline  .11811 -.61976 
+aline  .09525 -.61976 
+aline  .09525 -.01397 
+aline  .09398 -.0127 
+aline  .00381 -.0127 
+aline  .00381  .01016 
+aline  .11811  .01016 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="4"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot="4" ext_rep="6"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13843  .01143 
+aline  .13843 -.59436 
+aline  .1397 -.59563 
+aline  .22987 -.59563 
+aline  .22987 -.61849 
+aline  .11557 -.61849 
+aline  .11557  .01143 
+aline  .13843  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="5"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot="5" ext_rep="7"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11811  .01143 
+aline  .11811 -.61849 
+aline  .00381 -.61849 
+aline  .00381 -.59563 
+aline  .09398 -.59563 
+aline  .09525 -.59436 
+aline  .09525  .01143 
+aline  .11811  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="6"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=0 dep=.600006 italic=0
+dfont  ext_top="2" ext_mid=0 ext_bot=0 ext_rep="6"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13843 -.00127 
+aline  .13843 -.21336 
+aline  .11557 -.21336 
+aline  .11557 -.00127 
+aline  .13843 -.00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="7"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=0 dep=.600006 italic=0
+dfont  ext_top="3" ext_mid=0 ext_bot=0 ext_rep="7"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11811 -.00127 
+aline  .11811 -.21336 
+aline  .09525 -.21336 
+aline  .09525 -.00127 
+aline  .11811 -.00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="8"			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=.900009 italic=0
+dfont  ext_top="8" ext_mid="<" ext_bot=":" ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .25019 -.00381 
+aline  .25146 -.00508 
+aline  .25146 -.01905 
+bezier  .214525 -.430454E-01  .189516 -.831672E-01  .18161 -.127 
+aline  .18034 -.12827 
+aline  .18034 -.13462 
+aline  .17907 -.13589 
+aline  .17907 -.14605 
+aline  .1778 -.14732 
+aline  .1778 -.32004 
+aline  .17526 -.32131 
+aline  .13843 -.32131 
+aline  .13589 -.32004 
+aline  .13589 -.14732 
+bezier  .141365 -.864963E-01  .182415 -.313985E-01  .23622 -.00381 
+aline  .25019 -.00381 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="9"			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=.900009 italic=0
+dfont  ext_top="9" ext_mid="=" ext_bot=";" ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0762 -.00381 
+bezier  .08962 -.102671E-01  .101268 -.019182  .11303 -.02794 
+aline  .13716 -.05207 
+bezier  .158973 -.787028E-01  .174663 -.113062  .1778 -.14732 
+aline  .1778 -.32004 
+aline  .17526 -.32131 
+aline  .13843 -.32131 
+aline  .13589 -.32004 
+aline  .13589 -.14859 
+aline  .13462 -.14732 
+bezier  .131703 -.972799E-01  .104314 -.462951E-01  .06096 -.01905 
+aline  .06096 -.00508 
+aline  .06223 -.00381 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=":"			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=.900009 italic=0
+dfont  ext_top="8" ext_mid=0 ext_bot=":" ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17526  .00127 
+aline  .1778  0 
+aline  .1778 -.17272 
+bezier  .183215 -.218407  .204454 -.269181  .24511 -.29591 
+aline  .24765 -.29845 
+aline  .25019 -.29972 
+aline  .25146 -.30099 
+aline  .25146 -.31496 
+aline  .25019 -.31623 
+aline  .23622 -.31623 
+bezier  .182415 -.288642  .141365 -.233544  .13589 -.17272 
+aline  .13589  0 
+aline  .13843  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=";"			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=.900009 italic=0
+dfont  ext_top="9" ext_mid=0 ext_bot=";" ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17526  .00127 
+aline  .1778  0 
+aline  .1778 -.17272 
+bezier  .174663 -.206978  .158973 -.241337  .13716 -.26797 
+aline  .11303 -.2921 
+bezier  .974874E-01 -.302214  .827745E-01 -.319352  .06223 -.31623 
+aline  .06096 -.31496 
+aline  .06096 -.30099 
+bezier  .986355E-01 -.276844  .124522 -.236319  .13208 -.19177 
+aline  .13335 -.1905 
+aline  .13335 -.18415 
+aline  .13462 -.18288 
+aline  .13462 -.17272 
+aline  .13589 -.17145 
+aline  .13589  0 
+aline  .13843  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="<"			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=1.80002 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep="?"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17526  .00127 
+aline  .1778  0 
+aline  .1778 -.16891 
+aline  .17653 -.17018 
+bezier  .174257 -.231629  .132661 -.287226  .815975E-01 -.318135 
+bezier  .132661 -.349044  .174257 -.404641  .17653 -.46609 
+aline  .1778 -.46736 
+aline  .1778 -.63627 
+aline  .17526 -.63754 
+aline  .13843 -.63754 
+aline  .13589 -.63627 
+aline  .13589 -.46609 
+aline  .13462 -.46482 
+bezier  .131819 -.411685  .105915 -.356056  .06096 -.32512 
+aline  .06096 -.31115 
+bezier  .998492E-01 -.284127  .124303 -.239965  .13208 -.19304 
+aline  .13335 -.19177 
+aline  .13335 -.18415 
+aline  .13462 -.18288 
+aline  .13462 -.17145 
+aline  .13589 -.17018 
+aline  .13589  0 
+aline  .13843  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="="			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=1.80002 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep="w"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17526  .00127 
+aline  .1778  0 
+aline  .1778 -.17018 
+aline  .17907 -.17145 
+bezier  .181879 -.224211  .206928 -.279714  .25146 -.31115 
+aline  .25146 -.32512 
+bezier  .213022 -.352559  .189161 -.396604  .18161 -.44323 
+aline  .18034 -.4445 
+aline  .18034 -.45212 
+aline  .17907 -.45339 
+aline  .17907 -.46482 
+aline  .1778 -.46609 
+aline  .1778 -.63627 
+aline  .17526 -.63754 
+aline  .13843 -.63754 
+aline  .13589 -.63627 
+aline  .13589 -.46736 
+aline  .13716 -.46609 
+bezier  .13924 -.405048  .180191 -.349278  .230823 -.318135 
+bezier  .180191 -.286993  .13924 -.231222  .13716 -.17018 
+aline  .13589 -.16891 
+aline  .13589  0 
+aline  .13843  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=">"			!-------------- Beginning of new char.
+dfont  wid=.888891 hei=0 dep=.300003 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17526  .00127 
+aline  .1778  0 
+aline  .1778 -.10922 
+aline  .17526 -.11049 
+aline  .13843 -.11049 
+aline  .13589 -.10922 
+aline  .13589  0 
+aline  .13843  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="?"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=0 dep=.600006 italic=0
+dfont  ext_top="x" ext_mid=0 ext_bot="y" ext_rep="?"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .12446 -.00127 
+aline  .12446 -.21336 
+aline  .10922 -.21336 
+aline  .10922 -.00127 
+aline  .12446 -.00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="@"			!-------------- Beginning of new char.
+dfont  wid=.875003 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top="8" ext_mid=0 ext_bot=";" ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13843  .01524 
+aline  .14097  .01397 
+aline  .14097 -.04699 
+aline  .14224 -.04826 
+aline  .14224 -.08763 
+aline  .14351 -.0889 
+aline  .14351 -.1143 
+aline  .14478 -.11557 
+aline  .14478 -.13589 
+aline  .14605 -.13716 
+aline  .14605 -.15367 
+aline  .14732 -.15494 
+aline  .14732 -.16891 
+aline  .14859 -.17018 
+aline  .14859 -.18288 
+aline  .14986 -.18415 
+aline  .14986 -.19558 
+aline  .15113 -.19685 
+aline  .15113 -.20701 
+aline  .1524 -.20828 
+aline  .1524 -.21844 
+aline  .15367 -.21971 
+aline  .15367 -.2286 
+aline  .15494 -.22987 
+aline  .15494 -.23876 
+aline  .15621 -.24003 
+aline  .15621 -.24765 
+aline  .15748 -.24892 
+aline  .15748 -.25527 
+aline  .15875 -.25654 
+aline  .15875 -.26416 
+aline  .16002 -.26543 
+bezier  .171911 -.344834  .195116 -.428993  .22987 -.50419 
+aline  .24511 -.53467 
+bezier  .26078 -.56225  .276799 -.58958  .29591 -.61468 
+aline  .29591 -.61722 
+aline  .29464 -.61849 
+aline  .28067 -.61849 
+bezier  .253145 -.586952  .230441 -.55194  .20955 -.51562 
+aline  .18542 -.46736 
+bezier  .168654 -.429542  .154673 -.390464  .14351 -.35052 
+aline  .13335 -.30988 
+aline  .13208 -.30353 
+aline  .13081 -.29845 
+aline  .12446 -.2667 
+aline  .12446 -.26035 
+aline  .12319 -.25908 
+bezier  .121265 -.242611  .11787 -.228283  .11684 -.21209 
+aline  .11557 -.21082 
+aline  .11557 -.20193 
+aline  .1143 -.20066 
+aline  .1143 -.19177 
+aline  .11303 -.1905 
+aline  .11303 -.18034 
+aline  .11176 -.17907 
+aline  .11176 -.16891 
+aline  .11049 -.16764 
+aline  .11049 -.15494 
+aline  .10922 -.15367 
+aline  .10922 -.14097 
+aline  .10795 -.1397 
+aline  .10795 -.12446 
+aline  .10668 -.12319 
+aline  .10668 -.10414 
+aline  .10541 -.10287 
+aline  .10541 -.08001 
+aline  .10414 -.07874 
+aline  .10414 -.04191 
+aline  .10287 -.04064 
+aline  .10287  .01397 
+aline  .10541  .01524 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="A"			!-------------- Beginning of new char.
+dfont  wid=.875003 hei=.039999 dep=1.76002 italic=0
+dfont  ext_top="9" ext_mid=0 ext_bot=":" ext_rep=">"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .20193  .01524 
+aline  .20447  .01397 
+aline  .20447 -.04064 
+aline  .2032 -.04191 
+aline  .2032 -.07874 
+aline  .20193 -.08001 
+aline  .20193 -.10287 
+aline  .20066 -.10414 
+aline  .20066 -.12319 
+aline  .19939 -.12446 
+aline  .19939 -.1397 
+aline  .19812 -.14097 
+aline  .19812 -.15367 
+aline  .19685 -.15494 
+aline  .19685 -.16764 
+aline  .19558 -.16891 
+aline  .19558 -.17907 
+aline  .19431 -.18034 
+aline  .19431 -.1905 
+aline  .19304 -.19177 
+aline  .19304 -.20066 
+aline  .19177 -.20193 
+aline  .19177 -.21082 
+aline  .1905 -.21209 
+bezier  .18947 -.228283  .186075 -.242611  .18415 -.25908 
+aline  .18288 -.26035 
+aline  .18288 -.2667 
+aline  .17653 -.29845 
+aline  .17526 -.30353 
+aline  .17399 -.30988 
+aline  .16383 -.35052 
+bezier  .152667 -.390464  .138686 -.429542  .12192 -.46736 
+aline  .09779 -.51562 
+bezier  .768991E-01 -.551939  .541946E-01 -.586952  .02667 -.61849 
+aline  .0127 -.61849 
+aline  .01143 -.61722 
+aline  .01143 -.61468 
+bezier  .305409E-01 -.58958  .465597E-01 -.56225  .06223 -.53467 
+aline  .07747 -.50419 
+bezier  .119745 -.413807  .142712 -.311255  .15494 -.21844 
+aline  .15494 -.20828 
+aline  .15621 -.20701 
+aline  .15621 -.19685 
+aline  .15748 -.19558 
+aline  .15748 -.18415 
+aline  .15875 -.18288 
+aline  .15875 -.17018 
+aline  .16002 -.16891 
+aline  .16002 -.15494 
+aline  .16129 -.15367 
+aline  .16129 -.13716 
+aline  .16256 -.13589 
+aline  .16256 -.11557 
+aline  .16383 -.1143 
+aline  .16383 -.0889 
+aline  .1651 -.08763 
+aline  .1651 -.04826 
+aline  .16637 -.04699 
+aline  .16637  .01397 
+aline  .16891  .01524 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="B"			!-------------- Beginning of new char.
+dfont  wid=.875003 hei=0 dep=.600006 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep="B"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13843  .00127 
+aline  .14097  0 
+aline  .14097 -.21463 
+aline  .13843 -.2159 
+aline  .10541 -.2159 
+aline  .10287 -.21463 
+aline  .10287  0 
+aline  .10541  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="C"			!-------------- Beginning of new char.
+dfont  wid=.875003 hei=0 dep=.600006 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=0 ext_rep="C"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .20193  .00127 
+aline  .20447  0 
+aline  .20447 -.21463 
+aline  .20193 -.2159 
+aline  .16891 -.2159 
+aline  .16637 -.21463 
+aline  .16637  0 
+aline  .16891  .00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="D"			!-------------- Beginning of new char.
+dfont  wid=.611113 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=28
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17907  .01143 
+aline  .18415  .00635 
+aline  .18415  0 
+bezier  .141726 -.101275  .986786E-01 -.202371  .576263E-01 -.304165 
+bezier  .986786E-01 -.405959  .141726 -.507055  .18415 -.60833 
+aline  .18415 -.61468 
+aline  .17907 -.61976 
+aline  .17272 -.61976 
+bezier  .160749 -.605265  .157367 -.58548  .14859 -.56896 
+bezier  .112517 -.481615  .761569E-01 -.394389  .03937 -.30734 
+aline  .03937 -.30099 
+bezier  .831485E-01 -.198368  .124832 -.094878  .16891  .00762 
+aline  .17272  .01143 
+aline  .17907  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="E"			!-------------- Beginning of new char.
+dfont  wid=.611113 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=29
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .04191  .01143 
+bezier  .538811E-01 -.306466E-02  .572631E-01 -.228496E-01  .06604 -.03937 
+bezier  .102113 -.126715  .138473 -.213941  .17526 -.30099 
+aline  .17526 -.30734 
+bezier  .131482 -.409962  .897979E-01 -.513452  .04572 -.61595 
+aline  .04191 -.61976 
+aline  .03556 -.61976 
+aline  .03048 -.61468 
+aline  .03048 -.60833 
+bezier  .729039E-01 -.507055  .115951 -.405959  .157004 -.304165 
+bezier  .115951 -.202371  .729039E-01 -.101275  .03048  0 
+aline  .03048  .00635 
+aline  .03556  .01143 
+aline  .04191  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="F"			!-------------- Beginning of new char.
+dfont  wid=.833336 hei=0 dep=1.00001 italic=0
+dfont  next_char="G"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03556 -.00254 
+aline  .0381 -.00381 
+aline  .04191 -.00762 
+aline  .04318 -.01016 
+aline  .04318 -.32893 
+aline  .04445 -.3302 
+aline  .24892 -.3302 
+aline  .25019 -.32893 
+aline  .25019 -.01016 
+aline  .25146 -.00762 
+aline  .25527 -.00381 
+aline  .25781 -.00254 
+aline  .26543 -.00254 
+aline  .26797 -.00381 
+aline  .27178 -.00762 
+aline  .27305 -.01016 
+aline  .27305 -.34544 
+aline  .27178 -.34798 
+aline  .26797 -.35179 
+aline  .26543 -.35306 
+aline  .02921 -.35306 
+aline  .0254 -.35179 
+aline  .02159 -.34798 
+aline  .02032 -.34417 
+aline  .02032 -.01016 
+aline  .02159 -.00762 
+aline  .0254 -.00381 
+aline  .02794 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="G"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0381 -.00254 
+aline  .04064 -.00381 
+aline  .04318 -.00508 
+aline  .04572 -.00762 
+aline  .04826 -.0127 
+aline  .04826 -.46355 
+aline  .04953 -.46482 
+aline  .34036 -.46482 
+aline  .34163 -.46355 
+aline  .34163 -.0127 
+aline  .34417 -.00762 
+aline  .34671 -.00508 
+aline  .35179 -.00254 
+aline  .35941 -.00254 
+aline  .36449 -.00508 
+aline  .36703 -.00762 
+aline  .36957 -.0127 
+aline  .36957 -.4826 
+aline  .36703 -.48768 
+aline  .36449 -.49022 
+aline  .35941 -.49276 
+aline  .03048 -.49276 
+aline  .0254 -.49022 
+aline  .02286 -.48768 
+aline  .02032 -.4826 
+aline  .02032 -.0127 
+aline  .02286 -.00762 
+aline  .0254 -.00508 
+aline  .02794 -.00381 
+aline  .03048 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="H"			!-------------- Beginning of new char.
+dfont  wid=.472223 hei=0 dep=1.11112 italic=.194446
+dfont  next_char="I"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .18415 -.00254 
+bezier  .201588 -.433652E-02  .222238 -.222577E-01  .21209 -.04064 
+aline  .20955 -.04318 
+aline  .20447 -.04572 
+aline  .19685 -.04572 
+aline  .19177 -.04318 
+aline  .18923 -.04064 
+aline  .18669 -.03556 
+aline  .18669 -.02794 
+aline  .18923 -.02286 
+aline  .19177 -.02032 
+aline  .19939 -.01651 
+bezier  .1872 -.841974E-02  .168923 -.428659E-02  .15875 -.01778 
+aline  .15748 -.02032 
+aline  .15621 -.02159 
+bezier  .148599 -.040614  .144757 -.058896  .14478 -.07874 
+aline  .14351 -.08001 
+aline  .14351 -.09271 
+aline  .14224 -.09398 
+aline  .14224 -.10922 
+aline  .14097 -.11049 
+aline  .14097 -.12827 
+aline  .140123 -.13081 
+aline  .14097 -.13335 
+bezier  .180524 -.144639  .201063 -.197048  .17653 -.23114 
+bezier  .166631 -.248632  .147448 -.258811  .128039 -.262544 
+aline  .127 -.2667 
+aline  .12573 -.26797 
+aline  .12573 -.27686 
+aline  .12446 -.27813 
+bezier  .122785 -.296734  .120634 -.313823  .11684 -.33274 
+bezier  .109622 -.357809  .951289E-01 -.385601  .06731 -.39116 
+aline  .0508 -.39116 
+bezier  .333615E-01 -.389363  .012712 -.371442  .02286 -.35306 
+aline  .0254 -.35052 
+aline  .03048 -.34798 
+aline  .0381 -.34798 
+aline  .04318 -.35052 
+aline  .04572 -.35306 
+aline  .04826 -.35814 
+aline  .04826 -.36576 
+aline  .04572 -.37084 
+aline  .04318 -.37338 
+aline  .03556 -.37719 
+bezier  .476832E-01 -.385049  .643506E-01 -.388761  .0762 -.37846 
+bezier  .091144 -.366196  .917805E-01 -.342939  .09652 -.32639 
+aline  .09652 -.31496 
+aline  .09779 -.31369 
+aline  .09779 -.30099 
+aline  .09906 -.29972 
+aline  .09906 -.28448 
+aline  .10033 -.28321 
+aline  .10033 -.26543 
+aline  .101092 -.26162 
+aline  .100511 -.258717 
+bezier  .0616 -.246861  .417784E-01 -.195019  .06604 -.16129 
+bezier  .756876E-01 -.144116  .944397E-01 -.134117  .113284 -.130048 
+aline  .1143 -.127 
+aline  .11557 -.12573 
+aline  .11557 -.11684 
+aline  .11684 -.11557 
+aline  .11684 -.10795 
+aline  .11811 -.10668 
+aline  .11811 -.09779 
+aline  .11938 -.09652 
+bezier  .122007 -.067302  .126544 -.318595E-01  .15113 -.01016 
+aline  .15367 -.00889 
+aline  .15494 -.00762 
+aline  .16002 -.00508 
+aline  .16383 -.00381 
+aline  .16891 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .10668 -.14732 
+bezier  .880609E-01 -.152569  .738285E-01 -.168765  .07112 -.18796 
+aline  .06985 -.18923 
+bezier  .678547E-01 -.211601  .805919E-01 -.234793  .1016 -.24384 
+aline  .10287 -.24257 
+aline  .10287 -.23114 
+aline  .10414 -.22987 
+aline  .10414 -.21717 
+aline  .10541 -.2159 
+aline  .10541 -.2032 
+aline  .10668 -.20193 
+aline  .10668 -.1905 
+aline  .10795 -.18923 
+aline  .10795 -.17907 
+aline  .10922 -.1778 
+aline  .10922 -.16764 
+aline  .11049 -.16637 
+aline  .11049 -.15748 
+aline  .11176 -.15621 
+aline  .11176 -.14732 
+aline  .10922 -.146473 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .13843 -.14986 
+aline  .13843 -.16256 
+aline  .13716 -.16383 
+aline  .13716 -.17653 
+aline  .13589 -.1778 
+aline  .13589 -.1905 
+aline  .13462 -.19177 
+aline  .13462 -.2032 
+aline  .13335 -.20447 
+aline  .13335 -.21463 
+aline  .13208 -.2159 
+aline  .13208 -.22606 
+aline  .13081 -.22733 
+aline  .13081 -.23622 
+aline  .12954 -.23749 
+aline  .12954 -.24511 
+bezier  .150804 -.245206  .16859 -.225045  .17145 -.20447 
+aline  .17272 -.2032 
+bezier  .174514 -.181011  .162287 -.156812  .140335 -.148907 
+aline  .13843 -.14986 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="I"			!-------------- Beginning of new char.
+dfont  wid=.555557 hei=0 dep=2.22225 italic=.444446
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .29972 -.00254 
+bezier  .319306 -.50209E-02  .339266 -.258595E-01  .32893 -.04572 
+aline  .32512 -.04953 
+aline  .32258 -.0508 
+aline  .31877 -.05207 
+aline  .31115 -.05207 
+aline  .30734 -.0508 
+aline  .3048 -.04953 
+aline  .30099 -.04572 
+aline  .29845 -.04064 
+aline  .29845 -.03048 
+aline  .30099 -.0254 
+aline  .3048 -.02159 
+aline  .30734 -.02032 
+aline  .31115 -.01905 
+aline  .31623 -.01778 
+aline  .31369 -.01651 
+aline  .31242 -.01524 
+aline  .3048 -.01143 
+aline  .29972 -.01016 
+aline  .29845 -.00889 
+aline  .29083 -.00889 
+aline  .28575 -.01397 
+aline  .28448 -.01651 
+aline  .28321 -.01778 
+aline  .2794 -.0254 
+aline  .27813 -.02921 
+aline  .27686 -.03175 
+aline  .27051 -.0508 
+aline  .26924 -.05588 
+aline  .26797 -.05969 
+aline  .25908 -.09525 
+aline  .25781 -.1016 
+aline  .25654 -.10668 
+aline  .25273 -.12573 
+aline  .25146 -.13081 
+aline  .24511 -.16256 
+aline  .24384 -.16383 
+aline  .24384 -.17018 
+aline  .24003 -.18923 
+aline  .23876 -.1905 
+aline  .23876 -.19685 
+aline  .23749 -.19812 
+aline  .23749 -.20447 
+aline  .23622 -.21082 
+aline  .23495 -.21209 
+bezier  .234659 -.22703  .229082 -.240623  .2286 -.25527 
+aline  .22733 -.25654 
+aline  .22733 -.26289 
+aline  .22606 -.26416 
+aline  .22606 -.27051 
+aline  .22479 -.27178 
+aline  .22479 -.27813 
+aline  .22352 -.2794 
+aline  .22352 -.28575 
+aline  .22225 -.28702 
+aline  .22225 -.29337 
+aline  .22098 -.29464 
+aline  .22098 -.30099 
+aline  .21971 -.30226 
+bezier  .249936 -.316303  .276819 -.344762  .27813 -.37973 
+bezier  .287987 -.428128  .247766 -.482689  .19685 -.48514 
+aline  .19558 -.48641 
+aline  .18415 -.48641 
+bezier  .176731 -.521687  .168125 -.556697  .16002 -.59182 
+aline  .14224 -.66294 
+bezier  .130805 -.702405  .119511 -.745436  .08763 -.77343 
+bezier  .664332E-01 -.790143  .280531E-01 -.783655  .02032 -.75565 
+aline  .02032 -.74422 
+aline  .02286 -.73914 
+aline  .02667 -.73533 
+aline  .02921 -.73406 
+aline  .03302 -.73279 
+aline  .04064 -.73279 
+aline  .04445 -.73406 
+aline  .04699 -.73533 
+aline  .0508 -.73914 
+aline  .05334 -.74422 
+aline  .05334 -.75438 
+aline  .0508 -.75946 
+aline  .04699 -.76327 
+aline  .04445 -.76454 
+aline  .04064 -.76581 
+aline  .03556 -.76708 
+bezier  .464052E-01 -.774551  .061195 -.78058  .07239 -.77089 
+bezier  .099427 -.743064  .104667 -.701757  .1143 -.66548 
+bezier  .122341 -.626825  .130243 -.589861  .13589 -.55245 
+aline  .13716 -.55118 
+aline  .13716 -.54483 
+aline  .13843 -.54356 
+aline  .13843 -.53721 
+aline  .1397 -.53594 
+aline  .1397 -.52959 
+aline  .14097 -.52832 
+aline  .14097 -.52197 
+aline  .14224 -.5207 
+aline  .14224 -.51435 
+aline  .14351 -.51308 
+aline  .14351 -.50673 
+aline  .14478 -.50546 
+aline  .14478 -.49911 
+aline  .14605 -.49784 
+aline  .14605 -.49149 
+aline  .14732 -.49022 
+aline  .14732 -.48387 
+aline  .148167 -.48133 
+aline  .147574 -.479552 
+bezier  .109191 -.463944  .083453 -.419866  .09144 -.37973 
+bezier  .938447E-01 -.333469  .139016 -.295377  .18415 -.29718 
+bezier  .192098 -.262445  .200104 -.227723  .20828 -.19304 
+aline  .22733 -.11684 
+aline  .2286 -.11303 
+aline  .23114 -.10287 
+aline  .23241 -.09906 
+aline  .23368 -.09398 
+aline  .24511 -.05969 
+bezier  .254408 -.380447E-01  .263711 -.120501E-01  .28702 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .17526 -.31242 
+bezier  .142715 -.314707  .11311 -.340741  .10668 -.37338 
+bezier  .967953E-01 -.407471  .116325 -.449263  .14986 -.46482 
+aline  .15113 -.46228 
+aline  .1524 -.45593 
+aline  .15367 -.45466 
+aline  .15367 -.44831 
+aline  .15494 -.44196 
+aline  .15621 -.44069 
+aline  .15621 -.43434 
+aline  .16129 -.40894 
+aline  .16256 -.40767 
+aline  .16256 -.40132 
+aline  .16383 -.39497 
+aline  .1651 -.38989 
+aline  .17399 -.34544 
+aline  .17526 -.34036 
+aline  .17907 -.32131 
+aline  .18034 -.31623 
+aline  .181187 -.31369 
+aline  .180686 -.312189 
+aline  .178435 -.311626 
+aline  .17526 -.31242 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .21717 -.32258 
+aline  .2159 -.32893 
+aline  .21463 -.3302 
+aline  .21463 -.33655 
+aline  .21336 -.3429 
+aline  .21209 -.34417 
+aline  .21209 -.35052 
+aline  .20701 -.37592 
+aline  .20574 -.37719 
+aline  .20574 -.38354 
+aline  .20447 -.38989 
+aline  .2032 -.39497 
+aline  .19431 -.43942 
+aline  .19304 -.4445 
+aline  .18923 -.46355 
+aline  .18796 -.46863 
+aline  .187008 -.470535 
+bezier  .202174 -.474086  .21888 -.465125  .23241 -.4572 
+bezier  .262078 -.435348  .27373 -.39368  .25908 -.36068 
+bezier  .251357 -.342521  .23697 -.325316  .218186 -.319532 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="J"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=0 dep=1.00001 italic=0
+dfont  next_char="K"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .20955 -.00254 
+bezier  .262415 -.69685E-02  .313831 -.037051  .34163 -.08255 
+bezier  .358471 -.105544  .366023 -.135818  .36957 -.16256 
+aline  .36957 -.19304 
+bezier  .365833 -.223429  .35589 -.257316  .33528 -.28194 
+bezier  .2853 -.355472  .175523 -.375364  .1016 -.32639 
+bezier  .568989E-01 -.298201  .241629E-01 -.247569  .02159 -.19431 
+aline  .02032 -.19304 
+aline  .02032 -.16256 
+bezier  .240566E-01 -.132171  .340003E-01 -.982838E-01  .05461 -.07366 
+bezier  .883196E-01 -.243524E-01  .150417  .205938E-02  .20955 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .18161 -.02667 
+bezier  .116984 -.310367E-01  .596078E-01 -.820279E-01  .04699 -.14605 
+aline  .04572 -.14732 
+aline  .04572 -.15367 
+aline  .04445 -.15494 
+aline  .04445 -.16383 
+aline  .04318 -.1651 
+bezier  .392916E-01 -.222952  .700253E-01 -.284407  .12319 -.31115 
+bezier  .148848 -.326028  .178004 -.331355  .20701 -.3302 
+bezier  .232895 -.32641  .261584 -.317887  .28321 -.30099 
+bezier  .334699 -.265176  .359379 -.194138  .34036 -.13589 
+bezier  .322416 -.673181E-01  .252251 -.202933E-01  .18288 -.0254 
+aline  .18161 -.02667 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .19812 -.15367 
+aline  .2032 -.15494 
+aline  .20828 -.15748 
+aline  .21463 -.16383 
+aline  .21844 -.17145 
+aline  .21844 -.18415 
+aline  .21463 -.19177 
+aline  .20828 -.19812 
+aline  .2032 -.20066 
+aline  .19812 -.20193 
+aline  .19177 -.20193 
+aline  .18669 -.20066 
+aline  .18161 -.19812 
+aline  .17526 -.19177 
+aline  .17145 -.18415 
+aline  .17145 -.17145 
+aline  .17526 -.16383 
+aline  .18161 -.15748 
+aline  .18669 -.15494 
+aline  .19177 -.15367 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="K"			!-------------- Beginning of new char.
+dfont  wid=1.51112 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .28321 -.00254 
+aline  .28448 -.00381 
+bezier  .336317 -.513615E-02  .387406 -.294289E-01  .42672 -.06223 
+aline  .45212 -.08763 
+bezier  .485568 -.126751  .50673 -.179333  .51054 -.22987 
+aline  .51054 -.26543 
+aline  .50927 -.2667 
+bezier  .507799 -.317801  .484399 -.368665  .45212 -.40767 
+aline  .42672 -.43307 
+bezier  .387406 -.465871  .336317 -.490164  .28448 -.49149 
+aline  .28321 -.49276 
+aline  .24765 -.49276 
+aline  .24638 -.49149 
+bezier  .194543 -.490164  .143454 -.465871  .10414 -.43307 
+aline  .07874 -.40767 
+bezier  .452921E-01 -.368549  .241299E-01 -.315967  .02032 -.26543 
+aline  .02032 -.22987 
+aline  .02159 -.2286 
+bezier  .230615E-01 -.177499  .464611E-01 -.126635  .07874 -.08763 
+aline  .10414 -.06223 
+bezier  .143454 -.294289E-01  .194543 -.513612E-02  .24638 -.00381 
+aline  .24765 -.00254 
+aline  .28321 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .24892 -.03175 
+bezier  .205071 -.034103  .160057 -.532248E-01  .12573 -.08128 
+aline  .1016 -.10541 
+bezier  .764442E-01 -.134669  .589721E-01 -.170906  .05207 -.20955 
+aline  .0508 -.21082 
+aline  .0508 -.21844 
+aline  .04953 -.21971 
+aline  .04953 -.23114 
+aline  .04826 -.23241 
+aline  .04826 -.26289 
+aline  .04953 -.26416 
+bezier  .506581E-01 -.293899  .612195E-01 -.324394  .07493 -.35179 
+bezier  .828213E-01 -.36521  .918006E-01 -.377845  .1016 -.38989 
+aline  .12573 -.41402 
+bezier  .154638 -.437711  .189922 -.454263  .22733 -.46101 
+aline  .2286 -.46228 
+aline  .23622 -.46228 
+aline  .23749 -.46355 
+aline  .24892 -.46355 
+aline  .25019 -.46482 
+aline  .28067 -.46482 
+aline  .28194 -.46355 
+bezier  .325789 -.461197  .370803 -.442075  .40513 -.41402 
+aline  .42926 -.38989 
+bezier  .454416 -.360631  .471888 -.324394  .47879 -.28575 
+aline  .48006 -.28448 
+aline  .48006 -.27686 
+aline  .48133 -.27559 
+aline  .48133 -.26416 
+aline  .4826 -.26289 
+aline  .4826 -.23241 
+aline  .48133 -.23114 
+bezier  .480202 -.201401  .46964 -.170906  .45593 -.14351 
+bezier  .448039 -.13009  .439059 -.117455  .42926 -.10541 
+aline  .40513 -.08128 
+bezier  .376222 -.575889E-01  .340938 -.410372E-01  .30353 -.03429 
+aline  .30226 -.03302 
+aline  .29464 -.03302 
+aline  .29337 -.03175 
+aline  .28194 -.03175 
+aline  .28067 -.03048 
+aline  .25019 -.03048 
+aline  .24892 -.03175 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .2667 -.21844 
+bezier  .288622 -.219122  .302325 -.246176  .28956 -.26416 
+bezier  .276629 -.284129  .242727 -.278585  .23749 -.25527 
+aline  .23622 -.24892 
+aline  .23622 -.24638 
+aline  .23749 -.24003 
+aline  .23876 -.23622 
+aline  .2413 -.23114 
+aline  .24892 -.22352 
+aline  .254 -.22098 
+aline  .25781 -.21971 
+aline  .26416 -.21844 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="L"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=0 dep=1.00001 italic=0
+dfont  next_char="M"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .20955 -.00254 
+bezier  .262415 -.69685E-02  .313831 -.037051  .34163 -.08255 
+bezier  .358471 -.105544  .366023 -.135818  .36957 -.16256 
+aline  .36957 -.19304 
+bezier  .365833 -.223429  .35589 -.257316  .33528 -.28194 
+bezier  .2853 -.355472  .175523 -.375364  .1016 -.32639 
+bezier  .568989E-01 -.298201  .241629E-01 -.247569  .02159 -.19431 
+aline  .02032 -.19304 
+aline  .02032 -.16256 
+bezier  .240566E-01 -.132171  .340003E-01 -.982838E-01  .05461 -.07366 
+bezier  .883196E-01 -.243524E-01  .150417  .205938E-02  .20955 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .18161 -.02667 
+bezier  .116984 -.310367E-01  .596078E-01 -.820279E-01  .04699 -.14605 
+aline  .04572 -.14732 
+aline  .04572 -.15367 
+aline  .04445 -.15494 
+aline  .04445 -.16383 
+aline  .04318 -.1651 
+aline  .04445 -.16637 
+aline  .18288 -.16637 
+aline  .18415 -.1651 
+aline  .18415 -.02667 
+aline  .18288 -.0254 
+aline  .18161 -.02667 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .20701 -.02794 
+aline  .20701 -.1651 
+aline  .20828 -.16637 
+aline  .34544 -.16637 
+bezier  .346126 -.147817  .337543 -.125545  .32893 -.10668 
+bezier  .305679 -.623357E-01  .258549 -.300535E-01  .20828 -.02667 
+aline  .20701 -.02794 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .04318 -.1905 
+bezier  .477442E-01 -.222425  .605691E-01 -.258026  .08509 -.28194 
+bezier  .106809 -.305862  .137588 -.32239  .17018 -.32766 
+aline  .17145 -.32893 
+aline  .18161 -.32893 
+aline  .18288 -.3302 
+aline  .18415 -.32893 
+aline  .18415 -.1905 
+aline  .18288 -.18923 
+aline  .04445 -.18923 
+aline  .04318 -.1905 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .20701 -.1905 
+aline  .20701 -.32766 
+aline  .20828 -.32893 
+bezier  .272905 -.324563  .330282 -.273572  .3429 -.20955 
+aline  .34417 -.20828 
+aline  .34417 -.20193 
+aline  .34544 -.20066 
+aline  .34544 -.19177 
+aline  .34671 -.1905 
+aline  .34544 -.18923 
+aline  .20828 -.18923 
+aline  .20701 -.1905 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="M"			!-------------- Beginning of new char.
+dfont  wid=1.51112 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .28321 -.00254 
+aline  .28448 -.00381 
+bezier  .336317 -.513615E-02  .387406 -.294289E-01  .42672 -.06223 
+aline  .45212 -.08763 
+bezier  .485568 -.126751  .50673 -.179333  .51054 -.22987 
+aline  .51054 -.26543 
+aline  .50927 -.2667 
+bezier  .507799 -.317801  .484399 -.368665  .45212 -.40767 
+aline  .42672 -.43307 
+bezier  .387406 -.465871  .336317 -.490164  .28448 -.49149 
+aline  .28321 -.49276 
+aline  .24765 -.49276 
+aline  .24638 -.49149 
+bezier  .194543 -.490164  .143454 -.465871  .10414 -.43307 
+aline  .07874 -.40767 
+bezier  .452921E-01 -.368549  .241299E-01 -.315967  .02032 -.26543 
+aline  .02032 -.22987 
+aline  .02159 -.2286 
+bezier  .230615E-01 -.177499  .464611E-01 -.126635  .07874 -.08763 
+aline  .10414 -.06223 
+bezier  .143454 -.294289E-01  .194543 -.513612E-02  .24638 -.00381 
+aline  .24765 -.00254 
+aline  .28321 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .24892 -.03175 
+bezier  .205071 -.034103  .160057 -.532248E-01  .12573 -.08128 
+aline  .1016 -.10541 
+bezier  .764442E-01 -.134669  .589721E-01 -.170906  .05207 -.20955 
+aline  .0508 -.21082 
+aline  .0508 -.21844 
+aline  .04953 -.21971 
+aline  .04953 -.23114 
+aline  .04826 -.23241 
+aline  .04953 -.23368 
+aline  .25019 -.23368 
+aline  .25146 -.23241 
+aline  .25146 -.03175 
+aline  .25019 -.03048 
+aline  .24892 -.03175 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .2794 -.03175 
+aline  .2794 -.23241 
+aline  .28067 -.23368 
+aline  .48133 -.23368 
+aline  .4826 -.23241 
+aline  .48133 -.23114 
+bezier  .480202 -.201401  .46964 -.170906  .45593 -.14351 
+bezier  .448039 -.13009  .439059 -.117455  .42926 -.10541 
+aline  .40513 -.08128 
+bezier  .376222 -.575889E-01  .340938 -.410372E-01  .30353 -.03429 
+aline  .30226 -.03302 
+aline  .29464 -.03302 
+aline  .29337 -.03175 
+aline  .28194 -.03175 
+aline  .28067 -.03048 
+aline  .2794 -.03175 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .04826 -.26289 
+aline  .04953 -.26416 
+bezier  .506581E-01 -.293899  .612195E-01 -.324394  .07493 -.35179 
+bezier  .828213E-01 -.36521  .918006E-01 -.377845  .1016 -.38989 
+aline  .12573 -.41402 
+bezier  .154638 -.437711  .189922 -.454263  .22733 -.46101 
+aline  .2286 -.46228 
+aline  .23622 -.46228 
+aline  .23749 -.46355 
+aline  .24892 -.46355 
+aline  .25019 -.46482 
+aline  .25146 -.46355 
+aline  .25146 -.26289 
+aline  .25019 -.26162 
+aline  .04953 -.26162 
+aline  .04826 -.26289 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .2794 -.26289 
+aline  .2794 -.46355 
+aline  .28067 -.46482 
+aline  .28194 -.46355 
+bezier  .325789 -.461197  .370803 -.442075  .40513 -.41402 
+aline  .42926 -.38989 
+bezier  .454416 -.360631  .471888 -.324394  .47879 -.28575 
+aline  .48006 -.28448 
+aline  .48006 -.27686 
+aline  .48133 -.27559 
+aline  .48133 -.26416 
+aline  .4826 -.26289 
+aline  .48133 -.26162 
+aline  .28067 -.26162 
+aline  .2794 -.26289 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="N"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=0 dep=1.00001 italic=0
+dfont  next_char="O"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .20955 -.00254 
+bezier  .262415 -.69685E-02  .313831 -.037051  .34163 -.08255 
+bezier  .358471 -.105544  .366023 -.135818  .36957 -.16256 
+aline  .36957 -.19304 
+bezier  .365833 -.223429  .35589 -.257316  .33528 -.28194 
+bezier  .2853 -.355472  .175523 -.375364  .1016 -.32639 
+bezier  .568989E-01 -.298201  .241629E-01 -.247569  .02159 -.19431 
+aline  .02032 -.19304 
+aline  .02032 -.16256 
+bezier  .240566E-01 -.132171  .340003E-01 -.982838E-01  .05461 -.07366 
+bezier  .883196E-01 -.243524E-01  .150417  .205938E-02  .20955 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .18161 -.02667 
+bezier  .150791 -.283082E-01  .120145 -.425394E-01  .09652 -.06223 
+aline  .19304 -.15875 
+aline  .194945 -.159702 
+aline  .19685 -.15875 
+aline  .29337 -.06223 
+bezier  .26295 -.363519E-01  .222337 -.230958E-01  .18288 -.0254 
+aline  .18161 -.02667 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .07747 -.08128 
+bezier  .630994E-01 -.100285  .519763E-01 -.122223  .04699 -.14605 
+aline  .04572 -.14732 
+aline  .04572 -.15367 
+aline  .04445 -.15494 
+aline  .04445 -.16383 
+aline  .04318 -.1651 
+bezier  .407351E-01 -.205057  .538905E-01 -.245711  .08001 -.27686 
+aline  .17907 -.1778 
+aline  .08001 -.07874 
+aline  .07747 -.08128 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .21082 -.1778 
+aline  .30988 -.27686 
+bezier  .342394 -.237889  .355849 -.183233  .34036 -.13589 
+bezier  .334298 -.11476  .323786 -.952872E-01  .30988 -.07874 
+aline  .21082 -.1778 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .09652 -.29337 
+bezier  .136263 -.326982  .19243 -.339694  .2413 -.32258 
+bezier  .260547 -.31637  .278001 -.305929  .29337 -.29337 
+aline  .19685 -.19685 
+aline  .194945 -.195898 
+aline  .19304 -.19685 
+aline  .09652 -.29337 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="O"			!-------------- Beginning of new char.
+dfont  wid=1.51112 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .28321 -.00254 
+aline  .28448 -.00381 
+bezier  .336317 -.513615E-02  .387406 -.294289E-01  .42672 -.06223 
+aline  .45212 -.08763 
+bezier  .485568 -.126751  .50673 -.179333  .51054 -.22987 
+aline  .51054 -.26543 
+aline  .50927 -.2667 
+bezier  .507799 -.317801  .484399 -.368665  .45212 -.40767 
+aline  .42672 -.43307 
+bezier  .387406 -.465871  .336317 -.490164  .28448 -.49149 
+aline  .28321 -.49276 
+aline  .24765 -.49276 
+aline  .24638 -.49149 
+bezier  .194543 -.490164  .143454 -.465871  .10414 -.43307 
+aline  .07874 -.40767 
+bezier  .452921E-01 -.368549  .241299E-01 -.315967  .02032 -.26543 
+aline  .02032 -.22987 
+aline  .02159 -.2286 
+bezier  .230615E-01 -.177499  .464611E-01 -.126635  .07874 -.08763 
+aline  .10414 -.06223 
+bezier  .143454 -.294289E-01  .194543 -.513612E-02  .24638 -.00381 
+aline  .24765 -.00254 
+aline  .28321 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .24892 -.03175 
+bezier  .204525 -.342209E-01  .158794 -.053545  .12446 -.08255 
+aline  .123507 -.084455 
+aline  .12446 -.08636 
+aline  .26543 -.22733 
+aline  .4064 -.08636 
+aline  .407353 -.084455 
+bezier  .377382 -.549832E-01  .333559 -.394757E-01  .29337 -.03175 
+aline  .28194 -.03175 
+aline  .28067 -.03048 
+aline  .25019 -.03048 
+aline  .24892 -.03175 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .10033 -.10795 
+bezier  .692145E-01 -.141326  .533466E-01 -.189127  .04826 -.23241 
+aline  .04826 -.26289 
+aline  .04953 -.26416 
+bezier  .506581E-01 -.293899  .612195E-01 -.324394  .07493 -.35179 
+bezier  .831517E-01 -.364971  .912892E-01 -.3786  .102235 -.389573 
+aline  .10414 -.38862 
+aline  .24511 -.24765 
+aline  .10414 -.10668 
+aline  .102235 -.105728 
+aline  .101177 -.106257 
+aline  .10033 -.10795 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .28575 -.24765 
+aline  .42672 -.38862 
+aline  .428625 -.389573 
+bezier  .460702 -.356051  .477521 -.307156  .4826 -.26289 
+aline  .4826 -.23241 
+aline  .48133 -.23114 
+bezier  .480202 -.201401  .46964 -.170906  .45593 -.14351 
+bezier  .447708 -.13033  .439571 -.116699  .428625 -.105728 
+aline  .42672 -.10668 
+aline  .28575 -.24765 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .12446 -.40894 
+aline  .123507 -.410845 
+bezier  .153478 -.440317  .197301 -.455824  .23749 -.46355 
+aline  .24892 -.46355 
+aline  .25019 -.46482 
+aline  .28067 -.46482 
+aline  .28194 -.46355 
+bezier  .326335 -.461079  .372066 -.441755  .4064 -.41275 
+aline  .407353 -.410845 
+aline  .4064 -.40894 
+aline  .26543 -.26797 
+aline  .12446 -.40894 
+aline  .123507 -.410845 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="P"			!-------------- Beginning of new char.
+dfont  wid=1.05556 hei=0 dep=1.00001 italic=0
+dfont  next_char="X"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .32004 -.00254 
+bezier  .331167 -.293707E-01  .340486 -.575683E-01  .35052 -.08509 
+aline  .3429 -.08509 
+bezier  .327846 -.467952E-01  .287111 -.237107E-01  .24765 -.02032 
+aline  .24638 -.01905 
+aline  .23749 -.01905 
+aline  .23622 -.01778 
+aline  .21844 -.01778 
+aline  .21717 -.01651 
+aline  .05969 -.01651 
+aline  .587375E-01 -.018415 
+bezier  .967926E-01 -.713812E-01  .135737 -.123707  .17399 -.17653 
+aline  .17399 -.17907 
+bezier  .133655 -.230225  .925389E-01 -.280817  .523875E-01 -.332105 
+aline  .05334 -.33401 
+aline  .21971 -.33401 
+aline  .22098 -.33274 
+bezier  .248131 -.333169  .274455 -.327201  .29972 -.31496 
+bezier  .319072 -.303747  .334729 -.286411  .3429 -.26543 
+aline  .35052 -.26543 
+aline  .33655 -.30734 
+aline  .33528 -.30988 
+aline  .32131 -.35179 
+aline  .32004 -.35306 
+aline  .02286 -.35306 
+aline  .02032 -.35179 
+aline  .02032 -.34798 
+bezier  .624737E-01 -.294798  .105225 -.242048  .147003 -.188595 
+bezier  .104772 -.130812  .625499E-01 -.730234E-01  .02032 -.01524 
+aline  .02032 -.00381 
+aline  .02286 -.00254 
+aline  .32004 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="Q"			!-------------- Beginning of new char.
+dfont  wid=.944448 hei=0 dep=1.00001 italic=0
+dfont  next_char="Y"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .31115 -.00254 
+aline  .31115 -.01651 
+aline  .30099 -.01651 
+aline  .29972 -.01778 
+aline  .29337 -.01905 
+aline  .28956 -.02032 
+aline  .28448 -.02286 
+aline  .2794 -.02794 
+aline  .27813 -.03048 
+aline  .27686 -.03429 
+aline  .27559 -.03556 
+aline  .27559 -.32004 
+aline  .27686 -.32131 
+aline  .27813 -.32512 
+aline  .2794 -.32766 
+aline  .28448 -.33274 
+aline  .28956 -.33528 
+aline  .29337 -.33655 
+aline  .29972 -.33782 
+aline  .30099 -.33909 
+aline  .31115 -.33909 
+aline  .31115 -.35306 
+aline  .20701 -.35306 
+aline  .20701 -.33909 
+aline  .21717 -.33909 
+aline  .21844 -.33782 
+aline  .22479 -.33655 
+aline  .2286 -.33528 
+aline  .23368 -.33274 
+aline  .23876 -.32766 
+aline  .24003 -.32512 
+aline  .2413 -.32131 
+aline  .24257 -.32004 
+aline  .24257 -.01778 
+aline  .2413 -.01651 
+aline  .09017 -.01651 
+aline  .0889 -.01778 
+aline  .0889 -.32004 
+aline  .09017 -.32131 
+aline  .09144 -.32512 
+aline  .09271 -.32766 
+aline  .09779 -.33274 
+aline  .10287 -.33528 
+aline  .10668 -.33655 
+aline  .11303 -.33782 
+aline  .1143 -.33909 
+aline  .12446 -.33909 
+aline  .12446 -.35306 
+aline  .02032 -.35306 
+aline  .02032 -.33909 
+aline  .03048 -.33909 
+aline  .03175 -.33782 
+aline  .0381 -.33655 
+aline  .04191 -.33528 
+aline  .04699 -.33274 
+aline  .05207 -.32766 
+aline  .05334 -.32512 
+aline  .05461 -.32131 
+aline  .05588 -.32004 
+aline  .05588 -.03556 
+aline  .05461 -.03429 
+aline  .05334 -.03048 
+aline  .05207 -.02794 
+aline  .04699 -.02286 
+aline  .04191 -.02032 
+aline  .0381 -.01905 
+aline  .03175 -.01778 
+aline  .03048 -.01651 
+aline  .02032 -.01651 
+aline  .02032 -.00254 
+aline  .31115 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="R"			!-------------- Beginning of new char.
+dfont  wid=.472223 hei=0 dep=1.11112 italic=.194446
+dfont  next_char="Z"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .18415 -.00254 
+bezier  .201588 -.433652E-02  .222238 -.222577E-01  .21209 -.04064 
+aline  .20955 -.04318 
+aline  .20447 -.04572 
+aline  .19685 -.04572 
+aline  .19177 -.04318 
+aline  .18923 -.04064 
+aline  .18669 -.03556 
+aline  .18669 -.02794 
+aline  .18923 -.02286 
+aline  .19177 -.02032 
+aline  .19939 -.01651 
+bezier  .1872 -.841974E-02  .168923 -.428659E-02  .15875 -.01778 
+aline  .15748 -.02032 
+aline  .15621 -.02159 
+bezier  .148599 -.040614  .144757 -.058896  .14478 -.07874 
+aline  .14351 -.08001 
+aline  .14351 -.09271 
+aline  .14224 -.09398 
+aline  .14224 -.10922 
+aline  .14097 -.11049 
+aline  .14097 -.12827 
+aline  .1397 -.12954 
+aline  .1397 -.14605 
+aline  .13843 -.14732 
+aline  .13843 -.16256 
+aline  .13716 -.16383 
+aline  .13716 -.17653 
+aline  .13589 -.1778 
+aline  .13589 -.1905 
+aline  .13462 -.19177 
+aline  .13462 -.2032 
+aline  .13335 -.20447 
+aline  .13335 -.21463 
+aline  .13208 -.2159 
+aline  .13208 -.22606 
+aline  .13081 -.22733 
+aline  .13081 -.23622 
+aline  .12954 -.23749 
+aline  .12954 -.24765 
+aline  .12827 -.24892 
+aline  .12827 -.25781 
+aline  .127 -.25908 
+aline  .127 -.2667 
+aline  .12573 -.26797 
+aline  .12573 -.27686 
+aline  .12446 -.27813 
+bezier  .122785 -.296734  .120634 -.313823  .11684 -.33274 
+bezier  .109622 -.357809  .951289E-01 -.385601  .06731 -.39116 
+aline  .0508 -.39116 
+bezier  .333615E-01 -.389363  .012712 -.371442  .02286 -.35306 
+aline  .0254 -.35052 
+aline  .03048 -.34798 
+aline  .0381 -.34798 
+aline  .04318 -.35052 
+aline  .04572 -.35306 
+aline  .04826 -.35814 
+aline  .04826 -.36576 
+aline  .04572 -.37084 
+aline  .04318 -.37338 
+aline  .03556 -.37719 
+bezier  .476832E-01 -.385049  .643506E-01 -.388761  .0762 -.37846 
+bezier  .091144 -.366196  .917805E-01 -.342939  .09652 -.32639 
+aline  .09652 -.31496 
+aline  .09779 -.31369 
+aline  .09779 -.30099 
+aline  .09906 -.29972 
+aline  .09906 -.28448 
+aline  .10033 -.28321 
+aline  .10033 -.26543 
+aline  .1016 -.26416 
+aline  .1016 -.24765 
+aline  .10287 -.24638 
+aline  .10287 -.23114 
+aline  .10414 -.22987 
+aline  .10414 -.21717 
+aline  .10541 -.2159 
+aline  .10541 -.2032 
+aline  .10668 -.20193 
+aline  .10668 -.1905 
+aline  .10795 -.18923 
+aline  .10795 -.17907 
+aline  .10922 -.1778 
+aline  .10922 -.16764 
+aline  .11049 -.16637 
+aline  .11049 -.15748 
+aline  .11176 -.15621 
+aline  .11176 -.14605 
+aline  .11303 -.14478 
+aline  .11303 -.13589 
+aline  .1143 -.13462 
+aline  .1143 -.127 
+aline  .11557 -.12573 
+aline  .11557 -.11684 
+aline  .11684 -.11557 
+aline  .11684 -.10795 
+aline  .11811 -.10668 
+aline  .11811 -.09779 
+aline  .11938 -.09652 
+bezier  .122007 -.067302  .126544 -.318595E-01  .15113 -.01016 
+aline  .15367 -.00889 
+aline  .15494 -.00762 
+aline  .16002 -.00508 
+aline  .16383 -.00381 
+aline  .16891 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="S"			!-------------- Beginning of new char.
+dfont  wid=.833336 hei=0 dep=1.00001 italic=0
+dfont  next_char="["
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03556 -.00254 
+aline  .0381 -.00381 
+aline  .04191 -.00762 
+aline  .04318 -.01016 
+aline  .04318 -.24257 
+bezier  .480384E-01 -.27207  .066433 -.301589  .09398 -.31623 
+bezier  .131384 -.337421  .178287 -.334193  .21209 -.30734 
+bezier  .233608 -.292569  .245558 -.266577  .25019 -.24257 
+aline  .25019 -.01016 
+aline  .25146 -.00762 
+aline  .25527 -.00381 
+aline  .25781 -.00254 
+aline  .26543 -.00254 
+aline  .26797 -.00381 
+aline  .27178 -.00762 
+aline  .27305 -.01016 
+aline  .27305 -.24511 
+bezier  .270427 -.266675  .261323 -.288759  .24765 -.30607 
+bezier  .225953 -.331442  .195299 -.350399  .16129 -.35179 
+bezier  .099453 -.36232  .317767E-01 -.316349  .02159 -.25273 
+aline  .02159 -.24638 
+aline  .02032 -.24511 
+aline  .02032 -.01016 
+aline  .02159 -.00762 
+aline  .0254 -.00381 
+aline  .02794 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="T"			!-------------- Beginning of new char.
+dfont  wid=.833336 hei=0 dep=1.00001 italic=0
+dfont  next_char="\"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .16002 -.00254 
+bezier  .213142 -.737457E-02  .262857 -.488454E-01  .27178 -.10287 
+aline  .27178 -.10922 
+aline  .27305 -.11049 
+aline  .27305 -.34544 
+aline  .27178 -.34798 
+aline  .26797 -.35179 
+aline  .26543 -.35306 
+aline  .25781 -.35306 
+aline  .25527 -.35179 
+aline  .25146 -.34798 
+aline  .25019 -.34544 
+aline  .25019 -.11303 
+bezier  .245332 -.835304E-01  .226937 -.540111E-01  .19939 -.03937 
+bezier  .161986 -.181788E-01  .115083 -.214068E-01  .08128 -.04826 
+bezier  .597623E-01 -.063031  .478122E-01 -.890231E-01  .04318 -.11303 
+aline  .04318 -.34544 
+aline  .04191 -.34798 
+aline  .0381 -.35179 
+aline  .03556 -.35306 
+aline  .02794 -.35306 
+aline  .0254 -.35179 
+aline  .02159 -.34798 
+aline  .02032 -.34544 
+aline  .02032 -.11049 
+bezier  .229428E-01 -.889245E-01  .320465E-01 -.668413E-01  .04572 -.04953 
+bezier  .674174E-01 -.241585E-01  .980707E-01 -.520053E-02  .13208 -.00381 
+aline  .13335 -.00254 
+aline  .16002 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="U"			!-------------- Beginning of new char.
+dfont  wid=.833336 hei=0 dep=1.00001 italic=0
+dfont  next_char="]"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03556 -.00254 
+aline  .0381 -.00381 
+aline  .04191 -.00762 
+aline  .04318 -.01016 
+aline  .04318 -.24257 
+bezier  .480384E-01 -.27207  .066433 -.301589  .09398 -.31623 
+bezier  .131384 -.337421  .178287 -.334193  .21209 -.30734 
+bezier  .233608 -.292569  .245558 -.266577  .25019 -.24257 
+aline  .25019 -.01016 
+aline  .25146 -.00762 
+aline  .25527 -.00381 
+aline  .25781 -.00254 
+aline  .26543 -.00254 
+aline  .26797 -.00381 
+aline  .27178 -.00762 
+aline  .27305 -.01016 
+aline  .27305 -.24511 
+bezier  .270427 -.266675  .261323 -.288759  .24765 -.30607 
+bezier  .225953 -.331442  .195299 -.350399  .16129 -.35179 
+bezier  .099453 -.36232  .317767E-01 -.316349  .02159 -.25273 
+aline  .02159 -.24638 
+aline  .02032 -.24511 
+aline  .02032 -.01016 
+aline  .02159 -.00762 
+aline  .0254 -.00381 
+aline  .02794 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .15113 -.09017 
+aline  .15367 -.09144 
+aline  .15621 -.09398 
+aline  .15748 -.09652 
+aline  .15875 -.10033 
+aline  .15875 -.15494 
+aline  .16002 -.15621 
+aline  .21463 -.15621 
+aline  .21844 -.15748 
+aline  .22098 -.15875 
+aline  .22225 -.16002 
+aline  .22479 -.1651 
+aline  .22479 -.17145 
+aline  .22352 -.17399 
+aline  .21971 -.1778 
+aline  .21717 -.17907 
+aline  .16002 -.17907 
+aline  .15875 -.18034 
+aline  .15875 -.23495 
+aline  .15748 -.24003 
+aline  .1524 -.24511 
+aline  .14859 -.24638 
+aline  .14478 -.24638 
+aline  .14097 -.24511 
+aline  .13589 -.24003 
+aline  .13589 -.18034 
+aline  .13462 -.17907 
+aline  .0762 -.17907 
+aline  .07366 -.1778 
+aline  .06985 -.17399 
+aline  .06858 -.17145 
+aline  .06858 -.1651 
+aline  .07112 -.16002 
+aline  .07239 -.15875 
+aline  .07493 -.15748 
+aline  .07874 -.15621 
+aline  .13462 -.15621 
+aline  .13589 -.15494 
+aline  .13589 -.09652 
+aline  .13716 -.09398 
+aline  .1397 -.09144 
+aline  .14224 -.09017 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="V"			!-------------- Beginning of new char.
+dfont  wid=.833336 hei=0 dep=1.00001 italic=0
+dfont  next_char="^"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .14986 -.00254 
+aline  .15367 -.00381 
+aline  .15494 -.00508 
+bezier  .19638 -.11485  .233019 -.227228  .27305 -.33782 
+aline  .27305 -.34544 
+aline  .27178 -.34798 
+aline  .26797 -.35179 
+aline  .26543 -.35306 
+aline  .25781 -.35306 
+aline  .25527 -.35179 
+aline  .25146 -.34798 
+bezier  .216 -.249757  .183053 -.1498  .146685 -.523875E-01 
+bezier  .110317 -.1498  .773703E-01 -.249757  .04191 -.34798 
+aline  .0381 -.35179 
+aline  .03556 -.35306 
+aline  .02794 -.35306 
+aline  .0254 -.35179 
+aline  .02159 -.34798 
+aline  .02032 -.34544 
+aline  .02032 -.33782 
+bezier  .591661E-01 -.22831  .973132E-01 -.118511  .13589 -.00889 
+aline  .14097 -.00381 
+aline  .14351 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="W"			!-------------- Beginning of new char.
+dfont  wid=.833336 hei=0 dep=1.00001 italic=0
+dfont  next_char="_"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .03556 -.00254 
+aline  .0381 -.00381 
+aline  .04191 -.00762 
+bezier  .773705E-01 -.105842  .110317 -.2058  .146685 -.303212 
+bezier  .183053 -.2058  .215999 -.105842  .25146 -.00762 
+aline  .25527 -.00381 
+aline  .25781 -.00254 
+aline  .26543 -.00254 
+aline  .26797 -.00381 
+aline  .27178 -.00762 
+aline  .27305 -.01016 
+aline  .27305 -.01778 
+bezier  .233019 -.128372  .19638 -.24075  .15494 -.35052 
+aline  .15367 -.35179 
+aline  .14986 -.35306 
+aline  .14351 -.35306 
+aline  .14097 -.35179 
+aline  .13589 -.34671 
+bezier  .973133E-01 -.237089  .591661E-01 -.12729  .02032 -.01778 
+aline  .02032 -.01016 
+aline  .02159 -.00762 
+aline  .0254 -.00381 
+aline  .02794 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="X"			!-------------- Beginning of new char.
+dfont  wid=1.44445 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .4445 -.00254 
+bezier  .460021 -.034807  .473101 -.687042E-01  .48768 -.1016 
+aline  .48006 -.1016 
+bezier  .459583 -.581153E-01  .41298 -.346533E-01  .36703 -.02667 
+aline  .36576 -.0254 
+aline  .35941 -.0254 
+aline  .35814 -.02413 
+aline  .35052 -.02413 
+aline  .34925 -.02286 
+aline  .34036 -.02286 
+aline  .33909 -.02159 
+aline  .32512 -.02159 
+aline  .32385 -.02032 
+aline  .30099 -.02032 
+aline  .29972 -.01905 
+aline  .08382 -.01905 
+aline  .08255 -.02032 
+bezier  .137492 -.953157E-01  .192252 -.170443  .24765 -.24511 
+aline  .24765 -.25019 
+bezier  .186937 -.320454  .128125 -.392089  .06731 -.46228 
+aline  .06858 -.46355 
+aline  .30353 -.46355 
+aline  .3048 -.46228 
+aline  .32766 -.46228 
+aline  .32893 -.46101 
+bezier  .366017 -.460038  .40469 -.450662  .43815 -.43053 
+bezier  .456365 -.418217  .471287 -.401252  .48006 -.381 
+aline  .48768 -.381 
+bezier  .473352 -.418233  .459878 -.456201  .4445 -.49276 
+aline  .02286 -.49276 
+aline  .02032 -.49149 
+aline  .02032 -.48768 
+bezier  .081271 -.414692  .144356 -.342957  .204047 -.26924 
+bezier  .143961 -.184801  .813591E-01 -.101711  .02032 -.01778 
+aline  .02032 -.00381 
+aline  .02286 -.00254 
+aline  .4445 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="Y"			!-------------- Beginning of new char.
+dfont  wid=1.27778 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .42926 -.00254 
+aline  .42926 -.02159 
+bezier  .410814 -.211433E-01  .390838 -.239701E-01  .37719 -.0381 
+aline  .37338 -.04572 
+aline  .37211 -.0508 
+aline  .37084 -.05207 
+aline  .37084 -.44323 
+aline  .37211 -.4445 
+bezier  .374826 -.46498  .398127 -.470638  .41402 -.47371 
+aline  .42926 -.47371 
+aline  .42926 -.49276 
+aline  .26035 -.49276 
+aline  .26035 -.47371 
+bezier  .278796 -.474157  .298772 -.47133  .31242 -.4572 
+aline  .31623 -.44958 
+aline  .3175 -.4445 
+aline  .31877 -.44323 
+aline  .31877 -.02286 
+aline  .3175 -.02159 
+aline  .13208 -.02159 
+aline  .13081 -.02286 
+aline  .13081 -.44323 
+aline  .13208 -.4445 
+bezier  .134796 -.46498  .158097 -.470638  .17399 -.47371 
+aline  .18923 -.47371 
+aline  .18923 -.49276 
+aline  .02032 -.49276 
+aline  .02032 -.47371 
+bezier  .038766 -.474157  .058742 -.47133  .07239 -.4572 
+aline  .0762 -.44958 
+aline  .07747 -.4445 
+aline  .07874 -.44323 
+aline  .07874 -.05207 
+aline  .07747 -.0508 
+bezier  .747541E-01 -.303196E-01  .514532E-01 -.246616E-01  .03556 -.02159 
+aline  .02032 -.02159 
+aline  .02032 -.00254 
+aline  .42926 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="Z"			!-------------- Beginning of new char.
+dfont  wid=.555557 hei=0 dep=2.22225 italic=.444446
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .29972 -.00254 
+bezier  .319306 -.50209E-02  .339266 -.258595E-01  .32893 -.04572 
+aline  .32512 -.04953 
+aline  .32258 -.0508 
+aline  .31877 -.05207 
+aline  .31115 -.05207 
+aline  .30734 -.0508 
+aline  .3048 -.04953 
+aline  .30099 -.04572 
+aline  .29845 -.04064 
+aline  .29845 -.03048 
+aline  .30099 -.0254 
+aline  .3048 -.02159 
+aline  .30734 -.02032 
+aline  .31115 -.01905 
+aline  .31623 -.01778 
+aline  .31369 -.01651 
+aline  .31242 -.01524 
+aline  .3048 -.01143 
+aline  .29972 -.01016 
+aline  .29845 -.00889 
+aline  .29083 -.00889 
+aline  .28575 -.01397 
+aline  .28448 -.01651 
+aline  .28321 -.01778 
+aline  .2794 -.0254 
+aline  .27813 -.02921 
+aline  .27686 -.03175 
+aline  .27051 -.0508 
+aline  .26924 -.05588 
+aline  .26797 -.05969 
+aline  .25908 -.09525 
+aline  .25781 -.1016 
+aline  .25654 -.10668 
+aline  .25273 -.12573 
+aline  .25146 -.13081 
+aline  .24511 -.16256 
+aline  .24384 -.16383 
+aline  .24384 -.17018 
+aline  .24003 -.18923 
+aline  .23876 -.1905 
+aline  .23876 -.19685 
+aline  .23749 -.19812 
+aline  .23749 -.20447 
+aline  .23622 -.21082 
+aline  .23495 -.21209 
+bezier  .234659 -.22703  .229082 -.240623  .2286 -.25527 
+aline  .22733 -.25654 
+aline  .22733 -.26289 
+aline  .22606 -.26416 
+bezier  .224858 -.279005  .22144 -.29207  .21971 -.30734 
+aline  .21844 -.30861 
+aline  .21844 -.31496 
+aline  .21717 -.31623 
+aline  .21717 -.32258 
+aline  .2159 -.32893 
+aline  .21463 -.3302 
+aline  .21463 -.33655 
+aline  .21336 -.3429 
+aline  .21209 -.34417 
+aline  .21209 -.35052 
+aline  .20701 -.37592 
+aline  .20574 -.37719 
+aline  .20574 -.38354 
+aline  .20447 -.38989 
+aline  .2032 -.39497 
+aline  .19431 -.43942 
+bezier  .183628 -.490388  .172052 -.541155  .16002 -.59182 
+aline  .14224 -.66294 
+bezier  .130805 -.702405  .119511 -.745436  .08763 -.77343 
+bezier  .664332E-01 -.790143  .280531E-01 -.783655  .02032 -.75565 
+aline  .02032 -.74422 
+aline  .02286 -.73914 
+aline  .02667 -.73533 
+aline  .02921 -.73406 
+aline  .03302 -.73279 
+aline  .04064 -.73279 
+aline  .04445 -.73406 
+aline  .04699 -.73533 
+aline  .0508 -.73914 
+aline  .05334 -.74422 
+aline  .05334 -.75438 
+aline  .0508 -.75946 
+aline  .04699 -.76327 
+aline  .04445 -.76454 
+aline  .04064 -.76581 
+aline  .03556 -.76708 
+bezier  .464052E-01 -.774551  .061195 -.78058  .07239 -.77089 
+bezier  .099427 -.743064  .104667 -.701757  .1143 -.66548 
+bezier  .122341 -.626825  .130243 -.589861  .13589 -.55245 
+aline  .13716 -.55118 
+aline  .13716 -.54483 
+aline  .13843 -.54356 
+aline  .13843 -.53721 
+aline  .1397 -.53594 
+aline  .1397 -.52959 
+aline  .14097 -.52832 
+aline  .14097 -.52197 
+aline  .14224 -.5207 
+bezier  .143442 -.505855  .14686 -.49279  .14859 -.47752 
+aline  .14986 -.47625 
+aline  .14986 -.4699 
+aline  .15113 -.46863 
+aline  .15113 -.46228 
+aline  .1524 -.45593 
+aline  .15367 -.45466 
+aline  .15367 -.44831 
+aline  .15494 -.44196 
+aline  .15621 -.44069 
+aline  .15621 -.43434 
+aline  .16129 -.40894 
+aline  .16256 -.40767 
+aline  .16256 -.40132 
+aline  .16383 -.39497 
+aline  .1651 -.38989 
+aline  .17399 -.34544 
+bezier  .184672 -.294472  .196248 -.243705  .20828 -.19304 
+aline  .22733 -.11684 
+aline  .2286 -.11303 
+aline  .23114 -.10287 
+aline  .23241 -.09906 
+aline  .23368 -.09398 
+aline  .24511 -.05969 
+bezier  .254408 -.380447E-01  .263711 -.120501E-01  .28702 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="["			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0381 -.00254 
+aline  .04064 -.00381 
+aline  .04318 -.00508 
+aline  .04572 -.00762 
+aline  .04826 -.0127 
+aline  .04826 -.33655 
+bezier  .522095E-01 -.362459  .622264E-01 -.390723  .08001 -.41148 
+bezier  .10149 -.436478  .130173 -.454006  .16256 -.46101 
+aline  .16383 -.46228 
+aline  .17018 -.46228 
+aline  .17145 -.46355 
+aline  .18034 -.46355 
+aline  .18161 -.46482 
+bezier  .220062 -.467419  .258444 -.455441  .28956 -.4318 
+bezier  .314557 -.409889  .333976 -.381487  .33909 -.34798 
+aline  .34036 -.34671 
+aline  .34036 -.33782 
+aline  .34163 -.33655 
+aline  .34163 -.0127 
+aline  .34417 -.00762 
+aline  .34671 -.00508 
+aline  .35179 -.00254 
+aline  .35941 -.00254 
+aline  .36449 -.00508 
+aline  .36703 -.00762 
+aline  .36957 -.0127 
+aline  .36957 -.33909 
+aline  .3683 -.34036 
+bezier  .367792 -.37302  .351669 -.403941  .33274 -.42926 
+aline  .31115 -.45085 
+bezier  .28342 -.473139  .248054 -.490602  .21209 -.49149 
+aline  .21082 -.49276 
+aline  .17907 -.49276 
+bezier  .163854 -.489921  .146119 -.488555  .13081 -.48133 
+bezier  .111646 -.474249  .944905E-01 -.463302  .07874 -.45085 
+aline  .05715 -.42926 
+bezier  .370618E-01 -.403829  .231467E-01 -.371175  .02032 -.33909 
+aline  .02032 -.0127 
+aline  .02286 -.00762 
+aline  .0254 -.00508 
+aline  .02794 -.00381 
+aline  .03048 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="\"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .21082 -.00254 
+bezier  .226036 -.537887E-02  .243771 -.674519E-02  .25908 -.01397 
+bezier  .278244 -.210505E-01  .2954 -.319981E-01  .31115 -.04445 
+aline  .33274 -.06604 
+bezier  .352828 -.914708E-01  .366743 -.124125  .36957 -.15621 
+aline  .36957 -.4826 
+aline  .36703 -.48768 
+aline  .36449 -.49022 
+aline  .35941 -.49276 
+aline  .35179 -.49276 
+aline  .34671 -.49022 
+aline  .34417 -.48768 
+aline  .34163 -.4826 
+aline  .34163 -.15875 
+bezier  .33768 -.132841  .327664 -.104577  .30988 -.08382 
+bezier  .2884 -.588224E-01  .259717 -.412944E-01  .22733 -.03429 
+aline  .22606 -.03302 
+aline  .21971 -.03302 
+aline  .21844 -.03175 
+aline  .20955 -.03175 
+aline  .20828 -.03048 
+bezier  .169828 -.278812E-01  .131446 -.398589E-01  .10033 -.0635 
+bezier  .075333 -.854105E-01  .559145E-01 -.113813  .0508 -.14732 
+aline  .04953 -.14859 
+aline  .04953 -.15748 
+aline  .04826 -.15875 
+aline  .04826 -.4826 
+aline  .04572 -.48768 
+aline  .04318 -.49022 
+aline  .0381 -.49276 
+aline  .03048 -.49276 
+aline  .0254 -.49022 
+aline  .02286 -.48768 
+aline  .02032 -.4826 
+aline  .02032 -.15621 
+aline  .02159 -.15494 
+bezier  .220979E-01 -.12228  .382209E-01 -.913587E-01  .05715 -.06604 
+aline  .07874 -.04445 
+bezier  .10647 -.022161  .141836 -.469761E-02  .1778 -.00381 
+aline  .17907 -.00254 
+aline  .21082 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="]"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0381 -.00254 
+aline  .04064 -.00381 
+aline  .04318 -.00508 
+aline  .04572 -.00762 
+aline  .04826 -.0127 
+aline  .04826 -.33655 
+bezier  .522095E-01 -.362459  .622264E-01 -.390723  .08001 -.41148 
+bezier  .10149 -.436478  .130173 -.454006  .16256 -.46101 
+aline  .16383 -.46228 
+aline  .17018 -.46228 
+aline  .17145 -.46355 
+aline  .18034 -.46355 
+aline  .18161 -.46482 
+bezier  .220062 -.467419  .258444 -.455441  .28956 -.4318 
+bezier  .314557 -.409889  .333976 -.381487  .33909 -.34798 
+aline  .34036 -.34671 
+aline  .34036 -.33782 
+aline  .34163 -.33655 
+aline  .34163 -.0127 
+aline  .34417 -.00762 
+aline  .34671 -.00508 
+aline  .35179 -.00254 
+aline  .35941 -.00254 
+aline  .36449 -.00508 
+aline  .36703 -.00762 
+aline  .36957 -.0127 
+aline  .36957 -.33909 
+aline  .3683 -.34036 
+bezier  .367792 -.37302  .351669 -.403941  .33274 -.42926 
+aline  .31115 -.45085 
+bezier  .28342 -.473139  .248054 -.490602  .21209 -.49149 
+aline  .21082 -.49276 
+aline  .17907 -.49276 
+bezier  .163854 -.489921  .146119 -.488555  .13081 -.48133 
+bezier  .111646 -.474249  .944905E-01 -.463302  .07874 -.45085 
+aline  .05715 -.42926 
+bezier  .370618E-01 -.403829  .231467E-01 -.371175  .02032 -.33909 
+aline  .02032 -.0127 
+aline  .02286 -.00762 
+aline  .0254 -.00508 
+aline  .02794 -.00381 
+aline  .03048 -.00254 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .19939 -.11811 
+aline  .20193 -.11938 
+aline  .20447 -.12065 
+aline  .20574 -.12192 
+aline  .20828 -.127 
+aline  .20955 -.13081 
+aline  .20955 -.21844 
+aline  .21082 -.21971 
+aline  .30099 -.21971 
+aline  .30607 -.22225 
+aline  .30861 -.22479 
+aline  .31115 -.22987 
+aline  .31115 -.23749 
+aline  .30861 -.24257 
+aline  .30607 -.24511 
+aline  .30099 -.24765 
+aline  .21082 -.24765 
+aline  .20955 -.24892 
+aline  .20955 -.33655 
+bezier  .209348 -.351404  .186861 -.355534  .18161 -.34163 
+aline  .18161 -.24892 
+aline  .18034 -.24765 
+aline  .0889 -.24765 
+aline  .08382 -.24511 
+aline  .08128 -.24257 
+aline  .07874 -.23749 
+aline  .07874 -.22987 
+aline  .08128 -.22479 
+aline  .08382 -.22225 
+aline  .0889 -.21971 
+aline  .18034 -.21971 
+aline  .18161 -.21844 
+aline  .18161 -.127 
+aline  .18415 -.12192 
+aline  .18542 -.12065 
+aline  .18796 -.11938 
+aline  .1905 -.11811 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="^"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .19939 -.00254 
+aline  .20193 -.00381 
+aline  .20701 -.00889 
+aline  .20955 -.01397 
+aline  .21844 -.04064 
+aline  .21971 -.04318 
+aline  .2286 -.06985 
+aline  .22987 -.07239 
+aline  .23876 -.09906 
+aline  .24003 -.1016 
+aline  .25019 -.13208 
+bezier  .267956 -.18144  .284494 -.23131  .30226 -.28067 
+aline  .31242 -.31115 
+bezier  .3318 -.365623  .350513 -.420373  .36957 -.47498 
+aline  .36957 -.4826 
+aline  .36703 -.48768 
+aline  .36449 -.49022 
+aline  .35941 -.49276 
+aline  .35179 -.49276 
+aline  .34671 -.49022 
+aline  .34417 -.48768 
+bezier  .322927 -.431934  .304921 -.374848  .28448 -.31877 
+aline  .27432 -.28829 
+bezier  .256554 -.23893  .240016 -.18906  .22225 -.1397 
+aline  .21209 -.10922 
+aline  .21082 -.10668 
+aline  .20193 -.08001 
+aline  .20066 -.07747 
+aline  .195834 -.062992 
+aline  .194945 -.625475E-01 
+aline  .194056 -.062992 
+aline  .18923 -.07747 
+aline  .18796 -.08001 
+aline  .17907 -.10668 
+aline  .1778 -.10922 
+aline  .16764 -.1397 
+bezier  .149874 -.18906  .133336 -.23893  .11557 -.28829 
+aline  .10541 -.31877 
+bezier  .849689E-01 -.374848  .669625E-01 -.431934  .04572 -.48768 
+aline  .04318 -.49022 
+aline  .0381 -.49276 
+aline  .03048 -.49276 
+aline  .0254 -.49022 
+aline  .02286 -.48768 
+aline  .02032 -.4826 
+aline  .02032 -.47498 
+bezier  .393772E-01 -.420373  .580895E-01 -.365623  .07747 -.31115 
+aline  .08763 -.28067 
+bezier  .105396 -.23131  .121934 -.18144  .1397 -.13208 
+aline  .14986 -.1016 
+aline  .15113 -.09906 
+aline  .16002 -.07239 
+aline  .16129 -.06985 
+aline  .17018 -.04318 
+aline  .17145 -.04064 
+aline  .18034 -.01397 
+aline  .18288 -.00889 
+aline  .18669 -.00508 
+aline  .18923 -.00381 
+aline  .19177 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="_"			!-------------- Beginning of new char.
+dfont  wid=1.11111 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .0381 -.00254 
+aline  .04064 -.00381 
+aline  .04318 -.00508 
+aline  .04572 -.00762 
+bezier  .669625E-01 -.633659E-01  .849689E-01 -.120452  .10541 -.17653 
+aline  .11557 -.20701 
+bezier  .133336 -.25637  .149874 -.30624  .16764 -.3556 
+aline  .1778 -.38608 
+aline  .17907 -.38862 
+aline  .18796 -.41529 
+aline  .18923 -.41783 
+aline  .194056 -.432308 
+aline  .194945 -.432752 
+aline  .195834 -.432308 
+aline  .20066 -.41783 
+aline  .20193 -.41529 
+aline  .21082 -.38862 
+aline  .21209 -.38608 
+aline  .22225 -.3556 
+bezier  .240016 -.30624  .256554 -.25637  .27432 -.20701 
+aline  .28448 -.17653 
+bezier  .304921 -.120452  .322928 -.633659E-01  .34417 -.00762 
+aline  .34671 -.00508 
+aline  .35179 -.00254 
+aline  .35941 -.00254 
+aline  .36449 -.00508 
+aline  .36703 -.00762 
+aline  .36957 -.0127 
+aline  .36957 -.02032 
+bezier  .350513 -.074927  .3318 -.129677  .31242 -.18415 
+aline  .30226 -.21463 
+bezier  .284494 -.26399  .267956 -.313859  .25019 -.36322 
+aline  .24003 -.3937 
+aline  .23876 -.39624 
+aline  .22987 -.42291 
+aline  .2286 -.42545 
+aline  .21971 -.45212 
+aline  .21844 -.45466 
+aline  .20955 -.48133 
+aline  .20701 -.48641 
+aline  .20193 -.49149 
+aline  .19939 -.49276 
+aline  .19177 -.49276 
+aline  .18669 -.49022 
+aline  .18288 -.48641 
+aline  .18034 -.48133 
+aline  .17145 -.45466 
+aline  .17018 -.45212 
+aline  .16129 -.42545 
+aline  .16002 -.42291 
+aline  .15113 -.39624 
+aline  .14986 -.3937 
+aline  .1397 -.36322 
+bezier  .121934 -.31386  .105396 -.26399  .08763 -.21463 
+aline  .07747 -.18415 
+bezier  .580896E-01 -.129677  .393771E-01 -.074927  .02032 -.02032 
+aline  .02032 -.0127 
+aline  .02286 -.00762 
+aline  .0254 -.00508 
+aline  .02794 -.00381 
+aline  .03048 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="`"			!-------------- Beginning of new char.
+dfont  wid=.944448 hei=0 dep=1.00001 italic=0
+dfont  next_char="a"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .12446 -.00254 
+aline  .12446 -.01651 
+aline  .1143 -.01651 
+aline  .11303 -.01778 
+aline  .10668 -.01905 
+aline  .10287 -.02032 
+aline  .09779 -.02286 
+aline  .09271 -.02794 
+aline  .09144 -.03048 
+aline  .09017 -.03429 
+aline  .0889 -.03556 
+aline  .0889 -.33782 
+aline  .09017 -.33909 
+aline  .2413 -.33909 
+aline  .24257 -.33782 
+aline  .24257 -.03556 
+aline  .2413 -.03429 
+aline  .24003 -.03048 
+aline  .23876 -.02794 
+aline  .23368 -.02286 
+aline  .2286 -.02032 
+aline  .22479 -.01905 
+aline  .21844 -.01778 
+aline  .21717 -.01651 
+aline  .20701 -.01651 
+aline  .20701 -.00254 
+aline  .31115 -.00254 
+aline  .31115 -.01651 
+aline  .30099 -.01651 
+aline  .29972 -.01778 
+aline  .29337 -.01905 
+aline  .28956 -.02032 
+aline  .28448 -.02286 
+aline  .2794 -.02794 
+aline  .27813 -.03048 
+aline  .27686 -.03429 
+aline  .27559 -.03556 
+aline  .27559 -.32004 
+aline  .27686 -.32131 
+aline  .27813 -.32512 
+aline  .2794 -.32766 
+aline  .28448 -.33274 
+aline  .28956 -.33528 
+aline  .29337 -.33655 
+aline  .29972 -.33782 
+aline  .30099 -.33909 
+aline  .31115 -.33909 
+aline  .31115 -.35306 
+aline  .02032 -.35306 
+aline  .02032 -.33909 
+aline  .03048 -.33909 
+aline  .03175 -.33782 
+aline  .0381 -.33655 
+aline  .04191 -.33528 
+aline  .04699 -.33274 
+aline  .05207 -.32766 
+aline  .05334 -.32512 
+aline  .05461 -.32131 
+aline  .05588 -.32004 
+aline  .05588 -.03556 
+aline  .05461 -.03429 
+aline  .05334 -.03048 
+aline  .05207 -.02794 
+aline  .04699 -.02286 
+aline  .04191 -.02032 
+aline  .0381 -.01905 
+aline  .03175 -.01778 
+aline  .03048 -.01651 
+aline  .02032 -.01651 
+aline  .02032 -.00254 
+aline  .12446 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="a"			!-------------- Beginning of new char.
+dfont  wid=1.27778 hei=.100001 dep=1.50001 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .14351 -.00254 
+aline  .14351 -.02159 
+bezier  .12785 -.209458E-01  .110341 -.308322E-01  .10922 -.04826 
+aline  .10795 -.04953 
+aline  .10795 -.47244 
+aline  .10922 -.47371 
+aline  .34036 -.47371 
+aline  .34163 -.47244 
+aline  .34163 -.04953 
+aline  .34036 -.04826 
+bezier  .339239 -.308322E-01  .32173 -.209458E-01  .30607 -.02159 
+aline  .30607 -.00254 
+aline  .42926 -.00254 
+aline  .42926 -.02159 
+bezier  .413599 -.209458E-01  .396091 -.308322E-01  .39497 -.04826 
+aline  .3937 -.04953 
+aline  .3937 -.44577 
+aline  .39497 -.44704 
+bezier  .396091 -.464468  .4136 -.474354  .42926 -.47371 
+aline  .42926 -.49276 
+aline  .02032 -.49276 
+aline  .02032 -.47371 
+bezier  .359805E-01 -.474354  .534888E-01 -.464468  .05461 -.44704 
+aline  .05588 -.44577 
+aline  .05588 -.04953 
+aline  .05461 -.04826 
+bezier  .534888E-01 -.308322E-01  .359805E-01 -.209458E-01  .02032 -.02159 
+aline  .02032 -.00254 
+aline  .14351 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="b"			!-------------- Beginning of new char.
+dfont  wid=.555557 hei=.722223 dep=0 italic=0
+dfont  next_char="c"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10033  .25781 
+bezier  .132646  .239805  .164463  .221108  .19685  .2032 
+aline  .19431  .19812 
+aline  .19304  .19685 
+bezier  .161168  .208529  .13054  .225321  .09906  .23876 
+aline  .09779  .24003 
+bezier  .675255E-01  .224784  .359422E-01  .211228  .00508  .19685 
+aline  .00254  .19685 
+aline  .00127  .19812 
+aline -.00127  .2032 
+bezier  .319931E-01  .221489  .644478E-01  .2409  .09779  .25908 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="c"			!-------------- Beginning of new char.
+dfont  wid=1 hei=.75 dep=0 italic=0
+dfont  next_char="d"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .17653  .26924 
+aline  .18034  .26797 
+aline  .20701  .25908 
+aline  .20955  .25781 
+aline  .23622  .24892 
+aline  .23876  .24765 
+aline  .26924  .23749 
+aline  .27178  .23622 
+aline  .30226  .22606 
+aline  .3048  .22479 
+aline  .33147  .2159 
+aline  .33401  .21463 
+aline  .34925  .20955 
+aline  .35179  .20828 
+aline  .35179  .20701 
+aline  .35052  .2032 
+aline  .34925  .20066 
+bezier  .291419  .216867  .233424  .232825  .175895  .249873 
+bezier  .118366  .232825  .603711E-01  .216867  .00254  .20066 
+aline  .00127  .2032 
+aline  0  .20701 
+aline  0  .20828 
+aline  .00254  .20955 
+aline  .01778  .21463 
+aline  .02032  .2159 
+aline  .04699  .22479 
+aline  .04953  .22606 
+aline  .08001  .23622 
+aline  .08255  .23749 
+aline  .11303  .24765 
+aline  .11557  .24892 
+aline  .14224  .25781 
+aline  .14478  .25908 
+aline  .17145  .26797 
+aline  .17526  .26924 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="d"			!-------------- Beginning of new char.
+dfont  wid=1.44445 hei=.75 dep=0 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .25654  .26924 
+aline  .26162  .26797 
+aline  .28194  .26289 
+aline  .28829  .26162 
+aline  .31369  .25527 
+aline  .32004  .254 
+aline  .35052  .24638 
+aline  .35687  .24511 
+aline  .38227  .23876 
+aline  .38862  .23749 
+aline  .41402  .23114 
+aline  .42037  .22987 
+aline  .44577  .22352 
+aline  .45212  .22225 
+aline  .4826  .21463 
+aline  .48895  .21336 
+aline  .50419  .20955 
+aline  .508  .20828 
+aline  .50673  .20193 
+aline  .50546  .20066 
+aline  .50419  .20066 
+aline  .49149  .2032 
+aline  .49022  .20447 
+aline  .48387  .20447 
+aline  .43942  .21336 
+aline  .43815  .21463 
+aline  .4318  .21463 
+aline  .38735  .22352 
+aline  .38608  .22479 
+aline  .37973  .22479 
+aline  .33528  .23368 
+aline  .33401  .23495 
+aline  .32766  .23495 
+aline  .28321  .24384 
+aline  .28194  .24511 
+aline  .27559  .24511 
+aline  .25654  .24892 
+aline  .254  .249767 
+aline  .25146  .24892 
+aline  .23241  .24511 
+aline  .22606  .24511 
+aline  .22479  .24384 
+aline  .18034  .23495 
+aline  .17399  .23495 
+aline  .17272  .23368 
+aline  .12827  .22479 
+aline  .12192  .22479 
+aline  .12065  .22352 
+aline  .0762  .21463 
+aline  .06985  .21463 
+aline  .06858  .21336 
+aline  .02413  .20447 
+aline  .01778  .20447 
+aline  .01651  .2032 
+aline  .00381  .20066 
+aline  .00254  .20066 
+aline  .00127  .20193 
+aline  0  .20828 
+aline  .00381  .20955 
+aline  .01905  .21336 
+aline  .0254  .21463 
+aline  .05588  .22225 
+aline  .06223  .22352 
+aline  .08763  .22987 
+aline  .09398  .23114 
+aline  .11938  .23749 
+aline  .12573  .23876 
+aline  .15113  .24511 
+aline  .15748  .24638 
+aline  .18796  .254 
+aline  .19431  .25527 
+aline  .21971  .26162 
+aline  .22606  .26289 
+aline  .24638  .26797 
+aline  .25146  .26924 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="e"			!-------------- Beginning of new char.
+dfont  wid=.555557 hei=.722223 dep=0 italic=0
+dfont  next_char="f"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .07239  .25146 
+bezier  .981741E-01  .246366  .116939  .221186  .14478  .22606 
+bezier  .160354  .231324  .175654  .239057  .18796  .25019 
+aline  .1905  .25146 
+aline  .19177  .24892 
+aline  .19431  .24638 
+bezier  .172074  .226873  .142284  .202245  .11049  .2159 
+bezier  .913637E-01  .225446  .735719E-01  .24113  .0508  .23749 
+bezier  .035226  .232226  .199264E-01  .224493  .00762  .21336 
+aline  .00508  .21209 
+aline  .00381  .21463 
+aline  .00127  .21717 
+bezier  .181195E-01  .231696  .358379E-01  .246656  .05842  .25146 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="f"			!-------------- Beginning of new char.
+dfont  wid=1 hei=.75 dep=0 italic=0
+dfont  next_char="g"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13081  .26162 
+aline  .13208  .26035 
+bezier  .16428  .259651  .190699  .237019  .22225  .23241 
+aline  .22352  .23114 
+aline  .23495  .23114 
+aline  .23622  .22987 
+bezier  .274574  .229471  .312528  .245416  .34798  .26162 
+aline  .35052  .25654 
+aline  .35052  .25527 
+bezier  .297829  .228146  .234489  .202003  .1778  .23114 
+bezier  .158085  .238712  .137988  .249124  .11684  .24892 
+aline  .11557  .25019 
+bezier  .772164E-01  .250589  .039262  .234645  .00381  .21844 
+aline  .00127  .22352 
+aline  .00127  .22479 
+bezier  .416726E-01  .244947  .085064  .264901  .13081  .26162 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="g"			!-------------- Beginning of new char.
+dfont  wid=1.44445 hei=.75 dep=0 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .18923  .26162 
+aline  .1905  .26035 
+bezier  .239727  .259865  .286381  .229367  .33528  .22987 
+aline  .33655  .2286 
+aline  .35814  .2286 
+aline  .35941  .22987 
+aline  .37592  .22987 
+aline  .37719  .23114 
+aline  .38608  .23114 
+aline  .38735  .23241 
+bezier  .425768  .23677  .465802  .249405  .50419  .26162 
+aline  .50546  .26035 
+aline  .50673  .25654 
+aline  .50673  .25527 
+aline  .50419  .254 
+aline  .47371  .24384 
+bezier  .434744  .232319  .394732  .220848  .3556  .21971 
+aline  .35433  .21844 
+aline  .31877  .21844 
+aline  .3175  .21971 
+bezier  .268273  .220195  .221619  .250693  .17272  .25019 
+aline  .17145  .25146 
+aline  .14986  .25146 
+aline  .14859  .25019 
+aline  .13208  .25019 
+aline  .13081  .24892 
+aline  .12192  .24892 
+aline  .12065  .24765 
+bezier  .822316E-01  .24329  .421976E-01  .230655  .00381  .21844 
+aline  .00254  .21971 
+aline  .00127  .22352 
+aline  .00127  .22479 
+aline  .00381  .22606 
+aline  .03429  .23622 
+bezier  .073256  .247741  .113268  .259212  .1524  .26035 
+aline  .15367  .26162 
+aline  .18923  .26162 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="h"			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=20
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .15875  .01143 
+aline  .15875 -.00508 
+aline  .09779 -.00508 
+aline  .09652 -.00635 
+aline  .09652 -.60071 
+aline  .09779 -.60198 
+aline  .15875 -.60198 
+aline  .15875 -.61849 
+aline  .08001 -.61849 
+aline  .08001  .01143 
+aline  .15875  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="i"			!-------------- Beginning of new char.
+dfont  wid=.472224 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=21
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .08636  .01143 
+aline  .08636 -.61849 
+aline  .00762 -.61849 
+aline  .00762 -.60198 
+aline  .06858 -.60198 
+aline  .06985 -.60071 
+aline  .06985 -.00635 
+aline  .06858 -.00508 
+aline  .00762 -.00508 
+aline  .00762  .01143 
+aline  .08636  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="j"			!-------------- Beginning of new char.
+dfont  wid=.527781 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=22
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .09652  .01143 
+aline  .09652 -.60071 
+aline  .09779 -.60198 
+aline  .1778 -.60198 
+aline  .1778 -.61849 
+aline  .08001 -.61849 
+aline  .08001  .01143 
+aline  .09652  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="k"			!-------------- Beginning of new char.
+dfont  wid=.527781 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=23
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10541  .01143 
+aline  .10541 -.61849 
+aline  .00762 -.61849 
+aline  .00762 -.60198 
+aline  .08763 -.60198 
+aline  .0889 -.60071 
+aline  .0889  .01143 
+aline  .10541  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="l"			!-------------- Beginning of new char.
+dfont  wid=.527781 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=24
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .1778  .01143 
+aline  .1778 -.00508 
+aline  .09779 -.00508 
+aline  .09652 -.00635 
+aline  .09652 -.61849 
+aline  .08001 -.61849 
+aline  .08001  .01143 
+aline  .1778  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="m"			!-------------- Beginning of new char.
+dfont  wid=.527781 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=25
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10541  .01143 
+aline  .10541 -.61849 
+aline  .0889 -.61849 
+aline  .0889 -.00635 
+aline  .08763 -.00508 
+aline  .00762 -.00508 
+aline  .00762  .01143 
+aline  .10541  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="n"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=26
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .1905  .01143 
+aline  .19177  .01016 
+aline  .19177 -.00127 
+bezier  .165642 -.125172E-01  .135868 -.285902E-01  .13081 -.05969 
+aline  .12954 -.06096 
+aline  .12954 -.23114 
+bezier  .123774 -.266767  .926722E-01 -.290934  .06096 -.30353 
+bezier  .926722E-01 -.316126  .123774 -.340293  .12954 -.37592 
+aline  .12954 -.5461 
+bezier  .134678 -.567001  .149377 -.585011  .16891 -.59436 
+aline  .17018 -.59563 
+aline  .1778 -.59944 
+aline  .18161 -.60071 
+aline  .18415 -.60198 
+aline  .18796 -.60325 
+aline  .1905 -.60452 
+aline  .19177 -.60579 
+aline  .19177 -.61722 
+aline  .1905 -.61849 
+bezier  .168902 -.619814  .150239 -.605568  .13335 -.59436 
+aline  .11811 -.57912 
+aline  .11684 -.57658 
+aline  .1143 -.57404 
+aline  .10795 -.56134 
+aline  .10541 -.55372 
+aline  .10414 -.54737 
+aline  .10414 -.37719 
+aline  .10287 -.37592 
+bezier  .986504E-01 -.344613  .718324E-01 -.32257  .04445 -.31115 
+aline  .04191 -.30861 
+aline  .04191 -.29845 
+bezier  .669456E-01 -.285187  .950131E-01 -.267737  .1016 -.23749 
+aline  .10287 -.23114 
+aline  .10414 -.22987 
+aline  .10414 -.05969 
+bezier  .110792 -.225651E-01  .145809  .131119E-03  .17907  .01143 
+aline  .1905  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="o"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=.039999 dep=1.76002 italic=0
+dfont  next_char=27
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .05461  .01143 
+bezier  .878714E-01  .131294E-03  .122888 -.225652E-01  .12954 -.05969 
+aline  .12954 -.22987 
+aline  .13081 -.23114 
+bezier  .135178 -.263579  .163478 -.285545  .19177 -.29718 
+aline  .19177 -.30988 
+bezier  .163478 -.321515  .135178 -.343481  .13081 -.37592 
+aline  .12954 -.37719 
+aline  .12954 -.54737 
+bezier  .122889 -.584495  .878715E-01 -.607191  .05461 -.61849 
+aline  .04318 -.61849 
+aline  .04191 -.61722 
+aline  .04191 -.60579 
+bezier  .680377E-01 -.594543  .978124E-01 -.57847  .10287 -.54737 
+aline  .10414 -.5461 
+aline  .10414 -.37592 
+bezier  .109906 -.340293  .141008 -.316126  .17272 -.30353 
+bezier  .141008 -.290934  .109906 -.266767  .10414 -.23114 
+aline  .10414 -.06096 
+bezier  .990024E-01 -.400586E-01  .084303 -.220493E-01  .06477 -.0127 
+aline  .0635 -.01143 
+aline  .05588 -.00762 
+aline  .05207 -.00635 
+aline  .04953 -.00508 
+aline  .04572 -.00381 
+aline  .04318 -.00254 
+aline  .04191 -.00127 
+aline  .04191  .01016 
+aline  .04318  .01143 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="p"			!-------------- Beginning of new char.
+dfont  wid=1 hei=.039999 dep=1.16001 italic=0
+dfont  next_char="q"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .3556  .0127 
+aline  .35941  .00889 
+aline  .35941  .00254 
+aline  .34544 -.0254 
+aline  .34417 -.02921 
+aline  .3302 -.05715 
+aline  .32893 -.06096 
+aline  .31496 -.0889 
+aline  .31369 -.09271 
+aline  .29972 -.12065 
+aline  .29845 -.12446 
+aline  .28448 -.1524 
+aline  .28321 -.15621 
+aline  .26924 -.18415 
+aline  .26797 -.18796 
+aline  .25527 -.21336 
+aline  .254 -.21717 
+aline  .24003 -.24511 
+aline  .23876 -.24892 
+aline  .22479 -.27686 
+aline  .22352 -.28067 
+aline  .20955 -.30861 
+aline  .20828 -.31242 
+aline  .19431 -.34036 
+aline  .19304 -.34417 
+aline  .17907 -.37211 
+aline  .1778 -.37592 
+aline  .1651 -.40132 
+aline  .16383 -.40513 
+aline  .16002 -.40894 
+aline  .14986 -.40894 
+bezier  .121915 -.347628  .969334E-01 -.283777  .069215 -.222567 
+bezier  .608265E-01 -.227616  .535604E-01 -.234221  .04572 -.24003 
+aline  .04064 -.23495 
+bezier  .566868E-01 -.223629  .716597E-01 -.210817  .08763 -.19939 
+bezier  .113996 -.256525  .137612 -.315419  .16256 -.37338 
+aline  .16383 -.37084 
+aline  .1651 -.36703 
+aline  .17907 -.33909 
+aline  .18034 -.33528 
+aline  .19431 -.30734 
+aline  .19558 -.30353 
+aline  .20955 -.27559 
+aline  .21082 -.27178 
+aline  .22479 -.24384 
+aline  .22606 -.24003 
+aline  .24003 -.21209 
+aline  .2413 -.20828 
+aline  .254 -.18288 
+aline  .25527 -.17907 
+aline  .26924 -.15113 
+aline  .27051 -.14732 
+aline  .28448 -.11938 
+aline  .28575 -.11557 
+aline  .29972 -.08763 
+aline  .30099 -.08382 
+aline  .31496 -.05588 
+aline  .31623 -.05207 
+aline  .3302 -.02413 
+aline  .33147 -.02032 
+aline  .34671  .01016 
+aline  .34798  .01143 
+aline  .35052  .0127 
+aline  .3556  .0127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="q"			!-------------- Beginning of new char.
+dfont  wid=1 hei=.039999 dep=1.76002 italic=0
+dfont  next_char="r"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .3556  .0127 
+aline  .35941  .00889 
+aline  .35941  .00254 
+bezier  .293982 -.203555  .228753 -.409708  .16383 -.61595 
+aline  .16002 -.61976 
+aline  .14986 -.61976 
+bezier  .121484 -.52626  .096597 -.431424  .06858 -.33782 
+aline  .06477 -.34163 
+aline  .0635 -.34417 
+aline  .05715 -.35052 
+aline  .05588 -.35306 
+aline  .04953 -.35941 
+aline  .04826 -.36195 
+aline  .04572 -.36449 
+aline  .04064 -.35941 
+bezier  .569221E-01 -.341653  .071848 -.322918  .08763 -.3048 
+bezier  .114648 -.391001  .136642 -.480269  .16383 -.56642 
+bezier  .224735 -.374226  .284541 -.18159  .34671  .01016 
+aline  .34798  .01143 
+aline  .35052  .0127 
+aline  .3556  .0127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="r"			!-------------- Beginning of new char.
+dfont  wid=1 hei=.039999 dep=2.36003 italic=0
+dfont  next_char="s"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .3556  .0127 
+aline  .35941  .00889 
+bezier  .352726 -.350906E-01  .339191 -.781982E-01  .3302 -.12192 
+bezier  .274517 -.356819  .219399 -.591845  .16383 -.82677 
+aline  .16002 -.83058 
+aline  .14986 -.83058 
+bezier  .121554 -.705291  .960622E-01 -.579005  .06858 -.45339 
+bezier  .06004 -.464683  .536973E-01 -.479214  .04445 -.48895 
+aline  .04064 -.48514 
+bezier  .553777E-01 -.460046  .724324E-01 -.435431  .08763 -.41021 
+bezier  .114632 -.526515  .137099 -.644257  .16383 -.76073 
+bezier  .225199 -.503893  .283901 -.24618  .34671  .01016 
+aline  .34798  .01143 
+aline  .35052  .0127 
+aline  .3556  .0127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="s"			!-------------- Beginning of new char.
+dfont  wid=1 hei=.039999 dep=2.96003 italic=0
+dfont  next_char="t"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .3556  .0127 
+aline  .35941  .00889 
+aline  .35941  .00127 
+bezier  .353676 -.255267E-01  .349466 -.515193E-01  .34417 -.07874 
+aline  .3429 -.08001 
+aline  .3429 -.08636 
+bezier  .337673 -.111071  .333528 -.135049  .32893 -.16002 
+aline  .32766 -.16129 
+aline  .32766 -.16764 
+bezier  .322102 -.194327  .317484 -.22066  .31242 -.24765 
+aline  .31115 -.24892 
+aline  .31115 -.25527 
+bezier  .305923 -.279981  .301778 -.303959  .29718 -.32893 
+aline  .29591 -.3302 
+aline  .29591 -.33655 
+bezier  .290418 -.363363  .285539 -.389587  .28067 -.41656 
+aline  .2794 -.41783 
+aline  .2794 -.42418 
+bezier  .274173 -.448891  .270028 -.472869  .26543 -.49784 
+aline  .26416 -.49911 
+aline  .26416 -.50546 
+bezier  .258456 -.532512  .253868 -.558348  .24892 -.58547 
+aline  .24765 -.58674 
+aline  .24765 -.59309 
+bezier  .241916 -.619887  .237706 -.645879  .23241 -.6731 
+aline  .23114 -.67437 
+aline  .23114 -.68072 
+bezier  .225913 -.705431  .221768 -.729409  .21717 -.75438 
+aline  .2159 -.75565 
+aline  .2159 -.762 
+bezier  .210342 -.788687  .205724 -.81502  .20066 -.84201 
+aline  .19939 -.84328 
+aline  .19939 -.84963 
+bezier  .194163 -.874341  .190018 -.898319  .18542 -.92329 
+aline  .18415 -.92456 
+aline  .18415 -.93091 
+bezier  .178658 -.957723  .173779 -.983947  .16891 -1.01092 
+aline  .16764 -1.01219 
+aline  .16764 -1.01854 
+aline  .16383 -1.03759 
+aline  .16002 -1.0414 
+aline  .14986 -1.0414 
+aline  .14859 -1.03759 
+aline  .14859 -1.03124 
+aline  .14732 -1.02997 
+aline  .14732 -1.02362 
+aline  .14605 -1.02235 
+bezier  .14432 -1.00708  .140902 -.994015  .1397 -.97917 
+aline  .13843 -.9779 
+aline  .13843 -.97155 
+aline  .13716 -.97028 
+bezier  .13543 -.95501  .132012 -.941945  .13081 -.9271 
+aline  .12954 -.92583 
+aline  .12954 -.91948 
+aline  .12827 -.91821 
+bezier  .12654 -.90294  .123122 -.889875  .12192 -.87503 
+aline  .12065 -.87376 
+aline  .12065 -.86741 
+aline  .11938 -.86614 
+bezier  .11765 -.85087  .114232 -.837805  .11303 -.82296 
+aline  .11176 -.82169 
+bezier  .11003 -.80642  .106612 -.793355  .10541 -.77851 
+aline  .10414 -.77724 
+aline  .10414 -.77089 
+aline  .10287 -.76962 
+bezier  .10114 -.75435  .977224E-01 -.741285  .09652 -.72644 
+aline  .09525 -.72517 
+aline  .09525 -.71882 
+aline  .09398 -.71755 
+bezier  .922501E-01 -.70228  .888324E-01 -.689215  .08763 -.67437 
+aline  .08636 -.6731 
+aline  .08636 -.66675 
+aline  .08509 -.66548 
+bezier  .833601E-01 -.65021  .799424E-01 -.637145  .07874 -.6223 
+aline  .07747 -.62103 
+bezier  .757401E-01 -.60576  .723224E-01 -.592695  .07112 -.57785 
+aline  .06985 -.57658 
+aline  .06985 -.57023 
+aline  .06858 -.56896 
+aline  .06477 -.57658 
+aline  .0635 -.57785 
+aline  .04572 -.61341 
+aline  .04445 -.61341 
+aline  .04064 -.6096 
+aline  .04064 -.60833 
+aline  .04699 -.59563 
+aline  .04826 -.59436 
+aline  .08763 -.51562 
+aline  .0889 -.51816 
+aline  .0889 -.52451 
+aline  .09017 -.52578 
+aline  .09017 -.53213 
+aline  .09144 -.5334 
+aline  .09144 -.53975 
+aline  .09271 -.54102 
+bezier  .931916E-01 -.555667  .098769 -.56926  .09906 -.5842 
+aline  .10033 -.58547 
+aline  .10033 -.59182 
+aline  .1016 -.59309 
+bezier  .102082 -.607737  .107659 -.62133  .10795 -.63627 
+aline  .10922 -.63754 
+bezier  .109702 -.652187  .115279 -.66578  .11557 -.68072 
+aline  .11684 -.68199 
+aline  .11684 -.68834 
+aline  .11811 -.68961 
+bezier  .118592 -.704257  .124169 -.71785  .12446 -.73279 
+aline  .12573 -.73406 
+aline  .12573 -.74041 
+aline  .127 -.74168 
+bezier  .127482 -.756327  .133059 -.76992  .13335 -.78486 
+aline  .13462 -.78613 
+aline  .13462 -.79248 
+aline  .13589 -.79375 
+bezier  .136372 -.808397  .141949 -.82199  .14224 -.83693 
+aline  .14351 -.8382 
+bezier  .143992 -.852847  .149569 -.86644  .14986 -.88138 
+aline  .15113 -.88265 
+aline  .15113 -.889 
+aline  .1524 -.89027 
+bezier  .152882 -.904917  .158459 -.91851  .15875 -.93345 
+aline  .16002 -.93472 
+aline  .16002 -.94107 
+aline  .16129 -.94234 
+aline  .16129 -.94869 
+aline  .16256 -.94996 
+aline  .16383 -.95631 
+aline  .1651 -.94996 
+aline  .16637 -.94869 
+aline  .16637 -.94234 
+bezier  .171597 -.917629  .175742 -.893651  .18034 -.86868 
+aline  .18161 -.86741 
+aline  .18161 -.86106 
+bezier  .187168 -.834373  .191786 -.80804  .19685 -.78105 
+aline  .19812 -.77978 
+aline  .19812 -.77343 
+bezier  .203347 -.748719  .207492 -.724741  .21209 -.69977 
+aline  .21336 -.6985 
+aline  .21336 -.69215 
+bezier  .218852 -.665337  .223731 -.639113  .2286 -.61214 
+aline  .22987 -.61087 
+aline  .22987 -.60452 
+bezier  .235097 -.579809  .239242 -.555831  .24384 -.53086 
+aline  .24511 -.52959 
+aline  .24511 -.52324 
+bezier  .250814 -.496188  .255402 -.470352  .26035 -.44323 
+aline  .26162 -.44196 
+aline  .26162 -.43561 
+bezier  .267354 -.408813  .271564 -.382821  .27686 -.3556 
+aline  .27813 -.35433 
+aline  .27813 -.34798 
+bezier  .283357 -.323269  .287502 -.299291  .2921 -.27432 
+aline  .29337 -.27305 
+aline  .29337 -.2667 
+bezier  .298928 -.240013  .303546 -.21368  .30861 -.18669 
+aline  .30988 -.18542 
+aline  .30988 -.17907 
+bezier  .315107 -.154359  .319252 -.130381  .32385 -.10541 
+aline  .32512 -.10414 
+aline  .32512 -.09779 
+bezier  .330612 -.709775E-01  .335491 -.447527E-01  .34036 -.01778 
+aline  .34163 -.01651 
+aline  .34163 -.01016 
+aline  .34417  .00254 
+aline  .34544  .00762 
+aline  .34671  .01016 
+aline  .34798  .01143 
+aline  .35052  .0127 
+aline  .3556  .0127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="t"			!-------------- Beginning of new char.
+dfont  wid=1.05556 hei=0 dep=1.80002 italic=0
+dfont  ext_top="v" ext_mid=0 ext_bot="t" ext_rep="u"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .25654  .00508 
+aline  .26035  .00127 
+aline  .26035 -.62865 
+aline  .25654 -.63246 
+aline  .25273 -.63373 
+aline  .24638 -.63373 
+aline  .24511 -.63119 
+aline  .22225 -.56261 
+aline  .22098 -.55753 
+aline  .19939 -.49276 
+aline  .19812 -.48768 
+aline  .17526 -.4191 
+aline  .17399 -.41402 
+aline  .1524 -.34925 
+aline  .15113 -.34417 
+aline  .12827 -.27559 
+aline  .127 -.27051 
+aline  .10414 -.20193 
+aline  .10287 -.19685 
+aline  .08128 -.13208 
+aline  .08001 -.127 
+aline  .07366 -.10795 
+aline  .04572 -.16383 
+aline  .04445 -.16383 
+aline  .04064 -.16002 
+aline  .04064 -.15875 
+aline  .05334 -.13335 
+aline  .05461 -.13208 
+aline  .08763 -.06604 
+aline  .0889 -.06731 
+aline  .10922 -.12827 
+aline  .11049 -.13335 
+aline  .13208 -.19812 
+aline  .13335 -.2032 
+aline  .15621 -.27178 
+aline  .15748 -.27686 
+aline  .18034 -.34544 
+aline  .18161 -.35052 
+aline  .2032 -.41529 
+aline  .20447 -.42037 
+aline  .22733 -.48895 
+aline  .2286 -.49403 
+aline  .24511 -.54356 
+aline  .24638 -.54229 
+aline  .24638  .00127 
+aline  .25019  .00508 
+aline  .25654  .00508 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="u"			!-------------- Beginning of new char.
+dfont  wid=1.05556 hei=0 dep=.600006 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .25654  .00508 
+aline  .26035  .00127 
+aline  .26035 -.2159 
+aline  .25654 -.21971 
+aline  .25019 -.21971 
+aline  .24638 -.2159 
+aline  .24638  .00127 
+aline  .25019  .00508 
+aline  .25654  .00508 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="v"			!-------------- Beginning of new char.
+dfont  wid=1.05556 hei=.039999 dep=.560007 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .37465  .0127 
+aline  .37846  .00889 
+aline  .37846  .00254 
+aline  .37465 -.00127 
+aline  .26162 -.00127 
+aline  .26035 -.00254 
+aline  .26035 -.20193 
+aline  .25654 -.20574 
+aline  .25019 -.20574 
+aline  .24638 -.20193 
+aline  .24638  .00762 
+aline  .24765  .01016 
+aline  .24892  .01143 
+aline  .25146  .0127 
+aline  .37465  .0127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="w"			!-------------- Beginning of new char.
+dfont  wid=.777781 hei=0 dep=.600006 italic=0
+dfont  ext_top="~" ext_mid=0 ext_bot=127 ext_rep="w"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10541 -.00127 
+aline  .10541 -.21336 
+aline  .09017 -.21336 
+aline  .09017 -.00127 
+aline  .10541 -.00127 
+closepath
+! end of curve 
+
+! start of curve 
+amove  .18288 -.00127 
+aline  .18288 -.21336 
+aline  .16764 -.21336 
+aline  .16764 -.00127 
+aline  .18288 -.00127 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="x"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=0 dep=.600006 italic=0
+dfont  ext_top="x" ext_mid=0 ext_bot=0 ext_rep="?"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .11811 -.00508 
+bezier  .135818 -.331878E-01  .162984 -.545625E-01  .19431 -.06604 
+aline  .19431 -.07874 
+bezier  .167998 -.701929E-01  .144587 -.545091E-01  .12573 -.03429 
+aline  .12446 -.03556 
+aline  .12446 -.21209 
+aline  .10922 -.21209 
+aline  .10922 -.03556 
+aline  .10795 -.03429 
+bezier  .890933E-01 -.545091E-01  .656818E-01 -.701929E-01  .03937 -.07874 
+aline  .03937 -.06604 
+bezier  .714599E-01 -.541661E-01  .996334E-01 -.320883E-01  .11684 -.00254 
+aline  .11811 -.00508 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="y"			!-------------- Beginning of new char.
+dfont  wid=.666669 hei=0 dep=.600006 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot="y" ext_rep="?"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .12446 -.00254 
+aline  .12446 -.17907 
+aline  .12573 -.18034 
+bezier  .144587 -.160121  .167998 -.144437  .19431 -.13589 
+aline  .19431 -.14859 
+bezier  .16222 -.160464  .134047 -.182542  .11684 -.21209 
+bezier  .996335E-01 -.182542  .714599E-01 -.160464  .03937 -.14859 
+aline  .03937 -.13589 
+bezier  .656818E-01 -.144437  .890933E-01 -.160121  .10795 -.18034 
+aline  .10922 -.17907 
+aline  .10922 -.00254 
+aline  .12446 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="z"			!-------------- Beginning of new char.
+dfont  wid=.450005 hei=.119998 dep=0 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .16129  .04064 
+aline  .16256  .0381 
+aline  .16256  .00127 
+aline  .16129 -.00127 
+bezier  .126233 -.938642E-03  .920463E-01 -.866703E-02  .05969 -.0254 
+bezier  .382511E-01 -.374545E-01  .203628E-01 -.552295E-01  .00762 -.0762 
+aline -.00635 -.0762 
+aline -.00762 -.07493 
+aline -.00762 -.06096 
+bezier  .220424E-01 -.626363E-02  .802905E-01  .366667E-01  .14351  .03937 
+aline  .14478  .04064 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="{"			!-------------- Beginning of new char.
+dfont  wid=.450005 hei=.119998 dep=0 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .01524  .04064 
+aline  .01651  .03937 
+bezier  .797295E-01  .366667E-01  .137978 -.626374E-02  .16764 -.06096 
+aline  .16764 -.07493 
+aline  .16637 -.0762 
+aline  .1524 -.0762 
+bezier  .130448 -.382398E-01  .899792E-01 -.145135E-01  .04699 -.00635 
+aline  .04572 -.00508 
+aline  .03937 -.00508 
+aline  .0381 -.00381 
+aline  .03048 -.00381 
+aline  .02921 -.00254 
+aline  .01778 -.00254 
+aline  .01651 -.00127 
+aline -.00127 -.00127 
+aline -.00254  .00127 
+aline -.00254  .0381 
+aline -.00127  .04064 
+aline  .01524  .04064 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="|"			!-------------- Beginning of new char.
+dfont  wid=.450005 hei=.119998 dep=0 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .00762  .11557 
+bezier  .295721E-01  .776098E-01  .700408E-01  .538836E-01  .11303  .04572 
+aline  .1143  .04445 
+aline  .12065  .04445 
+aline  .12192  .04318 
+aline  .12954  .04318 
+aline  .13081  .04191 
+aline  .14224  .04191 
+aline  .14351  .04064 
+aline  .16129  .04064 
+aline  .16256  .0381 
+aline  .16256  .00127 
+aline  .16129 -.00127 
+bezier  .923623E-01 -.369561E-02  .245748E-01  .396255E-01 -.00762  .10033 
+aline -.00762  .1143 
+aline -.00635  .11557 
+aline  .00762  .11557 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="}"			!-------------- Beginning of new char.
+dfont  wid=.450005 hei=.119998 dep=0 italic=0
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .16637  .11557 
+aline  .16764  .1143 
+aline  .16764  .10033 
+bezier  .137978  .456337E-01  .797295E-01  .270328E-02  .01651  0 
+aline  .01524 -.00127 
+aline -.00127 -.00127 
+aline -.00254  .00127 
+aline -.00254  .0381 
+aline -.00127  .04064 
+bezier  .337872E-01  .403086E-01  .679737E-01  .048037  .10033  .06477 
+bezier  .121769  .768245E-01  .139657  .945995E-01  .1524  .11557 
+aline  .16637  .11557 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char="~"			!-------------- Beginning of new char.
+dfont  wid=.777781 hei=0 dep=.600006 italic=0
+dfont  ext_top="~" ext_mid=0 ext_bot=0 ext_rep="w"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .13716 -.00381 
+bezier  .160073 -.526748E-01  .201859 -.916838E-01  .25273 -.11049 
+aline  .25273 -.12573 
+bezier  .227426 -.117899  .20458 -.102579  .18415 -.08636 
+aline  .18288 -.08763 
+aline  .18288 -.21209 
+aline  .16764 -.21209 
+aline  .16764 -.07112 
+bezier  .155878 -.595761E-01  .146176 -.461581E-01  .136525 -.333375E-01 
+bezier  .126874 -.461581E-01  .117172 -.595761E-01  .10541 -.07112 
+aline  .10541 -.21209 
+aline  .09017 -.21209 
+aline  .09017 -.08763 
+aline  .0889 -.08636 
+bezier  .684697E-01 -.102579  .456245E-01 -.117899  .02032 -.12573 
+aline  .02032 -.11049 
+bezier  .711908E-01 -.916837E-01  .112977 -.526748E-01  .13589 -.00381 
+closepath
+! end of curve 
+
+fill
+dfont endchar
+dfont  char=127			!-------------- Beginning of new char.
+dfont  wid=.777781 hei=0 dep=.600006 italic=0
+dfont  ext_top=0 ext_mid=0 ext_bot=127 ext_rep="w"
+set path ! start of curve 
+newpath 
+! start of curve 
+amove  .10541 -.00254 
+aline  .10541 -.14351 
+bezier  .117172 -.155054  .126875 -.168471  .136525 -.181293 
+bezier  .146175 -.168471  .155878 -.155054  .16764 -.14351 
+aline  .16764 -.00254 
+aline  .18288 -.00254 
+aline  .18288 -.127 
+aline  .18415 -.12827 
+bezier  .204679 -.112188  .227366 -.966484E-01  .25273 -.0889 
+aline  .25273 -.10414 
+bezier  .201859 -.122946  .160073 -.161955  .13716 -.21082 
+aline  .13589 -.21082 
+bezier  .112977 -.161955  .711908E-01 -.122946  .02032 -.10414 
+aline  .02032 -.0889 
+bezier  .045684 -.966484E-01  .683712E-01 -.112188  .0889 -.12827 
+aline  .09017 -.127 
+aline  .09017 -.00254 
+aline  .10541 -.00254 
+closepath
+! end of curve 
+
+fill
+dfont endchar

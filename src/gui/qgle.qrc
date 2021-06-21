@@ -1,0 +1,57 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<!--
+/***********************************************************************************
+ * QGLE - A Graphical Interface to GLE                                             *
+ * Copyright (C) 2006  A. S. Budden & J. Struyf                                    *
+ *                                                                                 *
+ * This program is free software; you can redistribute it and/or                   *
+ * modify it under the terms of the GNU General Public License                     *
+ * as published by the Free Software Foundation; either version 2                  *
+ * of the License, or (at your option) any later version.                          *
+ *                                                                                 *
+ * This program is distributed in the hope that it will be useful,                 *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of                  *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   *
+ * GNU General Public License for more details.                                    *
+ *                                                                                 *
+ * You should have received a copy of the GNU General Public License               *
+ * along with this program; if not, write to the Free Software                     *
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA. *
+ *                                                                                 *
+ * Also add information on how to contact you by electronic and paper mail.        *
+ ***********************************************************************************/
+-->
+<qresource>
+	<file>images/amove.png</file>
+	<file>images/arc_3p.png</file>
+	<file>images/circle.png</file>
+	<file>images/edit_mode.png</file>
+	<file>images/editor.png</file>
+	<file>images/ellipse.png</file>
+	<file>images/ellipsis.png</file>
+	<file>images/gle.png</file>
+	<file>images/gle_shadow.png</file>
+	<file>images/grid.png</file>
+	<file>images/grid_snap.png</file>
+	<file>images/line.png</file>
+	<file>images/new.png</file>
+	<file>images/open.png</file>
+	<file>images/orthosnap.png</file>
+	<file>images/osnap.png</file>
+	<file>images/perp_line.png</file>
+	<file>images/pointer.png</file>
+	<file>images/polarsnap.png</file>
+	<file>images/polartrack.png</file>
+	<file>images/preview_mode.png</file>
+	<file>images/save.png</file>
+	<file>images/tan_line.png</file>
+	<file>images/text.png</file>
+	<file>images/varyingcolours.png</file>
+	<file>images/zoom_in.png</file>
+	<file>images/zoom_out.png</file>
+	<file>images/reload.png</file>
+	<file>images/reload_red.png</file>
+	<file>readme.txt</file>
+	<file>about.html</file>	
+</qresource>
+</RCC>

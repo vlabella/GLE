@@ -1,0 +1,36 @@
+StartFontMetrics 2.0
+FontName GleMarkers
+EncodingScheme GLEMARK
+FullName Gle Markers 
+FamilyName GLE
+Weight Roman
+ItalicAngle 0.0
+IsFixedPitch false
+UnderlinePosition -109
+UnderlineThickness 49
+Version 001.002
+Notice The GLE marker font is licensed under the Modified BSD license.
+FontBBox -170 -223 1024 896
+CapHeight 662
+XHeight 448
+Descender -217
+Ascender 682
+StartCharMetrics 14
+C  1; WX 1000; N C1 ; B 0 0 1000 1000 ;
+C  2; WX 1000; N C2 ; B 0 0 1000 1000 ;
+C  3; WX 1000; N C3 ; B 0 0 1000 1000 ;
+C  4; WX 1000; N C4 ; B 0 0 1000 1000 ;
+C  5; WX 1000; N C5 ; B 0 0 1000 1000 ;
+C  6; WX 1000; N C6 ; B 0 0 1000 1000 ;
+C  7; WX 1000; N C7 ; B 0 0 1000 1000 ;
+C  8; WX 1000; N C8 ; B 0 0 1000 1000 ;
+C  9; WX 1000; N C9 ; B 0 0 1000 1000 ;
+C 10; WX 1000; N C10 ; B 0 0 1000 1000 ;
+C 11; WX 1000; N C11 ; B 0 0 1000 1000 ;
+C 12; WX 1000; N C12 ; B 0 0 1000 1000 ;
+C 13; WX 1000; N C13 ; B 0 0 1000 1000 ;
+C 14; WX 1000; N C14 ; B 0 0 1000 1000 ;
+EndCharMetrics
+EndFontMetrics
+
+

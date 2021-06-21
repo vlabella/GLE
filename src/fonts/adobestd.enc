@@ -1,0 +1,356 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                      !
+! GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          !
+!                                                                      !
+! Modified BSD License                                                 !
+!                                                                      !
+! Copyright (C) 2009 GLE.                                              !
+!                                                                      !
+! Redistribution and use in source and binary forms, with or without   !
+! modification, are permitted provided that the following conditions   !
+! are met:                                                             !
+!                                                                      !
+!    1. Redistributions of source code must retain the above copyright !
+! notice, this list of conditions and the following disclaimer.        !
+!                                                                      !
+!    2. Redistributions in binary form must reproduce the above        !
+! copyright notice, this list of conditions and the following          !
+! disclaimer in the documentation and/or other materials provided with !
+! the distribution.                                                    !
+!                                                                      !
+!    3. The name of the author may not be used to endorse or promote   !
+! products derived from this software without specific prior written   !
+! permission.                                                          !
+!                                                                      !
+! THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR   !
+! IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       !
+! WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   !
+! ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY       !
+! DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL   !
+! DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE    !
+! GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS        !
+! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER !
+! IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR      !
+! OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN  !
+! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
+!                                                                      !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!$FFFF, 45; hyphen
+!$FFFF, 164; fraction
+!$FFFF, 197; macron
+
+$0020, 32; space
+$0021, 33; exclam
+$0022, 34; quotedbl
+$0023, 35; numbersign
+$0024, 36; dollar
+$0025, 37; percent
+$0026, 38; ampersand
+$2019, 39; quoteright
+$0028, 40; parenleft
+$0029, 41; parenright
+$002A, 42; asterisk
+$002B, 43; plus
+$002C, 44; comma
+$FFFF, 45; hyphen
+$002E, 46; period
+$002F, 47; slash
+$0030, 48; zero
+$0031, 49; one
+$0032, 50; two
+$0033, 51; three
+$0034, 52; four
+$0035, 53; five
+$0036, 54; six
+$0037, 55; seven
+$0038, 56; eight
+$0039, 57; nine
+$003A, 58; colon
+$003B, 59; semicolon
+$003C, 60; less
+$003D, 61; equal
+$003E, 62; greater
+$003F, 63; question
+$0040, 64; at
+$0041, 65; A
+$0042, 66; B
+$0043, 67; C
+$0044, 68; D
+$0045, 69; E
+$0046, 70; F
+$0047, 71; G
+$0048, 72; H
+$0049, 73; I
+$004A, 74; J
+$004B, 75; K
+$004C, 76; L
+$004D, 77; M
+$004E, 78; N
+$004F, 79; O
+$0050, 80; P
+$0051, 81; Q
+$0052, 82; R
+$0053, 83; S
+$0054, 84; T
+$0055, 85; U
+$0056, 86; V
+$0057, 87; W
+$0058, 88; X
+$0059, 89; Y
+$005A, 90; Z
+$005B, 91; bracketleft
+$005C, 92; backslash
+$005D, 93; bracketright
+$005E, 94; asciicircum
+$005F, 95; underscore
+$2018, 96; quoteleft
+$0061, 97; a
+$0062, 98; b
+$0063, 99; c
+$0064, 100; d
+$0065, 101; e
+$0066, 102; f
+$0067, 103; g
+$0068, 104; h
+$0069, 105; i
+$006A, 106; j
+$006B, 107; k
+$006C, 108; l
+$006D, 109; m
+$006E, 110; n
+$006F, 111; o
+$0070, 112; p
+$0071, 113; q
+$0072, 114; r
+$0073, 115; s
+$0074, 116; t
+$0075, 117; u
+$0076, 118; v
+$0077, 119; w
+$0078, 120; x
+$0079, 121; y
+$007A, 122; z
+$007B, 123; braceleft
+$007C, 124; bar
+$007D, 125; braceright
+$007E, 126; asciitilde
+$00A1, 161; exclamdown
+$00A2, 162; cent
+$00A3, 163; sterling
+$FFFF, 164; fraction
+$00A5, 165; yen
+$0192, 166; florin
+$00A7, 167; section
+$00A4, 168; currency
+$0027, 169; quotesingle
+$201C, 170; quotedblleft
+$00AB, 171; guillemotleft
+$2039, 172; guilsinglleft
+$203A, 173; guilsinglright
+$FB01, 174; fi
+$FB02, 175; fl
+$2013, 177; endash
+$2020, 178; dagger
+$2021, 179; daggerdbl
+$2219, 180; periodcentered
+$00B6, 182; paragraph
+$2022, 183; bullet
+$201A, 184; quotesinglbase
+$201E, 185; quotedblbase
+$201D, 186; quotedblright
+$00BB, 187; guillemotright
+$2026, 188; ellipsis
+$2030, 189; perthousand
+$00BF, 191; questiondown
+$0060, 193; grave
+$00B4, 194; acute
+$02C6, 195; circumflex
+$02DC, 196; tilde
+$FFFF, 197; macron
+$02D8, 198; breve
+$02D9, 199; dotaccent
+$00A8, 200; dieresis
+$02DA, 202; ring
+$00B8, 203; cedilla
+$02DD, 205; hungarumlaut
+$02DB, 206; ogonek
+$02C7, 207; caron
+$2014, 208; emdash
+$00C6, 225; AE
+$00AA, 227; ordfeminine
+$0141, 232; Lslash
+$00D8, 233; Oslash
+$0152, 234; OE
+$00BA, 235; ordmasculine
+$00E6, 241; ae
+$0131, 245; dotlessi
+$0142, 248; lslash
+$00F8, 249; oslash
+$0153, 250; oe
+$00DF, 251; germandbls
+$00C1, 256; Aacute
+$0102, 257; Abreve
+$00C2, 258; Acircumflex
+$00C4, 259; Adieresis
+$00C0, 260; Agrave
+$0100, 261; Amacron
+$0104, 262; Aogonek
+$00C5, 263; Aring
+$00C3, 264; Atilde
+$0106, 265; Cacute
+$010C, 266; Ccaron
+$00C7, 267; Ccedilla
+$010E, 268; Dcaron
+$0110, 269; Dcroat
+$0394, 270; Delta
+$00C9, 271; Eacute
+$011A, 272; Ecaron
+$00CA, 273; Ecircumflex
+$00CB, 274; Edieresis
+$0116, 275; Edotaccent
+$00C8, 276; Egrave
+$0112, 277; Emacron
+$0118, 278; Eogonek
+$00D0, 279; Eth
+$011E, 280; Gbreve
+$0122, 281; Gcommaaccent
+$00CD, 282; Iacute
+$00CE, 283; Icircumflex
+$00CF, 284; Idieresis
+$0130, 285; Idotaccent
+$00CC, 286; Igrave
+$012A, 287; Imacron
+$012E, 288; Iogonek
+$0136, 289; Kcommaaccent
+$0139, 290; Lacute
+$013D, 291; Lcaron
+$013B, 292; Lcommaaccent
+$0143, 293; Nacute
+$0147, 294; Ncaron
+$0145, 295; Ncommaaccent
+$00D1, 296; Ntilde
+$00D3, 297; Oacute
+$00D4, 298; Ocircumflex
+$00D6, 299; Odieresis
+$00D2, 300; Ograve
+$0150, 301; Ohungarumlaut
+$014C, 302; Omacron
+$00D5, 303; Otilde
+$0154, 304; Racute
+$0158, 305; Rcaron
+$0156, 306; Rcommaaccent
+$015A, 307; Sacute
+$0160, 308; Scaron
+$015E, 309; Scedilla
+$0218, 310; Scommaaccent
+$0164, 311; Tcaron
+$016A, 312; Tcommaaccent
+$00DE, 313; Thorn
+$00DA, 314; Uacute
+$00DB, 315; Ucircumflex
+$00DC, 316; Udieresis
+$00D9, 317; Ugrave
+$0170, 318; Uhungarumlaut
+$016A, 319; Umacron
+$0172, 320; Uogonek
+$016E, 321; Uring
+$00DD, 322; Yacute
+$0178, 323; Ydieresis
+$0179, 324; Zacute
+$017D, 325; Zcaron
+$017B, 326; Zdotaccent
+$00E1, 327; aacute
+$0103, 328; abreve
+$00E2, 329; acircumflex
+$00E4, 330; adieresis
+$00E0, 331; agrave
+$0101, 332; amacron
+$0105, 333; aogonek
+$00E5, 334; aring
+$00E3, 335; atilde
+$00A6, 336; brokenbar
+$0107, 337; cacute
+$010D, 338; ccaron
+$00E7, 339; ccedilla
+$F6C3, 340; commaaccent
+$00A9, 341; copyright
+$010F, 342; dcaron
+$0111, 343; dcroat
+$00B0, 344; degree
+$00F7, 345; divide
+$00E9, 346; eacute
+$011B, 347; ecaron
+$00EA, 348; ecircumflex
+$00EB, 349; edieresis
+$0117, 350; edotaccent
+$00E8, 351; egrave
+$0113, 352; emacron
+$0119, 353; eogonek
+$00F0, 354; eth
+$011F, 355; gbreve
+$0123, 356; gcommaaccent
+$2265, 357; greaterequal
+$00ED, 358; iacute
+$00EE, 359; icircumflex
+$00EF, 360; idieresis
+$00EC, 361; igrave
+$012B, 362; imacron
+$012F, 363; iogonek
+$0137, 364; kcommaaccent
+$013A, 365; lacute
+$013E, 366; lcaron
+$013C, 367; lcommaaccent
+$2264, 368; lessequal
+$00AC, 369; logicalnot
+$25CA, 370; lozenge
+$2212, 371; minus
+$03BC, 372; mu
+$00D7, 373; multiply
+$0144, 374; nacute
+$0148, 375; ncaron
+$0146, 376; ncommaaccent
+$2260, 377; notequal
+$00F1, 378; ntilde
+$00F3, 379; oacute
+$00F4, 380; ocircumflex
+$00F6, 381; odieresis
+$00F2, 382; ograve
+$0151, 383; ohungarumlaut
+$014D, 384; omacron
+$00BD, 385; onehalf
+$00BC, 386; onequarter
+$00B9, 387; onesuperior
+$00F5, 388; otilde
+$2202, 389; partialdiff
+$00B1, 390; plusminus
+$0155, 391; racute
+$221A, 392; radical
+$0159, 393; rcaron
+$0157, 394; rcommaaccent
+$00AE, 395; registered
+$015B, 396; sacute
+$0161, 397; scaron
+$015F, 398; scedilla
+$0219, 399; scommaaccent
+$2211, 400; summation
+$0165, 401; tcaron
+$0163, 402; tcommaaccent
+$00FE, 403; thorn
+$00BE, 404; threequarters
+$00B3, 405; threesuperior
+$2122, 406; trademark
+$00B2, 407; twosuperior
+$00FA, 408; uacute
+$00FB, 409; ucircumflex
+$00FC, 410; udieresis
+$00F9, 411; ugrave
+$0171, 412; uhungarumlaut
+$016B, 413; umacron
+$0173, 414; uogonek
+$016F, 415; uring
+$00FD, 416; yacute
+$00FF, 417; ydieresis
+$017A, 418; zacute
+$017E, 419; zcaron
+$017C, 420; zdotaccent

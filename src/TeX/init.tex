@@ -1,0 +1,692 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                      !
+! GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          !
+!                                                                      !
+! Modified BSD License                                                 !
+!                                                                      !
+! Copyright (C) 2009 GLE.                                              !
+!                                                                      !
+! Redistribution and use in source and binary forms, with or without   !
+! modification, are permitted provided that the following conditions   !
+! are met:                                                             !
+!                                                                      !
+!    1. Redistributions of source code must retain the above copyright !
+! notice, this list of conditions and the following disclaimer.        !
+!                                                                      !
+!    2. Redistributions in binary form must reproduce the above        !
+! copyright notice, this list of conditions and the following          !
+! disclaimer in the documentation and/or other materials provided with !
+! the distribution.                                                    !
+!                                                                      !
+!    3. The name of the author may not be used to endorse or promote   !
+! products derived from this software without specific prior written   !
+! permission.                                                          !
+!                                                                      !
+! THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR   !
+! IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       !
+! WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   !
+! ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY       !
+! DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL   !
+! DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE    !
+! GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS        !
+! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER !
+! IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR      !
+! OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN  !
+! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
+!                                                                      !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+size 10 10
+! To update inittex.ini first delete the current version from CGLE_TOP:
+! and then  CGLE INIT.TEX /DEV=PS to create a new version and copy
+! it to CGLE_TOP:
+
+print ""
+print "If GLE says 'Saving definitions', then compilation was successful."
+
+amove 2 8
+begin text
+\tfont{0}{texcmr}{1}   \sfont{0}{texcmr}{.7}   \ssfont{0}{texcmr}{.5}
+\tfont{1}{texcmmi}{1}  \sfont{1}{texcmmi}{.7}  \ssfont{1}{texcmmi}{.5}
+\tfont{2}{texcmsy}{1}  \sfont{2}{texcmsy}{.7}  \ssfont{2}{texcmsy}{.5}
+\tfont{3}{texcmex}{1}  \sfont{3}{texcmex}{.7}  \ssfont{3}{texcmex}{.5}
+end text
+begin text
+\mathcode{ }{$8000}
+\mathcode{!}{$5021}
+\mathcode{'}{$8000}
+\mathcode{(}{$4028}
+\mathcode{)}{$5029}
+\mathcode{*}{$2203}
+\mathcode{+}{$202B}
+\mathcode{,}{$613B}
+\mathcode{-}{$2200}
+\mathcode{.}{$013A}
+\mathcode{/}{$013D}
+\mathcode{:}{$303A}
+\mathcode{;}{$603B}
+\mathcode{<}{$313C}
+\mathcode{=}{$303D}
+\mathcode{>}{$313E}
+\mathcode{?}{$503F}
+\mathcode{[}{$405B}
+\mathcode{]}{$505D}
+\mathcode{_}{$8000}
+\mathcode{|}{$026A}
+
+end text
+begin text
+\delcode{.}{0}
+\delcode{(}{$028300}
+\delcode{)}{$029301}
+\delcode{[}{$05B302}
+\delcode{]}{$05D303}
+\delcode{<}{$26830A}
+\delcode{>}{$26930B}
+\delcode{/}{$02F30E}
+\delcode{|}{$26A30C}
+
+\def\lbrack{[} \def\rbrack{]}
+\def\space{ }
+
+\def\,{\movexy{0.5em}{0}}
+\def\:{\movexy{1em}{0}}
+\def\;{\movexy{2em}{0}}
+\def\!{\movexy{-0.5em}{0}}
+
+\def\smallskip{\vskip{2 ex}}            %does not work
+\def\medskip{\vskip{4 ex}}              %does not work
+\def\bigskip{\vskip{8 ex}}              %does not work
+
+\def\ss{\char{$19}}
+\def\ae{\char{$1A}}
+\def\oe{\char{$1b}}
+\def\o{\char{$1c}}
+\def\AE{\char{$1d}}
+\def\OE{\char{$1e}}
+\def\O{\char{$1f}}
+
+!\def\ae{\uchr{00E6}}
+!\def\oe{\uchr{0153}}
+!\def\o{\uchr{00F8}}
+!\def\AE{\uchr{00C6}}
+!\def\OE{\uchr{0152}}
+!\def\O{\uchr{00D8}}
+
+\def\i{\char{$10}}
+\def\j{\char{$11}}
+\def\l{{\fontenc{1}{rm}\char{248}}}
+\def\L{{\fontenc{1}{rm}\char{232}}}
+
+\def\adobess{\char{251}}
+\def\adobeae{\char{241}}
+\def\adobeoe{\char{250}}
+\def\adobeAE{\char{225}}
+\def\adobeOE{\char{234}}
+\def\adobeo{\char{249}}
+\def\adobeO{\char{233}}
+\def\adobei{\char{245}}
+\def\adobesterlin{\char{163}}
+\def\adobeyen{\char{165}}
+\def\adobeflorin{\char{166}}
+\def\adobesection{\char{167}}
+\def\adobecurrency{\char{168}}
+
+\def\degree{{\fontenc{1}{rm}\char{202}}}
+
+\def\dag{\mathchar{$279}}
+\def\ddag{\mathchar{$27A}}
+\def\S{\mathchar{$278}}
+\def\P{\mathchar{$27B}}
+end text
+
+begin text
+\mathchardef{\alpha}{$010B}
+\mathchardef{\beta}{$010C}
+\mathchardef{\gamma}{$010D}
+\mathchardef{\delta}{$010E}
+\mathchardef{\epsilon}{$010F}
+\mathchardef{\zeta}{$0110}
+\mathchardef{\eta}{$0111}
+\mathchardef{\theta}{$0112}
+\mathchardef{\iota}{$0113}
+\mathchardef{\kappa}{$0114}
+\mathchardef{\lambda}{$0115}
+\mathchardef{\mu}{$0116}
+\mathchardef{\nu}{$0117}
+\mathchardef{\xi}{$0118}
+\mathchardef{\pi}{$0119}
+\mathchardef{\rho}{$011A}
+\mathchardef{\sigma}{$011B}
+\mathchardef{\tau}{$011C}
+\mathchardef{\upsilon}{$011D}
+\mathchardef{\phi}{$011E}
+\mathchardef{\chi}{$011F}
+\mathchardef{\psi}{$0120}
+\mathchardef{\omega}{$0121}
+\mathchardef{\varepsilon}{$0122}
+\mathchardef{\vartheta}{$0123}
+\mathchardef{\varpi}{$0124}
+\mathchardef{\varrho}{$0125}
+\mathchardef{\varsigma}{$0126}
+\mathchardef{\varphi}{$0127}
+\mathchardef{\Gamma}{$7000}
+\mathchardef{\Delta}{$7001}
+\mathchardef{\Theta}{$7002}
+\mathchardef{\Lambda}{$7003}
+\mathchardef{\Xi}{$7004}
+\mathchardef{\Pi}{$7005}
+\mathchardef{\Sigma}{$7006}
+\mathchardef{\Upsilon}{$7007}
+\mathchardef{\Phi}{$7008}
+\mathchardef{\Psi}{$7009}
+\mathchardef{\Omega}{$700A}
+end text
+begin text
+
+\mathchardef{\aleph}{$0240}
+\mathchardef{\imath}{$017B}
+\mathchardef{\jmath}{$017C}
+\mathchardef{\ell}{$0160}
+\mathchardef{\wp}{$017D}
+\mathchardef{\Re}{$023C}
+\mathchardef{\Im}{$023D}
+\mathchardef{\partial}{$0140}
+\mathchardef{\infty}{$0231}
+\mathchardef{\prime}{$0230}
+\mathchardef{\emptyset}{$023B}
+\mathchardef{\nabla}{$0272}
+\mathchardef{\top}{$023E}
+\mathchardef{\bot}{$023F}
+end text
+begin text
+\mathchardef{\minus}{$007C}
+\mathchardef{\triangle}{$0234}
+\mathchardef{\forall}{$0238}
+\mathchardef{\exists}{$0239}
+\mathchardef{\neg}{$023A}
+\mathchardef{\flat}{$015B}
+\mathchardef{\natural}{$015C}
+\mathchardef{\sharp}{$015D}
+\def\clubsuit{{\setfont{pszd}\char{168}}}
+\def\diamondsuit{{\setfont{pszd}\char{169}}}
+\def\heartsuit{{\setfont{pszd}\char{170}}}
+\def\spadesuit{{\setfont{pszd}\char{171}}}
+
+\mathchardef{\coprod}{$1360}
+\mathchardef{\bigvee}{$1357}
+\mathchardef{\bigwedge}{$1356}
+\mathchardef{\biguplus}{$1355}
+\mathchardef{\bigcap}{$1354}
+\mathchardef{\bigcup}{$1353}
+\mathchardef{\prod}{$1351}
+\mathchardef{\sum}{$1350}
+\mathchardef{\bigotimes}{$134E}
+\mathchardef{\bigoplus}{$134C}
+\mathchardef{\bigodot}{$134A}
+\mathchardef{\bigsqcup}{$1346}
+\mathchardef{\smallint}{$1273}
+
+\mathchardef{\intop}{$1352}
+\mathchardef{\ointop}{$1348}
+\def{\int}{\intop\nolimits}
+\def{\oint}{\ointop\nolimits}
+
+end text
+begin text
+\mathchardef{\triangleleft}{$212F}
+\mathchardef{\triangleright}{$212E}
+\mathchardef{\bigtriangleup}{$2234}
+\mathchardef{\bigtriangledown}{$2235}
+\mathchardef{\wedge}{$225E}
+\mathchardef{\land}{$225E}
+\mathchardef{\vee}{$225F}
+\mathchardef{\lor}{$225F}
+\mathchardef{\cap}{$225C}
+\mathchardef{\cup}{$225B}
+\mathchardef{\ddagger}{$227A}
+\mathchardef{\dagger}{$2279}
+\mathchardef{\sqcap}{$2275}
+\mathchardef{\sqcup}{$2274}
+\mathchardef{\uplus}{$225D}
+\mathchardef{\amalg}{$2271}
+\mathchardef{\diamond}{$2205}
+\mathchardef{\bullet}{$220F}
+\mathchardef{\wr}{$226F}
+\mathchardef{\div}{$2204}
+\mathchardef{\odot}{$220C}
+\mathchardef{\oslash}{$220B}
+\mathchardef{\otimes}{$220A}
+\mathchardef{\ominus}{$2209}
+\mathchardef{\oplus}{$2208}
+\mathchardef{\mp}{$2207}
+\mathchardef{\pm}{$2206}
+\mathchardef{\circ}{$220E}
+\mathchardef{\bigcirc}{$220D}
+\mathchardef{\setminus}{$226E}
+\mathchardef{\cdot}{$2201}
+\mathchardef{\ast}{$2203}
+\mathchardef{\times}{$2202}
+\mathchardef{\star}{$213F}
+
+end text
+begin text
+\mathchardef{\propto}{$322F}
+\mathchardef{\sqsubseteq}{$3276}
+\mathchardef{\sqsupseteq}{$3277}
+\mathchardef{\parallel}{$326B}
+\mathchardef{\mid}{$326A}
+\mathchardef{\dashv}{$3261}
+\mathchardef{\vdash}{$3260}
+\mathchardef{\nearrow}{$3225}
+\mathchardef{\searrow}{$3226}
+\mathchardef{\nwarrow}{$322D}
+\mathchardef{\swarrow}{$322E}
+\mathchardef{\Leftrightarrow}{$322C}
+\mathchardef{\Leftarrow}{$3228}
+\mathchardef{\Rightarrow}{$3229}
+\def\neq{\not=}
+\def\ne{\neq}
+\mathchardef{\leq}{$3214}
+\def\le{\leq}
+\def\ge{\geq}
+\mathchardef{\geq}{$3215}
+\mathchardef{\succ}{$321F}
+\mathchardef{\prec}{$321E}
+\mathchardef{\approx}{$3219}
+\mathchardef{\succeq}{$3217}
+\mathchardef{\preceq}{$3216}
+\mathchardef{\supset}{$321B}
+\mathchardef{\subset}{$321A}
+\mathchardef{\supseteq}{$3213}
+\mathchardef{\subseteq}{$3212}
+\mathchardef{\in}{$3232}
+end text
+begin text
+\def\owns{\ni}
+\mathchardef{\ni}{$3233}
+\mathchardef{\gg}{$321D}
+\mathchardef{\ll}{$321C}
+\mathchardef{\not}{$3236}
+\mathchardef{\leftrightarrow}{$3224}
+\mathchardef{\leftarrow}{$3220}
+ \def\gets{\leftarrow}
+\mathchardef{\rightarrow}{$3221}
+\def{\to}{\rightarrow}
+\mathchardef{\uparrow}{$3222}
+\mathchardef{\downarrow}{$3223}
+\mathchardef{\updownarrow}{$326C}
+\mathchardef{\Uparrow}{$322A}
+\mathchardef{\Downarrow}{$322B}
+\mathchardef{\Updownarrow}{$326D}
+\mathchardef{\mapstochar}{$3237}
+ \def\mapsto{\mapstochar\rightarrow}
+\mathchardef{\sim}{$3218}
+\mathchardef{\simeq}{$3227}
+\mathchardef{\perp}{$323F}
+\mathchardef{\equiv}{$3211}
+\mathchardef{\asymp}{$3210}
+\mathchardef{\smile}{$315E}
+\mathchardef{\frown}{$315F}
+\mathchardef{\leftharpoonup}{$3128}
+\mathchardef{\leftharpoondown}{$3129}
+\mathchardef{\rightharpoonup}{$312A}
+\mathchardef{\rightharpoondown}{$312B}
+end text
+begin text
+
+\mathchardef{\lhook}{$312C}
+ \def\hookrightarrow{\lhook\joinrel\rightarrow}
+\mathchardef{\rhook}{$312D}
+\def\hookleftarrow{\leftarrow\joinrel\rhook}
+\def\bowtie{\mathrel\triangleright\joinrel\mathrel\triangleleft}
+\def\models{\mathrel|\joinrel=}
+\def\Longrightarrow{\Relbar\joinrel\Rightarrow}
+
+\def\longrightarrow{\protect\@lra}
+\def\longleftarrow{\protect\@lla}
+\def\Longleftarrow{\Leftarrow\joinrel\Relbar}
+\def\longmapsto{\mapstochar\longrightarrow}
+\def\longleftrightarrow{\leftarrow\joinrel\rightarrow}
+\def\Longleftrightarrow{\Leftarrow\joinrel\Rightarrow}
+\def\iff{\Longleftrightarrow}
+end text
+begin text
+\def\lmoustache{\delimiter{$4000340}}
+\def\rmoustache{\delimiter{$5000341}}
+\def\lgroup{\delimiter{$400033A}}
+\def\rgroup{\delimiter{$500033B}}
+\def\arrowvert{\delimiter{$33C}}
+\def\Arrowvert{\delimiter{$33D}}
+\def\bracevert{\delimiter{$33E}}
+\def\Vert{\delimiter{$26B30D}}
+\def\|{\Vert}
+\def\vert{\delimiter{$26A30C}}
+end text
+begin text
+\mathchardef{\backslash}{$326E}
+\def\rangle{\delimiter{$526930B}}
+\def\langle{\delimiter{$426830A}}
+\def\rbrace{\delimiter{$5267309}}
+\def\lbrace{\delimiter{$4266308}}
+\def\rceil{\delimiter{$5265307}}
+\def\lceil{\delimiter{$4264306}}
+\def\rfloor{\delimiter{$5263305}}
+\def\lfloor{\delimiter{$4262304}}
+
+end text
+begin text
+\def\rmf{\fam{0}}
+\def\log{\mathop{\rmf log}\nolimits}
+\def\lg{\mathop{\rmf lg}\nolimits}
+\def\ln{\mathop{\rmf ln}\nolimits}
+\def\lim{\mathop{\rmf lim}}
+\def\limsup{\mathop{\rmf lim\,sup}}
+\def\liminf{\mathop{\rmf lim\,inf}}
+\def\sin{\mathop{\rmf sin}\nolimits}
+\def\arcsin{\mathop{\rmf arcsin}\nolimits}
+\def\sinh{\mathop{\rmf sinh}\nolimits}
+\def\cos{\mathop{\rmf cos}\nolimits}
+\def\arccos{\mathop{\rmf arccos}\nolimits}
+\def\AA{\acccmb{texcmr}{23}{6}A}
+\def\aa{\acccmb{texcmr}{23}{6}a}
+end text
+begin text
+\def\cosh{\mathop{\rmf cosh}\nolimits}
+\def\tan{\mathop{\rmf tan}\nolimits}
+\def\arctan{\mathop{\rmf arctan}\nolimits}
+\def\tanh{\mathop{\rmf tanh}\nolimits}
+\def\cot{\mathop{\rmf cot}\nolimits}
+\def\coth{\mathop{\rmf coth}\nolimits}
+\def\sec{\mathop{\rmf sec}\nolimits}
+\def\csc{\mathop{\rmf csc}\nolimits}
+\def\max{\mathop{\rmf max}}
+\def\min{\mathop{\rmf min}}
+\def\inf{\mathop{\rmf inf}}
+\def\arg{\mathop{\rmf arg}\nolimits}
+\def\ker{\mathop{\rmf ker}\nolimits}
+\def\dim{\mathop{\rmf dim}\nolimits}
+\def\hom{\mathop{\rmf hom}\nolimits}
+\def\det{\mathop{\rmf det}}
+\def\exp{\mathop{\rmf exp}\nolimits}
+\def\Pr{\mathop{\rmf Pr}}
+\def\gcd{\mathop{\rmf gcd}}
+\def\deg{\mathop{\rmf deg}\nolimits}
+end text
+begin text
+\def\`{\acccmb{texcmr}{18}{5}}
+\def\'{\acccmb{texcmr}{19}{2}}
+\def\v{\acccmb{texcmr}{20}{0}}
+\def\u{\accent{texcmr}{21}}
+\def\={\accent{texcmr}{22}}
+\def\.{\accent{texcmr}{95}}
+\def\H{\accent{texcmr}{125}}
+\def\~{\acccmb{texcmr}{126}{7}}
+\def{''}{\acccmb{texcmr}{127}{3}}
+\def\c{\acccmb{rm}{203}{1}}
+\def\k{\accent{rm}{206}}
+end text
+! hardcoded in tex.cpp because of conflict with character "^"
+! \def\^{\acccmb{texcmr}{94}{4}}
+! can this be fixed by moving these:
+! tex_chardef('^',"\\sup ");
+! tex_chardef('_',"\\sub ");
+! from the code to this file?
+begin text
+
+% emulator stuff here.
+\def\kern#1{\movexy{#1}{0}}
+\def\raise#2{\movexy{0}{#1}#2\movexy{0}{-(#1)}}         %does not work
+\def\lower#2{\movexy{0}{-(#1)}#2\movexy{0}{(#1)}}       %does not work
+\def\mathord#1{\math{0}{#1}}
+\def\mathop#1{\math{1}{#1}}
+\def\mathbin#1{\math{2}{#1}}
+\def\mathrel#1{\math{3}{#1}}
+\def\mathopen#1{\math{4}{#1}}
+\def\mathclose#1{\math{5}{#1}}
+\def\mathpunct#1{\math{6}{#1}}
+\def\mathinnter#1{\math{7}{#1}}
+
+%does not work
+\def\copyright{c\mathchar{20D}}
+\def\test{\char{20D}}
+\def\dots{\ldotp\ldotp\ldotp}
+\def\ldots{\ldotp\ldotp\ldotp}
+\def\TeX{T\kern{-0.1667em}\lower{0.5 ex}{E}\kern{-0.125em}X}
+%
+\def\sp{^}
+\def\sb{_}
+
+% define some fonts,  won't work in math mode. should define rmf,itf,bff,ttf
+\def\rm{\setfont{rm}}
+\def\it{\setfont{rmi}}
+\def\bf{\setfont{rmb}}
+\def\tt{\setfont{tt}}
+\def\glass{\rule{0}{0}}
+end text
+
+begin text
+\unicode{$A3}{\adobesterlin{}}
+\unicode{$A5}{\adobeyen{}}
+\unicode{$A7}{\adobesection{}}
+\unicode{$A4}{\adobecurrency{}}
+\unicode{$B1}{\pm{}}
+\unicode{$B2}{{}^2}
+\unicode{$B3}{{}^3}
+\unicode{$B5}{\mu{}}
+\unicode{$B7}{\cdot{}}
+\unicode{$BA}{{}^1}
+\unicode{$C0}{\`A}
+\unicode{$C1}{\'A}
+\unicode{$C2}{\^A}
+\unicode{$C3}{\~A}
+\unicode{$C4}{\''A}
+\unicode{$C5}{\AA{}}
+\unicode{$C6}{\adobeAE{}}
+\unicode{$C7}{\c C}
+\unicode{$C8}{\`E}
+\unicode{$C9}{\'E}
+\unicode{$CA}{\^E}
+\unicode{$CB}{\''E}
+\unicode{$CC}{\`I}
+\unicode{$CD}{\'I}
+\unicode{$CE}{\^I}
+\unicode{$CF}{\''I}
+\unicode{$D1}{\~N}
+\unicode{$D2}{\`O}
+\unicode{$D3}{\'O}
+\unicode{$D4}{\^O}
+\unicode{$D5}{\~O}
+\unicode{$D6}{\''O}
+\unicode{$D7}{\times{}}
+\unicode{$D8}{\emptyset{}}
+\unicode{$D9}{\`U}
+\unicode{$DA}{\'U}
+\unicode{$DB}{\^U}
+\unicode{$DC}{\''U}
+\unicode{$DD}{\'Y}
+\unicode{$DF}{\adobess{}}
+\unicode{$E0}{\`a}
+\unicode{$E1}{\'a}
+\unicode{$E2}{\^a}
+\unicode{$E3}{\~a}
+\unicode{$E4}{\''a}
+\unicode{$E5}{\aa{}}
+\unicode{$E6}{\adobeae{}}
+\unicode{$E7}{\c c}
+\unicode{$E8}{\`e}
+\unicode{$E9}{\'e}
+\unicode{$EA}{\^e}
+\unicode{$EB}{\''e}
+\unicode{$EC}{\`i}
+\unicode{$ED}{\'i}
+\unicode{$EE}{\^i}
+\unicode{$EF}{\''i}
+\unicode{$F1}{\~n}
+\unicode{$F2}{\`o}
+\unicode{$F3}{\'o}
+\unicode{$F4}{\^o}
+\unicode{$F5}{\~o}
+\unicode{$F6}{\''o}
+\unicode{$F9}{\`u}
+\unicode{$FA}{\'u}
+\unicode{$FB}{\^u}
+\unicode{$FC}{\''u}
+\unicode{$FD}{\'y}
+\unicode{$FF}{\''y}
+\unicode{$100}{\=A}
+\unicode{$101}{\=a}
+\unicode{$102}{\u A}
+\unicode{$103}{\u a}
+\unicode{$104}{\k A}
+\unicode{$105}{\k a}
+\unicode{$106}{\'C}
+\unicode{$107}{\'c}
+\unicode{$108}{\^C}
+\unicode{$109}{\^c}
+\unicode{$10A}{\.C}
+\unicode{$10B}{\.c}
+\unicode{$10C}{\v C}
+\unicode{$10D}{\v c}
+\unicode{$10E}{\v D}
+\unicode{$112}{\=E}
+\unicode{$113}{\=e}
+\unicode{$114}{\u E}
+\unicode{$115}{\u e}
+\unicode{$116}{\.E}
+\unicode{$117}{\.e}
+\unicode{$118}{\k E}
+\unicode{$119}{\k e}
+\unicode{$11A}{\v E}
+\unicode{$11B}{\v e}
+\unicode{$11C}{\^G}
+\unicode{$11D}{\^g}
+\unicode{$11E}{\u G}
+\unicode{$11F}{\u g}
+\unicode{$120}{\.G}
+\unicode{$121}{\.g}
+\unicode{$124}{\^H}
+\unicode{$125}{\^h}
+\unicode{$128}{\~I}
+\unicode{$129}{\~i}
+\unicode{$12A}{\=I}
+\unicode{$12B}{\accent{texcmr}{22}\i{}}
+\unicode{$12C}{\u I}
+\unicode{$12D}{\accent{texcmr}{21}\i{}}
+\unicode{$12E}{\k I}
+\unicode{$12F}{\k i}
+\unicode{$134}{\^J}
+\unicode{$135}{\^j}
+\unicode{$139}{\'L}
+\unicode{$13A}{\'l}
+\unicode{$141}{\L{}}
+\unicode{$142}{\l{}}
+\unicode{$143}{\'N}
+\unicode{$144}{\'n}
+\unicode{$147}{\v N}
+\unicode{$148}{\v n}
+\unicode{$14C}{\=O}
+\unicode{$14D}{\=o}
+\unicode{$14E}{\u O}
+\unicode{$14F}{\u o}
+\unicode{$150}{\H O}
+\unicode{$151}{\H o}
+\unicode{$152}{\adobeOE{}}
+\unicode{$153}{\adobeoe{}}
+\unicode{$154}{\'R}
+\unicode{$155}{\'r}
+\unicode{$158}{\v R}
+\unicode{$159}{\v r}
+\unicode{$15A}{\'S}
+\unicode{$15B}{\'s}
+\unicode{$15C}{\^S}
+\unicode{$15D}{\^s}
+\unicode{$15E}{\c S}
+\unicode{$15F}{\c s}
+\unicode{$160}{\v S}
+\unicode{$161}{\v s}
+\unicode{$164}{\v T}
+\unicode{$168}{\~U}
+\unicode{$169}{\~u}
+\unicode{$16A}{\=U}
+\unicode{$16B}{\=u}
+\unicode{$16C}{\u U}
+\unicode{$16D}{\u u}
+\unicode{$16E}{\accent{texcmr}{23}U}
+\unicode{$16F}{\accent{texcmr}{23}u}
+\unicode{$170}{\H U}
+\unicode{$171}{\H u}
+\unicode{$174}{\^W}
+\unicode{$175}{\^w}
+\unicode{$176}{\^Y}
+\unicode{$177}{\^y}
+\unicode{$178}{\''Y}
+\unicode{$179}{\'Z}
+\unicode{$17A}{\'z}
+\unicode{$17B}{\.Z}
+\unicode{$17C}{\.z}
+\unicode{$17D}{\v Z}
+\unicode{$17E}{\v z}
+\unicode{$1CD}{\v A}
+\unicode{$1CE}{\v a}
+\unicode{$1CF}{\v I}
+\unicode{$1D0}{\v i}
+\unicode{$1D1}{\v O}
+\unicode{$1D2}{\v o}
+\unicode{$1D3}{\v U}
+\unicode{$1D4}{\v u}
+\unicode{$1FC}{\accent{texcmr}{19}\AE{}}
+\unicode{$1FD}{\accent{texcmr}{19}\ae{}}
+\unicode{$3B1}{\alpha{}}
+\unicode{$3B2}{\beta{}}
+\unicode{$3B3}{\gamma{}}
+\unicode{$3B4}{\delta{}}
+\unicode{$3B5}{\epsilon{}}
+\unicode{$3B6}{\zeta{}}
+\unicode{$3B7}{\eta{}}
+\unicode{$3B8}{\theta{}}
+\unicode{$3B9}{\iota{}}
+\unicode{$3BA}{\kappa{}}
+\unicode{$3BB}{\lambda{}}
+\unicode{$3BC}{\mu{}}
+\unicode{$3BD}{\nu{}}
+\unicode{$3BE}{\xi{}}
+\unicode{$3BF}{o}
+\unicode{$3C0}{\pi{}}
+\unicode{$3C1}{\rho{}}
+\unicode{$3C3}{\sigma{}}
+\unicode{$3C4}{\tau{}}
+\unicode{$3C5}{\upsilon{}}
+\unicode{$3C6}{\phi{}}
+\unicode{$3C7}{\chi{}}
+\unicode{$3C8}{\psi{}}
+\unicode{$3C9}{\omega{}}
+\unicode{$391}{A}
+\unicode{$392}{B}
+\unicode{$393}{\Gamma{}}
+\unicode{$394}{\Delta{}}
+\unicode{$395}{E}
+\unicode{$396}{F}
+\unicode{$397}{G}
+\unicode{$398}{\Theta{}}
+\unicode{$399}{I}
+\unicode{$39A}{K}
+\unicode{$39B}{\Lambda{}}
+\unicode{$39C}{M}
+\unicode{$39D}{N}
+\unicode{$39E}{\Xi{}}
+\unicode{$39F}{O}
+\unicode{$3A0}{\Pi{}}
+\unicode{$3A1}{R}
+\unicode{$3A3}{\Sigma{}}
+\unicode{$3A4}{T}
+\unicode{$3A5}{\Upsilon{}}
+\unicode{$3A6}{\Phi{}}
+\unicode{$3A7}{X}
+\unicode{$3A8}{\Psi{}}
+\unicode{$3A9}{\Omega{}}
+end text
+
+begin text
+\presave
+end text

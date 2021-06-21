@@ -1,0 +1,261 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!                                                                      !
+! GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          !
+!                                                                      !
+! Modified BSD License                                                 !
+!                                                                      !
+! Copyright (C) 2009 GLE.                                              !
+!                                                                      !
+! Redistribution and use in source and binary forms, with or without   !
+! modification, are permitted provided that the following conditions   !
+! are met:                                                             !
+!                                                                      !
+!    1. Redistributions of source code must retain the above copyright !
+! notice, this list of conditions and the following disclaimer.        !
+!                                                                      !
+!    2. Redistributions in binary form must reproduce the above        !
+! copyright notice, this list of conditions and the following          !
+! disclaimer in the documentation and/or other materials provided with !
+! the distribution.                                                    !
+!                                                                      !
+!    3. The name of the author may not be used to endorse or promote   !
+! products derived from this software without specific prior written   !
+! permission.                                                          !
+!                                                                      !
+! THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR   !
+! IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       !
+! WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   !
+! ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY       !
+! DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL   !
+! DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE    !
+! GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS        !
+! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER !
+! IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR      !
+! OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN  !
+! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
+!                                                                      !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+$0020, 32; space
+$0021, 33; exclam
+$0022, 34; quotedbl
+$0023, 35; numbersign
+$0024, 36; dollar
+$0025, 37; percent
+$0026, 38; ampersand
+$2019, 39; quoteright
+$0028, 40; parenleft
+$0029, 41; parenright
+$002A, 42; asterisk
+$002B, 43; plus
+$002C, 44; comma
+$FFFF, 45; hyphen
+$002E, 46; period
+$002F, 47; slash
+$0030, 48; zero
+$0031, 49; one
+$0032, 50; two
+$0033, 51; three
+$0034, 52; four
+$0035, 53; five
+$0036, 54; six
+$0037, 55; seven
+$0038, 56; eight
+$0039, 57; nine
+$003A, 58; colon
+$003B, 59; semicolon
+$003C, 60; less
+$003D, 61; equal
+$003E, 62; greater
+$003F, 63; question
+$0040, 64; at
+$0041, 65; A
+$0042, 66; B
+$0043, 67; C
+$0044, 68; D
+$0045, 69; E
+$0046, 70; F
+$0047, 71; G
+$0048, 72; H
+$0049, 73; I
+$004A, 74; J
+$004B, 75; K
+$004C, 76; L
+$004D, 77; M
+$004E, 78; N
+$004F, 79; O
+$0050, 80; P
+$0051, 81; Q
+$0052, 82; R
+$0053, 83; S
+$0054, 84; T
+$0055, 85; U
+$0056, 86; V
+$0057, 87; W
+$0058, 88; X
+$0059, 89; Y
+$005A, 90; Z
+$005B, 91; bracketleft
+$005C, 92; backslash
+$005D, 93; bracketright
+$005E, 94; asciicircum
+$005F, 95; underscore
+$2018, 96; quoteleft
+$0061, 97; a
+$0062, 98; b
+$0063, 99; c
+$0064, 100; d
+$0065, 101; e
+$0066, 102; f
+$0067, 103; g
+$0068, 104; h
+$0069, 105; i
+$006A, 106; j
+$006B, 107; k
+$006C, 108; l
+$006D, 109; m
+$006E, 110; n
+$006F, 111; o
+$0070, 112; p
+$0071, 113; q
+$0072, 114; r
+$0073, 115; s
+$0074, 116; t
+$0075, 117; u
+$0076, 118; v
+$0077, 119; w
+$0078, 120; x
+$0079, 121; y
+$007A, 122; z
+$007B, 123; braceleft
+$007C, 124; bar
+$007D, 125; braceright
+$007E, 126; asciitilde
+$2500, 128; u2500
+$2502, 129; u2502
+$250c, 130; u250c
+$2510, 131; u2510
+$2514, 132; u2514
+$2518, 133; u2518
+$251c, 134; u251c
+$2524, 135; u2524
+$252c, 136; u252c
+$2534, 137; u2534
+$253c, 138; u253c
+$2580, 139; u2580
+$2584, 140; u2584
+$2588, 141; u2588
+$258c, 142; u258c
+$2590, 143; u2590
+$2591, 144; u2591
+$2592, 145; u2592
+$2593, 146; u2593
+$2320, 147; u2320
+$25a0, 148; u25a0
+$2219, 149; u2219
+$221a, 150; u221a
+$2248, 151; u2248
+$2264, 152; u2264
+$2265, 153; u2265
+$00a0, 154; u00a0
+$2321, 155; u2321
+$00b0, 156; u00b0
+$00b2, 157; u00b2
+$00b7, 158; u00b7
+$00f7, 159; u00f7
+$2550, 160; u2550
+$2551, 161; u2551
+$2552, 162; u2552
+$0451, 163; u0451
+$2553, 164; u2553
+$2554, 165; u2554
+$2555, 166; u2555
+$2556, 167; u2556
+$2557, 168; u2557
+$2558, 169; u2558
+$2559, 170; u2559
+$255a, 171; u255a
+$255b, 172; u255b
+$255c, 173; u255c
+$255d, 174; u255d
+$255e, 175; u255e
+$255f, 176; u255f
+$2560, 177; u2560
+$2561, 178; u2561
+$0401, 179; u0401
+$2562, 180; u2562
+$2563, 181; u2563
+$2564, 182; u2564
+$2565, 183; u2565
+$2566, 184; u2566
+$2567, 185; u2567
+$2568, 186; u2568
+$2569, 187; u2569
+$256a, 188; u256a
+$256b, 189; u256b
+$256c, 190; u256c
+$00a9, 191; u00a9
+$044e, 192; u044e
+$0430, 193; u0430
+$0431, 194; u0431
+$0446, 195; u0446
+$0434, 196; u0434
+$0435, 197; u0435
+$0444, 198; u0444
+$0433, 199; u0433
+$0445, 200; u0445
+$0438, 201; u0438
+$0439, 202; u0439
+$043a, 203; u043a
+$043b, 204; u043b
+$043c, 205; u043c
+$043d, 206; u043d
+$043e, 207; u043e
+$043f, 208; u043f
+$044f, 209; u044f
+$0440, 210; u0440
+$0441, 211; u0441
+$0442, 212; u0442
+$0443, 213; u0443
+$0436, 214; u0436
+$0432, 215; u0432
+$044c, 216; u044c
+$044b, 217; u044b
+$0437, 218; u0437
+$0448, 219; u0448
+$044d, 220; u044d
+$0449, 221; u0449
+$0447, 222; u0447
+$044a, 223; u044a
+$042e, 224; u042e
+$0410, 225; u0410
+$0411, 226; u0411
+$0426, 227; u0426
+$0414, 228; u0414
+$0415, 229; u0415
+$0424, 230; u0424
+$0413, 231; u0413
+$0425, 232; u0425
+$0418, 233; u0418
+$0419, 234; u0419
+$041a, 235; u041a
+$041b, 236; u041b
+$041c, 237; u041c
+$041d, 238; u041d
+$041e, 239; u041e
+$041f, 240; u041f
+$042f, 241; u042f
+$0420, 242; u0420
+$0421, 243; u0421
+$0422, 244; u0422
+$0423, 245; u0423
+$0416, 246; u0416
+$0412, 247; u0412
+$042c, 248; u042c
+$042b, 249; u042b
+$0417, 250; u0417
+$0428, 251; u0428
+$042d, 252; u042d
+$0429, 253; u0429
+$0427, 254; u0427
+$042a, 255; u042a
