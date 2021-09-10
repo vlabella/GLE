@@ -1,13 +1,12 @@
-# GLE
-GLE - Graphics Layout Engine
+# GLE - Graphics Layout Engine
 
 GLE (Graphics Layout Engine) is a graphics scripting language designed for creating publication quality graphs, plots, diagrams, figures and slides. GLE supports various graph types (function plots, histograms, bar graphs, scatter plots, contour lines, color maps, surface plots, ...) through a simple but flexible set of graphing commands. More complex output can be created by relying on GLE's scripting language, which is full featured with subroutines, variables, and logic control. GLE relies on LaTeX for text output and supports mathematical formulea in graphs and figures. GLE's output formats include EPS, PS, PDF, JPEG, and PNG.
 
-This repo contains the source code to build the executables for the GLE package.  The manul, samples and library of gle routines are (will be) put in separate repositories eventually.  
+This repo contains the source code to build the executables for the GLE package.  The manual, samples, and library of gle routines are (will be) in separate repositories.  
 
 ## Building with CMAKE
 
-GLE can be build on Windows, Mac and Linux using cmake.
+GLE can be built on Windows, Mac, and Linux using cmake and system specific toolchains: Visual Studio, Xcode, and gcc.
 
 Libraries needed to build GLE are
 
@@ -20,7 +19,7 @@ Libraries needed to build GLE are
 * jpeg
 * Qt5 (for GUI)
 
-Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake if not set cmake will look for them in the system specific locations.  For more information consult cmake documentation on find_package.  
+Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake. If not, cmake will look for them in the system default locations.  For more information consult cmake documentation on find_package or find_library.  
 
 * ZLIB_ROOT
 * JPEG_ROOT
@@ -40,23 +39,24 @@ to install gle on you machine after building
 
 	cd build ; make install
 
-### Building on windows with Visual Studio as 64 bit executable
+### Building on Windows with Visual Studio as 64 bit executable
 
 	cmake -S src -B build -A x64 -T host=x64
 	cmake --build build
 
-To install gle on your machine afterbuilding
+To install gle on your machine after building
 
 	cmake -P build/cmake_install.cmake
 
-### options that controll the build
+### options that control the build
 
- * CMAKE_INsTALL_PREFIX - set this to a different install location than the default on your system
- * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes /MT instead of /MD.  You must also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries build with /MT as well
+ * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
+ * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
+ * ZLIB_USE_STATIC_LIBS - set ON to link to static variants of zlib: .a .lib instead of .so and .dll
 
 ### Creating packages with cpack
 
-cpack can be utilized to create distributable pacakges.  These pacakges shdoul be considered preliminary and experimental at this time since the manual and library of GLE routines are not included and thus GLE will not be complete.
+Cpack can be utilized to create distributable packages.  These packages are preliminary since the manual and library of GLE routines are not included, making these packages incomplete at this time.  This will be remidied when the other repos are created. 
 
 
 	cd build & cpack -G "WIX;NSIS;ZIP"
