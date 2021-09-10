@@ -89,16 +89,11 @@ add_custom_command(
 add_custom_command(
  	OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/glerc
  	COMMAND ${CMAKE_COMMAND} -E echo begin config gle > glerc
- 	COMMAND ${CMAKE_COMMAND} -E echo current = ${VERSION_NUMBER}.${BUILD_NUMBER} >> glerc
+ 	COMMAND ${CMAKE_COMMAND} -E echo current = ${PROJECT_VERSION} >> glerc
  	COMMAND ${CMAKE_COMMAND} -E echo end config >> glerc
   	COMMENT "Generating glerc"
   	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
-if(UNIX AND NOT APPLE)
-	add_compile_options(-fPIC)
-	#target_link_options(libgle-graphics PUBLIC -fPIC)
-	#target_link_options(libgle-graphics_s PUBLIC -fPIC)
-endif()
 
 add_library(gle_common OBJECT ${GLE_SOURCES})
 add_executable( gle $<TARGET_OBJECTS:gle_common> gle.cpp )
@@ -107,17 +102,15 @@ add_library( libgle-graphics SHARED $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp
 add_custom_target( glerc_file ALL DEPENDS glerc )
 set_source_files_properties( gle_cpp_lib.cpp PROPERTIES COMPILE_FLAGS -DHAVE_LIBGLE)
 
-install(TARGETS gle
-		CONFIGURATIONS Release Debug
-		RUNTIME )
-
-install(FILES glerc
-		CONFIGURATIONS Release Debug
-		DESTINATION . )
-
 set_target_properties(gle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}) 
 set_target_properties(libgle-graphics_s PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}) 
 set_target_properties(libgle-graphics PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}) 
+
+if(UNIX AND NOT APPLE)
+	target_link_options(libgle-graphics PUBLIC -fPIC)
+	target_link_options(libgle-graphics_s PUBLIC -fPIC)
+endif()
+
 
 target_link_libraries (gle LINK_PUBLIC 
 	${ZLIB_LIBRARIES}
@@ -159,3 +152,12 @@ if(APPLE)
 		lzma
 	)
 endif()
+
+install(TARGETS gle
+		CONFIGURATIONS Release Debug
+		RUNTIME )
+
+install(FILES glerc
+		CONFIGURATIONS Release Debug
+		DESTINATION . )
+

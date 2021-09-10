@@ -63,20 +63,11 @@ include(CPack)
 #
 SET(Boost_USE_STATIC_LIBS ON)
 find_package(Boost )
-find_package(ZLIB)
-if(ZLIB_USE_STATIC_LIBS)
-	# customization to select static libraries
-	if(WIN32)
-		list(TRANSFORM ZLIB_LIBRARIES REPLACE "zlib([d]*).lib" "zlibstatic\\1.lib")
-	else()
-		list(TRANSFORM ZLIB_LIBRARIES REPLACE "libz([d]*).so" "libz\\1.a")
-	endif()
-endif()
-find_package(JPEG)
-
-find_package(TIFF)
+find_package(ZLIB )
+find_package(JPEG )
+find_package(TIFF )
 # note fingPNG calls findZLIB
-find_package(PNG)
+find_package(PNG )
 # find debug if it exists
 get_property(_isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(_isMultiConfig)
