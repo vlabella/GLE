@@ -53,16 +53,22 @@ To install gle on your machine after building
  * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
  * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
  * ZLIB_USE_STATIC_LIBS - set ON to link to static variants of zlib: .a .lib instead of .so and .dll
+ * GLE_EXAMPLES_LIBRARY_PATH - set to the root folder of the gle-library folder on your computer (only needed if packaging)
+ * GLE_USER_MANUAL_PATH - set to the root folder of the gle-manual folder on your computer (only needed if packaging)
 
 ### Creating packages with cpack
 
-Cpack can be utilized to create distributable packages.  These packages are preliminary since the manual and library of GLE routines are not included, making these packages incomplete at this time.  This will be remidied when the other repos are created. 
+Cpack can be utilized to create distributable packages.  Note that gle-manual and gle-library repos should be checked out and built on your computer for them to get included in the package.
 
 
-	cd build & cpack -G "WIX;NSIS;ZIP"
+	cd build & cpack -G "NSIS;ZIP;7Z"
 
-	or on linux
+	on linux
 
 	cd build & cpack -G "DEB;ZIP"
+
+	on macOS
+
+	cd build & cpack -G "DragNDrop;ZIP"
 
 
