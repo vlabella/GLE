@@ -60,16 +60,17 @@ To install gle on your machine after building
 
 ### Creating packages with cpack
 
-Cpack can be utilized to create distributable packages.  Note that gle-manual and gle-library repos should be checked out and built on your computer for them to get included in the package.
+Cpack can be utilized to create distributable packages.  The gle-manual and gle-library repos should be checked out and built for them to get included in the package.  Windows platform utilizes NSIS for self installing exe building.  All other packages are for self installers.
 
+	windows:
 
 	cd build & cpack -G "NSIS;ZIP;7Z"
 
-	on linux
+	linux
 
 	cd build & cpack -G "DEB;ZIP"
 
-	on macOS
+	macOS
 
 	cd build & cpack -G "DragNDrop;ZIP"
 
