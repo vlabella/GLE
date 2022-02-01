@@ -6,7 +6,7 @@ include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple 
 
-project (gle VERSION 4.3.0)
+project (gle VERSION 4.3.1)
 
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d") 
@@ -22,40 +22,66 @@ if(WIN32)
 		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 		# tag CPACK_SYSTEM_NAME with "s" to denote static runtime - must rebuild the whole name as there is no way to add a tag
 		set(CPACK_SYSTEM_NAME "win64s")
-		if($<CMAKE_GENERATOR_PLATFORM:Win32>)
+		if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "Win32")
 			set(CPACK_SYSTEM_NAME "win32s")
 		endif()
 	endif()
 endif()
 #
-# -- cpack information  (need more here for NSIS and otheres - manul and sample gle files)
+# -- cpack information  (need more here for NSIS and others - manual and sample gle files)
 #
 set(CPACK_PACKAGE_VENDOR "GLE")
 set(CPACK_VERBATIM_VARIABLES true)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GLE Graphics Programming Language")
 #set(CPACK_PACKAGE_DESCRIPTION_FILE )
 #set(CPACK_RESOURCE_FILE_WELCOME )
-#set(CPACK_RESOURCE_FILE_LICENSE "LICENSE.txt")
-#set(CPACK_RESOURCE_FILE_README "README.txt")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/../doc/LICENSE.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/../doc/README.txt")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "GLE")
 #
 # - NSIS specifc settings
 #
-#set(CPACK_NSIS_MUI_ICON "")
-#set(CPACK_NSIS_MUI_UNIICON "")
-#set(CPACK_NSIS_MUI_HEADERIMAGE "")
-#set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "")
+set(CPACK_NSIS_COMPRESSOR "lzma")
+set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}/gui/images\\gle.ico")
+set(CPACK_NSIS_MUI_UNIICON "${CMAKE_CURRENT_SOURCE_DIR}/gui/images\\gle.ico")
+set(CPACK_NSIS_MUI_HEADERIMAGE "${CMAKE_CURRENT_SOURCE_DIR}/../graphics\\nsis_banner_image.bmp")
+set(CPACK_NSIS_MUI_WELCOMEFINISHPAGE_BITMAP "${CMAKE_CURRENT_SOURCE_DIR}/../graphics\\nsis_welcome_image.bmp")
 set(CPACK_NSIS_WELCOME_TITLE "GLE ${PROJECT_VERSION}")
 set(CPACK_NSIS_BRANDING_TEXT "GLE ${PROJECT_VERSION}")
 set(CPACK_NSIS_DISPLAY_NAME "GLE ${PROJECT_VERSION}")
-set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL ON)
-SET(CPACK_NSIS_MODIFY_PATH ON)
+set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL OFF)
+set(CPACK_NSIS_MODIFY_PATH ON)
+set(CPACK_PACKAGE_EXECUTABLES 	"qgle" "GLE Previewer"  )
+set(CPACK_NSIS_MENU_LINKS  		"doc/gle-manual.pdf" "GLE Mamual"
+	"https://glx.sourceforge.io" "GLE Web Site"
+	"https://github.com/vlabella/GLE" "GLE GitHub page"
+)
+  
+# extra commands include finddeps and setting file associations
+set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
+	Exec \"$INSTDIR\\bin\\qgle.exe -finddeps '$INSTDIR\\glerc.old'\"
+	WriteRegStr HKCR '.gle' '' 'GLEFile'
+  	WriteRegStr HKCR 'GLEFile' '' 'GLE Script'
+  	WriteRegStr HKCR 'GLEFile\\DefaultIcon' '' '$INSTDIR\\bin\\qgle.exe,0'
+  	WriteRegStr HKCR 'GLEFile\\shell\\open\\command' '' '$INSTDIR\\bin\\qgle.exe \"%1\"'
+  	WriteRegStr HKCR 'GLEFile\\shell\\edit' '' 'Edit GLE Script'
+  	WriteRegStr HKCR 'GLEFile\\shell\\edit\\command' '' '$INSTDIR\\bin\\qgle.exe \"%1\"'
+  	System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
+")
+set (CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
+	DeleteRegKey HKCR '.gle'
+    DeleteRegKey HKCR 'GLEFile'
+")
 #
-# -- wix specific settings
-# dont change these GUIDs
-set(CPACK_WIX_UPGRADE_GUID "5379E5A9-38C0-4DBD-A9B8-EF74CA83EC05" )
-set(CPACK_WIX_PRODUCT_GUID "5673597A-E655-423A-9281-E2F105896E3A" )
+# -- wix specific settings unused no .msi generated
+# dont change these GUIDs once generated
+#set(CPACK_WIX_UPGRADE_GUID "" )
+#set(CPACK_WIX_PRODUCT_GUID "" )
 #set(CPACK_WIX_PRODUCT_ICON "")
+#
+# -- DragNDrop MacOS dmg settings
+#
+set(CPACK_DMG_FORMAT "UDBZ")
 
 include(CPack)
 #
@@ -66,20 +92,20 @@ find_package(Boost )
 find_package(ZLIB )
 find_package(JPEG )
 find_package(TIFF )
-# note fingPNG calls findZLIB
+# note findPNG calls findZLIB
 find_package(PNG )
-# find debug if it exists
+# find debug if it exists for multi config generators only
 get_property(_isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(_isMultiConfig)
-	find_library(PNG_DEBUG NAMES pngd libpngd PATHS ${PNG_ROOT} )
-	set(HAS_DEBUG )
-	string(COMPARE NOTEQUAL "${PNG_DEBUG}" "PNG_DEBUG-NOTFOUND" HAS_DEBUG)
-	if(HAS_DEBUG)
+	find_library(PNG_DEBUG NAMES pngd libpngd PATHS ${PNG_ROOT} PATH_SUFFIXES lib )
+	if(NOT ${PNG_DEBUG} STREQUAL "PNG_DEBUG-NOTFOUND" )
 		list(INSERT PNG_LIBRARIES 0 "optimized")
 		list(APPEND PNG_LIBRARIES "debug")
 		list(APPEND PNG_LIBRARIES ${PNG_DEBUG})
 	endif()
 endif()
+#find_package(Cairo )
+#find_package(Pixman )
 #
 # -- cairo library - cmake does not supply findCAIRO.cmake
 #	
@@ -368,11 +394,32 @@ add_dependencies(makefmt gle)
 add_dependencies(qgle gle)
 add_dependencies(fonts fbuild makefmt)
 
-# put these in the root of the install location
+# documentation file installation in doc folder
 install(FILES 
-		../doc/LICENSE.txt 
-		../doc/README.txt 
-		../doc/ChangeLog.txt
-		CONFIGURATIONS Release Debug
-		RUNTIME DESTINATION .)
+	../doc/LICENSE.txt 
+	../doc/README.txt 
+	../doc/ChangeLog.txt
+	CONFIGURATIONS Release Debug
+	DESTINATION ./doc 
+)
+#
+# -- install include files from gle-library repo
+#
+install(DIRECTORY 
+	${GLE_EXAMPLES_LIBRARY_PATH}/include/
+	DESTINATION ./gleinc
+	CONFIGURATIONS Release Debug
+	OPTIONAL
+	PATTERN "*.gle"
+
+)
+#
+# -- install manual from gle-manula-repo
+#
+install(FILES
+	${GLE_USER_MANUAL_PATH}/gle-manual.pdf
+	DESTINATION ./doc
+	CONFIGURATIONS Release Debug
+	OPTIONAL
+)
 

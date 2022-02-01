@@ -9,7 +9,8 @@
 #include <boost/math/special_functions/erf.hpp>
 #include <boost/math/special_functions/gamma.hpp>
 #include <boost/math/special_functions/bessel.hpp>
-
+#include <boost/math/special_functions/airy.hpp>
+#include <boost/math/special_functions/chebyshev.hpp>
 
 double myfactorial(unsigned int n);
 double myhermite(unsigned int n, double x);

@@ -52,6 +52,7 @@
 /* Parameters p0...p4  ==  1=number, 2=string, 0=none (e.g. height()).*/
 
 // current max is 105 ==> FN_FACTORIAL
+// see eval.cpp for implementation of these functions
 
 #define NKEYS (sizeof keywfn / sizeof(struct keyw))
 struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
@@ -65,20 +66,24 @@ struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
 	{ "ACOTH",       71,            1,1, { 1,0,0,0,0 } },
 	{ "ACSC",        58,            1,1, { 1,0,0,0,0 } },
 	{ "ACSCH",       73,            1,1, { 1,0,0,0,0 } },
+	{ "AIRY_FIRST", 			FN_AIRY_FIRST,   		1,1, { 1,0,0,0,0 } },
+	{ "AIRY_SECOND", 			FN_AIRY_SECOND,			1,1, { 1,0,0,0,0 } },
 	{ "ARG",         FN_ARG,        1,1, { 1,0,0,0,0 } },
 	{ "ARG$",        FN_ARGS,       2,1, { 1,0,0,0,0 } },
 	{ "ASEC",        57,            1,1, { 1,0,0,0,0 } },
 	{ "ASECH",       72,            1,1, { 1,0,0,0,0 } },
 	{ "ASIN",        54,            1,1, { 1,0,0,0,0 } },
 	{ "ASINH",       69,            1,1, { 1,0,0,0,0 } },
-	{ "ASSOCIATED_LAGUERRE",    FN_ASSOCIATED_LAGUERRE,   1,3, { 1,1,1,0,0 } },
-	{ "ASSOCIATED_LEGENDRE",    FN_ASSOCIATED_LEGENDRE,   1,3, { 1,1,1,0,0 } },
+	{ "ASSOCIATED_LAGUERRE",    FN_ASSOCIATED_LAGUERRE,	1,3, { 1,1,1,0,0 } },
+	{ "ASSOCIATED_LEGENDRE",    FN_ASSOCIATED_LEGENDRE,	1,3, { 1,1,1,0,0 } },
 	{ "ATAN",        4,             1,1, { 1,0,0,0,0 } },
 	{ "ATAN2",       FN_ATAN2,      1,2, { 1,1,0,0,0 } },
 	{ "ATANH",       70,            1,1, { 1,0,0,0,0 } },
 	{ "ATN",         4,             1,1, { 1,0,0,0,0 } }, // for backward coompatability same as ATAN
-	{ "BESSEL_FIRST",    FN_BESSEL_FIRST,   1,2, { 1,1,0,0,0 } },
-	{ "BESSEL_SECOND",   FN_BESSEL_SECOND,  1,2, { 1,1,0,0,0 } },
+	{ "BESSEL_FIRST",    		FN_BESSEL_FIRST,   		1,2, { 1,1,0,0,0 } },
+	{ "BESSEL_SECOND",   		FN_BESSEL_SECOND,  		1,2, { 1,1,0,0,0 } },
+	{ "CHEBYSHEV_FIRST",   		FN_CHEBYSHEV_FIRST,  	1,2, { 1,1,0,0,0 } },
+	{ "CHEBYSHEV_SECOND",   	FN_CHEBYSHEV_SECOND,  	1,2, { 1,1,0,0,0 } },
 	{ "CHR$",        52,            2,1, { 1,0,0,0,0 } },
 	{ "COS",         5,             1,1, { 1,0,0,0,0 } },
 	{ "COSH",        62,            1,1, { 1,0,0,0,0 } },
@@ -96,11 +101,12 @@ struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
 	{ "DATAYVALUE",  FN_DATAYVALUE, 1,2, { 2,1,0,0,0 } },
 	{ "DATE$",       6,             2,0, { 0,0,0,0,0 } },
 	{ "DEVICE$",     51,            2,0, { 0,0,0,0,0 } },
-	{ "DOUBLE_FACTORIAL",   FN_DOUBLE_FACTORIAL,  1,1, { 1,0,0,0,0 } },
+	{ "DOUBLE_FACTORIAL",   	FN_DOUBLE_FACTORIAL,  	1,1, { 1,0,0,0,0 } },
 	{ "EOF",         55,            1,1, { 1,0,0,0,0 } },
+	{ "ERF",   		 			FN_ERF,        			1,1, { 1,0,0,0,0 } },
 	{ "EVAL",        FN_EVAL,       1,1, { 2,0,0,0,0 } },
 	{ "EXP",         7,             1,1, { 1,0,0,0,0 } },
-	{ "FACTORIAL",   FN_FACTORIAL,  1,1, { 1,0,0,0,0 } },
+	{ "FACTORIAL",   			FN_FACTORIAL,  			1,1, { 1,0,0,0,0 } },
 	{ "FEOF",        55,            1,1, { 1,0,0,0,0 } },
 	{ "FILE$",       FN_FILE,       2,0, { 0,0,0,0,0 } },
 	{ "FIX",         8,             1,1, { 1,0,0,0,0 } },
@@ -108,13 +114,13 @@ struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
 	{ "FORMAT$",     79,            2,2, { 1,2,0,0,0 } },
 	{ "GETENV",      FN_GETENV,     2,1, { 2,0,0,0,0 } },
 	{ "HEIGHT",      9,             1,1, { 0,0,0,0,0 } },
-	{ "HERMITE",     FN_HERMITE,    1,2, { 1,1,0,0,0 } },
+	{ "HERMITE",     			FN_HERMITE,    			1,2, { 1,1,0,0,0 } },
 	{ "INT",         10,            1,1, { 1,0,0,0,0 } },
 	{ "ISNAME",      FN_ISNAME,     1,1, { 2,0,0,0,0 } },
     { "JUSTIFY",     FN_JUSTIFY,    1,1, { 2,0,0,0,0 } },
-    { "LAGUERRE",    FN_LAGUERRE,   1,2, { 1,1,0,0,0 } },
+    { "LAGUERRE",    			FN_LAGUERRE,   			1,2, { 1,1,0,0,0 } },
 	{ "LEFT$",       11,            2,2, { 2,1,0,0,0 } },
-	{ "LEGENDRE",    FN_LEGENDRE,   1,2, { 1,1,0,0,0 } },
+	{ "LEGENDRE",    			FN_LEGENDRE,   			1,2, { 1,1,0,0,0 } },
 	{ "LEN",         12,            1,1, { 2,0,0,0,0 } },
 	{ "LOG",         13,            1,1, { 1,0,0,0,0 } },
 	{ "LOG10",       14,            1,1, { 1,0,0,0,0 } },
@@ -178,6 +184,21 @@ struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
 	{ "YPOS",        44,            1,0, { 0,0,0,0,0 } }
 };
 
+/*
+ASSOCIATED_LAGUERRE
+SPHERICAL_HARMONIC
+FACTORIAL
+DOUBLE_FACTORIAL
+HERMITE
+ASSOCIATED_LEGENDRE
+BESSEL_FIRST
+BESSEL_SECOND
+
+AIRY_FIRST
+AIRY_SECOND
+CHEBYSHEV_FIRST
+CHEBYSHEV_SECOND
+*/
 int binsearch(char *word, struct keyw tab[], int n);
 
 void find_un(char *cp, int *idx,int *ret,int *np,int **plist)

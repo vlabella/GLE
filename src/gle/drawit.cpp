@@ -55,6 +55,7 @@
 #include "gle-interface/gle-interface.h"
 #include "keyword.h"
 #include "run.h"
+#include <boost/math/constants/constants.hpp>
 
 #define dbg if (gle_debug>0)
 extern int gle_debug;
@@ -85,7 +86,20 @@ void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* co
 void gle_set_constants() {
 	GLEMemoryCell value;
 	GLE_MC_INIT(value);
-	var_findadd_set("PI", GLE_PI);
+	//
+	// -- here is where constants are defined within GLE as variables
+	//	  it is equivalent to the user adding the code
+	//    PI = 3.14159....
+	//  the GLE_PI constants are defined in all.h
+	//var_findadd_set("PI", GLE_PI);
+	// use boost::math::constants for best precisison
+	var_findadd_set("PI",boost::math::double_constants::pi);
+	var_findadd_set("TWO_PI",boost::math::double_constants::two_pi);
+	var_findadd_set("ROOT_PI",boost::math::double_constants::root_two);
+	var_findadd_set("HALF_PI",boost::math::double_constants::half_pi);
+	var_findadd_set("ROOT_TWO",boost::math::double_constants::root_two);
+	var_findadd_set("ROOT_THREE",boost::math::double_constants::root_three);
+	var_findadd_set("_E_",boost::math::double_constants::e);
 	GLE_MC_SET_BOOL(&value, true);
 	var_findadd_set("TRUE", &value);
 	GLE_MC_SET_BOOL(&value, false);

@@ -1,4 +1,20 @@
 
+4.3.1 (January 2022)
+    - enabled inverse hyperbolic trig functions atanh, asinh, acosh, asech, acoth, acsch
+    - added Gaussian error function erf()
+    - added Bessel, Airy, Chebyshev first and second order special
+        functions
+    - added constants pi, two_pi, root_pi, sqrt_pi, half_pi, root_2, root_3, _e_
+    - built against latest compilers and libraries on all platforms.
+        windows 10: Visual Studio 2019 Compiler Version 19.29.30137
+        ubuntu 20: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+        macOS 11.6: Apple clang version 13.0.0 (clang-1300.0.29.30)
+    - several improvements to cmake files
+    - utilized cpack for package building
+    - removed manual and sample library from gle repo into their own separate repos: gle-manual and gle-library,
+    respectively. (will import to GitHub soon)
+    - updated manual to include new constants and special functions and grouped functions according to type. See appendix.
+
 4.3.0 (December 2020)
     OSX, Linux and Windows 64 bit versions
     built against QT5
@@ -8,7 +24,7 @@
     built against QT4
 
 4.3.0 (October 2020)
-    
+
     64 bit Preview Release
     This is a preview built on windows using Visual Studio 2019 both 32 and 64 bit versions and both with and without the need for the separate installation of the Visual Studio Runtimes. the "s" in the installer filename indicates static runtimes were utilized and no need for separate installation - these are stand alone versions.
     This is built using cmake
@@ -245,7 +261,7 @@ New Features
     DSC comments for title and creator added to PostScript/EPS/PDF output.
     Includes HiResBoundingBox in PostScript output.
     Better support for UTF8 accents in LaTeX expressions (use \usepackage[utf8]{inputenc}).
-    Command line option "-noligatures" to disable the use of ligatures for "fl" and "fi". 
+    Command line option "-noligatures" to disable the use of ligatures for "fl" and "fi".
 
 Bug Fixes
 
@@ -264,7 +280,7 @@ Bug Fixes
     Combining "clip" + "fill" in "begin path/end path" does not perform the requested fill.
     Command line option "-noctrl-d" and some others are not documented in GLE's man page and "-help" output.
     Landscape detection PS mode is now more robust.
-    Fixes for all warnings new in GCC 4.3.0. 
+    Fixes for all warnings new in GCC 4.3.0.
 
 4.1.2 (March, 2008)
 
@@ -272,17 +288,17 @@ Bug Fixes
     Colormap command does not work for non-square .z files.
     Bug "rotate + tex = misplacement of text" (#1881020).
     Patch to make GLE compile with gcc 4.3 (include limits.h) (by Terje Røsten).
-    QGLE's export fails if path contains a space or '.' character. 
+    QGLE's export fails if path contains a space or '.' character.
 
 4.1.1 (January, 2008)
 
     Smooth option of "dn line" fixed for log-scale graphs (Bug #1860761).
     Patches to make GLE compile with gcc 4.3 (by Michal Vyskocil).
     Patches to make GLE work on 64 bit machines with "lib64" dir (by Michal Vyskocil).
-    Fix for GhostScript problem in QGLE on 64 bit machines. 
+    Fix for GhostScript problem in QGLE on 64 bit machines.
 
 4.1.0 (December, 2007)
- 
+
 Detailed Changes
 
     Added man page (now "man gle" should work on Linux).
@@ -325,7 +341,7 @@ Detailed Changes
     Example: "let d2 = fit d1 with a*sin(b*x)+c*x^2+d".
     Example: "let d2 = fit d1 with a*sin(b*x)+c*x^2+d eqstr e$ rsq r".
     These two examples fit dataset d1 with a function of the form "a*sin(b*x)+c*x^2+d" and put this function in d2.
-    The second example in addition stores the resulting equation as a string in variable "e$" and the correlaction coefficient in "r". 
+    The second example in addition stores the resulting equation as a string in variable "e$" and the correlaction coefficient in "r".
 
 4.0.12 (September, 2006)
 
@@ -397,7 +413,7 @@ Detailed Changes
     Graph block can include function calls, of which the output is clipped to the graph window
     (see e.g., Examples | 2D Complex | Labeled Scatter on the website)
     The manip utility has been integrated back into the GLE distribution
-    (see e.g., this screenshot of manip). 
+    (see e.g., this screenshot of manip).
 
 4.0.11 (December, 2005)
 
@@ -407,14 +423,14 @@ Detailed Changes
     Adds the command line option -o to specify the name of the output file.
     Fixes a bug with accents (\^, \i, and \j are supported now).
     The \tex{} escape sequence can now also be used in tables.
-    From and to specifications are now optional for let command. 
+    From and to specifications are now optional for let command.
 
 4.0.10 (November, 2005)
 
     Adds landscape support to the full page mode (orientation landscape).
     Improves the Windows installer (it now shows the readme, etc.).
     Fixes a bug in the parsing of some floating point numbers (e.g., 1.e5).
-    Fixes a bug in user defined markers. 
+    Fixes a bug in user defined markers.
 
 4.0.9 (August, 2005)
 
@@ -445,7 +461,7 @@ Detailed Changes
     Added set arrowsize 0.5 arrowangle 30 to control shape of arrows.
     Local variables can now be used in graph blocks.
     Slope, Offset and R squared values of regression plots can be stored in global variables.
-    Removed dependency on BOOST library. 
+    Removed dependency on BOOST library.
 
 4.0.8 (March, 2005)
 
@@ -496,7 +512,7 @@ Detailed Changes
 4.0.2
 
     Fixed problem with program crashing when it couldn't open the gle file or include file.
-    New zip files of source code and win32 executables. 
+    New zip files of source code and win32 executables.
 
 4.0.1
 
@@ -512,11 +528,11 @@ Detailed Changes
 GLE 3.3g (14-May-1994)
 
     Ported to ALPHA OSF/1, some bugs still exist though.
-    Merged changes made for gle32 and solaris and linux. 
+    Merged changes made for gle32 and solaris and linux.
 
 GLE 3.3f (16-April-1993)
 
-    fixed bug on sun's with axis labelling.  
+    fixed bug on sun's with axis labelling.
     dviprint -dsx    Sixel graphics driver added to GLE DVIPRINT,
             thanks to:   Evan Wilson,   N Z Dairy Group
 
@@ -527,7 +543,7 @@ GLE 3.3f (16-April-1993)
     Added a yaxis option
         yaxis negate
     This is reversed the numbering on the y axis.  For use with
-    measurements below ground, where you want zero at the top and 
+    measurements below ground, where you want zero at the top and
     positive numbers below the zero.
 
 GLE 3.3e (1-Jan-1993)
@@ -577,7 +593,7 @@ GLE 3.3a (27-Jan-1992)
 
     Fixed axis rounding errors for labels, e.g. .1 to .9 step .1
     might occasionally stop at .8
-    
+
     Fixed filled boxes on DVIGLE driver, the filled region wasn't
     being translated if a scale or rotate was being used.
 
@@ -598,17 +614,17 @@ GLE 3.3a (27-Jan-1992)
 
     The following accents now work.
         \` \' \v \u \= \^ \. \H \~ \"
-    e.g.    
+    e.g.
         text P\'e ter
 
 GLE 3.2i (1-Jan-1992)
 
     Improvements made to lstyle for dot matrix and laserjet drivers.
-    It now works!, patterns which don't divide into 32 bits and 
+    It now works!, patterns which don't divide into 32 bits and
     dashlen are both supported.        (Thanks to Frank Evans)
 
     HPGL driver modified, now supports sizes greater than a3.
-    New symbols HPGL_ADDX, HPGL_ADDY add a margin to the plot.  
+    New symbols HPGL_ADDX, HPGL_ADDY add a margin to the plot.
     These default to .9cm and 1.5cm
 
     Bug in 'E' format numbers, 5e+7 was interpreted as 5+7 = 12
@@ -620,7 +636,7 @@ GLE 3.2g (1-Nov-1991)
 
         dvigle
         dvilj, dvilj300, dviepson, dviep24
-    
+
     They now perform clipping and filling correctly, funny
     glitches in filled characters (texcmr) have been fixed.
 
@@ -631,67 +647,67 @@ GLE 3.2g (1-Nov-1991)
 
     The command syntax has changed, the commands:
         dvilj, dvilj300, dviepson, dviep24
-    
+
     Have been replaced by:
-        dviprint -dlj 
-        dviprint -dlj -hires        (was dvilj300) 
-        dviprint -depson     
+        dviprint -dlj
+        dviprint -dlj -hires        (was dvilj300)
+        dviprint -depson
         dviprint -depson -hires        (was dviep24)
 
     Support for HP-PaintJet printers
     has been added:
         dviprint -dpj
 
-   Usage: dviprint [-depson | -dlj] [-old] [-hires] [-debug] [-output xx.prt]    
-        -depson   To produce output for epson printers 
-        -dwp      To add tiff image to wp .eps file 
-        -dlj      To produce output for HP LaserJet printers 
-        -dpj      To produce output for HP PaintJet printers 
+   Usage: dviprint [-depson | -dlj] [-old] [-hires] [-debug] [-output xx.prt]
+        -depson   To produce output for epson printers
+        -dwp      To add tiff image to wp .eps file
+        -dlj      To produce output for HP LaserJet printers
+        -dpj      To produce output for HP PaintJet printers
         -dover    Overhead transparency mode for PaintJet
         -old      For old HP Laser Jet printers (no compression)
          -hires      Uses high resolution for that printer (slower)
-         -wide     If your printer has a wide carriage 
-         -noflip   Disable's auto flipping 
+         -wide     If your printer has a wide carriage
+         -noflip   Disable's auto flipping
          -nosquash Tries to print it full size
-         -compress Force internal bitmap compression (slow,saves memory) 
+         -compress Force internal bitmap compression (slow,saves memory)
          -noff     No form feed
          -debug    Prints debug messages
          -out x.x  Prints output to file instead of printer port
-    
+
     ...
         3d Bar graphs are now supported, the commands are:
-    
+
         bar d1,d2  3d .5 .3  side red,green  notop
-        bar d3,d4  3d .5 .3  side red,green top black,white 
-    
+        bar d3,d4  3d .5 .3  side red,green top black,white
+
         Take note of comma's.
-    
-    3d  (xoffset yoffset)  
-        Specifies the x and y vector used to draw the receding 
+
+    3d  (xoffset yoffset)
+        Specifies the x and y vector used to draw the receding
         lines, they are defined as fractions of the width of the
         bar.
         A negative xoffset will draw the 3d bar on the left side
         of the bar instead of the right hand side.
-    
+
     side (color list)
         The color of the side of each of the bars in the group.
-    
+
     top (color list)
         The color of the top part of the bar
     notop
-        Turns off the top part of the bar, use this if you have 
+        Turns off the top part of the bar, use this if you have
         a stacked bar graph so you only need sides on the lower parts
-        of each stack.    
-    
+        of each stack.
+
     Note:    You won't see the color of the side or top on the pc screen.
 
 GLE 3.2 (6-Mar-1991)
 
       File type changed from STREAM_LF to normal vax format.
-    
+
       SMOOTHM option added which is identical to SMOOTH but
       will allow multi-valued functions. (e.g. circles etc)
-    
+
       TWIDTH("") and THEIGHT("") functions fixed again.
 
 V3.2b
@@ -711,10 +727,10 @@ V3.2b
         write t$
         grestore            ! restores font and x,y
     end sub
-        
+
     The second parameter can be supplied using the MDATA command
-    when drawing a graph,  this gives the marker subroutine a 
-    value from another dataset to use to draw the marker.  For 
+    when drawing a graph,  this gives the marker subroutine a
+    value from another dataset to use to draw the marker.  For
     example the marker could vary in size, or angle, with every
     one plotted.
         d3 MARKER myname MDATA d4
@@ -722,19 +738,19 @@ V3.2b
     Encapsulated Postscript option modified so that WordPerfect
     won't clip the edge of the drawing.
 
-    On a PC the /EPS qualifier will now create a file using 
+    On a PC the /EPS qualifier will now create a file using
     an extension of .EPS instead of .PS
-    
-    DEFMARKER mname fontname char_num scale dx dy 
-    This command defines a new marker, from any font, it is 
+
+    DEFMARKER mname fontname char_num scale dx dy
+    This command defines a new marker, from any font, it is
     automatically centered but can be adjusted using dx,dy.
     e.g.
         defmarker hand pszd 43 1 0 0
 
-    Bug in set color in PS devices which caused the 
+    Bug in set color in PS devices which caused the
     color to affect a previous line is fixed.
 
-    Added built in function which returns a string describing 
+    Added built in function which returns a string describing
     the device. e.g. DEVICE$() = "HARDCOPY, PS,"
     on the postscript driver.
 
@@ -742,28 +758,28 @@ V3.2b
     devices. E.g.:
         if pos(device$(),"PS,",1)>0 then
             set font psncsb
-        end if 
+        end if
 
     POS(src$,search$,start) string function fixed (surprise surprise)
-    
-    The editor now tolerates lines > 80 characters. 
-    
+
+    The editor now tolerates lines > 80 characters.
+
     Fixed bug which caused incorrect characters to be drawn
     on pc screen occasionally.
 
 V3.2c
 
-    
+
     Pressing ESC repeatedly will now abort a redraw operation. (on PC)
 
-    Load and Saveas will now default to .GLE 
+    Load and Saveas will now default to .GLE
 
     Bug with tex macro replacement fixed.
 
     Bug with mouse cursor not appearing on HERC screens is fixed.
 
     WPGLE.EXE added, this command will produce a special output
-    file which contains EPS for PostScript printers and a 
+    file which contains EPS for PostScript printers and a
     crude bitmap for WordPerfect to display on the screen.
 
 V3.2e
@@ -783,19 +799,19 @@ V3.2f
         /fill    (For dvibit, makes bar's filled instead of shaded)
 
     Added symbol for PC.
-    
+
         GLE_NOCONTROLD TRUE
          (Stops ^D being added to ps files)
 
     (this is the default for unix)
-    
-    The DCL symbol GLE_NOCONTROLD should be set to "TRUE" to kill the 
+
+    The DCL symbol GLE_NOCONTROLD should be set to "TRUE" to kill the
     ^D on vms systems.
 
     If you set the DCL symbol GLE_EDITOR to TPU then you will get
     TPU instead of EDT when you press ^E
 
-    You can now tell gle about postscript fonts that you have 
+    You can now tell gle about postscript fonts that you have
     downloaded into your own printer.
 
     Lets pretend we are adding a font called Greek-Bold
@@ -816,7 +832,7 @@ V3.2f
         3) Add a line to psfont.dat
            psgb Greek-Bold
 
-        This tells the postscript driver that this is a 
+        This tells the postscript driver that this is a
         font that the printer knows how to deal with.
 
 GLE 3.1e (1-Mar-1990)
@@ -834,17 +850,17 @@ GLE 3.1e (1-Mar-1990)
 
       In the graph module, if you use '0' as a column for the x data
       of a bigfile GLE will generate xdata of 1,2,3,4 ...
-      e.g.  d1 bigfile a.dat,0,2 
+      e.g.  d1 bigfile a.dat,0,2
 
       Data separated with commas and no spaces was being read incorrectly
-      The data reading routine has been re-written. (introducing new 
+      The data reading routine has been re-written. (introducing new
       and more interesting bugs in the process)
 
 GLE 3.1d (19-Feb-1990)
 
       In the past  "TEXT a\delta b" would have produced a space
       between the delta character and the letter b,  this action
-      was incorrect and had been fixed. 
+      was incorrect and had been fixed.
       Use "TEXT a\delta\ b" to get a space.
 
       "TEXT a(\delta)b" also works now.
@@ -853,12 +869,12 @@ GLE 3.1c
 
       Built in functions twidth("") and theight("") now work.
 
-      Their is now a BIGFILE command for executing large gle files 
+      Their is now a BIGFILE command for executing large gle files
       that won't fit into memory using INCLUDE. (note this should
       not be confused with  the BIGFILE graph command).
       e.g.  BIGFILE NZMAP.GLE
-      
-      As bigfile compiles and executes the gle file one line at a 
+
+      As bigfile compiles and executes the gle file one line at a
       time you cannot use multi line structures (subs, if then else etc)
       but you can call subroutines if they are defined before the bigfile
       statement.
@@ -880,15 +896,15 @@ GLE 3.1c
 GLE 3.1b
 
       Fixed the circle fill command so it uses the right colour.
-      
+
       Modified PostScript arrows with wide lines so they look nice.
       They are now filled triangles rather than two short lines.
 
-      There is now an example in BOXR.GLE which shows you how to 
+      There is now an example in BOXR.GLE which shows you how to
       define a subroutine to draw boxes with rounded corners.
 
       Horizontal error bars have been added, the commands are
-            HERR, HERRLEFT, HERRRIGHT, HERRWIDTH 
+            HERR, HERRLEFT, HERRRIGHT, HERRWIDTH
 
       If you had the same subroutine defined twice in a gle
       file it would skip the intervening gle commands, this is fixed.
@@ -903,8 +919,8 @@ GLE 3.1a
 
       Bug with reading exponential format numbers fixed.
 
-      Bigfile option added, so that you can extract particular 
-      columns of data from a data file, e.g. 
+      Bigfile option added, so that you can extract particular
+      columns of data from a data file, e.g.
             D1 LINE BIGFILE TEST.DAT,3,2
       Will use column 3 for x values and column 2 for y values.
 
@@ -923,25 +939,25 @@ GLE 3.1a
 
 GLE 3.1
 
-      Modified default DPOINTS setting so that if DTICKS is not a 
+      Modified default DPOINTS setting so that if DTICKS is not a
       whole number it will display one decimal point.
       e.g. (1.0,  1.5,  2.0) instead of (1   1.5   2)
 
-      the  "graph data d2=c3,c1"  option now requires no spaces 
+      the  "graph data d2=c3,c1"  option now requires no spaces
       within the "d1=c1,c2"
 
-      Begin path wasn't issuing a newpath, so multiple paths 
+      Begin path wasn't issuing a newpath, so multiple paths
       got added together.
 
       Gle files can now begin with a numeric character.
 
-      Bug with bitmap drivers fixed (dviepson, dvilj300 etc) which 
+      Bug with bitmap drivers fixed (dviepson, dvilj300 etc) which
       resulted in a stray horizontal line on the page.
 
-      The editor doesn't display long lines correctly,  it does 
+      The editor doesn't display long lines correctly,  it does
       store them though.
 
-      On the PC  the PSGLE driver now writes output files 
+      On the PC  the PSGLE driver now writes output files
       to INPUTFILE.PS instead of out.ps   e.g. bar.gle --> bar.ps
 
       Added \linegap{-1} tex primitive to stop odd spaces lines
@@ -953,9 +969,9 @@ GLE 3.1
       have now been installed (e.g.  []{}<>% )
 
       You can no add lines and text to a drawing using the mouse or arrow
-      keys on the PC version of gle. 
+      keys on the PC version of gle.
 
-      There is now a graph command, FULLSIZE which sets 
+      There is now a graph command, FULLSIZE which sets
       vscale,hscale to 1,  and turns the border off.
 
 GLE 3.0h
@@ -969,13 +985,13 @@ GLE 3.0h
             key hei 1.2
       end graph
 
-      If the value of an error bar length is a missing value then that 
+      If the value of an error bar length is a missing value then that
       particular bar won't be drawn.
 
-      If you escape out of the idiot graph creation menu it will now 
+      If you escape out of the idiot graph creation menu it will now
       correctly put an END GRAPH in your file.
 
-      Line and Grid shading has been added to the postscript 
+      Line and Grid shading has been added to the postscript
       device driver, the following colour names are now accepted.
 
       shade,shade1,shade2,shade3,shade4,shade5
@@ -983,7 +999,7 @@ GLE 3.0h
 
       e.g. BAR 2 3 FILL GRID3
 
-      Print the example file SHADE.GLE on a postscript printer 
+      Print the example file SHADE.GLE on a postscript printer
       and stick it on the wall for reference.  ($ cgle shade /print)
 
       Bug with changing diskdrives on a PC is fixed.
@@ -991,24 +1007,24 @@ GLE 3.0h
       The fonts SSBI and SSI were reversed on the laser printer.
 
       There is now an axis qualifier SHIFT for shifting the labelling
-      horizontally (when the label refers to the data between the 
+      horizontally (when the label refers to the data between the
       two ticks) e.g.
             xaxis shift .4
 
-      In order to put a large space between two words you must 
+      In order to put a large space between two words you must
       use these control sequences e.g.  TEXT  Hello \; world
             \,   =     .1cm
             \:   =     .2cm
             \;   =     .4cm
 
       Use \_ to get an underscore character inside text
-      ("_" normally means subscript) 
+      ("_" normally means subscript)
 
-      Fixed X2AXIS SIDE ON 
+      Fixed X2AXIS SIDE ON
 
       HPGL Plotter pens 1=black, 2=red, 3=green, 4=blue, 5=magenta, 6=white
 
-      Bug fixed in linestyles caused by the cap being set to ROUND which 
+      Bug fixed in linestyles caused by the cap being set to ROUND which
       merges the dashes together for wide lines on the laser printer.
 
 GLE 3.0g
@@ -1027,69 +1043,69 @@ GLE 3.0g
 
 GLE 3.0e (17-Sep-1990)
 
-    Missing values are not used to calculate new dataset values during 
+    Missing values are not used to calculate new dataset values during
     a let command (e.g.  "let d3 = sin(d2)")
-    
-    Fixed bug in LOG data display.  (If you have used LOG axis prior to 
+
+    Fixed bug in LOG data display.  (If you have used LOG axis prior to
     this release you SHOULD replot your graphs)
-    
+
     The bigfile option now works with markers as well as lines.
                 (e.g.  "d3 bigfile "year.dat" lstyle 1 marker dot ")
-    
+
     GLE 3.0d (5-Sep-1990)
-    
+
     The default labelling of axes is sometimes not ideal, for example
           0     0.333333   0.6666667        1.0
-    you can now adjust this with the command "XAXIS DPOINTS 3" which sets 
+    you can now adjust this with the command "XAXIS DPOINTS 3" which sets
     the decimal places for an axis.  e.g.
           0.000 0.3330.666   1.000
-    
+
     The MSCALE option now works.
-    
-    Markers have been reduced in size, this will affect existing gle 
+
+    Markers have been reduced in size, this will affect existing gle
     files, they are now approx 60% of there original size.
-    
-    The bigfile option now works on postscript printers, there was a bug 
+
+    The bigfile option now works on postscript printers, there was a bug
     caused by sending an entire 10,000 point curve to the printer as one path
     which it choked on if it was short of memory.
-    
+
     You will occasionally get an error message "PATH TOO COMPLEX" this means
     that GLE decided to split up a line into shorter segments.  Normally
     this WARNING can be ignored.
-    
+
     The default axis labelling of  1, 1.5, 2  has been changed to  1.0, 1.5, 2.0
-    Exponent axis labelling has been fixed 2.00000e4 becomes 2.0e4 
-    
+    Exponent axis labelling has been fixed 2.00000e4 becomes 2.0e4
+
           *** NEW DEVICE DRIVERS ***
-    
-    GLE now supports the EPSON 8PIN and 24Pin printers, and the 
+
+    GLE now supports the EPSON 8PIN and 24Pin printers, and the
     HP deskjet/laserjet printers.  To support bitmap devices which require
     a large amount of memory GLE first writes a device independent file
     OUT.DVI, you then run the bitmap driver for your printer and that prints
     directly to LPT1:  e.g.
           C:\GLE> dvigle myfile        (produces OUT.DVI)
           C:\GLE> dviepson       (creates bitmap and prints to lpt1)
-    
+
     The output options are:
           C:\GLE> DVIEPSON Standard epson printer
           C:\GLE> DVIEP24        24 Pin epson printers (180 dpi)
           C:\GLE> DVILJ          HP Laser jet, Desk jet (150 dpi)
           C:\GLE> DVILJ300 HP Laser jet, Desk jet (300 dpi)
-    The hi resolution drivers are significantly slower (2-3 times) than the 
+    The hi resolution drivers are significantly slower (2-3 times) than the
     low resolution drivers so would only be used for final copies.
-    
-    By default the fonts (RM, RMB, SS, TT etc) will all map to PLSR (plotter 
+
+    By default the fonts (RM, RMB, SS, TT etc) will all map to PLSR (plotter
     simplex roman) on both bitmap drivers and the HPGL driver.
     If you want this to happen on other drivers then put the
     command "PLOTTER FONTS" right after your SIZE command in your gle file.
-    
+
     An lwidth of .00001 on a laser printer will give you 1 pixel width lines.
     (and won't occasionally round to two pixels)
-    
+
     Using Postscript and HP drivers on the PC:
           C:\GLE\> PSGLE MYFILE.GLE    (Writes myfile.ps)
           C:\GLE\> HPGLE myfile.gle    (Writes out.hp)
-    
+
     Making a 360K distribution diskette from the 1.2M diskette.
     (if a: = 1.2Meg disk,  b: = 360K disk)
           a:> copy a:install.exe b:
@@ -1098,50 +1114,50 @@ GLE 3.0e (17-Sep-1990)
           a:> copy a:gle2.zip   b:
           a:> copy a:gle3.zip   b:
           a:> copy a:gle4.zip   b:
-    
+
     To install GLE on a pc type:
-          C:\> a:install 
+          C:\> a:install
 
 GLE 3.0c
 
-    Bug with LaTeX symbols in graph titles fixed. 
-    
+    Bug with LaTeX symbols in graph titles fixed.
+
     Extra graph dataset qualifiers "BIGFILE and NOMISS"
           NOMISS removes missing values from a dataset.  (so disjointed lines
           are re-connected)  (e.g.  "d3 colour red nomiss")
           BIGFILE allows a very large dataset to be drawn on a PC, it doesn't
-          read the dataset into memory as usual.  (but must be in a file 
+          read the dataset into memory as usual.  (but must be in a file
           with only one dataset, and no BARS or markers can be drawn.
           And axis ranges must be specified by hand.
           (e.g.  "d3 bigfile "year.dat" lstyle 1")
-    
+
     Fonts:      The LaTeX greek font is missing from the small distribution disk.
-          It is now possible to copy on any missing font directly into the 
-          c:\gle\font\ directory. Copy both the FMT and FVE files. 
+          It is now possible to copy on any missing font directly into the
+          c:\gle\font\ directory. Copy both the FMT and FVE files.
           e.g. "texcmmi.fmt, texcmmi.fve"
-    
+
           set join mitre | round | bevel
           set cap but | round | square
-    
+
     Fixed:
           Superscript, Subscript
           Symbols on Laser Printer after white fill.
           Individual dataset scaling fixed.
-          
+
     Notes on new Drivers:  HPGL, TEK4010, P79.
           HPGL: With this driver you can define the symbols
                 hpgl_open, hpgl_close to be the escape
                 sequences required for strange hp printers.
                 also HPGL_WIDTH, and HPGL_HEIGHT for non A3 plotters
-          
+
           TEK:  TEK_OPEN and TEK_CLOSE can be defined to allow
                 non dec tektronix terminals, e.g. TEK_OPEN = "^[?38h"
-    
+
           (this is normally done in CGLECMD.COM so that when you specify
           /DEV=V550, OR /DEV=HPA4 it defines the symbols for you.
-    
+
           On the vax the following cgle dev qualifiers are valid:
-    
+
                 cgle myfile.gle /dev=vdisk,v550,hpgl,tek
           Plus any P79 supported device, your output file will be  MYFILE.HPGL
 
@@ -1157,36 +1173,36 @@ GLE 3.0b
                 PostScript
           (additions to this list lower down)
     3) Fonts:
-          The PC version comes on one 360K floppy, on this disk is a 
+          The PC version comes on one 360K floppy, on this disk is a
           subset of fonts, if you use a font that isn't on this disk
           it will use a replacement font, and replacement metrics so
           the size of the text may be misleading.
           If you have enough disk space (another 1Meg) then you can
           install the complete font set.
-    
+
     4) PostScript:
-          The PSGLE driver is not on the 360K Floppy, you must install 
+          The PSGLE driver is not on the 360K Floppy, you must install
           it separately if you have enough disk space (another 400K)
           (or copy gle and data files to a VAX and use the vax
           PS driver)
-    
+
     5) Using GLE on a VT100/VT240
           If your keyboard doesn't have function keys (f9-f14) then you
           can use GOLD 1-4 (for 11-14) and GOLD 0 (for f10) and
           GOLD 9 (for F9)  GOLD 5 (show errors)
-    
+
           If you run GLE on a vt100 it will work OK but not actually DRAW
           anything on the screen (as it thinks it's a vt240)
-    
+
     6) Other keyboard features:
           ^F will toggle between fast and slow (but nicer text) on some devices
           ^E will call VAX/EDT
           ^Z Exits from all menu's etc (like ESC on a PC)
           ALT-X Exits on a PC without asking you for confirmation.
-    
-    7) There are currently no drivers for Plotters or DotMatrix Printers, 
+
+    7) There are currently no drivers for Plotters or DotMatrix Printers,
     these are planned for the next month or two   (see update notices below)
-    
+
     8) Additions:
           The command "SET FONTLWIDTH value"  has been added, this allows
     the line width of stroked fonts to be changed.

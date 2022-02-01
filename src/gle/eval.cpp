@@ -196,6 +196,11 @@ int getEvalStackInt(GLEArrayImpl* stk, int pos) {
 	return gle_round_int(stk->getDouble(pos));
 }
 
+unsigned int getEvalStackUnsignedInt(GLEArrayImpl* stk, int pos) {
+	stk->checkType(pos, GLEObjectTypeDouble);
+	return static_cast<unsigned int>(gle_round_int(stk->getDouble(pos)));
+}
+
 GLEString* getEvalStackGLEString(GLEArrayImpl* stk, int pos) {
 	stk->checkType(pos, GLEObjectTypeString);
 	return (GLEString*)stk->getObject(pos);
@@ -487,7 +492,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case 127: /* csch 67*/
 			setEvalStack(stk, stk->last(), 1.0/sinh(getEvalStackDouble(stk, stk->last())));
 			break;
-		#ifdef HAVE_INVERSE_HYP
+		//#ifdef HAVE_INVERSE_HYP VL eliminated - in c++11 standard now
 		case 128: /* acosh 68*/
 			setEvalStack(stk, stk->last(), acosh(getEvalStackDouble(stk, stk->last())));
 			break;
@@ -506,7 +511,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case 133: /* acsch 73*/
 			setEvalStack(stk, stk->last(), 1.0/asinh(getEvalStackDouble(stk, stk->last())));
 			break;
-		#endif
+		//#endif
 		case 134: /* todeg 74*/
 			setEvalStack(stk, stk->last(), getEvalStackDouble(stk, stk->last())*180.0/GLE_PI);
 			break;
@@ -599,6 +604,23 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 					getEvalStackInt(stk, stk->last()), getEvalStackInt(stk, stk->last()+1), getEvalStackDouble(stk, stk->last()+2), getEvalStackDouble(stk, stk->last()+3) 
 					) 
 				);
+			break;
+		case FN_BUILTIN_MAGIC + FN_ERF:
+			setEvalStack(stk, stk->last(), erf(getEvalStackDouble(stk, stk->last())));
+			break;
+		case FN_BUILTIN_MAGIC + FN_AIRY_FIRST:
+			setEvalStack(stk, stk->last(), boost::math::airy_ai( getEvalStackDouble(stk, stk->last()) ) );
+			break;
+		case FN_BUILTIN_MAGIC + FN_AIRY_SECOND:
+			setEvalStack(stk, stk->last(), boost::math::airy_bi( getEvalStackDouble(stk, stk->last()) ) );
+			break;
+		case FN_BUILTIN_MAGIC + FN_CHEBYSHEV_FIRST:
+			stk->decrementSize(1);
+			setEvalStack(stk, stk->last(), boost::math::chebyshev_t( getEvalStackUnsignedInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
+			break;
+		case FN_BUILTIN_MAGIC + FN_CHEBYSHEV_SECOND:
+			stk->decrementSize(1);
+			setEvalStack(stk, stk->last(), boost::math::chebyshev_u( getEvalStackUnsignedInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
 		case 137: /* pointx */
 			{

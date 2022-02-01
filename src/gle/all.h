@@ -50,6 +50,9 @@
 #else
 	#define GLE_PI 3.14159265358979323846
 #endif
+//
+// -- define these constants for use in scripts
+//
 
 #if defined(__UNIX__) && defined(HAVE_X11)
 	#define ENABLE_GS_PREVIEW

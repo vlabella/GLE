@@ -1,4 +1,6 @@
-# todo -copy /QE *.fve *.fmt font.dat psfont.dat $(PROJECT_BINDIR)\font
+#
+# -- font files
+#
 
 set(FVE_FILES 
 	glemark.fve
@@ -71,7 +73,7 @@ set(FMT_FILES
 	texcmtt.fmt 
 )
 
-set(ADOBE_FMT 
+set(ADOBE_FMT_FILES 
 	psagb.fmt
 	psagbo.fmt
 	psagd.fmt
@@ -113,7 +115,10 @@ set(MAKEFMT ${CMAKE_CURRENT_BINARY_DIR}/../makefmt/$<$<PLATFORM_ID:Windows>:$<IF
 set(FBUILD  ${CMAKE_CURRENT_BINARY_DIR}/../fbuild/$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,Debug,Release>>/fbuild$<$<CONFIG:Debug>:d> )
 set(ADOBE35 Adobe-Core35_AFMs-314)
 
-foreach( fmt_file ${ADOBE_FMT} )
+# all font files are built and put in the binary dir
+set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/../gle/font)
+
+foreach( fmt_file ${ADOBE_FMT_FILES} )
 	set(OPTIONE -e adobestd.enc)
 	if( ${fmt_file} STREQUAL psagb.fmt )
 		set(afm_file ITCAvantGarde-Book.afm )
@@ -189,9 +194,9 @@ foreach( fmt_file ${ADOBE_FMT} )
 		set(OPTIONE )
 	endif()
 	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${fmt_file}
+		OUTPUT ${OUTPUT_DIR}/${fmt_file}
 		DEPENDS ${ADOBE35}/${afm_file}
-		COMMAND ${MAKEFMT} ${OPTIONE} -o ${fmt_file} ${ADOBE35}/${afm_file}
+		COMMAND ${MAKEFMT} ${OPTIONE} -o ${OUTPUT_DIR}/${fmt_file} ${ADOBE35}/${afm_file}
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating ${fmt_file} from ${ADOBE35}/${afm_file}"
 	)
@@ -202,9 +207,9 @@ endforeach(fmt_file)
 foreach( fmt_file ${FMT_FILES} )
 	string(REPLACE ".fmt" ".afm" afm_file ${fmt_file} )
 	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${fmt_file}
+		OUTPUT ${OUTPUT_DIR}/${fmt_file}
 		DEPENDS ${afm_file}
-		COMMAND ${MAKEFMT} -o ${fmt_file} ${CMAKE_CURRENT_SOURCE_DIR}/${afm_file}
+		COMMAND ${MAKEFMT} -o ${OUTPUT_DIR}/${fmt_file} ${CMAKE_CURRENT_SOURCE_DIR}/${afm_file}
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating ${fmt_file} from ${afm_file}"
 	)
@@ -215,19 +220,51 @@ endforeach(fmt_file)
 foreach( fve_file ${FVE_FILES} )
 	string(REPLACE ".fve" ".gle" gle_file ${fve_file} )
 	add_custom_command(
-		OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/${fve_file}
+		OUTPUT ${OUTPUT_DIR}/${fve_file}
 		DEPENDS ${gle_file}
 		COMMAND ${FBUILD} ${fve_file}
-#		COMMAND ${CMAKE_COMMAND} -E rename ${fve_file} ${CMAKE_CURRENT_BINARY_DIR}/${fve_file}
+		COMMAND ${CMAKE_COMMAND} -E rename ${fve_file} ${OUTPUT_DIR}/${fve_file}
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating ${fve_file} from ${gle_file}"
 	)
 endforeach(fve_file)
 
-add_custom_target(fonts ALL DEPENDS adobe_fmt_fonts fmt_fonts fve_fonts)
+add_custom_command(
+	OUTPUT ${OUTPUT_DIR}/psfont.dat
+	COMMAND ${CMAKE_COMMAND} -E copy psfont.dat ${OUTPUT_DIR}/psfont.dat
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+add_custom_command(
+	OUTPUT ${OUTPUT_DIR}/font.dat
+	COMMAND ${CMAKE_COMMAND} -E copy font.dat ${OUTPUT_DIR}/font.dat
+	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+file(MAKE_DIRECTORY ${OUTPUT_DIR})
+
+#add_custom_target(
+	#create_font_dir ALL
+	#COMMAND ${CMAKE_COMMAND} -E make_directory ${OUTPUT_DIR}
+	#COMMENT "makeing font dir"
+#)
+
+add_custom_target(fonts ALL
+	DEPENDS 
+#	create_font_dir
+	adobe_fmt_fonts 
+	fmt_fonts 
+	fve_fonts
+	font.dat 
+	psfont.dat
+)
+
+# transform the lists  - prepend the output directory to them
+list(TRANSFORM FVE_FILES PREPEND "${OUTPUT_DIR}/")
+list(TRANSFORM FMT_FILES PREPEND "${OUTPUT_DIR}/")
+list(TRANSFORM ADOBE_FMT_FILES PREPEND "${OUTPUT_DIR}/")
 
 add_custom_target(adobe_fmt_fonts DEPENDS 
-	${ADOBE_FMT}
+	${ADOBE_FMT_FILES}
 	makefmt
 )
 
@@ -242,10 +279,11 @@ add_custom_target(fve_fonts DEPENDS
 	fbuild
 )
 
+
 install(FILES 
 	font.dat 
 	psfont.dat 
-	${ADOBE_FMT} 
+	${ADOBE_FMT_FILES} 
 	${FMT_FILES} 
 	${FVE_FILES}
 	CONFIGURATIONS Release Debug

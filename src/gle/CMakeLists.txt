@@ -87,12 +87,12 @@ add_custom_command(
 )
 
 add_custom_command(
- 	OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/glerc
- 	COMMAND ${CMAKE_COMMAND} -E echo begin config gle > glerc
- 	COMMAND ${CMAKE_COMMAND} -E echo current = ${PROJECT_VERSION} >> glerc
- 	COMMAND ${CMAKE_COMMAND} -E echo end config >> glerc
-  	COMMENT "Generating glerc"
-  	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+ 	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/glerc
+ 	COMMAND ${CMAKE_COMMAND} -E echo begin config gle > ${CMAKE_CURRENT_BINARY_DIR}/glerc
+ 	COMMAND ${CMAKE_COMMAND} -E echo current = ${PROJECT_VERSION} >> ${CMAKE_CURRENT_BINARY_DIR}/glerc
+ 	COMMAND ${CMAKE_COMMAND} -E echo end config >> ${CMAKE_CURRENT_BINARY_DIR}/glerc
+  	COMMENT "Generating glerc in ${CMAKE_CURRENT_BINARY_DIR}"
+  	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
 add_library(gle_common OBJECT ${GLE_SOURCES})
@@ -112,7 +112,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 
-target_link_libraries (gle LINK_PUBLIC 
+target_link_libraries ( gle LINK_PUBLIC 
 	${ZLIB_LIBRARIES}
 	${JPEG_LIBRARIES}
 	${TIFF_LIBRARIES}
@@ -157,7 +157,7 @@ install(TARGETS gle
 		CONFIGURATIONS Release Debug
 		RUNTIME )
 
-install(FILES glerc
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/glerc
 		CONFIGURATIONS Release Debug
 		DESTINATION . )
 

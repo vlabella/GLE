@@ -36,32 +36,38 @@
  *                                                                      *
  ************************************************************************/
 
-#define FN_RGB        47
-#define FN_EVAL       76
-#define FN_NARGS      81
-#define FN_ARG        82
-#define FN_ARGS       83
-#define FN_MIN        84
-#define FN_MAX        85
-#define FN_SDIV       86
-#define FN_XBAR       87
-#define FN_XY2ANGLE   88
-#define FN_DATAXVALUE 89
-#define FN_DATAYVALUE 90
-#define FN_NDATA      91
-#define FN_ATAN2      92
-#define FN_ISNAME     93
-#define FN_FILE       94
-#define FN_PATH       95
-#define FN_FONT       96
-#define FN_GETENV     97
-#define FN_XG3D       98
-#define FN_YG3D       99
-#define FN_JUSTIFY    100
-#define FN_RGBA       101
-#define FN_RGBA255    102
-#define FN_NDATASETS  103
-#define FN_DI         104
+// constants for the built in functions
+
+// built in functions take the lower 60
+// see eval.cpp and fn.cpp
+#define FN_BUILTIN_MAGIC        60
+
+#define FN_RGB                  47
+#define FN_EVAL                 76
+#define FN_NARGS                81
+#define FN_ARG                  82
+#define FN_ARGS                 83
+#define FN_MIN                  84
+#define FN_MAX                  85
+#define FN_SDIV                 86
+#define FN_XBAR                 87
+#define FN_XY2ANGLE             88
+#define FN_DATAXVALUE           89
+#define FN_DATAYVALUE           90
+#define FN_NDATA                91
+#define FN_ATAN2                92
+#define FN_ISNAME               93
+#define FN_FILE                 94
+#define FN_PATH                 95
+#define FN_FONT                 96
+#define FN_GETENV               97
+#define FN_XG3D                 98
+#define FN_YG3D                 99
+#define FN_JUSTIFY              100
+#define FN_RGBA                 101
+#define FN_RGBA255              102
+#define FN_NDATASETS            103
+#define FN_DI                   104
 #define FN_FACTORIAL  			105
 #define FN_DOUBLE_FACTORIAL  	106
 #define FN_HERMITE    			107
@@ -72,5 +78,11 @@
 #define FN_SPHERICAL_HARMONIC   112
 #define FN_BESSEL_FIRST			113
 #define FN_BESSEL_SECOND		114
+#define FN_ERF                  115
+#define FN_AIRY_FIRST           116
+#define FN_AIRY_SECOND          117
+#define FN_CHEBYSHEV_FIRST      118
+#define FN_CHEBYSHEV_SECOND     119
 
-#define FN_BUILTIN_MAGIC 60
+
+

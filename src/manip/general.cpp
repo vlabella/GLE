@@ -36,14 +36,14 @@
  *                                                                      *
  ************************************************************************/
 
-#define pi 3.14159265
+#define pi 3.1415926535897932384626433
 #define farcalloc calloc
 
 #include "all.h"
 
 void polar_xy(double r, double angle, double *dx, double *dy) {
-	*dx = r*cos(angle*3.14159265/180);
-	*dy = r*sin(angle*3.14159265/180);
+	*dx = r*cos(angle*pi/180.0);
+	*dy = r*sin(angle*pi/180.0);
 }
 
 void xy_polar(double dx,double dy,double *radius,double *angle) {
@@ -52,12 +52,12 @@ void xy_polar(double dx,double dy,double *radius,double *angle) {
 		return;
 	}
 	if (dx==0) {
-		*angle = 90;
-		if (dy<0) *angle = -90;
+		*angle = 90.0;
+		if (dy<0) *angle = -90.0;
 	} else {
-		*angle = atan2(dy,dx)*180/pi;
+		*angle = atan2(dy,dx)*180.0/pi;
 	}
-	*radius = sqrt(pow(dx,2)+pow(dy,2));
+	*radius = sqrt(pow(dx,2.0)+pow(dy,2.0));
 }
 
 void ncpy(char *d, const char *s, int n) {

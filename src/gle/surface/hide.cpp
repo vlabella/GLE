@@ -128,7 +128,7 @@ void setminmax(float x,float y,float z) {
 
 #define RERR (0.0001)         /* Rounding error */
 int MAXH;
-#define deg(d) ((d)*3.14159254/180)
+#define deg(d) ((d)*3.14159265358979323846/180)
 float *h,*h2;         /* h2 is the underneath */
 float eye_x,eye_y,eye_depth;
 float vdist=0; /* 1=eye touching front of picture, infinity=  cube back */

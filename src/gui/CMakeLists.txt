@@ -51,6 +51,7 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 	variantdelegate.cpp
 	$<$<PLATFORM_ID:Darwin>:macspecific.cpp>
 	qgle.qrc
+	$<$<PLATFORM_ID:Windows>:qgle.rc>
 )
 # no jpeg as its continaed in Qt
 target_link_libraries ( qgle LINK_PUBLIC 
