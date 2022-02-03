@@ -273,7 +273,10 @@ LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS *info) {
 
 int main(int argc, char *argv[]) {
 	#ifdef Q_OS_WIN32
-	Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin);
+	Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+	#endif
+	#ifdef Q_OS_LINUX
+	Q_IMPORT_PLUGIN(QWaylandIntegrationPlugin)
 	#endif
 	QLocale curLocale("C");
 	QLocale::setDefault(curLocale);

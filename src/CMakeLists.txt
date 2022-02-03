@@ -269,6 +269,7 @@ if(UNIX AND NOT APPLE)
 	add_compile_options(-Wno-deprecated-declarations)
 	add_compile_options(-fpermissive)
 	add_compile_options(-fPIC)
+	#add_compile_options(-no-pie)
 endif()
 if(WIN32)
 	# GLE specific definitions

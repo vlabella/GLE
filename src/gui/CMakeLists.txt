@@ -53,7 +53,7 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 	qgle.qrc
 	$<$<PLATFORM_ID:Windows>:qgle.rc>
 )
-# no jpeg as its continaed in Qt
+# no jpeg as its contianed in Qt
 target_link_libraries ( qgle LINK_PUBLIC 
 	${ZLIB_LIBRARIES}
 	${TIFF_LIBRARIES}
@@ -73,7 +73,12 @@ if(UNIX AND NOT APPLE)
  		glut
  		GLU
  		GL 
+# 		Qt5::QWaylandIntegrationPlugin
  	)
+ 	target_link_options(qgle PUBLIC -no-pie)
+	qt_import_plugins( qgle
+  		INCLUDE_BY_TYPE platforms
+	)
 endif()
 
 if(WIN32)
