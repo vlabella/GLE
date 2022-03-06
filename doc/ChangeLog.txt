@@ -1,4 +1,9 @@
 
+4.3.2 (March 2022)
+    - added the following fonts that were missing: 
+    arial8, arialbd8, arialbi8, ariali8, cokoi8b, cokoi8bi,
+    cokoi8i, cokoi8n, times8, timesbd8, timesbi8, timesi8
+
 4.3.1 (January 2022)
     - enabled inverse hyperbolic trig functions atanh, asinh, acosh, asech, acoth, acsch
     - added Gaussian error function erf()

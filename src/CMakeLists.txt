@@ -6,7 +6,7 @@ include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple 
 
-project (gle VERSION 4.3.1)
+project (gle VERSION 4.3.2)
 
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d") 

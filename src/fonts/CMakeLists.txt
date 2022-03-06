@@ -1,7 +1,13 @@
 #
-# -- font files
+# -- font files - create .fve and .afm files for packaging with binary executable
 #
-
+# .fve file are created from .gle files of the same name using fbuild
+# .afm files are creted frin .fmt files using makefmt
+#
+# all targets (.fve and .afm) files are put in the same /font folder in the distro
+#
+# -- list of targets to build
+#
 set(FVE_FILES 
 	glemark.fve
 	plba.fve
@@ -71,8 +77,20 @@ set(FMT_FILES
 	texcmsy.fmt
 	texcmti.fmt
 	texcmtt.fmt 
+	cyrillic/arial8.fmt    
+	cyrillic/arialbd8.fmt  
+	cyrillic/arialbi8.fmt 
+	cyrillic/ariali8.fmt
+	cyrillic/cokoi8b.fmt  
+	cyrillic/cokoi8bi.fmt  
+	cyrillic/cokoi8i.fmt  
+	cyrillic/cokoi8n.fmt  
+	cyrillic/times8.fmt 
+	cyrillic/timesbd8.fmt
+	cyrillic/timesbi8.fmt 
+	cyrillic/timesi8.fmt
 )
-
+# specialization for Adboe files the source names are not the same as the target names
 set(ADOBE_FMT_FILES 
 	psagb.fmt
 	psagbo.fmt
@@ -114,10 +132,10 @@ set(ADOBE_FMT_FILES
 set(MAKEFMT ${CMAKE_CURRENT_BINARY_DIR}/../makefmt/$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,Debug,Release>>/makefmt$<$<CONFIG:Debug>:d> )
 set(FBUILD  ${CMAKE_CURRENT_BINARY_DIR}/../fbuild/$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,Debug,Release>>/fbuild$<$<CONFIG:Debug>:d> )
 set(ADOBE35 Adobe-Core35_AFMs-314)
-
 # all font files are built and put in the binary dir
 set(OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/../gle/font)
 
+# Adobe specialization file mapping of adobe names to gle names
 foreach( fmt_file ${ADOBE_FMT_FILES} )
 	set(OPTIONE -e adobestd.enc)
 	if( ${fmt_file} STREQUAL psagb.fmt )
@@ -206,10 +224,12 @@ endforeach(fmt_file)
 #
 foreach( fmt_file ${FMT_FILES} )
 	string(REPLACE ".fmt" ".afm" afm_file ${fmt_file} )
+	#strip off source folder name if it exists
+	get_filename_component(TARGET_FMT ${fmt_file} NAME)
 	add_custom_command(
-		OUTPUT ${OUTPUT_DIR}/${fmt_file}
+		OUTPUT ${OUTPUT_DIR}/${TARGET_FMT}
 		DEPENDS ${afm_file}
-		COMMAND ${MAKEFMT} -o ${OUTPUT_DIR}/${fmt_file} ${CMAKE_CURRENT_SOURCE_DIR}/${afm_file}
+		COMMAND ${MAKEFMT} -o ${OUTPUT_DIR}/${TARGET_FMT} ${CMAKE_CURRENT_SOURCE_DIR}/${afm_file}
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating ${fmt_file} from ${afm_file}"
 	)
@@ -258,11 +278,14 @@ add_custom_target(fonts ALL
 	psfont.dat
 )
 
-# transform the lists  - prepend the output directory to them
+# transform the lists  - prepend the output directory to them and strip off any source directories
+
+list(TRANSFORM FMT_FILES REPLACE "^.*/" "")
+list(TRANSFORM FVE_FILES REPLACE "^.*/" "")
+list(TRANSFORM ADOBE_FMT_FILES REPLACE "^.*/" "")
 list(TRANSFORM FVE_FILES PREPEND "${OUTPUT_DIR}/")
 list(TRANSFORM FMT_FILES PREPEND "${OUTPUT_DIR}/")
 list(TRANSFORM ADOBE_FMT_FILES PREPEND "${OUTPUT_DIR}/")
-
 add_custom_target(adobe_fmt_fonts DEPENDS 
 	${ADOBE_FMT_FILES}
 	makefmt
