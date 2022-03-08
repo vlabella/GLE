@@ -4,7 +4,9 @@ GLE (Graphics Layout Engine) is a graphics scripting language designed for creat
 
 This repo contains the source code to build the executables for the GLE package.  The manual, samples, and library of gle routines are in separate repositories.
 
-More information can be found on the gle website here http://glx.sourceforge.io
+More information can be found on the gle website here http://glx.sourceforge.io.  Binary distributions can be found there as well.
+
+[![Download GLE - Graphics Layout Engine](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/glx/files/latest/download)
 
 ## Building with CMAKE
 
