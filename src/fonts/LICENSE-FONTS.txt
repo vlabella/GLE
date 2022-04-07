@@ -1,6 +1,6 @@
 ########################################################################
 #                                                                      #
-# GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          #
+# GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          #
 #                                                                      #
 # Modified BSD License                                                 #
 #                                                                      #

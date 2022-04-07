@@ -1,6 +1,6 @@
 /************************************************************************
  *                                                                      *
- * GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          *
+ * GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          *
  *                                                                      *
  * Modified BSD License                                                 *
  *                                                                      *
@@ -657,7 +657,7 @@ string GLEInterface::getUserConfigLocation() {
 		GLEGetEnv("APPDATA", location);
 		if (location != "") {
 			AddDirSep(location);
-			location += "gle-graphics.org";
+			location += "glx.sourceforge.net";
 		}
 	#endif
 	if (location != "") {

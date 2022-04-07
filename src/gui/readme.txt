@@ -102,7 +102,7 @@ make install
 qgle
 
 Note that more information on comiling GLE can be found here:
-<http://www.gle-graphics.org/tut/linux.html>
+<http://glx.sourceforge.net/tut/linux.html>
 
 On Arch Linux, the QT4 package lives in /opt/qt4 whereas QT3 lives in
 /opt/qt.  There is a script called qt-config (not to be confused with

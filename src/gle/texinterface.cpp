@@ -1,6 +1,6 @@
 /************************************************************************
  *                                                                      *
- * GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          *
+ * GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          *
  *                                                                      *
  * Modified BSD License                                                 *
  *                                                                      *
@@ -1053,7 +1053,7 @@ bool read_eps_and_adjust_bounding_box(const string& name, GLEScript* script) {
 			// Make sure to use proper Adobe DSC comments
 			// Windows Explorer can show these in the document properties of a PDF created by GLE
 			string vers_nosnap = g_get_version_nosnapshot();
-			out << "%%Creator: GLE " << vers_nosnap << " <www.gle-graphics.org>" << endl;
+			out << "%%Creator: GLE " << vers_nosnap << " <glx.sourceforge.net>" << endl;
 			out << "%%CreationDate: " << ctime(&t);
 			out << "%%Title: " << script->getLocation()->getName() << endl;
 			int b3New = (int)ceil(b1 + bb.getX() + 1e-6);

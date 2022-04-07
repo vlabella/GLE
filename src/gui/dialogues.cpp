@@ -366,8 +366,8 @@ SoftwareLocateDialogue::~SoftwareLocateDialogue() {
 }
 
 void SoftwareLocateDialogue::showGhostScriptError(QString error, QString loc) {
-	QString gswww = tr("http://www.cs.wisc.edu/~ghost/");
-	QString guidewww = tr("http://www.gle-graphics.org/");
+	QString gswww = tr("http://www.ghostscript.com");
+	QString guidewww = tr("http://glx.sourceforge.net/");
 	#ifdef Q_WS_X11
 		guidewww += tr("tut/linux.html");
 	#endif
@@ -713,5 +713,5 @@ void CrashRecoverDialogue::sendReport()
 	saveEmail();
 //	http = new QHttp(this);
 //	connect(http, SIGNAL(requestFinished(int,bool)), this, SLOT(requestFinished(int,bool)));
-	performRequest("www.gle-graphics.org", "/gle-crash-report.php");
+	performRequest("glx.sourceforge.net", "/gle-crash-report.php");
 }

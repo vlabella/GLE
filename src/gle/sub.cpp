@@ -1,6 +1,6 @@
 /************************************************************************
  *                                                                      *
- * GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          *
+ * GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          *
  *                                                                      *
  * Modified BSD License                                                 *
  *                                                                      *
@@ -374,6 +374,7 @@ std::cerr << std::endl;
 /* 	Run a user defined function  */
 void GLERun::sub_call_stack(GLESub* sub, GLEArrayImpl* stk) throw(ParserError) {
 	// Save current return value
+	//gprint(sub->getName());
 	GLEMemoryCell save_return_value;
 	GLE_MC_INIT(save_return_value);
 	GLE_MC_COPY(&save_return_value, &m_returnValue);

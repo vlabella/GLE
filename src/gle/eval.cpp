@@ -1,6 +1,6 @@
 /************************************************************************
  *                                                                      *
- * GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          *
+ * GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          *
  *                                                                      *
  * Modified BSD License                                                 *
  *                                                                      *
@@ -875,7 +875,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			both.l[0] = pass_justify(getEvalStackStringStd(stk, stk->last()));
 			both.l[1] = 0;
 			setEvalStack(stk, stk->last(), both.d);
-			break;         
+			break;
 		case 109: /* CVTCOLOR(c$) */
 			{
 				GLERC<GLEColor> color(pass_color_var(getEvalStackStringStd(stk, stk->last())));

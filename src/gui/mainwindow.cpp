@@ -1733,7 +1733,7 @@ void GLEMainWindow::about()
 
 // SLOT: open the GLE website
 void GLEMainWindow::showGLEWebsite() {
-	QUrl url("http://www.gle-graphics.org/");
+	QUrl url("http://glx.sourceforge.net/");
 	QDesktopServices::openUrl(url);
 }
 

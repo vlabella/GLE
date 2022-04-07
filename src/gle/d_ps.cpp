@@ -1,6 +1,6 @@
 /************************************************************************
  *                                                                      *
- * GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          *
+ * GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          *
  *                                                                      *
  * Modified BSD License                                                 *
  *                                                                      *
@@ -204,7 +204,7 @@ void PSGLEDevice::opendev(double width, double height, GLEFileLocation* outputfi
 	// Make sure to use proper Adobe DSC comments
 	// Windows Explorer can show these in the document properties of a PDF created by GLE
 	string vers_nosnap = g_get_version_nosnapshot();
-	out() << "%%Creator: GLE " << vers_nosnap << " <www.gle-graphics.org>" << endl;
+	out() << "%%Creator: GLE " << vers_nosnap << " <glx.sourceforge.net>" << endl;
 	out() << "%%CreationDate: " << ctime(&t);
 	out() << "%%Title: " << inputfile << endl;
 	for (vector<string>::size_type i = 0; i < comments.size(); i++) {
