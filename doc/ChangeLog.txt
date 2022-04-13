@@ -6,9 +6,8 @@
             ! -- test which caused error for incorrect number of arguments when subroutine is
             !    an r-value in an expression.
             !
-            sub mysum a b c
+            sub mysum a b
                 default b 4
-                default c 5
                 return a+b
             end sub
             ! try stand alone subroutine call
