@@ -98,13 +98,17 @@ void GLEPolish::get_array_index(GLEPcode& pcode) throw(ParserError) {
 	m_tokens.ensure_next_token("]");
 }
 
-void GLEPolish::get_params(GLEPcode& pcode, int np, int* plist, const string& name) throw(ParserError) {
+int GLEPolish::get_params(GLEPcode& pcode, int np, int* plist, const string& name, int np_default ) throw(ParserError) {
+	// called when subroutine is a left hand argument => a = myfunc(4,5)
+	// returns the number of parameters found
 	int nb_param = 0;
+	//printf("get_params %d %d\n",np,np_default);
+	//gprint("get_params %d %d",np,np_default);
 	if (!m_tokens.is_next_token(")")) {
 		while (true) {
 			if (nb_param >= np) {
 				char err_str[100];
-				sprintf(err_str, "': found >= %d, expected %d", nb_param+1, np);
+				sprintf(err_str, "': found >= %d, expected %d to %d", nb_param+1, np-np_default,np);
 				throw error(string("too many parameters in call to '")+name+err_str);
 			}
 			int vtype = *(plist + nb_param);
@@ -117,11 +121,12 @@ void GLEPolish::get_params(GLEPcode& pcode, int np, int* plist, const string& na
 			if (next_token == ')') break;
 		}
 	}
-	if (nb_param != np) {
+	if (nb_param < (np-np_default) ) {
 		char err_str[100];
-		sprintf(err_str, "': found %d, expected %d", nb_param, np);
+		sprintf(err_str, "': found %d, expected at least %d", nb_param, np-np_default);
 		throw error(string("incorrect number of parameters in call to '")+name+err_str);
 	}
+	return nb_param;
 }
 
 void GLEPolish::polish(const char *expr, GLEPcode& pcode, int *rtype) throw(ParserError) {
@@ -160,7 +165,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) throw(ParserError) {
 		int token_col = m_tokens.token_pos_col();
 		int token_len = token.length();
 		char first_char = token_len > 0 ? token[0] : ' ';
-		// cout << "Token: '" << token << "'" << endl;
+		//cout << "Token: '" << token << "'" << endl;
 		// end of stream, or found ',' or ')'
 		if (token_len == 0 || (token_len == 1 && (first_char == ',' || (first_char == ')' && curpri == 0) || (first_char == ']' && curpri == 0)))) {
 			if (token_len != 0) {
@@ -201,7 +206,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) throw(ParserError) {
 			/* 1,2 = +,- */
 			if (idx > 3 && m_tokens.is_next_token("(")) {
 				//
-				// it is a built in function
+				// it is a built in function (do built in functions have default or optional arguments??)
 				//
 				dbg gprint("Found built in function \n");
 				get_params(pcode, np, plist, uc_token);
@@ -219,9 +224,64 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) throw(ParserError) {
 				//
 				// it is a user defined function
 				//
-//				printf("User cts=%s  idx=%d ret=%d np=%d plist=%d\n",cts,idx,ret,np,plist);
+				//printf("User idx=%d ret=%d np=%d plist=%d\n",idx,ret,np,plist);
 				dbg gprint("Found user function \n");
-				get_params(pcode, sub->getNbParam(), sub->getParamTypes(), uc_token);
+				// modify to handle default arguments
+				//printf("pcode size = %d\n",pcode.size());
+				int np_found = get_params(pcode, sub->getNbParam() , sub->getParamTypes(), uc_token, sub->getNbDefault());
+				//printf("pcode size = %d\n",pcode.size());
+				int def_param_index = 0;
+				while( np_found < sub->getNbParam() ){
+					// add in the default parameters if they were not specified
+					const string& value = sub->getDefault(np_found);
+					if (value != "") {
+						// add in the default values to the pcode which must be constant int, float, or string
+						pcode.addInt(PCODE_EXPR);   /* Expression follows */
+						pcode.addInt(0);
+						if (is_float(value)) {
+							double v = atof(value.c_str());
+							pcode.addDouble(v);
+						}else if(is_integer(value) || is_integer_e(value)){
+							int v = atoi(value.c_str());
+							pcode.addInt(v);
+						}else{
+							pcode.addString(value);
+						}
+					}
+					np_found++;
+				}
+				//printf("pcode size = %d\n",pcode.size());
+				/* fill in default values taken from pass.cpp*/
+				#if 0
+				bool has_all = true;
+				for (int i = 0; i < sub->getNbParam(); i++) {
+					if (sub->getParamPos(i) == -1) {
+						const string& value = sub->getDefault(i);
+						if (value != "") {
+							sub->setParam(i, value, -2); /* 2 indicates default */
+						} else {
+							has_all = false;
+						}
+					}
+				}
+				
+				/* error if some not given */
+				
+				if (!has_all) {
+					int count = 0;
+					stringstream err;
+					err << "insufficient arguments in call to '" << sub->getName() << "': no value for: ";
+					for (int i = 0; i < sub->getNbParam(); i++) {
+						if (sub->getParamPos(i) == -1) {
+							if (count != 0) err << ", ";
+							err << sub->getParamNameShort(i);
+							count++;
+						}
+					}
+					throw error(poscol, err.str());
+				}
+				*
+				#endif
 				pcode.addFunction(sub->getIndex()+LOCAL_START_INDEX);
 				unary = 2;
 				break;

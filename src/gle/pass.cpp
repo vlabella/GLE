@@ -461,6 +461,7 @@ void GLEParser::pass_subroutine_call(GLESubCallInfo* info, int poscol) throw(Par
 	}
 	while (has_parenthesis || not_at_end_command()) {
 		/* check if argument name is given */
+		//printf("foo\n");
 		int argno = -1;
 		int addidx = -1;
 		string& token = m_tokens.next_multilevel_token();

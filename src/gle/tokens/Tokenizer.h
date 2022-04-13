@@ -57,6 +57,8 @@ int strcontains(const char* str, char ch);
 int strposition(const char* str, char ch);
 
 bool is_float(const string& strg);
+bool is_integer(const string& strg);
+bool is_integer_e(const string& strg);
 
 void strip_string_markers(string& strg);
 

@@ -4,12 +4,12 @@ cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
-SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple 
+SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 
-project (gle VERSION 4.3.2)
+project (gle VERSION 4.3.3)
 
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
-set( CMAKE_DEBUG_POSTFIX  "d") 
+set( CMAKE_DEBUG_POSTFIX  "d")
 #
 # -- Windows option for static runtimes
 #

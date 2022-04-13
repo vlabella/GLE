@@ -176,6 +176,15 @@ public:
 	inline const string& getDefault(int idx) const { return m_PDefault[idx]; }
 	inline void setDefault(int idx, const string& value) { m_PDefault[idx] = value; }
 	inline int getNbParam() { return m_PType.size(); }
+	inline int getNbDefault() {
+		// return the number of default parameters
+		// these are the non-empty ones
+		int ret = 0;
+		for(string s : m_PDefault){
+			if(s!="") ret++;
+		}
+		return ret;
+	}
 	inline int* getParamTypes() { return &m_PType[0]; }
 	inline GLESub* getParentSub() { return m_ParentSub; }
 	inline void setParentSub(GLESub* par) { m_ParentSub = par; }
