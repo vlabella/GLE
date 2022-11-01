@@ -1,7 +1,7 @@
 GLE Readme
 ==========
 
-This document contains instructions on how to compile, install, and run GLE4.
+This document contains instructions on how to compile, install, and run GLE.
 
 Supported platforms: Windows, Linux, Mac OS/X, Unix, OS/2.
 
@@ -46,7 +46,7 @@ During installation, GLE will search for installed programs, such as GhostScript
 Running GLE -finddeps "C:\Program Files" (locate GLE fonts and optionally GhostScript/LaTeX): ................................................................................
 ................................................................................
 ................................................................................
-Found: GLE 4.1.0 in C:\Program Files\Gle4\4.1.0\bin\gle.exe
+Found: GLE 4.3.4 in C:\Program Files\GLE\4.3.4\bin\gle.exe
 Found: GLE 4.0.12 in C:\Program Files\Gle4\4.0.12\bin\gle.exe (*)
 Found: latex.exe in '?'
 Found: pdflatex.exe in '?'
@@ -58,8 +58,8 @@ In this example, GLE has detected that GhostScript is installed on my computer, 
 
 GLE should now have added a new entry titled GLE to your start menu. Clicking it pops up a menu showing the options "Command Prompt", "Readme", "Uninstall", and "Website". Click on "Command Prompt" to open a command prompt. Now type the command "gle" and press enter.
 
-C:\Program Files\Gle4\4.1.0\samples> gle
-GLE version 4.1.0
+C:\Program Files\GLE\4.3.4\samples> gle
+GLE version 4.3.4
 Usage: gle [options] filename.gle
 More information: gle /help
 
@@ -69,13 +69,13 @@ If the version number printed by GLE is not correct, then a previous version of 
 
 I will now show you how to change the search path. This is a list of folders that Windows searches for executable programs when you try to run a particular program from the command prompt. Note that normally the GLE installer should have done this for you. Only perform the next step if you saw an error message or incorrect GLE version in the previous step.
 
-Select "Control Panel" from the start menu and click "System". Navigate to the "Advanced" tab and click the "Environment Variables" button. Select the variable "PATH" and click the "Edit" button. Add to the "Value" field the location of the GLE executable "gle.exe". This location is the installation folder you specified during installation with "\bin" added at the end, for example, C:\Program Files\Gle4\4.1.0\bin. Note that different folders in the PATH are separated with the symbol ";". You might need to change the value of PATH in either the "User" or the "System" variables.
+Select "Control Panel" from the start menu and click "System". Navigate to the "Advanced" tab and click the "Environment Variables" button. Select the variable "PATH" and click the "Edit" button. Add to the "Value" field the location of the GLE executable "gle.exe". This location is the installation folder you specified during installation with "\bin" added at the end, for example, C:\Program Files\GLE\4.3.4\bin. Note that different folders in the PATH are separated with the symbol ";". You might need to change the value of PATH in either the "User" or the "System" variables.
 
 If you have LaTeX installed on your computer, you also need to perform the next step. LaTeX may not be installed in "C:\Program Files", and then GLE does not detect it automatically during installation. Open the command prompt and run "gle -finddeps LATEXPATH", with LATEXPATH the location of your LaTeX installation. The following example assumes that the MiKTeX distribution is installed (http://www.miktex.org/).
 
 C:>gle -finddeps "C:\MiKTeX"
 Finding dependencies in: C:\MiKTeX: ...........................
-Found: gle.exe in 'C:\Program Files\gle4\bin'
+Found: gle.exe in 'C:\Program Files\GLE\bin'
 Found: gswin32c.exe in 'C:\Program Files\Tools\gs\gs\gs8.00\bin'
 Found: latex.exe in 'C:\MiKTeX\Main\miktex\bin'
 Found: dvips.exe in 'C:\MiKTeX\Main\miktex\bin'
@@ -125,12 +125,12 @@ E.g. (Windows):
 
 ---------------------------------------------------------
 
-C:\Program Files\Gle4\samples>gle -d eps sample.gle
-GLE 4.1.0 [sample.gle]-C-R-[sample.eps]
+C:\Program Files\GLE\samples>gle -d eps sample.gle
+GLE 4.3.4 [sample.gle]-C-R-[sample.eps]
 
 ---------------------------------------------------------
 
-Preview the output file sample.eps with GhostView (e.g., by browsing with your favorite file manager to in this case C:\Program Files\Gle4\samples and clicking sample.eps).
+Preview the output file sample.eps with GhostView (e.g., by browsing with your favorite file manager to in this case C:\Program Files\GLE\samples and clicking sample.eps).
 
 See the GLE manual for more information.
 <http://glx.sourceforge.net/>
@@ -203,7 +203,7 @@ are required, and
 must be enabled in config.i (to disable bitmap support, comment these out with '#')
 
 	you must have the environment variable GLE_TOP point to the location
-	of C:\Path\To\gle4\bin
+	of C:\Path\To\GLE\bin
 
 	you must have the environment variable LIBTIFFDIR point to the location
 	of the libtiff.h and .lib files
@@ -221,7 +221,7 @@ must be enabled in config.i (to disable bitmap support, comment these out with '
 		INSTALL_BIN     (D:/UTILS/bin)
 		ADD_DLLS	(D:/GCC.321/dll/gcc321m.dll)
 		ADD_DOCS	(readme ../gle-refman/gle-manual.pdf)
-                PROJECT_DIR     (E:/Works/Projects/CGLE/current/gle4)
+                PROJECT_DIR     (E:/Works/Projects/CGLE/current/GLE)
         in config.os2
 
         make -f Makefile.os2

@@ -6,7 +6,7 @@
  *   2) If the file has been modified in any way, a notice of such
  *      modification is conspicuously indicated.
  *
- * PostScript, Display PostScript, and Adobe are registered trademarks of
+ * PostScript, Display PostScript, and Adobe are regsitered trademarks of
  * Adobe Systems Incorporated.
  *
  * ************************************************************************
@@ -220,7 +220,7 @@ static char *linetoken(FILE *stream)
  */
 
 //static enum parseKey recognize(ident)
-//  register char *ident;
+//   char *ident;
 // ** GLE ** replaced above two lines by the following one
 static enum parseKey recognize(char* ident)
 {
@@ -266,13 +266,13 @@ static enum parseKey recognize(char* ident)
 
 //static BOOL parseGlobals(fp, gfi)
 //  FILE *fp;
-//  register GlobalFontInfo *gfi;
+//   GlobalFontInfo *gfi;
 // ** GLE ** replaced above three lines by the following one
 static BOOL parseGlobals(FILE *fp, GlobalFontInfo *gfi)
 {
     BOOL cont = TRUE, save = (gfi != NULL);
     int error = ok;
-    register char *keyword;
+     char *keyword;
 
     while (cont)
     {
@@ -442,14 +442,14 @@ static BOOL parseGlobals(FILE *fp, GlobalFontInfo *gfi)
 
 //static int initializeArray(fp, cwi)
 //  FILE *fp;
-//  register int *cwi;
+//   int *cwi;
 // ** GLE ** replaced above three lines by the following one
 int initializeArray(FILE *fp, int *cwi)
 {
     BOOL cont = TRUE, found = FALSE;
     long opos = ftell(fp);
     int width = 0, i = 0, error = 0;
-    register char *keyword;
+     char *keyword;
 
     while (cont)
     {
@@ -527,13 +527,13 @@ int initializeArray(FILE *fp, int *cwi)
 
 //static parseCharWidths(fp, cwi)
 //  FILE *fp;
-//  register int *cwi;
+//   int *cwi;
 // ** GLE ** replaced above three lines by the following one
 static int parseCharWidths(FILE *fp, int *cwi)
 {
     BOOL cont = TRUE, save = (cwi != NULL);
     int pos = 0, error = ok;
-    register char *keyword;
+     char *keyword;
 
     while (cont)
     {
@@ -630,14 +630,14 @@ static int parseCharWidths(FILE *fp, int *cwi)
 
 //static parseCharMetrics(fp, fi)
 //  FILE *fp;
-//  register FontInfo *fi;
+//   FontInfo *fi;
 // ** GLE ** replaced above three lines by the following one
 static int parseCharMetrics(FILE *fp, FontInfo *fi)
 {
     BOOL cont = TRUE, firstTime = TRUE;
     int error = ok, count = 0;
-    register CharMetricInfo *temp = fi->cmi;
-    register char *keyword;
+     CharMetricInfo *temp = fi->cmi;
+     char *keyword;
 
     while (cont)
     {
@@ -743,13 +743,13 @@ static int parseCharMetrics(FILE *fp, FontInfo *fi)
 
 //static parseTrackKernData(fp, fi)
 //  FILE *fp;
-//  register FontInfo *fi;
+//   FontInfo *fi;
 // ** GLE ** replaced above three lines by the following one
 static int parseTrackKernData(FILE *fp, FontInfo *fi)
 {
     BOOL cont = TRUE, save = (fi->tkd != NULL);
     int pos = 0, error = ok, tcount = 0;
-    register char *keyword;
+     char *keyword;
 
     while (cont)
     {
@@ -849,13 +849,13 @@ static int parseTrackKernData(FILE *fp, FontInfo *fi)
 
 //static parsePairKernData(fp, fi)
 //  FILE *fp;
-//  register FontInfo *fi;
+//   FontInfo *fi;
 // ** GLE ** replaced above three lines by the following one
 static int parsePairKernData(FILE* fp, FontInfo *fi)
 {
     BOOL cont = TRUE, save = (fi->pkd != NULL);
     int pos = 0, error = ok, pcount = 0;
-    register char *keyword;
+     char *keyword;
 
     while (cont)
     {
@@ -977,13 +977,13 @@ static int parsePairKernData(FILE* fp, FontInfo *fi)
 
 //static parseCompCharData(fp, fi)
 //  FILE *fp;
-//  register FontInfo *fi;
+//   FontInfo *fi;
 // ** GLE ** replaced above three lines by the following one
 static int parseCompCharData(FILE *fp, FontInfo *fi)
 {
     BOOL cont = TRUE, firstTime = TRUE, save = (fi->ccd != NULL);
     int pos = 0, j = 0, error = ok, ccount = 0, pcount = 0;
-    register char *keyword;
+     char *keyword;
 
     while (cont)
     {
@@ -1123,7 +1123,7 @@ extern int parseFile (FILE *fp, FontInfo **fi, FLAGS flags)
     int code = ok; 	/* return code from each of the parsing routines */
     int error = ok;	/* used as the return code from this function */
 
-    register char *keyword; /* used to store a token */
+     char *keyword; /* used to store a token */
 
 
     /* storage data for the global variable ident */

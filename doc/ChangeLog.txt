@@ -39,7 +39,7 @@
     - added Gaussian error function erf()
     - added Bessel, Airy, Chebyshev first and second order special
         functions
-    - added constants pi, two_pi, root_pi, sqrt_pi, half_pi, root_2, root_3, _e_
+    - added constants pi, two_pi, root_pi, sqrt_pi, half_pi, root_two, root_three, _e_
     - built against latest compilers and libraries on all platforms.
         windows 10: Visual Studio 2019 Compiler Version 19.29.30137
         ubuntu 20: gcc (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0

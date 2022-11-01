@@ -125,8 +125,8 @@ typedef struct {
 } encodeState;
 
 static void GLELZWEncoderClearHash(encodeState* sp) {
-	register hash_t *hp = &sp->enc_hashtab[HSIZE-1];
-	register long i = HSIZE-8;
+	hash_t *hp = &sp->enc_hashtab[HSIZE-1];
+	long i = HSIZE-8;
  	do {
 		i -= 8;
 		hp[-7].hash = -1;
@@ -208,10 +208,10 @@ int GLELZWByteStream::preEncode() {
  * for the decoder.
  */
 int GLELZWByteStream::encode(GLEBYTE* bp, GLEDWORD cc) {
-	register encodeState *sp = (encodeState*)m_Data;
-	register long fcode;
-	register hash_t *hp;
-	register int h, c;
+	encodeState *sp = (encodeState*)m_Data;
+	long fcode;
+	hash_t *hp;
+	int h, c;
 	hcode_t ent;
 	long disp;
 	long incount, outcount, checkpoint;
@@ -362,7 +362,7 @@ int GLELZWByteStream::encode(GLEBYTE* bp, GLEDWORD cc) {
  * string and tacking on an End Of Information code.
  */
 int GLELZWByteStream::postEncode() {
-	register encodeState *sp = (encodeState*)m_Data;
+	encodeState *sp = (encodeState*)m_Data;
 	GLEBYTE* op = m_RawCP;
 	long nextbits = sp->lzw_nextbits;
 	long nextdata = sp->lzw_nextdata;
