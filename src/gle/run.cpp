@@ -55,7 +55,7 @@
 #include "sub.h"
 #include "gle-interface/gle-interface.h"
 
-void name_get2(char *n,double *x1,double *y1,double *x2,double *y2) throw(ParserError);
+void name_get2(char *n,double *x1,double *y1,double *x2,double *y2);
 
 #define GRAPHDEF extern
 #include "graph.h"
@@ -81,11 +81,11 @@ void run_bigfile(char *ss);
 void begin_config(const std::string& block, int *pln, int *pcode, int *cp);
 void begin_tex_preamble(int *pln, int *pcode, int *cp);
 void begin_tex(GLERun* run, int *pln, int *pcode, int *cp);
-void begin_surface(int *pln, int *pcode, int *cp) throw(ParserError);
-void begin_letz(int *pln, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError);
-void begin_fitz(int *pln, int *pcode, int *cp) throw(ParserError);
-void begin_contour(int *pln, int *pcode, int *cp) throw(ParserError);
-// void begin_fitls(int *pln, int *pcode, int *cp) throw(ParserError);
+void begin_surface(int *pln, int *pcode, int *cp);
+void begin_letz(int *pln, GLEPcodeList* pclist, int *pcode, int *cp);
+void begin_fitz(int *pln, int *pcode, int *cp);
+void begin_contour(int *pln, int *pcode, int *cp);
+// void begin_fitls(int *pln, int *pcode, int *cp);
 
 class GLEBox {
 public:
@@ -175,11 +175,11 @@ public:
 	GLEFile();
 	~GLEFile();
 	void close();
-	void open(const char* fname) throw(ParserError);
-	bool eof() throw(ParserError);
-	char* getToken() throw(ParserError);
-	char* readLine() throw(ParserError);
-	void gotoNewLine() throw(ParserError);
+	void open(const char* fname);
+	bool eof();
+	char* getToken();
+	char* readLine();
+	void gotoNewLine();
 	void resetLang();
 	void setLangChars(int type, const char* str);
 	inline void setCommentChars(const std::string& str) { setLangChars(0, str.c_str()); }
@@ -194,16 +194,16 @@ vector<GLEFile*> g_Files;
 
 int f_getchan(void);
 void f_readahead(int chn);
-int f_testchan(int chn) throw(ParserError);
+int f_testchan(int chn);
 void siffree(char **s);
 void f_getline(int chn);
 char *f_gettok(int chn);
 static int chn;
-int f_eof(int chn) throw(ParserError);
+int f_eof(int chn);
 char *f_getnext(int chn);
 
 void f_create_chan(int var, const char* fname, int rd_wr);
-void f_close_chan(int idx) throw(ParserError);
+void f_close_chan(int idx);
 
 
 /*---------------------------------------------------------------------------*/
@@ -233,7 +233,7 @@ vector<int> g_drobj;
 
 #define PCODE_UNKNOWN_COMMAND 1
 
-void byte_code_error(int err) throw(ParserError) {
+void byte_code_error(int err) {
 	char str[50];
 	TokenizerPos pos;
 	pos.setColumn(-1);
@@ -255,7 +255,7 @@ int gle_is_open() {
 	return done_open;
 }
 
-void error_before_drawing_cmds(const char* name) throw(ParserError) {
+void error_before_drawing_cmds(const char* name) {
 	// NOTE: this can be broken by GLEGlobalSource::performUpdates(), which puts includes at front
 	string str = name;
 	str += " command must appear before drawing commands";
@@ -529,7 +529,7 @@ GLEBlocks* GLERun::getBlockTypes() {
 	return m_blockTypes;
 }
 
-void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, int *pend, bool& mkdrobjs) throw(ParserError) {
+void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, int *pend, bool& mkdrobjs) {
 /* srclin = The source line number */
 /* pcode =  a pointer to the pcode output buffer */
 /* plne =   a pointer to the length of the pcode output */
@@ -1766,7 +1766,7 @@ GLEStoredBox* box_start() {
 	return box;
 }
 
-GLEStoredBox* GLERun::last_box() throw (ParserError) {
+GLEStoredBox* GLERun::last_box() {
 	GLEBoxStack* stack = GLEBoxStack::getInstance();
 	if (stack->size() <= 0) {
 		g_throw_parser_error("too many end boxes");
@@ -1774,7 +1774,7 @@ GLEStoredBox* GLERun::last_box() throw (ParserError) {
 	return stack->lastBox();
 }
 
-bool GLERun::box_end() throw (ParserError) {
+bool GLERun::box_end() {
 	double x1, y1, x2, y2;
 	GLEBoxStack* stack = GLEBoxStack::getInstance();
 	if (stack->size() <= 0) {
@@ -1843,7 +1843,7 @@ bool GLERun::is_name(GLEObjectRepresention* obj, GLEArrayImpl* path, unsigned in
 	return true;
 }
 
-GLEObjectRepresention* GLERun::name_to_object(GLEObjectRepresention* obj, GLEArrayImpl* path, GLEJustify* just, unsigned int offs) throw (ParserError) {
+GLEObjectRepresention* GLERun::name_to_object(GLEObjectRepresention* obj, GLEArrayImpl* path, GLEJustify* just, unsigned int offs) {
 	/* check for just object name */
 	unsigned int size = path->size();
 	if (size <= offs) {
@@ -1921,7 +1921,7 @@ bool GLERun::is_name(GLEString* name) {
 	return false;
 }
 
-GLEObjectRepresention* GLERun::name_to_object(GLEString* name, GLEJustify* just) throw(ParserError) {
+GLEObjectRepresention* GLERun::name_to_object(GLEString* name, GLEJustify* just) {
 	int idx, type;
 	GLERC<GLEArrayImpl> path(name->split('.'));
 	GLEString* objname = (GLEString*)path->getObjectUnsafe(0);
@@ -1948,7 +1948,7 @@ GLEObjectRepresention* GLERun::name_to_object(GLEString* name, GLEJustify* just)
 	return NULL;
 }
 
-void GLERun::name_to_point(GLEString* name, GLEPoint* point) throw(ParserError) {
+void GLERun::name_to_point(GLEString* name, GLEPoint* point) {
 	GLEJustify just;
 	GLEObjectRepresention* obj = name_to_object(name, &just);
 	if (obj != NULL) {
@@ -1961,7 +1961,7 @@ void GLERun::name_to_point(GLEString* name, GLEPoint* point) throw(ParserError) 
 	}
 }
 
-void GLERun::name_to_size(GLEString* name, double *wd, double *hi) throw(ParserError) {
+void GLERun::name_to_size(GLEString* name, double *wd, double *hi) {
 	GLEJustify just;
 	GLEObjectRepresention* obj = name_to_object(name, &just);
 	if (obj != NULL) {
@@ -1975,7 +1975,7 @@ void GLERun::name_to_size(GLEString* name, double *wd, double *hi) throw(ParserE
 	}
 }
 
-void GLERun::name_join(GLEString *n1, GLEString *n2, int marrow, double a1, double a2, double d1, double d2)  throw(ParserError) {
+void GLERun::name_join(GLEString *n1, GLEString *n2, int marrow, double a1, double a2, double d1, double d2)  {
 	GLEJustify j1, j2;
 	GLEObjectRepresention* obj1 = name_to_object(n1, &j1);
 	GLEObjectRepresention* obj2 = name_to_object(n2, &j2);
@@ -2006,7 +2006,7 @@ void GLERun::name_join(GLEString *n1, GLEString *n2, int marrow, double a1, doub
 	g_arrowcurve(ex, ey, marrow, a1, a2, d1, d2);
 }
 
-void GLERun::draw_object_static(const string& path, const string& name, int* pcode, int* cp, bool mkdrobjs) throw (ParserError) {
+void GLERun::draw_object_static(const string& path, const string& name, int* pcode, int* cp, bool mkdrobjs) {
 	int cp_backup = *cp;
 	GLEPoint orig;
 	g_get_xy(&orig);
@@ -2093,7 +2093,7 @@ void GLERun::draw_object_static(const string& path, const string& name, int* pco
 	g_move(orig);
 }
 
-void GLERun::draw_object_subbyname(GLESub* sub, GLEObjectRepresention* newobj, GLEArrayImpl* path, GLEPoint* orig) throw (ParserError) {
+void GLERun::draw_object_subbyname(GLESub* sub, GLEObjectRepresention* newobj, GLEArrayImpl* path, GLEPoint* orig) {
 	bool hasoffs = (path->size() > 1);
 	GLEDevice* olddev = NULL;
 	if (hasoffs && !g_is_dummy_device()) {
@@ -2140,7 +2140,7 @@ void GLERun::draw_object_subbyname(GLESub* sub, GLEObjectRepresention* newobj, G
 	}
 }
 
-void GLERun::draw_object_dynamic(int idx, GLEObjectRepresention* newobj, GLEArrayImpl* path, GLEPoint* orig) throw (ParserError) {
+void GLERun::draw_object_dynamic(int idx, GLEObjectRepresention* newobj, GLEArrayImpl* path, GLEPoint* orig) {
 	GLEDataObject* obj = getVars()->getObject(idx);
 	if (obj == NULL || obj->getType() != GLEObjectTypeObjectRep) {
 		string err = getVars()->typeError(idx, GLEObjectTypeObjectRep);
@@ -2206,7 +2206,7 @@ void GLERun::draw_object_dynamic(int idx, GLEObjectRepresention* newobj, GLEArra
 	}
 }
 
-void GLERun::draw_object(const string& path, const char* newname) throw (ParserError) {
+void GLERun::draw_object(const string& path, const char* newname) {
 	int idx, type;
 	char ostr[255];
 	GLEPoint orig;
@@ -2250,7 +2250,7 @@ void GLERun::draw_object(const string& path, const char* newname) throw (ParserE
 	g_move(orig);
 }
 
-void GLERun::begin_object(const std::string& name, GLESub* sub) throw (ParserError) {
+void GLERun::begin_object(const std::string& name, GLESub* sub) {
 	GLEStoredBox* box = box_start();
 	box->setStroke(false);
 	box->setObjectRep(getCRObjectRep());
@@ -2285,7 +2285,7 @@ void GLERun::begin_object(const std::string& name, GLESub* sub) throw (ParserErr
 	}
 }
 
-void GLERun::end_object() throw (ParserError) {
+void GLERun::end_object() {
 	GLEBoxStack* stack = GLEBoxStack::getInstance();
 	if (stack->size() <= 0) {
 		g_throw_parser_error("too many end boxes");
@@ -2391,7 +2391,7 @@ void nm_adjust(GLEJustify jj, double *sx, double *sy, double ex, double ey, GLER
 	}
 }
 
-int f_eof(int chn) throw(ParserError) {
+int f_eof(int chn) {
 	if (f_testchan(chn) == -1) return 1;
 	else return (int)g_Files[chn]->eof();
 }
@@ -2404,7 +2404,7 @@ void siffree(char **s) {
 	*s = NULL;
 }
 
-int f_testchan(int chn) throw(ParserError) {
+int f_testchan(int chn) {
 	if (chn < 0 || chn >= (int)g_Files.size() || g_Files[chn] == NULL) {
 		char chn_s[10];
 		sprintf(chn_s, "%d", chn);
@@ -2433,7 +2433,7 @@ void f_create_chan(int var, const char* fname, int rd_wr) {
 	file->open(fname);
 }
 
-void f_close_chan(int idx) throw(ParserError) {
+void f_close_chan(int idx) {
 	if (f_testchan(idx) != -1) {
 		GLEFile* file = g_Files[idx];
 		file->close();
@@ -2465,7 +2465,7 @@ void GLEFile::close() {
 	}
 }
 
-void GLEFile::open(const char* fname) throw(ParserError) {
+void GLEFile::open(const char* fname) {
 	m_FileName = fname;
 	if (isRead()) {
 		validate_file_name(m_FileName, true);
@@ -2486,22 +2486,22 @@ void GLEFile::open(const char* fname) throw(ParserError) {
 	}
 }
 
-char* GLEFile::readLine() throw(ParserError) {
+char* GLEFile::readLine() {
 	m_buffer = m_Input->read_line();
 	return (char*)m_buffer.c_str();
 }
 
-char* GLEFile::getToken() throw(ParserError) {
+char* GLEFile::getToken() {
 	m_buffer = m_Input->next_token();
 	str_remove_quote(m_buffer);
 	return (char*)m_buffer.c_str();
 }
 
-void GLEFile::gotoNewLine() throw(ParserError) {
+void GLEFile::gotoNewLine() {
 	m_Input->token_skip_to_end();
 }
 
-bool GLEFile::eof() throw(ParserError) {
+bool GLEFile::eof() {
 	return m_Input->has_more_tokens() == 0 ? true : false;
 }
 

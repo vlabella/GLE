@@ -290,24 +290,24 @@ void iffree(void *p, const char *s);
 void setrange(double x, double y, int m);
 void gdraw_key(KeyInfo* info);
 void copy_default(int d);
-void do_dataset(int d, GLEGraphBlockInstance* graphBlock) throw(ParserError);
+void do_dataset(int d, GLEGraphBlockInstance* graphBlock);
 void do_each_dataset_settings();
 void fill_vec(double x1, double y1, double x2, double y2, vector<double>* vec);
 void do_smooth(void);
-void window_set(bool showError) throw(ParserError);
+void window_set(bool showError);
 void reset_axis_ranges();
 bool should_autorange_based_on_lets();
 void deleteLet(GLELet* let);
-GLELet* parseLet(GLESourceLine& sline) throw(ParserError);
-GLELet* parseLet(const string& letFct, int codeLine) throw(ParserError);
-void doLet(GLELet* let, bool nofirst) throw(ParserError);
+GLELet* parseLet(GLESourceLine& sline);
+GLELet* parseLet(const string& letFct, int codeLine);
+void doLet(GLELet* let, bool nofirst);
 void request(void);
 /*int draw_axis(void *axis);*/
 void bar_reset();
 void doskip(char *s,int *ct);
 void store_window_bounds_to_vars();
 void do_dataset_key(int d);
-void do_bigfile_compatibility() throw(ParserError);
+void do_bigfile_compatibility();
 void ensureDataSetCreated(int d);
 
 #define kw(ss) if (str_i_equals(tk[ct],ss))
@@ -347,7 +347,7 @@ public:
 class GLEDataSet;
 
 void draw_vec(double x1, double y1, double x2, double y2, GLEDataSet* ds);
-void draw_mark(double x1, double y1, int i, double sz, double dval, GLEDataSet* ds) throw (ParserError);
+void draw_mark(double x1, double y1, int i, double sz, double dval, GLEDataSet* ds);
 
 /* range of dataset dimension is initialized in window_set */
 /* can be different from axis range because "xmin" / "xmax" / "ymin" / "ymax" settings of dn */
@@ -468,7 +468,7 @@ public:
 	void clip(double *x, double *y);
 	bool contains(double x, double y);
 	bool contains(const GLEPoint& p);
-	void checkRanges() throw(ParserError);
+	void checkRanges();
 	void copyRangeIfRequired(int dimension);
 	vector<int> getMissingValues();
 	void validateDimensions();
@@ -540,16 +540,16 @@ GRAPHDEF GLEDataSet *dp[MAX_NB_DATA];
 GRAPHDEF bar_struct *br[MAX_NB_BAR];
 void vinit_axis(int i);
 void vinit_title_axis();
-void draw_bar(double x, double yf, double yt, double wd, bar_struct* barset, int di, GLEDataSet* toDataSet) throw(ParserError);
+void draw_bar(double x, double yf, double yt, double wd, bar_struct* barset, int di, GLEDataSet* toDataSet);
 void get_dataset_ranges();
 void set_bar_axis_places();
-int get_dataset_identifier(const std::string& ds, bool def = false) throw(ParserError);
-int get_dataset_identifier(const string& ds, GLEParser* parser, bool def) throw(ParserError);
+int get_dataset_identifier(const std::string& ds, bool def = false);
+int get_dataset_identifier(const string& ds, GLEParser* parser, bool def);
 
-double graph_bar_pos(double xpos, int bar, int set) throw(ParserError);
-void begin_graph(GLEGraphBlockBase* graphBlockBase, GLEGraphBlockInstance* graphBlock) throw (ParserError);
+double graph_bar_pos(double xpos, int bar, int set);
+void begin_graph(GLEGraphBlockBase* graphBlockBase, GLEGraphBlockInstance* graphBlock);
 bool execute_graph(GLESourceLine& sline, bool isCommandCheck, GLEGraphBlockInstance* graphBlock);
-void begin_key(int *pln, int *pcode, int *cp) throw (ParserError);
+void begin_key(int *pln, int *pcode, int *cp);
 void begin_tab(int *pln, int *pcode, int *cp);
 void begin_text(int *pln, int *pcode, int *cp, double w, int just);
 void draw_key(int nkd, struct offset_struct* koffset, char *kpos,double khei, int knobox);

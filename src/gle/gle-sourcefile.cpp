@@ -235,7 +235,7 @@ void GLESourceFile::load(istream& input) {
 	}
 }
 
-void GLESourceFile::load() throw(ParserError) {
+void GLESourceFile::load() {
 	// called to load the main script or an include file
 	if (getLocation()->isStdin()) {
 		load(cin);
@@ -374,7 +374,7 @@ void GLEGlobalSource::sourceLineFileAndNumber(int line, ostream& err) {
 	}
 }
 
-void GLEGlobalSource::load() throw(ParserError) {
+void GLEGlobalSource::load() {
 	GLESourceFile* main = getMainFile();
 	main->load();
 	main->trim(0);

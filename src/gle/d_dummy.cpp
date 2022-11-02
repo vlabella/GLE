@@ -146,7 +146,7 @@ void GLEDummyDevice::narc(dbl r,dbl t1,dbl t2,dbl cx,dbl cy) {
 void GLEDummyDevice::newpath(void) {
 }
 
-void GLEDummyDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void GLEDummyDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 	g_scale(PS_POINTS_PER_INCH/CM_PER_INCH, PS_POINTS_PER_INCH/CM_PER_INCH);
 	g_translate(1.0*CM_PER_INCH/72, 1.0*CM_PER_INCH/72);
 }

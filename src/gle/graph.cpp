@@ -84,10 +84,10 @@ GLERC<GLEColor> g_graph_background;
 int freedataset(int i);
 void free_temp(void);
 void set_sizelength(void);
-void draw_graph(KeyInfo* keyinfo, GLEGraphBlockInstance* graphBlock) throw (ParserError);
+void draw_graph(KeyInfo* keyinfo, GLEGraphBlockInstance* graphBlock);
 void do_set_bar_color(const char* tk, bar_struct* bar, int type);
 void do_set_bar_style(const char* tk, bar_struct* bar);
-void do_axis_part_all(int xset) throw (ParserError);
+void do_axis_part_all(int xset);
 bool do_remaining_entries(int ct, bool isCommandCheck);
 void graph_freebars();
 double get_next_exp(TOKENS tk,int ntk,int *curtok);
@@ -422,7 +422,7 @@ bool GLEGraphBlockBase::checkLine(GLESourceLine& sline) {
 // axis is defined in terms of its base size, which is equal to g_fontsz.
 // A useful value for base is 0.25
 
-void begin_graph(GLEGraphBlockBase* graphBlockBase, GLEGraphBlockInstance* graphBlock) throw (ParserError) {
+void begin_graph(GLEGraphBlockBase* graphBlockBase, GLEGraphBlockInstance* graphBlock) {
 	g_colormap = NULL;
 	for (unsigned int i = 0; i < g_letCmds.size(); i++) {
 		deleteLet(g_letCmds[i]);
@@ -998,7 +998,7 @@ bool do_remaining_entries(int ct, bool isCommandCheck) {
 	return nb_found > 0;
 }
 
-void do_axis(int axis, bool craxis) throw (ParserError) {
+void do_axis(int axis, bool craxis) {
 	int ct = 2;
 	while (ct <= ntk)  {
 		kw("BASE") xx[axis].base = next_exp;
@@ -1098,7 +1098,7 @@ void do_axis(int axis, bool craxis) throw (ParserError) {
 	}
 }
 
-void do_labels(int axis, bool showerr) throw (ParserError) {
+void do_labels(int axis, bool showerr) {
 	int ct = 2;
 	while (ct <= ntk)  {
 		if (*tk[ct]==' ') ct++;
@@ -1140,7 +1140,7 @@ void do_labels(int axis, bool showerr) throw (ParserError) {
 	}
 }
 
-void do_side(int axis, bool showerr) throw (ParserError) {
+void do_side(int axis, bool showerr) {
 	int ct = 2;
 	while (ct <= ntk)  {
 		if (*tk[ct]==' ') ct++;
@@ -1160,7 +1160,7 @@ void do_side(int axis, bool showerr) throw (ParserError) {
 	}
 }
 
-void do_ticks(int axis, bool showerr) throw (ParserError) {
+void do_ticks(int axis, bool showerr) {
 	int ct = 2;
 	while (ct <= ntk)  {
 		if (*tk[ct]==' ') ct++;
@@ -1189,7 +1189,7 @@ void do_ticks(int axis, bool showerr) throw (ParserError) {
 	}
 }
 
-void do_subticks(int axis, bool showerr) throw (ParserError) {
+void do_subticks(int axis, bool showerr) {
 	int ct = 2;
 	while (ct <= ntk)  {
 		if (*tk[ct]==' ') ct++;
@@ -1216,7 +1216,7 @@ void do_subticks(int axis, bool showerr) throw (ParserError) {
 	}
 }
 
-void do_axis_part(int axis, bool craxis, int xset) throw (ParserError) {
+void do_axis_part(int axis, bool craxis, int xset) {
 	// craxis = command is for current axis
 	// showerr = passing options for axis command to labels/side/ticks commands
 	switch (xset) {
@@ -1241,7 +1241,7 @@ void do_axis_part(int axis, bool craxis, int xset) throw (ParserError) {
 	}
 }
 
-void do_axis_part_all(int xset) throw (ParserError) {
+void do_axis_part_all(int xset) {
 	int axis = axis_type(tk[1]);
 	if (axis == GLE_AXIS_ALL) {
 		do_axis_part(GLE_AXIS_X, false, xset);
@@ -1550,7 +1550,7 @@ void key_update_bounds(double ox, double oy, KeyInfo* keyinfo) {
 	}
 }
 
-void draw_graph(KeyInfo* keyinfo, GLEGraphBlockInstance* graphBlock) throw (ParserError) {
+void draw_graph(KeyInfo* keyinfo, GLEGraphBlockInstance* graphBlock) {
 	GLERectangle box;
 	double ox,oy;
 
@@ -1776,7 +1776,7 @@ bool is_dataset_identifier(const char* ds) {
 	return ptr != NULL && *ptr == 0 && result >= 0;
 }
 
-int get_dataset_identifier(const std::string& ds, bool def) throw(ParserError) {
+int get_dataset_identifier(const std::string& ds, bool def) {
 	int len = ds.size();
 	if (len <= 1 || toupper(ds[0]) != 'D') {
 		g_throw_parser_error("illegal data set identifier '", ds.c_str(), "'");
@@ -1814,7 +1814,7 @@ int get_dataset_identifier(const std::string& ds, bool def) throw(ParserError) {
 	}
 }
 
-int get_dataset_identifier(const string& ds, GLEParser* parser, bool def) throw(ParserError) {
+int get_dataset_identifier(const string& ds, GLEParser* parser, bool def) {
 	Tokenizer* tokens = parser->getTokens();
 	if (str_i_equals(ds, "d")) {
 		tokens->ensure_next_token("[");
@@ -1852,7 +1852,7 @@ int get_dataset_identifier(const string& ds, GLEParser* parser, bool def) throw(
 	}
 }
 
-int get_column_number(GLEParser* parser) throw(ParserError) {
+int get_column_number(GLEParser* parser) {
 	Tokenizer* tokens = parser->getTokens();
 	const string& token = tokens->next_token();
 	if (str_i_equals(token, "c")) {

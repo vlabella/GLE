@@ -71,7 +71,7 @@ bool begin_line_norep(int *pln, string& srclin);
 
 void replace_exp(string& exp);
 
-double token_next_double(int i) throw(ParserError);
+double token_next_double(int i);
 
 bool get_block_line(int pln, string& srclin);
 

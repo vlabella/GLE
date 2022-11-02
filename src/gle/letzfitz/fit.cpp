@@ -82,8 +82,8 @@ public:
 	string data_file;
 public:
 	GLEFitZData();
-	void loadData() throw(ParserError);
-	void sortData() throw(ParserError);
+	void loadData();
+	void sortData();
 };
 
 GLEFitZData::GLEFitZData() {
@@ -93,7 +93,7 @@ GLEFitZData::GLEFitZData() {
 }
 
 // different from the one in let.cpp because fields are optional here
-void get_from_to_step_fitz(TOKENS tk, int ntok, int *curtok, double* from, double* to, double* step) throw(ParserError) {
+void get_from_to_step_fitz(TOKENS tk, int ntok, int *curtok, double* from, double* to, double* step) {
 	(*curtok) = (*curtok) + 1;
 	if ((*curtok) >= ntok) {
 		return;
@@ -133,7 +133,7 @@ void get_from_to_step_fitz(TOKENS tk, int ntok, int *curtok, double* from, doubl
 	}
 }
 
-void begin_fitz(int *pln, int *pcode, int *cp) throw(ParserError) {
+void begin_fitz(int *pln, int *pcode, int *cp) {
 	GLEFitZData data;
 	// Start with pcode from the next line
 	(*pln)++;
@@ -253,7 +253,7 @@ void setminmax(double v, double *min, double *max) {
 	if (v> *max) *max = v;
 }
 
-void GLEFitZData::loadData() throw(ParserError) {
+void GLEFitZData::loadData() {
 	TokenizerLanguage lang;
 	StreamTokenizer tokens(&lang);
 	string expanded(GLEExpandEnvironmentVariables(data_file));
@@ -282,7 +282,7 @@ void GLEFitZData::loadData() throw(ParserError) {
 	}
 }
 
-void GLEFitZData::sortData() throw(ParserError) {
+void GLEFitZData::sortData() {
 	/* Copy data */
 	for (vector<double>::size_type i = 0; i < pntxyz.size(); i+=3) {
 		double xp = pntxyz[i];

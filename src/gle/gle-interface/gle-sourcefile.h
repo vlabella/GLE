@@ -91,7 +91,7 @@ public:
 	void performUpdates();
 	int getNextInsertIndex(int line, int pos);
 	void load(istream& input);
-	void load() throw(ParserError);
+	void load();
 	bool tryLoad();
 	inline void addObjectDOConstructor(GLEObjectDOConstructor* cons) { m_Cons.add(cons); }
 	inline int getNbObjectDOConstructors() { return m_Cons.size(); }
@@ -128,7 +128,7 @@ public:
 	void scheduleInsertLine(int i, const string& str);
 	void performUpdates();
 	void sourceLineFileAndNumber(int line, ostream& err);
-	void load() throw(ParserError);
+	void load();
 	bool tryLoad();
 	void clearObjectDOConstructors();
 };

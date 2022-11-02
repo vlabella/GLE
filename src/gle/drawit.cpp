@@ -81,7 +81,7 @@ GLERun* getGLERunInstance() {
 	return g_GLERun;
 }
 
-void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* code, GLESourceFile* file) throw(ParserError);
+void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* code, GLESourceFile* file);
 
 void gle_set_constants() {
 	GLEMemoryCell value;
@@ -185,7 +185,7 @@ void output_error_cerr(ParserError& err) {
 	}
 }
 
-void validate_open_input_stream(ifstream& input, const string& fname) throw(ParserError) {
+void validate_open_input_stream(ifstream& input, const string& fname) {
 	string expanded(GLEExpandEnvironmentVariables(fname));
 	validate_file_name(expanded, true);
 	input.open(expanded.c_str());
@@ -194,7 +194,7 @@ void validate_open_input_stream(ifstream& input, const string& fname) throw(Pars
 	}
 }
 
-FILE* validate_fopen(const string& fname, const char *mode, bool isread) throw(ParserError) {
+FILE* validate_fopen(const string& fname, const char *mode, bool isread) {
 	string expanded(GLEExpandEnvironmentVariables(fname));
 	validate_file_name(expanded, isread);
 	FILE* result = fopen(expanded.c_str(), mode);
@@ -205,7 +205,7 @@ FILE* validate_fopen(const string& fname, const char *mode, bool isread) throw(P
 	return result;
 }
 
-void validate_file_name(const string& fname, bool isread) throw(ParserError) {
+void validate_file_name(const string& fname, bool isread) {
 	GLEInterface* iface = GLEGetInterfacePointer();
 	if (iface->hasFileInfos()) {
 		GLEFileLocation finfo;
@@ -251,7 +251,7 @@ void validate_file_name(const string& fname, bool isread) throw(ParserError) {
 	}
 }
 
-void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bool silent) throw (ParserError) {
+void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bool silent) {
 	GLEGlobalSource* glecode = script->getSource();
 	GLEInterface* iface = script->getGLEInterface();
 	script->cleanUp();
@@ -394,7 +394,7 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 	g_set_console_output(has_console);
 }
 
-void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* code, GLESourceFile* file) throw(ParserError) {
+void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* code, GLESourceFile* file) {
 	GLEFileLocation* loc = file->getLocation();
 	loc->setName(fname);
 	const string* dirname = NULL;

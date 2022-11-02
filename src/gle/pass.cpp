@@ -64,7 +64,7 @@ extern GLESubMap g_Subroutines;
 void get_cap(TOKENS tk,int *ntok,int *curtok,int *pcode,int *plen);
 void get_join(TOKENS tk,int *ntok,int *curtok,int *pcode,int *plen);
 void g_marker_def(char *s1, char *s2);
-void font_load(void) throw(ParserError);
+void font_load(void);
 bool execute_graph(GLESourceLine& sline, bool isCommandCheck);
 
 extern int this_line;
@@ -235,7 +235,7 @@ void GLEParser::get_block_type(int type, string& result) {
 	result = block_type;
 }
 
-void GLEParser::checkmode() throw(ParserError) {
+void GLEParser::checkmode() {
 	/* Check for text mode block */
 	if (cur_mode != 0) {
 		string block_type;
@@ -279,7 +279,7 @@ void GLEParser::setAllowSpace(bool allow) {
 	else multi->setEndToken(' ');
 }
 
-void GLEParser::checkValidName(const string& name, const char* type, int pos) throw(ParserError) {
+void GLEParser::checkValidName(const string& name, const char* type, int pos) {
 	if (name.length() <= 0) {
 		throw getTokens()->error(pos, string("zero length ")+type+" name");
 	}
@@ -295,7 +295,7 @@ void GLEParser::checkValidName(const string& name, const char* type, int pos) th
 	}
 }
 
-double GLEParser::evalTokenToDouble() throw(ParserError) {
+double GLEParser::evalTokenToDouble() {
 	double x = 0.0;
 	Tokenizer* tokens = getTokens();
 	string& expr = tokens->next_multilevel_token();
@@ -309,7 +309,7 @@ double GLEParser::evalTokenToDouble() throw(ParserError) {
 	return x;
 }
 
-void GLEParser::evalTokenToString(string* str) throw(ParserError) {
+void GLEParser::evalTokenToString(string* str) {
 	Tokenizer* tokens = getTokens();
 	string& expr = tokens->next_multilevel_token();
 	int pos = tokens->token_pos_col();
@@ -321,7 +321,7 @@ void GLEParser::evalTokenToString(string* str) throw(ParserError) {
 	}
 }
 
-void GLEParser::evalTokenToFileName(string* str) throw(ParserError) {
+void GLEParser::evalTokenToFileName(string* str) {
 	Tokenizer* tokens = getTokens();
    const string& token = tokens->next_continuous_string_excluding("\"$+");
    if (token != "") {
@@ -331,7 +331,7 @@ void GLEParser::evalTokenToFileName(string* str) throw(ParserError) {
    }
 }
 
-void GLEParser::polish(GLEPcode& pcode, int *rtype) throw(ParserError) {
+void GLEParser::polish(GLEPcode& pcode, int *rtype) {
 	Tokenizer* tokens = getTokens();
 	string& expr = tokens->next_multilevel_token();
 	int pos = tokens->token_pos_col();
@@ -345,17 +345,17 @@ void GLEParser::polish(GLEPcode& pcode, int *rtype) throw(ParserError) {
 	}
 }
 
-void GLEParser::polish_eol(GLEPcode& pcode, int *rtype) throw(ParserError) {
+void GLEParser::polish_eol(GLEPcode& pcode, int *rtype) {
 	setAllowSpace(true);
 	polish(pcode, rtype);
 	setAllowSpace(false);
 }
 
-void GLEParser::polish(const char* str, GLEPcode& pcode, int *rtype) throw(ParserError) {
+void GLEParser::polish(const char* str, GLEPcode& pcode, int *rtype) {
 	m_polish->polish(str, pcode, rtype);
 }
 
-void GLEParser::polish_pos(const string& arg, int pos, GLEPcode& pcode, int* rtype) throw(ParserError) {
+void GLEParser::polish_pos(const string& arg, int pos, GLEPcode& pcode, int* rtype) {
 	try {
 		m_polish->internalPolish(arg.c_str(), pcode, rtype);
 	} catch (ParserError& err) {
@@ -364,35 +364,35 @@ void GLEParser::polish_pos(const string& arg, int pos, GLEPcode& pcode, int* rty
 	}
 }
 
-void GLEParser::get_xy(GLEPcode& pcode) throw(ParserError) {
+void GLEParser::get_xy(GLEPcode& pcode) {
 	int vtype = 1;
 	polish(pcode, &vtype);
 	vtype = 1;
 	polish(pcode, &vtype);
 }
 
-void GLEParser::get_exp(GLEPcode& pcode) throw(ParserError) {
+void GLEParser::get_exp(GLEPcode& pcode) {
 	int vtype = 1;
 	polish(pcode, &vtype);
 }
 
-void GLEParser::get_exp_eol(GLEPcode& pcode) throw(ParserError) {
+void GLEParser::get_exp_eol(GLEPcode& pcode) {
 	int vtype = 1;
 	polish_eol(pcode, &vtype);
 }
 
-void GLEParser::get_strexp(GLEPcode& pcode) throw(ParserError) {
+void GLEParser::get_strexp(GLEPcode& pcode) {
 	int vtype = 2;
 	polish(pcode, &vtype);
 }
 
-int GLEParser::get_anyexp(GLEPcode& pcode) throw(ParserError) {
+int GLEParser::get_anyexp(GLEPcode& pcode) {
 	int vtype = 0;
 	polish(pcode, &vtype);
 	return vtype;
 }
 
-void GLEParser::get_if(GLEPcode& pcode) throw(ParserError) {
+void GLEParser::get_if(GLEPcode& pcode) {
 	Tokenizer* tokens = getTokens();
 	string expr = tokens->next_multilevel_token();
 	int pos = tokens->token_pos_col();
@@ -417,7 +417,7 @@ void GLEParser::get_if(GLEPcode& pcode) throw(ParserError) {
 	}
 }
 
-void GLEParser::parse_if(int srclin, GLEPcode& pcode) throw(ParserError) {
+void GLEParser::parse_if(int srclin, GLEPcode& pcode) {
 	get_if(pcode);
 	GLESourceBlock* block = add_block(GLE_SRCBLK_MAGIC+GLE_OPBEGIN_IF, srclin);
 	block->setOffset2(pcode.size());
@@ -425,7 +425,7 @@ void GLEParser::parse_if(int srclin, GLEPcode& pcode) throw(ParserError) {
 	pcode.addInt(0);
 }
 
-void GLEParser::get_subroutine_call(GLEPcode& pcode, string* name, int poscol) throw(ParserError) {
+void GLEParser::get_subroutine_call(GLEPcode& pcode, string* name, int poscol) {
 	string fct_name;
 	if (name != NULL) {
 		fct_name = *name;
@@ -443,7 +443,7 @@ void GLEParser::get_subroutine_call(GLEPcode& pcode, string* name, int poscol) t
 	gen_subroutine_call_code(&info, pcode);
 }
 
-void GLEParser::pass_subroutine_call(GLESubCallInfo* info, int poscol) throw(ParserError) {
+void GLEParser::pass_subroutine_call(GLESubCallInfo* info, int poscol) {
 	GLESub* sub = info->getSub();
 	int np = sub->getNbParam();
 	string uc_token;
@@ -558,7 +558,7 @@ void GLEParser::pass_subroutine_call(GLESubCallInfo* info, int poscol) throw(Par
 	}
 }
 
-void GLEParser::gen_subroutine_call_polish_arg(GLESubCallInfo* info, int i, GLEPcode& pcode) throw(ParserError) {
+void GLEParser::gen_subroutine_call_polish_arg(GLESubCallInfo* info, int i, GLEPcode& pcode) {
 	GLESub* sub = info->getSub();
 	try {
 		int vtype = sub->getParamType(i);
@@ -589,7 +589,7 @@ void GLEParser::evaluate_subroutine_arguments(GLESubCallInfo* info, GLEArrayImpl
 	}
 }
 
-void GLEParser::gen_subroutine_call_code(GLESubCallInfo* info, GLEPcode& pcode) throw(ParserError) {
+void GLEParser::gen_subroutine_call_code(GLESubCallInfo* info, GLEPcode& pcode) {
 	/* pass all arguments */
 	GLESub* sub = info->getSub();
 	int np = sub->getNbParam();
@@ -603,7 +603,7 @@ void GLEParser::gen_subroutine_call_code(GLESubCallInfo* info, GLEPcode& pcode) 
 	pcode.setInt(savelen, pcode.size() - savelen - 1);
 }
 
-GLESub* GLEParser::get_subroutine_declaration(GLEPcode& pcode) throw(ParserError) {
+GLESub* GLEParser::get_subroutine_declaration(GLEPcode& pcode) {
 	string uc_token;
 	string& token = m_tokens.next_token();
 	str_to_uppercase(token, uc_token);
@@ -658,7 +658,7 @@ GLESub* GLEParser::get_subroutine_declaration(GLEPcode& pcode) throw(ParserError
 	return sub;
 }
 
-void GLEParser::get_subroutine_default_param(GLESub* sub) throw(ParserError) {
+void GLEParser::get_subroutine_default_param(GLESub* sub) {
 	if (sub == NULL) {
 		return;
 	}
@@ -676,7 +676,7 @@ void GLEParser::get_subroutine_default_param(GLESub* sub) throw(ParserError) {
 	sub->setDefault(idx, token);
 }
 
-int GLEParser::get_optional(OPKEY lkey, GLEPcode& pcode) throw(ParserError) {
+int GLEParser::get_optional(OPKEY lkey, GLEPcode& pcode) {
 	// find the largest width
 	int count, width;
 	get_key_info(lkey, &count, &width);
@@ -727,11 +727,11 @@ ParserError GLEParser::create_option_error(OPKEY lkey, int count, const string& 
 	return m_tokens.error(strm.str());
 }
 
-void GLEParser::duplicate_error(GLEPcode& pcode, int pos) throw(ParserError) {
+void GLEParser::duplicate_error(GLEPcode& pcode, int pos) {
 	if (pcode.getInt(pos) != 0) throw error("duplicate or illegal combination of qualifiers");
 }
 
-int GLEParser::get_one_option(op_key* lkey, GLEPcode& pcode, int plen) throw(ParserError) {
+int GLEParser::get_one_option(op_key* lkey, GLEPcode& pcode, int plen) {
 // switches 	int 	placed in directly, 1 present, 0 not present
 // expressions 	LONG* 	pointed to, 0 if not present.
 // color/fill	LONG* 	Pointer to exp 0 if not present.
@@ -795,11 +795,11 @@ int GLEParser::get_one_option(op_key* lkey, GLEPcode& pcode, int plen) throw(Par
 	return -1;
 }
 
-int GLEParser::get_first(OPKEY lkey) throw(ParserError) {
+int GLEParser::get_first(OPKEY lkey) {
 	return get_first(m_tokens.next_token(), lkey);
 }
 
-int GLEParser::get_first(const string& token, OPKEY lkey) throw(ParserError) {
+int GLEParser::get_first(const string& token, OPKEY lkey) {
 	int count, width;
 	get_key_info(lkey, &count, &width);
 	for (int i = 0; i < count; i++) {
@@ -810,7 +810,7 @@ int GLEParser::get_first(const string& token, OPKEY lkey) throw(ParserError) {
 	throw create_option_error(lkey, count, token);
 }
 
-bool GLEParser::try_get_token(const char* token) throw(ParserError) {
+bool GLEParser::try_get_token(const char* token) {
 	string& my_token = m_tokens.try_next_token();
 	if (str_i_equals(token, my_token.c_str())) {
 		return true;
@@ -820,14 +820,14 @@ bool GLEParser::try_get_token(const char* token) throw(ParserError) {
 	return false;
 }
 
-void GLEParser::get_token(const char* token) throw(ParserError) {
+void GLEParser::get_token(const char* token) {
 	string& my_token = m_tokens.next_token();
 	if (!str_i_equals(token, my_token.c_str())) {
 		throw error(string("expected '")+token+"', but found '"+my_token+"' instead");
 	}
 }
 
-void GLEParser::get_fill(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_fill(GLEPcode& pcode) {
 	get_color(pcode);
 }
 
@@ -911,7 +911,7 @@ GLERC<GLEColor> memory_cell_to_color(GLEPolish* polish, GLEArrayImpl* stk, GLEMe
 	return color;
 }
 
-GLERC<GLEColor> pass_color_var(const std::string& token) throw(ParserError) {
+GLERC<GLEColor> pass_color_var(const std::string& token) {
 	GLERC<GLEColor> color(new GLEColor());
 	int result = 0;
 	if (token.empty()) {
@@ -926,7 +926,7 @@ GLERC<GLEColor> pass_color_var(const std::string& token) throw(ParserError) {
 	return color;
 }
 
-void GLEParser::get_color(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_color(GLEPcode& pcode) {
 	int result = 0;
 	GLERC<GLEColor> color;
 	string& token = m_tokens.next_token();
@@ -968,7 +968,7 @@ int get_marker_string(const string& marker, IThrowsError* error) {
    return mark_idx;
 }
 
-void GLEParser::get_marker(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_marker(GLEPcode& pcode) {
 	int vtype = 1;
 	string& token = m_tokens.next_token();
 	if (token == "(" || is_float(token)) {
@@ -983,13 +983,13 @@ void GLEParser::get_marker(GLEPcode& pcode) throw (ParserError) {
 	}
 }
 
-int pass_marker(char *name) throw(ParserError) {
+int pass_marker(char *name) {
 	string marker;
 	polish_eval_string(name, &marker);
    return get_marker_string(marker, g_get_throws_error());   
 }
 
-void GLEParser::define_marker_1(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::define_marker_1(GLEPcode& pcode) {
 	string name;
 	Tokenizer* tokens = getTokens();
 	str_to_uppercase(tokens->next_token(), name);
@@ -1001,7 +1001,7 @@ void GLEParser::define_marker_1(GLEPcode& pcode) throw (ParserError) {
 	g_defmarker((char*)name.c_str(), (char*)font.c_str(), ccc, dx, dy, sz, true);
 }
 
-void GLEParser::define_marker_2(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::define_marker_2(GLEPcode& pcode) {
 	string name, sub;
 	Tokenizer* tokens = getTokens();
 	tokens->ensure_next_token_i("marker");
@@ -1060,7 +1060,7 @@ int get_font_index(const string& token, IThrowsError* error) {
 	throw error->throwError(strm.str());
 }
 
-void GLEParser::get_font(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_font(GLEPcode& pcode) {
 	string& token = m_tokens.next_token();
 	if (str_starts_with(token, "\"") || str_var_valid_name(token)) {
    	int etype = 1;
@@ -1085,7 +1085,7 @@ int pass_font(const std::string& token) {
 	}
 }
 
-void GLEParser::get_papersize(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_papersize(GLEPcode& pcode) {
 	const string& token = m_tokens.next_token();
 	int type = g_papersize_type(token);
 	if (type == GLE_PAPER_UNKNOWN) {
@@ -1098,7 +1098,7 @@ void GLEParser::get_papersize(GLEPcode& pcode) throw (ParserError) {
 	}
 }
 
-void GLEParser::get_justify(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_justify(GLEPcode& pcode) {
 	const string& token = m_tokens.next_token();
 	if (str_starts_with(token, "\"") || str_var_valid_name(token)) {
 		int etype = 1;
@@ -1122,22 +1122,22 @@ int pass_justify(const std::string& token) {
 	return gt_firstval(op_justify, token.c_str());
 }
 
-void GLEParser::get_join(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_join(GLEPcode& pcode) {
 	pcode.addInt(get_first(op_join));
 }
 
-void GLEParser::get_cap(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_cap(GLEPcode& pcode) {
 	pcode.addInt(get_first(op_cap));
 }
 
-void GLEParser::get_var_add(int *var, int *vtype) throw (ParserError) {
+void GLEParser::get_var_add(int *var, int *vtype) {
 	string uc_token;
 	string& token = m_tokens.next_token();
 	str_to_uppercase(token, uc_token);
 	var_findadd((char*)uc_token.c_str(), var, vtype);
 }
 
-void GLEParser::get_var(GLEPcode& pcode) throw (ParserError) {
+void GLEParser::get_var(GLEPcode& pcode) {
 	int var;
 	int vtype = 0;
 	get_var_add(&var, &vtype);
@@ -1193,7 +1193,7 @@ bool GLEParser::pass_block_specific(GLESourceLine& sourceLine, GLEPcode& pcode) 
 	return false;
 }
 
-void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) throw(ParserError) {
+void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 	resetSpecial();
 	static int i,f,vtyp,v,vidx;
 	int srclin = SLine.getGlobalLineNo();
@@ -1969,7 +1969,7 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) throw(ParserError) 
 	}
 }
 
-void GLEParser::do_text_mode(GLESourceLine &SLine, Tokenizer* tokens, GLEPcode& pcode) throw (ParserError) {
+void GLEParser::do_text_mode(GLESourceLine &SLine, Tokenizer* tokens, GLEPcode& pcode) {
 	int pos_endoffs = pcode.size();
 	// Save space for end offset
 	pcode.addInt(0);
@@ -2060,7 +2060,7 @@ void GLEParser::remove_last_block() {
 	m_blocks.pop_back();
 }
 
-void GLEParser::check_loop_variable(int var) throw (ParserError) {
+void GLEParser::check_loop_variable(int var) {
 	GLESourceBlock* block = last_block();
 	if (block == NULL || var != block->getVariable()) {
 		stringstream err;
@@ -2070,7 +2070,7 @@ void GLEParser::check_loop_variable(int var) throw (ParserError) {
 	}
 }
 
-GLESourceBlock* GLEParser::check_block_type(int pos, int t0, int t1, int t2) throw (ParserError) {
+GLESourceBlock* GLEParser::check_block_type(int pos, int t0, int t1, int t2) {
 	GLESourceBlock* block = last_block();
 	if (block == NULL) {
 		stringstream err;

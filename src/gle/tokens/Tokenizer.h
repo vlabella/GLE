@@ -137,7 +137,7 @@ public:
 
 IThrowsError* g_get_throws_error();
 
-double tokenizer_string_to_double(const char* value) throw(ParserError);
+double tokenizer_string_to_double(const char* value);
 
 #if defined(__UNIX__) || defined(__MAC__)
 	ParserError g_format_parser_error(const char* format, ...);
@@ -145,13 +145,13 @@ double tokenizer_string_to_double(const char* value) throw(ParserError);
 	ParserError g_format_parser_error(va_list format, ...);
 #endif
 
-void g_throw_parser_error(const string& err) throw(ParserError);
+void g_throw_parser_error(const string& err);
 
-void g_throw_parser_error(const char* err, int idx) throw(ParserError);
+void g_throw_parser_error(const char* err, int idx);
 
-void g_throw_parser_error(const char* str1, const char* str2, const char* str3) throw(ParserError);
+void g_throw_parser_error(const char* str1, const char* str2, const char* str3);
 
-void g_throw_parser_error_sys(const char* str1, const char* str2 = NULL, const char* str3 = NULL) throw(ParserError);
+void g_throw_parser_error_sys(const char* str1, const char* str2 = NULL, const char* str3 = NULL);
 
 #define MAX_PUSHBACK_CH 2
 
@@ -302,21 +302,21 @@ public:
 	Tokenizer(TokenizerLanguage* lang);
 	virtual ~Tokenizer();
 
-	int has_more_tokens() throw(ParserError);
+	int has_more_tokens();
 	// end of stream not reached
 
-	string& next_token() throw(ParserError);
+	string& next_token();
 	// returns next token.  throws exception if no more tokens.
 
-	string& next_continuous_string_excluding(const char* forbidden) throw(ParserError);
+	string& next_continuous_string_excluding(const char* forbidden);
 
-	string& try_next_token() throw(ParserError);
+	string& try_next_token();
 
-	string& read_line() throw(ParserError);
+	string& read_line();
 
-	double next_double() throw(ParserError);
+	double next_double();
 
-	int next_integer() throw(ParserError);
+	int next_integer();
 	// reads an integer token.  throws exception if token is not
 	// an integer
 
@@ -332,7 +332,7 @@ public:
 
 	TokenizerLangElem* try_find_lang_elem(int i);
 
-	void next_token_and_pos(TokenAndPos& tkpos) throw(ParserError);
+	void next_token_and_pos(TokenAndPos& tkpos);
 
 	void pushback_token();
 
@@ -344,7 +344,7 @@ public:
 
 	void pushback_token(const char* token);
 
-	void peek_token(string* token) throw(ParserError);
+	void peek_token(string* token);
 	// look at next token without moving the current token pointer
 
 	bool has_space_before() const { return m_space_before; };
@@ -365,40 +365,40 @@ public:
 
 	inline const TokenizerPos& token_stream_pos() const { return m_token_count; };
 
-	int is_next_token(const char* token) throw(ParserError);
+	int is_next_token(const char* token);
 
-	int is_next_token_i(const char* token) throw(ParserError);
+	int is_next_token_i(const char* token);
 
-	int is_next_token(const string& token) throw(ParserError) {
+	int is_next_token(const string& token) {
 		return is_next_token(token.c_str());
 	}
 	// checks wether next token is [token].  if so, the token is
 	// consumed (current token pointer moved).   Otherwise,
 	// the next token is not consumed.
 
-	int is_next_token_in(const char* charlist) throw(ParserError);
+	int is_next_token_in(const char* charlist);
 
-	void ensure_next_token(const char* token) throw(ParserError);
+	void ensure_next_token(const char* token);
 	// ensures the next token is [token] and moves current token pointer
 	// raises exception if next token is not [token]
 
-	void ensure_next_token_i(const char* token) throw(ParserError);
+	void ensure_next_token_i(const char* token);
 
-	int ensure_next_token_in(const char* charlist) throw(ParserError);
+	int ensure_next_token_in(const char* charlist);
 	// reads a one-character token occurring in charlist.
 	// raises exception when the next token is not as expected.
 
-	void ensure_next_token_list(const char* charlist) throw(ParserError);
+	void ensure_next_token_list(const char* charlist);
 	// reads a list of one-character tokens
 
 	void token_skip_to_end();
 	// skips to end of line
 
-	void read_till_close_comment() throw(ParserError);
+	void read_till_close_comment();
 
-	string& next_multilevel_token() throw(ParserError);
+	string& next_multilevel_token();
 
-	virtual char token_read_sig_char() throw(ParserError);
+	virtual char token_read_sig_char();
 
 	virtual void on_trailing_space();
 
@@ -449,14 +449,14 @@ protected:
 	void reset_position();
 	void reset_nopos();
 	void reset_all();
-    void undo_pushback_token();
-	void copy_string(char endch) throw(ParserError);
-	void multi_level_do_multi(char open) throw(ParserError);
-	void get_token() throw(ParserError);
+  	void undo_pushback_token();
+	void copy_string(char endch);
+	void multi_level_do_multi(char open);
+	void get_token();
 	// consumes one token (and forgets it?)
 	// raises exception when e.g. a string constant is not terminated.
-	void get_token_2() throw(ParserError);
-	void get_check_token() throw(ParserError);
+	void get_token_2();
+	void get_check_token();
 	TokenizerLangElem* findLangElem(const TokenizerLangHash* hash);
 	TokenizerLangElem* findLangElem2(const TokenizerLangHash* hash);
 };
@@ -471,8 +471,8 @@ public:
 	StreamTokenizer(istream* _is);
 	StreamTokenizer(istream* _is, TokenizerLanguage* lang);
 	virtual ~StreamTokenizer();
-	void open_tokens(const char* fname) throw(ParserError);
-	void open_tokens(const string& fname) throw(ParserError);
+	void open_tokens(const char* fname);
+	void open_tokens(const string& fname);
 	void open_tokens(istream* strm, const char* fname);
 	void close_tokens();
 	virtual int stream_ok();

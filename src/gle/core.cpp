@@ -506,7 +506,7 @@ void g_set_pagesize(int type) {
 	}
 }
 
-void g_set_pagesize(const string& papersize) throw (ParserError) {
+void g_set_pagesize(const string& papersize) {
 	SpaceStringTokenizer tokens(papersize.c_str());
 	const string& token = tokens.next_token();
 	int type = g_papersize_type(token);
@@ -520,7 +520,7 @@ void g_set_pagesize(const string& papersize) throw (ParserError) {
 	}
 }
 
-void g_set_margins(const string& margins) throw (ParserError) {
+void g_set_margins(const string& margins) {
 	SpaceStringTokenizer tokens(margins.c_str());
 	g.topmargin = tokens.next_double();
 	g.bottommargin = tokens.next_double();
@@ -1881,7 +1881,7 @@ void g_marker(int i, double sz) {
 	g_marker2(i,sz,1.0);
 }
 
-void g_marker2(int i, double sz, double dval) throw(ParserError) {
+void g_marker2(int i, double sz, double dval) {
 	static double cx,cy,h,scale;
 	static double x1,y1,x2,y2;
 	if (i<0) {
@@ -2044,7 +2044,7 @@ bool g_parse_ps_boundingbox(const string& line, int* bx1, int* by1, int* bx2, in
 	return false;
 }
 
-void g_postscript(char *fname, double wx, double wy) throw(ParserError) {
+void g_postscript(char *fname, double wx, double wy) {
 	/*
 	fname ... the filename
 	wx .... the users desired width  in GLE units
@@ -2157,7 +2157,7 @@ int g_bitmap_string_to_type(const char* stype) {
 	}
 }
 
-void g_update_bitmap_type(const string& fname, int* type) throw(ParserError) {
+void g_update_bitmap_type(const string& fname, int* type) {
 	if (*type == 0) {
 		string ext;
 		GetExtension(fname, ext);
@@ -2263,7 +2263,7 @@ GLEBitmap* g_bitmap_type_to_object(int type) {
 	}
 }
 
-void g_bitmap(string& fname, double wx, double wy, int type) throw(ParserError) {
+void g_bitmap(string& fname, double wx, double wy, int type) {
 	fname = GLEExpandEnvironmentVariables(fname);
 	validate_file_name(fname, true);
 	g_update_bitmap_type(fname, &type);
@@ -2288,7 +2288,7 @@ void g_bitmap(string& fname, double wx, double wy, int type) throw(ParserError) 
 	delete bitmap;
 }
 
-void g_bitmap(GLEBitmap* bitmap, double wx, double wy, int type) throw(ParserError) {
+void g_bitmap(GLEBitmap* bitmap, double wx, double wy, int type) {
 	/* Read header */
 	int result = bitmap->readHeader();
 	if (result != GLE_IMAGE_ERROR_NONE) {
@@ -2327,7 +2327,7 @@ void g_bitmap(GLEBitmap* bitmap, double wx, double wy, int type) throw(ParserErr
 	g_update_bounds(cx+wx, cy+wy);
 }
 
-void g_bitmap_info(string& fname, int xvar, int yvar, int type)  throw(ParserError) {
+void g_bitmap_info(string& fname, int xvar, int yvar, int type) {
 	fname = GLEExpandEnvironmentVariables(fname);
 	validate_file_name(fname, true);
 	g_update_bitmap_type(fname, &type);
@@ -2364,7 +2364,7 @@ void g_bitmap_info(string& fname, int xvar, int yvar, int type)  throw(ParserErr
 
 void g_arrowpoints(double cx, double cy, double dx, double dy, GLEArrowPoints* pts);
 
-void g_arrowline(double x2, double y2, int flag, int can_fillpath) throw(ParserError) {
+void g_arrowline(double x2, double y2, int flag, int can_fillpath) {
 	double x1,y1;
 	GLECore* core = g_get_core();
 	if (core->isComputingLength()) {
@@ -2571,7 +2571,7 @@ void g_set_arrow_style(int shape) {
 	g.arrowstyle = shape;
 }
 
-void g_set_arrow_style(const char* shape) throw(ParserError) {
+void g_set_arrow_style(const char* shape) {
 	if (str_i_equals(shape, "SIMPLE")) {
 		g_set_arrow_style(GLE_ARRSTY_SIMPLE);
 	} else if (str_i_equals(shape, "FILLED")) {
@@ -2594,7 +2594,7 @@ void g_set_arrow_tip(int tip) {
 	g.arrowtip = tip;
 }
 
-void g_set_arrow_tip(const char* tip) throw (ParserError) {
+void g_set_arrow_tip(const char* tip) {
 	if (str_i_equals(tip, "SHARP")) {
 		g_set_arrow_tip(GLE_ARRTIP_SHARP);
 	} else if (str_i_equals(tip, "ROUND")) {
@@ -2604,7 +2604,7 @@ void g_set_arrow_tip(const char* tip) throw (ParserError) {
 	}
 }
 
-void g_arrow(double dx, double dy, int can_fillpath) throw(ParserError) {
+void g_arrow(double dx, double dy, int can_fillpath) {
 	int old_join;
 	char old_lstyle[15];
 	g_get_line_style(old_lstyle);
@@ -2756,7 +2756,7 @@ int g_get_compatibility() {
 	return g_compatibility;
 }
 
-int g_parse_compatibility(const string& compat) throw (ParserError) {
+int g_parse_compatibility(const string& compat) {
 	TokenizerLanguage lang;
 	lang.setSpaceTokens(" ");
 	lang.setSingleCharTokens(".");
@@ -2787,7 +2787,7 @@ int g_parse_compatibility(const string& compat) throw (ParserError) {
 	return value;
 }
 
-int g_set_compatibility(const string& compat) throw (ParserError) {
+int g_set_compatibility(const string& compat) {
 	int value = g_parse_compatibility(compat);
 	g_set_compatibility(value);
 	return value;

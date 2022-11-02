@@ -133,9 +133,9 @@ protected:
 public:
 	GLEFunctionParserPcode();
 	~GLEFunctionParserPcode();
-	void polish(const char* fct, StringIntHash* vars = NULL) throw(ParserError);
-	void polishPos(const char* fct, int pos, StringIntHash* vars = NULL) throw(ParserError);
-	void polishX() throw(ParserError);
+	void polish(const char* fct, StringIntHash* vars = NULL);
+	void polishPos(const char* fct, int pos, StringIntHash* vars = NULL);
+	void polishX();
 	double evalDouble();
 	bool evalBool();
 	inline GLEPcode* getCode() { return &m_Pcode; }
@@ -149,17 +149,17 @@ protected:
 public:
 	GLEPolish();
 	~GLEPolish();
-	void internalPolish(const char *expr, GLEPcode& pcode, int *rtype) throw(ParserError);
-	void internalPolish(GLEPcode& pcode, int *rtype) throw(ParserError);
-	void internalEval(const char *exp, double *x) throw(ParserError);
-    void internalEvalString(const char* exp, string* str) throw(ParserError);
-	void polish(const char *expr, GLEPcode& pcode, int *rtype) throw(ParserError);
-	void eval(GLEArrayImpl* stk, const char *exp, double *x) throw(ParserError);
-	void evalString(GLEArrayImpl* stk, const char *exp, string *str, bool allownum = false) throw(ParserError);
-	GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, const char *exp) throw(ParserError);
-	int get_params(GLEPcode& pcode, int np, int* plist, const string& name, int np_default = 0) throw(ParserError);
-	void get_array_index(GLEPcode& pcode) throw(ParserError);
-	double evalTokenToDouble() throw(ParserError);
+	void internalPolish(const char *expr, GLEPcode& pcode, int *rtype);
+	void internalPolish(GLEPcode& pcode, int *rtype);
+	void internalEval(const char *exp, double *x);
+    void internalEvalString(const char* exp, string* str);
+	void polish(const char *expr, GLEPcode& pcode, int *rtype);
+	void eval(GLEArrayImpl* stk, const char *exp, double *x);
+	void evalString(GLEArrayImpl* stk, const char *exp, string *str, bool allownum = false);
+	GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, const char *exp);
+	int get_params(GLEPcode& pcode, int np, int* plist, const string& name, int np_default = 0);
+	void get_array_index(GLEPcode& pcode);
+	double evalTokenToDouble();
 	Tokenizer* getTokens(const string& str);
 	void initTokenizer();
 	inline void setExprVars(StringIntHash* vars) { m_vars = vars; }
@@ -171,9 +171,9 @@ public:
 	};
 };
 
-void polish_eval(char *exp, double *x) throw(ParserError);
-void polish_eval_string(const char *exp, string *str, bool allownum = false) throw(ParserError);
-void polish(char *expr, GLEPcode& pcode, int *rtype) throw(ParserError);
+void polish_eval(char *exp, double *x);
+void polish_eval_string(const char *exp, string *str, bool allownum = false);
+void polish(char *expr, GLEPcode& pcode, int *rtype);
 void eval_pcode(GLEPcode& pcode, double* x);
 void eval_pcode_str(GLEPcode& pcode, string& x);
 

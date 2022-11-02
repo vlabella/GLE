@@ -62,7 +62,7 @@ bool axis_is_max(int axis);
 bool axis_horizontal(int axis);
 int axis_get_orth(int axis, int which);
 int axis_type(const char *s);
-int axis_type_check(const char *s) throw (ParserError);
+int axis_type_check(const char *s);
 const char* axis_type_name(int type);
 bool axis_is_pos(double pos, int* cnt, double del, vector<double>& vec);
 bool axis_is_pos_perc(double pos, int* cnt, double perc, vector<double>& vec);

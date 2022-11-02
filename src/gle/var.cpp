@@ -634,13 +634,13 @@ bool var_valid_name(const string& name) {
    return true;
 }
 
-void ensure_valid_var_name(const string& name) throw(ParserError) {
+void ensure_valid_var_name(const string& name) {
 	if (!var_valid_name(name)) {
 		g_throw_parser_error("illegal variable name '", name.c_str(), "'");
 	}
 }
 
-void ensure_valid_var_name(Tokenizer* tokens, const string& name) throw(ParserError) {
+void ensure_valid_var_name(Tokenizer* tokens, const string& name) {
 	if (!var_valid_name(name)) {
 		throw tokens->error(string("illegal variable name '")+name+"'");
 	}

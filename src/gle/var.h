@@ -223,7 +223,7 @@ void var_findadd_set(const char *s, GLEMemoryCell* value);
 GLEVarSubMap* var_add_local_submap();
 void var_remove_local_submap();
 bool str_var_valid_name(const string& name);
-void ensure_valid_var_name(const string& name) throw(ParserError);
-void ensure_valid_var_name(Tokenizer* tokens, const string& name) throw(ParserError);
+void ensure_valid_var_name(const string& name);
+void ensure_valid_var_name(Tokenizer* tokens, const string& name);
 
 #endif

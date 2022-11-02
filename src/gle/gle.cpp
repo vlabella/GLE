@@ -87,7 +87,7 @@ ConfigCollection g_Config;
 void load_one_file(const char* name, CmdLineObj& cmdline, size_t* exit_code);
 void load_one_file_stdin(CmdLineObj& cmdline, size_t* exit_code);
 void init_option_args(CmdLineObj& cmdline);
-void do_gen_inittex(CmdLineObj& cmdline, GLEOptions& options) throw(ParserError);
+void do_gen_inittex(CmdLineObj& cmdline, GLEOptions& options);
 void process_option_args(CmdLineObj& cmdline, GLEOptions& options);
 void do_run_other_version(ConfigCollection& coll, int argc, char **argv);
 void gle_do_socket(const string& commands);
@@ -325,7 +325,7 @@ void do_show_info() {
 	do_wait_for_enter_exit(0);
 }
 
-void do_gen_inittex(CmdLineObj& cmdline, GLEOptions& options) throw(ParserError) {
+void do_gen_inittex(CmdLineObj& cmdline, GLEOptions& options) {
 	// Generate inittex.ini from init.tex
 	if (cmdline.hasOption(GLE_OPT_MKINITTEX)) {
 		IS_INSTALL = 1;
@@ -704,7 +704,7 @@ void get_out_name(GLEFileLocation* inname, CmdLineObj& cmdline, GLEFileLocation*
 	}
 }
 
-GLERC<GLEScript> load_gle_code_sub(const char* name, CmdLineObj& cmdline) throw(ParserError) {
+GLERC<GLEScript> load_gle_code_sub(const char* name, CmdLineObj& cmdline) {
 	string in_name = name;
 	GLERC<GLEScript> script = new GLEScript();
 	GLEFileLocation* loc = script->getLocation();
@@ -713,7 +713,7 @@ GLERC<GLEScript> load_gle_code_sub(const char* name, CmdLineObj& cmdline) throw(
 	return script;
 }
 
-GLERC<GLEScript> load_gle_code_sub_stdin(CmdLineObj& cmdline) throw(ParserError) {
+GLERC<GLEScript> load_gle_code_sub_stdin(CmdLineObj& cmdline) {
 	GLERC<GLEScript> script = new GLEScript();
 	GLEFileLocation* loc = script->getLocation();
 	loc->createStdin();
@@ -740,7 +740,7 @@ void delete_temp_file(const string& file, const char* ext) {
 	}
 }
 
-void writeRecordedOutputFile(const string& fname, int deviceCode, string* buffer) throw (ParserError) {
+void writeRecordedOutputFile(const string& fname, int deviceCode, string* buffer) {
 	string outf = fname;
 	outf.append(g_device_to_ext(deviceCode));
 	ofstream out(outf.c_str(), ios::out | ios::binary);
@@ -751,7 +751,7 @@ void writeRecordedOutputFile(const string& fname, int deviceCode, string* buffer
 	out.close();
 }
 
-void writeRecordedOutputFile(const string& fname, int deviceCode, GLEScript* script) throw (ParserError) {
+void writeRecordedOutputFile(const string& fname, int deviceCode, GLEScript* script) {
 	string* buffer = script->getRecordedBytesBuffer(deviceCode);
 	writeRecordedOutputFile(fname, deviceCode, buffer);
 }
@@ -774,13 +774,13 @@ public:
 	~GLELoadOneFileManager();
 	void update_bounding_box();
 	void delete_previous_output(int deviceCode);
-	void create_cairo_eps() throw(ParserError);
-	bool process_one_file_tex() throw(ParserError);
+	void create_cairo_eps();
+	bool process_one_file_tex();
 	void do_output_type(const char* type);
 	void cat_stdout(const char* ext);
 	void cat_stdout_and_del(const char* ext);
-	void create_latex_eps_ps_pdf() throw(ParserError);
-	void convert_eps_to_pdf_no_latex() throw(ParserError);
+	void create_latex_eps_ps_pdf();
+	void convert_eps_to_pdf_no_latex();
 	istream* get_eps_stream();
 	bool hasGenerated(int deviceCode);
 	bool hasFile(int deviceCode);
@@ -788,7 +788,7 @@ public:
 	void setHasGenerated(int deviceCode, bool value);
 	void setHasFile(int deviceCode, bool value);
 	void setHasIncFile(int deviceCode, bool value);
-	void write_recorded_data(int deviceCode) throw(ParserError);
+	void write_recorded_data(int deviceCode);
 	void clean_tex_temp_files();
 	void clean_inc_file(int deviceCode);
 	void delete_original_eps_pdf();
@@ -830,7 +830,7 @@ void GLELoadOneFileManager::delete_previous_output(int deviceCode) {
 	}
 }
 
-void GLELoadOneFileManager::create_cairo_eps() throw(ParserError) {
+void GLELoadOneFileManager::create_cairo_eps() {
 	CmdLineArgSet* device = (CmdLineArgSet*)m_CmdLine->getOption(GLE_OPT_DEVICE)->getArg(0);
 	if (!hasGenerated(GLE_DEVICE_EPS) && device->hasValue(GLE_DEVICE_EPS)) {
 		setHasGenerated(GLE_DEVICE_EPS, true);
@@ -844,7 +844,7 @@ void GLELoadOneFileManager::create_cairo_eps() throw(ParserError) {
 	}
 }
 
-bool GLELoadOneFileManager::process_one_file_tex() throw(ParserError) {
+bool GLELoadOneFileManager::process_one_file_tex() {
 	CmdLineArgSet* device = (CmdLineArgSet*)m_CmdLine->getOption(GLE_OPT_DEVICE)->getArg(0);
 	delete_previous_output(GLE_DEVICE_EPS);
 	delete_previous_output(GLE_DEVICE_PDF);
@@ -949,7 +949,7 @@ void GLELoadOneFileManager::cat_stdout_and_del(const char* ext) {
 	delete_temp_file(m_OutName->getFullPath(), ext);
 }
 
-void GLELoadOneFileManager::convert_eps_to_pdf_no_latex() throw(ParserError) {
+void GLELoadOneFileManager::convert_eps_to_pdf_no_latex() {
 	CmdLineArgSet* device = (CmdLineArgSet*)m_CmdLine->getOption(GLE_OPT_DEVICE)->getArg(0);
 	if (device->hasValue(GLE_DEVICE_PDF) && !hasGenerated(GLE_DEVICE_PDF)) {
 		setHasFile(GLE_DEVICE_PDF, true);
@@ -991,7 +991,7 @@ bool GLELoadOneFileManager::requires_tex_pdf(CmdLineArgSet* device, CmdLineObj* 
 	return false;
 }
 
-void GLELoadOneFileManager::create_latex_eps_ps_pdf() throw(ParserError) {
+void GLELoadOneFileManager::create_latex_eps_ps_pdf() {
 	/* m_OutName has no path and no extension */
 	m_IncName.fromAbsolutePath(m_OutName->getFullPath() + "_inc");
 	/* includegraphics does not handle "." in filenames */
@@ -1090,7 +1090,7 @@ void GLELoadOneFileManager::setHasIncFile(int deviceCode, bool value) {
 	}
 }
 
-void GLELoadOneFileManager::write_recorded_data(int deviceCode) throw (ParserError) {
+void GLELoadOneFileManager::write_recorded_data(int deviceCode) {
 	CmdLineArgSet* device = (CmdLineArgSet*)m_CmdLine->getOption(GLE_OPT_DEVICE)->getArg(0);
 	if (!device->hasValue(deviceCode)) {
 		return;
@@ -1171,7 +1171,7 @@ void complain_latex_not_supported(int device) {
 	}
 }
 
-void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code) throw(ParserError) {
+void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code) {
 	GLEFileLocation out_name; /* out_name has no extension */
 	GLEGetInterfacePointer()->getConfig()->setAllowConfigBlocks(false);
 	GLEChDir(script->getLocation()->getDirectory());

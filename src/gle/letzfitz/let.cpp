@@ -69,7 +69,7 @@ void get_next_exp_file(TOKENS tk, int ntok, int *curtok, string* res);
 #define next_file_eval(s) get_next_exp_file(tk,ntk,&ct,&s)
 #define next_str(s) ct+=1;s=tk[ct]
 
-void get_from_to_step(TOKENS tk, int ntok, int *curtok, double* from, double* to, double* step) throw(ParserError) {
+void get_from_to_step(TOKENS tk, int ntok, int *curtok, double* from, double* to, double* step) {
 	(*curtok) = (*curtok) + 1;
 	if ((*curtok) >= ntok) {
 		return;
@@ -106,7 +106,7 @@ void get_from_to_step(TOKENS tk, int ntok, int *curtok, double* from, double* to
 	}
 }
 
-void begin_letz(int *pln, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+void begin_letz(int *pln, GLEPcodeList* pclist, int *pcode, int *cp) {
 	// Variables
 	double xmin = 10, xmax = 10, xstep = 1;
 	double ymin = 10, ymax = 10, ystep = 1;

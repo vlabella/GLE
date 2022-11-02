@@ -126,7 +126,7 @@ unsigned char float_to_color_comp_255(double value) {
 	return (unsigned char)color;
 }
 
-void eval_get_extra_arg_test(int i, const char* type) throw(ParserError) {
+void eval_get_extra_arg_test(int i, const char* type) {
 	int max_arg = g_CmdLine.getNbExtraArgs();
 	if (max_arg == 0) {
 		stringstream s;
@@ -140,7 +140,7 @@ void eval_get_extra_arg_test(int i, const char* type) throw(ParserError) {
 	}
 }
 
-double eval_get_extra_arg_f(int i) throw(ParserError) {
+double eval_get_extra_arg_f(int i) {
 	eval_get_extra_arg_test(i, "");
 	const string& arg = g_CmdLine.getExtraArg(i-1);
 	if (!is_float(arg)) {
@@ -151,7 +151,7 @@ double eval_get_extra_arg_f(int i) throw(ParserError) {
 	return atof(arg.c_str());
 }
 
-const char* eval_get_extra_arg_s(int i) throw(ParserError) {
+const char* eval_get_extra_arg_s(int i) {
 	eval_get_extra_arg_test(i, "$");
 	return g_CmdLine.getExtraArg(i-1).c_str();
 }
@@ -369,7 +369,7 @@ void eval_binary_operator(GLEArrayImpl* stk, int op) {
 	stk->decrementSize(1);
 }
 
-void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int plen) throw(ParserError) {
+void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int plen) {
 	if (plen > 1000) {
 		gprint("Expression is suspiciously long %d \n",plen);
 	}
@@ -992,7 +992,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	}
 }
 
-GLESub* eval_subroutine_call(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+GLESub* eval_subroutine_call(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) {
 	if (*(pcode+(*cp)++) != 1) {
 		(*cp)--;
 		gprint("PCODE, Expecting expression, v=%ld cp=%d \n", *(pcode + (*cp)), *cp);
@@ -1009,7 +1009,7 @@ GLESub* eval_subroutine_call(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode
 	return result;
 }
 
-void eval_do_object_block_call(GLEArrayImpl* stk, GLESub* sub, GLEObjectDO* obj) throw(ParserError) {
+void eval_do_object_block_call(GLEArrayImpl* stk, GLESub* sub, GLEObjectDO* obj) {
 	GLEObjectDOConstructor* cons = obj->getConstructor();
 	obj->makePropertyStore();
 	GLEArrayImpl* arr = obj->getProperties()->getArray();
@@ -1045,7 +1045,7 @@ void evalDoConstant(GLEArrayImpl* stk, int *pcode, int *cp)
 	stk->setDouble(stk->last(), both.d);
 }
 
-GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) {
 	int fixed_cp;
 	if (cp == 0) {
 		fixed_cp = 0;
@@ -1069,30 +1069,30 @@ GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, 
 	return stk->get(stk->last() + 1);
 }
 
-double evalDouble(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+double evalDouble(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) {
 	GLEMemoryCell* mc = evalGeneric(stk, pclist, pcode, cp);
 	gle_memory_cell_check(mc, GLEObjectTypeDouble);
 	return mc->Entry.DoubleVal;
 }
 
-bool evalBool(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+bool evalBool(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) {
 	GLEMemoryCell* mc = evalGeneric(stk, pclist, pcode, cp);
 	gle_memory_cell_check(mc, GLEObjectTypeBool);
 	return mc->Entry.BoolVal;
 }
 
-GLEString* evalStringPtr(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+GLEString* evalStringPtr(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) {
 	GLEMemoryCell* mc = evalGeneric(stk, pclist, pcode, cp);
 	gle_memory_cell_check(mc, GLEObjectTypeString);
 	return (GLEString*)mc->Entry.ObjectVal;
 }
 
-GLERC<GLEColor> evalColor(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) throw(ParserError) {
+GLERC<GLEColor> evalColor(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp) {
 	GLEMemoryCell* mc = evalGeneric(stk, pclist, pcode, cp);
 	return memory_cell_to_color(get_global_polish(), stk, mc, g_get_throws_error(), 0);
 }
 
-GLERC<GLEString> evalString(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp, bool allowOther) throw(ParserError) {
+GLERC<GLEString> evalString(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp, bool allowOther) {
 	GLERC<GLEString> result;
 	GLEMemoryCell* mc = evalGeneric(stk, pclist, pcode, cp);
 	int type = gle_memory_cell_type(mc);

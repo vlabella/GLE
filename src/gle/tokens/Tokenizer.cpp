@@ -173,7 +173,7 @@ ostream& mtab(ostream &os, int nb) {
 	return os;
 }
 
-double tokenizer_string_to_double(const char* value) throw(ParserError) {
+double tokenizer_string_to_double(const char* value) {
 	char *endp;
 	double dvalue = strtod(value, &endp);
 	if (value != endp && *endp == 0) {
@@ -274,14 +274,14 @@ string TokenizerPos::getString(int tab1, int tab2) const {
 }
 
 
-void g_throw_parser_error(const string& err) throw(ParserError) {
+void g_throw_parser_error(const string& err) {
 	TokenizerPos pos;
 	pos.setColumn(-1);
 	ParserError err_exp(err, pos, NULL);
 	throw err_exp;
 }
 
-void g_throw_parser_error(const char* str1, const char* str2, const char* str3) throw(ParserError) {
+void g_throw_parser_error(const char* str1, const char* str2, const char* str3) {
 	TokenizerPos pos;
 	pos.setColumn(-1);
 	string err = str1;
@@ -291,7 +291,7 @@ void g_throw_parser_error(const char* str1, const char* str2, const char* str3) 
 	throw err_exp;
 }
 
-void g_throw_parser_error_sys(const char* str1, const char* str2, const char* str3) throw(ParserError) {
+void g_throw_parser_error_sys(const char* str1, const char* str2, const char* str3) {
 	TokenizerPos pos;
 	pos.setColumn(-1);
 	ostringstream err_str;
@@ -304,7 +304,7 @@ void g_throw_parser_error_sys(const char* str1, const char* str2, const char* st
 	throw err_exp;
 }
 
-void g_throw_parser_error(const char* err, int idx) throw(ParserError) {
+void g_throw_parser_error(const char* err, int idx) {
 	char str[30];
 	sprintf(str, "%d", idx);
 	TokenizerPos pos;
@@ -635,7 +635,7 @@ void Tokenizer::reset_position() {
 	m_token_start.set(0, 0);
 }
 
-int Tokenizer::has_more_tokens() throw(ParserError) {
+int Tokenizer::has_more_tokens() {
   if (m_token_has_pushback > 0) {
 	  return 1;
   }
@@ -651,18 +651,18 @@ int Tokenizer::has_more_tokens() throw(ParserError) {
   }
 }
 
-string& Tokenizer::next_token() throw(ParserError) {
+string& Tokenizer::next_token() {
 	get_check_token();
 //	cerr << m_token_start << "\t" << m_token << endl;
 	return m_token;
 }
 
-string& Tokenizer::try_next_token() throw(ParserError) {
+string& Tokenizer::try_next_token() {
 	get_token();
 	return m_token;
 }
 
-double Tokenizer::next_double() throw(ParserError) {
+double Tokenizer::next_double() {
 	char *ptr;
 	get_check_token();
 	double result = strtod(m_token.c_str(), &ptr);
@@ -670,7 +670,7 @@ double Tokenizer::next_double() throw(ParserError) {
 	return result;
 }
 
-int Tokenizer::next_integer() throw(ParserError) {
+int Tokenizer::next_integer() {
 	char* ptr;
 	get_check_token();
 	int result = strtol(m_token.c_str(), &ptr, 10);
@@ -685,7 +685,7 @@ int Tokenizer::try_next_integer(int *i) {
 	return *ptr != 0 ? 0 : 1;
 }
 
-void Tokenizer::get_token() throw(ParserError) {
+void Tokenizer::get_token() {
 	get_token_2();
 	if ((!m_langhash.isNull()) && m_token.length() > 0) {
 		TokenizerLangHash::const_iterator i = m_langhash->find(m_token);
@@ -718,7 +718,7 @@ TokenizerLangElem* Tokenizer::try_find_lang_elem(int i) {
   return NULL;
 }
 
-void Tokenizer::get_token_2() throw(ParserError) {
+void Tokenizer::get_token_2() {
 	if (m_token_has_pushback > 0) {
 		const TokenAndPos& tkpos = m_pushback_tokens.back();
 		m_token = tkpos.getToken();
@@ -798,7 +798,7 @@ void Tokenizer::get_token_2() throw(ParserError) {
 	}
 }
 
-void Tokenizer::copy_string(char string_delim) throw(ParserError) {
+void Tokenizer::copy_string(char string_delim) {
 	TokenizerPos pos = token_stream_pos();
 	while (m_token_at_end == 0) {
 		char token_ch = token_read_char_no_comment();
@@ -814,7 +814,7 @@ void Tokenizer::copy_string(char string_delim) throw(ParserError) {
 	throw error(pos, "unterminated string constant");
 }
 
-void Tokenizer::multi_level_do_multi(char open) throw(ParserError) {
+void Tokenizer::multi_level_do_multi(char open) {
 	vector<char> m_open_token;
 	m_open_token.push_back(open);
 	TokenizerLanguageMultiLevel* multi = m_language->getMulti();
@@ -852,7 +852,7 @@ void Tokenizer::multi_level_do_multi(char open) throw(ParserError) {
 	}
 }
 
-string& Tokenizer::next_continuous_string_excluding(const char* forbidden) throw(ParserError) {
+string& Tokenizer::next_continuous_string_excluding(const char* forbidden) {
    undo_pushback_token();
 	m_token = "";
 	char token_ch = token_read_sig_char();
@@ -888,7 +888,7 @@ void Tokenizer::undo_pushback_token()
 	}
 }
 
-string& Tokenizer::next_multilevel_token() throw(ParserError) {
+string& Tokenizer::next_multilevel_token() {
    undo_pushback_token();
 	m_token = "";
 	char token_ch = token_read_sig_char();
@@ -931,7 +931,7 @@ void Tokenizer::goto_position(const TokenizerPos& pos) {
 	m_token_has_pushback_ch	= 0;
 }
 
-string& Tokenizer::read_line() throw(ParserError) {
+string& Tokenizer::read_line() {
 	m_token = "";
 	while (m_token_has_pushback > 0) {
 		TokenAndPos& tkpos = m_pushback_tokens.back();
@@ -1025,7 +1025,7 @@ void Tokenizer::read_number_term(char token_ch, bool has_e, bool sure_num) {
 	}
 }
 
-void Tokenizer::next_token_and_pos(TokenAndPos& tkpos) throw(ParserError) {
+void Tokenizer::next_token_and_pos(TokenAndPos& tkpos) {
 	get_check_token();
 	tkpos.setToken(m_token);
 	tkpos.setPos(m_token_start);
@@ -1055,14 +1055,14 @@ void Tokenizer::pushback_token(const char* token) {
 	pushback_token(string(token), m_token_start);
 }
 
-void Tokenizer::get_check_token() throw(ParserError) {
+void Tokenizer::get_check_token() {
 	get_token();
 	if (m_token.length() == 0) {
 		throw eof_error();
 	}
 }
 
-void Tokenizer::peek_token(string* token) throw(ParserError) {
+void Tokenizer::peek_token(string* token) {
 	get_check_token();
 	pushback_token();
 	*token = m_token;
@@ -1084,7 +1084,7 @@ void Tokenizer::inc_line() {
 	m_token_count.set_line(m_token_count.getLine()+1);
 }
 
-int Tokenizer::is_next_token(const char* token) throw(ParserError) {
+int Tokenizer::is_next_token(const char* token) {
 	get_token();
 	if (m_token.length() == 0) {
 		return m_token == token;
@@ -1097,7 +1097,7 @@ int Tokenizer::is_next_token(const char* token) throw(ParserError) {
 	}
 }
 
-int Tokenizer::is_next_token_i(const char* token) throw(ParserError) {
+int Tokenizer::is_next_token_i(const char* token) {
 	get_token();
 	if (m_token.length() == 0) {
 		return m_token == token;
@@ -1110,7 +1110,7 @@ int Tokenizer::is_next_token_i(const char* token) throw(ParserError) {
 	}
 }
 
-int Tokenizer::is_next_token_in(const char* charlist) throw(ParserError) {
+int Tokenizer::is_next_token_in(const char* charlist) {
 	get_check_token();
 	if (m_token.length() == 1) {
 		char ch = m_token[0];
@@ -1120,7 +1120,7 @@ int Tokenizer::is_next_token_in(const char* charlist) throw(ParserError) {
 	return -1;
 }
 
-int Tokenizer::ensure_next_token_in(const char* charlist) throw(ParserError) {
+int Tokenizer::ensure_next_token_in(const char* charlist) {
 	get_check_token();
 	if (m_token.length() == 1) {
 		char ch = m_token[0];
@@ -1129,21 +1129,21 @@ int Tokenizer::ensure_next_token_in(const char* charlist) throw(ParserError) {
 	throw error(string("expected one of '") + charlist + "', found '" + m_token + "'");
 }
 
-void Tokenizer::ensure_next_token(const char* token) throw(ParserError) {
+void Tokenizer::ensure_next_token(const char* token) {
 	get_check_token();
 	if (m_token != token) {
 		throw error(string("expected '") + token + "', found '" + m_token + "'");
 	}
 }
 
-void Tokenizer::ensure_next_token_i(const char* token) throw(ParserError) {
+void Tokenizer::ensure_next_token_i(const char* token) {
 	get_check_token();
 	if (!str_i_equals(m_token.c_str(), token)) {
 		throw error(string("expected '") + token + "', found '" + m_token + "'");
 	}
 }
 
-void Tokenizer::ensure_next_token_list(const char* charlist) throw(ParserError) {
+void Tokenizer::ensure_next_token_list(const char* charlist) {
 	char err = 0;
 	int len = strlen(charlist);
 	TokenizerPos start = m_token_start;
@@ -1165,7 +1165,7 @@ void Tokenizer::ensure_next_token_list(const char* charlist) throw(ParserError) 
 	}
 }
 
-char Tokenizer::token_read_sig_char() throw(ParserError) {
+char Tokenizer::token_read_sig_char() {
 	char token_ch;
 	while (1) {
 		do {
@@ -1269,7 +1269,7 @@ void Tokenizer::token_skip_to_end() {
 	}
 }
 
-void Tokenizer::read_till_close_comment() throw(ParserError) {
+void Tokenizer::read_till_close_comment() {
 	TokenizerPos start = m_token_count;
 	int prev_ch = 0;
 	while (1) {
@@ -1361,7 +1361,7 @@ StreamTokenizer::~StreamTokenizer() {
 	close_tokens();
 }
 
-void StreamTokenizer::open_tokens(const char* fname) throw(ParserError) {
+void StreamTokenizer::open_tokens(const char* fname) {
 	m_fb = new filebuf();
 	m_fb->open(fname, ios::in);
 	if (!m_fb->is_open()) {
@@ -1374,7 +1374,7 @@ void StreamTokenizer::open_tokens(const char* fname) throw(ParserError) {
 	m_is = new istream(m_fb);
 }
 
-void StreamTokenizer::open_tokens(const string& fname) throw(ParserError) {
+void StreamTokenizer::open_tokens(const string& fname) {
 	open_tokens(fname.c_str());
 }
 

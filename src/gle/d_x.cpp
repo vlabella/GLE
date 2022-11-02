@@ -431,7 +431,7 @@ void X11GLEDevice::newpath()
 	path_newpath();
 }
 /*---------------------------------------------------------------------------*/
-void X11GLEDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError)
+void X11GLEDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile)
 {
 	gle_nspeed = 2; /* text mode = slow and fast */
 	xsizecm = 16;
