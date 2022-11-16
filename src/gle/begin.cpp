@@ -51,7 +51,7 @@
 void replace_exp(char* exp);
 void replace_exp(string& exp);
 
-double token_next_double(int i) throw(ParserError) {
+double token_next_double(int i) {
 	char* tok = tk[i];
 	if (!is_float(tok)) {
 		stringstream err;

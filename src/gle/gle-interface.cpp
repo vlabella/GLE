@@ -69,8 +69,8 @@ extern string GLE_WORKING_DIR;
 extern string GLE_TOP_DIR;
 
 void init_option_args(CmdLineObj& cmdline);
-void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code) throw(ParserError);
-GLERC<GLEScript> load_gle_code_sub(const char* name, CmdLineObj& cmdline) throw(ParserError);
+void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code);
+GLERC<GLEScript> load_gle_code_sub(const char* name, CmdLineObj& cmdline);
 
 void GLEScaleSimpleLineProperties(double scale, bool dir, GLEPropertyStore* prop);
 void GLEScaleArrowProperties(double scale, bool dir, GLEPropertyStore* prop);
@@ -1065,7 +1065,7 @@ GLEScript* GLEObjectDOConstructor::getScript() {
 }
 
 void output_error(ParserError& err);
-void eval(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp, double *oval, GLEString **ostr, int *otyp) throw(ParserError);
+void eval(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int *cp, double *oval, GLEString **ostr, int *otyp);
 
 GLEObjectDO* GLEObjectDOConstructor::constructObject() {
 	GLEObjectDO* obj = new GLEObjectDO(this);

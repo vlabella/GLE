@@ -220,7 +220,7 @@ void g_get_hei(double *h);
 //void g_gsave(void);
 void g_hint(char *s);
 void g_marker(int i, double sz);
-void g_marker2(int i, double sz, double dval) throw (ParserError);
+void g_marker2(int i, double sz, double dval);
 void g_set_hei(double h);
 bool gclip(double *x1,double *y1, double *x2, double *y2,double xmin, double ymin, double xmax, double ymax);
 void g_pscomment(char* ss);
@@ -237,8 +237,8 @@ GLECore* g_get_core();
 // -- no need to ifdef these
 // they will simply print warning message if libraries are not linked
 //
-void g_bitmap(string& fname, double wx, double wy, int type) throw(ParserError);
-void g_bitmap_info(string& fname, int xvar, int yvar, int type) throw(ParserError);
+void g_bitmap(string& fname, double wx, double wy, int type);
+void g_bitmap_info(string& fname, int xvar, int yvar, int type);
 int g_bitmap_string_to_type(const std::string& stype);
 int g_bitmap_string_to_type(const char* stype);
 string g_bitmap_supported_types();
@@ -249,7 +249,7 @@ void g_elliptical_arc(double rx, double ry, double t1, double t2, double cx, dou
 void g_elliptical_narc(double rx, double ry, double t1, double t2, double cx, double cy, int arrow);
 
 void g_arrowsize(GLEArrowProps* arrow);
-void g_arrowline(double x2, double y2, int flag, int can_fillpath) throw(ParserError);
+void g_arrowline(double x2, double y2, int flag, int can_fillpath);
 
 void g_arrowpoints(double cx,double cy,double dx,double dy, double *ax1,
                    double *ay1,double *ax2,double *ay2, double *nnx, double *nny);
@@ -273,7 +273,7 @@ int g_get_device();
 bool g_is_dummy_device();
 void g_resetfont();
 
-void g_arrow(double dx, double dy, int can_fillpath) throw(ParserError);
+void g_arrow(double dx, double dy, int can_fillpath);
 void g_arrowcurve(double x, double y, int arrow, double a1, double a2, double d1, double d2);
 bool g_has_size();
 void g_set_size(double width, double height, bool box);
@@ -295,8 +295,8 @@ int g_get_pdf_image_format();
 
 int g_get_compatibility();
 void g_set_compatibility(int compat);
-int g_set_compatibility(const string& compat) throw (ParserError);
-int g_parse_compatibility(const string& compat) throw (ParserError);
+int g_set_compatibility(const string& compat);
+int g_parse_compatibility(const string& compat);
 void g_compatibility_settings();
 
 void g_set_iconst(int i, int value);
@@ -323,10 +323,10 @@ void g_dev_rel(GLEPoint* pt);
 void g_dev(GLERectangle* rect);
 void g_undev(GLERectangle* rect);
 void g_undev(GLERectangle* rect, gmodel* g);
-void g_set_arrow_style(const char* shape) throw (ParserError);
-void g_set_arrow_tip(const char* tip) throw (ParserError);
+void g_set_arrow_style(const char* shape);
+void g_set_arrow_tip(const char* tip);
 
-void g_bitmap(GLEBitmap*, double wx, double wy, int type) throw(ParserError);
+void g_bitmap(GLEBitmap*, double wx, double wy, int type);
 
 void g_set_tex_scale(const char* ss);
 void g_set_tex_labels(bool onoff);
@@ -418,7 +418,7 @@ bool g_reset_message();
 void g_move(double zx,double zy);
 void g_set_pos(double zx,double zy);
 void g_newpath(void);
-void g_postscript(char *ss,double w,double h) throw (ParserError);
+void g_postscript(char *ss,double w,double h);
 bool g_parse_ps_boundingbox(const string& line, int* bx1, int* by1, int* bx2, int* by2);
 void g_rdev(double x, double y,double *xd,double *yd);
 void g_reverse(void);

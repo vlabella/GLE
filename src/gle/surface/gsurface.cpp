@@ -69,7 +69,7 @@ void hide_enddefaults(void);
 
 void text_expand(int x);
 void hide_defaults();
-void pass_line() throw(ParserError);
+void pass_line();
 void pass_title();
 void pass_cube();
 void pass_top();
@@ -230,7 +230,7 @@ int geton() {
         return true;
 }
 
-void pass_line() throw(ParserError) {
+void pass_line() {
 	if (ntk<1) return;
 	kw("SIZE") {sf.screenx = getf(); sf.screeny = getf();}
 	else kw("TITLE") pass_title();

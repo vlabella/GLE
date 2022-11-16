@@ -552,7 +552,7 @@ void GLECairoDevice::newpath(void) {
 	cairo_new_path(m_cr);
 }
 
-void GLECairoDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void GLECairoDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 }
 
 void GLECairoDevice::pscomment(char* ss) {
@@ -854,7 +854,7 @@ GLECairoDeviceSVG::GLECairoDeviceSVG(bool showerror) : GLECairoDevice(showerror)
 GLECairoDeviceSVG::~GLECairoDeviceSVG() {
 }
 
-void GLECairoDeviceSVG::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void GLECairoDeviceSVG::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 	m_width = width;
 	m_height = height;
 	m_OutputName.copy(outputfile);
@@ -879,7 +879,7 @@ GLECairoDevicePDF::GLECairoDevicePDF(bool showerror) : GLECairoDevice(showerror)
 GLECairoDevicePDF::~GLECairoDevicePDF() {
 }
 
-void GLECairoDevicePDF::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void GLECairoDevicePDF::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 	clearRecordedData();
 	m_width = width;
 	m_height = height;
@@ -909,7 +909,7 @@ GLECairoDeviceEPS::GLECairoDeviceEPS(bool showerror) : GLECairoDevice(showerror)
 GLECairoDeviceEPS::~GLECairoDeviceEPS() {
 }
 
-void GLECairoDeviceEPS::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void GLECairoDeviceEPS::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 	clearRecordedData();
 	m_width = width;
 	m_height = height;
@@ -1017,7 +1017,7 @@ void GLECairoDeviceEMF::set_matrix(double newmat[3][3]) {
     cairo_set_matrix(m_cr, &matrix);
 }
 
-void GLECairoDeviceEMF::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void GLECairoDeviceEMF::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 	m_width = width;
 	m_height = height;
 	m_OutputName.copy(outputfile);

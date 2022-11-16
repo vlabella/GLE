@@ -370,7 +370,7 @@ void GLEGraphPartBars::drawBar(int b) {
 	}
 }
 
-double graph_bar_pos(double xpos, int bar, int set) throw(ParserError) {
+double graph_bar_pos(double xpos, int bar, int set) {
 	if (set < 1 || set > g_nbar) {
 		g_throw_parser_error("illegal bar set: ", set);
 	}
@@ -392,7 +392,7 @@ double graph_bar_pos(double xpos, int bar, int set) throw(ParserError) {
 	}
 }
 
-void draw_bar(double x, double yf, double yt, double wd, bar_struct* barset, int di, GLEDataSet* toDataSet) throw(ParserError) {
+void draw_bar(double x, double yf, double yt, double wd, bar_struct* barset, int di, GLEDataSet* toDataSet) {
 	/* draw a bar, wd wide, centere at x , from yf, to yt */
 	x = x + wd/2;
 	double x1 = x - wd/2;
@@ -534,7 +534,7 @@ bool should_autorange_based_on_lets() {
 	return false;
 }
 
-void window_set(bool showError) throw(ParserError) {
+void window_set(bool showError) {
 	// Called twice:
 	// - Before processing "let" commands - then "showError = false"
 	// - After processing "let" commands - then "showError = true"
@@ -1341,7 +1341,7 @@ void GLEGraphPartMarkers::drawMarkers(int dn) {
 	}
 }
 
-void draw_mark(double x, double y, int mrk, double msize, double dval, GLEDataSet* ds) throw (ParserError) {
+void draw_mark(double x, double y, int mrk, double msize, double dval, GLEDataSet* ds) {
 	if (ds->contains(x, y)) {
 		g_move(fnXY(x, y, ds));
 		g_marker2(mrk, msize, dval);
@@ -1534,7 +1534,7 @@ public:
 	GLELetDataSet();
 	~GLELetDataSet();
 	void initializeFrom(int dn, int var);
-	void complainNoFunction() throw (ParserError);
+	void complainNoFunction();
 	bool interpolateTo(double x, int lr);
 	inline int getNbValues() { return m_Vals.size(); }
 	inline double getXValue(int i) { return m_Vals[i].x; }
@@ -1608,7 +1608,7 @@ void GLELetDataSet::initializeFrom(int dn, int var) {
 	}
 }
 
-void GLELetDataSet::complainNoFunction() throw (ParserError) {
+void GLELetDataSet::complainNoFunction() {
 	for (unsigned int i = 1; i < m_Vals.size(); i++) {
 		if (m_Vals[i].x == m_Vals[i-1].x) {
 			ostringstream errs;
@@ -2160,12 +2160,12 @@ protected:
 public:
 	GLEFitLS();
 	virtual ~GLEFitLS();
-	void polish(const string& str) throw(ParserError);
+	void polish(const string& str);
 	void setXY(vector<double>* x, vector<double>* y);
 	void fit();
 	void testFit();
 	void setVarsVals(double* vals);
-	void toFunctionStr(const string& format, string* str) throw(ParserError);
+	void toFunctionStr(const string& format, string* str);
 	virtual double fitMSE(double* vals);
 	inline GLEFunctionParserPcode* getFunction() { return m_Function.get(); }
 	inline double getRSquare() { return m_RSquare; }
@@ -2181,7 +2181,7 @@ GLEFitLS::GLEFitLS() {
 GLEFitLS::~GLEFitLS() {
 }
 
-void GLEFitLS::polish(const string& str) throw(ParserError) {
+void GLEFitLS::polish(const string& str) {
 	m_FunctionStr = str;
 	m_Function->polish(str.c_str(), &m_VarMap);
 	/* Iterate over variables in expression */
@@ -2264,7 +2264,7 @@ double GLEFitLS::fitMSE(double* vals) {
 	return tot / m_X->size();
 }
 
-void GLEFitLS::toFunctionStr(const string& format, string* str) throw(ParserError) {
+void GLEFitLS::toFunctionStr(const string& format, string* str) {
 	*str = "";
 	string fmt_str = format;
 	if (fmt_str == "") fmt_str = "fix 3";
@@ -2328,12 +2328,12 @@ public:
 	~GLELet();
 	void initVars();
 	void initStep();
-	void doLet() throw(ParserError);
-	void parseFitFunction(const string& fct, GLEParser* parser) throw(ParserError);
-	void parseHistogram(GLEParser* parser) throw(ParserError);
-	void doFitFunction() throw(ParserError);
-	void doHistogram() throw(ParserError);
-	void complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets) throw(ParserError);
+	void doLet();
+	void parseFitFunction(const string& fct, GLEParser* parser);
+	void parseHistogram(GLEParser* parser);
+	void doFitFunction();
+	void doHistogram();
+	void complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets);
 	bool checkIdenticalRanges(GLEVectorAutoDelete<GLELetDataSet>& datasets);
 	void transformIdenticalRangeDatasets(GLEVectorAutoDelete<GLELetDataSet>& datasets, DataFill* fill);
 	void combineFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets, DataFill* fill, double logstep);
@@ -2566,7 +2566,7 @@ void GLELet::combineFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets, Data
 	}
 }
 
-void GLELet::complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets) throw(ParserError) {
+void GLELet::complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets) {
 	for (unsigned int i = 0; i < datasets.size(); i++) {
 		if (!datasets[i]->isFunction()) {
 			datasets[i]->complainNoFunction();
@@ -2574,7 +2574,7 @@ void GLELet::complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datase
 	}
 }
 
-void GLELet::doLet() throw(ParserError) {
+void GLELet::doLet() {
 	if (m_LetTo <= m_LetFrom) {
 		stringstream ss;
 		ss << "illegal range for let expression: ";
@@ -2687,7 +2687,7 @@ void GLELet::doLet() throw(ParserError) {
 	vars->setNameMode(nameMode::NAME);
 }
 
-void GLELet::parseFitFunction(const string& fct, GLEParser* parser) throw(ParserError) {
+void GLELet::parseFitFunction(const string& fct, GLEParser* parser) {
 	Tokenizer* tokens = parser->getTokens();
 	string& token = tokens->next_token();
 	m_FitDS = get_dataset_identifier(token, parser, true);
@@ -2757,7 +2757,7 @@ void GLELet::parseFitFunction(const string& fct, GLEParser* parser) throw(Parser
 	}
 }
 
-void GLELet::doFitFunction() throw(ParserError) {
+void GLELet::doFitFunction() {
 	bool linfit = false, logefit = false, log10fit = false, powxfit = false, genfit = false;
 	// doing fitting routines
 	if (str_i_equals(m_fitType, "LINFIT"))   linfit = true;
@@ -2921,7 +2921,7 @@ void GLELet::doFitFunction() throw(ParserError) {
 	delete let;
 }
 
-void GLELet::parseHistogram(GLEParser* parser) throw(ParserError) {
+void GLELet::parseHistogram(GLEParser* parser) {
 	Tokenizer* tokens = parser->getTokens();
 	string& token = tokens->next_token();
 	m_nrBins = -1;
@@ -2947,7 +2947,7 @@ void GLELet::parseHistogram(GLEParser* parser) throw(ParserError) {
 	}
 }
 
-void GLELet::doHistogram() throw(ParserError) {
+void GLELet::doHistogram() {
 	int bins = m_nrBins;
 	GLEDataPairs histData(getDataset(m_HistDS));
 	if (!hasFrom() || !hasTo()) {
@@ -3040,7 +3040,7 @@ void deleteLet(GLELet* let) {
 //  no option after linfit results in line being drawn over the whole graph
 // DATA results in the line being drawn from the minimum to the maximum of the data series
 
-GLELet* parseLet(GLEParser* parser, int codeLine) throw(ParserError) {
+GLELet* parseLet(GLEParser* parser, int codeLine) {
 	GLELet* let = new GLELet();
 	let->setCodeLine(codeLine);
 	Tokenizer* tokens = parser->getTokens();
@@ -3133,19 +3133,19 @@ GLELet* parseLet(GLEParser* parser, int codeLine) throw(ParserError) {
 	return let;
 }
 
-GLELet* parseLet(GLESourceLine& sline) throw(ParserError) {
+GLELet* parseLet(GLESourceLine& sline) {
 	GLEParser* parser = get_global_parser();
 	parser->setString(sline.getCodeCStr());
 	return parseLet(parser, sline.getGlobalLineNo());
 }
 
-GLELet* parseLet(const string& letFct, int codeLine) throw(ParserError) {
+GLELet* parseLet(const string& letFct, int codeLine) {
 	GLEParser* parser = get_global_parser();
 	parser->setString(letFct.c_str());
 	return parseLet(parser, codeLine);
 }
 
-void doLet(GLELet* let, bool nofirst) throw(ParserError) {
+void doLet(GLELet* let, bool nofirst) {
 	g_set_error_line(let->getCodeLine());
 	let->setNoFirst(nofirst);
 	let->setFineTune(nofirst);
@@ -3255,7 +3255,7 @@ void fixup_err(string& err) {
 	}
 }
 
-void do_dataset(int d, GLEGraphBlockInstance* graphBlock) throw(ParserError) {
+void do_dataset(int d, GLEGraphBlockInstance* graphBlock) {
 	int ct = 2;
 	while (ct <= ntk)	{
 		kw("LINE") {
@@ -3624,7 +3624,7 @@ void get_dataset_ranges() {
 	}
 }
 
-void do_bigfile_compatibility_dn(int dn) throw(ParserError) {
+void do_bigfile_compatibility_dn(int dn) {
 	string infile = dp[dn]->bigfile;
 	if (infile.length() >= 1 && infile[infile.length()-1] == '$') {
 		int idx, typ;
@@ -3736,7 +3736,7 @@ void do_bigfile_compatibility_dn(int dn) throw(ParserError) {
 	dp[dn]->fromData(xp, yp, miss);
 }
 
-void do_bigfile_compatibility() throw(ParserError) {
+void do_bigfile_compatibility() {
 	for (int dn = 1; dn <= ndata; dn++) {
 		if (dp[dn] != NULL) {
 			if (dp[dn]->bigfile != NULL) {
@@ -4325,7 +4325,7 @@ vector<int> GLEDataSet::getMissingValues() {
 	return result;
 }
 
-void GLEDataSet::checkRanges() throw(ParserError) {
+void GLEDataSet::checkRanges() {
 	// when parsing "let" -> already create dataset with ensureCreate...
 	// so that dn command applies to it
 	copyRangeIfRequired(GLE_DIM_X);

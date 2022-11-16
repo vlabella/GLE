@@ -72,7 +72,7 @@ char *un_quote(char *ct);
 
 #define skipspace doskip(tk[ct],&ct)
 
-void begin_config(const std::string& block, int *pln, int *pcode, int *cp) throw(ParserError) {
+void begin_config(const std::string& block, int *pln, int *pcode, int *cp) {
 	string block_name(block);
 	ConfigSection* section = g_Config.getSection(block_name);
 	if (section == NULL) {

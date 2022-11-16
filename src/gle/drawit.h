@@ -36,5 +36,5 @@
  *                                                                      *
  ************************************************************************/
 
-void CompileGLE(const string& output_file, GLEGlobalSource &glecode, CmdLineObj* cmdline, bool silent) throw(ParserError);
-void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bool silent = false) throw (ParserError);
+void CompileGLE(const string& output_file, GLEGlobalSource &glecode, CmdLineObj* cmdline, bool silent);
+void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bool silent = false);

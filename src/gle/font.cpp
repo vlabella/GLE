@@ -46,7 +46,7 @@
 
 int text_gprint(int *in,int ilen);
 int fftext_block(uchar *s,double width,int justify);
-void font_load(void) throw (ParserError);
+void font_load(void);
 void font_init(void);
 
 int do_prim(uchar **in,int *out,int *lout);  /*  \frac{text}{text} */
@@ -140,7 +140,7 @@ void font_get_chardata(struct char_data *cd, int ff, int cc) {
 	}
 }
 
-void font_load(void) throw(ParserError) {
+void font_load(void) {
 	/* load font.dat */
 	char inbuff[200];
 	string fname = fontdir("font.dat");

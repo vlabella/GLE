@@ -355,7 +355,7 @@ void sub_get_startend(int idx, int *ss, int *ee) {
 	*ee = sub->getEnd();
 }
 
-GLESub* sub_get(int idx) throw(ParserError) {
+GLESub* sub_get(int idx) {
 	if (!sub_is_valid(idx)) {
 		g_throw_parser_error("illegal subroutine identifier: ", idx);
 	}
@@ -372,7 +372,7 @@ std::cerr << std::endl;
 */
 
 /* 	Run a user defined function  */
-void GLERun::sub_call_stack(GLESub* sub, GLEArrayImpl* stk) throw(ParserError) {
+void GLERun::sub_call_stack(GLESub* sub, GLEArrayImpl* stk) {
 	// Save current return value
 	//gprint(sub->getName());
 	GLEMemoryCell save_return_value;
@@ -406,7 +406,7 @@ void GLERun::sub_call_stack(GLESub* sub, GLEArrayImpl* stk) throw(ParserError) {
 }
 
 /* 	Run a user defined function  */
-void GLERun::sub_call(GLESub* sub, GLEArrayImpl* arguments) throw(ParserError) {
+void GLERun::sub_call(GLESub* sub, GLEArrayImpl* arguments) {
 	GLEMemoryCell save_return_value;
 	GLE_MC_INIT(save_return_value);
 	GLE_MC_COPY(&save_return_value, &m_returnValue);
@@ -436,7 +436,7 @@ void GLERun::sub_call(GLESub* sub, GLEArrayImpl* arguments) throw(ParserError) {
 	var_free_local();
 }
 
-void call_sub_byname(const string& name, double* args, int nb, const char* err_inf) throw(ParserError) {
+void call_sub_byname(const string& name, double* args, int nb, const char* err_inf) {
 	GLESub* sub = sub_find(name);
 	if (sub == NULL)  {
 		stringstream err;
@@ -453,7 +453,7 @@ void call_sub_byname(const string& name, double* args, int nb, const char* err_i
 	getGLERunInstance()->sub_call(sub, stk.get());
 }
 
-void call_sub_byid(int idx, double* args, int nb, const char* err_inf) throw(ParserError) {
+void call_sub_byid(int idx, double* args, int nb, const char* err_inf) {
 	GLESub* sub = sub_get(idx);
 	if (sub == NULL) return;
 	if (sub->getNbParam() != nb) {

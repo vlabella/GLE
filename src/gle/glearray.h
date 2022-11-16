@@ -102,7 +102,7 @@ protected:
 public:
 	GLEZData();
 	~GLEZData();
-	void read(const string& fname) throw(ParserError);
+	void read(const string& fname);
 	inline double getZMin() { return m_ZMin; }
 	inline double getZMax() { return m_ZMax; }
 	inline GLERectangle* getBounds() { return &m_XYBounds; }

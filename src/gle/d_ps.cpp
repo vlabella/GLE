@@ -178,7 +178,7 @@ FILE* PSGLEDevice::get_file_pointer(void) {
 	return psfile;
 }
 
-void PSGLEDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) throw(ParserError) {
+void PSGLEDevice::opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) {
 	first_ellipse = 1;
 	m_OutputName.copy(outputfile);
 	m_OutputName.addExtension(g_device_to_ext(getDeviceType()));

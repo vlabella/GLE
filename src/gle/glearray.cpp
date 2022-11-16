@@ -208,7 +208,7 @@ GLEZData::~GLEZData() {
 	if (m_Data != NULL) delete[] m_Data;
 }
 
-void GLEZData::read(const string& fname) throw(ParserError) {
+void GLEZData::read(const string& fname) {
 	string expanded(GLEExpandEnvironmentVariables(fname));
 	validate_file_name(expanded, false);
 	TokenizerLanguage lang;

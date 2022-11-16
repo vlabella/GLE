@@ -99,7 +99,7 @@ public:
 	inline double getDataY(int i) { return m_YPt[i]; }
 	inline double* getDataXArray() { return &m_XPt[0]; }
 	inline double* getDataYArray() { return &m_YPt[0]; }
-	inline void read(const string& fname) throw(ParserError) { m_Data.read(fname); }
+	inline void read(const string& fname) { m_Data.read(fname); }
 	inline GLERectangle* getBounds() { return m_Data.getBounds(); }
 	inline int getNX() { return m_Data.getNX(); }
 	inline int getNY() { return m_Data.getNY(); }
@@ -119,7 +119,7 @@ public:
 	void addVect(int m, double x, double y);
 	void fillDefault(double zmin, double zmax, double zdel);
 	void createLabels(bool alpha);
-	void openData(const string& name, const string& lab) throw(ParserError);
+	void openData(const string& name, const string& lab);
 	void closeData();
 	void doContour(double zz[], int nrz, int nx, int ny, double zmax);
 	void draw(double* x, double* y, int iflag);
@@ -181,7 +181,7 @@ void GLEContourInfo::createLabels(bool alpha) {
 	}
 }
 
-void GLEContourInfo::openData(const string& name, const string& lab) throw(ParserError) {
+void GLEContourInfo::openData(const string& name, const string& lab) {
 	m_DatFile = validate_fopen(name, "w", false);
 	m_LabFile = validate_fopen(lab, "w", false);
 }
@@ -327,7 +327,7 @@ void GLEContourInfo::addVect(int m, double x, double y) {
 	}
 }
 
-void get_contour_values(GLEContourInfo* info, int ct) throw(ParserError) {
+void get_contour_values(GLEContourInfo* info, int ct) {
 	double from, to, step;
 	bool has_from = false;
 	bool has_to = false;
@@ -355,7 +355,7 @@ void get_contour_values(GLEContourInfo* info, int ct) throw(ParserError) {
 	}
 }
 
-void begin_contour(int *pln, int *pcode, int *cp) throw(ParserError) {
+void begin_contour(int *pln, int *pcode, int *cp) {
 	string data_file;
 	vector<double> cval;
 	vector<string> clab;

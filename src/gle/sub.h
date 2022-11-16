@@ -218,11 +218,11 @@ public:
 	inline int size() { return m_Subs.size(); }
 };
 
-GLESub* sub_get(int idx) throw(ParserError);
+GLESub* sub_get(int idx);
 GLESub* sub_find(const string& s);
 void sub_param(GLESub* sub, const string& name);
 
-void call_sub_byname(const string& name, double* args, int nb, const char* err_inf) throw(ParserError);
-void call_sub_byid(int idx, double* args, int nb, const char* err_inf) throw(ParserError);
+void call_sub_byname(const string& name, double* args, int nb, const char* err_inf);
+void call_sub_byid(int idx, double* args, int nb, const char* err_inf);
 
 #endif

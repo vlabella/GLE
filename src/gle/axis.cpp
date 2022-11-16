@@ -55,7 +55,7 @@
 double start_subtick(double dsubticks, double dticks, GLEAxis* ax);
 void nice_ticks(double *dticks, double *gmin,double *gmax, double *t1,double *tn,int minset, int maxset);
 void numtrim(char **d,char *s, double dticks);
-void nice_log_ticks(double *start, double *last, double gmin, double gmax) throw (ParserError);
+void nice_log_ticks(double *start, double *last, double gmin, double gmax);
 
 double fnloglen(double v, GLEAxis *ax);
 double fnlogx(double v, GLEAxis *ax);
@@ -872,7 +872,7 @@ void draw_axis_titles_v35(GLEAxis *ax, double h, double ox, double oy, double dt
 	g_grestore();
 }
 
-void nice_log_ticks(double *start, double *last, double gmin, double gmax) throw (ParserError) {
+void nice_log_ticks(double *start, double *last, double gmin, double gmax) {
 	if (gmin <= 0 || gmax <= 0) {
 		stringstream err;
 		err << "illegal range for log axis: min = ";
@@ -1120,7 +1120,7 @@ int axis_type(const char *s) {
 	return GLE_AXIS_ALL;
 }
 
-int axis_type_check(const char *s) throw (ParserError) {
+int axis_type_check(const char *s) {
 	int type = axis_type(s);
 	if (type == GLE_AXIS_ALL) {
 		ostringstream err;

@@ -104,28 +104,28 @@ TeXInterface::~TeXInterface() {
 	}
 }
 
-TeXObject* TeXInterface::draw(const char* str) throw(ParserError) {
+TeXObject* TeXInterface::draw(const char* str) {
 	TeXObjectInfo info;
 	return draw(str, info, 1);
 }
 
-TeXObject* TeXInterface::draw(const std::string& str, GLERectangle* box) throw(ParserError) {
+TeXObject* TeXInterface::draw(const std::string& str, GLERectangle* box) {
 	TeXObjectInfo info;
 	return draw(str.c_str(), info, 1, box);
 }
-TeXObject* TeXInterface::drawUTF8(const char* str, GLERectangle* box) throw(ParserError) {
+TeXObject* TeXInterface::drawUTF8(const char* str, GLERectangle* box) {
 	TeXObjectInfo info;
 	string utf8 = str;
 	decode_utf8_basic(utf8);
 	return draw(utf8.c_str(), info, 1, box);
 }
 
-TeXObject* TeXInterface::draw(const char* str, int nblines, GLERectangle* box) throw(ParserError) {
+TeXObject* TeXInterface::draw(const char* str, int nblines, GLERectangle* box) {
 	TeXObjectInfo info;
 	return draw(str, info, nblines, box);
 }
 
-TeXObject* TeXInterface::draw(const char* str, TeXObjectInfo& info, int nblines, GLERectangle* box) throw(ParserError) {
+TeXObject* TeXInterface::draw(const char* str, TeXObjectInfo& info, int nblines, GLERectangle* box) {
 	/* Load hash */
 	tryLoadHash();
 	/* Get object from hash */
@@ -166,7 +166,7 @@ void TeXInterface::scaleObject(string& obj_str, double hei) {
 	}
 }
 
-TeXObject* TeXInterface::drawObj(TeXHashObject* hobj, TeXObjectInfo& info, GLERectangle* box) throw(ParserError) {
+TeXObject* TeXInterface::drawObj(TeXHashObject* hobj, TeXObjectInfo& info, GLERectangle* box) {
 	/* Throw exception if disabled*/
 	if (!isEnabled()) {
 		g_throw_parser_error("safe mode - TeX subsystem has been disabled");
