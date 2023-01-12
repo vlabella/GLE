@@ -2,9 +2,9 @@
 
 GLE (Graphics Layout Engine) is a graphics scripting language designed for creating publication quality graphs, plots, diagrams, figures and slides. GLE supports various graph types (function plots, histograms, bar graphs, scatter plots, contour lines, color maps, surface plots, ...) through a simple but flexible set of graphing commands. More complex output can be created by relying on GLE's scripting language, which is full featured with subroutines, variables, and logic control. GLE relies on LaTeX for text output and supports mathematical formulea in graphs and figures. GLE's output formats include EPS, PS, PDF, JPEG, and PNG.
 
-This repo contains the source code to build the executables for the GLE package.  The manual, samples, and library of gle routines are in separate repositories.
+This repo contains the source code to build the executables for GLE.  The manual and library of GLE routines and samples that are distributed with the binary packages are contained in separate repositories here: [gle-manual](https://github.com/vlabella/gle-manual) and [gle-library](https://github.com/vlabella/gle-library).
 
-More information can be found on the gle website here http://glx.sourceforge.io.  Binary distributions can be found there as well.
+More information and the binary distributions can be found on the GLE website here http://glx.sourceforge.io or using the link below.
 
 [![Download GLE - Graphics Layout Engine](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/glx/files/latest/download)
 
