@@ -387,7 +387,7 @@ QString QGLE::GetExeName()
 		name[res] = 0;
 		result = name;
 	}
-#elif defined Q_OS_LINUX
+#elif defined(Q_OS_HURD) || defined Q_OS_LINUX
 	return(QFileInfo("/proc/self/exe").readLink());
 #else
 	return(QApplication::applicationFilePath());
@@ -420,7 +420,7 @@ QRegExp QGLE::fileRegExp()
 #ifdef Q_OS_WIN32
 	QRegExp rx("(file:///)?(.*\\.(?:gle|eps))", Qt::CaseInsensitive);
 #else
-//#elif defined(Q_OS_LINUX)
+//#elif defined(Q_OS_HURD) || defined(Q_OS_LINUX)
 	QRegExp rx("(file://)?(.*\\.(?:gle|eps))", Qt::CaseInsensitive);
 #endif
 	return(rx);
@@ -445,7 +445,7 @@ QString QGLE::gsLibFileName()
 			return(QObject::tr("gsdll32.dll"));
 		#endif
 	#endif
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_HURD) || defined(Q_OS_LINUX)
 	return(QObject::tr("libgs.so"));
 #elif defined(Q_OS_MACOS)
 	return(QObject::tr("libgs.dylib"));
@@ -458,7 +458,7 @@ QString QGLE::libraryFilter()
 {
 #ifdef Q_OS_WIN32
 	return(QObject::tr("DLLs (*.dll)"));
-#elif defined(Q_OS_LINUX)
+#elif defined(Q_OS_HURD) || defined(Q_OS_LINUX)
 	return(QObject::tr("Shared objects (*.so*)"));
 #elif defined(Q_OS_MACOS)
 	return(QObject::tr("Dynamic libraries (*.dylib);; Ghostscript framework (*)"));
@@ -482,7 +482,7 @@ QString QGLE::executableFilter()
 #ifdef Q_OS_WIN32
 	return(QObject::tr("Executables (*.exe)"));
 #else
-//#elif defined(Q_OS_LINUX)
+//#elif defined(Q_OS_HURD) || defined(Q_OS_LINUX)
 	return(QObject::tr("All files (*)"));
 #endif
 }
