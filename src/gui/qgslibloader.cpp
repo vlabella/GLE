@@ -256,7 +256,7 @@ void GSLibFunctions::freeLibrary() {
 
 #endif
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+#if defined(Q_OS_HURD) || defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
 
 #include <dlfcn.h>
 
@@ -292,6 +292,9 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 	gsapi_revision_t rv;
 	/* Try to load the library */
 	if (location == "") {
+		#ifdef Q_OS_HURD
+		tryLocationLoop("/usr/lib/i386-gnu/");
+		#endif // HURD
 		#ifdef Q_OS_LINUX
 		#if defined(__x86_64__) || defined(__ppc64__) || defined (__s390x__) || defined (__sparc64__)
 		// try 64 bit libraries on 64 bit system
