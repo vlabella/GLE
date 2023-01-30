@@ -53,13 +53,16 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 	qgle.qrc
 	$<$<PLATFORM_ID:Windows>:qgle.rc>
 )
-# no jpeg as its contianed in Qt
+# no jpeg as its contained in Qt
+# but need to add JPEG for Linux!
+# order matters: first static files (and libgle), then dynamic libraries
 target_link_libraries ( qgle LINK_PUBLIC 
+	libgle-graphics_s
 	${ZLIB_LIBRARIES}
+	${JPEG_LIBRARIES}
 	${TIFF_LIBRARIES}
 	${PNG_LIBRARIES}
 	${PIXMAN_LIBRARIES}
-	libgle-graphics_s
 	Qt::Core
 	Qt::Gui
 	Qt::Network

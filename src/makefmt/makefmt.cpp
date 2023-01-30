@@ -114,8 +114,8 @@ int find_accent(const string& accent) {
 }
 
 int main(int argc, char *argv[]) {
-	char filename[80];
-	char fmtname[80];
+	char filename[200];
+	char fmtname[200];
 	init_accents();
 	/* encoding file given? */
 	int argpos = 1;
