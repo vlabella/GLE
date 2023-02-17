@@ -33,30 +33,26 @@
 
 
 # endif()
-# add_custom_target(inittex ALL DEPENDS 
+# add_custom_target(inittex ALL DEPENDS
 # 	${OUTPUT_DIR}/inittex.ini
 # 	gle
 # )
 
-# install(FILES 
-# 	${OUTPUT_DIR}/inittex.ini 
+# install(FILES
+# 	${OUTPUT_DIR}/inittex.ini
 # 	${OUTPUT_DIR}/init.tex
 # 	CONFIGURATIONS Release Debug
-# 	DESTINATION . 
+# 	DESTINATION .
 # )
 
-install(FILES 
+install(FILES
 	init.tex
- 	CONFIGURATIONS Release Debug
- 	DESTINATION . 
+	CONFIGURATIONS Release Debug
+ 	DESTINATION .
 )
 # make the inittex.ini in the install folder
-install(CODE "execute_process(COMMAND ${CMAKE_INSTALL_PREFIX}/bin/gle$<$<CONFIG:Debug>:d> -mkinittex)")
-# explicity install inittex.ini for cpack even though its created in this directory
-# from gle -mkinittex command above
-install(FILES 
-	${CMAKE_INSTALL_PREFIX}/inittex.ini
- 	CONFIGURATIONS Release Debug
- 	DESTINATION . 
+install(CODE
+	"execute_process(COMMAND ${CMAKE_INSTALL_PREFIX}/bin/gle$<$<CONFIG:Debug>:d> -mkinittex)"
 )
+
 

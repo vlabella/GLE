@@ -7,7 +7,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 COMPONENTS 
+find_package(Qt5 COMPONENTS
 	Widgets
 	Network
 	DBus
@@ -53,14 +53,20 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 	qgle.qrc
 	$<$<PLATFORM_ID:Windows>:qgle.rc>
 )
-# no jpeg as its contained in Qt
-# but need to add JPEG for Linux!
+#
+# - care must be taken with library order for Linux
+#
 # order matters: first static files (and libgle), then dynamic libraries
-target_link_libraries ( qgle LINK_PUBLIC 
+list(APPEND QGLE_LIBRARIES
 	libgle-graphics_s
 	${ZLIB_LIBRARIES}
-	${JPEG_LIBRARIES}
-	${TIFF_LIBRARIES}
+)
+if(UNIX AND NOT APPLE)
+	list(APPEND QGLE_LIBRARIES
+	${JPEG_LIBRARIES} # contained in Qt on windows and MacOS
+	)
+endif()
+list(APPEND QGLE_LIBRARIES
 	${PNG_LIBRARIES}
 	${PIXMAN_LIBRARIES}
 	Qt::Core
@@ -69,33 +75,40 @@ target_link_libraries ( qgle LINK_PUBLIC
 	Qt::Widgets
 	Qt::OpenGL
 	${CAIRO_LIBRARIES}
+)
+if(UNIX AND NOT APPLE)
+	list(APPEND QGLE_LIBRARIES
+ 		glut
+ 		GLU
+ 		GL
+# 		Qt5::QWaylandIntegrationPlugin
+	)
+endif()
+if(WIN32)
+	list(APPEND QGLE_LIBRARIES
+	 msimg32.lib
+	 opengl32.lib
+	 glu32.lib
+	)
+endif()
+
+target_link_libraries ( qgle LINK_PUBLIC
+	TIFF::TIFF
+	${QGLE_LIBRARIES}
 	)
 
 if(UNIX AND NOT APPLE)
- 	target_link_libraries ( qgle LINK_PUBLIC 
- 		glut
- 		GLU
- 		GL 
-# 		Qt5::QWaylandIntegrationPlugin
- 	)
  	target_link_options(qgle PUBLIC -no-pie)
 	qt_import_plugins( qgle
   		INCLUDE_BY_TYPE platforms
 	)
 endif()
 
-if(WIN32)
-	target_link_libraries(qgle LINK_PUBLIC 
-	 msimg32.lib 
-	 opengl32.lib
-	 glu32.lib
-	)
-endif()
 if(APPLE)
-	#openGL is depricated on OSX starting 10.9 this silences the warning
+	#openGL is deprecated on OSX starting 10.9 this silences the warning
 	add_compile_definitions(Q_OS_APPLE)
 	add_compile_options(-Wno-deprecated-declarations)
-	target_link_libraries ( qgle LINK_PUBLIC 
+	target_link_libraries ( qgle LINK_PUBLIC
 	lzma
 	"-framework AppKit"
 	"-framework GSS"
@@ -107,6 +120,6 @@ if(APPLE)
     "-framework Carbon"
 	)
 endif()
-set_target_properties(qgle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}) 
+set_target_properties(qgle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 install(TARGETS qgle RUNTIME BUNDLE DESTINATION bin )

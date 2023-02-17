@@ -113,22 +113,58 @@ endif()
 
 
 target_link_libraries ( gle LINK_PUBLIC
+	TIFF::TIFF
 	${ZLIB_LIBRARIES}
 	${JPEG_LIBRARIES}
-	${TIFF_LIBRARIES}
 	${PNG_LIBRARIES}
 	${CAIRO_LIBRARIES}
 	${PIXMAN_LIBRARIES}
 	)
 
 target_link_libraries ( libgle-graphics LINK_PUBLIC
+	TIFF::TIFF
 	${ZLIB_LIBRARIES}
 	${JPEG_LIBRARIES}
-	${TIFF_LIBRARIES}
 	${PNG_LIBRARIES}
 	${CAIRO_LIBRARIES}
 	${PIXMAN_LIBRARIES}
 	)
+
+if(ZSTD_FOUND)
+	target_link_libraries ( gle LINK_PUBLIC
+ 		zstd::libzstd_static
+ 	)
+ 	target_link_libraries ( libgle-graphics LINK_PUBLIC
+ 		zstd::libzstd_static
+ 	)
+endif()
+
+if(DEFLATE_FOUND)
+	target_link_libraries ( gle LINK_PUBLIC
+		${DEFLATE_LIBRARIES}
+	)
+	target_link_libraries ( libgle-graphics LINK_PUBLIC
+		${DEFLATE_LIBRARIES}
+	)
+endif()
+
+if(JBIG_FOUND)
+	target_link_libraries ( gle LINK_PUBLIC
+		JBIG::JBIG
+	)
+	target_link_libraries ( libgle-graphics LINK_PUBLIC
+		JBIG::JBIG
+	)
+endif()
+
+if(LibLZMA_FOUND)
+	target_link_libraries ( gle LINK_PUBLIC
+		${LIBLZMA_LIBRARIES}
+	)
+	target_link_libraries ( libgle-graphics LINK_PUBLIC
+		${LIBLZMA_LIBRARIES}
+	)
+endif()
 
 if(WIN32)
 	target_link_libraries ( libgle-graphics LINK_PUBLIC
