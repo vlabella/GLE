@@ -153,6 +153,7 @@ protected:
 	unsigned int m_firstColumn;
 	unsigned int m_nextLine;
 	unsigned int m_ignoreHeader;
+	unsigned int m_numrows;
 	GLECSVError m_error;
 	string m_fileName;
 	string m_comment;
@@ -166,6 +167,7 @@ public:
 	void setDelims(const char* delims);
 	void setCommentIndicator(const char* comment);
 	void setIgnoreHeader(unsigned int ignore);
+	void setNumrows(signed int numrows);
 	GLECSVError* getError();
 	unsigned int getNbLines();
 	unsigned int getNbColumns(unsigned int line);
