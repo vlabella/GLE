@@ -339,6 +339,7 @@ GLECSVData::GLECSVData() {
 	initDelims();
 	m_lines = 0;
 	m_ignoreHeader = 0;
+	m_numrows = 0;
 	m_nextLine = true;
 	m_firstColumn = 0;
 	m_error.errorCode = GLECSVErrorNone;
@@ -499,6 +500,9 @@ void GLECSVData::parseBlock() {
 	GLECSVDataStatus status = ignoreHeader();
 	while (status != GLECSVDataStatusEOF) {
 		status = readCell();
+		if (m_nextLine && m_numrows && (m_firstCell.size() >= m_numrows)) {
+			break;
+		}
 	}
 }
 
@@ -521,6 +525,10 @@ void GLECSVData::setCommentIndicator(const char* comment) {
 
 void GLECSVData::setIgnoreHeader(unsigned int ignore) {
 	m_ignoreHeader = ignore;
+}
+
+void GLECSVData::setNumrows(signed int numrows) {
+	m_numrows = numrows;
 }
 
 void GLECSVData::initDelims() {
