@@ -1,3 +1,10 @@
+4.3.4 (March 2023)
+    - built with latest compilers and libraries on all platforms (boost 1.81.0, qt 5.15.8, et al.)
+    - added numrows feature to graph data command to limit number of data rows read (R. Machulka)
+    - improvements to feyn.gle package (A. Grozin)
+    - clarifications and improvements to manual (V. LaBella, A. Grozin)
+    - build improvements with cmake, will find ztd and jbig for libtiff if available, and other OS specific tweaks (V. LaBella, C. Steigies, A. Grozin, adalbosco)
+
 4.3.3 (April 2022)
     - changed www.gle-graphics.org to glx.sourceforge.net everywhere
     - replace old ghostscript URL with www.ghostscript.com
