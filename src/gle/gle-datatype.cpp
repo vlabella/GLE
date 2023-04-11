@@ -125,6 +125,42 @@ bool gle_memory_cell_to_double(GLEMemoryCell* a, double* result) {
 	}
 }
 
+bool gle_memory_cell_add(GLEMemoryCell* a, GLEMemoryCell* b) {
+	// add b to a  a = a+b
+	/*
+	if (a->Type != b->Type) return false;
+	int a_type = gle_memory_cell_type(a);
+	int b_type = gle_memory_cell_type(b);
+	if (a_type == b_type) {
+		switch (a_type) {
+			case GLEObjectTypeDouble:
+				eval_binary_operator_double(stk, op, a->Entry.DoubleVal, b->Entry.DoubleVal);
+				break;
+			case GLEObjectTypeString:
+				eval_binary_operator_string(stk, op, (GLEString*)a->Entry.ObjectVal, (GLEString*)b->Entry.ObjectVal);
+				break;
+			case GLEObjectTypeBool:
+				eval_binary_operator_bool(stk, op, a->Entry.BoolVal, b->Entry.BoolVal);
+				break;
+			default:
+				complain_operator_type(op, a_type);
+				break;
+		}
+		*/
+	switch (a->Type) {
+		case GLE_MC_INT:
+			return a->Entry.IntVal += b->Entry.IntVal;
+		case GLE_MC_DOUBLE:
+			return a->Entry.DoubleVal += b->Entry.DoubleVal;
+		//case GLE_MC_OBJECT: // should work for string but fail for other types???
+			//GLEString *aa,*bb;
+			//aa = reinterpret_cast<GLEString*> a->Entry.ObjectVal;
+			//bb = (GLEString*) b->Entry.ObjectVal;
+			//return aa->concat(bb);
+	}
+	return false;
+}
+
 int gle_memory_cell_type(GLEMemoryCell* a) {
 	switch (a->Type) {
 		case GLE_MC_UNKNOWN: return GLEObjectTypeUnknown;

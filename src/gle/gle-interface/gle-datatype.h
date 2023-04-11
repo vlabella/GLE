@@ -142,6 +142,7 @@ inline void GLE_MC_COPY(GLEMemoryCell* a, GLEMemoryCell* b) {
 }
 
 bool gle_memory_cell_equals(GLEMemoryCell* a, GLEMemoryCell* b);
+bool gle_memory_cell_add(GLEMemoryCell* a, GLEMemoryCell* b);
 void gle_memory_cell_print(GLEMemoryCell* a, ostream& out);
 bool gle_memory_cell_to_double(GLEMemoryCell* a, double* result);
 void gle_memory_cell_check(GLEMemoryCell* a, int expected);

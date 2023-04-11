@@ -58,7 +58,7 @@ extern int gle_debug;
 #include "fn.h"
 
 /*---------------------------------------------------------------------------*/
-/* bin = 10..29, binstr = 30..49, fn= 60...139, userfn=LOCAL_START_INDEX..nnn */
+/* bin = 10..29  (now 31), binstr = 30..49, fn= 60...139, userfn=LOCAL_START_INDEX..nnn */
 #define stack_bin(i,p) stack_op(pcode, stk, stkp, &nstk, i + BINARY_OPERATOR_OFFSET, p + curpri)
 #define stack_fn(i)    stack_op(pcode, stk, stkp, &nstk, i + FN_BUILTIN_MAGIC, 10 + curpri)
 #define dbg if ((gle_debug & 4)>0)
@@ -88,7 +88,13 @@ void GLEPolish::initTokenizer() {
 	lang->addLanguageElem(0, "<=");
 	lang->addLanguageElem(0, ">=");
 	lang->addLanguageElem(0, "<>");
-	lang->addLanguageElem(0, "**");
+	// -- additions for shortcut operators (also see pass.cpp)
+	lang->addLanguageElem(0, "+=");
+	lang->addLanguageElem(0, "-=");
+	lang->addLanguageElem(0, "*=");
+	lang->addLanguageElem(0, "/=");
+	lang->addLanguageElem(0, "++");
+	lang->addLanguageElem(0, "--");
 	m_tokens.select_language(0);
 }
 
@@ -165,7 +171,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 		int token_col = m_tokens.token_pos_col();
 		int token_len = token.length();
 		char first_char = token_len > 0 ? token[0] : ' ';
-		//cout << "Token: '" << token << "'" << endl;
+		//cout << "Token: '" << token << "' " <<token_len<<" "<<unary<<" "<<first_char<< endl;
 		// end of stream, or found ',' or ')'
 		if (token_len == 0 || (token_len == 1 && (first_char == ',' || (first_char == ')' && curpri == 0) || (first_char == ']' && curpri == 0)))) {
 			if (token_len != 0) {
@@ -184,16 +190,31 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 			if (unary == 1) {
 				throw error("constant, function, or unary operator expected");
 			}
-			pcode.setInt(savelen, pcode.size() - savelen - 1);
+			if(savelen >= 0){
+				// needed for shortcut operators
+				pcode.setInt(savelen, pcode.size() - savelen - 1);
+			}
+			//#define DEBUG_POLISH
 			#ifdef DEBUG_POLISH
 				pcode.show(savelen);
 			#endif
 			return;
 		}
+		// specialization for shortcut operators += -= *= /=
+		if(token == "+=" || token == "-=" || token == "*=" || token == "/=" ){
+			unary = 2;
+			pcode.erase(pcode.end() - 1);
+			pcode.erase(pcode.end() - 1);
+			savelen = -1; // lenght set from calling code
+			//cout <<token<<endl;
+		}
 		dbg gprint("First word token via (1=unary %d) cts {%s}\n ", unary, token.c_str());
+
+		//gprint("First word token via (1=unary %d) cts {%s}\n ", unary, token.c_str());
 		switch (unary) {
 		case 1:  /* a unary operator, or function, or number or variable */
 			if (is_float(token)) {
+				//cout << "float '"<<token<<"'"<<endl;
 				dbg gprint("Found number {%s}\n",token.c_str());
 				double value = atof(token.c_str());
 				pcode.addDouble(value);
@@ -203,12 +224,13 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 			str_to_uppercase(token, uc_token);
 			/* NOT a number, is it a built in function? */
 			find_un((char*)uc_token.c_str(), &idx, &ret, &np, &plist);
+			//cout << idx;
 			/* 1,2 = +,- */
 			if (idx > 3 && m_tokens.is_next_token("(")) {
 				//
 				// it is a built in function (do built in functions have default or optional arguments??)
 				//
-				dbg gprint("Found built in function \n");
+				dbg gprint("Found built in function\n");
 				get_params(pcode, np, plist, uc_token);
 				pcode.addFunction(idx + FN_BUILTIN_MAGIC);
 				unary = 2;
@@ -264,9 +286,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 						}
 					}
 				}
-				
 				/* error if some not given */
-				
 				if (!has_all) {
 					int count = 0;
 					stringstream err;
@@ -290,7 +310,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 			int v;
 			var_find((char*)uc_token.c_str(), &v, &ret);
 			if (v >= 0) {
-				// cout << "found var: '" << uc_token << "' -> " << v << endl;
+				//cout << "found var: '" << uc_token << "' -> " << v << " " <<ret<<endl;
 				if (ret == 2) pcode.addStrVar(v);
 				else pcode.addVar(v);
 				unary = 2;
@@ -344,7 +364,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 				}
 				break;
 			}
-			// std::cout << "Unquoted string '" << token << "'" << std::endl;
+			//std::cout << "Unquoted string '" << token << "'" << std::endl;
 			pcode.addString(token);
 			if (!valid_unquoted_string(token)) {
 				throw error(token_col, "invalid unquoted string '"+token+"'");
@@ -362,7 +382,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 			} else {
 				not_string = false;
 			}
-			/* Binary operators, +,-,*,/,^,<,>,<=,>=,.and.,.or. */
+			/* Binary operators, +,-,*,/,^,<,>,<=,>=,.and.,.or.,+=,-=,*=,/= */
 			int priority = 0;
 			if (token_len == 1) {
 				switch (first_char) {
@@ -388,6 +408,22 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 					v = BIN_OP_NOT_EQUALS; priority = 1;
 				} else if (token == ">=") {
 					v = BIN_OP_GE; priority = 1;
+				} else if (token == "+=") {
+					v = BIN_OP_PLUS_EQUALS; priority = 2;
+					unary = 1;
+				} else if (token == "-=") {
+					v = BIN_OP_MINUS_EQUALS; priority = 2;
+					unary = 1;
+				} else if (token == "*=") {
+					v = BIN_OP_MULTIPLY_EQUALS; priority = 3;
+					unary = 1;
+				} else if (token == "/=") {
+					v = BIN_OP_DIVIDE_EQUALS; priority = 3;
+					unary = 1;
+				} else if (token == "++") {
+					v = BIN_OP_PLUS_PLUS; priority = 2;
+				} else if (token == "--") {
+					v = BIN_OP_MINUS_MINUS; priority = 2;
 				} else if (token == "**") {
 					v = BIN_OP_POW;  priority = 4;
 				} else if (uc_token == "AND") {
@@ -415,7 +451,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 				throw error(string("unknown binary operator '")+token+"'");
 			}
 		} // end switch
-	} // end for
+	} // end while
 }
 
 Tokenizer* GLEPolish::getTokens(const string& str) {
@@ -558,6 +594,18 @@ std::string gle_operator_to_string(int op) {
 			return "%";
 		case BIN_OP_DOT:
 			return ".";
+		case BIN_OP_PLUS_EQUALS:
+			return "+=";
+		case BIN_OP_MINUS_EQUALS:
+			return "-=";
+		case BIN_OP_MULTIPLY_EQUALS:
+			return "*=";
+		case BIN_OP_DIVIDE_EQUALS:
+			return "/=";
+		case BIN_OP_PLUS_PLUS:
+			return "++";
+		case BIN_OP_MINUS_MINUS:
+			return "--";
 		default:
 			break;
 	}
@@ -661,6 +709,7 @@ void GLEPcode::show(int start) {
 	cout << "PCode:" << endl;
 	union { double d ; int l[2]; short s[4]; } both;
 	int size = getInt(start);
+	// ?? size = this->size();
 	int pos = start+1;
 	while (pos <= start+size) {
 		int varid = 0;

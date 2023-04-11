@@ -550,8 +550,8 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 	while (cp < plen) {
 		int cmd_plen = pcode[cp++];
 		int p = pcode[cp++];
-		// cout << "pcode = " << p << " cp = " << cp << " cmd_plen = " << cmd_plen << " plen = " << plen << " srclin = " << *srclin << endl;
-		// cout << sline.getCode() << endl;
+		//cout << "pcode = " << p << " cp = " << cp << " cmd_plen = " << cmd_plen << " plen = " << plen << " srclin = " << *srclin << endl;
+		//cout << sline.getCode() << endl;
 		if (!done_open) {
 			//
 			// list here all the commands that can come before SIZE
@@ -654,7 +654,7 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 			g_get_xy(&ox,&oy);
 			g_arcto(x1+ox,y1+oy,x2+ox+x1,y2+oy+y1,r);
 			break;
-		  case 51: /* Assignment  var=exp */
+		  case 51: /* Assignment  var=exp or var+=exp or var++ */
 			readlong(jj);
 			getVars()->set(jj, evalGeneric(getStack(), getPcodeList(), pcode, &cp));
 			break;
