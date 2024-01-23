@@ -128,7 +128,7 @@ class IThrowsError {
 public:
    IThrowsError();
    virtual ~IThrowsError();
-   
+
    virtual ParserError throwError(int pos, const string& error);
    virtual ParserError throwError(const char* s1, const char* s2, const char* s3);
    virtual ParserError throwError(const string& error);
@@ -298,6 +298,7 @@ protected:
 	vector<TokenAndPos> m_pushback_tokens;
 	char m_token_pushback_ch[MAX_PUSHBACK_CH];
 public:
+
 	Tokenizer();
 	Tokenizer(TokenizerLanguage* lang);
 	virtual ~Tokenizer();
@@ -423,13 +424,13 @@ public:
 	inline void token_pushback_ch(char ch) {
 		m_token_pushback_ch[m_token_has_pushback_ch++] = ch;
 	}
-   
+
 	virtual ParserError throwError(const char* s1, const char* s2, const char* s3);
-   
+
 	virtual ParserError throwError(int pos, const string& error);
-   
+
 	virtual ParserError throwError(const string& error);
-   
+
 	virtual int getErrorPosition() const;
 
 	ParserError error(const string& src) const;

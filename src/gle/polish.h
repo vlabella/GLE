@@ -53,6 +53,7 @@ class GLEArrayImpl;
 
 const int BINARY_OPERATOR_OFFSET = 10;
 
+// must also check polish.cpp for actual character definitions
 enum BinaryOperators {
 	BIN_OP_PLUS = 1,
 	BIN_OP_MINUS,
@@ -68,7 +69,13 @@ enum BinaryOperators {
 	BIN_OP_AND,
 	BIN_OP_OR,
 	BIN_OP_MOD,
-	BIN_OP_DOT
+	BIN_OP_DOT,
+	BIN_OP_PLUS_EQUALS,
+	BIN_OP_MINUS_EQUALS,
+	BIN_OP_MULTIPLY_EQUALS,
+	BIN_OP_DIVIDE_EQUALS, // 19 or 29 with offset
+	BIN_OP_PLUS_PLUS,
+	BIN_OP_MINUS_MINUS
 };
 
 std::string gle_operator_to_string(int op);

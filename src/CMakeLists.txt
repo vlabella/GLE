@@ -4,6 +4,7 @@ cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
+include(CMakePrintHelpers)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 project (gle VERSION 4.3.4)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
@@ -118,16 +119,16 @@ find_package(Boost)
 find_package(ZLIB)
 find_package(JPEG)
 find_package(TIFF)
-find_package(LibLZMA) #for libtiff optional
-if(LibLZMA_FOUND)
-	list(APPEND TIFF_LIBRARIES ${LIBLZMA_LIBRARIES})
+# find optional pacakges for LibTIFF
+find_package(LibLZMA) # -- for libTIFF optional
+find_package(JBIG) # -- for libtiff optional
+if(JBIG_FOUND)
+	message(STATUS "Found JBIG" )
 endif()
-find_package(zstd) #for libtiff optional
-if(zstd_FOUND)
-	message(STATUS "Found zstd " )
-	list(APPEND TIFF_LIBRARIES zstd::libzstd_static)
+find_package(ZSTD) # -- for libtiff optional
+if(ZSTD_FOUND)
+	message(STATUS "Found ZSTD" )
 endif()
-
 #
 # -- libdeflate for libtiff - optional
 #
@@ -148,15 +149,13 @@ if(_isMultiConfig)
 		list(APPEND DEFLATE_LIBRARIES ${DEFLATE_RELEASE})
 	endif()
 else()
-	find_library(DEFLATE_LIBRARIES NAMES libdeflate libdeflated PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
+	find_library(DEFLATE_LIBRARIES NAMES deflate deflated libdeflate.a libdeflated.a PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
 	string(COMPARE NOTEQUAL "${DEFLATE_LIBRARIES}" "DEFLATE_LIBRARIES-NOTFOUND" DEFLATE_FOUND)
 endif()
 find_path(DEFLATE_INCLUDE_DIRS libdeflate.h PATHS ${DEFLATE_ROOT} PATH_SUFFIXES include )
 if(DEFLATE_FOUND)
 	message(STATUS "Found LIBDEFLATE: ${DEFLATE_LIBRARIES}" )
-	list(APPEND TIFF_LIBRARIES ${DEFLATE_LIBRARIES} )
 endif()
-message("${TIFF_LIBRARIES}")
 # note findPNG calls findZLIB
 find_package(PNG )
 # find debug if it exists for multi config generators only
@@ -194,7 +193,7 @@ else()
 	find_library(CAIRO_LIBRARIES NAMES cairo cairod PATHS ${CAIRO_ROOT} PATH_SUFFIXES lib REQUIRED)
 	string(COMPARE NOTEQUAL "${CAIRO_LIBRARIES}" "CAIRO_LIBRARIES-NOTFOUND" CAIRO_FOUND)
 endif()
-find_path(CAIRO_INCLUDE_DIRS cairo.h PATHS ${CAIRO_ROOT} PATH_SUFFIXES include REQUIRED)
+find_path(CAIRO_INCLUDE_DIRS cairo.h PATHS ${CAIRO_ROOT} PATH_SUFFIXES include include/cairo REQUIRED)
 if(CAIRO_FOUND)
 	message(STATUS "Found CAIRO: ${CAIRO_LIBRARIES}" )
 endif()
@@ -218,10 +217,10 @@ if(_isMultiConfig)
 		list(APPEND PIXMAN_LIBRARIES ${PIXMAN_RELEASE})
 	endif()
 else()
-	find_library(PIXMAN_LIBRARIES NAMES pixman pixmand PATHS ${PIXMAN_ROOT} PATH_SUFFIXES lib REQUIRED)
+	find_library(PIXMAN_LIBRARIES NAMES pixman pixmand pixman-1 PATHS ${PIXMAN_ROOT} PATH_SUFFIXES lib REQUIRED)
 	string(COMPARE NOTEQUAL "${PIXMAN_LIBRARIES}" "PIXMAN_LIBRARIES-NOTFOUND" PIXMAN_FOUND)
 endif()
-find_path(PIXMAN_INCLUDE_DIRS pixman.h PATHS ${PIXMAN_ROOT} PATH_SUFFIXES include REQUIRED)
+find_path(PIXMAN_INCLUDE_DIRS pixman.h PATHS ${PIXMAN_ROOT} PATH_SUFFIXES include include/pixman-1 REQUIRED)
 if(PIXMAN_FOUND)
 	message(STATUS "Found PIXMAN: ${PIXMAN_LIBRARIES}" )
 endif()
@@ -232,11 +231,11 @@ endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
 #
-find_path(GDIR1 iapi.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices )
+find_path(GDIR1 iapi.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR1} )
-find_path(GDIR2 gdevdsp.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices )
+find_path(GDIR2 gdevdsp.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
-find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices )
+find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
 
 include_directories(
@@ -480,7 +479,7 @@ install(DIRECTORY
 
 )
 #
-# -- install manual from gle-manula-repo
+# -- install manual from gle-manual repo
 #
 install(FILES
 	${GLE_USER_MANUAL_PATH}/gle-manual.pdf

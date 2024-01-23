@@ -84,7 +84,15 @@ double yg3d(double x, double y, double z);
 /*---------------------------------------------------------------------------*/
 /* Input is exp-pcode, output is number or string */
 
-const char *binop[] = { "", "+", "-", "*", "/", "^", "=", "<", "<=", ">", ">=", "<>", ".AND.", ".OR." };
+// for debugging
+const char *binop[] = { "", "+", "-", "*", "/", "^", "=", "<", "<=", ">", ">=", "<>", ".AND.", ".OR.", "%", "+=", "-=", "*=" , "/=", "++", "--"};
+const char *pcodes[]= {"","PCODE_EXPR","PCODE_DOUBLE","PCODE_VAR","PCODE_STRVAR","PCODE_STRING","PCODE_OBJECT","PCODE_NEXT_CMD"};
+string pcode_to_string(int p){
+	if( p <= PCODE_NEXT_CMD ){
+		return pcodes[p];
+	}
+	return "";
+}
 
 struct keyw
 {
@@ -273,8 +281,9 @@ void eval_binary_operator_string(GLEArrayImpl* stk, int op, GLEString* a, GLEStr
 			break;
 	}
 }
-
+// constants defined in polish.h
 void eval_binary_operator_double(GLEArrayImpl* stk, int op, double a, double b) {
+	//cout << "EVALDOUBLE " << binop[op]<<":"<<op<<" "<<a<<" "<<b<<endl;
 	switch (op) {
 		case BIN_OP_PLUS:
 			setEvalStack(stk, stk->last() - 1, a + b);
@@ -314,10 +323,29 @@ void eval_binary_operator_double(GLEArrayImpl* stk, int op, double a, double b) 
 		case BIN_OP_MOD:
 			setEvalStack(stk, stk->last() - 1, gle_round_int(a) % gle_round_int(b));
 			break;
+		case BIN_OP_PLUS_EQUALS:
+			setEvalStack(stk, stk->last() - 1, a += b);
+			break;
+		case BIN_OP_MINUS_EQUALS:
+			setEvalStack(stk, stk->last() - 1, a -= b);
+			break;
+		case BIN_OP_MULTIPLY_EQUALS:
+			setEvalStack(stk, stk->last() - 1, a *= b);
+			break;
+		case BIN_OP_DIVIDE_EQUALS:
+			setEvalStack(stk, stk->last() - 1, a /= b);
+			break;
+		case BIN_OP_PLUS_PLUS:
+			setEvalStack(stk, stk->last() - 1, a++ );
+			break;
+		case BIN_OP_MINUS_MINUS:
+			setEvalStack(stk, stk->last() - 1, a-- );
+			break;
 		default:
 			complain_operator_type(op, GLEObjectTypeDouble);
 			break;
 	}
+	//cout << "EVALDOUBLE " << binop[op]<<":"<<op<<" "<<a<<" "<<b<<endl;
 }
 
 void eval_binary_operator_bool(GLEArrayImpl* stk, int op, bool a, bool b) {
@@ -334,11 +362,61 @@ void eval_binary_operator_bool(GLEArrayImpl* stk, int op, bool a, bool b) {
 	}
 }
 
+void eval_unary_operator_double(GLEArrayImpl* stk, int op, double a)
+{
+	switch (op) {
+		case BIN_OP_PLUS_PLUS:
+			setEvalStack(stk, stk->last(), ++a );
+			break;
+		case BIN_OP_MINUS_MINUS:
+			setEvalStack(stk, stk->last(), --a );
+			break;
+		default:
+			complain_operator_type(op, GLEObjectTypeDouble);
+			break;
+	}
+}
+
+void eval_unary_operator_bool(GLEArrayImpl* stk, int op, bool a)
+{
+	// C++17 defines ++ for bool types but not --  Not sure if this impacts GLE - but here for completeness
+	// but gcc on linux does not support it so this is a noop
+	switch (op) {
+		//case BIN_OP_PLUS_PLUS:
+			//a++;
+		//	setEvalStack(stk, stk->last(), a );
+		//	break;
+		default:
+			complain_operator_type(op, GLEObjectTypeDouble);
+			break;
+	}
+}
+
+
+void eval_unary_operator(GLEArrayImpl* stk, int op)
+{
+	// a OP
+	GLEMemoryCell* a = stk->get(stk->last());
+	int a_type = gle_memory_cell_type(a);
+	switch (a_type) {
+		case GLEObjectTypeDouble:
+			eval_unary_operator_double(stk, op, a->Entry.DoubleVal);
+			break;
+		case GLEObjectTypeBool:
+			eval_unary_operator_bool(stk, op, a->Entry.BoolVal);
+			break;
+		default:
+			complain_operator_type(op, a_type);
+			break;
+	}
+	//stk->decrementSize(1);
+}
+
 void eval_binary_operator(GLEArrayImpl* stk, int op) {
 	// a OP b
 	GLEMemoryCell* a = stk->get(stk->last() - 1);
-	GLEMemoryCell* b = stk->get(stk->last());
 	int a_type = gle_memory_cell_type(a);
+	GLEMemoryCell* b = stk->get(stk->last());
 	int b_type = gle_memory_cell_type(b);
 	if (a_type == b_type) {
 		switch (a_type) {
@@ -377,8 +455,9 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	double x1, y1, x2, y2;
 	double xx, yy;
 	int i, j;
+	//cout << endl << "plen " << plen << endl;
 	for (int c = 0; c < plen; c++) {
-	  // cout << "pos: " << c << " pcode: " << pcode[c] << endl;
+	  //cout << "pos: " << c << " pcode: " << pcode[c] <<" "<<pcode_to_string(pcode[c])<< endl;
 	  switch (pcode[c]) {
 		/*
 		..
@@ -401,6 +480,8 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			stk->incrementSize(1);
 			stk->ensure(stk->size());
 			getVarsInstance()->get(i, stk->get(stk->last()));
+			//cout << i << ":"<<stk->get(stk->last())<<endl;
+			//gprint("Got variable %f %d %f \n",getEvalStackDouble(stk, stk->last()),stk->last(),*(pcode+(c)));
 			break;
 		case PCODE_STRING: /* Null terminated string follows (int aligned) */
 			c++;
@@ -413,7 +494,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			setEvalStack(stk, stk->last(), pclist->get(i));
 			break;
 		/*
-			Binary operators 10..29 -----------------------
+			Binary operators 10..29 (now 31) -----------------------
 		*/
 		case BIN_OP_PLUS + BINARY_OPERATOR_OFFSET:
 		case BIN_OP_MINUS + BINARY_OPERATOR_OFFSET:
@@ -430,7 +511,15 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case BIN_OP_OR + BINARY_OPERATOR_OFFSET:
 		case BIN_OP_MOD + BINARY_OPERATOR_OFFSET:
 		case BIN_OP_DOT + BINARY_OPERATOR_OFFSET:
+		case BIN_OP_PLUS_EQUALS + BINARY_OPERATOR_OFFSET:
+		case BIN_OP_MINUS_EQUALS + BINARY_OPERATOR_OFFSET:
+		case BIN_OP_MULTIPLY_EQUALS + BINARY_OPERATOR_OFFSET:
+		case BIN_OP_DIVIDE_EQUALS + BINARY_OPERATOR_OFFSET:  // 29
 			eval_binary_operator(stk, pcode[c] - BINARY_OPERATOR_OFFSET);
+			break;
+		case BIN_OP_PLUS_PLUS + BINARY_OPERATOR_OFFSET: 	 // 30
+		case BIN_OP_MINUS_MINUS + BINARY_OPERATOR_OFFSET:	 // 31
+			eval_unary_operator(stk, pcode[c] - BINARY_OPERATOR_OFFSET);
 			break;
 
 	    /* look in fn.c and start indexes with 1 */
@@ -599,10 +688,10 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			break;
 		case FN_BUILTIN_MAGIC + FN_SPHERICAL_HARMONIC:
 			stk->decrementSize(3);
-			setEvalStack(stk, stk->last(), 
-				boost::math::spherical_harmonic_r( 
-					getEvalStackInt(stk, stk->last()), getEvalStackInt(stk, stk->last()+1), getEvalStackDouble(stk, stk->last()+2), getEvalStackDouble(stk, stk->last()+3) 
-					) 
+			setEvalStack(stk, stk->last(),
+				boost::math::spherical_harmonic_r(
+					getEvalStackInt(stk, stk->last()), getEvalStackInt(stk, stk->last()+1), getEvalStackDouble(stk, stk->last()+2), getEvalStackDouble(stk, stk->last()+3)
+					)
 				);
 			break;
 		case FN_BUILTIN_MAGIC + FN_ERF:
@@ -985,7 +1074,10 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				GLESub* sub = sub_get(*(pcode + c) - LOCAL_START_INDEX);
 				getGLERunInstance()->sub_call_stack(sub, stk);
 			} else {
-				g_throw_parser_error("unrecognized byte code expression");
+				stringstream ss;
+				ss <<"unrecognized byte code expression " <<pcode[c];
+				g_throw_parser_error(ss.str());
+
 			}
 		break;
 	  }
@@ -1051,6 +1143,7 @@ GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, 
 		fixed_cp = 0;
 		cp = &fixed_cp;
 	}
+	//cout << pcode[(*cp)] << endl;
 	if (pcode[(*cp)] == 8) {
 		evalDoConstant(stk, pcode, cp);
 		*cp = *cp + 1;
@@ -1059,6 +1152,7 @@ GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, 
 			g_throw_parser_error("pcode error: expected expression");
 		}
 		int plen = pcode[(*cp)++];
+		//cout << plen << endl;
 		eval_pcode_loop(stk, pclist, pcode + (*cp), plen);
 		*cp = *cp + plen;
 	}

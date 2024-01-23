@@ -112,7 +112,22 @@ void GLEParserInitTokenizer(Tokenizer* tokens) {
 	lang->setLineCommentTokens("!");
 	lang->setSpaceTokens(" \t\r\n");
 	lang->enableCComment();
-	lang->setSingleCharTokens(",;=@()[]{}");
+	//lang->setSingleCharTokens(",;@()[]{}=");
+	// -- additions for shortcut operators (see also polish.cpp - these differ a bit)
+	lang->setSingleCharTokens(",;@()[]{}=+-*/");
+	//lang->setSingleCharTokens(",.:;[]{}()+-*/=<>|^%\\");
+	lang->addSubLanguages(1);
+	lang->addLanguageElem(0, "+=");
+	lang->addLanguageElem(0, "-=");
+	lang->addLanguageElem(0, "*=");
+	lang->addLanguageElem(0, "/=");
+	lang->addLanguageElem(0, "++");
+	lang->addLanguageElem(0, "--");
+	// for join commands
+	lang->addLanguageElem(0, "<-");
+	lang->addLanguageElem(0, "->");
+	lang->addLanguageElem(0, "<->");
+	tokens->select_language(0);
 }
 
 GLESubCallAdditParam::GLESubCallAdditParam() {
@@ -337,7 +352,7 @@ void GLEParser::polish(GLEPcode& pcode, int *rtype) {
 	int pos = tokens->token_pos_col();
 	// cout << "pos = " << pos << endl;
 	try {
-		// cout << "Polish: '" << expr << "'" << endl;
+		//cout << "Polish: '" << expr << "'" << endl;
 		m_polish->internalPolish(expr.c_str(), pcode, rtype);
 	} catch (ParserError& err) {
 		err.incColumn(pos-1);
@@ -986,7 +1001,7 @@ void GLEParser::get_marker(GLEPcode& pcode) {
 int pass_marker(char *name) {
 	string marker;
 	polish_eval_string(name, &marker);
-   return get_marker_string(marker, g_get_throws_error());   
+   return get_marker_string(marker, g_get_throws_error());
 }
 
 void GLEParser::define_marker_1(GLEPcode& pcode) {
@@ -1014,7 +1029,7 @@ void GLEParser::define_marker_2(GLEPcode& pcode) {
 /*
 
     Data types:
-    
+
     - fill
     - color
     - marker
@@ -1238,9 +1253,15 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 		pcode.addInt(0); // save space for end offset
 		str_to_uppercase(tokens->next_token(), first);
 		int pos_first = tokens->token_pos_col();
+		TokenizerPos tp_first = tokens->token_pos(); // save in case it needs to be moved back
 		find_mkey((char*)first.c_str(), &fctkey);
-		// cout << "first = " << first << " idx = " << fctkey << endl;
+		//cout << endl;
+		//cout << "first = " << first << " idx = " << fctkey << endl;
 		if (fctkey == 0) {
+			string pt;
+			//tokens->is_next_token("++");
+			//tokens->peek_token(&pt);
+			//cout << "TP 3 :"<<tokens->token_pos()<<endl;
 			if (first == "@") {
 				pcode.addInt(52);
 				get_subroutine_call(pcode);
@@ -1273,15 +1294,64 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 						else pcode.addStringExpression("");
 					}
 				}
-			} else if (tokens->is_next_token("=")) {
+			} else if (
+				tokens->is_next_token("=")
+			) {
 				// Variable assignment
 				checkValidName(first, "variable", pos_first);
 				pcode.addInt(51);
 				var_findadd((char*)first.c_str(),&vidx,&vtype);
 				pcode.addInt(vidx);
 				polish_eol(pcode, &vtype);
+			}else if (
+				tokens->is_next_token("+=") ||
+				tokens->is_next_token("-=") ||
+				tokens->is_next_token("*=") ||
+				tokens->is_next_token("/=")
+			) {
+				// variable assignment shortcuts - same pcode (51) as assignment
+				checkValidName(first, "variable", pos_first);
+				pcode.addInt(51);
+				var_findadd((char*)first.c_str(),&vidx,&vtype);
+				pcode.addInt(vidx);
+				pcode.addInt(PCODE_EXPR);
+				int savelen = pcode.size();
+				pcode.addInt(0);
+				if (vtype == 2) pcode.addStrVar(vidx);
+				else pcode.addVar(vidx);
+				tokens->pushback_token();
+				polish_eol(pcode, &vtype);
+				pcode.setInt(savelen, pcode.size() - savelen - 1);
+			}else if(
+				tokens->is_next_token("++")
+			){
+				checkValidName(first, "variable", pos_first);
+				pcode.addInt(51);
+				var_findadd((char*)first.c_str(),&vidx,&vtype);
+				pcode.addInt(vidx);
+				pcode.addInt(PCODE_EXPR);
+				int savelen = pcode.size();
+				pcode.addInt(0);
+				if (vtype == 2) pcode.addStrVar(vidx);
+				else pcode.addVar(vidx);
+				pcode.addInt(BIN_OP_PLUS_PLUS+BINARY_OPERATOR_OFFSET);
+				pcode.setInt(savelen, pcode.size() - savelen - 1);
+			}else if(
+				tokens->is_next_token("--")
+			){
+				checkValidName(first, "variable", pos_first);
+				pcode.addInt(51);
+				var_findadd((char*)first.c_str(),&vidx,&vtype);
+				pcode.addInt(vidx);
+				pcode.addInt(PCODE_EXPR);
+				int savelen = pcode.size();
+				pcode.addInt(0);
+				if (vtype == 2) pcode.addStrVar(vidx);
+				else pcode.addVar(vidx);
+				pcode.addInt(BIN_OP_MINUS_MINUS+BINARY_OPERATOR_OFFSET);
+				pcode.setInt(savelen, pcode.size() - savelen - 1);
 			} else {
-				/* call subroutine without @ sign */
+				// call subroutine without @ sign
 				pcode.addInt(52);
 				get_subroutine_call(pcode, &first, pos_first);
 			}
@@ -1713,6 +1783,11 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 					int to = g_parse_compatibility(temp_str);
 					m_tokens.ensure_next_token("]");
 					temp_str = tokens->next_token();
+					// file sep character '/' is now a token due to math shortcut operators
+					// so get all tokens to end of line
+					while (tokens->has_more_tokens()) {
+						temp_str += tokens->next_token();
+					}
 					if (g_get_compatibility() >= from && g_get_compatibility() <= to) {
 						setSpecial(GLE_PARSER_INCLUDE);
 						str_remove_quote(temp_str);
@@ -1721,6 +1796,11 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 				} else {
 					setSpecial(GLE_PARSER_INCLUDE);
 					temp_str = tokens->next_token();
+					// file sep character '/' is now a token due to math shortcut operators
+					// so get all tokens to end of line
+					while (tokens->has_more_tokens()) {
+						temp_str += tokens->next_token();
+					}
 					str_remove_quote(temp_str);
 					setInclude(temp_str);
 				}

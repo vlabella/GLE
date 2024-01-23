@@ -1909,6 +1909,7 @@ public:
 	string comment;
 	string delimiters;
 	unsigned int ignore;
+	unsigned int numrows;
 	bool nox;
 };
 
@@ -1931,20 +1932,22 @@ unsigned int GLEDataSetDescription::getNrDimensions() const {
 }
 
 GLEDataDescription::GLEDataDescription() :
-    comment("!"),
-    delimiters(" ,;\t"),
+	comment("!"),
+	delimiters(" ,;\t"),
 	ignore(0),
+	numrows(0), // 0 ... unlimited
 	nox(false)
 {
 }
 
-/* data a.dat												  */
-/* data a.dat d2 d5											*/
-/* data a.dat d1=c1,c3 d2=c5,c1						  */
-/* data a.dat IGNORE n d2 d5							  */
-/* data a.dat IGNORE n d1=c1,c3 d2=c5,c1			  */
-/* data a.dat COMMENT # d1=c1,c3 d2=c5,c1				*/
-/* data a.dat COMMENT # IGNORE n d1=c1,c3 d2=c5,c1	*/
+/* data a.dat                                                */
+/* data a.dat d2 d5                                          */
+/* data a.dat d1=c1,c3 d2=c5,c1                              */
+/* data a.dat IGNORE n d2 d5                                 */
+/* data a.dat IGNORE n d1=c1,c3 d2=c5,c1                     */
+/* data a.dat COMMENT # d1=c1,c3 d2=c5,c1                    */
+/* data a.dat COMMENT # IGNORE n d1=c1,c3 d2=c5,c1           */
+/* data a.dat COMMENT # IGNORE n NUMROWS m d1=c1,c3 d2=c5,c1 */
 
 void read_data_description(GLEDataDescription* description, GLESourceLine& sline) {
 	// Get data command
@@ -1967,6 +1970,8 @@ void read_data_description(GLEDataDescription* description, GLESourceLine& sline
 		// check if it is one of the options
 		if (str_i_equals(token, "IGNORE")) {
 			description->ignore = tokens->next_integer();
+		} else if (str_i_equals(token, "NUMROWS")) {
+			description->numrows = tokens->next_integer();
 		} else if (str_i_equals(token, "COMMENT")) {
 			parser->evalTokenToFileName(&description->comment);
 		} else if (str_i_equals(token, "DELIMITERS")) {
@@ -2091,6 +2096,7 @@ void data_command(GLESourceLine& sline) {
 	csvData.setDelims(description.delimiters.c_str());
 	csvData.setCommentIndicator(description.comment.c_str());
 	csvData.setIgnoreHeader(description.ignore);
+	csvData.setNumrows(description.numrows);
 	csvData.read(expandedName);
 	unsigned int dataColumns = csvData.validateIdenticalNumberOfColumns();
 	GLECSVError* error = csvData.getError();

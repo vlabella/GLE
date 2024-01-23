@@ -50,7 +50,7 @@ using namespace std;
 
 #define SPACE_CHAR	' '
 
-// #define debug_tok_lang(x) cerr << x << endl
+//#define debug_tok_lang(x) cerr << x << endl
 #define debug_tok_lang(x)
 
 // GNU version of index not defined in MingW, ...
@@ -318,7 +318,7 @@ IThrowsError::IThrowsError() {
 
 IThrowsError::~IThrowsError() {
 }
- 
+
 ParserError IThrowsError::throwError(const char* s1, const char* s2, const char* s3) {
 	TokenizerPos pos;
 	pos.setColumn(-1);
@@ -327,7 +327,7 @@ ParserError IThrowsError::throwError(const char* s1, const char* s2, const char*
 	if (s3 != NULL) err += s3;
 	return ParserError(err, pos, NULL);
 }
- 
+
 ParserError IThrowsError::throwError(int /* pos */, const string& error) {
    return throwError(error);
 }
@@ -687,12 +687,15 @@ int Tokenizer::try_next_integer(int *i) {
 
 void Tokenizer::get_token() {
 	get_token_2();
+	//cout << "GT "<<m_token<<endl;
 	if ((!m_langhash.isNull()) && m_token.length() > 0) {
+		//cout << " if ";
 		TokenizerLangHash::const_iterator i = m_langhash->find(m_token);
 		if (i != m_langhash->end()) {
 			const TokenizerLangElem* elem = findLangElem(i->second.get());
 			if (elem != NULL) m_token = elem->getName();
 		}
+		//cout << m_token <<endl;
 	}
 }
 
@@ -706,10 +709,10 @@ TokenizerLangElem* Tokenizer::try_find_lang_elem(int i) {
       TokenizerLangElem* elem = findLangElem(i->second.get());
       if (elem != NULL) {
         debug_tok_lang("Tokenizer::found elem " << elem->getName());
-	return elem;
+		  return elem;
       } else {
         debug_tok_lang("Tokenizer::call returns NULL, pushback " << m_token);
-	pushback_token();
+		  pushback_token();
       }
     } else {
       pushback_token();
@@ -754,6 +757,7 @@ void Tokenizer::get_token_2() {
 		throw error("unterminated string constant");
 	}
 	// No string found
+	//cout << "GT2 " <<token_ch <<" "<<m_token <<endl;
 	if (m_language->isSingleCharToken(token_ch)) {
 		if (m_language->isDecimalDot(token_ch)) {
 			// Number starting with decimal dot
@@ -794,6 +798,7 @@ void Tokenizer::get_token_2() {
 				return;
 			}
 			m_token += token_ch;
+			//cout << "GT2 " <<token_ch <<" "<<m_token <<endl;
 		} while (m_token_at_end == 0);
 	}
 }
@@ -881,7 +886,6 @@ void Tokenizer::undo_pushback_token()
 {
 	if (m_token_has_pushback > 0) {
 		TokenAndPos& tkpos = m_pushback_tokens.back();
-		// cout << "goto position = " << tkpos.getPos() << endl;
 		goto_position(tkpos.getPos());
 		m_pushback_tokens.clear();
 		m_token_has_pushback = 0;
@@ -892,6 +896,7 @@ string& Tokenizer::next_multilevel_token() {
    undo_pushback_token();
 	m_token = "";
 	char token_ch = token_read_sig_char();
+	//cout << "token_ch: '" << token_ch << "'" << endl;
 	m_token_start = m_token_count;
 	if (m_token_at_end == 1) {
 		return m_token;
@@ -907,7 +912,7 @@ string& Tokenizer::next_multilevel_token() {
 			m_token += token_ch;
 			if ((token_ch == '\"' || token_ch == '\'') && m_language->getParseStrings()) {
 				copy_string(token_ch);
-				// cout << "token: '" << m_token << "'" << endl;
+				//cout << "token: '" << m_token << "'" << endl;
 			} else if (multi->isOpenToken(token_ch)) {
 				/* Use subroutine for efficiency: */
 				/* no vector constructed if not multi-level */
@@ -926,6 +931,7 @@ void Tokenizer::on_trailing_space() {
 }
 
 void Tokenizer::goto_position(const TokenizerPos& pos) {
+	//cout << "goto position : " << pos << endl;
 	m_token_count = pos;
 	m_token_count.incCol(-1);
 	m_token_has_pushback_ch	= 0;
@@ -1188,6 +1194,11 @@ char Tokenizer::token_read_sig_char() {
 			} else if (next_token_ch == '*' && m_language->isEnableCComment()) {
 				m_space_before = true;
 				read_till_close_comment();
+			} else if (next_token_ch == '=' ) {
+				// /= operator put char back and move the column back one
+				token_pushback_ch(next_token_ch);
+				m_token_count.incCol(-1);
+				return token_ch;
 			} else {
 				token_pushback_ch(next_token_ch);
 				return token_ch;
@@ -1204,6 +1215,7 @@ char Tokenizer::token_read_char() {
 	}
 	while (1) {
 		char ch = stream_get();
+		//cout << "CH "<<ch<<endl;
 		if (stream_ok()) {
 			if (ch == '\t') m_token_count.incTab();
 			else m_token_count.incCol();
@@ -1292,11 +1304,11 @@ ParserError Tokenizer::throwError(const char* s1, const char* s2, const char* s3
 ParserError Tokenizer::throwError(int pos, const string& msg) {
    return error(pos, msg);
 }
-   
+
 ParserError Tokenizer::throwError(const string& msg) {
    return error(msg);
 }
-   
+
 int Tokenizer::getErrorPosition() const {
    return token_pos_col();
 }
