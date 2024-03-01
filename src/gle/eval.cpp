@@ -822,7 +822,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				GLERC<GLEString> needle(getEvalStackGLEString(stk, stk->last() - 1));
 				GLEString* hayStack(getEvalStackGLEString(stk, stk->last() - 2));
 				validateArrayIndexRange(from, 1, hayStack->length());
-				stk->decrementSize(1);
+				stk->decrementSize(2);
 				setEvalStack(stk, stk->last(), hayStack->find(needle.get(), hayStack->toStringIndex(from)) + 1);
 			}
 			break;

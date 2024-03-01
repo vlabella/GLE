@@ -6,7 +6,7 @@ include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
-project (gle VERSION 4.3.4)
+project (gle VERSION 4.3.5)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d")
 #
@@ -63,7 +63,7 @@ set(CPACK_NSIS_ENABLE_UNINSTALL_BEFORE_INSTALL OFF)
 set(CPACK_NSIS_MODIFY_PATH ON)
 set(CPACK_PACKAGE_EXECUTABLES 	"qgle" "GLE Previewer"  )
 set(CPACK_NSIS_MENU_LINKS
-	"doc/gle-manual.pdf" "GLE Mamual"
+	"doc/gle-manual.pdf" "GLE Manual"
 	"https://glx.sourceforge.io" "GLE Web Site"
 	"https://github.com/vlabella/GLE" "GLE GitHub page"
 )

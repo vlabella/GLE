@@ -69,6 +69,7 @@ endif()
 list(APPEND QGLE_LIBRARIES
 	${PNG_LIBRARIES}
 	${PIXMAN_LIBRARIES}
+	TIFF::TIFF
 	Qt::Core
 	Qt::Gui
 	Qt::Network
@@ -93,8 +94,31 @@ if(WIN32)
 	)
 endif()
 
+if(ZSTD_FOUND)
+	list(APPEND QGLE_LIBRARIES
+ 		zstd::libzstd_static
+ 	)
+endif()
+
+if(DEFLATE_FOUND)
+	list(APPEND QGLE_LIBRARIES
+		${DEFLATE_LIBRARIES}
+	)
+endif()
+
+if(JBIG_FOUND)
+	list(APPEND QGLE_LIBRARIES
+		JBIG::JBIG
+	)
+endif()
+
+if(LibLZMA_FOUND)
+	list(APPEND QGLE_LIBRARIES
+		${LIBLZMA_LIBRARIES}
+	)
+endif()
+
 target_link_libraries ( qgle LINK_PUBLIC
-	TIFF::TIFF
 	${QGLE_LIBRARIES}
 	)
 

@@ -1,3 +1,5 @@
+4.3.5 (March 2024)
+    - fixed bug in GLE string function "pos" that caused issues. It was not clearing all its parameters off the stack.
 4.3.4 (April 2023)
     - built with latest compilers and libraries on all platforms (boost 1.81.0, qt 5.15.8, et al.)
     - added numrows feature to graph data command to limit number of data rows read (R. Machulka)
