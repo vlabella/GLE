@@ -711,6 +711,30 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::chebyshev_u( getEvalStackUnsignedInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
+		case FN_BUILTIN_MAGIC + FN_TEST_PRINT: // test_print
+			// simple for loop that evaluates a function that is passed to it
+			//{
+			//	std::string toEval(getEvalStackStringStd(stk, stk->last()));
+			//	stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
+			//}
+			cout << endl;
+			stk->decrementSize(2);
+			{
+			std::string toEval(getEvalStackStringStd(stk, stk->last()));
+			cout << toEval << endl;
+			stringstream ss;
+			ss << "x="<<getEvalStackDouble(stk, stk->last()+1);
+			cout << ss.str().c_str()<<endl;
+			cout << getEvalStackDouble(stk, stk->last()+2)<<endl;
+			double x;
+			//get_global_polish()->eval(stk, ss.str().c_str(),&x);
+			stk->set(stk->last(), get_global_polish()->evalGeneric(stk, ss.str().c_str() ));
+			//setEvalStack(stk, stk->last(),ss.str().c_str());
+			//setEvalStack(stk, stk->last(),"print x");
+			//get_global_polish()->evalString(stk, ss.str().c_str());
+			stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
+			}
+			break;
 		case 137: /* pointx */
 			{
 				GLEPoint pt;
@@ -1077,7 +1101,6 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				stringstream ss;
 				ss <<"unrecognized byte code expression " <<pcode[c];
 				g_throw_parser_error(ss.str());
-
 			}
 		break;
 	  }

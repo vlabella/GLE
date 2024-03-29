@@ -2033,6 +2033,10 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 			  case GLE_KW_SLEEP:
 				get_exp(pcode);
 				break;
+			  case GLE_KW_SWAP:
+				get_var(pcode);
+				get_var(pcode);
+				break;
 			  default:
 				throw error("unrecognised command {"+first+"}");
 			}

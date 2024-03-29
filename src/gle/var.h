@@ -207,6 +207,7 @@ void var_find_dn(GLEVarSubMap* map, int *idx, int *var, int *nd);
 void var_findadd(const char *name,int *idx,int *type);	/* Add a variable to the list */
 void var_free_local(void);
 void var_get(int jj, double *v);
+int var_get_type(int var);
 void var_getstr(int v, char *s);
 void var_getstr(int jj, string& s);
 void var_nlocal(int *l);

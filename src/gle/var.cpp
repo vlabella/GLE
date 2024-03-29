@@ -701,6 +701,10 @@ char* var_get_name(int var) {
 	return getVarsInstance()->getName(var);
 }
 
+int var_get_type(int var) {
+	return var_type(getVarsInstance()->getName(var));
+}
+
 void var_nlocal(int *l) {
 	*l = getVarsInstance()->getNbLocal();
 }

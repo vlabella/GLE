@@ -508,6 +508,7 @@ GLERun::GLERun(GLEScript* script, GLEFileLocation* outfile, GLEPcodeIndexed* pco
 	allowBeforeSize(GLE_KW_UNTIL);
 	allowBeforeSize(GLE_KW_WHILE);
 	allowBeforeSize(GLE_KW_END);
+	allowBeforeSize(GLE_KW_SWAP);
 }
 
 GLERun::~GLERun() {
@@ -1664,6 +1665,27 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 		  case GLE_KW_BLOCK_COMMAND:
 			readlong(jj); /* block type */
 			getBlockTypes()->getBlock(jj)->executeLine(sline);
+			break;
+		  case GLE_KW_SWAP:
+		  	readlong(jj);
+		  	readlong(jj2);
+		  	t = var_get_type(jj);
+		  	j = var_get_type(jj2);
+		  	if(t != j){
+		  		g_throw_parser_error("SWAP ERROR variables must be same type");
+		  	}
+		  	if(t == 2){
+		  		std::string s1,s2;
+				var_getstr(jj,s1);
+		  		var_getstr(jj2,s2);
+		  		var_setstr(jj,(char*)s2.c_str());
+				var_setstr(jj2,(char*)s1.c_str());
+		  	}else{
+		  		var_get(jj,&x);
+		  		var_get(jj2,&y);
+		  		var_set(jj,y);
+				var_set(jj2,x);
+		  	}
 			break;
 		  default :
 		  	byte_code_error(PCODE_UNKNOWN_COMMAND);

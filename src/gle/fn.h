@@ -83,6 +83,8 @@
 #define FN_AIRY_SECOND          117
 #define FN_CHEBYSHEV_FIRST      118
 #define FN_CHEBYSHEV_SECOND     119
+#define FN_TEST_PRINT			120
+
 
 
 

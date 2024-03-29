@@ -48,7 +48,7 @@
 /* and give it the next unused index number                         */
 /*            *** 50 is RESERVED for assignment ***                 */
 /* when adding you need to edit pass.cpp and run.cpp                */
-/* CURRENT MAX IS 89 next command number is 90                      */
+/* CURRENT MAX IS 90 next command number is 91                      */
 /*------------------------------------------------------------------*/
 
 #define NKEYS (sizeof mkeywfn / sizeof(struct mkeyw))
@@ -134,6 +134,7 @@ struct mkeyw { const char *word; int index;  } mkeywfn[] = {
 	{ "SLEEP",                       GLE_KW_SLEEP                   },
 	{ "STROKE",                      GLE_KW_STROKE                  },
 	{ "SUB",                         GLE_KW_SUB                     },
+	{ "SWAP",                        GLE_KW_SWAP                    },
 	{ "TEX",                         GLE_KW_TEX                     },
 	{ "TEXT",                        GLE_KW_TEXT                    },
 	{ "TEXTDEF",                     GLE_KW_TEXTDEF                 },

@@ -159,6 +159,7 @@ struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
 	{ "TAN",         28,            1,1, { 1,0,0,0,0 } },
 	{ "TANH",        64,            1,1, { 1,0,0,0,0 } },
 	{ "TDEPTH",      29,            1,1, { 2,0,0,0,0 } },
+	{ "TEST_PRINT",  FN_TEST_PRINT, 1,3, { 2,1,1,0,0 } },
 	{ "THEIGHT",     30,            1,1, { 2,0,0,0,0 } },
 	{ "TIME$",       31,            2,0, { 0,0,0,0,0 } },
 	{ "TODEG",       74,            1,1, { 1,0,0,0,0 } },
