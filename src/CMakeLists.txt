@@ -257,6 +257,7 @@ if(APPLE)
 		__MAC__
 		__OSX__
 		__MACOS__
+		__UNIX__
 		HAVE_CONFIG_H
 		HAVE_CAIRO
 		HAVE_LIBZ
