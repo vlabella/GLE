@@ -52,7 +52,7 @@ install(FILES
 )
 # make the inittex.ini in the install folder
 install(CODE
-	"execute_process(COMMAND ${CMAKE_INSTALL_PREFIX}/bin/gle$<$<CONFIG:Debug>:d> -mkinittex)"
+	"execute_process(COMMAND \$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/gle$<$<CONFIG:Debug>:d> -mkinittex)"
 )
 
 
