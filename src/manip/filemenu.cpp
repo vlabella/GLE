@@ -135,7 +135,7 @@ int m_gstart,m_gend;
 char mbuff[255];
 
 extern int iserr;
-int hcx,cx,hcy;        /* HIlighted current x,y */
+int hcx,cx,hcy;        /* highlighted current x,y */
 
 bool do_menu(pmenutype *ppmenu) {
         menutype *cm,*cmi,*si=NULL,*mi;

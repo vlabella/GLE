@@ -251,7 +251,7 @@ integer iget_(huge integer *bitmap, integer *n)
 
 /*     zmax is the maximum value of z for consideration.  a value of */
 /*     z(i,j) greater than zmax is a signal that that point and the */
-/*     grid line segments radiating from that point to it's neighbors */
+/*     grid line segments radiating from that point to its neighbors */
 /*     are to be excluded from contouring. */
 
 /*     bitmap is a work area large enough to hold 2*nx*ny*ncv bits.  it */
@@ -315,11 +315,11 @@ integer iget_(huge integer *bitmap, integer *n)
 
 /*     l1 and l2 contain limits used during the spiral search for the */
 /*     beginning of a contour. */
-/*     ij stores subcripts used during the spiral search. */
+/*     ij stores subscripts used during the spiral search. */
 
 
 /*     i1, i2 and i3 are used for subscript computations during the */
-/*     examination of lines from z(i,j) to it's neighbors. */
+/*     examination of lines from z(i,j) to its neighbors. */
 
 
 /*     xint is used to mark intersections of the contour under */

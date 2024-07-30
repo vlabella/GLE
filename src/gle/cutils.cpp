@@ -79,13 +79,13 @@ static inline int isinf_ld (long double x) { return isnan (x - x); }
 
 int gle_isnan(double v) {
 	// Do not include <iostream> or <cmath> before gle_isnan
-	// otherwise gle_isnan wil break on Mac OS/X and OS/2
+	// otherwise gle_isnan will break on macOS and OS/2
 	return isnan(v);
 }
 
 int gle_isinf(double v) {
 	// Do not include <iostream> or <cmath> before gle_isinf
-	// otherwise gle_isinf wil break on Mac OS/X and OS/2
+	// otherwise gle_isinf will break on macOS and OS/2
 	return isinf(v);
 }
 

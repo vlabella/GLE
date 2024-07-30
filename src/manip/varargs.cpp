@@ -39,7 +39,7 @@
 /*
 
 As varargs are so difficult to make work, I've put them
-in this module by themselvs,  on a DEC5400 it was necessary
+in this module by themselves. On a DEC5400 it was necessary
 to compile this module using the native C compiler instead of
 GCC
 

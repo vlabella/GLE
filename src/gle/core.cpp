@@ -2073,7 +2073,7 @@ void g_postscript(char *fname, double wx, double wy) {
 	}
 	if (fabs(wy) < 1e-18) {
 		if (fabs(wx) < 1e-18) {
-			// if with and hight is zero, then use default size
+			// if width and height are zero, then use default size
 			wx = bx2/PS_POINTS_PER_INCH*CM_PER_INCH;
 			wy = by2/PS_POINTS_PER_INCH*CM_PER_INCH;
 		} else {

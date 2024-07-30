@@ -49,7 +49,7 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/../doc/LICENSE.txt"
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/../doc/README.txt")
 set(CPACK_PACKAGE_INSTALL_DIRECTORY "GLE")
 #
-# - NSIS specifc settings
+# - NSIS specific settings
 #
 set(CPACK_NSIS_COMPRESSOR "lzma")
 set(CPACK_NSIS_MUI_ICON "${CMAKE_CURRENT_SOURCE_DIR}/gui/images\\gle.ico")
@@ -119,7 +119,7 @@ find_package(Boost)
 find_package(ZLIB)
 find_package(JPEG)
 find_package(TIFF)
-# find optional pacakges for LibTIFF
+# find optional packages for LibTIFF
 find_package(LibLZMA) # -- for libTIFF optional
 find_package(JBIG) # -- for libtiff optional
 if(JBIG_FOUND)

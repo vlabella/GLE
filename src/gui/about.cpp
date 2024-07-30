@@ -120,7 +120,7 @@ QWidget* AboutBox::createContributorsPanel()
 	"<li>Chris Pugmire: original program creation and design</li>"
 	"<li>Christoph Brendes: programming</li>"
 	"<li>David Parfitt: documentation (GLE users guide)</li>"
-	"<li>Edd Edmondson: packager for Mac OS/X"
+	"<li>Edd Edmondson: packager for macOS"
 	"<li>Jan Struyf: programming (and current 4.x series maintainer)</li>"
 	"<li>Laurence Abbott: programming</li>"
 	"<li>Michal Vyskocil: packager for openSUSE</li>"

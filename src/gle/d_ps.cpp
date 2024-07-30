@@ -61,7 +61,7 @@
 #define dbg if ((gle_debug & 64)>0)
 
 //
-// elipse function only for PS
+// ellipse function only for PS
 //
 static char ellipse_fcn[] = "\
 /ellipsedict 8 dict def\n ellipsedict /mtrx matrix put \n\
@@ -255,7 +255,7 @@ void PSGLEDevice::closedev() {
 		// - add to .Xresources: Ghostscript*geometry:   -5+0
 		//   to place gs window in upper right corner like  gle -d x11
 		// - may use environment variable or .glerc file for additional gs options
-		//   based on $DISPLAY, if you work on multiple sytems
+		//   based on $DISPLAY, if you work on multiple systems
 		if (GS_PREVIEW) {
 			ostringstream GScmd;
 			double width, height;
@@ -987,7 +987,7 @@ void PSGLEDevice::resetfont() {
 }
 
 void PSGLEDevice::read_psfont(void) {
-	/* add aditional ps fonts,  e.g.  pstr = TimesRoman */
+	/* add additional ps fonts,  e.g.  pstr = TimesRoman */
 	static int init_done;
 	FILE *fptr;
 	char *s;
@@ -1000,7 +1000,7 @@ void PSGLEDevice::read_psfont(void) {
 
 	string fname = fontdir("psfont.dat");
 	fptr = fopen(fname.c_str(), "r");
-	if (fptr == 0) return; /* if not exists then don't bother */
+	if (fptr == 0) return; /* if it doesn't exist then don't bother */
 
 	if (fgets(inbuff, 200, fptr) != 0) {
 		while (!feof(fptr)) {

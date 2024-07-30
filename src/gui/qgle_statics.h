@@ -167,7 +167,7 @@ public:
 
 	//! Static member used to compute the minimum of two double values
 	static double min(double a, double b);
-	//! Static member comverting from centimeters to PostScript points
+	//! Static member converting from centimeters to PostScript points
 	static double cmToPt(double cm);
 	//! Static member used to compute the DPI value based on the display and image size (in cm)
 	static int computeAutoScaleDPIFromCm(const QSize& bitmapSize, int inset, double imgWd, double imgHi);

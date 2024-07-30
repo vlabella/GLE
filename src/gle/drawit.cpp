@@ -61,7 +61,7 @@
 extern int gle_debug;
 extern int this_line;
 int trace_on;
-int **gpcode;   /* gpcode is a pointer to an array of poiter to int */
+int **gpcode;   /* gpcode is a pointer to an array of pointer to int */
 int *gplen;     /* gpcode is a pointer to an array of int */
 int ngpcode=0;
 int ngerror;

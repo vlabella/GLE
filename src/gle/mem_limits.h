@@ -36,10 +36,10 @@
  *                                                                      *
  ************************************************************************/
 
-#ifndef INCLUDE_MEM_LIMTS
-#define INCLUDE_MEM_LIMTS
+#ifndef INCLUDE_MEM_LIMITS
+#define INCLUDE_MEM_LIMITS
 //
-// mem_limts.h
+// mem_limits.h
 //
 /*
  memory limits for GLE.
@@ -47,12 +47,12 @@
  these are all statically defined arrays, soon they will be replaced with STL
  containers
 
-These is gleaned from the file var.c
+These are gleaned from the file var.c
 
 also I had to modify the files sub.c polish.c eval.c to
 include LOCAL_START_INDEX
 
-it seems that all the commands,functions and variables are indexed by one variable
+it seems that all the commands, functions and variables are indexed by one variable
 
 if the index is > LOCAL_START_INDEX then it is treated as a local variable
 and stored in the lvar_name and lvar_val
@@ -84,10 +84,10 @@ else the variable is a global variable
 
 //
 // maximum element in the postscript line.  This affects speed of
-// PS rendereing.  any line that has more than
+// PS rendering.  any line that has more than
 // MAXIMUM_PS_VECTOR points in it will be broken up
 // into lines of MAXIMUM_PS_VECTOR
-// not this is assinged to MAX_VECTOR in gle.cpp
+// note this is assigned to MAX_VECTOR in d_ps.cpp
 // no warning is printed if this is exceeded as was done in 3.3h
 //
 #define MAXIMUM_PS_VECTOR 500

@@ -6,7 +6,7 @@
  *   2) If the file has been modified in any way, a notice of such
  *      modification is conspicuously indicated.
  *
- * PostScript, Display PostScript, and Adobe are regsitered trademarks of
+ * PostScript, Display PostScript, and Adobe are registered trademarks of
  * Adobe Systems Incorporated.
  *
  * ************************************************************************
@@ -112,7 +112,7 @@ enum parseKey {
   NOPE };
 
 /* keywords for the system:
- * This a table of all of the current strings that are vaild AFM keys.
+ * This a table of all of the current strings that are valid AFM keys.
  * Each entry can be referenced by the appropriate parseKey value (an
  * enumerated data type defined above). If you add a new keyword here,
  * a corresponding parseKey MUST be added to the enumerated data type
@@ -1098,7 +1098,7 @@ static int parseCompCharData(FILE *fp, FontInfo *fi)
  *  The caller of this function is responsible for locating and opening
  *  an AFM file and handling all errors associated with that task.
  *
- *  parseFile expects 3 parameters: a vaild file pointer, a pointer
+ *  parseFile expects 3 parameters: a valid file pointer, a pointer
  *  to a (FontInfo *) variable (for which storage will be allocated and
  *  the data requested filled in), and a mask specifying which
  *  data from the AFM File should be saved in the FontInfo structure.

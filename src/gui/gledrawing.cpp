@@ -132,7 +132,7 @@ void GLEDrawingArea::initSelectionVars()
 	isSelectedObjectSnap = false;
 	// Selection handles
 	handleList.clear();
-	// Used for rotating objectss
+	// Used for rotating objects
 	baseAngle = 0.0;
 	lastAngle = 0.0;
 	// Reference point for scale / move

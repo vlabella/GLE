@@ -380,7 +380,7 @@ void process_option_args(CmdLineObj& cmdline, GLEOptions& options) {
 			}
 		}
 	}
-	// Distable TeX interface
+	// Disable TeX interface
 	if (cmdline.hasOption(GLE_OPT_SAFEMODE)) {
 		TeXInterface* interface = TeXInterface::getInstance();
 		interface->setEnabled(false);
@@ -1141,7 +1141,7 @@ void GLELoadOneFileManager::delete_original_eps_pdf_impl(int deviceCode) {
 	bool should_del = hasFile(deviceCode);
 	if (device->hasValue(deviceCode)) {
 		/* don't delete .eps/.pdf if we wanted this as output */
-		/* and we did not wanted this printed to stout */
+		/* and we did not want this printed to stdout */
 		if (!m_OutName->isStdout() && !m_CmdLine->hasOption(GLE_OPT_CREATE_INC)) {
 			should_del = false;
 		}

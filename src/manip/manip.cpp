@@ -606,7 +606,7 @@ void init_gle_top(char** argv) {
 				StripPathComponents(&GLE_TOP_DIR, 2);
 			#endif
 		} else {
-			// The user will see as error messege: "$GLE_TOP/some_file" not found.
+			// The user will see as error message: "$GLE_TOP/some_file" not found.
 			GLE_TOP_DIR = "$GLE_TOP";
 		}
 	} else {

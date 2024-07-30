@@ -2715,7 +2715,7 @@ void GLELet::parseFitFunction(const string& fct, GLEParser* parser) {
 			setHasStepOption(true);
 			setStep(parser->evalTokenToDouble());
 		} else if (str_i_equals(token, "LIMIT_DATA_X")) {
-			// user wants the data ploted from dd xmax to dd xmin
+			// user wants the data plotted from dd xmax to dd xmin
 			m_limitDataX = true;
 		} else if (str_i_equals(token, "LIMIT_DATA_Y")) {
 			// get x values from evaluation of slope
@@ -3226,7 +3226,7 @@ void next_svg_iter(int* s, int* ct) {
 				polish_eval(next,&temp);
 				*s = (int) temp;
 			} else {
-				// its not a variable must be another keyword
+				// it's not a variable; must be another keyword
 				// set iter to 1
 				(*ct)--;
 				*s = 1;

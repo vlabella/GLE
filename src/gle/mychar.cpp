@@ -37,8 +37,8 @@
  ************************************************************************/
 
 /*----------------------------------------------------------------------*/
-/* This routine prints a char from one of my fonts, it has cacheing 	*/
-/* for the char data, which could be extended to bitmap cacheing 	*/
+/* This routine prints a char from one of my fonts. It has caching	*/
+/* for the char data, which could be extended to bitmap caching.	*/
 /*----------------------------------------------------------------------*/
 
 #include "all.h"

@@ -41,7 +41,7 @@
 #include "fn.h"
 
 /*-------------------------------------------------------------------*/
-/*      Find the function called *cp, and return it's number         */
+/*      Find the function called *cp, and return its number          */
 /*-------------------------------------------------------------------*/
 
 /* You can add a function, you MUST place it in alphabetical order   */

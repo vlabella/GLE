@@ -201,7 +201,7 @@ void GLESourceFile::reNumber() {
 }
 
 void GLESourceFile::load(istream& input) {
-	//  load the input and rememeber to look for continuation character
+	//  load the input and remember to look for continuation character
 	const char CONT_CHAR = '&';  // should be a global define somewhere??
 	bool cont = false;
 	string inbuff;

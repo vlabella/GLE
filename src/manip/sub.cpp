@@ -40,7 +40,7 @@
 
 int var_alloc_local(void);
 int var_free_local(void);
-extern int32 *(*gpcode)[];   /* gpcode is a pointer to an array of poiter to int32 */
+extern int32 *(*gpcode)[];   /* gpcode is a pointer to an array of pointer to int32 */
 extern int32 (*gplen)[];   /* gpcode is a pointer to an array of int32 */
 extern int ngpcode;
 extern int gle_debug;

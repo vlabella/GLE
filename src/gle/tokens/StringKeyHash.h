@@ -76,7 +76,7 @@ using namespace std;
 
 #ifndef GCC2
 #ifndef _MSC_VER
-	// gcc on OSX is complaining about this not sure if its needed
+	// gcc on macOS is complaining about this; not sure if it's needed
 	// using namespace __gnu_cxx;  // using gnu extensions such as "hash"
 #endif
 #endif

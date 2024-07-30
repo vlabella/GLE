@@ -10,7 +10,7 @@ More information and the binary distributions can be found on the GLE website he
 
 ## Building with CMAKE
 
-GLE can be built on Windows, Mac, and Linux using cmake and system specific toolchains: Visual Studio, Xcode, and gcc.
+GLE can be built on Windows, macOS, and Linux using cmake and system specific toolchains: Visual Studio, Xcode, and gcc.
 
 Libraries needed to build GLE are
 
@@ -34,12 +34,12 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 * GHOSTPDL_ROOT
 * Qt5_DIR
 
-### Building on linux or OSX
+### Building on Linux or macOS
 
 	cmake -S src -B build
 	cd build ; make
 
-to install gle on you machine after building
+to install gle on your machine after building
 
 	cd build ; make install
 
