@@ -6,7 +6,7 @@
     - added shortcut operators += -= *= /= ++ -- (V. LaBella)
     - improvements to feyn.gle package (A. Grozin)
     - clarifications and improvements to manual (V. LaBella, A. Grozin)
-    - build improvements with cmake, will find ztd and jbig for libtiff if available, and other OS specific tweaks (V. LaBella, C. Steigies, A. Grozin, adalbosco)
+    - build improvements with cmake, will find zstd and jbig for libtiff if available, and other OS specific tweaks (V. LaBella, C. Steigies, A. Grozin, adalbosco)
 
 4.3.3 (April 2022)
     - changed www.gle-graphics.org to glx.sourceforge.net everywhere
@@ -20,7 +20,7 @@
                 default b 4
                 return a+b
             end sub
-            ! try stand alone subroutine call
+            ! try stand-alone subroutine call
             mysum(2,6)
             ! ok
             mysum(2)
@@ -71,11 +71,11 @@
 4.3.0 (October 2020)
 
     64 bit Preview Release
-    This is a preview built on windows using Visual Studio 2019 both 32 and 64 bit versions and both with and without the need for the separate installation of the Visual Studio Runtimes. the "s" in the installer filename indicates static runtimes were utilized and no need for separate installation - these are stand alone versions.
+    This is a preview built on windows using Visual Studio 2019 both 32 and 64 bit versions and both with and without the need for the separate installation of the Visual Studio Runtimes. the "s" in the installer filename indicates static runtimes were utilized and no need for separate installation - these are stand-alone versions.
     This is built using cmake
     This requires ghostscript 9.53 or later to be installed using same architecture as GLE. that is 64 bit GLE will search for 64 bit ghostscript.
-    The following special functions have been added from boost C++ librarires factorial, double_factorial, hermite, legendre, associated_legendre, laguerre, associated_laguerre, and spherical_harmonics. - more will be added in the future.
-    Builds for other platforms will be forth comming.
+    The following special functions have been added from boost C++ libraries: factorial, double_factorial, hermite, legendre, associated_legendre, laguerre, associated_laguerre, and spherical_harmonics. - more will be added in the future.
+    Builds for other platforms will be forthcoming.
 
 4.2.5 (August 2015)
 
@@ -135,7 +135,7 @@ Bug Fixes
     Added Python script to generate GLE palette functions (contributed by Brandon Aubie)
     Fixed "too many open files" when including bitmaps in filled boxes (reported by Alexis Letessier)
     Fixed issue with filled boxes (reported by Alexis Letessier)
-    Make GLE compile with GCC 4.7.x (issue raised by Terje Røsten)
+    Make GLE compile with GCC 4.7.x (issue raised by Terje RÃ¸sten)
     Support other 64bit systems besides x86
     Fixed more GLU problems introduced in Qt4.8
 
@@ -272,7 +272,7 @@ Bug Fixes
 New Features
 
     Added "range" and "nsteps" options to the graph block's let command.
-    Added functions file$() and path$() to retrieve the script's name and path (suggested by Jörg Baumgartner).
+    Added functions file$() and path$() to retrieve the script's name and path (suggested by JÃ¶rg Baumgartner).
     Added function isname() that tests if its argument is a named point or object.
     Added "set background" to set background color of shade / grid filling patterns.
     Added "background" to bar command and key block.
@@ -321,7 +321,7 @@ Bug Fixes
     GLE can't handle filenames with a dot (#2015073).
     Fix for auto-range function with data sets with no spread (suggested by Florian Wisser).
     Fix for "nox" option of "data" command of graph block.
-    Fixes for incorrect code points in GLE's Unicode table (o.a., for "ü").
+    Fixes for incorrect code points in GLE's Unicode table (o.a., for "Ã¼").
     Combining "clip" + "fill" in "begin path/end path" does not perform the requested fill.
     Command line option "-noctrl-d" and some others are not documented in GLE's man page and "-help" output.
     Landscape detection PS mode is now more robust.
@@ -332,7 +332,7 @@ Bug Fixes
     GLE fails to read certain JPG files (bitmap command).
     Colormap command does not work for non-square .z files.
     Bug "rotate + tex = misplacement of text" (#1881020).
-    Patch to make GLE compile with gcc 4.3 (include limits.h) (by Terje Røsten).
+    Patch to make GLE compile with gcc 4.3 (include limits.h) (by Terje RÃ¸sten).
     QGLE's export fails if path contains a space or '.' character.
 
 4.1.1 (January, 2008)
