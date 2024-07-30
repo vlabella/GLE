@@ -58,7 +58,7 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 #
 # order matters: first static files (and libgle), then dynamic libraries
 list(APPEND QGLE_LIBRARIES
-	libgle-graphics_s
+	gle-graphics_s
 	${ZLIB_LIBRARIES}
 	${JPEG_LIBRARIES}
 	${PNG_LIBRARIES}
