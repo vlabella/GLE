@@ -41,17 +41,9 @@
 	-lF77 -lI77 -lm -lc   (in that order)
 */
 
-/* "f2c.h" defines abs() -- conflict with the definition in <math.h> */
-/* changing the order solves the problem */
-#if ( defined(__OS2__) && defined(__EMX__) ) || defined(__WIN32__) || defined(__MAC__) || defined(__LINUX__)
 #include <stdio.h>
 #include <math.h>
 #include "f2c.h"
-#else
-#include <stdio.h>
-#include <math.h>
-#include "f2c.h"
-#endif
 
 doublereal gutre2_(real* a, real* b);
 void gd_message__(const char *s, int l);

@@ -299,8 +299,6 @@ if(APPLE)
 endif()
 if(UNIX AND NOT APPLE)
 	add_compile_definitions(
-		__LINUX__
-		UNIX
 		__UNIX__
 		HAVE_CONFIG_H
 		HAVE_CAIRO
