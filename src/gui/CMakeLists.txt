@@ -60,13 +60,7 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 list(APPEND QGLE_LIBRARIES
 	libgle-graphics_s
 	${ZLIB_LIBRARIES}
-)
-if(UNIX AND NOT APPLE)
-	list(APPEND QGLE_LIBRARIES
-	${JPEG_LIBRARIES} # contained in Qt on windows and MacOS
-	)
-endif()
-list(APPEND QGLE_LIBRARIES
+	${JPEG_LIBRARIES}
 	${PNG_LIBRARIES}
 	${PIXMAN_LIBRARIES}
 	TIFF::TIFF
