@@ -23,6 +23,8 @@ Libraries needed to build GLE are
 * jpeg
 * Qt5 (for GUI)
 
+On Unix operating systems, curses or ncurses is additionally required to build the manip tool.
+
 Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake. If not, cmake will look for them in the system default locations.  For more information consult cmake documentation on find_package or find_library.  
 
 * ZLIB_ROOT
