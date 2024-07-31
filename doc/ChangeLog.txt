@@ -61,11 +61,11 @@
     - updated manual to include new constants and special functions and grouped functions according to type. See appendix.
 
 4.3.0 (December 2020)
-    OSX, Linux and Windows 64 bit versions
+    macOS, Linux and Windows 64 bit versions
     built against QT5
 
 4.3.0 (November 2020)
-    OSX, Linux and Windows 64 bit versions
+    macOS, Linux and Windows 64 bit versions
     built against QT4
 
 4.3.0 (October 2020)
@@ -194,7 +194,7 @@ Bug Fixes
 
     #3058793: y1axis dominates the plot (lin/log) bound to y2axis
     #2782744: Automatic tick labels with latex
-    Fixed compilation on Mac OS/X
+    Fixed compilation on Mac OS X
     The graph block's "data" command now understands column c0, which contains the data set's line numbers
     #2996854: Missing a few multiple bars
     Fixed: xend()/yend() do not work in QGLE's edit mode
@@ -297,7 +297,7 @@ New Features
     New key block setting: "background", which sets the background color.
     Key box is now transparent (only for keys defined within the graph block).
     Adds function "atan2" (#1881021).
-    QGLE is now available on MacOS/X (installation instructions).
+    QGLE is now available on Mac OS X (installation instructions).
     "File | Edit" menu added to QGLE for easy access to files included in GLE script.
     "Edit | Copy as Bitmap" menu added to copy the diagram to the clipboard.
     Adds entries to QGLE's help menu to display the GLE manual and website.
@@ -534,12 +534,12 @@ Detailed Changes
     Includes makefiles for OS/2.
     Fix for slow rendering of long complex paths in postscript file. Speed now equivalent to 3.3h.
     Tweak to exe and src release filenames i.e gle_version_[src,exe]_[platform]....
-    Exits gracefully when it cant open a file such as a data file in graph, image file, include file or using fopen.
+    Exits gracefully when it can't open a file such as a data file in graph, image file, include file or using fopen.
 
 4.0.5 (November, 2003)
 
     Fix unix/linux compile issues with afm files. They now have the proper line endings for Unix.
-    Fix compatability issue with 3.3h: ATN and ATAN now work equivalently. In 3.3h only ATN worked for arctangent?
+    Fix compatibility issue with 3.3h: ATN and ATAN now work equivalently. In 3.3h only ATN worked for arctangent?
 
 4.0.4 (November, 2003)
 
@@ -547,7 +547,7 @@ Detailed Changes
     Will search c:\program files\gle (WINDOWS) or \usr\local\bin (UNIX) directories if GLE_TOP environment variable is not set.
     Proper wildcard/globbing handling on UNIX (assumes shell does the expansion).
     Minor improvement on file finding and error reporting.
-    Cleanup of unused functions and varibles in gle.cpp.
+    Cleanup of unused functions and variables in gle.cpp.
     Windows binary now compressed with upx.
 
 4.0.3 (November, 2003)
@@ -568,7 +568,7 @@ Detailed Changes
     Code cleanup from 3.5.
     Compiles with latest C++ compilers.
     Has better error reporting where it prints out the line number and text associated with the line (even if the error was detected in an include file).
-    Removed ncurses dependancy.
+    Removed ncurses dependency.
 
 GLE 3.3g (14-May-1994)
 
@@ -594,7 +594,7 @@ GLE 3.3f (16-April-1993)
 GLE 3.3e (1-Jan-1993)
 
     Fixed clipping of lines through a log axis.
-    Fixed help display which was loosing two lines on multi page
+    Fixed help display which was losing two lines on multi page
     displays.
 
 GLE 3.3d
@@ -608,7 +608,7 @@ GLE 3.3c (1-Apr-1992)
     Fixed problems with large datasets in surface and contour
     Fixed problem with /kern/lower/movexy and other def's
     Fixed bug with   dviprint -depson -hires -nosquash
-    Fixed bug with smoothing contours which made lines dissappear.
+    Fixed bug with smoothing contours which made lines disappear.
     (20-Sep-1992)
     Fixed bug with UNTIL looping.
     Removed limit of number of 'saved' points.

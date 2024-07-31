@@ -103,7 +103,7 @@
 
 3 ARROWS
  The arrow keys normally move the data cursor, however if you are half
- way througg typing a command then, the left and right arrow keys allow you
+ way through typing a command then the left and right arrow keys allow you
  to edit the command.  Use the PAGE-UP and PAGE-DOWN keys to recall
  your last command.
 
@@ -112,7 +112,7 @@
 3 COPY
  For copying a section to another section. "% COPY <range1> <range2> if <exp>"
  They do not have to be the same shape. The pointers to both rangers
- are increased even if the number is not coppied  e.g. 
+ are increased even if the number is not copied  e.g.
 	"% COPY r4r2 r1r2"
 	"% COPY c1c3r6r100  c6c8 if c1<c2"
 
@@ -126,7 +126,7 @@
 
 
 3 DELETE
- For deleteing entire rows or columns.  "% DELETE <range> [IF <exp>]"
+ For deleting entire rows or columns.  "% DELETE <range> [IF <exp>]"
  e.g. 	"% DELETE c1c3 IF r1>3.and.r2=0
 	"% DELETE r1"
  Numbers are shuffled in from the right to take the place of the
@@ -146,7 +146,7 @@
 
 3 EXIT 
  EXIT saves the data in your input file spec and exits to DOS.  You
- can optionally specify an output file as well. eg. "% EXIT myfile.dat
+ can optionally specify an output file as well e.g. "% EXIT myfile.dat
 
  The command "EXIT myfile.dat c3c5r1r3" will write out that range of
  numbers to the file.
@@ -213,17 +213,17 @@
  e.g. 	"% INSERT c5" or "% INSERT r2".
 
 3 LOAD
- Load data into columns. eg. "% LOAD filename" loads all data into corresponding
+ Load data into columns e.g. "% LOAD filename" loads all data into corresponding
  columns.  "% LOAD filename c3" load first column of data into c3 etc.
 
  "LOAD myfile.dat c3 -LIST"
- This commmand will load the the data into a single column or range
+ This command will load the the data into a single column or range
  (even if it is several columns wide in the data file)
 
 3 MOVE
  For copying a section to another section. "% MOVE <range1> <range2> if <exp>"
  They do not have to be the same shape. The pointer to the destination
- is only increased if the line or column is coppied e.g.
+ is only increased if the line or column is copied e.g.
 	"% MOVE c1 c2c3"
 	"% MOVE r4r2 r1r2"
 	"% MOVE c1c3r6r100  c6c8 if c1<c2"
@@ -326,7 +326,7 @@
   (See also SET COLTYPE) 
 
 4 DIGITS
-	Sets the number of significat digits to be displayed, e.g.
+	Sets the number of significant digits to be displayed, e.g.
 	with DIGITS 3.
 		123456    becomes   123000
 		0.12345   becomes   0.123
@@ -342,7 +342,7 @@
 3 PROPAGATE
  This command has the same format as move. e.g
  "% PROPAGATE <source> <destination>"  The difference is that the
- source is coppied as many times as possible to fill up the destination.
+ source is copied as many times as possible to fill up the destination.
  e.g. 	"% PROP c1r1r7 c2"
 
 3 SUM
@@ -350,18 +350,18 @@
 	"% SUM C1C3"
 
 3 PARSUM
- Adds up one coloumn, putting the partial sum's into another coloumn.e.g.
+ Adds up one column, putting the partial sums into another column. e.g.
  1,2,3,4 becomes 1,3,6,10.
 	"% PARSUM C1 C4"
 
 3 GENERATE
- For generating a patter of data e.g.   1 1 2 2 5 5 1 1 2 2 5 5 etc.
+ For generating a pattern of data e.g.   1 1 2 2 5 5 1 1 2 2 5 5 etc.
 	"% GEN 2(1,2,5)30 c4"	!1 1 2 2 5 5  repeated 30 times
 	"% GEN (1:100:5)5 c1"	!1 to 100 step 5,  5 times
 	"% GEN (1,2,*,3:5)5 c1"	!missing values included
 
 3 FUNCTIONS
- Calculations can be performed on rows or columns. eg "% C1=C2*3+R"
+ Calculations can be performed on rows or columns e.g. "% C1=C2*3+R"
  where "R" stands for row-number and C1 and C2 are columns.
  They can also be performed on ROWS. eg "% r1=sin(r2)+log10(c)"
 

@@ -138,7 +138,7 @@ void QGLE::qtToGLEString(const QString& str1, GLEString* str2) {
 	}
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::absGLEToQt(double gleX, double gleY, double dpi, int areaHeight)
 {
 	double qtX, qtY;
@@ -150,7 +150,7 @@ QPointF QGLE::absGLEToQt(double gleX, double gleY, double dpi, int areaHeight)
 	return(QPointF(qtX, qtY));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::absGLEToQt(QPointF gle, double dpi, int areaHeight)
 {
 	return(absGLEToQt(gle.x(), gle.y(), dpi, areaHeight));
@@ -174,7 +174,7 @@ QSizeF QGLE::qtSizeToGLE(QSizeF qt, double dpi)
 	return(QSizeF(gleX,gleY));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::relGLEToQt(double gleX, double gleY, double dpi)
 {
 	double qtX, qtY;
@@ -185,13 +185,13 @@ QPointF QGLE::relGLEToQt(double gleX, double gleY, double dpi)
 	return(QPointF(qtX, qtY));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::relGLEToQt(QPointF gle, double dpi)
 {
 	return(relGLEToQt(gle.x(), gle.y(), dpi));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QSizeF QGLE::relGLEToQt(QSizeF gle, double dpi)
 {
 	QPointF qt;
@@ -204,7 +204,7 @@ double QGLE::relGLEToQt(double gle, double dpi)
 	return(gle*dpi/CM_PER_INCH);
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::relQtToGLE(double qtX, double qtY, double dpi)
 {
 	double gleX, gleY;
@@ -215,13 +215,13 @@ QPointF QGLE::relQtToGLE(double qtX, double qtY, double dpi)
 	return(QPointF(gleX, gleY));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::relQtToGLE(QPointF qt, double dpi)
 {
 	return(relQtToGLE(qt.x(), qt.y(), dpi));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QSizeF QGLE::relQtToGLE(QSizeF qt, double dpi)
 {
 	QPointF gle;
@@ -234,7 +234,7 @@ double QGLE::relQtToGLE(double qt, double dpi)
 	return(qt*CM_PER_INCH/dpi);
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::absQtToGLE(double qtX, double qtY, double dpi, int areaHeight)
 {
 	double gleX, gleY;
@@ -245,7 +245,7 @@ QPointF QGLE::absQtToGLE(double qtX, double qtY, double dpi, int areaHeight)
 	return(QPointF(gleX, gleY));
 }
 
-// Static member used to convert betweeen coordinate systems
+// Static member used to convert between coordinate systems
 QPointF QGLE::absQtToGLE(QPointF qt, double dpi, int areaHeight)
 {
 	return(absQtToGLE(qt.x(), qt.y(), dpi, areaHeight));
@@ -355,7 +355,7 @@ double QGLE::min(double a, double b) {
 	return a < b ? a : b;
 }
 
-//! Static member comverting from centimeters to PostScript points
+//! Static member converting from centimeters to PostScript points
 double QGLE::cmToPt(double cm) {
 	return cm*PS_POINTS_PER_INCH/CM_PER_INCH;
 }

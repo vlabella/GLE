@@ -130,7 +130,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(APPLE)
-	#openGL is deprecated on OSX starting 10.9 this silences the warning
+	#openGL is deprecated on macOS starting at 10.9; this silences the warning
 	add_compile_definitions(Q_OS_APPLE)
 	add_compile_options(-Wno-deprecated-declarations)
 	target_link_libraries ( qgle LINK_PUBLIC

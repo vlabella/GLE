@@ -435,7 +435,7 @@ void SoftwareLocateDialogue::locateManual() {
 	cursor.movePosition(QTextCursor::End);
 	browser->setTextCursor(cursor);
 	browser->insertPlainText(tr("\n"));
-	// don't use stock dialog; otherwise it's impossible to select a framework on MacOS/X
+	// don't use stock dialog; otherwise it's impossible to select a framework on macOS
 	QFileDialog dialog(this, tr("Locate the GhostScript library"), "/", QGLE::libraryFilter());
 	dialog.setFileMode(QFileDialog::AnyFile);
 	if (dialog.exec()) {

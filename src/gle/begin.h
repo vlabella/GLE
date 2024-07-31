@@ -38,7 +38,7 @@
 
 #ifndef INCLUDE_BEGIN
 #define INCLUDE_BEGIN
-extern int **gpcode;   /* gpcode is a pointer to an array of poiter to int */
+extern int **gpcode;   /* gpcode is a pointer to an array of pointer to int */
 extern int *gplen;     /* gpcode is a pointer to an array of int */
 extern int ngpcode;
 

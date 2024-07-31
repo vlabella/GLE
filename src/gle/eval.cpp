@@ -1239,7 +1239,7 @@ void debug_polish(int *pcode,int *zcp)
 	}
 	plen = *(pcode+*(cp));
 	gprint("Expression length %d current point %d \n",plen,(int) *cp);
-	if (plen>1000) gprint("Expession is suspiciously int %d \n",plen);
+	if (plen>1000) gprint("Expression is suspiciously int %d \n",plen);
 	for (c=(*cp)+1;(c-*cp)<=plen;c++) {
 	  cde = *(pcode+c);
 	  gprint("Code=%d ",cde);

@@ -40,7 +40,7 @@
 	'string   - put string in cell and move in current direction
 	range = expression  - evaluate exp for each cell in range
 	cell(exp,exp) = expression  - evaluate exp and put in cell
-	cmd - exectue command, if then else next for save load generate
+	cmd - execute command, if then else next for save load generate
 				   print, input
 	& = continued on next line.
 

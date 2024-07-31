@@ -2,7 +2,7 @@
 # -- font files - create .fve and .afm files for packaging with binary executable
 #
 # .fve file are created from .gle files of the same name using fbuild
-# .afm files are creted frin .fmt files using makefmt
+# .afm files are created frin .fmt files using makefmt
 #
 # all targets (.fve and .afm) files are put in the same /font folder in the distro
 #
@@ -265,7 +265,7 @@ file(MAKE_DIRECTORY ${OUTPUT_DIR})
 #add_custom_target(
 	#create_font_dir ALL
 	#COMMAND ${CMAKE_COMMAND} -E make_directory ${OUTPUT_DIR}
-	#COMMENT "makeing font dir"
+	#COMMENT "making font dir"
 #)
 
 add_custom_target(fonts ALL

@@ -107,7 +107,7 @@ public:
 	PFN_gsapi_delete_instance gsapi_delete_instance;
 	PFN_gsapi_set_stdio gsapi_set_stdio;
 	PFN_gsapi_set_poll gsapi_set_poll;
-	// used in g2 9.2 or earlier - depricated now 
+	// used in g2 9.2 or earlier - deprecated now
 	PFN_gsapi_set_display_callback gsapi_set_display_callback;
 	PFN_gsapi_register_callout gsapi_register_callout;
 	PFN_gsapi_init_with_args gsapi_init_with_args;
@@ -222,9 +222,9 @@ public:
 	void setGhostscriptArguments( const QStringList &list );
 
 	/** @brief Enable display setting
-	           This should be set to true if you are using the intepreter to render pages or in any way
+	           This should be set to true if you are using the interpreter to render pages or in any way
 	           need a display device in your use of the Ghostscript library. If you do not need it
-	           (ex. you are just converting ps to pdf) set it to false.
+	           (e.g. you are just converting ps to pdf) set it to false.
 	    @param display enable/disable the display device
 	*/
 	void setDisplay( bool display = true);

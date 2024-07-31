@@ -62,7 +62,7 @@ public:
 signals:
 	//! This signal keeps the user notified of what's going on.
 	void serverMessage(QString msg);
-	//! This signal notifies QGLE that a new file has been opended using "gle -p"
+	//! This signal notifies QGLE that a new file has been opened using "gle -p"
 	void gleMinusPRunned(QString file);
 
 protected:

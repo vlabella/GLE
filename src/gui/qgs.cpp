@@ -113,7 +113,7 @@ int rectangle_request(void *handle, void *device,void **memory, int *ox, int *oy
 }
 
 #ifdef USE_INTERNAL_GSAPI
-	// old gs api - depricated - 9.2 and earlier
+	// old gs api - deprecated - 9.2 and earlier
 	// will not work with newer gs that has V3
 	#define GS_ERROR(name) e_##name
 	#ifdef QGS_USE_MAJOR_V2
@@ -275,7 +275,7 @@ bool GSInterpreterLib::start(bool setStdio)
 		                                           &(GSApiWrapper::handleStdout),
 		                                           &(GSApiWrapper::handleStderr));
 	}
-	// depricated - use register_callout
+	// deprecated - use register_callout
 	//int call = m_gs->gsapi_set_display_callback(ghostScriptInstance, (display_callback*)(&(GSApiWrapper::device)));
 	int state = 0;
 	int call = m_gs->gsapi_register_callout(ghostScriptInstance, my_callout_handler, &state);

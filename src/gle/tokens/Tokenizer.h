@@ -373,7 +373,7 @@ public:
 	int is_next_token(const string& token) {
 		return is_next_token(token.c_str());
 	}
-	// checks wether next token is [token].  if so, the token is
+	// checks whether next token is [token].  if so, the token is
 	// consumed (current token pointer moved).   Otherwise,
 	// the next token is not consumed.
 

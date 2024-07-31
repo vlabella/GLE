@@ -76,7 +76,7 @@
  *        text_draw
  *
  * text_tomacro
- *    -> expands macro's (starting with "\")
+ *    -> expands macros (starting with "\")
  *    -> expands special characters (such as '^' and '_') unless they are escaped
  *
  * text_topcode
@@ -182,7 +182,7 @@ deftable *tex_finddef(const char *s) ;
 int fontfam[16][4];
 double fontfamsz[16][4];        /* 1=text,  2=script, 3=scriptscript */
 int famdef = -1;        /* don't use unless/until it is defined */
-char *cdeftable[256];   /* Character macro's */
+char *cdeftable[256];   /* Character macros */
 uchar chr_code[256];    /* Character codes 1..9  */
 int chr_mathcode[256];  /* Character codes 1..9  */
 int chr_init;           /* Flag to initialize chr variables */
@@ -354,7 +354,7 @@ norm_again:
 		outlong(0);             /* space for x,y to be put */
 		outlong(0);
 		break;
-	    case 6: /* \ Primitive Command (macro's already done) */
+	    case 6: /* \ Primitive Command (macros already done) */
 		skip_space = false;
 		do_prim(&in,out,lout,&params);
 		break;
@@ -393,7 +393,7 @@ norm_again:
 
 uchar* cmdParam(uchar **inp, uchar **pm, int* pmlen, int npm) {
 	int gcnt=0,i;
-	uchar* save_inp = *inp; /* need this to look ahead but not move ahaead */
+	uchar* save_inp = *inp; /* need this to look ahead but not move ahead */
 	uchar* in = *inp;
 	gcnt = 0;
 	for (i=0;i<npm;i++) {
@@ -757,7 +757,7 @@ void do_prim(uchar **in, int *out, int *lout, TexArgStrs* params) {
 	cmd_token(in,cmdstr);   /* finds command name and parameters */
 	ci = find_primcmd((char*)cmdstr);
 
-	if (ci==0) { /* then maybe its a mathchar */
+	if (ci==0) { /* then maybe it's a mathchar */
 		m = tex_findmathdef((char*)cmdstr);
 		if (m!=0) {
 			p_mathchar(*m);
@@ -1854,9 +1854,9 @@ void  text_tomacro(const string& in, uchar *out) {
 				s = UC str_skip_brackets((char*)s, '{', '}');
 			}
 			if (strcmp((char*)macroname, "def")==0) {
-				// make sure not to expand macro's in macro name
+				// make sure not to expand macros in macro name
 				// otherwise, during a second pass, the name will be replaced by the value
-				// e.g., \def\a{b} will trun into: \defb{b{}
+				// e.g., \def\a{b} will turn into: \defb{b{}
 				s = UC str_find_char((const char*)s, '{');
 			}
 		}

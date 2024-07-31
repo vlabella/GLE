@@ -667,7 +667,7 @@ void ToolTab::exploreGLETop() {
 void ToolTab::browseToolGsLib() {
 	QString dir = QGLE::GetDirName(ToolGsLib->text());
 	if (dir.isEmpty()) dir = "/";
-	// don't use stock dialog; otherwise it's impossible to select a framework on MacOS/X
+	// don't use stock dialog; otherwise it's impossible to select a framework on macOS
 	QFileDialog dialog(this, tr("Locate the GhostScript library"), dir, QGLE::libraryFilter());
 	dialog.setFileMode(QFileDialog::AnyFile);
 	if (dialog.exec()) {

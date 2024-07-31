@@ -205,7 +205,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 			unary = 2;
 			pcode.erase(pcode.end() - 1);
 			pcode.erase(pcode.end() - 1);
-			savelen = -1; // lenght set from calling code
+			savelen = -1; // length set from calling code
 			//cout <<token<<endl;
 		}
 		dbg gprint("First word token via (1=unary %d) cts {%s}\n ", unary, token.c_str());

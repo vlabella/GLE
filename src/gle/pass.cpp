@@ -697,7 +697,7 @@ int GLEParser::get_optional(OPKEY lkey, GLEPcode& pcode) {
 	get_key_info(lkey, &count, &width);
 	// the location in the pcode tells what option it is, must remember
 	// zero all the optional parameters.
-	// puts zero in for each option wheather it is there or not
+	// puts zero in for each option whether it is there or not
 	int plen = pcode.size();
 	for (int i = 0; i < width+1; i++) {
 		pcode.addInt(0);
@@ -960,7 +960,7 @@ void GLEParser::get_color(GLEPcode& pcode) {
 }
 
 int get_marker_string(const string& marker, IThrowsError* error) {
-	/* if 0, maybe its a user defined marker, ie a subroutine */
+	/* if 0, maybe it's a user-defined marker, i.e. a subroutine */
 	/* Use -ve to signify subroutine instead of normal marker */
 	int mark_idx = 0;
 	for (int i = 0; i < nmark; i++) {

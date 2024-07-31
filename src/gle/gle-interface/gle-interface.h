@@ -74,7 +74,7 @@
 #ifndef _MSC_VER
 #define DLLFCT DLLIMPORT
 #else
-// in msvc  class function delcared as ddlimport or export do not need to be declared dllepxort or dllimport
+// in msvc  class functions declared as ddlimport or export do not need to be declared dllepxort or dllimport
 #define DLLFCT
 #endif
 #define DLLCLASS DLLCLASSIMPORT
@@ -82,7 +82,7 @@
 #ifndef _MSC_VER
 #define DLLFCT DLLEXPORT
 #else
-// in msvc  class function delcared as ddlimport or export do not need to be declared dllepxort or dllimport
+// in msvc  class functions declared as ddlimport or export do not need to be declared dllepxort or dllimport
 #define DLLFCT
 #endif
 #define DLLCLASS DLLCLASSEXPORT

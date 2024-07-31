@@ -563,7 +563,7 @@ void GLEMainWindow::startServer()
 	connect(serverThread, SIGNAL(serverMessage(QString)),
 			this, SLOT(updateServerStatus(QString)));
 
-	// Notify QGLE that a new file has been opended using "gle -p"
+	// Notify QGLE that a new file has been opened using "gle -p"
 	connect(serverThread, SIGNAL(gleMinusPRunned(QString)),
 			this, SLOT(openFile(QString)));
 

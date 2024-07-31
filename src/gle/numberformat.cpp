@@ -54,7 +54,7 @@
 
 	round 3
 	round number to 3 significant digits
-	pad with zeros if number too large (don't use exponential represenations)
+	pad with zeros if number too large (don't use exponential representations)
 
 	nozeros
 
