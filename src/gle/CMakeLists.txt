@@ -97,18 +97,18 @@ add_custom_command(
 
 add_library(gle_common OBJECT ${GLE_SOURCES})
 add_executable( gle $<TARGET_OBJECTS:gle_common> gle.cpp )
-add_library( libgle-graphics_s STATIC $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp )
-add_library( libgle-graphics SHARED $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp )
+add_library( gle-graphics_s STATIC $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp )
+add_library( gle-graphics SHARED $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp )
 add_custom_target( glerc_file ALL DEPENDS glerc )
 set_source_files_properties( gle_cpp_lib.cpp PROPERTIES COMPILE_FLAGS -DHAVE_LIBGLE)
 
 set_target_properties(gle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
-set_target_properties(libgle-graphics_s PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
-set_target_properties(libgle-graphics PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+set_target_properties(gle-graphics_s PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+set_target_properties(gle-graphics PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 if(UNIX AND NOT APPLE)
-	target_link_options(libgle-graphics PUBLIC -fPIC)
-	target_link_options(libgle-graphics_s PUBLIC -fPIC)
+	target_link_options(gle-graphics PUBLIC -fPIC)
+	target_link_options(gle-graphics_s PUBLIC -fPIC)
 endif()
 
 
@@ -121,7 +121,7 @@ target_link_libraries ( gle LINK_PUBLIC
 	${PIXMAN_LIBRARIES}
 	)
 
-target_link_libraries ( libgle-graphics LINK_PUBLIC
+target_link_libraries ( gle-graphics LINK_PUBLIC
 	TIFF::TIFF
 	${ZLIB_LIBRARIES}
 	${JPEG_LIBRARIES}
@@ -134,7 +134,7 @@ if(ZSTD_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
  		zstd::libzstd_static
  	)
- 	target_link_libraries ( libgle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PUBLIC
  		zstd::libzstd_static
  	)
 endif()
@@ -143,7 +143,7 @@ if(DEFLATE_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
 		${DEFLATE_LIBRARIES}
 	)
-	target_link_libraries ( libgle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PUBLIC
 		${DEFLATE_LIBRARIES}
 	)
 endif()
@@ -152,7 +152,7 @@ if(JBIG_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
 		JBIG::JBIG
 	)
-	target_link_libraries ( libgle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PUBLIC
 		JBIG::JBIG
 	)
 endif()
@@ -161,13 +161,13 @@ if(LibLZMA_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
 		${LIBLZMA_LIBRARIES}
 	)
-	target_link_libraries ( libgle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PUBLIC
 		${LIBLZMA_LIBRARIES}
 	)
 endif()
 
 if(WIN32)
-	target_link_libraries ( libgle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PUBLIC
 		opengl32.lib
 		wsock32.lib
 		Ws2_32.lib
@@ -181,7 +181,7 @@ if(WIN32)
 		)
 endif()
 if(APPLE)
-	target_link_libraries ( libgle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PUBLIC
 		lzma
 	)
 	target_link_libraries ( gle LINK_PUBLIC
