@@ -81,7 +81,7 @@ typedef unsigned long uint32;
 #include <ctype.h>
 #include <math.h>
 
-#if HAVE_WAIT_H
+#if HAVE_SYS_WAIT_H
 #include <sys/wait.h>
 #endif
 
