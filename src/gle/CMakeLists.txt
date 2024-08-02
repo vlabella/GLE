@@ -79,14 +79,6 @@ set( GLEBTOOL_SOURCES
 )
 
 add_custom_command(
- 	OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/gle_cpp_lib.cpp
- 	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/gle.cpp
- 	COMMAND ${CMAKE_COMMAND} -E copy gle.cpp gle_cpp_lib.cpp
-  	COMMENT "Generating gle_cpp_lib.cpp from gle.cpp"
-  	WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-)
-
-add_custom_command(
  	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/glerc
  	COMMAND ${CMAKE_COMMAND} -E echo begin config gle > ${CMAKE_CURRENT_BINARY_DIR}/glerc
  	COMMAND ${CMAKE_COMMAND} -E echo current = ${PROJECT_VERSION} >> ${CMAKE_CURRENT_BINARY_DIR}/glerc
@@ -97,10 +89,11 @@ add_custom_command(
 
 add_library(gle_common OBJECT ${GLE_SOURCES})
 add_executable( gle $<TARGET_OBJECTS:gle_common> gle.cpp )
-add_library( gle-graphics_s STATIC $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp )
-add_library( gle-graphics SHARED $<TARGET_OBJECTS:gle_common> gle_cpp_lib.cpp )
+add_library(gle-graphics_s STATIC $<TARGET_OBJECTS:gle_common> gle.cpp)
+add_library(gle-graphics SHARED $<TARGET_OBJECTS:gle_common> gle.cpp)
+target_compile_definitions(gle-graphics_s PRIVATE -DHAVE_LIBGLE)
+target_compile_definitions(gle-graphics PRIVATE -DHAVE_LIBGLE)
 add_custom_target( glerc_file ALL DEPENDS glerc )
-set_source_files_properties( gle_cpp_lib.cpp PROPERTIES COMPILE_FLAGS -DHAVE_LIBGLE)
 
 set_target_properties(gle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 set_target_properties(gle-graphics_s PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
