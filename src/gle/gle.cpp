@@ -112,7 +112,7 @@ void gle_cat_csv(vector<string>* files) {
 	}
 }
 
-#if defined(HAVE_LIBGLE) || defined(HAVE_LIBGLE_STATIC)
+#ifdef HAVE_LIBGLE
 int GLEMain(int argc, char **argv) {
 #else
 int main(int argc, char **argv) {

@@ -50,10 +50,6 @@ jobs:
             jobs=1
         esac
 
-        # Remove this jobs=1 override once parallel building is fixed.
-        # See https://github.com/vlabella/GLE/issues/26
-        jobs=1
-
         echo "--parallel $jobs" >> build.args
     - name: Configure
       run: |
