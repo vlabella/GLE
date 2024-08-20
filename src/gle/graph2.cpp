@@ -1692,7 +1692,7 @@ public:
 	DataFillDimension(GLEFunctionParserPcode* fct);
 	~DataFillDimension();
 	void setRange(GLERange* range, bool log);
-	bool isYValid();	
+	bool isYValid();
 	inline bool isLog() { return m_Log; }
 	inline GLERange* getRange() { return &m_Range; }
 	inline void setDoubleAt(double v, int i) { m_Values->setDoubleAt(v, i); }
@@ -1797,7 +1797,7 @@ DataFill::DataFill(bool finetune) {
 	m_discontinuityThreshold = GLE_INF;
 	m_tuneDistance = 1e-6;
 	m_tuneIterationsMin = 50;
-	m_tuneIterationsMax = 10000;	
+	m_tuneIterationsMax = 10000;
 }
 
 DataFill::~DataFill() {
@@ -1895,7 +1895,7 @@ void DataFill::tryIPol(double other, double nanval) {
 			other = xmid;
 			not_xmid = nanval;
 		}
-		if (iter > m_tuneIterationsMax || (iter > m_tuneIterationsMin 
+		if (iter > m_tuneIterationsMax || (iter > m_tuneIterationsMin
 										   && maxDistanceTo(not_xmid) < m_tuneDistance)) {
 			addPointLR(xmid, GLE_DS_L);
 			return;
@@ -2299,14 +2299,17 @@ protected:
 	GLERC<GLEFunctionParserPcode> m_Where;
 	GLEVarBackup m_varBackup;
 	set<int> m_XRangeDS;
-	double m_LetFrom, m_LetTo, m_LetStep, m_LogStep;
-	bool m_FineTune, m_NoFirst, m_HasSteps, m_HasStepOption, m_HasFrom, m_HasTo;
+	double m_LetFrom, m_LetTo, m_LetStep, m_LogStep, m_LetNormMin, m_LetNormMax;
+	bool m_FineTune, m_NoFirst, m_HasSteps, m_HasStepOption, m_HasFrom, m_HasTo, m_HasNormMin, m_HasNormMax;
 	int m_VarX, m_Ds, m_LetNSteps;
 	int m_codeLine;
 
 	// For histogram routine
 	int m_nrBins;
 	int m_HistDS;
+
+	// For normalize routine
+	int m_NormDS;
 
 	// For fitting routines
 	int m_FitDS;
@@ -2331,8 +2334,10 @@ public:
 	void doLet();
 	void parseFitFunction(const string& fct, GLEParser* parser);
 	void parseHistogram(GLEParser* parser);
+	void parseNormalize(GLEParser* parser);
 	void doFitFunction();
 	void doHistogram();
+	void doNormalize();
 	void complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datasets);
 	bool checkIdenticalRanges(GLEVectorAutoDelete<GLELetDataSet>& datasets);
 	void transformIdenticalRangeDatasets(GLEVectorAutoDelete<GLELetDataSet>& datasets, DataFill* fill);
@@ -2348,6 +2353,8 @@ public:
 	inline void setFrom(double value) { m_LetFrom = value; }
 	inline void setTo(double value) { m_LetTo = value; }
 	inline void setNSteps(int value) { m_LetNSteps = value; }
+	inline void setNormMin(double value) { m_LetNormMin = value; }
+	inline void setNormMax(double value) { m_LetNormMax = value; }
 	inline void setFineTune(bool value) { m_FineTune = value; }
 	inline void setNoFirst(bool value) { m_NoFirst = value; }
 	inline double getFrom() { return m_LetFrom; }
@@ -2356,10 +2363,14 @@ public:
 	inline bool hasSteps() { return m_HasSteps; }
 	inline bool hasFrom() { return m_HasFrom; }
 	inline bool hasTo() { return m_HasTo; }
+	inline bool hasNormMin() { return m_HasNormMin; }
+	inline bool hasNormMax() { return m_HasNormMax; }
 	inline void setHasStepOption(bool has) { m_HasStepOption = has; }
 	inline void setHasSteps(bool has) { m_HasSteps = has; }
 	inline void setHasFrom(bool has) { m_HasFrom = has; }
 	inline void setHasTo(bool has) { m_HasTo = has; }
+	inline void setHasNormMin(bool has) { m_HasNormMin = has; }
+	inline void setHasNormMax(bool has) { m_HasNormMax = has; }
 	inline void setDataSet(int ds) { m_Ds = ds; }
 	inline int getDataSet() { return m_Ds; }
 	inline int getDimension() { return m_Fcts.size(); }
@@ -2367,6 +2378,7 @@ public:
 	inline void addXRangeDS(int ds) { m_XRangeDS.insert(ds); }
 	inline set<int>& getXRangeDS() { return m_XRangeDS; }
 	inline bool isHistogram() const  { return m_HistDS != -1; }
+	inline bool isNormalize() const  { return m_NormDS != -1; }
 	inline bool isFit() const  { return m_FitDS != -1; }
 	inline void setCodeLine(int line) { m_codeLine = line; }
 	inline int getCodeLine() const { return m_codeLine; }
@@ -2378,6 +2390,8 @@ GLELet::GLELet() {
 	m_LetTo = 0.0;
 	m_LetStep = 0.0;
 	m_LetNSteps = 0;
+	m_LetNormMin = 0;
+	m_LetNormMax = 1;
 	m_VarX = -1;
 	m_NoFirst = false;
 	m_FineTune = false;
@@ -2385,10 +2399,13 @@ GLELet::GLELet() {
 	m_HasStepOption = false;
 	m_HasFrom = false;
 	m_HasTo = false;
+	m_HasNormMin = false;
+	m_HasNormMax = false;
 	m_Ds = -1;
 	m_codeLine = -1;
 	m_fitType = "none";
 	m_HistDS = -1;
+	m_NormDS = -1;
 	m_nrBins = -1;
 	m_FitDS = -1;
 	m_limitDataX = false;
@@ -2715,7 +2732,7 @@ void GLELet::parseFitFunction(const string& fct, GLEParser* parser) {
 			setHasStepOption(true);
 			setStep(parser->evalTokenToDouble());
 		} else if (str_i_equals(token, "LIMIT_DATA_X")) {
-			// user wants the data plotted from dd xmax to dd xmin
+			// user wants the data ploted from dd xmax to dd xmin
 			m_limitDataX = true;
 		} else if (str_i_equals(token, "LIMIT_DATA_Y")) {
 			// get x values from evaluation of slope
@@ -2947,6 +2964,26 @@ void GLELet::parseHistogram(GLEParser* parser) {
 	}
 }
 
+void GLELet::parseNormalize(GLEParser* parser) {
+	Tokenizer* tokens = parser->getTokens();
+	string& token = tokens->next_token();
+	m_NormDS = get_dataset_identifier(token, parser, true);
+	while (tokens->has_more_tokens()) {
+		string& token = tokens->next_token();
+		if (str_i_equals(token, "MIN")) {
+			setHasNormMin(true);
+			setNormMin(parser->evalTokenToDouble());
+		} else if (str_i_equals(token,"MAX")) {
+			setHasNormMax(true);
+			setNormMax(parser->evalTokenToDouble());
+		} else {
+			stringstream errstr;
+			errstr << "unknown token in 'let' expression: '" << token << "'";
+			throw tokens->error(errstr.str());
+		}
+	}
+}
+
 void GLELet::doHistogram() {
 	int bins = m_nrBins;
 	GLEDataPairs histData(getDataset(m_HistDS));
@@ -3028,6 +3065,29 @@ void GLELet::doHistogram() {
 	fill.toDataset(dp[resds]);
 }
 
+void GLELet::doNormalize() {
+	GLEDataPairs normData(getDataset(m_NormDS));
+
+	double minVal = normData.getY(0);
+	double maxVal = normData.getY(0);
+	for (unsigned int i = 1; i < normData.size(); i++) {
+		minVal = min(minVal, normData.getY(i));
+		maxVal = max(maxVal, normData.getY(i));
+	}
+
+	DataFill fill(false);
+	for (int dim = GLE_DIM_X; dim <= GLE_DIM_Y; dim++) {
+		DataFillDimension* dim_f = new DataFillDimension(NULL);
+		fill.addDataDimension(dim_f);
+	}
+	for (unsigned int i = 0; i < normData.size(); i++) {
+		fill.addPoint(normData.getX(i), (normData.getY(i)-minVal)/(maxVal-minVal)*(m_LetNormMax-m_LetNormMin)+m_LetNormMin);
+	}
+	int resds = getDataSet();
+	dp[resds]->clearAll();
+	fill.toDataset(dp[resds]);
+}
+
 void deleteLet(GLELet* let) {
 	delete let;
 }
@@ -3066,6 +3126,11 @@ GLELet* parseLet(GLEParser* parser, int codeLine) {
 
 	if (str_i_equals(let_fct,"HIST")) {
 		let->parseHistogram(parser);
+		return let;
+	}
+
+	if (str_i_equals(let_fct,"NORMALIZE")) {
+		let->parseNormalize(parser);
 		return let;
 	}
 
@@ -3160,6 +3225,8 @@ void doLet(GLELet* let, bool nofirst) {
 		let->doHistogram();
 	} else if (let->isFit()) {
 		let->doFitFunction();
+	} else if (let->isNormalize()) {
+		let->doNormalize();
 	} else {
 		GLEVars* vars = getVarsInstance();
 		vars->addLocalSubMap(let->getVarSubMap());
@@ -3226,7 +3293,7 @@ void next_svg_iter(int* s, int* ct) {
 				polish_eval(next,&temp);
 				*s = (int) temp;
 			} else {
-				// it's not a variable; must be another keyword
+				// its not a variable must be another keyword
 				// set iter to 1
 				(*ct)--;
 				*s = 1;
