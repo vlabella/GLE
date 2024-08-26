@@ -639,7 +639,10 @@ NearestIpol::NearestIpol(IpolData* data):
 }
 
 double NearestIpol::ipol(double xp, double yp) {
-	return m_Data->getValue(gle_round_int(xp * m_Data->getWidth()), gle_round_int(yp * m_Data->getHeight()));
+	return m_Data->getValue(
+		(int)floor(xp * m_Data->getWidth()), // gle_round_int(xp * m_Data->getWidth())
+		(int)floor(yp * m_Data->getHeight()) // gle_round_int(yp * m_Data->getHeight())
+	);
 }
 
 void GLEBitmapSetPalette(GLEBYTE* pal, int offs, double red, double green, double blue) {
