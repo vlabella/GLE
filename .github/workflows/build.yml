@@ -9,7 +9,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        build_type: [Release]
+        c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+        exclude:
+          - os: windows-latest
+            c_compiler: gcc
+          - os: windows-latest
+            c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: cl
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -45,6 +64,8 @@ jobs:
                 libdeflate libpng libtiff pixman qt@5 zstd
             echo "-D Qt5_DIR=$(brew --prefix qt@5)/lib/cmake/Qt5" >> configure.args
             jobs=$(sysctl -n hw.activecpu)
+            ;;
+          Windows)
             ;;
           *)
             jobs=1
