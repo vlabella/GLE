@@ -66,6 +66,7 @@ jobs:
             jobs=$(sysctl -n hw.activecpu)
             ;;
           Windows)
+            # make sure libraries are installed on windows
             ;;
           *)
             jobs=1
