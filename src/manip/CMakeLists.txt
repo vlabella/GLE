@@ -27,6 +27,11 @@ if(WIN32)
 	target_link_libraries(manip LINK_PUBLIC Ws2_32.lib ) 
 endif()
 
+if(UNIX)
+	target_link_libraries(manip PRIVATE ${CURSES_LIBRARIES})
+	target_include_directories(manip SYSTEM PRIVATE ${CURSES_INCLUDE_DIRS})
+endif()
+
 set_target_properties(manip  PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX}) 
 install(TARGETS manip 
 		CONFIGURATIONS Release Debug

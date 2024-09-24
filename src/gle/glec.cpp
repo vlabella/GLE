@@ -68,7 +68,10 @@ extern string DIR_SEP;
 
 void GLEAddLibName(string* lib) {
 	AddDirSep(*lib);
-	*lib += "libgle-graphics-";
+#ifndef __WIN32__
+	*lib += "lib";
+#endif
+	*lib += "gle-graphics-";
 	*lib += GLEVN;
 #ifdef __UNIX__
 	#ifdef __MACOS__
