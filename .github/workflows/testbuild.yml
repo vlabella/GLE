@@ -1,0 +1,65 @@
+name: Test Build For Branch
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest, windows-latest]
+        build_type: [Release]
+        c_compiler: [gcc, clang, cl]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Install dependencies
+      run: |
+        set -x
+        touch configure.args
+
+        case $RUNNER_OS in
+          Linux)
+            sudo apt-get update
+            # Add libjbig-dev and libzstd-dev once GLE can find them without
+            # relying on nonexistent cmake config files.
+            # See https://github.com/vlabella/GLE/issues/16
+            sudo apt-get install cmake freeglut3-dev libboost-dev \
+                libcairo-dev libdeflate-dev libgs-dev \
+                libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
+                libpng-dev libtiff-dev libz-dev qtbase5-dev
+            jobs=$(nproc)
+            ;;
+          macOS)
+            # Add jbigkit once GLE can find it without relying on nonexistent
+            # cmake config files.
+            # See https://github.com/vlabella/GLE/issues/16
+            # liblzma and libz are already in macOS.
+            # cmake is preinstalled with Homebrew on GitHub Actions runners and
+            # trying to install it again produces an unintelligible warning.
+            brew install --quiet boost cairo ghostscript jpeg-turbo \
+                libdeflate libpng libtiff pixman qt@5 zstd
+            echo "-D Qt5_DIR=$(brew --prefix qt@5)/lib/cmake/Qt5" >> configure.args
+            jobs=$(sysctl -n hw.activecpu)
+            ;;
+          Windows)
+            # make sure libraries are installed on windows
+            ;;
+          *)
+            jobs=1
+        esac
+
+        echo "--parallel $jobs" >> build.args
+    - name: Configure
+      run: |
+        xargs -t < configure.args cmake -S src -B build -D CMAKE_BUILD_TYPE=Release
+    - name: Build
+      run: |
+        xargs -t < build.args cmake --build build --verbose
+    - name: Install
+      run: |
+        DESTDIR=destroot cmake --install build
