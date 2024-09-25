@@ -1,4 +1,4 @@
-name: Build
+name: Branch Build
 on:
   pull_request:
   push:
