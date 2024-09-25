@@ -1,0 +1,5 @@
+{
+  "dependencies": [
+    "boost","zlib","libpng","tiff","cairo","pixman","ijg-libjpeg","qt5","libdeflate"
+  ]
+}
