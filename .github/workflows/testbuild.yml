@@ -7,9 +7,26 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        os: [windows-latest]
         build_type: [Release]
         c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+        exclude:
+          - os: windows-latest
+            c_compiler: gcc
+          - os: windows-latest
+            c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: cl
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -54,7 +71,7 @@ jobs:
         esac
 
         echo "--parallel $jobs" >> build.args
-    - name: Configure
+    - name: Configure CMake
       run: |
         xargs -t < configure.args cmake -S src -B build -D CMAKE_BUILD_TYPE=Release
     - name: Build
