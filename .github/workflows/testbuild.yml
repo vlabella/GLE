@@ -66,7 +66,7 @@ jobs:
           Windows)
             # make sure libraries are installed on windows
             git clone http://github.com/Microsoft/vcpkg
-            ./vcpkg/vcpkg-bootstrap.sh
+            ./vcpkg/bootstrap-vcpkg.sh
             vcpkg install zlib libpng ijg-libjpeg
             ;;
           *)
