@@ -65,6 +65,7 @@ jobs:
             ;;
           Windows)
             # make sure libraries are installed on windows
+            echo windows
             ;;
           *)
             jobs=1
