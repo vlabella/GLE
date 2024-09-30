@@ -1,6 +1,8 @@
 name: Test Build For Branch
 on:
   workflow_dispatch:
+env: 
+  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
 jobs:
   build:
     name: Build on ${{ matrix.os }}
@@ -40,31 +42,18 @@ jobs:
         script: |
         core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
         core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-      env: 
-        VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
     - name: Install dependencies
       run: |
-        set -x
-        touch configure.args
-
-        case $RUNNER_OS in
-          Windows)
-            # make sure libraries are installed on windows
-            git clone http://github.com/Microsoft/vcpkg
-            ./vcpkg/bootstrap-vcpkg.sh
-            vcpkg install
-            ;;
-          *)
-            jobs=1
-        esac
-
-        echo "--parallel $jobs" >> build.args
+          # make sure libraries are installed on windows
+          git clone http://github.com/Microsoft/vcpkg
+          ./vcpkg/bootstrap-vcpkg.sh
+          vcpkg install
     - name: Configure CMake
       run: |
-        xargs -t < configure.args cmake -S src -B build -D CMAKE_BUILD_TYPE=Release
+        cmake -S ${{github.workspace}}/src -B build -D CMAKE_BUILD_TYPE=Release
     - name: Build
       run: |
-        xargs -t < build.args cmake --build build --verbose
+        cmake --build build --verbose
     - name: Install
       run: |
         DESTDIR=destroot cmake --install build
