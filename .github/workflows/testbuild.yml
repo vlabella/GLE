@@ -36,6 +36,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
     - name: Export GitHub Actions cache environment variables
       uses: actions/github-script@v7
       with:
@@ -50,10 +56,10 @@ jobs:
           vcpkg install
     - name: Configure CMake
       run: |
-        cmake -S ${{github.workspace}}/src -B build -D CMAKE_BUILD_TYPE=Release
+        cmake -S ${{github.workspace}}/src -B ${{ steps.strings.outputs.build-output-dir }} -D CMAKE_BUILD_TYPE=${{ matrix.build_type }}
     - name: Build
       run: |
-        cmake --build build --verbose
+        cmake --build ${{ steps.strings.outputs.build-output-dir }} --conifg=${{ matrix.build_type }}
     - name: Install
       run: |
         DESTDIR=destroot cmake --install build
