@@ -1,5 +1,5 @@
 # single platform cmake build for windows
-name: Test Build For Branch
+name: Windows Build
 on:
   workflow_dispatch:
 env:
@@ -25,7 +25,7 @@ jobs:
           vcpkg install
     - name: Configure CMake
       run: |
-        cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/../vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
     - name: Build
       run: |
         cmake --build ${{github.workspace}}/build --conifg=$${{env.BUILD_TYPE}}
