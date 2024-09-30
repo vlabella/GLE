@@ -40,29 +40,6 @@ jobs:
         touch configure.args
 
         case $RUNNER_OS in
-          Linux)
-            sudo apt-get update
-            # Add libjbig-dev and libzstd-dev once GLE can find them without
-            # relying on nonexistent cmake config files.
-            # See https://github.com/vlabella/GLE/issues/16
-            sudo apt-get install cmake freeglut3-dev libboost-dev \
-                libcairo-dev libdeflate-dev libgs-dev \
-                libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
-                libpng-dev libtiff-dev libz-dev qtbase5-dev
-            jobs=$(nproc)
-            ;;
-          macOS)
-            # Add jbigkit once GLE can find it without relying on nonexistent
-            # cmake config files.
-            # See https://github.com/vlabella/GLE/issues/16
-            # liblzma and libz are already in macOS.
-            # cmake is preinstalled with Homebrew on GitHub Actions runners and
-            # trying to install it again produces an unintelligible warning.
-            brew install --quiet boost cairo ghostscript jpeg-turbo \
-                libdeflate libpng libtiff pixman qt@5 zstd
-            echo "-D Qt5_DIR=$(brew --prefix qt@5)/lib/cmake/Qt5" >> configure.args
-            jobs=$(sysctl -n hw.activecpu)
-            ;;
           Windows)
             # make sure libraries are installed on windows
             git clone http://github.com/Microsoft/vcpkg
