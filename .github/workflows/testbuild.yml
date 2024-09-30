@@ -1,7 +1,7 @@
 name: Test Build For Branch
 on:
   workflow_dispatch:
-env: 
+env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
 jobs:
   build:
@@ -46,8 +46,8 @@ jobs:
       uses: actions/github-script@v7
       with:
         script: |
-        core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-        core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
     - name: Install dependencies
       run: |
           # make sure libraries are installed on windows
