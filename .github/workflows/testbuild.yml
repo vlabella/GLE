@@ -22,7 +22,7 @@ jobs:
           # make sure libraries are installed on windows
           git clone http://github.com/Microsoft/vcpkg
           ./vcpkg/bootstrap-vcpkg.sh
-          vcpkg install
+          vcpkg install --triplet x64-windows
     - name: Configure CMake
       run: |
         cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -D CMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
