@@ -32,8 +32,8 @@ jobs:
       run: ${{ github.workspace }}\\vcpkg\\vcpkg install
       env:
     #    X_VCPKG_ASSET_SOURCES: "clear;x-azurl,https://your.domain.com/container,${{ secrets.SAS }},readwrite"
-        VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
-        VCPKG_OVERLAY_PORTS: "${{ github.workspace }}/ports"
+    #    VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+    #    VCPKG_OVERLAY_PORTS: "${{ github.workspace }}/ports"
       shell: cmd
     - name: Configure CMake
       run: |
