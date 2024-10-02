@@ -118,9 +118,9 @@ ${CMAKE_CURRENT_SOURCE_DIR}/../project_info.mak
 #
 # -- external libraries user can pass ***_ROOT to modify search location
 #
+find_package(ZLIB REQUIRED)
 SET(Boost_USE_STATIC_LIBS ON)
 find_package(Boost)
-find_package(ZLIB REQUIRED)
 find_package(JPEG)
 if(UNIX)
 	find_package(Curses REQUIRED) # -- for manip
