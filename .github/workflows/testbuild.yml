@@ -9,23 +9,36 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Checkout
+    - name: Checkout GLE
       uses: actions/checkout@v4
-    - name: Export GitHub Actions cache environment variables
+
+    - name: Acquire vcpkg
+      uses: actions/checkout@v4
+      with:
+        repository: "Microsoft/vcpkg"
+        path: vcpkg
+
+    - name: Bootstrap vcpkg
+      run: "${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh"
+      shell: bash
+
+    - name: Enable GitHub Actions Cache backend
       uses: actions/github-script@v7
       with:
         script: |
           core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-    - name: Install dependencies
-      run: |
-          # make sure libraries are installed on windows
-          git clone http://github.com/Microsoft/vcpkg
-          ./vcpkg/bootstrap-vcpkg.sh
-          vcpkg install --triplet x64-windows
+
+    - name: Build ports
+      run: ${{ github.workspace }}/vcpkg/vcpkg install
+      env:
+    #    X_VCPKG_ASSET_SOURCES: "clear;x-azurl,https://your.domain.com/container,${{ secrets.SAS }},readwrite"
+        VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+        VCPKG_OVERLAY_PORTS: "${{ github.workspace }}/ports"
+      shell: bash
     - name: Configure CMake
       run: |
-        cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows
+        cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
     - name: Build
       run: |
         cmake --build ${{github.workspace}}/build --conifg=$${{env.BUILD_TYPE}}

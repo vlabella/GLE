@@ -6,7 +6,7 @@ include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
-include(D:/a/GLE/GLE/vcpkg/scripts/buildsystems/vcpkg.cmake)
+#include(D:/a/GLE/GLE/vcpkg/scripts/buildsystems/vcpkg.cmake)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 project (gle VERSION 4.3.5)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
@@ -120,7 +120,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/../project_info.mak
 #
 SET(Boost_USE_STATIC_LIBS ON)
 find_package(Boost)
-find_package(ZLIB CONFIG REQUIRED)
+find_package(ZLIB REQUIRED)
 find_package(JPEG)
 if(UNIX)
 	find_package(Curses REQUIRED) # -- for manip
