@@ -19,7 +19,7 @@ jobs:
         path: vcpkg
 
     - name: Bootstrap vcpkg
-      run: "${{ github.workspace }}\\vcpkg\\bootstrap-vcpkg.sh"
+      run: "${{ github.workspace }}\\vcpkg\\bootstrap-vcpkg.bat"
       shell: cmd
 
     - name: Enable GitHub Actions Cache backend
@@ -29,7 +29,7 @@ jobs:
           core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
     - name: Build ports
-      run: ${{ github.workspace }\}\vcpkg\\vcpkg install
+      run: ${{ github.workspace }}\\vcpkg\\vcpkg install
       env:
     #    X_VCPKG_ASSET_SOURCES: "clear;x-azurl,https://your.domain.com/container,${{ secrets.SAS }},readwrite"
         VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
