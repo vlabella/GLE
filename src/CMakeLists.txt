@@ -6,6 +6,7 @@ include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
+include(D:/a/GLE/GLE/vcpkg/scripts/buildsystems/vcpkg.cmake)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 project (gle VERSION 4.3.5)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
