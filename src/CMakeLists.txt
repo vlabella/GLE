@@ -1,7 +1,7 @@
 cmake_minimum_required (VERSION 3.18)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
 cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed.
-#cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
+cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
@@ -14,8 +14,8 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 #
 # -- Windows option for static runtimes
 #
-message(${ZLIB_ROOT})
-message(${ZLIB_DIR})
+#message(${ZLIB_ROOT})
+#message(${ZLIB_DIR})
 if(WIN32)
 	#
 	# -- Windows option for runtime library - assume DLL /MD unless USE_STATIC_RUNTIME=ON then use static /MT
@@ -120,7 +120,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/../project_info.mak
 #
 SET(Boost_USE_STATIC_LIBS ON)
 find_package(Boost)
-find_package(ZLIB)
+find_package(ZLIB CONFIG REQUIRED)
 find_package(JPEG)
 if(UNIX)
 	find_package(Curses REQUIRED) # -- for manip
