@@ -28,9 +28,9 @@ jobs:
         script: |
           core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
-    - name: Build ports
-      run: ${{ github.workspace }}\\vcpkg\\vcpkg install
-      shell: cmd
+#    - name: Build ports
+#      run: ${{ github.workspace }}\\vcpkg\\vcpkg install
+#      shell: cmd
     - name: Configure CMake
       run: |
         cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
