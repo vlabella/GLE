@@ -1,5 +1,5 @@
 {
   "dependencies": [
-    "zlib"
+    "zlib","boost","libpng","tiff","cairo","pixman","qt5","libdeflate"
   ]
 }
