@@ -20,7 +20,7 @@ jobs:
 
     - name: Bootstrap vcpkg
       run: "${{ github.workspace }}/vcpkg/bootstrap-vcpkg.sh"
-      shell: bash
+      shell: cmd
 
     - name: Enable GitHub Actions Cache backend
       uses: actions/github-script@v7
@@ -35,7 +35,7 @@ jobs:
     #    X_VCPKG_ASSET_SOURCES: "clear;x-azurl,https://your.domain.com/container,${{ secrets.SAS }},readwrite"
         VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
         VCPKG_OVERLAY_PORTS: "${{ github.workspace }}/ports"
-      shell: bash
+      shell: cmd
     - name: Configure CMake
       run: |
         cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
