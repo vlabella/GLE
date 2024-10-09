@@ -31,9 +31,14 @@ jobs:
 #    - name: Build ports
 #      run: ${{ github.workspace }}\\vcpkg\\vcpkg install
 #      shell: cmd
+    - name: Acquire Ghostscipt/PDL
+      uses: actions/checkout@v4
+      with:
+        repository: "ArtifexSoftware/ghostpdl"
+        path: ghostpdl
     - name: Configure CMake
       run: |
-        cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DGHOSTPDL_ROOT=${{ github.workspace }}/ghostpdl
     - name: Build
       run: |
         cmake --build ${{github.workspace}}/build --conifg=$${{env.BUILD_TYPE}}
