@@ -41,7 +41,7 @@ jobs:
         cmake -S ${{github.workspace}}/src -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET=x64-windows-static-release -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DGHOSTPDL_ROOT=${{ github.workspace }}/ghostpdl
     - name: Build
       run: |
-        cmake --build ${{github.workspace}}/build --conifg=$${{env.BUILD_TYPE}}
+        cmake --build ${{github.workspace}}/build --conifg=${{env.BUILD_TYPE}}
     - name: Install
       run: |
         DESTDIR=destroot cmake --install build
