@@ -38,7 +38,7 @@ jobs:
         path: ghostpdl
     - name: Configure CMake
       run: |
-        cmake -S ${{github.workspace}}\\src -B ${{github.workspace}}\\build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET=x64-windows-static-release -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}/vcpkg/scripts/buildsystems/vcpkg.cmake -DGHOSTPDL_ROOT=${{ github.workspace }}/ghostpdl -DUSE_STATIC_RUNTIME=ON
+        cmake -S ${{github.workspace}}\\src -B ${{github.workspace}}\\build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET=x64-windows-static-release -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl -DUSE_STATIC_RUNTIME=ON
     - name: Build
       run: |
         cmake --build ${{github.workspace}}\\build --config ${{env.BUILD_TYPE}}

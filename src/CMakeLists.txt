@@ -25,7 +25,7 @@ if(WIN32)
 		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 		# tag CPACK_SYSTEM_NAME with "s" to denote static runtime - must rebuild the whole name as there is no way to add a tag
 		set(CPACK_SYSTEM_NAME "win64s")
-		if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "Win32")
+		if(${CMAKE_VS_PLATFORM_NAME} STREQUAL "Win32")
 			set(CPACK_SYSTEM_NAME "win32s")
 		endif()
 	endif()
