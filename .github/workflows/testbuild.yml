@@ -44,7 +44,7 @@ jobs:
         cmake --build ${{github.workspace}}\build --config ${{env.BUILD_TYPE}}
     - name: Install
       run: |
-        cmake -DBUILD_TYPE=Release -P ${{github.workspace}}\buildcmake_install.cmake
+        cmake -DBUILD_TYPE=Release -P ${{github.workspace}}\build\cmake_install.cmake
     - name: Package
       run: |
         cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\build"
