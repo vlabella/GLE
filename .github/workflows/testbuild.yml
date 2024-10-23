@@ -44,4 +44,7 @@ jobs:
         cmake --build ${{github.workspace}}\\build --config ${{env.BUILD_TYPE}}
     - name: Install
       run: |
-        DESTDIR=destroot cmake --install build
+        cmake -DBUILD_TYPE=Release -P cmake_install.cmake
+    - name: Package
+      run: |
+        cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\\build"
