@@ -6,7 +6,6 @@ include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
-#include(D:/a/GLE/GLE/vcpkg/scripts/buildsystems/vcpkg.cmake)
 SET( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 project (gle VERSION 4.3.5)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
@@ -14,8 +13,6 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 #
 # -- Windows option for static runtimes
 #
-#message(${ZLIB_ROOT})
-#message(${ZLIB_DIR})
 if(WIN32)
 	#
 	# -- Windows option for runtime library - assume DLL /MD unless USE_STATIC_RUNTIME=ON then use static /MT
