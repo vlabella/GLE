@@ -9,11 +9,6 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Choco Install Miktex
-        uses: crazy-max/ghaction-chocolatey@v3
-        with:
-          args: install miktex --no-progress
-
     - name: Checkout GLE
       uses: actions/checkout@v4
 
@@ -28,6 +23,11 @@ jobs:
       with:
         repository: "vlabella/gle-manual"
         path: gle-manual
+
+    - name: Choco Install Miktex
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: -h
 
     - name: Acquire vcpkg
       uses: actions/checkout@v4
