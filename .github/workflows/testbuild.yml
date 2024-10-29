@@ -11,7 +11,6 @@ jobs:
     steps:
     - name: Install Chocolatey pkg
       uses: Tyler887/chocolatey-install@1.0
-        with: install miktex --no-progress
 
     - name: Checkout GLE
       uses: actions/checkout@v4
