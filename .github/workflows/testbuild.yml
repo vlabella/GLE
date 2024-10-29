@@ -68,6 +68,7 @@ jobs:
     - name: Configure MikTeX
       shell: cmd
       run: |
+        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
         initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
 
 
