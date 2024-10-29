@@ -27,7 +27,7 @@ jobs:
     - name: Choco Install Miktex
       uses: crazy-max/ghaction-chocolatey@v3
       with:
-        args: -h
+        args: install miktex --no-progress
 
     - name: Acquire vcpkg
       uses: actions/checkout@v4
