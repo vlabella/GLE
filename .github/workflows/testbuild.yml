@@ -52,6 +52,11 @@ jobs:
       with:
         args: install miktex --no-progress
 
+    - name: Add MikTex to PATH
+      shell: pwsh
+      run: |
+       echo "C:\\Program Files\\MikTeX\\bin\\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
     - name: Configure MikTeX
       run: |
         initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
