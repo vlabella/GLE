@@ -9,8 +9,10 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Install Chocolatey pkg
-      uses: Tyler887/chocolatey-install@1.0
+    - name: Choco Install Miktex
+        uses: crazy-max/ghaction-chocolatey@v3
+        with:
+          args: install miktex --no-progress
 
     - name: Checkout GLE
       uses: actions/checkout@v4
