@@ -54,7 +54,7 @@ jobs:
 
     - name: Display MikTeX path
       shell: cmd
-      run: dir "C:\\Program Files\\MikTeX\\bin\\x64"
+      run: dir "C:\Program Files\MikTeX"
 
     - name: Add MikTex to PATH PowerShell
       shell: pwsh
