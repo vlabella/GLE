@@ -54,16 +54,16 @@ jobs:
 
     - name: Display MikTeX path
       shell: cmd
-      run: dir "C:\Program Files\MikTeX"
+      run: dir "C:\Program Files\MikTeX\miktex\bin"
 
     - name: Add MikTex to PATH PowerShell
       shell: pwsh
       run: |
-       echo "C:\\Program Files\\MikTeX\\bin\\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+       echo "C:\\Program Files\\MikTeX\\miktexbin\\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Add MikTex to PATH CMD
       shell: pwsh
-      run: set PATH=%PATH%;"C:\Program Files\MikTeX\bin\x64"
+      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
 
     - name: Configure MikTeX
       shell: cmd
