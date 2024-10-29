@@ -25,9 +25,9 @@ jobs:
         path: gle-manual
 
     - name: Choco Install Miktex
-        uses: crazy-max/ghaction-chocolatey@v3
-        with:
-          args: -h
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: -h
 
     - name: Acquire vcpkg
       uses: actions/checkout@v4
