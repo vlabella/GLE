@@ -46,6 +46,19 @@ jobs:
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
+     - name: Install MiKTeX
+        run: |
+          choco install miktex --no-progress
+          echo "C:\Program Files\MiKTeX\miktex\bin\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
+      - run: initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
+      - run: miktex --admin --verbose packages update-package-database
+      - run: miktex --admin --verbose packages update
+      - run: miktex --verbose packages update
+      - run: miktex --admin --verbose packages install cm-super
+      - run: miktex --admin --verbose fndb refresh
+      - run: initexmf --admin --verbose --update-fndb
+      - run: initexmf --admin --verbose --mklinks --force
+      - run: updmap --admin
     - name: Configure CMake
       run: |
         cmake -S ${{github.workspace}}\src -B ${{github.workspace}}\build -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}} -DVCPKG_TARGET_TRIPLET=x64-windows-static-release -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl -DUSE_STATIC_RUNTIME=ON -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library" -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
