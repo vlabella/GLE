@@ -46,8 +46,8 @@ jobs:
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
-    - name: Install Chocolatey
-      uses: chocolatey-install
+    - name: Install Chocolatey pkg
+      uses: Tyler887/chocolatey-install@1.0
 #    - name: Install MiKTeX
 #        run: choco install miktex --no-progress
 #          echo "C:\Program Files\MiKTeX\miktex\bin\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
