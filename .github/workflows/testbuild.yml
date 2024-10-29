@@ -52,24 +52,33 @@ jobs:
       with:
         args: install miktex --no-progress
 
-    - name: Add MikTex to PATH
+    - name: Display MikTeX path
+      shell: cmd
+      run: dir "C:\\Program Files\\MikTeX\\bin\\x64"
+
+    - name: Add MikTex to PATH PowerShell
       shell: pwsh
       run: |
        echo "C:\\Program Files\\MikTeX\\bin\\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
+    - name: Add MikTex to PATH CMD
+      shell: pwsh
+      run: set PATH=%PATH%;"C:\Program Files\MikTeX\bin\x64"
+
     - name: Configure MikTeX
       shell: cmd
       run: |
-        set PATH=%PATH%;"C:\\Program Files\\MikTeX\\bin\\x64"
-        "C:\\Program Files\\MikTeX\\bin\\x64\\initexmf" --admin --verbose --set-config-value=[MPM]AutoInstall=1
-        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose packages update-package-database
-        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose packages update
-        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --verbose packages update
-        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose packages install cm-super
-        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose fndb refresh
-        "C:\\Program Files\\MikTeX\\bin\\x64\\initexmf" --admin --verbose --update-fndb
-        "C:\\Program Files\\MikTeX\\bin\\x64\\initexmf" --admin --verbose --mklinks --force
-        "C:\\Program Files\\MikTeX\\bin\\x64\\updmap" --admin
+        initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
+
+
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose packages update-package-database
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose packages update
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --verbose packages update
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose packages install cm-super
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\miktex" --admin --verbose fndb refresh
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\initexmf" --admin --verbose --update-fndb
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\initexmf" --admin --verbose --mklinks --force
+#        "C:\\Program Files\\MikTeX\\bin\\x64\\updmap" --admin
 
     - name: Configure CMake
       run: >
