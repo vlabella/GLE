@@ -48,8 +48,8 @@ jobs:
         path: ghostpdl
     - name: Install Chocolatey
       uses: chocolatey-install
-    - name: Install MiKTeX
-        run: choco install miktex --no-progress
+#    - name: Install MiKTeX
+#        run: choco install miktex --no-progress
 #          echo "C:\Program Files\MiKTeX\miktex\bin\x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8
 #        run: initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
 #        run: miktex --admin --verbose packages update-package-database
