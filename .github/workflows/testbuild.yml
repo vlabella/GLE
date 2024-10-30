@@ -10,31 +10,6 @@ jobs:
     runs-on: windows-latest
     steps:
 
-#    - name: display path cmd
-#      shell: cmd
-#      run: echo %PATH%
-
-#    - name: display path pwsh
-#      shell: pwsh
-#      run: echo $env:PATH
-
-#    - name: display path cmd
-#      shell: cmd
-#      run: echo %PATH%
-
-#    - name: display path pwsh
-#      shell: pwsh
-#      run: echo $env:PATH
-
-    - name: Choco Install Ghostscript
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install ghostscript --no-progress
-
-    - name: Display gs version
-      shell: cmd
-      run: gswin64c --version
-
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
@@ -53,10 +28,6 @@ jobs:
         repository: "vlabella/gle-manual"
         path: gle-manual
 
-#    - name: Display gle-library path
-#      shell: cmd
-#      run: dir ${{github.workspace}}\gle-manual
-
     - name: Acquire vcpkg
       uses: actions/checkout@v4
       with:
@@ -74,37 +45,34 @@ jobs:
           core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
+      # header files needed for building of GLE
     - name: Acquire Ghostscipt/PDL
       uses: actions/checkout@v4
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
 
+      # needed for building of manual
     - name: Choco Install MikTeX
       uses: crazy-max/ghaction-chocolatey@v3
       with:
         args: install miktex --no-progress
 
-#  no need to install comes preinstalled
-#    - name: Choco Install NSIS
-#      uses: crazy-max/ghaction-chocolatey@v3
-#      with:
-#        args: install nsis --no-progress
+      # needed for building of manual
+    - name: Choco Install Ghostscript
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install ghostscript --no-progress
 
-      # gs version number hard coded here - will fail when version number changes
-    - name: Add MikTeX and Gshoscript to PATH PowerShell
+      # gs version number hard coded - will fail when version number changes
+    - name: Add MikTeX and Ghostcript to PATH using PowerShell
       shell: pwsh
       run: |
        echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.04.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
- #   - name: Add MikTeX to PATH PowerShell
- #     shell: pwsh
- #     run: |
- #      echo "C:/Program Files/MikTeX/miktex/bin/x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
- #   - name: Add MikTeX to PATH CMD
- #     shell: cmd
- #     run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
+    - name: Display gs version
+      shell: cmd
+      run: gswin64c --version
 
     - name: Configure MikTeX
       shell: cmd
