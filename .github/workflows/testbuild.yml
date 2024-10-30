@@ -65,23 +65,24 @@ jobs:
       with:
         args: install miktex --no-progress
 
-    - name: Display gs version
-      shell: cmd
-      run: gswin64c --version
-
     - name: Choco Install NSIS
       uses: crazy-max/ghaction-chocolatey@v3
       with:
         args: install nsis --no-progress
 
-    - name: Add MikTeX & Perl to PATH PowerShell
+    - name: Add MikTeX to PATH PowerShell
       shell: pwsh
       run: |
-       echo "C:/Program Files/MikTeX/miktex/bin/x64;C:/strawberry/perl/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+       echo "C:/Program Files/MikTeX/miktex/bin/x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-    - name: Add MikTeX & Perl to PATH CMD
+    - name: Add MikTeX to PATH CMD
       shell: cmd
-      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\strawberry\perl\bin"
+      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
+
+    - name: Display gs version
+      shell: cmd
+      run: gswin64c --version
+
 
     - name: Configure MikTeX
       shell: cmd
