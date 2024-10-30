@@ -27,6 +27,10 @@ jobs:
         repository: "vlabella/gle-manual"
         path: gle-manual
 
+    - name: Display gle library path
+      shell: cmd
+      run: dir ${{github.workspace}}\gle-manual
+
     - name: Acquire vcpkg
       uses: actions/checkout@v4
       with:
