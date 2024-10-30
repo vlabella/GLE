@@ -10,6 +10,28 @@ jobs:
     runs-on: windows-latest
     steps:
 
+    - name: display path cmd
+      shell: cmd
+      run: echo %PATH%
+
+    - name: display path pwsh
+      shell: pwsh
+      run: echo $env:PATH
+    
+    - name: Add MikTeX to PATH PowerShell
+      shell: pwsh
+      run: |
+       echo "C:/Program Files/MikTeX/miktex/bin/x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: display path cmd
+      shell: cmd
+      run: echo %PATH%
+    
+    - name: display path pwsh
+      shell: pwsh
+      run: echo $env:PATH
+    
+
 #    - name: Choco Install Perl
 #      uses: crazy-max/ghaction-chocolatey@v3
 #      with:
