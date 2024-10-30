@@ -9,10 +9,11 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
-    - name: Choco Install Perl
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install strawberryperl --no-progress
+
+#    - name: Choco Install Perl
+#      uses: crazy-max/ghaction-chocolatey@v3
+#      with:
+#        args: install strawberryperl --no-progress
 
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
@@ -32,9 +33,9 @@ jobs:
         repository: "vlabella/gle-manual"
         path: gle-manual
 
-    - name: Display gle-library path
-      shell: cmd
-      run: dir ${{github.workspace}}\gle-manual
+#    - name: Display gle-library path
+#      shell: cmd
+#      run: dir ${{github.workspace}}\gle-manual
 
     - name: Acquire vcpkg
       uses: actions/checkout@v4
@@ -63,6 +64,10 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v3
       with:
         args: install miktex --no-progress
+
+    - name: Display gs version
+      shell: cmd
+      run: gswin64c --version
 
     - name: Choco Install NSIS
       uses: crazy-max/ghaction-chocolatey@v3
@@ -114,7 +119,7 @@ jobs:
     - name: Build Manual
       working-directory: ${{github.workspace}}\gle-manual
       run: |
-        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\strawberry\perl\bin"
+        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
 
     - name: Package
