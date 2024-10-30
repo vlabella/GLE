@@ -55,18 +55,28 @@ jobs:
       with:
         args: install miktex --no-progress
 
-#    - name: Display MikTeX path
-#      shell: cmd
-#      run: dir "C:\Program Files\MikTeX\miktex\bin"
+    - name: Choco Install Perl
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install activeperl --no-progress
+
+    - name: Choco Install NSIS
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install nsis --no-progress
+
+    - name: Display Perl Path
+      shell: cmd
+      run: dir "C:\perl64"
 
     - name: Add MikTex to PATH PowerShell
       shell: pwsh
       run: |
-       echo "C:/Program Files/MikTeX/miktex/bin/x64" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+       echo "C:/Program Files/MikTeX/miktex/bin/x64;C:/perl64/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Add MikTex to PATH CMD
       shell: cmd
-      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
+      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\perl64\bin"
 
     - name: Configure MikTeX
       shell: cmd
@@ -102,10 +112,12 @@ jobs:
         cmake -DBUILD_TYPE=Release -P ${{github.workspace}}\build\cmake_install.cmake
 
     - name: Build Manual
+      working-directory: ${{github.workspace}}\gle-manual
       run: |
-        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64"
-        cd ${{github.workspace}}\gle-manual & nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
+        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\perl64\bin"
+        nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
 
     - name: Package
+      working-directory: ${{github.workspace}}\build
       run: |
-        cd ${{github.workspace}}\build & cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\stage"
+        cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\stage"
