@@ -70,6 +70,7 @@ jobs:
       run: |
        echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.04.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
+      # if this fails then gs version is wrong
     - name: Display gs version
       shell: cmd
       run: gswin64c --version
@@ -94,7 +95,8 @@ jobs:
         -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
         -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
-        -DUSE_STATIC_RUNTIME=ON -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
+        -DUSE_STATIC_RUNTIME=ON
+        -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
 
