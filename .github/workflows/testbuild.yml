@@ -9,6 +9,15 @@ jobs:
   build:
     runs-on: windows-latest
     steps:
+    - name: Choco Install Perl
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install strawberryperl --no-progress
+
+    - name: Display strawberry perl path
+      shell: cmd
+      run: dir C:\strawberry\perl
+
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
@@ -59,15 +68,7 @@ jobs:
       with:
         args: install miktex --no-progress
 
-    - name: Choco Install Perl
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install straberryperl --no-progress
-
-    - name: Display straberry perl path
-      shell: cmd
-      run: dir C:\strawberry\perl
-
+    
     - name: Choco Install NSIS
       uses: crazy-max/ghaction-chocolatey@v3
       with:
