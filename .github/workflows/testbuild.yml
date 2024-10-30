@@ -14,10 +14,6 @@ jobs:
       with:
         args: install strawberryperl --no-progress
 
-    - name: Display strawberry perl path
-      shell: cmd
-      run: dir C:\strawberry\perl
-
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
@@ -36,7 +32,7 @@ jobs:
         repository: "vlabella/gle-manual"
         path: gle-manual
 
-    - name: Display gle library path
+    - name: Display gle-library path
       shell: cmd
       run: dir ${{github.workspace}}\gle-manual
 
@@ -68,24 +64,19 @@ jobs:
       with:
         args: install miktex --no-progress
 
-    
     - name: Choco Install NSIS
       uses: crazy-max/ghaction-chocolatey@v3
       with:
         args: install nsis --no-progress
 
-    - name: Display Perl Path
-      shell: cmd
-      run: dir "C:\perl64"
-
-    - name: Add MikTex to PATH PowerShell
+    - name: Add MikTeX & Perl to PATH PowerShell
       shell: pwsh
       run: |
-       echo "C:/Program Files/MikTeX/miktex/bin/x64;C:/perl64/bin;C:/strawberry/perl/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+       echo "C:/Program Files/MikTeX/miktex/bin/x64;C:/strawberry/perl/bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-    - name: Add MikTex to PATH CMD
+    - name: Add MikTeX & Perl to PATH CMD
       shell: cmd
-      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\perl64\bin;C:\strawberry\perl\bin"
+      run: set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\strawberry\perl\bin"
 
     - name: Configure MikTeX
       shell: cmd
@@ -123,7 +114,7 @@ jobs:
     - name: Build Manual
       working-directory: ${{github.workspace}}\gle-manual
       run: |
-        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\perl64\bin;C:\strawberry\perl\bin"
+        set PATH=%PATH%;"C:\Program Files\MikTeX\miktex\bin\x64;C:\strawberry\perl\bin"
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
 
     - name: Package
