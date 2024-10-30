@@ -12,10 +12,6 @@ jobs:
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
-    - name: Display nmake help
-      shell: cmd
-      run: nmake /?
-
     - name: Checkout GLE
       uses: actions/checkout@v4
 
@@ -58,10 +54,10 @@ jobs:
       uses: crazy-max/ghaction-chocolatey@v3
       with:
         args: install miktex --no-progress
-    
-    - name: Display MikTeX path
-      shell: cmd
-      run: dir "C:\Program Files\MikTeX\miktex\bin"
+
+#    - name: Display MikTeX path
+#      shell: cmd
+#      run: dir "C:\Program Files\MikTeX\miktex\bin"
 
     - name: Add MikTex to PATH PowerShell
       shell: pwsh
