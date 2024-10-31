@@ -113,7 +113,28 @@ jobs:
       run: |
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
 
+    - name: Upload Artifacts - Manual PDF
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: GLE PDF Manual
+        path: ${{github.workspace}}\gle-manual\gle-manual.pdf
+        if-no-files-found: warn
+        retention-dats: 0
+        compression-level: 0
+
     - name: Package
       working-directory: ${{github.workspace}}\build
       run: |
         cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\stage"
+
+    - name: Upload Artifacts - Binaries
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: Windows Binary Executables
+        path: ${{github.workspace}}\stage\gle-?.?.?-win64.*
+        if-no-files-found: warn
+        retention-dats: 0
+        compression-level: 0
+
+
+            
