@@ -1,4 +1,6 @@
-# single platform cmake build for windows
+#
+# -- Windows - build, build manual, package and upload
+#
 name: Windows Build
 on:
   workflow_dispatch:
@@ -135,6 +137,3 @@ jobs:
         if-no-files-found: warn
         retention-dats: 0
         compression-level: 0
-
-
-            
