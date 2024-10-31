@@ -121,7 +121,7 @@ jobs:
         name: GLE PDF Manual
         path: ${{github.workspace}}\gle-manual\gle-manual.pdf
         if-no-files-found: warn
-        retention-dats: 0
+        retention-days: 0
         compression-level: 0
 
     - name: Package
@@ -133,7 +133,7 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         name: Windows Binary Executables
-        path: ${{github.workspace}}\stage\gle-?.?.?-win64.*
+        path: ${{github.workspace}}\stage\gle-*.*
         if-no-files-found: warn
-        retention-dats: 0
+        retention-days: 0
         compression-level: 0
