@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 3.18)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
+cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed.
 cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
@@ -21,7 +22,7 @@ if(WIN32)
 		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 		# tag CPACK_SYSTEM_NAME with "s" to denote static runtime - must rebuild the whole name as there is no way to add a tag
 		set(CPACK_SYSTEM_NAME "win64s")
-		if(${CMAKE_GENERATOR_PLATFORM} STREQUAL "Win32")
+		if(${CMAKE_VS_PLATFORM_NAME} STREQUAL "Win32")
 			set(CPACK_SYSTEM_NAME "win32s")
 		endif()
 	endif()
@@ -114,9 +115,9 @@ ${CMAKE_CURRENT_SOURCE_DIR}/../project_info.mak
 #
 # -- external libraries user can pass ***_ROOT to modify search location
 #
+find_package(ZLIB REQUIRED)
 SET(Boost_USE_STATIC_LIBS ON)
 find_package(Boost)
-find_package(ZLIB)
 find_package(JPEG)
 if(UNIX)
 	find_package(Curses REQUIRED) # -- for manip
@@ -206,9 +207,9 @@ endif()
 set(PIXMAN_FOUND )
 get_property(_isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
 if(_isMultiConfig)
-	find_library(PIXMAN_RELEASE NAMES pixman PATHS ${PIXMAN_ROOT} PATH_SUFFIXES lib REQUIRED)
+	find_library(PIXMAN_RELEASE NAMES pixman pixman-1 PATHS ${PIXMAN_ROOT} PATH_SUFFIXES lib REQUIRED)
 	string(COMPARE NOTEQUAL "${PIXMAN_RELEASE}" "PIXMAN_RELEASE-NOTFOUND" PIXMAN_FOUND)
-	find_library(PIXMAN_DEBUG NAMES pixmand PATHS ${PIXMAN_ROOT} PATH_SUFFIXES lib )
+	find_library(PIXMAN_DEBUG NAMES pixmand pixmand-1 PATHS ${PIXMAN_ROOT} PATH_SUFFIXES lib )
 	set(HAS_DEBUG )
 	string(COMPARE NOTEQUAL "${PIXMAN_DEBUG}" "PIXMAN_DEBUG-NOTFOUND" HAS_DEBUG)
 	if(HAS_DEBUG)

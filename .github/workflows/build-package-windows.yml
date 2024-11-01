@@ -1,7 +1,8 @@
 #
-# -- Windows - build, build manual, package and upload
+# -- Windows - build, build manual, package, and upload
+#     runs manually
 #
-name: Windows Build
+name: Build & Package Windows
 on:
   workflow_dispatch:
 env:
