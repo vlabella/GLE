@@ -1,0 +1,127 @@
+#
+# -- Build for Linux and macOS
+#    build, build manual, package, and upload
+#     runs manually
+#
+name: Build & Package Linux and macOS
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build on ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+        build_type: [Release]
+        c_compiler: [gcc, clang, cl]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: Checkout GLE
+      uses: actions/checkout@v4
+
+    - name: Checkout GLE Library
+      uses: actions/checkout@v4
+      with:
+        repository: "vlabella/gle-library"
+        path: gle-library
+
+    - name: Checkout GLE Manual
+      uses: actions/checkout@v4
+      with:
+        repository: "vlabella/gle-manual"
+        path: gle-manual
+
+    - name: Install dependencies
+      run: |
+        set -x
+        touch configure.args
+
+        case $RUNNER_OS in
+          Linux)
+            sudo apt-get update
+            # Add libjbig-dev and libzstd-dev once GLE can find them without
+            # relying on nonexistent cmake config files.
+            # See https://github.com/vlabella/GLE/issues/16
+            sudo apt-get install cmake freeglut3-dev libboost-dev \
+                libcairo-dev libdeflate-dev libgs-dev \
+                libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
+                libpng-dev libtiff-dev libz-dev qtbase5-dev \
+                ghostscript texlive texlive-latex-extra texlive-science dvipng
+            jobs=$(nproc)
+            ;;
+          macOS)
+            # Add jbigkit once GLE can find it without relying on nonexistent
+            # cmake config files.
+            # See https://github.com/vlabella/GLE/issues/16
+            # liblzma and libz are already in macOS.
+            # cmake is preinstalled with Homebrew on GitHub Actions runners and
+            # trying to install it again produces an unintelligible warning.
+            brew install --quiet boost cairo ghostscript jpeg-turbo \
+                libdeflate libpng libtiff pixman qt@5 zstd \
+                ghostscript texlive texlive-latex-extra texlive-science dvipng
+            echo "-D Qt5_DIR=$(brew --prefix qt@5)/lib/cmake/Qt5" >> configure.args
+            jobs=$(sysctl -n hw.activecpu)
+            ;;
+          Windows)
+            # see build-windows.yml
+            ;;
+          *)
+            jobs=1
+        esac
+
+        echo "--parallel $jobs" >> build.args
+
+    - name: Configure cmake
+      run: >
+        xargs -t < configure.args cmake -S src -B build
+        -DCMAKE_BUILD_TYPE=Release
+        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
+        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
+        -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
+
+    - name: Build GLE
+      run: |
+        xargs -t < build.args cmake --build build --verbose
+
+    - name: Install GLE
+      run: |
+        cmake -P ${{github.workspace}}/build/cmake_install.cmake
+
+    - name: Build Manual
+      working-directory: ${{github.workspace}}/gle-manual
+      run: |
+        make -f Makefile.gcc GLE_TOP=${{github.workspace}}/stage
+
+    - name: Upload Artifacts - Manual PDF
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: GLE PDF Manual
+        path: ${{github.workspace}}/gle-manual/gle-manual.pdf
+        if-no-files-found: warn
+        retention-days: 0
+        compression-level: 0
+
+    - name: Package
+      working-directory: ${{github.workspace}}/build
+      run: |
+        case $RUNNER_OS in
+          Linux)
+            cpack -G "ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}/stage"
+          macOS)
+            cpack -G "DragNDrop;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}/stage"
+          *)
+            jobs=1
+        esac
+
+    - name: Upload Artifacts - Binaries
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: Windows Binary Executables
+        path: ${{github.workspace}}\stage\gle-*.*
+        if-no-files-found: warn
+        retention-days: 0
+        compression-level: 0
