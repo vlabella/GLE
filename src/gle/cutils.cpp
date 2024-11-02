@@ -39,7 +39,8 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
+//#include <math.h>
+#include <cmath>
 #include <errno.h>
 #include <string.h>
 #include <algorithm>

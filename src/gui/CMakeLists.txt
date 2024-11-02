@@ -60,10 +60,10 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 list(APPEND QGLE_LIBRARIES
 	gle-graphics_s
 	${ZLIB_LIBRARIES}
-	${JPEG_LIBRARIES}
+#	${JPEG_LIBRARIES} comes in Qt
 	${PNG_LIBRARIES}
 	${PIXMAN_LIBRARIES}
-	TIFF::TIFF
+#	TIFF::TIFF  comes in Qt
 	Qt::Core
 	Qt::Gui
 	Qt::Network

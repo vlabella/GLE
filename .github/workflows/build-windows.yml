@@ -1,0 +1,76 @@
+#
+# -- Windows - build GLE executables
+#     no manual or installer creation
+#     runs on commit
+#     binary installation folder saved
+#
+name: Build Windows
+on:
+  workflow_dispatch:
+  #pull_request:
+  #push:
+  #  branches: [main]
+env:
+  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+  BUILD_TYPE: Release
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+
+    - name: Checkout GLE
+      uses: actions/checkout@v4
+
+    - name: Acquire vcpkg
+      uses: actions/checkout@v4
+      with:
+        repository: "Microsoft/vcpkg"
+        path: vcpkg
+
+    - name: Bootstrap vcpkg
+      run: "${{ github.workspace }}\\vcpkg\\bootstrap-vcpkg.bat"
+      shell: cmd
+
+    - name: Enable GitHub Actions Cache backend
+      uses: actions/github-script@v7
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+      # header files needed for building of GLE
+    - name: Acquire Ghostscipt/PDL
+      uses: actions/checkout@v4
+      with:
+        repository: "ArtifexSoftware/ghostpdl"
+        path: ghostpdl
+
+    - name: Configure CMake
+      run: >
+        cmake -S ${{github.workspace}}\src -B ${{github.workspace}}\build
+        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
+        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
+        -DUSE_STATIC_RUNTIME=ON
+        -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
+        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
+        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
+
+    - name: Build
+      run: |
+        cmake --build ${{github.workspace}}\build --config ${{env.BUILD_TYPE}}
+
+    - name: Install
+      run: |
+        cmake -DBUILD_TYPE=Release -P ${{github.workspace}}\build\cmake_install.cmake
+
+    - name: Upload Artifacts - zip file of installation folder
+      uses: actions/upload-artifact@v4.4.3
+      with:
+        name: Windows Binaries
+        path: ${{github.workspace}}/stage
+        if-no-files-found: warn
+        retention-days: 0
+        compression-level: 0
+

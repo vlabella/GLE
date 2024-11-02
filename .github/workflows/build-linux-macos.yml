@@ -1,7 +1,10 @@
 #
-# -- Build for Linux and macOS
+# -- Linux and macOS build
+#     no manual or installer creation
+#     runs on commit
+#     binary installation folder saved
 #
-name: Build Linux and macOS Original
+name: Build Linux and macOS
 on:
   workflow_dispatch:
   #pull_request:
@@ -15,7 +18,7 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         build_type: [Release]
-        c_compiler: [gcc, clang, cl]
+        c_compiler: [gcc, clang]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -72,7 +75,7 @@ jobs:
     - name: Upload Artifacts - Binaries
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: Binary Executables
+        name: Binary Executables $RUNNER_OS
         path: ${{github.workspace}}/destroot
         if-no-files-found: warn
         retention-days: 0

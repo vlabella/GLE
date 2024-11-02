@@ -3,7 +3,7 @@ GLE Readme
 
 This document contains instructions on how to compile, install, and run GLE.
 
-Supported platforms: Windows, Linux, macOS, Unix, OS/2.
+Supported platforms: Windows, Linux, Mac OS/X, Unix, OS/2.
 
 Contents
 --------
@@ -14,7 +14,7 @@ Contents
 2.2 Installing GLE on OS/2
 3. Running GLE
 4. Compiling GLE from the source code
-4.1 Compiling with GCC (Windows, Linux, macOS, ...)
+4.1 Compiling with GCC (Windows, Linux, Mac OS/X, ...)
 4.2 Compiling on Windows (with Microsoft Visual C++)
 4.3 Compiling on OS/2 (with GCC 3.2.1)
 4.4 Notes for all platforms
@@ -149,7 +149,7 @@ and for Linux here:
 
 The GLE source code is distributed as gle-graphics-x.y.z-src.tar.gz.
 
-4.1 Compiling with GCC (Windows, Linux, macOS, ...)
+4.1 Compiling with GCC (Windows, Linux, Mac OS/X, ...)
 ------------------------------------------------------
 
 To install GLE system-wide:
@@ -238,7 +238,7 @@ Note: If you get the following error:
 The compilation process will built:
 
 gle(.exe) : GLE main executable
-fbuild(.exe) : makes *.fve from *.gle using fbuild in the src\font directory
+fbuild(.exe) : makes *.fve fron *.gle using fbuild in the src\font directory
 makefmt(.exe) : makes font files *.fmt from *.afm in the src\font directory
 
 It will also run the fbuild and makefmt commands and put the
