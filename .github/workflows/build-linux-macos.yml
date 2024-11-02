@@ -63,19 +63,19 @@ jobs:
         esac
 
         echo "--parallel $jobs" >> build.args
-    - name: Configure
+    - name: Configure cmake
       run: |
         xargs -t < configure.args cmake -S src -B build -D CMAKE_BUILD_TYPE=Release
-    - name: Build
+    - name: Build GLE
       run: |
         xargs -t < build.args cmake --build build --verbose
-    - name: Install
+    - name: Install GLE
       run: |
         DESTDIR=destroot cmake --install build
-    - name: Upload Artifacts - Binaries
+    - name: Upload Artifacts - GLE Binaries
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: Binary Executables ${{ runner.os }}
+        name: GLE Binary Executables ${{ runner.os }}
         path: ${{github.workspace}}/destroot
         if-no-files-found: warn
         retention-days: 0

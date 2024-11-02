@@ -10,6 +10,7 @@ env:
   BUILD_TYPE: Release
 jobs:
   build:
+    name: Build & Package Windows
     runs-on: windows-latest
     steps:
 
@@ -116,7 +117,7 @@ jobs:
       run: |
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
 
-    - name: Upload Artifacts - Manual PDF
+    - name: Upload Artifacts - GLE Manual PDF
       uses: actions/upload-artifact@v4.4.3
       with:
         name: GLE PDF Manual
@@ -130,10 +131,10 @@ jobs:
       run: |
         cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\stage"
 
-    - name: Upload Artifacts - Binaries
+    - name: Upload Artifacts - GLE Binary Distributables
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: Windows Binary Executables
+        name: GLE Binary Distributables ${{ runner.os }}
         path: ${{github.workspace}}\stage\gle-*.*
         if-no-files-found: warn
         retention-days: 0
