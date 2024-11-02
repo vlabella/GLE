@@ -92,7 +92,8 @@ jobs:
 
     - name: Build GLE Manual
       working-directory: ${{github.workspace}}/gle-manual
-      run: |
+      run: >
+        export PATH=destroot/usr/local/bin:$PATH
         make -f Makefile.gcc
 
     - name: Upload Artifacts - GLE Manual PDF
@@ -109,9 +110,9 @@ jobs:
       run: |
         case $RUNNER_OS in
           Linux)
-            cpack -G "ZIP;7Z" -C ${{env.BUILD_TYPE}} -B destroot
+            cpack -G "ZIP;7Z" -C ${{env.BUILD_TYPE}} -B destroot/usr/local
           macOS)
-            cpack -G "DragNDrop;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B destroot
+            cpack -G "DragNDrop;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B destroot/usr/local
           *)
             jobs=1
         esac
@@ -120,7 +121,7 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         name: GLE Binary Distributables ${{ runner.os }}
-        path: ${{github.workspace}}\stage\gle-*.*
+        path: ${{github.workspace}}/destroot/usr/local/gle-*.*
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
