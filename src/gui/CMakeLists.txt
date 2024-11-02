@@ -60,10 +60,18 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 list(APPEND QGLE_LIBRARIES
 	gle-graphics_s
 	${ZLIB_LIBRARIES}
-#	${JPEG_LIBRARIES} comes in Qt
 	${PNG_LIBRARIES}
 	${PIXMAN_LIBRARIES}
-#	TIFF::TIFF  comes in Qt
+)
+if(UNIX OR APPLE)
+	# these come in QT on windows ??
+	list(APPEND QGLE_LIBRARIES
+		${JPEG_LIBRARIES}
+		TIFF::TIFF
+	)
+endif()
+
+list(APPEND QGLE_LIBRARIES
 	Qt::Core
 	Qt::Gui
 	Qt::Network
@@ -72,6 +80,7 @@ list(APPEND QGLE_LIBRARIES
 	${CAIRO_LIBRARIES}
 	${CMAKE_DL_LIBS}
 )
+
 if(UNIX AND NOT APPLE)
 	list(APPEND QGLE_LIBRARIES
  		glut
