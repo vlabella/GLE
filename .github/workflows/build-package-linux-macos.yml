@@ -93,7 +93,7 @@ jobs:
     - name: Build GLE Manual
       working-directory: ${{github.workspace}}/gle-manual
       run: |
-        export PATH=destroot/usr/local/bin:$PATH; make -f Makefile.gcc
+        export PATH=${{github.workspace}}/destroot/usr/local/bin:$PATH; make -f Makefile.gcc
 
     - name: Upload Artifacts - GLE Manual PDF
       uses: actions/upload-artifact@v4.4.3
