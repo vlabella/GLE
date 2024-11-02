@@ -18,7 +18,7 @@ jobs:
       matrix:
         os: [macos-latest, ubuntu-latest]
         build_type: [Release]
-        c_compiler: [gcc, clang]
+        c_compiler: [gcc]
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -75,7 +75,7 @@ jobs:
     - name: Upload Artifacts - Binaries
       uses: actions/upload-artifact@v4.4.3
       with:
-        name: Binary Executables $RUNNER_OS
+        name: Binary Executables ${{ runner.os }}
         path: ${{github.workspace}}/destroot
         if-no-files-found: warn
         retention-days: 0
