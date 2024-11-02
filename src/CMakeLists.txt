@@ -11,6 +11,13 @@ project (gle VERSION 4.3.5)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d")
 #
+# -- options for building GUI - default is to build it
+#      pass -DBUILD_GUI=OFF to turn if off
+#
+if(NOT DEFINED BUILD_GUI)
+	set(BUILD_GUI ON)
+endif()
+#
 # -- Windows option for static runtimes
 #
 if(WIN32)
@@ -123,8 +130,11 @@ if(UNIX)
 	find_package(Curses REQUIRED) # -- for manip
 endif()
 find_package(TIFF)
-# find optional packages for LibTIFF only if linking against static libraries on windows
+
 if(WIN32)
+	#
+	# -- find optional packages for LibTIFF only if linking against static libraries on windows
+	#
 	find_package(LibLZMA) # -- for libTIFF optional
 	find_package(JBIG) # -- for libtiff optional
 	if(JBIG_FOUND)
@@ -462,13 +472,16 @@ if(UNIX)
 endif()
 add_subdirectory(fbuild)
 add_subdirectory(makefmt)
-add_subdirectory(gui)
 add_subdirectory(fonts)
 add_subdirectory(TeX)
 add_dependencies(fbuild gle)
 add_dependencies(makefmt gle)
-add_dependencies(qgle gle)
+add_dependencies(glebtool gle)
 add_dependencies(fonts fbuild makefmt)
+if(BUILD_GUI)
+add_subdirectory(gui)
+add_dependencies(qgle gle)
+endif()
 
 # documentation file installation in doc folder
 install(FILES
