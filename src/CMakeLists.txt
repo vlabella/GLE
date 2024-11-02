@@ -122,42 +122,44 @@ if(UNIX)
 	find_package(Curses REQUIRED) # -- for manip
 endif()
 find_package(TIFF)
-# find optional packages for LibTIFF
-find_package(LibLZMA) # -- for libTIFF optional
-find_package(JBIG) # -- for libtiff optional
-if(JBIG_FOUND)
-	message(STATUS "Found JBIG" )
-endif()
-find_package(ZSTD) # -- for libtiff optional
-if(ZSTD_FOUND)
-	message(STATUS "Found ZSTD" )
-endif()
-#
-# -- libdeflate for libtiff - optional
-#
-set(DEFLATE_FOUND)
-get_property(_isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-if(_isMultiConfig)
-	find_library(DEFLATE_RELEASE NAMES libdeflate libdeflatestatic PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
-	string(COMPARE NOTEQUAL "${DEFLATE_RELEASE}" "DEFLATE_RELEASE-NOTFOUND" DEFLATE_FOUND)
-	find_library(DEFLATE_DEBUG NAMES defalted libdeflatestaticd PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
-	set(HAS_DEBUG )
-	string(COMPARE NOTEQUAL "${DEFLATE_DEBUG}" "DEFLATE_DEBUG-NOTFOUND" HAS_DEBUG)
-	if(HAS_DEBUG)
-		list(APPEND DEFLATE_LIBRARIES "optimized")
-		list(APPEND DEFLATE_LIBRARIES ${DEFLATE_RELEASE})
-		list(APPEND DEFLATE_LIBRARIES "debug")
-		list(APPEND DEFLATE_LIBRARIES ${DEFLATE_DEBUG})
-	else()
-		list(APPEND DEFLATE_LIBRARIES ${DEFLATE_RELEASE})
+# find optional packages for LibTIFF only if linking against static libraries on windows
+if(WIN32)
+	find_package(LibLZMA) # -- for libTIFF optional
+	find_package(JBIG) # -- for libtiff optional
+	if(JBIG_FOUND)
+		message(STATUS "Found JBIG" )
 	endif()
-else()
-	find_library(DEFLATE_LIBRARIES NAMES deflate deflated libdeflate.a libdeflated.a PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
-	string(COMPARE NOTEQUAL "${DEFLATE_LIBRARIES}" "DEFLATE_LIBRARIES-NOTFOUND" DEFLATE_FOUND)
-endif()
-find_path(DEFLATE_INCLUDE_DIRS libdeflate.h PATHS ${DEFLATE_ROOT} PATH_SUFFIXES include )
-if(DEFLATE_FOUND)
-	message(STATUS "Found LIBDEFLATE: ${DEFLATE_LIBRARIES}" )
+	find_package(ZSTD) # -- for libtiff optional
+	if(ZSTD_FOUND)
+		message(STATUS "Found ZSTD" )
+	endif()
+	#
+	# -- libdeflate for libtiff - optional
+	#
+	set(DEFLATE_FOUND)
+	get_property(_isMultiConfig GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
+	if(_isMultiConfig)
+		find_library(DEFLATE_RELEASE NAMES libdeflate libdeflatestatic PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
+		string(COMPARE NOTEQUAL "${DEFLATE_RELEASE}" "DEFLATE_RELEASE-NOTFOUND" DEFLATE_FOUND)
+		find_library(DEFLATE_DEBUG NAMES defalted libdeflatestaticd PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
+		set(HAS_DEBUG )
+		string(COMPARE NOTEQUAL "${DEFLATE_DEBUG}" "DEFLATE_DEBUG-NOTFOUND" HAS_DEBUG)
+		if(HAS_DEBUG)
+			list(APPEND DEFLATE_LIBRARIES "optimized")
+			list(APPEND DEFLATE_LIBRARIES ${DEFLATE_RELEASE})
+			list(APPEND DEFLATE_LIBRARIES "debug")
+			list(APPEND DEFLATE_LIBRARIES ${DEFLATE_DEBUG})
+		else()
+			list(APPEND DEFLATE_LIBRARIES ${DEFLATE_RELEASE})
+		endif()
+	else()
+		find_library(DEFLATE_LIBRARIES NAMES deflate deflated libdeflate.a libdeflated.a PATHS ${DEFLATE_ROOT} PATH_SUFFIXES lib )
+		string(COMPARE NOTEQUAL "${DEFLATE_LIBRARIES}" "DEFLATE_LIBRARIES-NOTFOUND" DEFLATE_FOUND)
+	endif()
+	find_path(DEFLATE_INCLUDE_DIRS libdeflate.h PATHS ${DEFLATE_ROOT} PATH_SUFFIXES include )
+	if(DEFLATE_FOUND)
+		message(STATUS "Found LIBDEFLATE: ${DEFLATE_LIBRARIES}" )
+	endif()
 endif()
 # note findPNG calls findZLIB
 find_package(PNG )
