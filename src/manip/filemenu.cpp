@@ -645,9 +645,9 @@ sortagain:;
                         DosSetDefaultDisk(toupper(*wild)-'A' + 1);
                 }
                 strcpy(buff2,wild+2); strcpy(wild,buff2);
-                if (_chdir2(wild)!=0) ; /* {perror("Cannot change dir"); delay(3000);} */
+                if (_chdir2(wild)!=0){/*empty*/} ; /* {perror("Cannot change dir"); delay(3000);} */
 #else
-                if (chdir(wild)!=0) ; /* {perror("Cannot change dir"); delay(3000);} */
+                if (chdir(wild)!=0){/*empty*/} ; /* {perror("Cannot change dir"); delay(3000);} */
 #endif
         }
 
