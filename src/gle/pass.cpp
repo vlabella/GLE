@@ -350,9 +350,9 @@ void GLEParser::polish(GLEPcode& pcode, int *rtype) {
 	Tokenizer* tokens = getTokens();
 	string& expr = tokens->next_multilevel_token();
 	int pos = tokens->token_pos_col();
-	cout << "pos = " << pos << endl;
+	//cout << "pos = " << pos << endl;
 	try {
-		cout << "Polish: '" << expr << "'" << endl;
+		//cout << "Polish: '" << expr << "'" << endl;
 		m_polish->internalPolish(expr.c_str(), pcode, rtype);
 	} catch (ParserError& err) {
 		err.incColumn(pos-1);

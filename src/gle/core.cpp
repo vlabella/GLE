@@ -1865,12 +1865,12 @@ void g_set_partial_state(gmodel* s) {
 }
 
 	/*		 12,4,-.5,-.5,0.35,	original dot */
-struct mark_struct { int ff; int cc; double rx; double ry; double scl; double x1; double x2; double y1; double y2; };
-struct mark_struct minf[61];
+struct marker_struct { int ff; int cc; double rx; double ry; double scl; double x1; double x2; double y1; double y2; };
+struct marker_struct minf[61];
 extern char *mrk_name[];
 extern char *mrk_fname[];
 
-/* struct mark_struct { int ff, int cc, double rx, double ry, double scl;}; */
+/* struct marker_struct { int ff, int cc, double rx, double ry, double scl;}; */
 extern char *mark_name[];
 extern char *mark_sub[];
 extern int mark_subp[];
