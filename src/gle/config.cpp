@@ -145,7 +145,7 @@ void init_config(ConfigCollection* collection) {
 #ifdef __WIN32__
 	strarg->setDefault("latex.exe");
 #endif
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	strarg->setDefault("latex");
 #endif
 #ifdef __OS2__
@@ -167,7 +167,7 @@ void init_config(ConfigCollection* collection) {
 #ifdef __WIN32__
 	strarg->setDefault("dvips.exe");
 #endif
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	strarg->setDefault("dvips");
 #endif
 #ifdef __OS2__
@@ -204,7 +204,7 @@ void init_config(ConfigCollection* collection) {
 #ifdef __APPLE__
 	strarg->setDefault("gs,glegs;$EXELOC/glegs");
 #endif
-#if defined(__UNIX__) && !defined(__APPLE__)
+#if defined(__unix__) && !defined(__APPLE__)
 	strarg->setDefault("gs");
 #endif
 #ifdef __OS2__
@@ -243,7 +243,7 @@ void init_config(ConfigCollection* collection) {
 #ifdef __APPLE__
 	strarg->setDefault("/Library/Frameworks/Ghostscript.framework,Ghostscript.framework");
 #endif
-#if defined(__UNIX__) && !defined(__APPLE__)
+#if defined(__unix__) && !defined(__APPLE__)
 	strarg->setDefault("/usr/lib/libgs.so");
 #endif
 	strarg = section->addStringOption("editor", GLE_TOOL_TEXT_EDITOR);
@@ -500,7 +500,7 @@ void find_deps(const string& loc, GLEInterface* iface) {
 			}
 		}
 	}
-	#ifdef __UNIX__
+	#if defined(__unix__) || defined(__APPLE__)
 		// Find programs in search path on Unix
 		GLEFindPrograms(tofind, &progress);
 	#endif
@@ -516,7 +516,7 @@ void find_deps(const string& loc, GLEInterface* iface) {
 	for (unsigned int i = 0; i < tofind.size(); i++) {
 		tofind[i]->updateResult(true);
 	}
-	#ifdef __UNIX__
+	#if defined(__unix__) || defined(__APPLE__)
 		// Search for libraries in typical directories and in LD_LIBRARY_PATH
 		string gslibloc = GLEFindLibrary("libgs", &progress);
 		if (gslibloc != "") {

@@ -58,7 +58,7 @@ void fnerxx(char *s);
 	#include <stdarg.h>
 #endif
 
-#if defined(__UNIX__) || ( defined(__OS2__) && defined(__EMX__) )
+#if defined(__unix__) || defined(__APPLE__) || ( defined(__OS2__) && defined(__EMX__) )
 	void fner(const char* arg_list, ...);
 	void printmess(const char* arg_list, ...);
 	void wprintf(const char* arg_list, ...);

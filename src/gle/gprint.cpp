@@ -64,7 +64,7 @@ void check_new_error();
 
 extern GLEGlobalSource* g_Source;
 
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	void gprint(const char* arg_list, ...)
 #else
 	void gprint(va_list arg_list, ...)

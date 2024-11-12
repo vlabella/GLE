@@ -158,13 +158,13 @@ int gle_round_int(double val);
 
 int gle_make_zero_based(int val);
 
-#if defined(__UNIX__)
-	string str_format(const char* arg_list, ...);
+#if defined(__unix__) || defined(__APPLE__)
+	std::string str_format(const char* arg_list, ...);
 #else
-	string str_format(va_list arg_list, ...);
+	std::string str_format(va_list arg_list, ...);
 #endif
 
-void str_format(string* str, const char *format, va_list ap);
+void str_format(std::string* str, const char *format, va_list ap);
 
 int gle_pass_hex(const char* str, int from, int digits, int* err);
 

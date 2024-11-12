@@ -326,7 +326,7 @@ void show_cellwide(int x, int y) {
         cputs(buff);
 }
 
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 void wprintf_do(char *s) {
         //printw("%s",s);
         printf("%s",s);
@@ -344,7 +344,7 @@ void printmess_do(char *output) {
 #endif
 
 /* Prints to the window */
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 void wprintf(const char* arg_list, ...) {
 #else
 void wprintf(va_list arg_list, ...) {

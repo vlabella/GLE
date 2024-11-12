@@ -1023,7 +1023,7 @@ void PSGLEDevice::read_psfont(void) {
 }
 
 void PSGLEDevice::displayGeometry(double width, double height, int *gsPixelWidth, int *gsPixelHeight, int *gsPixelRes) {
-#if defined(__UNIX__) && defined(ENABLE_GS_PREVIEW)
+#if ( defined(__unix__) || defined(__APPLE__) ) && defined(ENABLE_GS_PREVIEW)
 	Display *dpy = XOpenDisplay((char *) NULL);
 	if (dpy == NULL){
 		perror("Unable to open Display!");

@@ -38,7 +38,7 @@
 
 /* colors are defined by ncurses library */
 /* #ifndef HAVE_NCURSES_H */
-#if !defined(__UNIX__) && !( defined(__OS2__) && defined(__EMX__) )
+#if !defined(__unix__) && !( defined(__OS2__) && defined(__EMX__) && !defined(__APPLE__) )
 
 #define COLOR_CLEAR 0XFF000000
 #define COLOR_BLACK 0X01000000

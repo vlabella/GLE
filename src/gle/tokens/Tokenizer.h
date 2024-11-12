@@ -139,7 +139,7 @@ IThrowsError* g_get_throws_error();
 
 double tokenizer_string_to_double(const char* value);
 
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	ParserError g_format_parser_error(const char* format, ...);
 #else
 	ParserError g_format_parser_error(va_list format, ...);

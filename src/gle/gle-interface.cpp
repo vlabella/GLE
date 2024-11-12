@@ -650,7 +650,7 @@ string GLEInterface::getToolLocation(const char* name) {
 
 string GLEInterface::getUserConfigLocation() {
 	string location;
-	#if defined(__UNIX__) || defined (__OS2__)
+	#if defined(__unix__) || defined(__APPLE__) || defined (__OS2__)
 		GLEGetEnv("HOME", location);
 	#endif
 	#ifdef __WIN32__	

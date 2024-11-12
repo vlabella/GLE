@@ -154,7 +154,7 @@ void manip_scr_init(char * dummy) {
 	doneinit = true;
 	initscr();
 	scrollok(stdscr,true);
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	if (signal(SIGINT, SIG_IGN) == SIG_ERR) {
 		fprintf(stderr,"Unable to disable ctrl-c\n");
 	}

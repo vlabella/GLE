@@ -54,7 +54,7 @@
 // -- define these constants for use in scripts
 //
 
-#if defined(__UNIX__) && defined(HAVE_X11)
+#if ( defined(__unix__) || defined(__APPLE__) ) && defined(HAVE_X11)
 	#define ENABLE_GS_PREVIEW
 #endif
 

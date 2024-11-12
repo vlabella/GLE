@@ -85,7 +85,7 @@ typedef unsigned long uint32;
 #include <sys/wait.h>
 #endif
 
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	#include <stdarg.h>
 #endif
 

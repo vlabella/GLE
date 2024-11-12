@@ -39,7 +39,7 @@
 #ifndef INCLUDE_FILE_IO
 #define INCLUDE_FILE_IO
 
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	#define READ_BIN "r"
 	#define WRITE_BIN "w"
 #endif

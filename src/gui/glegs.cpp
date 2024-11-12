@@ -52,7 +52,7 @@
 #if HAVE_STRINGS_H
 	#include <strings.h>
 #endif
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	#include <dlfcn.h>
 #endif
 

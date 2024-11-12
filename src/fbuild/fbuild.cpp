@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 	for (i=0;i<TOKEN_LENGTH;i++) strcpy(tk[i],space_str);
 	if (fgets(inbuff,200,fptr) != 0) {
 		while (!feof(fptr)) {
-			#ifdef __UNIX__
+			#if defined(__unix__) || defined(__APPLE__)
 				// remove DOS CR if present
 				i = strlen(inbuff);
 				if (i >= 2 && inbuff[i-2] == '\r') {

@@ -687,7 +687,7 @@ void str_get_system_error(ostream& error) {
 	}
 }
 
-#if defined(__UNIX__)
+#if defined(__unix__) || defined(__APPLE__)
 	string str_format(const char* format, ...) {
 #else
 	string str_format(va_list format, ...) {

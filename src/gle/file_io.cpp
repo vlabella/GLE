@@ -66,7 +66,7 @@
 #ifdef __APPLE__
 	#include <mach-o/dyld.h>
 #endif
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	#include <limits.h>
 	#include <unistd.h>
 	#include <fcntl.h>
@@ -105,7 +105,7 @@ using namespace std;
 #include "cutils.h"
 #include <cstring>
 
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	/* Cygwin too */
 	string PATH_SEP = ":";
 	string DIR_SEP = "/";
@@ -1021,7 +1021,7 @@ int ReadFileLineAllowEmpty(istream& file, string& line) {
 }
 
 bool IsExecutable(const string& fname) {
-#if defined(__UNIX__) || defined(__APPLE__) || ( defined(__OS2__) && defined(__EMX__) )
+#if defined(__unix__) || defined(__APPLE__) || ( defined(__OS2__) && defined(__EMX__) )
 	struct stat stat_buf;
 	if (stat((const char *)fname.c_str(), &stat_buf) == 0) {
 		return (stat_buf.st_mode & S_IXOTH) != 0;
@@ -1034,7 +1034,7 @@ bool IsExecutable(const string& fname) {
 }
 
 bool IsDirectory(const string& fname, bool linkok) {
-#if defined(__UNIX__) || defined(__APPLE__) || ( defined(__OS2__) && defined(__EMX__) )
+#if defined(__unix__) || defined(__APPLE__) || ( defined(__OS2__) && defined(__EMX__) )
 	struct stat stat_buf;
 	if (linkok) {
 		if (stat((const char *)fname.c_str(), &stat_buf) == 0) {
@@ -1143,7 +1143,7 @@ void GLEFindFiles(const string& dirname, vector<GLEFindEntry*>& tofind, GLEProgr
 	} while (FindNextFile(hFind, &FindFileData) != 0);
 	FindClose(hFind);
 #endif
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	DIR* dir = opendir(dirname.c_str());
 	if (dir != NULL) {
 		struct dirent* entry = readdir(dir);
@@ -1171,7 +1171,7 @@ void GLEFindFiles(const string& dirname, vector<GLEFindEntry*>& tofind, GLEProgr
 }
 
 string GLEFindLibrary(const char* name, GLEProgressIndicator* progress) {
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	string libpath;
 	const char* ldlibpath = getenv("LD_LIBRARY_PATH");
 	if (ldlibpath != NULL && ldlibpath[0] != 0) {
@@ -1214,7 +1214,7 @@ string GLEFindLibrary(const char* name, GLEProgressIndicator* progress) {
 }
 
 void GLEFindPrograms(vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress) {
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	const char* path = getenv("PATH");
 	if (path == NULL) {
 		return;
@@ -1271,7 +1271,7 @@ void GLECloseSocket(SOCKET sock) {
 	closesocket(sock);
 	WSACleanup();
 #endif
-#if defined(__UNIX__) || defined(__APPLE__)
+#if defined(__unix__) || defined(__APPLE__)
 	close(sock);
 #endif
 }
@@ -1355,7 +1355,7 @@ bool GetExeName(const char* appname, char **argv, string& exe_name) {
 		return true;
 	}
 #endif
-#if defined(__UNIX__) && !defined(__APPLE__) && !defined(__FREEBSD__)
+#if defined(__unix__) && !defined(__APPLE__) && !defined(__FREEBSD__)
 	/* try to read location from the /proc/self/exe file */
 	char path[PATH_MAX];
 	struct stat stat_buf;
@@ -1412,7 +1412,7 @@ bool GetExeName(const char* appname, char **argv, string& exe_name) {
 }
 
 string GetHomeDir() {
-	#if defined(__UNIX__) || defined(__APPLE__) || defined (__OS2__)
+	#if defined(__unix__) || defined(__APPLE__) || defined (__OS2__)
 		const char* home = getenv("HOME");
 		if (home != NULL && home[0] != 0) {
 			string home_str(home);

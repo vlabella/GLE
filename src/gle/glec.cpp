@@ -53,7 +53,7 @@
 #ifdef __WIN32__
 	#include <windows.h>
 #endif
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	#include <dlfcn.h>
 #endif
 
@@ -73,7 +73,7 @@ void GLEAddLibName(string* lib) {
 #endif
 	*lib += "gle-graphics-";
 	*lib += GLEVN;
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	#ifdef __APPLE__
 		*lib += ".dylib";
 	#else
@@ -88,13 +88,13 @@ void GLEAddLibName(string* lib) {
 
 void* tryLoadLib(const string& name, int tryCount, bool verbose) {
 	void* lib = 0;
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	lib = dlopen(name.c_str(), RTLD_NOW);
 #endif
 	if (verbose) {
 		cout << "Try: " << (tryCount + 1) << " load '" << name << "':" << endl;
 		if (lib == 0) {
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 			cout << "error: " << dlerror();
 #endif
 		} else {
@@ -112,7 +112,7 @@ int main(int argc, char** argv) {
 		cerr << "GLE: error getting file name of 'gle' executable" << endl;
 		return -1;
 	}
-#ifdef __UNIX__
+#if defined(__unix__) || defined(__APPLE__)
 	string lib_name;
 	void* lib = NULL;
 	unsigned int tryCount = 0;
