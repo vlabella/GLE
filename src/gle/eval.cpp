@@ -96,7 +96,7 @@ string pcode_to_string(int p){
 
 struct keyw
 {
-	char *word;
+	const char *word;
 	int index;
 	int ret,np,p[5];
 } ;
