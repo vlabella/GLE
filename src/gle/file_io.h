@@ -68,81 +68,81 @@ public:
 
 class GLEFindEntry {
 protected:
-	vector<string> m_ToFind;
-	vector<string> m_Found;
-	string* m_Result;
-	string m_NotFound;
+	std::vector<std::string> m_ToFind;
+	std::vector<std::string> m_Found;
+	std::string* m_Result;
+	std::string m_NotFound;
 	bool m_Done;
 public:
-	GLEFindEntry(string* result);
+	GLEFindEntry(std::string* result);
 	~GLEFindEntry();
-	void addToFind(const string& tofind);
+	void addToFind(const std::string& tofind);
 	void updateResult(bool isFinal);
-	void setFound(unsigned int i, const string& found);
-	inline void setNotFound(const string& notfound) { m_NotFound = notfound; }
+	void setFound(unsigned int i, const std::string& found);
+	inline void setNotFound(const std::string& notfound) { m_NotFound = notfound; }
 	inline unsigned int getNbFind() { return m_ToFind.size(); }
-	inline const string& getFind(unsigned int i) { return m_ToFind[i]; }
+	inline const std::string& getFind(unsigned int i) { return m_ToFind[i]; }
 };
 
-string fontdir(const char *fname);
+std::string fontdir(const char *fname);
 char *line(int i);
 
-bool GLEGetEnv(const string& name, string& result);
+bool GLEGetEnv(const std::string& name, std::string& result);
 void CopyGLETop(char* buf);
-string GetActualFilename(ifstream* file, const string& fname, const string* directory);
-void FillIncludePaths(vector<string>& IP);
-void GLEPathToVector(const string& path, vector<string>* vec);
+std::string GetActualFilename(ifstream* file, const std::string& fname, const std::string* directory);
+void FillIncludePaths(std::vector<std::string>& IP);
+void GLEPathToVector(const std::string& path, std::vector<std::string>* vec);
 bool GLEStreamContains(istream& strm, const char* msg);
-void StripDirSep(string& fname);
-void StripDirSepButNotRoot(string& fname);
-void CorrectDirSep(string& fname);
-void CorrectDirSepStrip(string& fname);
-void AddDirSep(string& fname);
-string GLEAddRelPath(const string& base, int cd, const char* path);
-bool GLEAddRelPathAndFileTry(const string& base, int cd, const char* path, const char* file, string& result);
-void FileNameDotToUnderscore(string& fname);
-void GetExtension(const string& fname, string& ext);
-void GetMainName(const string& fname, string& name);
-void GetMainNameExt(const string& fname, const char* ext, string& name);
-void AddExtension(string& fname, const string& ext);
-void SplitFileName(const string& fname, string& dir, string& name);
-void SplitFileNameNoDir(const string& fname, string& name);
-void RemoveDirectoryIfEqual(string* filename, const string& directory);
-void GetDirName(const string& fname, string& dir);
-void EnsureMkDir(const string& dir);
-bool TryDeleteDir(const string& fname);
-bool TryDeleteFile(const string& fname);
-bool DeleteFileWithExt(const string& fname, const char* ext);
-bool DeleteFileWithNewExt(const string& fname, const char* ext);
-int ReadFileLine(istream& file, string& line);
-int ReadFileLineAllowEmpty(istream& file, string& line);
-bool IsDirectory(const string& fname, bool linkok = true);
-bool IsExecutable(const string& fname);
-string GLETempName();
-string GLETempDirName();
-bool GLEMoveFile(const string& from, const string& to);
+void StripDirSep(std::string& fname);
+void StripDirSepButNotRoot(std::string& fname);
+void CorrectDirSep(std::string& fname);
+void CorrectDirSepStrip(std::string& fname);
+void AddDirSep(std::string& fname);
+std::string GLEAddRelPath(const std::string& base, int cd, const char* path);
+bool GLEAddRelPathAndFileTry(const std::string& base, int cd, const char* path, const char* file, std::string& result);
+void FileNameDotToUnderscore(std::string& fname);
+void GetExtension(const std::string& fname, std::string& ext);
+void GetMainName(const std::string& fname, std::string& name);
+void GetMainNameExt(const std::string& fname, const char* ext, std::string& name);
+void AddExtension(std::string& fname, const std::string& ext);
+void SplitFileName(const std::string& fname, std::string& dir, std::string& name);
+void SplitFileNameNoDir(const std::string& fname, std::string& name);
+void RemoveDirectoryIfEqual(std::string* filename, const std::string& directory);
+void GetDirName(const std::string& fname, std::string& dir);
+void EnsureMkDir(const std::string& dir);
+bool TryDeleteDir(const std::string& fname);
+bool TryDeleteFile(const std::string& fname);
+bool DeleteFileWithExt(const std::string& fname, const char* ext);
+bool DeleteFileWithNewExt(const std::string& fname, const char* ext);
+int ReadFileLine(istream& file, std::string& line);
+int ReadFileLineAllowEmpty(istream& file, std::string& line);
+bool IsDirectory(const std::string& fname, bool linkok = true);
+bool IsExecutable(const std::string& fname);
+std::string GLETempName();
+std::string GLETempDirName();
+bool GLEMoveFile(const std::string& from, const std::string& to);
 void GLECopyStream(istream& from, ostream& to);
-int GLECopyFile(const string& from, const string& to, string* err = NULL);
-bool GLEGetCrDir(string* name);
-bool GLEGetCrDirWin32(string* name);
-bool GLEChDir(const string& dir);
-void GLEFindFiles(const string& dir, vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
-string GLEFindLibrary(const char* name, GLEProgressIndicator* progress);
-void GLEFindPrograms(vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
-int GLESystem(const string& cmd, bool wait = true, bool redirout = true, istream* ins = NULL, ostream* outerrs = NULL);
-int GLERunCommand(const string& cmd, string& result);
-int GLESendSocket(const string& commands);
-bool GetExeName(const char* appname, char **argv, string& exe_name);
-string GetHomeDir();
-void GLESetGLETop(const string& cmdline);
-bool GLEFileExists(const string& fname);
+int GLECopyFile(const std::string& from, const std::string& to, std::string* err = NULL);
+bool GLEGetCrDir(std::string* name);
+bool GLEGetCrDirWin32(std::string* name);
+bool GLEChDir(const std::string& dir);
+void GLEFindFiles(const std::string& dir, std::vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
+std::string GLEFindLibrary(const char* name, GLEProgressIndicator* progress);
+void GLEFindPrograms(std::vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
+int GLESystem(const std::string& cmd, bool wait = true, bool redirout = true, istream* ins = NULL, ostream* outerrs = NULL);
+int GLERunCommand(const std::string& cmd, std::string& result);
+int GLESendSocket(const std::string& commands);
+bool GetExeName(const char* appname, char **argv, std::string& exe_name);
+std::string GetHomeDir();
+void GLESetGLETop(const std::string& cmdline);
+bool GLEFileExists(const std::string& fname);
 void GLESleep(int msec);
-void StripPathComponents(string* fname, int nb);
-bool IsAbsPath(const string& path);
-void GLEGetFullPath(const string& dirname, const string& fname, string& fullpath);
-string GLEExpandEnvironmentVariables(const string& str);
-bool GLEReadFile(const string& name, vector<string>* lines);
-bool GLEReadFileBinary(const string& name, std::vector<char>* contents);
+void StripPathComponents(std::string* fname, int nb);
+bool IsAbsPath(const std::string& path);
+void GLEGetFullPath(const std::string& dirname, const std::string& fname, std::string& fullpath);
+std::string GLEExpandEnvironmentVariables(const std::string& str);
+bool GLEReadFile(const std::string& name, std::vector<std::string>* lines);
+bool GLEReadFileBinary(const std::string& name, std::vector<char>* contents);
 
 #define GLE_SYSTEM_OK            0
 #define GLE_SYSTEM_ERROR         1
@@ -157,7 +157,7 @@ protected:
 	int m_Sep, m_Max, m_IsOK;
 	ifstream m_File;
 public:
-	StreamTokenizerMax(const string& fname, int sep, int max);
+	StreamTokenizerMax(const std::string& fname, int sep, int max);
 	~StreamTokenizerMax();
 	bool hasMoreTokens();
 	bool isSepChar(char ch);

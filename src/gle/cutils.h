@@ -41,7 +41,7 @@
 
 #include <stdarg.h>
 
-bool gle_onlyspace(const string& s);
+bool gle_onlyspace(const std::string& s);
 bool gle_isnumber(const char *s);
 
 bool gle_isalphanum(char ch);
@@ -61,9 +61,9 @@ const char* str_skip_brackets(const char* s, int ch1, int ch2);
 
 char* gle_strupr(char* s);
 char* gle_strlwr(char *s);
-void gle_strlwr(string& s);
+void gle_strlwr(std::string& s);
 
-int str_skip_brackets(const string& s, int pos, int ch1, int ch2);
+int str_skip_brackets(const std::string& s, int pos, int ch1, int ch2);
 
 // for compatibility between different compilers
 bool str_i_equals(const char* s1, const char* s2);
@@ -76,58 +76,58 @@ struct str_i_less
 };
 
 char* str_i_str(const char* haystack, const char* needle);
-int str_i_str(const string& haystack, const char* needle);
-int str_i_str(const string& haystack, int from, const char* needle);
+int str_i_str(const std::string& haystack, const char* needle);
+int str_i_str(const std::string& haystack, int from, const char* needle);
 
-bool str_i_equals(const string& s1, const string& s2);
+bool str_i_equals(const std::string& s1, const std::string& s2);
 
 bool str_contains(const char* str, char ch);
 
-bool str_contains(const string& str, const char* elems);
+bool str_contains(const std::string& str, const char* elems);
 
 int str_remove_all(char* str, char ch);
 
-void str_prefix(int count, char ch, string* str);
+void str_prefix(int count, char ch, std::string* str);
 
-void str_to_uppercase(const string& input, string& output);
+void str_to_uppercase(const std::string& input, std::string& output);
 
-void str_to_uppercase(string& output);
+void str_to_uppercase(std::string& output);
 
 std::vector<std::string> strs_to_uppercase(const std::vector<std::string>& input);
 
 std::string str_join(const std::vector<std::string>& input, const char* joinStr = ", ");
 
-void str_uppercase_initial_capital(string& str);
+void str_uppercase_initial_capital(std::string& str);
 
-bool str_only_space(const string& str);
+bool str_only_space(const std::string& str);
 
-void str_trim_both(string& str);
+void str_trim_both(std::string& str);
 
-void str_trim_right(string& str);
+void str_trim_right(std::string& str);
 
-void str_trim_left(string& str);
+void str_trim_left(std::string& str);
 
-void str_trim_left(string& str, string& prefix);
+void str_trim_left(std::string& str, std::string& prefix);
 
-void str_trim_left_bom(string& str);
+void str_trim_left_bom(std::string& str);
 
-int str_starts_with_trim(const string& str, const char* test);
+int str_starts_with_trim(const std::string& str, const char* test);
 
-bool str_starts_with(const string& str, const char* find);
+bool str_starts_with(const std::string& str, const char* find);
 
-bool str_i_starts_with(const string& str, const char* find);
+bool str_i_starts_with(const std::string& str, const char* find);
 
-bool str_i_ends_with(const string& str, const char* find);
+bool str_i_ends_with(const std::string& str, const char* find);
 
-void str_remove_quote(string& str);
+void str_remove_quote(std::string& str);
 
-void str_try_add_quote(string& str);
+void str_try_add_quote(std::string& str);
 
-void str_parse_get_next(const string& strg, const char* find, string& res);
+void str_parse_get_next(const std::string& strg, const char* find, std::string& res);
 
-void gle_int_to_string_bin(int value, string* binary);
+void gle_int_to_string_bin(int value, std::string* binary);
 
-void gle_int_to_string(int value, string* str);
+void gle_int_to_string(int value, std::string* str);
 
 int gle_double_digits(double value, int prec);
 
@@ -145,12 +145,12 @@ double f_r_sign(double* a, double* b);
 
 int f_i_sign(int *a, int* b);
 
-void str_delete_start(string& str, char ch);
+void str_delete_start(std::string& str, char ch);
 
-void str_replace_start(string& str, const char* find, const char* repl);
+void str_replace_start(std::string& str, const char* find, const char* repl);
 
 void str_replace_all(char* str, const char* find, const char* repl);
-void str_replace_all(string& str, const char* find, const char* repl);
+void str_replace_all(std::string& str, const char* find, const char* repl);
 
 void str_get_system_error(ostream& error);
 

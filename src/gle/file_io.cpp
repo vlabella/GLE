@@ -98,12 +98,12 @@
        #define PATH_MAX 8192
 #endif
 
-using namespace std;
-
 #include "tokens/stokenizer.h"
 #include "file_io.h"
 #include "cutils.h"
 #include <cstring>
+
+using namespace std;
 
 #if defined(__unix__) || defined(__APPLE__)
 	/* Cygwin too */
