@@ -128,15 +128,15 @@ inline GLERefCountObject* GLE_SET_RC(GLERefCountObject* rc, GLERefCountObject* v
 	return value;
 }
 
-template <class T> class GLERCVector : public vector< GLERC<T> > {
+template <class T> class GLERCVector : public std::vector< GLERC<T> > {
 public:
 	inline void add(T* elem) { this->push_back(GLERC<T>(elem)); }
 	inline T* get(int i) { return (*this)[i].get(); }
 };
 
-template <class T> class GLEVectorAutoDelete : public vector<T*> {
+template <class T> class GLEVectorAutoDelete : public std::vector<T*> {
 public:
-	GLEVectorAutoDelete() : vector<T*>() {
+	GLEVectorAutoDelete() : std::vector<T*>() {
 	}
 	~GLEVectorAutoDelete() {
 		this->deleteAll();
@@ -146,7 +146,7 @@ public:
 		vector<T*>::clear();
 	}
 	void deleteAll() {
-		for (typename vector<T*>::size_type i = 0; i < vector<T*>::size(); i++) {
+		for (typename std::vector<T*>::size_type i = 0; i < std::vector<T*>::size(); i++) {
 			T* elem = this->at(i);
 			if (elem != NULL) delete elem;
 		}
