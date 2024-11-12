@@ -189,7 +189,7 @@ public:
 	std::ostream& toUTF8(std::ostream& out) const;
 	void toUTF8(string& out) const;
 	void toUTF8(char* out) const;
-	sstd::tring toUTF8() const;
+	std::string toUTF8() const;
 	GLEString* concat(GLEString* other) const;
 	GLEString* substringWithLength(unsigned int from, unsigned int size) const;
 	GLEString* substring(unsigned int from, unsigned int to) const;
