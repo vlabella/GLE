@@ -88,7 +88,7 @@ class GLEByteStream;
 
 class GLEBitmap {
 protected:
-	string m_Error;
+	std::string m_Error;
 	int  m_Height;
 	int  m_Width;
 	char m_Mode;
@@ -130,7 +130,7 @@ public:
 	inline rgb* getPalette() { return m_Palette; }
 	inline int getExtraComponents() { return m_ExtraComponents; }
 	inline void setExtraComponents(int extra) { m_ExtraComponents = extra; }
-	inline const string& getError() { return m_Error; }
+	inline const std::string& getError() { return m_Error; }
 	inline void setError(const string& err) { m_Error = err; }
 	inline void setError(const char* err) { m_Error = err; }
 	rgb* allocPalette(int ncolors);
@@ -138,16 +138,16 @@ public:
 	int getColorComponents();
 	int getMaxBits();
 	void checkGrayScalePalette();
-	virtual int open(const string& fname);
+	virtual int open(const std::string& fname);
 	virtual int readHeader();
-	virtual int toPS(ostream* fp);
+	virtual int toPS(std::ostream* fp);
 	virtual void loadImageData();
 	virtual int prepare(int mode);
 	virtual int decode(GLEByteStream* output);
 	virtual int coded(GLEByteStream* output);
 	virtual void close();
-	virtual string getFName();
-	void printInfo(ostream& os);
+	virtual std::string getFName();
+	void printInfo(std::ostream& os);
 };
 
 class GLEFileBitmap : public GLEBitmap {
@@ -156,9 +156,9 @@ protected:
 public:
 	GLEFileBitmap();
 	virtual ~GLEFileBitmap();
-	virtual int open(const string& fname);
+	virtual int open(const std::string& fname);
 	virtual void close();
-	virtual string getFName();
+	virtual std::string getFName();
 	int read16BE();
 	int read16LE();
 	inline int read8() { return fgetc(m_file.getFile()); }

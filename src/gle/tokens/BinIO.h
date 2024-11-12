@@ -46,35 +46,35 @@
 #define BINIO_READ	0
 #define BINIO_WRITE	1
 
-using namespace std;
+// using namespace std;  should not reside in header file
 
 class BinIO;
 class BinIOSerializable;
 
 class BinIOError {
 private:
-	string m_txt;
+	std::string m_txt;
 	int m_pos;
 public:
-	BinIOError(const string& txt, BinIO& io);
-	ostream& write(ostream& os) const;
+	BinIOError(const std::string& txt, BinIO& io);
+	std::ostream& write(std::ostream& os) const;
 };
 
-inline ostream& operator<<(ostream& os, const BinIOError& err) {
+inline std::ostream& operator<<(std::ostream& os, const BinIOError& err) {
 	return err.write(os);
 }
 
 class BinIO {
 protected:
 	int m_rdwr;
-	ostream* m_os;
-	istream* m_is;
+	std::ostream* m_os;
+	std::istream* m_is;
 	filebuf& m_fb;
-	vector<BinIOSerializable*> m_ser;
+	std::vector<BinIOSerializable*> m_ser;
 public:
 	BinIO(filebuf& fb, int rdwr);
 	~BinIO();
-	inline ostream& os() { return *m_os; }
+	inline std::ostream& os() { return *m_os; }
 	long getPosition();
 	void write(size_t val);
 #ifdef __APPLE__
@@ -83,7 +83,7 @@ public:
 	void write(int val);
 	void write(char val);
 	void write_char(char val);
-	void write(const string& val);
+	void write(const std::string& val);
 	void write(const void* bytes, int size);
 	void write(BinIOSerializable* ser);
 	void ensure(char val, const char* errmsg);
@@ -91,7 +91,7 @@ public:
 	int check(char yes, char no, const char* errmsg);
 	int read_int();
 	char read_char();
-	void read_str(string& str);
+	void read_str(std::string& str);
 	void read(void* bytes, int size);
 	int hasSerializable();
 	int addSerializable(BinIOSerializable* ser);
@@ -102,7 +102,7 @@ public:
 
 
 template <class ElemType>
-class BinIOVector : public vector<ElemType> {
+class BinIOVector : public std::vector<ElemType> {
 public:
 	void bin_write(BinIO& io) const {
 		io.write('V');
@@ -135,7 +135,7 @@ public:
 	virtual void bin_write_impl(BinIO& io) = 0;
 };
 
-BinIOSerializable* bin_read_serializable(BinIO& io, const string& key);
+BinIOSerializable* bin_read_serializable(BinIO& io, const std::string& key);
 BinIOSerializable* bin_read_serializable(BinIO& io);
 BinIOSerializable* try_bin_read_serializable(BinIO& io);
 BinIOSerializable* ptr_bin_read_serializable(BinIO& io);

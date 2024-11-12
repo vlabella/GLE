@@ -51,7 +51,7 @@
 #define QGS_DISPLAY_32 0
 #define QGS_DISPLAY_24 1
 
-using namespace std;
+// using namespace std;  should not reside in header file
 
 /** @namespace GSApiWrapper Namespace containing the callback functions for communication with
     the ghostscript library.

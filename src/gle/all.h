@@ -61,17 +61,17 @@
 //
 // -- containers
 //
-typedef vector< vector<int> > _GlobalPCode;
-typedef vector< vector<int> >::iterator _itGlobalPCode;
-typedef vector< vector<int> >::const_iterator _citGlobalPCode;
+typedef std::vector< std::vector<int> > _GlobalPCode;
+typedef std::vector< std::vector<int> >::iterator _itGlobalPCode;
+typedef std::vector< std::vector<int> >::const_iterator _citGlobalPCode;
 
-typedef vector<int> _PCode;
-typedef vector<int>::iterator _itPCode;
-typedef vector<int>::const_iterator _citPCode;
+typedef std::vector<int> _PCode;
+typedef std::vector<int>::iterator _itPCode;
+typedef std::vector<int>::const_iterator _citPCode;
 
-typedef vector<string> _Tokens;
-typedef vector<string>::iterator _itTokens;
-typedef vector<string>::const_iterator _citTokens;
+typedef std::vector<std::string> _Tokens;
+typedef std::vector<std::string>::iterator _itTokens;
+typedef std::vector<std::string>::const_iterator _citTokens;
 
 #include "glepro.h"
 

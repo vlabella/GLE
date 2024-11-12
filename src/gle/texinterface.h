@@ -55,18 +55,18 @@ class TeXInterface;
 
 class TeXHashObject {
 protected:
-	string m_Line;
+	std::string m_Line;
 	bool m_Used;
 	int m_HasDimensions, m_NbLines;
 	double m_Width, m_Height, m_Baseline;
 public:
-	TeXHashObject(const string& line);
-	void outputMeasure(ostream& os);
-	void outputLog(ostream& os);
-	void outputLines(ostream& os);
-	void addFirstLine(string* str);
+	TeXHashObject(const std::string& line);
+	void outputMeasure(std::ostream& os);
+	void outputLog(std::ostream& os);
+	void outputLines(std::ostream& os);
+	void addFirstLine(std::string* str);
 	void setDimension(double width, double height, double baseline);
-	inline const string& getLine() { return m_Line; }
+	inline const std::string& getLine() { return m_Line; }
 	inline int hasDimensions() { return m_HasDimensions; }
 	inline bool isUsed() { return m_Used; }
 	inline void setUsed(bool used) { m_Used = used; }
@@ -109,7 +109,7 @@ protected:
 	GLERC<GLEColor> m_Color;
 public:
 	TeXObject();
-	void output(ostream& os);
+	void output(std::ostream& os);
 	int isBlack();
 	void getDimensions(double* x1, double *y1, double *x2, double *y2);
 	inline void setAngle(double angle) { m_Angle = angle; }
@@ -122,7 +122,7 @@ public:
 	inline double getHeight() { return m_Object->getHeight(); }
 	inline double getDXp() { return m_DXp; }
 	inline double getDYp() { return m_DYp; }
-	inline const string& getLine() { return m_Object->getLine(); }
+	inline const std::string& getLine() { return m_Object->getLine(); }
 	inline int hasObject() { return m_Object != NULL; }
 	inline void setColor(const GLERC<GLEColor>& color) { m_Color = color; }
 	inline GLEColor* getColor() { return m_Color.get(); }
@@ -133,34 +133,34 @@ protected:
 	string m_Name;
 public:
 	TeXSize(const char* name);
-	void createObject(string* name);
-	inline const string& getName() { return m_Name; }
+	void createObject(std::string* name);
+	inline const std::string& getName() { return m_Name; }
 };
 
 class TeXPreambleKey {
 protected:
-	string m_DocumentClass;
-	vector<string> m_Preamble;
+	std::string m_DocumentClass;
+	std::vector<std::string> m_Preamble;
 public:
 	bool equals(const TeXPreambleKey* key) const;
 	void copyFrom(const TeXPreambleKey* other);
 	inline void clear() { m_Preamble.clear(); }
 	inline void setDocumentClass(const string& line) { m_DocumentClass = line; }
-	inline const string& getDocumentClass() const { return m_DocumentClass; }
+	inline const std::string& getDocumentClass() const { return m_DocumentClass; }
 	inline int getNbPreamble() const { return m_Preamble.size(); }
-	inline const string& getPreamble(int i) const { return m_Preamble[i]; }
-	inline void addPreamble(const string& str) { m_Preamble.push_back(str); }
+	inline const std::string& getPreamble(int i) const { return m_Preamble[i]; }
+	inline void addPreamble(const std::string& str) { m_Preamble.push_back(str); }
 };
 
 class TeXPreambleInfo : public TeXPreambleKey {
 	bool m_HasFontSizes;
-	vector<double> m_FontSizes;
+	std::vector<double> m_FontSizes;
 public:
 	TeXPreambleInfo();
 	void setFontSize(int font, double size);
 	double getFontSize(int font);
-	void save(ostream& os);
-	void load(istream& is, TeXInterface* iface);
+	void save(std::ostream& os);
+	void load(std::istream& is, TeXInterface* iface);
 	int getBestSizeScaled(double hei);
 	int getBestSizeFixed(double hei);
 	inline int getNbFonts() { return m_FontSizes.size(); }
@@ -171,7 +171,7 @@ public:
 class TeXPreambleInfoList {
 protected:
 	TeXPreambleInfo* m_Current;
-	vector<TeXPreambleInfo*> m_Infos;
+	std::vector<TeXPreambleInfo*> m_Infos;
 public:
 	TeXPreambleInfoList();
 	~TeXPreambleInfoList();
@@ -205,12 +205,12 @@ public:
 class TeXInterface {
 protected:
 	static TeXInterface m_Instance;
-	vector<TeXObject*> m_TeXObjects;
+	std::vector<TeXObject*> m_TeXObjects;
 	TeXHash m_TeXHash;
-	vector<TeXSize*> m_FontSizes;
+	std::vector<TeXSize*> m_FontSizes;
 	TeXPreambleInfoList m_Preambles;
-	string m_HashName;
-	string m_DotDir;
+	std::string m_HashName;
+	std::string m_DotDir;
 	GLEFileLocation m_MainOutputName;
 	int m_ScaleMode;
 	int m_HashLoaded, m_HashModified;
@@ -234,19 +234,19 @@ public:
 	void reset();
 	int tryCreateHash();
 	void removeDotFiles();
-	void createInc(const string& prefix);
+	void createInc(const std::string& prefix);
 	void createTeX(bool usegeom);
 	int getHashObjectIndex(const string& line);
 	TeXHashObject* getHashObject(const string& line);
 	TeXHashObject* getHashObject(int idx);
 	void resetPreamble();
-	void createPreamble(ostream& tex_file);
+	void createPreamble(std::ostream& tex_file);
 	inline void setHasFontSizes(bool has) { m_HasFontSizes = has; }
 	inline bool hasFontSizes() { return m_HasFontSizes; }
 	inline bool hasObjects() { return m_TeXObjects.size() != 0; }
 	inline int getNbPreamble() { return m_Preambles.getCurrent()->getNbPreamble(); }
-	inline const string& getPreamble(int i) { return m_Preambles.getCurrent()->getPreamble(i); }
-	inline const string& getDocumentClass() { return m_Preambles.getCurrent()->getDocumentClass(); }
+	inline const std::string& getPreamble(int i) { return m_Preambles.getCurrent()->getPreamble(i); }
+	inline const std::string& getDocumentClass() { return m_Preambles.getCurrent()->getDocumentClass(); }
 	inline TeXPreambleInfoList* getPreambles() { return &m_Preambles; }
 	inline void addSize(TeXSize* size) { m_FontSizes.push_back(size); }
 	inline int getNbFontSizes() { return m_FontSizes.size(); }
@@ -273,15 +273,15 @@ protected:
 	void retrieveTeXFontSizes(TeXHash& tex_hash, TeXPreambleInfo* preamble);
 };
 
-bool create_eps_file_latex_dvips(const string& fname, GLEScript* script);
-bool create_ps_file_latex_dvips(const string& fname);
-bool create_pdf_file_pdflatex(const string& fname, GLEScript* script);
+bool create_eps_file_latex_dvips(const std::string& fname, GLEScript* script);
+bool create_ps_file_latex_dvips(const std::string& fname);
+bool create_pdf_file_pdflatex(const std::string& fname, GLEScript* script);
 
 bool create_bitmap_file(GLEFileLocation* fname, int device, int dpi, int options, GLEScript* script);
 bool create_pdf_file_ghostscript(GLEFileLocation* fname, int dpi, GLEScript* script);
 
-bool run_ghostscript(const string& args, const string& outfile, bool redirout = true, istream* is = NULL);
-bool run_latex(const string& dir, const string& file);
-bool run_dvips(const string& file, bool eps);
+bool run_ghostscript(const std::string& args, const std::string& outfile, bool redirout = true, std::istream* is = NULL);
+bool run_latex(const std::string& dir, const std::string& file);
+bool run_dvips(const std::string& file, bool eps);
 
 #endif

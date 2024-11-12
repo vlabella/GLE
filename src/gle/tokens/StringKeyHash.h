@@ -72,7 +72,7 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+// using namespace std;  should not reside in header file
 
 #ifndef GCC2
 #ifndef _MSC_VER

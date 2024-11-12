@@ -83,7 +83,7 @@
 #include <fstream>
 #include <limits>
 
-using namespace std;
+// using namespace std;  should not reside in header file
 
 #if defined(__OS2__) && defined(__EMX__)
 #define uint unsigned int
@@ -99,5 +99,5 @@ using namespace std;
 
 #endif
 
-#define GLE_INF numeric_limits<double>::infinity()
-#define GLE_NAN numeric_limits<double>::quiet_NaN()
+#define GLE_INF std::numeric_limits<double>::infinity()
+#define GLE_NAN std::numeric_limits<double>::quiet_NaN()

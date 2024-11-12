@@ -45,7 +45,7 @@
 	void gprint(va_list arg_list, ...);
 #endif
 
-void gprint(const string& output);
+void gprint(const std::string& output);
 
 void g_set_error_column(int col);
 void g_set_error_line(int lin);

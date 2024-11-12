@@ -107,7 +107,7 @@ typedef struct s_range RANGE;
 #include <direct.h>
 #endif
 
-using namespace std;
+// using namespace std;  should not reside in header file
 
 #ifdef HAVE_NCURSES_H
 	#include <ncurses.h>
