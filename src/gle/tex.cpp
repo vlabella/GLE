@@ -173,7 +173,7 @@ bool tex_def(const char *name, const char *defn,int npm);
 int tex_mathdef(const char *name, int defn);
 int* tex_findmathdef(const char *s);
 void tex_chardef(int c, const char *defn);
-char *tex_findchardef(int c);
+const char *tex_findchardef(int c);
 deftable *tex_finddef(const char *s) ;
 
 /*----------------------------------------------------------------------*/
@@ -1565,7 +1565,7 @@ void tex_chardef(int c, const char *defn) {
 	cdeftable[c] = sdup(defn);
 }
 
-char* tex_findchardef(int c) {
+const char* tex_findchardef(int c) {
 	if (c < 0 || c > 255) return "";
 	else return cdeftable[c];
 }
