@@ -51,7 +51,7 @@
 	#include <sys/param.h>
 #endif
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	#include <sys/types.h>
 	#include <sys/stat.h>
 	#include <stdlib.h>
@@ -111,7 +111,7 @@ using namespace std;
 	string DIR_SEP = "/";
 #endif
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	string PATH_SEP = ";";
 	string DIR_SEP = "\\";
 #endif
@@ -455,7 +455,7 @@ void StripPathComponents(string* fname, int nb) {
 
 string GLETempDirName() {
 	string result;
-#ifdef __WIN32__
+#ifdef _WIN32
 	#define WIN32_TMPNAM_BUFSIZE 1024
 	TCHAR lpPathBuffer[WIN32_TMPNAM_BUFSIZE+1];
 	DWORD dwRetVal = GetTempPath(WIN32_TMPNAM_BUFSIZE, lpPathBuffer);
@@ -473,7 +473,7 @@ string GLETempDirName() {
 
 string GLETempName() {
 	string result;
-#ifdef __WIN32__
+#ifdef _WIN32
 	#define WIN32_TMPNAM_BUFSIZE 1024
 	result = "C:\\gle.tmp";
 	TCHAR szTempName[WIN32_TMPNAM_BUFSIZE+1];
@@ -499,7 +499,7 @@ string GLETempName() {
 }
 
 bool GLEMoveFile(const string& from, const string& to) {
-#ifdef __WIN32__
+#ifdef _WIN32
 #else
 	if (rename(from.c_str(), to.c_str()) == -1) return false;
 #endif
@@ -540,7 +540,7 @@ int GLECopyFile(const string& from, const string& to, string* err) {
 
 // Return current directory
 bool GLEGetCrDir(string* name) {
-#ifdef __WIN32__
+#ifdef _WIN32
 	TCHAR buffer[1024];
 	if (GetCurrentDirectory(1024, buffer) != 0) {
 		*name = buffer;
@@ -568,7 +568,7 @@ bool GLEGetCrDir(string* name) {
 // Return current directory
 // -> Used for compatibility with QGLE.EXE
 bool GLEGetCrDirWin32(string* name) {
-#if defined(__WIN32__) || defined(__CYGWIN__)
+#if defined(_WIN32) || defined(__CYGWIN__)
 	TCHAR buffer[1024];
 	if (GetCurrentDirectory(1024, buffer) != 0) {
 		*name = buffer;
@@ -589,7 +589,7 @@ bool GLEGetCrDirWin32(string* name) {
 
 // Change directory
 bool GLEChDir(const string& dir) {
-#ifdef __WIN32__
+#ifdef _WIN32
 	return SetCurrentDirectory(dir.c_str());
 #else
 	return chdir(dir.c_str()) == 0;
@@ -604,7 +604,7 @@ void GLESetGLETop(const string& cmdline) {
 		StripPathComponents(&gle_top, 1);
 	}
 	gle_top = "GLE_TOP="+gle_top;
-#ifdef __WIN32__
+#ifdef _WIN32
 	_putenv(gle_top.c_str());
 #endif
 }
@@ -621,7 +621,7 @@ int GLERunCommand(const string& cmd, string& result) {
 #define GLESYS_PIPE_RD 0
 #define GLESYS_PIPE_WR 1
 
-#ifdef __WIN32__
+#ifdef _WIN32
 
 void GLEReadFileWin32(HANDLE input, ostream* strm) {
 	char buffer[GLEREAD_BUF+1];
@@ -892,7 +892,7 @@ int GLESystem(const string& cmd, bool wait, bool redirout, istream* ins, ostream
 #endif
 
 void GLESleep(int msec) {
-#ifdef __WIN32__
+#ifdef _WIN32
 	Sleep(msec);
 #else
 	sleep(msec/1000);
@@ -912,7 +912,7 @@ bool GLEFileExists(const string& fname) {
 // Create new directory
 void MakeDirectory(const string& dir) {
 	/* Create directory user read/write/exec, group & others read/exec */
-#ifdef __WIN32__
+#ifdef _WIN32
 	SECURITY_ATTRIBUTES sec_attr;
 	sec_attr.nLength = sizeof(SECURITY_ATTRIBUTES);
 	sec_attr.lpSecurityDescriptor = NULL;
@@ -954,7 +954,7 @@ void EnsureMkDir(const string& dir) {
 
 bool TryDeleteDir(const string& fname) {
 	// cout << "Delete: '" << fname << "'" << endl;
-#ifdef __WIN32__
+#ifdef _WIN32
 	RemoveDirectory(fname.c_str());
 #else
 	if (rmdir(fname.c_str()) != 0) {
@@ -966,7 +966,7 @@ bool TryDeleteDir(const string& fname) {
 
 bool TryDeleteFile(const string& fname) {
 	// cout << "Delete: '" << fname << "'" << endl;
-#ifdef __WIN32__
+#ifdef _WIN32
 	DeleteFile(fname.c_str());
 #else
 	if (unlink(fname.c_str()) != 0) {
@@ -1124,7 +1124,7 @@ void GLEFindFiles(const string& dirname, vector<GLEFindEntry*>& tofind, GLEProgr
 		find_files_progress = 0;
 	}
 	// cout << "Dir: " << dirname << endl;
-#ifdef __WIN32__
+#ifdef _WIN32
 	WIN32_FIND_DATA FindFileData;
 	string findpattern = dirname + DIR_SEP + "*.*";
 	HANDLE hFind = FindFirstFile(findpattern.c_str(), &FindFileData);
@@ -1267,7 +1267,7 @@ string GetActualFilename(ifstream* file, const string& fname, const string* dire
 
 #ifdef HAVE_SOCKETS
 void GLECloseSocket(SOCKET sock) {
-#ifdef __WIN32__
+#ifdef _WIN32
 	closesocket(sock);
 	WSACleanup();
 #endif
@@ -1279,7 +1279,7 @@ void GLECloseSocket(SOCKET sock) {
 
 int GLESendSocket(const string& commands) {
 #ifdef HAVE_SOCKETS
-#ifdef __WIN32__
+#ifdef _WIN32
 	struct WSAData wsaData;
 	int nCode = WSAStartup(MAKEWORD(1, 1), &wsaData);
 	if (nCode != 0) {
@@ -1289,7 +1289,7 @@ int GLESendSocket(const string& commands) {
 	struct sockaddr_in name;
 	SOCKET sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
 	if (sock < 0) {
-		#ifdef __WIN32__
+		#ifdef _WIN32
 		WSACleanup();
 		#endif
 		return -2;
@@ -1308,7 +1308,7 @@ int GLESendSocket(const string& commands) {
 	}
 	char ch = 0;
 	while (true) {
-#ifdef __WIN32__
+#ifdef _WIN32
 		int res1 = recv(sock, &ch, 1, 0);
 		if (res1 <= 0) {
 			if (res1 == SOCKET_ERROR && WSAGetLastError() == WSAEWOULDBLOCK) {
@@ -1337,7 +1337,7 @@ int GLESendSocket(const string& commands) {
 }
 
 bool GetExeName(const char* appname, char **argv, string& exe_name) {
-#ifdef __WIN32__
+#ifdef _WIN32
 	char name[1024];
 	DWORD res = GetModuleFileName(NULL, name, 1023);
 	if (res > 0) {

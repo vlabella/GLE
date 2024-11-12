@@ -103,7 +103,7 @@ typedef struct s_range RANGE;
 #include <vector>
 #include <fstream>
 
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <direct.h>
 #endif
 

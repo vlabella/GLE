@@ -969,7 +969,7 @@ int GLECairoDeviceEPS::getDeviceType() {
 	return GLE_DEVICE_CAIRO_EPS;
 }
 
-#ifdef __WIN32__
+#ifdef _WIN32
 
 #include <cairo-win32.h>
 

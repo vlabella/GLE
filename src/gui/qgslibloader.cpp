@@ -113,7 +113,7 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 	/* Try to open the library */
 	if (location == "") {
 		m_LibGSLocation = "gsdll32.dll";
-		#ifdef __WIN32__
+		#ifdef _WIN32
 		// windows builds
 		#if _WIN64
 			// VS builds

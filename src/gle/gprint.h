@@ -36,7 +36,7 @@
  *                                                                      *
  ************************************************************************/
 
-#if defined(__NOCYGWIN__)
+#if defined(NO_CYGWIN)
 	#include <stdarg.h>
 #endif
 #if defined(__unix__) || defined(__APPLE__)

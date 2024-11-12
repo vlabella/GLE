@@ -51,7 +51,7 @@
 #include "gle-interface/gle-interface.h"
 #include "gle-poppler.h"
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	#include <io.h>
 #endif
 
@@ -200,7 +200,7 @@ int main(int argc, char **argv) {
 	}
 	for (int i = 0; i < g_CmdLine.getNbMainArgs(); i++) {
 	  // the standard CMD shell didn't expand the wildcards
-#ifdef __WIN32__
+#ifdef _WIN32
 		//
 		// -- globbing and wildcards
 		//
@@ -427,7 +427,7 @@ void init_option_args(CmdLineObj& cmdline) {
 	setarg->setUnsupportedValue(GLE_DEVICE_SVG);
 	setarg->setUnsupportedValue(GLE_DEVICE_EMF);
 #endif
-#ifndef __WIN32__
+#ifndef _WIN32
 	setarg->setUnsupportedValue(GLE_DEVICE_EMF);
 #endif
 	setarg->addDefaultValue(GLE_DEVICE_EPS);
@@ -513,7 +513,7 @@ void init_option_args(CmdLineObj& cmdline) {
 	option = new CmdLineOption("nosave");
 	option->setHelp("Don't write output file to disk (dry-run)");
 	cmdline.addOption(option, GLE_OPT_NOSAVE);
-#if defined(__WIN32__) && defined(HAVE_CAIRO)
+#if defined(_WIN32) && defined(HAVE_CAIRO)
 	option = new CmdLineOption("copy");
 	option->setHelp("Copy resulting figure to clipboard (only EMF)");
 	cmdline.addOption(option, GLE_OPT_COPY);
@@ -602,7 +602,7 @@ void gle_preview_file(const char* name, CmdLineObj& cmdline) {
 	int result = GLESendSocket(commands.str());
 	if (result == -3) {
 		cerr << "Note: GLE is trying to launch QGLE, the GLE preview application" << endl;
-#ifdef __WIN32__
+#ifdef _WIN32
 		string qgle = "\"" + GLE_BIN_DIR + DIR_SEP + "qgle.exe\"";
 #else
 		string qgle = "\"" + GLE_BIN_DIR + DIR_SEP + "qgle\"";
@@ -1159,7 +1159,7 @@ void GLELoadOneFileManager::delete_original_eps_pdf() {
 	delete_original_eps_pdf_impl(GLE_DEVICE_PDF);
 	/* has temporary output file */
 	if (m_HasTempFile) {
-		#ifdef __WIN32__
+		#ifdef _WIN32
 			delete_temp_file(m_OutName->getFullPath(), ".tmp");
 		#else
 			delete_temp_file(m_OutName->getFullPath(), "");
@@ -1254,7 +1254,7 @@ void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code
 		g_select_device(GLE_DEVICE_X11);
 		DrawIt(script, &out_name, &cmdline);
 	}
-#if defined(__WIN32__) && defined(HAVE_CAIRO)
+#if defined(_WIN32) && defined(HAVE_CAIRO)
 	if (device->hasValue(GLE_DEVICE_EMF)) {
 		GLECairoDeviceEMF* dev = (GLECairoDeviceEMF*)g_select_device(GLE_DEVICE_EMF);
 		if (cmdline.hasOption(GLE_OPT_COPY)) {

@@ -53,7 +53,7 @@ using namespace std;
 
 void GLEFindRelPath(const string& p1, const string& p2, string* result, int* nb) {
 	char path = '/';
-	#ifdef __WIN32__
+	#ifdef _WIN32
 		path = '\\';
 	#endif
 	char spliton[2];
@@ -203,7 +203,7 @@ int main(int argc, char** argv) {
 	string option = argv[1];
 	cout << option;
 	if (option == "-setrelpath") {
-#ifndef __WIN32__
+#ifndef _WIN32
 		return do_setrelpath(argv + 2, argc-2);
 #else
 		return 0;

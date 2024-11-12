@@ -51,7 +51,7 @@
 #include "cmdline.h"
 #include "config.h"
 #include "mem_limits.h"
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <time.h>
 #endif
 
@@ -1047,7 +1047,7 @@ void PSGLEDevice::displayGeometry(double width, double height, int *gsPixelWidth
 		*gsPixelWidth = (int) (*gsPixelHeight * gleXbyY);
 	}
 #endif
-#if defined(__WIN32__) && defined(ENABLE_GS_PREVIEW)
+#if defined(_WIN32) && defined(ENABLE_GS_PREVIEW)
 	// Not yet implemented
 #endif
 #if defined(__OS2__) && defined(ENABLE_GS_PREVIEW)

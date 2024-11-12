@@ -608,7 +608,7 @@ void CmdLineOptionList::setHasOption(int id, bool set) {
 }
 
 char CmdLineOptionList::getOptionPrefix() {
-#ifdef __WIN32__
+#ifdef _WIN32
 	return '/';
 #else
 	return '-';
@@ -822,7 +822,7 @@ void CmdLineObj::parse(int argc, char** argv) {
 	CmdLineOption* cropt = NULL;
 	while ((crarg = getNextArg()) != NULL) {
 		int len = strlen(crarg);
-#ifdef __WIN32__
+#ifdef _WIN32
 		/* Also allow options with prefix '/' on Windows */
 		/* On Unix, '/' might be the start of an absolute path !! */
 		if (len >= 2 && (crarg[0] == '-' || crarg[0] == '/')) {
@@ -897,7 +897,7 @@ void CmdLineObj::addOptionArg(CmdLineOption* cropt, int argidx, const string& cr
 bool cmdline_is_option(const char* opt, const char* val) {
 	bool is_option = false;
 	if (opt != NULL && opt[0] == '-') is_option = true;
-#ifdef __WIN32__
+#ifdef _WIN32
 	if (opt != NULL && opt[0] == '/') is_option = true;
 #endif
 	return is_option && str_i_equals(opt+1, val);

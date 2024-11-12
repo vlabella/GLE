@@ -329,7 +329,7 @@ public:
 	virtual int getDeviceType();
 };
 
-#ifdef __WIN32__
+#ifdef _WIN32
 
 class GLECairoDeviceEMFWinInfo;
 

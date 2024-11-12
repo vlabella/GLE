@@ -42,9 +42,9 @@
 #undef DLLEXPORT
 #undef DLLIMPORT
 
-#ifndef __WIN32__
+#ifndef _WIN32
 #ifdef Q_OS_WIN32
-#define __WIN32__
+#define _WIN32
 #endif
 #endif
 
@@ -52,7 +52,7 @@
 #define INCLUDE_GLE_DLL
 #endif
 
-#if defined(__WIN32__) && defined(INCLUDE_GLE_DLL)
+#if defined(_WIN32) && defined(INCLUDE_GLE_DLL)
 	#define DLLEXPORT __declspec( dllexport )
 	#define DLLIMPORT __declspec( dllimport )
 	#ifndef _MSC_VER

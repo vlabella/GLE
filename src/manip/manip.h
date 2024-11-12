@@ -54,7 +54,7 @@ void fner_clear(void);
 void fnerx(char *s);
 void fnerxx(char *s);
 
-#if defined(__NOCYGWIN__)
+#if defined(NO_CYGWIN)
 	#include <stdarg.h>
 #endif
 

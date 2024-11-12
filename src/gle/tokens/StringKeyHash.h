@@ -95,7 +95,7 @@ typedef std::string name_hash_key;
 
 template <class ElemType> class StringKeyPair : public std::pair<const name_hash_key, ElemType> {
 public:
-	StringKeyPair(const name_hash_key key, ElemType value) : pair<const name_hash_key, ElemType>(key, value) {
+	StringKeyPair(const name_hash_key key, ElemType value) : std::pair<const name_hash_key, ElemType>(key, value) {
 	}
 };
 
@@ -275,7 +275,7 @@ public:
 
 	std::ostream& write(std::ostream &os, int tab) const {
 		for (typename StringKeyHash<ElemType>::const_iterator i = this->begin(); i != this->end(); i++ ) {
-			cerr << i->first << endl;
+			std::cerr << i->first << std::endl;
 			i->second.write(os, tab);
 		}
 		return os;
@@ -283,7 +283,7 @@ public:
 
 	std::ostream& writeKeys(std::ostream &os) const {
 		for (typename StringKeyHash<ElemType>::const_iterator i = this->begin(); i != this->end(); i++ ) {
-			cerr << i->first << endl;
+			std::cerr << i->first << std::endl;
 		}
 		return os;
 	}

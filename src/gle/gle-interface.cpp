@@ -569,7 +569,7 @@ bool GLEInterface::isDeviceSupported(int device) {
 		case GLE_DEVICE_SVG:
         case GLE_DEVICE_CAIRO_SVG:
 			return true;
-#ifdef __WIN32__
+#ifdef _WIN32
         case GLE_DEVICE_EMF:
 			return true;
 #endif
@@ -614,7 +614,7 @@ bool GLEInterface::hasCmdLineOptionString(const char* name) {
 
 string GLEInterface::getGhostScriptLocation() {
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
-#ifdef __WIN32__
+#ifdef _WIN32
 	string name = "gsdll32.dll";
 	#if _WIN64
 		// VS builds
@@ -656,7 +656,7 @@ string GLEInterface::getUserConfigLocation() {
 	#if defined(__unix__) || defined(__APPLE__) || defined (__OS2__)
 		GLEGetEnv("HOME", location);
 	#endif
-	#ifdef __WIN32__	
+	#ifdef _WIN32	
 		GLEGetEnv("APPDATA", location);
 		if (location != "") {
 			AddDirSep(location);

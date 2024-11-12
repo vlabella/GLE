@@ -268,14 +268,8 @@ include_directories(
 # -- compile time definitions
 #
 if(APPLE)
-	# GLE specific definitions
-	# shodul not define double underscore identifiers
 	# use __APPLE__ in source code to identify apple/mac platforms which is defined by compiler
 	add_compile_definitions(
-#		__MAC__  changed to __APPLE__ everywhere in source code
-#		__OSX__    changed to __APPLE__ everywhere in source code
-#		__MACOS__  changed to __APPLE__ everywhere in source code
-#		__unix__   # is this needed?
 		HAVE_CONFIG_H
 		HAVE_CAIRO
 		HAVE_LIBZ
@@ -318,7 +312,6 @@ endif()
 if(UNIX AND NOT APPLE)
 	# use __unix__ in source code to identify linux platforms which is defined by compiler
 	add_compile_definitions(
-#		__unix__
 		HAVE_CONFIG_H
 		HAVE_CAIRO
 		HAVE_LIBZ
@@ -358,11 +351,9 @@ if(UNIX AND NOT APPLE)
 	#add_compile_options(-no-pie)
 endif()
 if(WIN32)
-	# GLE specific definitions
 	# use _WIN32 in source code to identify windows platforms which is defined by compiler
 	add_compile_definitions(
-		__WIN32__
-		__NOCYGWIN__
+		NO_CYGWIN
 		NOMINMAX
 		HAVE_CONFIG_H
 		HAVE_CAIRO

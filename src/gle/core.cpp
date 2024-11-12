@@ -257,7 +257,7 @@ GLEDevice* g_select_device(int device) {
         case GLE_DEVICE_CAIRO_SVG:
             g.dev = new GLECairoDeviceSVG(false);
             break;
-#ifdef __WIN32__
+#ifdef _WIN32
         case GLE_DEVICE_EMF:
             g.dev = new GLECairoDeviceEMF(false);
             break;

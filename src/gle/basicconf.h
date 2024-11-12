@@ -89,7 +89,7 @@
 #define uint unsigned int
 #endif
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	#define DLLEXPORT __declspec( dllexport )
 	#define DLLIMPORT __declspec( dllimport )
 #else

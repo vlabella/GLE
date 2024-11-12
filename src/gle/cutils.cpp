@@ -52,7 +52,7 @@
 #endif
 
 // For visual C++ -- should use numeric limits?
-#if defined(__WIN32__) && !defined(__NOCYGWIN__)
+#if defined(_WIN32) && !defined(NO_CYGWIN)
 #include<float.h>
 	#define isnan _isnan
 	#define isinf _isnan

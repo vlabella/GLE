@@ -56,7 +56,7 @@
 #include "graph.h"
 #include "sub.h"
 #include "file_io.h"
-#ifdef __WIN32__
+#ifdef _WIN32
 #include <time.h>
 #endif
 #include "specialfunctions.h"

@@ -50,7 +50,7 @@
     #include "../config_noauto.h"
 #endif
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	#include <windows.h>
 #endif
 #if defined(__unix__) || defined(__APPLE__)
@@ -68,7 +68,7 @@ extern string DIR_SEP;
 
 void GLEAddLibName(string* lib) {
 	AddDirSep(*lib);
-#ifndef __WIN32__
+#ifndef _WIN32
 	*lib += "lib";
 #endif
 	*lib += "gle-graphics-";
@@ -80,7 +80,7 @@ void GLEAddLibName(string* lib) {
 		*lib += ".so";
 	#endif
 #endif
-#ifdef __WIN32__
+#ifdef _WIN32
 	*lib += ".dll";
 #endif
 //	cout << "Trying: " << (*lib) << endl;
@@ -153,7 +153,7 @@ int main(int argc, char** argv) {
 	int result = GLEMain(argc, argv);
 	dlclose(lib);
 #endif
-#ifdef __WIN32__
+#ifdef _WIN32
 	string lib_name = exe_name;
 	StripPathComponents(&lib_name, 1);
 	GLEAddLibName(&lib_name);

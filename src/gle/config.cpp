@@ -55,7 +55,7 @@
 #include "config.h"
 #include "drawit.h"
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	#include <windows.h>
 #endif
 
@@ -144,7 +144,7 @@ void init_config(ConfigCollection* collection) {
 	section = new ConfigSection("tools");
 	/* LaTeX */
 	strarg = section->addStringOption("latex", GLE_TOOL_LATEX_CMD);
-#ifdef __WIN32__
+#ifdef _WIN32
 	strarg->setDefault("latex.exe");
 #endif
 #if defined(__unix__) || defined(__APPLE__)
@@ -157,7 +157,7 @@ void init_config(ConfigCollection* collection) {
 
 	/* PdfLaTeX */
 	strarg = section->addStringOption("pdflatex", GLE_TOOL_PDFTEX_CMD);
-#ifdef __WIN32__
+#ifdef _WIN32
 	strarg->setDefault("pdflatex.exe");
 #else
 	strarg->setDefault("pdflatex");
@@ -166,7 +166,7 @@ void init_config(ConfigCollection* collection) {
 
 	/* DVIPS */
 	strarg = section->addStringOption("dvips", GLE_TOOL_DVIPS_CMD);
-#ifdef __WIN32__
+#ifdef _WIN32
 	strarg->setDefault("dvips.exe");
 #endif
 #if defined(__unix__) || defined(__APPLE__)
@@ -178,7 +178,7 @@ void init_config(ConfigCollection* collection) {
 	section->addStringOption("dvips_options", GLE_TOOL_DVIPS_OPTIONS);
 	/* GhostScript Program */
 	strarg = section->addStringOption("ghostscript", GLE_TOOL_GHOSTSCRIPT_CMD);
-#ifdef __WIN32__
+#ifdef _WIN32
 	#define ENVIRONMENT32
 	#if _WIN32 || _WIN64
 		// Visual Studio builds with cl.exe
@@ -217,7 +217,7 @@ void init_config(ConfigCollection* collection) {
 	collection->addSection(section, GLE_CONFIG_TOOLS);
 	/* GhostScript Library */
 	strarg = section->addStringOption("libgs", GLE_TOOL_GHOSTSCRIPT_LIB);
-#ifdef __WIN32__
+#ifdef _WIN32
 	#define ENVIRONMENT32
 	#if _WIN32 || _WIN64
 		// Visual Studio builds with cl.exe
@@ -446,7 +446,7 @@ void find_deps(const string& loc, GLEInterface* iface) {
 	vector<string*> result;
 	string gle_paths = ";";
 	ConfigCollection* collection = iface->getConfig()->getRCFile();
-#ifdef __WIN32__
+#ifdef _WIN32
 	GLEFindEntry* findGLE = new GLEFindEntry(&gle_paths);
 	findGLE->addToFind("gle.exe");
 	findGLE->addToFind("gle_ps.exe");
@@ -707,7 +707,7 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 
 void do_find_deps_sub(GLEInterface* iface, const string& loc) {
 	string myloc = loc;
-#ifdef __WIN32__
+#ifdef _WIN32
 	if (myloc.length() == 0) {
 		GLEGetEnv("ProgramFiles", myloc);
 	}

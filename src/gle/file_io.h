@@ -44,7 +44,7 @@
 	#define WRITE_BIN "w"
 #endif
 
-#ifdef __WIN32__
+#ifdef _WIN32
 	#define READ_BIN "rb"
 	#define WRITE_BIN "wb"
 #endif
