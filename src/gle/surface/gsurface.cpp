@@ -60,6 +60,8 @@
 
 #include "gsurface.h"
 
+using namespace std;
+
 extern int gle_debug;
 
 FILE *df;

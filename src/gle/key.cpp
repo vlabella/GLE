@@ -64,6 +64,8 @@ extern double graph_xmin,graph_ymin,graph_xmax,graph_ymax; /* graph units */
 #define dbg if ((gle_debug & 64)>0)
 #define LARGE_NUM 1E30
 
+using namespace std;
+
 char *un_quote(char *ct);
 extern int gle_debug;
 void doskip(char *s,int *ct);

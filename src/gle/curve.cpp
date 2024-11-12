@@ -43,6 +43,8 @@
 #include "keyword.h"
 #include "run.h"
 
+using namespace std;
+
 int ncvec=0;
 void cvec_list(GLEPcodeList* pclist, int *pcode);
 double cvecx[30],cvecy[30];

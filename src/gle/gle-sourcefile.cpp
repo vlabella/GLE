@@ -43,6 +43,8 @@
 #include "stdio.h"
 #include "cutils.h"
 
+using namespace std;
+
 int showLineAbbrev(const string& text, int focuscol, ostream& out) {
 	int delta = 0;
 	int show_max = 60;

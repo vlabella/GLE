@@ -56,7 +56,7 @@ public:
 	int marker;
 	int column;
 	double msize,lwidth;
-	string descrip;
+	std::string descrip;
 	int sepstyle;
 	double sepdist;
 public:
@@ -91,9 +91,9 @@ protected:
 	GLERC<GLEColor> m_Color;
 	GLERC<GLEColor> m_BoxColor;
 	GLERC<GLEColor> m_BackgroundColor;
-	vector<KeyRCInfo> m_ColInfo;
-	vector<KeyRCInfo> m_RowInfo;
-	vector<KeyEntry*> m_entries;
+	std::vector<KeyRCInfo> m_ColInfo;
+	std::vector<KeyRCInfo> m_RowInfo;
+	std::vector<KeyEntry*> m_entries;
 	double m_Hei, m_Base, m_LinePos, m_LineLen, m_ExtraY;
 	double m_MarginX, m_MarginY, m_TotHei, m_ColDist, m_Dist;
 	double m_OffsX, m_OffsY;

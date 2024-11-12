@@ -94,11 +94,10 @@ int gle_isinf(double v) {
 #include <vector>
 #include <sstream>
 #include <iostream>
-
-using namespace std;
-
 #include "cutils.h"
 #include "tokens/stokenizer.h"
+
+using namespace std;
 
 bool equals_rel(double v1, double v2) {
 	if (v1 != 0.0) {

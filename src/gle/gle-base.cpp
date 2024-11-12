@@ -39,6 +39,8 @@
 #include "basicconf.h"
 #include "gle-interface/gle-base.h"
 
+using namespace std;
+
 GLERefCountObject::GLERefCountObject() {
 	m_OwnerCount = 0;
 }

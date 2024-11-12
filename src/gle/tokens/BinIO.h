@@ -69,10 +69,10 @@ protected:
 	int m_rdwr;
 	std::ostream* m_os;
 	std::istream* m_is;
-	filebuf& m_fb;
+	std::filebuf& m_fb;
 	std::vector<BinIOSerializable*> m_ser;
 public:
-	BinIO(filebuf& fb, int rdwr);
+	BinIO(std::filebuf& fb, int rdwr);
 	~BinIO();
 	inline std::ostream& os() { return *m_os; }
 	long getPosition();

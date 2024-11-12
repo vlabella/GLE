@@ -44,6 +44,7 @@
 #include "../basicconf.h"
 #include "../file_io.h"
 #include "img2ps.h"
+using namespace std;
 
 /*
  * JPEG

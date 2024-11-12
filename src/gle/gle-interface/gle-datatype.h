@@ -187,7 +187,7 @@ public:
 	void fromUTF8(const std::string& str);
 	void fromUTF8(const char* str, unsigned int len);
 	std::ostream& toUTF8(std::ostream& out) const;
-	void toUTF8(string& out) const;
+	void toUTF8(std::string& out) const;
 	void toUTF8(char* out) const;
 	std::string toUTF8() const;
 	GLEString* concat(GLEString* other) const;
@@ -269,7 +269,7 @@ class DLLCLASS GLEArrayWithFreeList : public GLEArrayImpl {
 
 };
 
-typedef map<GLEStringKey, unsigned int, GLEStringCompare> GLEStringHashData;
+typedef std::map<GLEStringKey, unsigned int, GLEStringCompare> GLEStringHashData;
 
 class GLEStringHash : public GLEArrayImpl {
 protected:

@@ -38,12 +38,11 @@
 
 #include <math.h>
 #include <vector>
-
-using namespace std;
-
 #include "all.h"
 #include "gprint.h"
 #include "leastsq.h"
+
+using namespace std;
 
 GLEPowellFunc::GLEPowellFunc() {
 }

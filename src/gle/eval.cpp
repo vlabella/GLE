@@ -61,6 +61,8 @@
 #endif
 #include "specialfunctions.h"
 
+using namespace std;
+
 colortyp colvar;
 //
 // set this to zero if your compiler complains about acosh atanh and asinh

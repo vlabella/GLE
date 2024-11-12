@@ -152,7 +152,7 @@ void str_replace_start(std::string& str, const char* find, const char* repl);
 void str_replace_all(char* str, const char* find, const char* repl);
 void str_replace_all(std::string& str, const char* find, const char* repl);
 
-void str_get_system_error(ostream& error);
+void str_get_system_error(std::ostream& error);
 
 int gle_round_int(double val);
 
@@ -168,9 +168,9 @@ void str_format(std::string* str, const char *format, va_list ap);
 
 int gle_pass_hex(const char* str, int from, int digits, int* err);
 
-void bool_vector_set_expand(vector<bool>* v, unsigned int i, bool value);
+void bool_vector_set_expand(std::vector<bool>* v, unsigned int i, bool value);
 
-bool bool_vector_is(vector<bool>* v, unsigned int i);
+bool bool_vector_is(std::vector<bool>* v, unsigned int i);
 
 void split_into_lines(const std::vector<unsigned char>* input, std::vector<std::string>* output);
 

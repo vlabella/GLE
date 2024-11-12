@@ -168,7 +168,7 @@ public:
 	void updateRange(double value);
 	void clip(double* value);
 	bool contains(double value);
-	std::ostream& printRange(ostream& out) const;
+	std::ostream& printRange(std::ostream& out) const;
 	inline double getMin() { return m_Min; }
 	inline double getMax() { return m_Max; }
 	inline double getWidth() { return m_Max - m_Min; }
@@ -375,8 +375,8 @@ enum GLEFontStyle {
 
 class GLEFont : public GLEDataObject {
 protected:
-	string m_Name;
-	string m_FullName;
+	std::string m_Name;
+	std::string m_FullName;
 	GLERC<GLEFont> m_Bold;
 	GLERC<GLEFont> m_Italic;
 	GLERC<GLEFont> m_BoldItalic;
@@ -387,12 +387,12 @@ public:
 	GLEFont();
 	~GLEFont();
 	// Return the name of the font
-	inline const string& getName() { return m_Name; }
-	inline const string& getFullName() { return m_FullName; }
+	inline const std::string& getName() { return m_Name; }
+	inline const std::string& getFullName() { return m_FullName; }
 	inline const char* getNameC() { return m_Name.c_str(); }
 	inline const char* getFullNameC() { return m_FullName.c_str(); }
-	inline void setName(const string& name) { m_Name = name; }
-	inline void setFullName(const string& name) { m_FullName = name; }
+	inline void setName(const std::string& name) { m_Name = name; }
+	inline void setFullName(const std::string& name) { m_FullName = name; }
 	inline bool hasStyle(GLEFontStyle style) { return getStyle(style) != NULL; }
 	DLLFCT GLEFontStyle checkStyle(GLEFont* child);
 	DLLFCT GLEFont* getStyle(GLEFontStyle style);
@@ -448,7 +448,7 @@ public:
 	~GLEColor();
 	virtual int getType() const;
 	virtual bool equals(GLEDataObject* obj) const;
-	virtual void print(ostream& out) const;
+	virtual void print(std::ostream& out) const;
 	bool equalsApprox(GLEColor* other);
 	DLLFCT void setRGB(double r, double g, double b);
 	DLLFCT void setRGBA(double r, double g, double b, double a);
@@ -457,8 +457,8 @@ public:
     void setRGBA255(double r, double g, double b, double a);
 	void setGray(double gray);
 	DLLFCT const char* getName();
-	void setName(const string& name);
-	void setName(const string* name);
+	void setName(const std::string& name);
+	void setName(const std::string* name);
 	void setHexValue(unsigned int v);
 	void setDoubleEncoding(double v);
 	double getDoubleEncoding();
@@ -558,14 +558,14 @@ public:
 	virtual ~GLEProperty();
 	inline GLEPropertyType getType() { return m_Type; }
 	inline GLEPropertyID getID() { return m_ID; }
-	inline const string& getName() { return m_Name; }
+	inline const std::string& getName() { return m_Name; }
 	inline const char* getNameC() { return m_Name.c_str(); }
 	inline void setSetCommandName(const char* cmdname) { m_SetCmdName = cmdname; }
 	inline const char* getSetCommandName() { return m_SetCmdName; }
 	inline void setIndex(int idx) { m_Index = idx; }
 	inline int getIndex() { return m_Index; }
-	virtual void getPropertyAsString(string* result, GLEMemoryCell* value);
-	virtual void createSetCommandGLECode(ostream& os, GLEMemoryCell* value);
+	virtual void getPropertyAsString(std::string* result, GLEMemoryCell* value);
+	virtual void createSetCommandGLECode(std::ostream& os, GLEMemoryCell* value);
 	virtual bool isEqualToState(GLEPropertyStore* store);
 	virtual void updateState(GLEPropertyStore* store);
 };
@@ -784,8 +784,8 @@ public:
 	DLLFCT bool initializeGLE(const char* appname, int argc, char **argv);
 
 	// Returns the version of GLE
-	DLLFCT string getGLEVersion();
-	DLLFCT string getGLEBuildDate();
+	DLLFCT std::string getGLEVersion();
+	DLLFCT std::string getGLEBuildDate();
 
 	// Returns the location of GLE_TOP
 	DLLFCT const char* getGLETop();
@@ -848,14 +848,14 @@ public:
 
 	GLEFont* getFontIndex(int font);
 
-	// Return the property store model for a text string
+	// Return the property store model for a text std::string
 	inline GLEPropertyStoreModel* getTextPropertyStoreModel() { return m_TextModel.get(); }
 
 	DLLFCT const char* getInitialPostScript();
 
 	DLLFCT const char* getTerminatePostScript();
 
-	// Render a given string
+	// Render a given std::string
 	DLLFCT GLETextDO* renderText(const char* strUTF8, GLEPropertyStore* prop);
 	void renderText(GLETextDO* text, GLEPropertyStore* prop);
 
@@ -877,18 +877,18 @@ public:
 	DLLFCT void setCmdLineOptionString(const char* name, const char* value, int arg = 0);
 	DLLFCT bool hasCmdLineOptionString(const char* name);
 
-	DLLFCT string getGhostScriptLocation();
-	DLLFCT string getToolLocation(const char* name);
-	DLLFCT string getUserConfigLocation();
+	DLLFCT std::string getGhostScriptLocation();
+	DLLFCT std::string getToolLocation(const char* name);
+	DLLFCT std::string getUserConfigLocation();
 
 	// Returns the location of gle-manual.pdf
-	DLLFCT string getManualLocation();
+	DLLFCT std::string getManualLocation();
 
 	DLLFCT void findDependencies(const char* root);
 	DLLFCT void saveRCFile();
 
 	DLLFCT void addFileInfo(const GLEFileLocation& f1);
-	DLLFCT vector<GLEFileLocation> getFileInfos();
+	DLLFCT std::vector<GLEFileLocation> getFileInfos();
 	inline bool hasFileInfos() { return m_FileInfoMap != NULL; }
 
 	DLLFCT void evalString(const char* str, GLEScript* script = NULL);
@@ -1003,7 +1003,7 @@ public:
 
 	virtual void initProperties(GLEInterface* iface);
 	virtual bool needsAMove(GLEPoint& pt);
-	virtual void createGLECode(string& code);
+	virtual void createGLECode(std::string& code);
 	virtual void updateBoundingBox();
 	virtual void applyTransformation(bool dir);
 	virtual GLEDrawObject* clone();
@@ -1024,7 +1024,7 @@ public:
 	inline void setRealProperty(GLEPropertyID id, double value) { m_Properties->setRealProperty(id, value); }
 	inline void setFontProperty(GLEPropertyID id, GLEFont* value) { m_Properties->setFontProperty(id, value); }
 	inline void setColorProperty(GLEPropertyID id, GLEColor* value) { m_Properties->setColorProperty(id, value); }
-	void getPropertyAsString(GLEPropertyID id, string* result) { m_Properties->getPropertyAsString(id, result); }
+	void getPropertyAsString(GLEPropertyID id, std::string* result) { m_Properties->getPropertyAsString(id, result); }
 };
 
 class GLEHasArrowBase {
@@ -1052,7 +1052,7 @@ public:
 	inline void setP2(const GLEPoint& p2) { m_P2 = p2; }
 	virtual void initProperties(GLEInterface* iface);
 	virtual bool needsAMove(GLEPoint& pt);
-	virtual void createGLECode(string& code);
+	virtual void createGLECode(std::string& code);
 	virtual void updateBoundingBox();
 	virtual void applyTransformation(bool dir);
 	virtual GLEDrawObject* clone();
@@ -1080,7 +1080,7 @@ public:
 	inline bool isCircle() { return m_Rx == m_Ry; }
 	DLLFCT GLEPoint getPoint(GLEJustify just);
 	virtual bool needsAMove(GLEPoint& pt);
-	virtual void createGLECode(string& code);
+	virtual void createGLECode(std::string& code);
 	virtual void updateBoundingBox();
 	virtual void applyTransformation(bool dir);
 	virtual GLEDrawObject* clone();
@@ -1102,7 +1102,7 @@ public:
 	inline void setAngle1(double a1) { m_Angle1 = a1; }
 	inline void setAngle2(double a2) { m_Angle2 = a2; }
 	virtual bool needsAMove(GLEPoint& pt);
-	virtual void createGLECode(string& code);
+	virtual void createGLECode(std::string& code);
 	virtual void updateBoundingBox();
 	virtual GLEDrawObject* clone();
 	virtual bool approx(GLEDrawObject* other);
@@ -1181,7 +1181,7 @@ protected:
 public:
 	GLEObjectDOConstructor(GLESub* sub);
 	virtual ~GLEObjectDOConstructor();
-	DLLFCT const string& getName();
+	DLLFCT const std::string& getName();
 	DLLFCT GLEObjectDO* constructObject();
 	DLLFCT GLEScript* getScript();
 	inline GLESub* getSubroutine() { return m_Sub; }

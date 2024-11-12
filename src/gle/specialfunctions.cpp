@@ -1,7 +1,9 @@
 //
-// -- specialfunctions.cpp
-//	  Some simple special functions - might want to look into using boost for these
+// -- specialfunctions.cpp  - deprecated - using boost now
 //
+//
+
+using namespace std;
 
 double myfactorial(unsigned int n)
 {

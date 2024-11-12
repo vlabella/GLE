@@ -26,7 +26,7 @@
 #include "../basicconf.h"
 #include "../file_io.h"
 #include "img2ps.h"
-
+using namespace std;
 GLELZWByteStream::GLELZWByteStream(GLEByteStream* pipe) : GLEPipedByteStream(pipe) {
 	m_RawDatasize = 4096;
 	m_RawData = (GLEBYTE*)malloc(m_RawDatasize);

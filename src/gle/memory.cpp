@@ -40,6 +40,8 @@
 #include "file_io.h"
 #include "gprint.h"
 
+using namespace std;
+
 extern char errgle[];
 
 char *sdup(const char *s) {

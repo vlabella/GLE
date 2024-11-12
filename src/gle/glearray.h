@@ -67,7 +67,7 @@ protected:
 
 class GLEDoubleArray : public GLEObject {
 protected:
-	vector<double> m_Elems;
+	std::vector<double> m_Elems;
 public:
 	GLEDoubleArray();
 	virtual ~GLEDoubleArray();
@@ -81,7 +81,7 @@ protected:
 
 class GLEBoolArray : public GLEObject {
 protected:
-	vector<bool> m_Elems;
+	std::vector<bool> m_Elems;
 public:
 	GLEBoolArray();
 	virtual ~GLEBoolArray();
@@ -102,7 +102,7 @@ protected:
 public:
 	GLEZData();
 	~GLEZData();
-	void read(const string& fname);
+	void read(const std::string& fname);
 	inline double getZMin() { return m_ZMin; }
 	inline double getZMax() { return m_ZMax; }
 	inline GLERectangle* getBounds() { return &m_XYBounds; }
@@ -135,15 +135,15 @@ public:
 	GLECSVErrorCode errorCode;
 	unsigned int errorLine;
 	unsigned int errorColumn;
-	string errorString;
+	std::string errorString;
 };
 
 class GLECSVData {
 protected:
-	vector<GLEBYTE> m_buffer;
-	vector<unsigned int> m_cellPos;
-	vector<unsigned int> m_cellSize;
-	vector<unsigned int> m_firstCell;
+	std::vector<GLEBYTE> m_buffer;
+	std::vector<unsigned int> m_cellPos;
+	std::vector<unsigned int> m_cellSize;
+	std::vector<unsigned int> m_firstCell;
 	GLEBYTE* m_data;
 	bool* m_delims;
 	unsigned int m_size;
@@ -155,15 +155,15 @@ protected:
 	unsigned int m_ignoreHeader;
 	unsigned int m_numrows;
 	GLECSVError m_error;
-	string m_fileName;
-	string m_comment;
+	std::string m_fileName;
+	std::string m_comment;
 	bool m_lastDelimWasSpace;
 public:
 	GLECSVData();
 	~GLECSVData();
 	bool read(const std::string& file);
 	void readBuffer(const char* buffer);
-	void print(ostream& os);
+	void print(std::ostream& os);
 	void setDelims(const char* delims);
 	void setCommentIndicator(const char* comment);
 	void setIgnoreHeader(unsigned int ignore);
@@ -172,7 +172,7 @@ public:
 	unsigned int getNbLines();
 	unsigned int getNbColumns(unsigned int line);
 	const char* getCell(unsigned int row, unsigned int column, unsigned int* size);
-	string getCellString(unsigned int row, unsigned int column);
+	std::string getCellString(unsigned int row, unsigned int column);
 	void setCellTrim(unsigned int row, unsigned int column, const char* data);
 	unsigned int validateIdenticalNumberOfColumns();
 private:
@@ -198,7 +198,7 @@ private:
 	void initWritePos();
 	void writeChar(GLEBYTE ch);
 	GLECSVDataStatus skipSpacesAndFirstDelim(GLEBYTE ch);
-	void createErrorString(const string& str);
+	void createErrorString(const std::string& str);
 	unsigned int getUTF8Column(unsigned int cellPos);
 	unsigned int getFirstCell(unsigned int line);
 };

@@ -46,12 +46,11 @@
 #include <vector>
 #include <iostream>
 #include <stdlib.h>
-
-using namespace std;
-
 #include "tokens/stokenizer.h"
 #include "cmdline.h"
 #include "cutils.h"
+
+using namespace std;
 
 CmdLineOptionArg::CmdLineOptionArg(const char* name) {
 	m_Name = name;

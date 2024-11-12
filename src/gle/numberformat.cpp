@@ -43,6 +43,8 @@
 #include "gprint.h"
 #include "numberformat.h"
 
+using namespace std;
+
 /*
 	dec, hex [upper|lower], bin
 	01

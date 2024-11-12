@@ -57,6 +57,8 @@ extern int gle_debug;
 #include "run.h"
 #include "fn.h"
 
+using namespace std;
+
 /*---------------------------------------------------------------------------*/
 /* bin = 10..29  (now 31), binstr = 30..49, fn= 60...139, userfn=LOCAL_START_INDEX..nnn */
 #define stack_bin(i,p) stack_op(pcode, stk, stkp, &nstk, i + BINARY_OPERATOR_OFFSET, p + curpri)

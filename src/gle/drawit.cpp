@@ -57,6 +57,8 @@
 #include "run.h"
 #include <boost/math/constants/constants.hpp>
 
+using namespace std;
+
 #define dbg if (gle_debug>0)
 extern int gle_debug;
 extern int this_line;

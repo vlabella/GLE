@@ -44,6 +44,8 @@
 #include "cutils.h"
 #include "gle-interface/gle-interface.h"
 
+using namespace std;
+
 int text_gprint(int *in,int ilen);
 int fftext_block(uchar *s,double width,int justify);
 void font_load(void);

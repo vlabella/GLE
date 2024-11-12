@@ -60,6 +60,8 @@
 #include "glearray.h"
 #include "polish.h"
 
+using namespace std;
+
 void g_graph_init();
 void dis_mat(char *s,double m[3][3]);
 

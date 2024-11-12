@@ -62,6 +62,8 @@
 #define BEGINDEF extern
 #include "begin.h"
 
+using namespace std;
+
 extern string GLE_TOP_DIR;
 extern string GLE_BIN_DIR;
 extern ConfigCollection g_Config;

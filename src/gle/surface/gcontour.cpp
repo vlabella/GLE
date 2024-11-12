@@ -58,6 +58,7 @@
 #include "../begin.h"
 
 #include "f2c.h"
+using namespace std;
 
 double get_next_exp(TOKENS tk, int ntk, int *curtok);
 void get_next_exp_file(TOKENS tk, int ntok, int *curtok, string* res);

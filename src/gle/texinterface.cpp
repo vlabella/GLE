@@ -62,6 +62,8 @@
 
 #include <time.h>
 
+using namespace std;
+
 void decode_utf8_basic(string& sc);
 
 extern ConfigCollection g_Config;

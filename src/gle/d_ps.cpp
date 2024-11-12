@@ -55,6 +55,8 @@
 #include <time.h>
 #endif
 
+using namespace std;
+
 //
 // -- constants
 //

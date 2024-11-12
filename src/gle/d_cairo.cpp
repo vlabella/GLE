@@ -50,6 +50,8 @@
 #include <cairo-pdf.h>
 #include <cairo-svg.h>
 
+using namespace std;
+
 /************************************************************************************
  * Fonts in Cairo:
  *

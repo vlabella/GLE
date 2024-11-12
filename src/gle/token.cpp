@@ -41,6 +41,8 @@
 #include "token.h"
 #include "cutils.h"
 
+using namespace std;
+
 void add_tokf(char* pp1,int n,TOKENS tok, int* ntok, char* outbuff, int tj)
 {
 	char* token_start;

@@ -52,13 +52,13 @@ protected:
 	double m_Max;
 	bool m_HasMin;
 	bool m_HasMax;
-	string m_Prepend;
-	string m_Append;
+	std::string m_Prepend;
+	std::string m_Append;
 public:
 	GLENumberFormatter();
 	virtual ~GLENumberFormatter();
 	virtual void parseOptions(GLENumberFormat* format);
-	virtual void format(double number, string* output);
+	virtual void format(double number, std::string* output);
 	virtual bool appliesTo(double number);
 	inline bool hasPrefix() { return m_Prefix != -1; }
 	inline int getPrefix() { return m_Prefix; }
@@ -67,20 +67,20 @@ public:
 	inline void setNoZeroes(bool noz) { m_NoZeroes = noz; }
 	inline bool hasSign() { return m_Sign; }
 	inline void setSign(bool sign) { m_Sign = sign; }
-	void doPrefix(string* output);
-	void doNoZeroes(string* output);
-	void doSign(string* output);
-	void doPadLeft(string* output);
-	void doPadRight(string* output);
-	void doAll(string* output);
+	void doPrefix(std::string* output);
+	void doNoZeroes(std::string* output);
+	void doSign(std::string* output);
+	void doPadLeft(std::string* output);
+	void doPadRight(std::string* output);
+	void doAll(std::string* output);
 	inline bool hasPadRight() { return m_PadRight != -1; }
 	inline int getPadRight() { return m_PadRight; }
 	inline void setPadRight(int PadRight) { m_PadRight = PadRight;  }
 	inline bool hasPadLeft() { return m_PadLeft != -1; }
 	inline int getPadLeft() { return m_PadLeft; }
 	inline void setPadLeft(int PadLeft) { m_PadLeft = PadLeft;  }
-	inline string& getPrepend() { return m_Prepend; }
-	inline string& getAppend() { return m_Append; }
+	inline std::string& getPrepend() { return m_Prepend; }
+	inline std::string& getAppend() { return m_Append; }
 	void setMin(double min);
 	void setMax(double max);
 	inline bool hasMax() { return m_HasMax; }
@@ -88,26 +88,26 @@ public:
 	inline double getMax() { return m_Max; }
 	inline double getMin() { return m_Min; }
 	void setDefaults(GLENumberFormatter* def);
-	void formatSimple(double value, string* output, int prec, int* exp);
+	void formatSimple(double value, std::string* output, int prec, int* exp);
 };
 
 class GLENumberFormat {
 protected:
 	level_char_separator m_Separator;
 	tokenizer<level_char_separator> m_Tokens;
-	vector<GLENumberFormatter*> m_Format;
+	std::vector<GLENumberFormatter*> m_Format;
 	GLENumberFormatter m_Default;
 public:
-	GLENumberFormat(const string& format);
+	GLENumberFormat(const std::string& format);
 	~GLENumberFormat();
 	inline bool hasMoreTokens() { return m_Tokens.has_more(); }
-	inline const string& nextToken() { return m_Tokens.cr_token(); }
+	inline const std::string& nextToken() { return m_Tokens.cr_token(); }
 	inline void addFormat(GLENumberFormatter* format)  { m_Format.push_back(format); }
-	void format(double number, string* output);
+	void format(double number, std::string* output);
 	void incTokens();
 	int nextInt();
 	double nextDouble();
-	void nextString(string& value);
+	void nextString(std::string& value);
 };
 
 #endif

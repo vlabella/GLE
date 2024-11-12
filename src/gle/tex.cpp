@@ -52,6 +52,8 @@
 #include "cmdline.h"
 #include "config.h"
 
+using namespace std;
+
 // uncomment this if you want to store the
 // tex font information to the decode.tex file.
 // this will create the file decode.tex in your directory

@@ -46,6 +46,7 @@
 #include "img2ps.h"
 #include "glegif.h"
 #include <cstring>
+using namespace std;
 
 /*
  * GIF

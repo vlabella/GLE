@@ -63,6 +63,8 @@
 #include "../gle/basicconf.h"
 #include "parseAFM.h"
 
+using namespace std;
+
 #define lineterm EOL	/* line terminating character */
 #define lineterm_win EOL_WIN    /* line terminating character */
 #define normalEOF 1	/* return code from parsing routines used only */

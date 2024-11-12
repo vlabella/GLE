@@ -97,7 +97,7 @@ protected:
 	RefCountVector<GLEDataObject> m_ConstObjects;
 };
 
-class GLEPcode : public vector<int> {
+class GLEPcode : public std::vector<int> {
 protected:
 	GLEPcodeList* m_PCodeList;
 public:
@@ -114,8 +114,8 @@ public:
 	void addFunction(int idx);
 	void addVar(int var);
 	void addStrVar(int var);
-	void addString(const string& str);
-	void addStringNoID(const string& str);
+	void addString(const std::string& str);
+	void addStringNoID(const std::string& str);
 	void addStringChar(const char* str);
 	void addStringNoIDChar(const char* str);
 	void show();
@@ -124,7 +124,7 @@ public:
 
 class GLEPcodeIndexed : public GLEPcode {
 protected:
-	vector<int> m_Index;
+	std::vector<int> m_Index;
 public:
 	GLEPcodeIndexed(GLEPcodeList* list);
 	inline int getNbEntries() { return m_Index.size(); }
@@ -159,30 +159,30 @@ public:
 	void internalPolish(const char *expr, GLEPcode& pcode, int *rtype);
 	void internalPolish(GLEPcode& pcode, int *rtype);
 	void internalEval(const char *exp, double *x);
-    void internalEvalString(const char* exp, string* str);
+    void internalEvalString(const char* exp, std::string* str);
 	void polish(const char *expr, GLEPcode& pcode, int *rtype);
 	void eval(GLEArrayImpl* stk, const char *exp, double *x);
-	void evalString(GLEArrayImpl* stk, const char *exp, string *str, bool allownum = false);
+	void evalString(GLEArrayImpl* stk, const char *exp, std::string *str, bool allownum = false);
 	GLEMemoryCell* evalGeneric(GLEArrayImpl* stk, const char *exp);
-	int get_params(GLEPcode& pcode, int np, int* plist, const string& name, int np_default = 0);
+	int get_params(GLEPcode& pcode, int np, int* plist, const std::string& name, int np_default = 0);
 	void get_array_index(GLEPcode& pcode);
 	double evalTokenToDouble();
-	Tokenizer* getTokens(const string& str);
+	Tokenizer* getTokens(const std::string& str);
 	void initTokenizer();
 	inline void setExprVars(StringIntHash* vars) { m_vars = vars; }
-	inline ParserError error(int column, const string& src) const {
+	inline ParserError error(int column, const std::string& src) const {
 		return m_tokens.error(column, src);
 	};
-	inline ParserError error(const string& src) const {
+	inline ParserError error(const std::string& src) const {
 		return m_tokens.error(src);
 	};
 };
 
 void polish_eval(char *exp, double *x);
-void polish_eval_string(const char *exp, string *str, bool allownum = false);
+void polish_eval_string(const char *exp, std::string *str, bool allownum = false);
 void polish(char *expr, GLEPcode& pcode, int *rtype);
 void eval_pcode(GLEPcode& pcode, double* x);
-void eval_pcode_str(GLEPcode& pcode, string& x);
+void eval_pcode_str(GLEPcode& pcode, std::string& x);
 
 GLEPolish* get_global_polish();
 

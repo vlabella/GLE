@@ -37,7 +37,7 @@
  ************************************************************************/
 
 #include "StringKeyHash.h"
-
+using namespace std;
 //#ifdef GLE_USE_HASHTABLE
 
 int StringIntHash::try_get(const name_hash_key& key) const {

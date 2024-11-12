@@ -41,6 +41,8 @@
 #include "var.h"
 #include "core.h"
 
+using namespace std;
+
 const char* gle_object_type_to_string(GLEObjectType type) {
 	switch (type) {
 	case GLEObjectTypeBool:

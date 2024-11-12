@@ -36,5 +36,5 @@
  *                                                                      *
  ************************************************************************/
 
-void CompileGLE(const string& output_file, GLEGlobalSource &glecode, CmdLineObj* cmdline, bool silent);
+void CompileGLE(const std::string& output_file, GLEGlobalSource &glecode, CmdLineObj* cmdline, bool silent);
 void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bool silent = false);

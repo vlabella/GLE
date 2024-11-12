@@ -130,7 +130,7 @@ public:
 
 class TeXSize {
 protected:
-	string m_Name;
+	std::string m_Name;
 public:
 	TeXSize(const char* name);
 	void createObject(std::string* name);
@@ -145,7 +145,7 @@ public:
 	bool equals(const TeXPreambleKey* key) const;
 	void copyFrom(const TeXPreambleKey* other);
 	inline void clear() { m_Preamble.clear(); }
-	inline void setDocumentClass(const string& line) { m_DocumentClass = line; }
+	inline void setDocumentClass(const std::string& line) { m_DocumentClass = line; }
 	inline const std::string& getDocumentClass() const { return m_DocumentClass; }
 	inline int getNbPreamble() const { return m_Preamble.size(); }
 	inline const std::string& getPreamble(int i) const { return m_Preamble[i]; }
@@ -175,8 +175,8 @@ protected:
 public:
 	TeXPreambleInfoList();
 	~TeXPreambleInfoList();
-	void save(const string& filestem);
-	void load(const string& filestem, TeXInterface* iface);
+	void save(const std::string& filestem);
+	void load(const std::string& filestem, TeXInterface* iface);
 	TeXPreambleInfo* findOrAddPreamble(const TeXPreambleKey* pre_key);
 	inline int getNbPreambles() { return m_Infos.size(); }
 	inline TeXPreambleInfo* getPreamble(int i) { return m_Infos[i]; }
@@ -186,15 +186,15 @@ public:
 	inline void select(TeXPreambleInfo* value) { m_Current = value; }
 };
 
-class TeXHash : public vector<TeXHashObject*> {
+class TeXHash : public std::vector<TeXHashObject*> {
 public:
 	TeXHash();
 	~TeXHash();
 	void cleanUp();
-	void loadTeXPS(const string& filestem);
-	void saveTeXPS(const string& filestem, TeXInterface* iface);
+	void loadTeXPS(const std::string& filestem);
+	void saveTeXPS(const std::string& filestem, TeXInterface* iface);
 	TeXHashObject* getHashObject(int idx);
-	TeXHashObject* getHashObjectOrNULL(const string& line);
+	TeXHashObject* getHashObjectOrNULL(const std::string& line);
 	inline TeXHashObject* get(int i) { return (*this)[i]; }
 };
 
@@ -225,7 +225,7 @@ public:
 	TeXObject* draw(const char* str, int nblines, GLERectangle* box = NULL);
 	TeXObject* draw(const char* str, TeXObjectInfo& info, int nblines, GLERectangle* box = NULL);
 	TeXObject* drawObj(TeXHashObject* hobj, TeXObjectInfo& info, GLERectangle* box = NULL);
-	void scaleObject(string& obj_str, double hei);
+	void scaleObject(std::string& obj_str, double hei);
 	void checkObjectDimensions();
 	int createObj(const char* str, double hei);
 	void initialize(GLEFileLocation* dotfile, GLEFileLocation* oname);
@@ -236,8 +236,8 @@ public:
 	void removeDotFiles();
 	void createInc(const std::string& prefix);
 	void createTeX(bool usegeom);
-	int getHashObjectIndex(const string& line);
-	TeXHashObject* getHashObject(const string& line);
+	int getHashObjectIndex(const std::string& line);
+	TeXHashObject* getHashObject(const std::string& line);
 	TeXHashObject* getHashObject(int idx);
 	void resetPreamble();
 	void createPreamble(std::ostream& tex_file);
@@ -258,13 +258,13 @@ public:
 	inline bool isEnabled() { return m_Enabled; }
 	inline void setEnabled(bool ena) { m_Enabled = ena; }
 protected:
-	void writeInc(ostream& out, const char* prefix);
+	void writeInc(std::ostream& out, const char* prefix);
 	void tryLoadHash();
 	void loadTeXLines();
 	void createHiddenDir();
 	void saveTeXLines();
 	bool createTeXPS();
-	bool createTeXPS(const string& filestem);
+	bool createTeXPS(const std::string& filestem);
 	void addHashObject(TeXHashObject* obj);
 	void cleanUpObjects();
 	void cleanUpHash();

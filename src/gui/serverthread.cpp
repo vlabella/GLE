@@ -34,6 +34,8 @@
 
 #include <sstream>
 
+using namespace std;
+
 GLEServerThread::GLEServerThread(QObject *parent, quint16 port) : QThread(parent)
 {
 	// Just save the requested port

@@ -7,6 +7,8 @@
 #include "sub.h"
 #include "builtin-double.h"
 
+using namespace std;
+
 GLEBuiltInBinaryDoubleDouble::GLEBuiltInBinaryDoubleDouble(const char* name, GLEBuiltInFactory* factory) {
 	setRoot(factory->createRoot(name, factory->getBinaryArgNamesXY()));
 	setArgTypeDefaults(factory->getBinaryDoubleDoubleArgTypeDefaults());

@@ -45,6 +45,8 @@
 #include "stdio.h"
 #include "f2c.h"
 
+using namespace std;
+
 /* Common Block Declarations */
 
 typedef struct {

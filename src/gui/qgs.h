@@ -204,7 +204,7 @@ public:
 	    @param sync whether to expect an image generated from the content specified by pos
 	*/
 	bool run(QFile& file);
-	bool run(const string* data);
+	bool run(const std::string* data);
 
 	bool startRender();
 	bool nextRender(const char* str);

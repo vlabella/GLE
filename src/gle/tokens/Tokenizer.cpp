@@ -39,14 +39,14 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-
-using namespace std;
+#include <string.h>
+#include <stdio.h>
 
 #include "../basicconf.h"
 #include "../cutils.h"
 #include "Tokenizer.h"
-#include <string.h>
-#include <stdio.h>
+
+using namespace std;
 
 #define SPACE_CHAR	' '
 

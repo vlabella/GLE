@@ -48,6 +48,8 @@
 #include "cutils.h"
 #include "gprint.h"
 
+using namespace std;
+
 GLEDummyDevice::GLEDummyDevice(bool showerror) {
 	m_ShowError = showerror;
 }

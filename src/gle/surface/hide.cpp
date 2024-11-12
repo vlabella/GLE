@@ -47,6 +47,8 @@
 #include "../gle-block.h"
 #include "gsurface.h"
 
+using namespace std;
+
 typedef int int32;
 class GLENumberFormat;
 

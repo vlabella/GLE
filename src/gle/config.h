@@ -114,8 +114,8 @@ protected:
 	CmdLineObj* m_CmdLine;
 	ConfigCollection* m_Config;
 	bool m_AllowConfigBlocks;
-	vector<string> m_AllowReadDirs;
-	vector<string> m_AllowWriteDirs;
+	std::vector<std::string> m_AllowReadDirs;
+	std::vector<std::string> m_AllowWriteDirs;
 public:
 	GLEGlobalConfig();
 	~GLEGlobalConfig();
@@ -127,20 +127,20 @@ public:
 	inline bool allowConfigBlocks() { return m_AllowConfigBlocks; }
 	inline void setAllowConfigBlocks(bool allow) { m_AllowConfigBlocks = allow; }
 	inline int getNumberAllowReadDirs() { return m_AllowReadDirs.size(); }
-	inline const string& getAllowReadDir(int i) { return m_AllowReadDirs[i]; }
+	inline const std::string& getAllowReadDir(int i) { return m_AllowReadDirs[i]; }
 	inline int getNumberAllowWriteDirs() { return m_AllowWriteDirs.size(); }
-	inline const string& getAllowWriteDir(int i) { return m_AllowWriteDirs[i]; }
+	inline const std::string& getAllowWriteDir(int i) { return m_AllowWriteDirs[i]; }
 };
 
-bool try_load_config(const string& fname);
+bool try_load_config(const std::string& fname);
 void do_find_deps(CmdLineObj& cmdline);
-void do_find_deps_sub(GLEInterface* iface, const string& loc);
+void do_find_deps_sub(GLEInterface* iface, const std::string& loc);
 void do_save_config();
 bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, ConfigCollection& coll);
 void init_config(ConfigCollection* collection);
-string get_tool_path(int tool, ConfigSection* tools);
+std::string get_tool_path(int tool, ConfigSection* tools);
 
-const string& gle_config_margins();
-const string& gle_config_papersize();
+const std::string& gle_config_margins();
+const std::string& gle_config_papersize();
 
 #endif

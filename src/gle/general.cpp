@@ -39,6 +39,8 @@
 #include "all.h"
 #include "gprint.h"
 
+using namespace std;
+
 #ifdef VAXC
 double myatan2(double y, double x);
 #endif

@@ -26,6 +26,8 @@
 #include "settings.h"
 #include "consolewindow.h"
 
+using namespace std;
+
 EvaluatorDialog::EvaluatorDialog(GLEMainWindow *parent) : QDialog(parent)
 {
 	mainWin = parent;

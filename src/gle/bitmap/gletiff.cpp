@@ -49,6 +49,8 @@
 #include "tiffio.h"
 #include "img2ps.h"
 
+using namespace std;
+
 /*
  * TIFF
  */

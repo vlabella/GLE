@@ -38,6 +38,7 @@
 
 #include <fstream>
 #include <set>
+#include <string>
 
 #include "all.h"
 #include "cutils.h"
@@ -61,6 +62,8 @@
 #include "keyword.h"
 #include "run.h"
 #include "gle-poppler.h"
+
+using namespace std;
 
 // TODO make these available through the interface
 extern CmdLineObj g_CmdLine;

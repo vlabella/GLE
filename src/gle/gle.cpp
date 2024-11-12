@@ -57,6 +57,8 @@
 
 #include <set>
 
+using namespace std;
+
 /*------------ GLOBAL VARIABLES --------------*/
 //
 // -- these globals are needed. they are called in other source files using extern...

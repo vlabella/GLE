@@ -48,6 +48,8 @@
 #include "cutils.h"
 #include "polish.h"
 
+using namespace std;
+
 void replace_exp(char* exp);
 void replace_exp(string& exp);
 

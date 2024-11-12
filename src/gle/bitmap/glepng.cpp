@@ -49,6 +49,8 @@
 
 #include <png.h>
 
+using namespace std;
+
 
 GLEPNG::GLEPNG() {
 	m_PNGPtr = NULL;

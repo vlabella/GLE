@@ -141,12 +141,12 @@ private:
 
 class GLESub {
 protected:
-	string m_Name;
+	std::string m_Name;
 	int m_Typ, m_Idx;
-	vector<int> m_PType;
-	vector<string> m_PName;
-	vector<string> m_PNameS;
-	vector<string> m_PDefault;
+	std::vector<int> m_PType;
+	std::vector<std::string> m_PName;
+	std::vector<std::string> m_PNameS;
+	std::vector<std::string> m_PDefault;
 	int m_Start, m_End;
 	GLEVarMap m_LocalVars;
 	GLESub* m_ParentSub;
@@ -156,14 +156,14 @@ protected:
 public:
 	GLESub();
 	~GLESub();
-	void addParam(const string& name, int type);
+	void addParam(const std::string& name, int type);
 	void setStartEnd(int start, int end);
-	int findParameter(const string& name);
-	void listArgNames(ostream& out);
+	int findParameter(const std::string& name);
+	void listArgNames(std::ostream& out);
 	void clear();
 	GLEObjectDOConstructor* getObjectDOConstructor();
-	inline const string& getName() const { return m_Name; }
-	inline void setName(const string& name) { m_Name = name; }
+	inline const std::string& getName() const { return m_Name; }
+	inline void setName(const std::string& name) { m_Name = name; }
 	inline int getStart() const { return m_Start; }
 	inline void setStart(int line) { m_Start = line; }
 	inline int getEnd() const { return m_End; }
@@ -171,16 +171,16 @@ public:
 	inline int getIndex() const { return m_Idx; }
 	inline GLEVarMap* getLocalVars() { return &m_LocalVars; }
 	inline int getParamType(int idx) { return m_PType[idx]; }
-	inline const string& getParamName(int idx) { return m_PName[idx]; }
-	inline const string& getParamNameShort(int idx) { return m_PNameS[idx]; }
-	inline const string& getDefault(int idx) const { return m_PDefault[idx]; }
-	inline void setDefault(int idx, const string& value) { m_PDefault[idx] = value; }
+	inline const std::string& getParamName(int idx) { return m_PName[idx]; }
+	inline const std::string& getParamNameShort(int idx) { return m_PNameS[idx]; }
+	inline const std::string& getDefault(int idx) const { return m_PDefault[idx]; }
+	inline void setDefault(int idx, const std::string& value) { m_PDefault[idx] = value; }
 	inline int getNbParam() { return m_PType.size(); }
 	inline int getNbDefault() {
 		// return the number of default parameters
 		// these are the non-empty ones
 		int ret = 0;
-		for(string s : m_PDefault){
+		for(std::string s : m_PDefault){
 			if(s!="") ret++;
 		}
 		return ret;
@@ -197,7 +197,7 @@ public:
 class GLESubMap {
 protected:
 	StringIntHash m_Map;
-	vector<GLESub*> m_Subs;
+	std::vector<GLESub*> m_Subs;
 	GLERC<GLEStringHash> m_SubRoots;
 public:
 	GLESubMap();
@@ -210,19 +210,19 @@ public:
 	GLESub* add(GLESub* parent);
 	void add(GLEAbstractSub* sub);
 	/* FIXME: lookup should be based on GLEString */
-	GLESub* add(const string& name);
-	GLESub* get(const string& name);
+	GLESub* add(const std::string& name);
+	GLESub* get(const std::string& name);
 	void list();
 	inline GLESub* get(int i) { return m_Subs[i]; }
-	inline int getIndex(const string& name) { return m_Map.try_get(name); }
+	inline int getIndex(const std::string& name) { return m_Map.try_get(name); }
 	inline int size() { return m_Subs.size(); }
 };
 
 GLESub* sub_get(int idx);
-GLESub* sub_find(const string& s);
-void sub_param(GLESub* sub, const string& name);
+GLESub* sub_find(const std::string& s);
+void sub_param(GLESub* sub, const std::string& name);
 
-void call_sub_byname(const string& name, double* args, int nb, const char* err_inf);
+void call_sub_byname(const std::string& name, double* args, int nb, const char* err_inf);
 void call_sub_byid(int idx, double* args, int nb, const char* err_inf);
 
 #endif

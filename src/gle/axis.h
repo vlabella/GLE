@@ -64,8 +64,8 @@ int axis_get_orth(int axis, int which);
 int axis_type(const char *s);
 int axis_type_check(const char *s);
 const char* axis_type_name(int type);
-bool axis_is_pos(double pos, int* cnt, double del, vector<double>& vec);
-bool axis_is_pos_perc(double pos, int* cnt, double perc, vector<double>& vec);
+bool axis_is_pos(double pos, int* cnt, double del, std::vector<double>& vec);
+bool axis_is_pos_perc(double pos, int* cnt, double perc, std::vector<double>& vec);
 double axis_range_dist_perc(double v1, double v2, GLERange* range, bool log);
 
 void roundrange(GLERange* range, bool extend, bool tozero, double dticks);
@@ -129,30 +129,30 @@ public:
 	bool grid, gridtop;
 	bool alignBase;
 	bool roundRange;
-	string title;
-	vector<string> names;
-	vector<double> places;
-	vector<double> noticks1;
-	vector<double> noticks2;
-	vector<double> noplaces;
+	std::string title;
+	std::vector<std::string> names;
+	std::vector<double> places;
+	std::vector<double> noticks1;
+	std::vector<double> noticks2;
+	std::vector<double> noplaces;
 	int negate;
-	string format;
+	std::string format;
 	GLERangeSet m_Range;
 	GLERangeSet m_DataRange;
-	vector<GLEDataSetDimension*> m_Dims;
+	std::vector<GLEDataSetDimension*> m_Dims;
 	GLERC<GLEAxisQuantileScale> m_QuantileScale;
 public:
 	GLEAxis();
 	~GLEAxis();
 	void init(int i);
-	string* getNamePtr(int i);
+	std::string* getNamePtr(int i);
 	void setName(int i, const std::string& name);
 	void setPlace(int i, double place);
 	void clearNoTicks();
 	void addNoTick(double pos);
 	void insertNoTick(double pos);
 	void insertNoTickOrLabel(double pos);
-	void insertNoTick(double pos, vector<double>& vec);
+	void insertNoTick(double pos, std::vector<double>& vec);
 	void printNoTicks();
 	void getLabelsFromDataSet(int ds);
 	int getNbNamedPlaces();
@@ -172,7 +172,7 @@ public:
 	inline bool isNoTick1Perc(double pos, int* cnt) { return axis_is_pos_perc(pos, cnt, 0.001, noticks1); }
 	inline bool isNoTick2Perc(double pos, int* cnt) { return axis_is_pos_perc(pos, cnt, 0.001, noticks2); }
 	inline double getPlace(unsigned int i) { return places[i]; }
-	inline void addName(const char* name) { names.push_back(string(name)); }
+	inline void addName(const char* name) { names.push_back(std::string(name)); }
 	inline void addPlace(double place) { places.push_back(place); }
 	inline void addNoTick1(double pos) { noticks1.push_back(pos); }
 	inline void addNoTick2(double pos) { noticks2.push_back(pos); }

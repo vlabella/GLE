@@ -292,14 +292,14 @@ void gdraw_key(KeyInfo* info);
 void copy_default(int d);
 void do_dataset(int d, GLEGraphBlockInstance* graphBlock);
 void do_each_dataset_settings();
-void fill_vec(double x1, double y1, double x2, double y2, vector<double>* vec);
+void fill_vec(double x1, double y1, double x2, double y2, std::vector<double>* vec);
 void do_smooth(void);
 void window_set(bool showError);
 void reset_axis_ranges();
 bool should_autorange_based_on_lets();
 void deleteLet(GLELet* let);
 GLELet* parseLet(GLESourceLine& sline);
-GLELet* parseLet(const string& letFct, int codeLine);
+GLELet* parseLet(const std::string& letFct, int codeLine);
 void doLet(GLELet* let, bool nofirst);
 void request(void);
 /*int draw_axis(void *axis);*/
@@ -373,9 +373,9 @@ public:
 
 class GLEDataPairs : public GLERefCountObject {
 protected:
-	vector<double> m_X;
-	vector<double> m_Y;
-	vector<int> m_M;
+	std::vector<double> m_X;
+	std::vector<double> m_Y;
+	std::vector<int> m_M;
 public:
 	GLEDataPairs();
 	GLEDataPairs(double* x, double* y, int* m, int np);
@@ -392,7 +392,7 @@ public:
 	void transformLog(bool xlog, bool ylog);
 	void untransformLog(bool xlog, bool ylog);
 	void noLogZero(bool xlog, bool ylog);
-	vector<double>* getDimension(unsigned int i);
+	std::vector<double>* getDimension(unsigned int i);
 	double getMinXInterval();
 	inline unsigned int size() const { return m_X.size(); }
 	inline double getX(int i) const { return m_X[i]; }
@@ -421,18 +421,18 @@ public:
 	bool axisscale;
 	bool inverted;
 	char lstyle[9];
-	string key_name;
+	std::string key_name;
 	char *bigfile;
 	GLERC<GLEColor> key_fill;
 	GLERC<GLEColor> color;
 	double errwidth;
-	string errup;
-	string errdown;
+	std::string errup;
+	std::string errdown;
 	double herrwidth;
-	string herrup;
-	string herrdown;
+	std::string herrup;
+	std::string herrdown;
 	double msize,mdist,lwidth;
-	vector<string>* yv_str;
+	std::vector<std::string>* yv_str;
 	int marker;
 	int smooth;
 	int smoothm;
@@ -470,11 +470,11 @@ public:
 	bool contains(const GLEPoint& p);
 	void checkRanges();
 	void copyRangeIfRequired(int dimension);
-	vector<int> getMissingValues();
+	std::vector<int> getMissingValues();
 	void validateDimensions();
 	void validateNbPoints(unsigned int expectedNb, const char* descr = NULL);
 	GLEArrayImpl* getDimData(unsigned int dim);
-	void fromData(const vector<double>& xp, const vector<double>& yp, const vector<int>& miss);
+	void fromData(const std::vector<double>& xp, const std::vector<double>& yp, const std::vector<int>& miss);
 	inline GLEDataSetDimension* getDim(int i) { return &dims[i]; }
 	inline GLEArrayImpl* getData() { return &m_data; }
 	inline GLEArrayImpl* getDataBackup() { return &m_dataBackup; }
@@ -498,7 +498,7 @@ public:
 	int notop;
 	double x3d,y3d;
 	bool horiz;
-	string style[20];
+	std::string style[20];
 	int layer;
 	bar_struct();
 };
@@ -544,7 +544,7 @@ void draw_bar(double x, double yf, double yt, double wd, bar_struct* barset, int
 void get_dataset_ranges();
 void set_bar_axis_places();
 int get_dataset_identifier(const std::string& ds, bool def = false);
-int get_dataset_identifier(const string& ds, GLEParser* parser, bool def);
+int get_dataset_identifier(const std::string& ds, GLEParser* parser, bool def);
 
 double graph_bar_pos(double xpos, int bar, int set);
 void begin_graph(GLEGraphBlockBase* graphBlockBase, GLEGraphBlockInstance* graphBlock);
@@ -553,7 +553,7 @@ void begin_key(int *pln, int *pcode, int *cp);
 void begin_tab(int *pln, int *pcode, int *cp);
 void begin_text(int *pln, int *pcode, int *cp, double w, int just);
 void draw_key(int nkd, struct offset_struct* koffset, char *kpos,double khei, int knobox);
-string dimension2String(unsigned int dimension);
+std::string dimension2String(unsigned int dimension);
 
 #define DP_CAST (struct data_struct*)
 #define BR_CAST (struct bar_struct*)
@@ -600,8 +600,8 @@ private:
 
 class GLEColorMap {
 public:
-	string m_function;
-	string m_palette;
+	std::string m_function;
+	std::string m_palette;
 	int m_wd, m_hi;
 	bool m_color;
 	double m_zmin, m_zmax;
@@ -617,7 +617,7 @@ public:
 	void draw(GLEToView* toView, double x0, double y0, double wd, double hi);
 	void setZMin(double val);
 	void setZMax(double val);
-	void setPalette(const string& pal);
+	void setPalette(const std::string& pal);
 	void readData();
 	inline bool hasZMin() { return m_has_zmin; }
 	inline bool hasZMax() { return m_has_zmax; }
@@ -626,7 +626,7 @@ public:
 	inline void setFunction(const std::string& f) { m_function = f; }
 	inline void setWidth(int wd) { m_wd = wd; }
 	inline void setHeight(int hi) { m_hi = hi; }
-	inline const string& getFunction() { return m_function; }
+	inline const std::string& getFunction() { return m_function; }
 	inline int getWidth() { return m_wd; }
 	inline int getHeight() { return m_hi; }
 	inline bool isColor() { return m_color; }
@@ -634,7 +634,7 @@ public:
 	inline void setInvert(bool inv) { m_invert = inv; }
 	inline bool isInverted() { return m_invert; }
 	inline bool hasPalette() { return m_haspal; }
-	inline const string& getPaletteFunction() { return m_palette; }
+	inline const std::string& getPaletteFunction() { return m_palette; }
 	inline GLEZData* getData() { return m_Data; }
 	inline void setIpolType(IpolType type) { m_ipolType = type; }
 	inline IpolType getIpolType() const { return m_ipolType; }

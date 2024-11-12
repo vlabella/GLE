@@ -58,6 +58,8 @@
 #include "keyword.h"
 #include "run.h"
 
+using namespace std;
+
 #define GLEG_CMD_AXIS     1
 #define GLEG_CMD_LABELS   2
 #define GLEG_CMD_SIDE     3

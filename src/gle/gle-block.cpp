@@ -5,6 +5,8 @@
 #include "tokens/Tokenizer.h"
 #include "gle-interface/gle-interface.h"
 
+using namespace std;
+
 void GLEParserInitTokenizer(Tokenizer* tokens);
 
 GLEBlockInstance::GLEBlockInstance(GLEBlockBase* parent):

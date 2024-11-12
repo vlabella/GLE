@@ -36,23 +36,23 @@
  *                                                                      *
  ************************************************************************/
 
-inline ostream& TokenizerLangHashPtr::write(ostream &os, int tab) const {
+inline std::ostream& TokenizerLangHashPtr::write(std::ostream &os, int tab) const {
   return get()->write(os,tab);
 }
 inline void TokenizerLangHashPtr::addLangElem(Tokenizer* tokens, TokenizerLangElem* elem) {
   GetPtr()->addLangElem(tokens,elem);
 }
 
-inline void TokenizerLangHashPtr::addLangElem(const vector<string>& toks, TokenizerLangElem* elem, unsigned int pos) {
+inline void TokenizerLangHashPtr::addLangElem(const std::vector<std::string>& toks, TokenizerLangElem* elem, unsigned int pos) {
   GetPtr()->addLangElem(toks,elem,pos);
 }
 
-inline TokenizerLangHashPtr::TokenizerLangHashPtr(TokenizerLangHash* src) 
+inline TokenizerLangHashPtr::TokenizerLangHashPtr(TokenizerLangHash* src)
   : RefCountPtr<TokenizerLangHash>(src) {}
 
 inline TokenizerLangHashPtr::TokenizerLangHashPtr() {}
 
-inline TokenizerLangHashPtr::TokenizerLangHashPtr(const string& name) {
+inline TokenizerLangHashPtr::TokenizerLangHashPtr(const std::string& name) {
   SetPtr(new TokenizerLangHash(name));
 }
 

@@ -341,12 +341,12 @@ public:
 
 class GLEASCII85ByteStream : public GLEByteStream {
 private:
-	ostream* m_File;
+	std::ostream* m_File;
 	unsigned char m_Buffer[10];
 	int m_Count;
 	int m_BreakLength;
 public:
-	GLEASCII85ByteStream(ostream* file);
+	GLEASCII85ByteStream(std::ostream* file);
 	virtual ~GLEASCII85ByteStream();
 	virtual int sendByte(GLEBYTE byte);
 	virtual int term();

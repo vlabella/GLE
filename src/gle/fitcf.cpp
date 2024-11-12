@@ -45,6 +45,8 @@
 #include "fitcf.h"
 #include "gprint.h"
 
+using namespace std;
+
 void gd_message__(const char *s,int l)
 {
 	gprint("%s  %ld \n",s,l);

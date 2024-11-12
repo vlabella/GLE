@@ -40,6 +40,8 @@
 #include "cutils.h"
 #include "fn.h"
 
+using namespace std;
+
 /*-------------------------------------------------------------------*/
 /*      Find the function called *cp, and return its number          */
 /*-------------------------------------------------------------------*/

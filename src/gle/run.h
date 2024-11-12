@@ -54,11 +54,11 @@ void eval_do_object_block_call(GLEArrayImpl* stk, GLESub* sub, GLEObjectDO* obj)
 
 void clear_run();
 
-void g_set_pagesize(const string& papersize);
-void g_set_margins(const string& margins);
+void g_set_pagesize(const std::string& papersize);
+void g_set_margins(const std::string& margins);
 
 GLEFileLocation* get_output_file();
-const string& get_input_file();
+const std::string& get_input_file();
 
 class GLESub;
 class GLESubMap;
@@ -80,7 +80,7 @@ protected:
 	GLEBlocks* m_blockTypes;
 	GLERC<GLEObjectRepresention> m_CrObj;
 	GLERC<GLEArrayImpl> m_stack;
-	vector<GLELengthBlock> m_lengthBlocks;
+	std::vector<GLELengthBlock> m_lengthBlocks;
 	bool m_AllowBeforeSize[GLE_KW_NB];
 	GLEMemoryCell m_returnValue;
 	GLEPcodeIndexed* m_pcode;
@@ -93,10 +93,10 @@ public:
 	void do_pcode(GLESourceLine &SLine,int *srclin, int *pcode, int plen, int *pend, bool& mkdrobjs);
 	void begin_object(const std::string& name, GLESub* sub);
 	void end_object();
-	void draw_object_static(const string& path, const string& name, int* pcode, int* cp, bool mkdrobjs);
+	void draw_object_static(const std::string& path, const std::string& name, int* pcode, int* cp, bool mkdrobjs);
 	void draw_object_subbyname(GLESub* sub, GLEObjectRepresention* newobj, GLEArrayImpl* path, GLEPoint* orig);
 	void draw_object_dynamic(int idx, GLEObjectRepresention* newobj, GLEArrayImpl* path, GLEPoint* orig);
-	void draw_object(const string& name, const char* newname);
+	void draw_object(const std::string& name, const char* newname);
 	void sub_call(GLESub* sub, GLEArrayImpl* arguments = 0);
 	void sub_call_stack(GLESub* sub, GLEArrayImpl* stk);
 	void name_set(GLEString* name, double x1, double y1, double x2, double y2);

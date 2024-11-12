@@ -22,6 +22,8 @@
 #include "mainwindow.h"
 #include "objectblocks.h"
 
+using namespace std;
+
 GLEObjectBlocksList::GLEObjectBlocksList(QWidget *parent, GLEMainWindow* main, GLEDrawingArea* area, int size) : QTreeView(parent) {
 	defaultSize = size;
 	mainWin = main;

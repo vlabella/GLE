@@ -52,6 +52,8 @@
 #include "token.h"
 #include "graph.h"
 
+using namespace std;
+
 double start_subtick(double dsubticks, double dticks, GLEAxis* ax);
 void nice_ticks(double *dticks, double *gmin,double *gmax, double *t1,double *tn,int minset, int maxset);
 void numtrim(char **d,char *s, double dticks);

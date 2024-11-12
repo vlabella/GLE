@@ -46,17 +46,17 @@ protected:
 	bool m_Delete;
 	int m_GlobalLineNo;
 	int m_LineNo;
-	string m_Code;
-	string m_Prefix;
+	std::string m_Code;
+	std::string m_Prefix;
 	GLESourceFile* m_File;
 public:
 	GLESourceLine();
 	~GLESourceLine();
-	inline void setCode(const string& code) { m_Code = code; }
-	inline const string& getCode() { return m_Code; }
+	inline void setCode(const std::string& code) { m_Code = code; }
+	inline const std::string& getCode() { return m_Code; }
 	inline const char* getCodeCStr() { return m_Code.c_str(); }
-	inline void setPrefix(const string& prefix) { m_Prefix = prefix; }
-	inline const string& getPrefix() { return m_Prefix; }
+	inline void setPrefix(const std::string& prefix) { m_Prefix = prefix; }
+	inline const std::string& getPrefix() { return m_Prefix; }
 	inline int getLineNo() { return m_LineNo; }
 	inline void setLineNo(int no) { m_LineNo = no; }
 	inline int getGlobalLineNo() { return m_GlobalLineNo; }
@@ -66,16 +66,16 @@ public:
 	inline void setDelete(bool del) { m_Delete = del; }
 	inline bool isDelete() { return m_Delete; }
 	bool isEmpty();
-	const string& getFileName();
-	int showLineAbbrev(ostream& out, int focuscol);
+	const std::string& getFileName();
+	int showLineAbbrev(std::ostream& out, int focuscol);
 };
 
 class GLESourceFile {
 protected:
 	GLEFileLocation m_File;
-	vector<GLESourceLine*> m_Code;
-	vector<int> m_ToInsertIdx;
-	vector<string> m_ToInsertLine;
+	std::vector<GLESourceLine*> m_Code;
+	std::vector<int> m_ToInsertIdx;
+	std::vector<std::string> m_ToInsertLine;
 	GLERCVector<GLEObjectDOConstructor> m_Cons;
 public:
 	GLESourceFile();
@@ -87,10 +87,10 @@ public:
 	void clear();
 	void reNumber();
 	GLESourceLine* addLine();
-	void scheduleInsertLine(int i, const string& str);
+	void scheduleInsertLine(int i, const std::string& str);
 	void performUpdates();
 	int getNextInsertIndex(int line, int pos);
-	void load(istream& input);
+	void load(std::istream& input);
 	void load();
 	bool tryLoad();
 	inline void addObjectDOConstructor(GLEObjectDOConstructor* cons) { m_Cons.add(cons); }
@@ -102,8 +102,8 @@ public:
 class GLEGlobalSource {
 protected:
 	GLESourceFile m_Main;
-	vector<GLESourceFile*> m_Files;
-	vector<GLESourceLine*> m_Code;
+	std::vector<GLESourceFile*> m_Files;
+	std::vector<GLESourceLine*> m_Code;
 public:
 	GLEGlobalSource();
 	~GLEGlobalSource();
@@ -111,30 +111,30 @@ public:
 	inline GLEFileLocation* getLocation() { return m_Main.getLocation(); }
 	inline int getNbLines() { return m_Code.size(); }
 	inline GLESourceLine* getLine(int i) { return m_Code[i]; }
-	inline const string& getLineCode(int i) { return m_Code[i]->getCode(); }
+	inline const std::string& getLineCode(int i) { return m_Code[i]->getCode(); }
 	inline void addLine(GLESourceLine* line) { m_Code.push_back(line); }
 	inline int getNbFiles() { return m_Files.size(); }
 	inline GLESourceFile* getFile(int i) { return m_Files[i]; }
 	void clear();
 	GLESourceFile* createNew();
-	bool includes(const string& file);
+	bool includes(const std::string& file);
 	void initFromMain();
 	void insertInclude(int offs, GLESourceFile* file);
 	void insertIncludeNoOverwrite(int offs, GLESourceFile* file);
 	void reNumber();
-	void addLine(const string& code);
-	void updateLine(int i, const string& code);
+	void addLine(const std::string& code);
+	void updateLine(int i, const std::string& code);
 	void scheduleDeleteLine(int i);
-	void scheduleInsertLine(int i, const string& str);
+	void scheduleInsertLine(int i, const std::string& str);
 	void performUpdates();
-	void sourceLineFileAndNumber(int line, ostream& err);
+	void sourceLineFileAndNumber(int line, std::ostream& err);
 	void load();
 	bool tryLoad();
 	void clearObjectDOConstructors();
 };
 
-int showLineAbbrev(const string& text, int focuscol, ostream& out);
-void sourceLineFileAndNumber(int globalLine, ostream& out);
+int showLineAbbrev(const std::string& text, int focuscol, std::ostream& out);
+void sourceLineFileAndNumber(int globalLine, std::ostream& out);
 
 #endif
 

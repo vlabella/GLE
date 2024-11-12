@@ -43,7 +43,6 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-
 #include <stdarg.h>
 
 #include "RefCount.h"
@@ -102,7 +101,7 @@ private:
 	std::string m_parsestr;
 	TokenizerPos m_pos;
 public:
-	ParserError(const string& txt, const TokenizerPos& pos, const char* fname);
+	ParserError(const std::string& txt, const TokenizerPos& pos, const char* fname);
 	ParserError(const ParserError& err);
 	std::ostream& write(std::ostream& os) const;
 	void toString(std::string& str) const;
@@ -234,7 +233,7 @@ public:
 	~TokenizerLanguage();
 	void addSubLanguages(int nb);
 	void addLanguageElem(int sublang, const char* elem);
-	void addLanguageElem(int sublang, const vector<string>& toks, TokenizerLangElem* elem);
+	void addLanguageElem(int sublang, const std::vector<std::string>& toks, TokenizerLangElem* elem);
 	void addElementIndex(int size);
 	void setElement(int i, TokenizerLangElem* elem);
 	void resetCharMaps();
@@ -397,7 +396,7 @@ public:
 
 	void read_till_close_comment();
 
-	string& next_multilevel_token();
+	std::string& next_multilevel_token();
 
 	virtual char token_read_sig_char();
 
@@ -464,8 +463,8 @@ protected:
 
 class StreamTokenizer : public Tokenizer {
 protected:
-	filebuf* m_fb;
-	istream* m_is;
+	std::filebuf* m_fb;
+	std::istream* m_is;
 public:
 	StreamTokenizer();
 	StreamTokenizer(TokenizerLanguage* lang);
@@ -513,7 +512,7 @@ public:
 
 class MyOutputFile {
 protected:
-	filebuf m_FB;
+	std::filebuf m_FB;
 	std::ostream* m_OS;
 public:
 	MyOutputFile();

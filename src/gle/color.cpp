@@ -37,11 +37,12 @@
  ************************************************************************/
 
 #include <fstream>
-
 #include "all.h"
 #include "cutils.h"
 #include "gle-interface/gle-interface.h"
 #include "color.h"
+
+using namespace std;
 
 GLEColorList* g_ColorList = NULL;
 

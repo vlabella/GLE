@@ -48,6 +48,8 @@
 #include "glearray.h"
 #include "polish.h"
 
+using namespace std;
+
 extern int **gpcode;   /* gpcode is a pointer to an array of pointer to int */
 extern int *gplen;     /* gpcode is a pointer to an array of int */
 extern int ngpcode;

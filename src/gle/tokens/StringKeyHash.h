@@ -91,7 +91,7 @@
 #define SKEYHASH_DELETE	1
 #define SKEYHASH_KEEP   0
 
-typedef string name_hash_key;
+typedef std::string name_hash_key;
 
 template <class ElemType> class StringKeyPair : public std::pair<const name_hash_key, ElemType> {
 public:
@@ -228,10 +228,10 @@ public:
  * Hashtable int -> string                                                                           *
  **************************************************************************************************/
 
-class IntStringHash : public IntBasicHash<string> {
+class IntStringHash : public IntBasicHash<std::string> {
 public:
-	int try_get(int key, string* res) const;
-	void add_item(int key, const string& elem);
+	int try_get(int key, std::string* res) const;
+	void add_item(int key, const std::string& elem);
 };
 
 /**************************************************************************************************
@@ -246,7 +246,7 @@ template <class ElemType> class StringKeyHash :
 	public std::hash_map<name_hash_key, ElemType , hash_name_hash_key, eq_name_hash_key> {
     #endif
 #else
-	public map<name_hash_key, ElemType, lt_name_hash_key> {
+	public std::map<name_hash_key, ElemType, lt_name_hash_key> {
 #endif
 public:
 	ElemType try_add(const name_hash_key& key) {
@@ -273,7 +273,7 @@ public:
 		insert(StringKeyPair<ElemType>(key, elem));
 	}
 
-	ostream& write(ostream &os, int tab) const {
+	std::ostream& write(std::ostream &os, int tab) const {
 		for (typename StringKeyHash<ElemType>::const_iterator i = this->begin(); i != this->end(); i++ ) {
 			cerr << i->first << endl;
 			i->second.write(os, tab);
@@ -281,7 +281,7 @@ public:
 		return os;
 	}
 
-	ostream& writeKeys(ostream &os) const {
+	std::ostream& writeKeys(std::ostream &os) const {
 		for (typename StringKeyHash<ElemType>::const_iterator i = this->begin(); i != this->end(); i++ ) {
 			cerr << i->first << endl;
 		}

@@ -67,8 +67,8 @@ typedef struct {
 
 class GLEFontCharData {
 public:
-	vector<GLEFontKernInfo> Kern;
-	vector<GLEFontLigatureInfo> Lig;
+	std::vector<GLEFontKernInfo> Kern;
+	std::vector<GLEFontLigatureInfo> Lig;
 	float wx, wy, x1, y1, x2, y2;
 public:
 	GLEFontCharData();
@@ -111,4 +111,4 @@ GLECoreFont* get_core_font_ensure_loaded(int font);
 	#define FONTDEF
 #endif
 
-FONTDEF vector<GLECoreFont*> fnt;
+FONTDEF std::vector<GLECoreFont*> fnt;

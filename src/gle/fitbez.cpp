@@ -43,6 +43,8 @@
 #include "cutils.h"
 #include "graph.h"
 
+using namespace std;
+
 int glefitcf_(int *mode,float *x, float *y, int *l, int *m, float *u, float *v, int *n);
 
 void fitbez(GLEDataPairs* data, bool multi) {

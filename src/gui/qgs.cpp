@@ -20,6 +20,8 @@
 #include "qgs.h"
 #include <math.h>
 
+using namespace std;
+
 #define MINIMUM(a, b)    ((a) < (b) ? (a) : (b))
 
 GSInterpreterLib* g_GSInterpreterLib = NULL;

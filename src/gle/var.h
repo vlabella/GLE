@@ -51,7 +51,7 @@ class GLEVarMap;
 class GLEVarSubMap : public GLERefCountObject {
 protected:
 	StringIntHash m_Map;
-	vector<int> m_Idxs;
+	std::vector<int> m_Idxs;
 	GLEVarMap* m_Parent;
 public:
 	GLEVarSubMap(GLEVarMap* parent);
@@ -60,8 +60,8 @@ public:
 	void clear();
 	void removeFromParent();
 	void addToParent(GLEVarMap* parent);
-	void var_add(const string& name, int idx);
-	inline int var_get(const string& name) { return m_Map.try_get(name); }
+	void var_add(const std::string& name, int idx);
+	inline int var_get(const std::string& name) { return m_Map.try_get(name); }
 	inline int size() { return m_Idxs.size(); }
 	inline int get(int i) { return m_Idxs[i]; }
 };
@@ -69,35 +69,35 @@ public:
 class GLEVarBackup : public GLERefCountObject {
 public:
 	GLEVarBackup();
-	void backup(GLEVars* vars, const vector<int>& ids);
+	void backup(GLEVars* vars, const std::vector<int>& ids);
 	void restore(GLEVars* vars);
 private:
-	vector<int> m_ids;
+	std::vector<int> m_ids;
 	GLEArrayImpl m_values;
 };
 
 class GLEVarMap {
 protected:
-	vector<string> m_Names;
-	vector<int> m_Types;
+	std::vector<std::string> m_Names;
+	std::vector<int> m_Types;
 	StringIntHash m_Map;
-	vector<int> m_Free;
-	vector<GLEVarSubMap*> m_SubMap;
+	std::vector<int> m_Free;
+	std::vector<GLEVarSubMap*> m_SubMap;
 	bool m_IsTemp;
 public:
 	GLEVarMap();
 	~GLEVarMap();
 	/* FIXME: lookup should be based on GLEString */
-	int var_find_add(const string& name, bool* isnew);
-	int var_find_add_submap(const string& name, bool* isnew);
-	int var_get(const string& name);
-	const string& var_name(int idx);
+	int var_find_add(const std::string& name, bool* isnew);
+	int var_find_add_submap(const std::string& name, bool* isnew);
+	int var_get(const std::string& name);
+	const std::string& var_name(int idx);
 	void clear();
 	void list();
 	int getFreeID();
-	int addVarIdx(const string& name);
+	int addVarIdx(const std::string& name);
 	void addVars(const StringIntHash& submap);
-	void addVar(int idx, const string& name);
+	void addVar(int idx, const std::string& name);
 	void removeVar(int idx);
 	void clearSubMaps();
 	GLEVarSubMap* pushSubMap();
@@ -140,7 +140,7 @@ protected:
 	GLEArrayImpl m_Global;
 	GLEArrayImpl m_Stack;
 	GLELocalVars* local_var;
-	vector<GLELocalVars*> local_var_stack;
+	std::vector<GLELocalVars*> local_var_stack;
 	int local_var_stack_level;
 	nameMode::Enum m_nameMode;
 public:
@@ -165,7 +165,7 @@ public:
 	int getNbLocal();
 	void allocLocal(int num);
 	void freeLocal();
-	void addLocal(const string& name, int *idx, int *type);
+	void addLocal(const std::string& name, int *idx, int *type);
 	GLEVarMap* swapLocalMap(GLEVarMap* map);
 	GLEVarSubMap* addLocalSubMap();
 	void addLocalSubMap(GLEVarSubMap* submap);
@@ -173,7 +173,7 @@ public:
 	void findDN(GLEVarSubMap* map, int *idx, int *var, int *nd);
 	int getGlobalType(int var);
 	const char* getObjectTypeName(int type);
-	string typeError(int var, int type);
+	std::string typeError(int var, int type);
 	inline void allocLocal(GLEVarMap* map) { allocLocal(map->size()); }
 	inline GLELocalVars* getLocalVars() { return local_var; }
 	inline bool hasLocalMap() { return m_LocalMap != NULL; }
@@ -188,13 +188,13 @@ public:
 GLEVars* getVarsInstance();
 
 void var_init(int idx, int type);
-int var_type(const string& name);
-bool str_var(const string& s);
+int var_type(const std::string& name);
+bool str_var(const std::string& s);
 bool str_var(const char* s);
 int valid_var(const char *s);
 bool has_local_var_map();
 GLEVarMap* get_local_var_map();
-void var_add_local(const string& name, int *idx, int *type);
+void var_add_local(const std::string& name, int *idx, int *type);
 GLELocalVars* get_local_vars();
 void var_alloc_local(int num);
 void var_alloc_local(GLEVarMap* map);
@@ -209,7 +209,7 @@ void var_free_local(void);
 void var_get(int jj, double *v);
 int var_get_type(int var);
 void var_getstr(int v, char *s);
-void var_getstr(int jj, string& s);
+void var_getstr(int jj, std::string& s);
 void var_nlocal(int *l);
 void var_set(int jj, double v);
 void var_set(int jj, GLEMemoryCell* value);
@@ -217,14 +217,14 @@ GLEVarMap* var_swap_local_map(GLEVarMap* map);
 void var_set_local_map(GLEVarMap* map);
 void var_setstr(int jj, char *s);
 char* var_get_name(int jj);
-bool var_valid_name(const string& name);
+bool var_valid_name(const std::string& name);
 void var_findadd_set(const char* name, double value);
-void var_findadd_set(const char* name, const string& value);
+void var_findadd_set(const char* name, const std::string& value);
 void var_findadd_set(const char *s, GLEMemoryCell* value);
 GLEVarSubMap* var_add_local_submap();
 void var_remove_local_submap();
-bool str_var_valid_name(const string& name);
-void ensure_valid_var_name(const string& name);
-void ensure_valid_var_name(Tokenizer* tokens, const string& name);
+bool str_var_valid_name(const std::string& name);
+void ensure_valid_var_name(const std::string& name);
+void ensure_valid_var_name(Tokenizer* tokens, const std::string& name);
 
 #endif

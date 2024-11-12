@@ -40,6 +40,8 @@
 #include "cutils.h"
 #include "keyword.h"
 
+using namespace std;
+
 /*------------------------------------------------------------------*/
 /*      Find the KEY WORD *cp, and return its number                */
 /*------------------------------------------------------------------*/

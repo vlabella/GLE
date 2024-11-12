@@ -50,6 +50,8 @@
 
 #include <set>
 
+using namespace std;
+
 #define true (!false)
 #define false 0
 

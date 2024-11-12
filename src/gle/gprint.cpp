@@ -48,6 +48,9 @@ typedef double dbl;
 //#endif
 #include "gprint.h"
 #include "cutils.h"
+
+using namespace std;
+
 char *line(int i);
 #define false 0
 #define true (!false)

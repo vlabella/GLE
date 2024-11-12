@@ -72,7 +72,7 @@ protected:
 	int m_pcode_offs1; /* jump address */
 	int m_pcode_offs2; /* fill in address */
 	bool m_dangling;
-	vector<GLESourceBlock>* m_deps;
+	std::vector<GLESourceBlock>* m_deps;
 public:
 	GLESourceBlock(int type, int first_line);
 	GLESourceBlock(const GLESourceBlock& block);
@@ -103,29 +103,29 @@ class GLESubCallAdditParam {
 /* current implementation just for "name" option of draw command */
 /* later: implement for all common options, such as color, lwidth, ... */
 protected:
-	string m_Val;
+	std::string m_Val;
 	int m_Pos;
 public:
 	GLESubCallAdditParam();
 	~GLESubCallAdditParam();
-	int isAdditionalParam(const string& str);
-	void setAdditionalParam(int idx, const string& val, int pos);
-	inline const string& getVal() { return m_Val; }
+	int isAdditionalParam(const std::string& str);
+	void setAdditionalParam(int idx, const std::string& val, int pos);
+	inline const std::string& getVal() { return m_Val; }
 	inline int getPos() { return m_Pos; }
 };
 
 class GLESubCallInfo {
 protected:
-	vector<string> m_ParamVal;
-	vector<int> m_ParamPos;
+	std::vector<std::string> m_ParamVal;
+	std::vector<int> m_ParamPos;
 	GLESubCallAdditParam* m_Addit;
 	GLESub* m_Sub;
 public:
 	GLESubCallInfo(GLESub* sub);
 	~GLESubCallInfo();
-	void setParam(int i, const string& val, int pos);
+	void setParam(int i, const std::string& val, int pos);
 	inline int getParamPos(int i) { return m_ParamPos[i]; }
-	inline const string& getParamVal(int i) { return m_ParamVal[i]; }
+	inline const std::string& getParamVal(int i) { return m_ParamVal[i]; }
 	inline void setAdditParam(GLESubCallAdditParam* addit) { m_Addit = addit; }
 	inline GLESubCallAdditParam* getAdditParam() { return m_Addit; }
 	inline GLESub* getSub() { return m_Sub; }
@@ -141,25 +141,25 @@ protected:
 	GLEPolish* m_polish;
 	GLESub* m_CrSub;
 	GLEBlocks* m_blockTypes;
-	string m_include;
+	std::string m_include;
 	int m_special;
 	bool m_auto_endif;
 	bool m_insub;
-	vector<GLESourceBlock> m_blocks;
+	std::vector<GLESourceBlock> m_blocks;
 public:
 	GLEParser(GLEScript* script, GLEPolish* polish);
 	~GLEParser();
 	GLEBlocks* getBlockTypes();
 	void initTokenizer();
 	double evalTokenToDouble();
-	void evalTokenToString(string* str);
-	void evalTokenToFileName(string* str);
+	void evalTokenToString(std::string* str);
+	void evalTokenToFileName(std::string* str);
 	bool pass_block_specific(GLESourceLine& sourceLine, GLEPcode& pcode);
 	void passt(GLESourceLine &SLine, GLEPcode& pcode);
 	void polish_eol(GLEPcode& pcode, int *rtype);
 	void polish(GLEPcode& pcode, int *rtype);
 	void polish(const char* str, GLEPcode& pcode, int *rtype);
-	void polish_pos(const string& arg, int pos, GLEPcode& pcode, int* rtype);
+	void polish_pos(const std::string& arg, int pos, GLEPcode& pcode, int* rtype);
 	void get_var(GLEPcode& pcode);
 	void get_xy(GLEPcode& pcode);
 	void get_exp(GLEPcode& pcode);
@@ -170,7 +170,7 @@ public:
 	void gen_subroutine_call_code(GLESubCallInfo* info, GLEPcode& pcode);
 	void gen_subroutine_call_polish_arg(GLESubCallInfo* info, int i, GLEPcode& pcode);
 	void evaluate_subroutine_arguments(GLESubCallInfo* info, GLEArrayImpl* arguments);
-	void get_subroutine_call(GLEPcode& pcode, string* name = NULL, int poscol = 0);
+	void get_subroutine_call(GLEPcode& pcode, std::string* name = NULL, int poscol = 0);
 	GLESub* get_subroutine_declaration(GLEPcode& pcode);
 	void get_subroutine_default_param(GLESub* sub);
 	void get_if(GLEPcode& pcode);
@@ -181,13 +181,13 @@ public:
 	void do_endsub(int srclin, GLEPcode& pcode);
 	int get_optional(OPKEY lkey, GLEPcode& pcode);
 	int get_first(OPKEY lkey);
-   int get_first(const string& token, OPKEY lkey);
+   int get_first(const std::string& token, OPKEY lkey);
 	void get_token(const char* token);
 	bool try_get_token(const char* token);
 	void get_fill(GLEPcode& pcode);
 	void get_marker(GLEPcode& pcode);
 	void get_var_add(int *var, int *vtype);
-	int pass_marker(const string& marker);
+	int pass_marker(const std::string& marker);
 	void define_marker_1(GLEPcode& pcode);
 	void define_marker_2(GLEPcode& pcode);
 	void get_font(GLEPcode& pcode);
@@ -198,15 +198,15 @@ public:
 	void get_papersize(GLEPcode& pcode);
 	void do_text_mode(GLESourceLine &SLine, Tokenizer* tokens, GLEPcode& pcode);
 	void checkmode();
-	void get_block_type(int type, string& result);
-	ParserError create_option_error(OPKEY lkey, int count, const string& token);
+	void get_block_type(int type, std::string& result);
+	ParserError create_option_error(OPKEY lkey, int count, const std::string& token);
 	int get_one_option(op_key* lkey, GLEPcode& pcode, int plen);
 	void duplicate_error(GLEPcode& pcode, int pos);
-	void checkValidName(const string& name, const char* type, int pos);
+	void checkValidName(const std::string& name, const char* type, int pos);
 	void setAllowSpace(bool allow);
 	bool not_at_end_command();
 	bool test_not_at_end_command();
-	GLESub* is_draw_sub(const string& str);
+	GLESub* is_draw_sub(const std::string& str);
 	GLESourceBlock* add_block(int type, int first_line);
 	GLESourceBlock* last_block();
 	GLESourceBlock* find_block(int type);
@@ -220,14 +220,14 @@ public:
 	inline void resetSpecial() { m_special = GLE_PARSER_NONE; }
 	inline bool hasSpecial(int special) { return (m_special & special) != 0; }
 	inline void setSpecial(int special) { m_special |= special; }
-	inline const string& getInclude() { return m_include; }
-	inline void setInclude(const string& name) { m_include = name; }
+	inline const std::string& getInclude() { return m_include; }
+	inline void setInclude(const std::string& name) { m_include = name; }
 	inline bool isInSub() { return m_insub; }
 	inline void setInSub(bool insub) { m_insub = insub; }
-	inline ParserError error(const string& src) const {
+	inline ParserError error(const std::string& src) const {
 		return m_tokens.error(src);
 	};
-	inline ParserError error(int column, const string& src) const {
+	inline ParserError error(int column, const std::string& src) const {
 		return m_tokens.error(column, src);
 	};
 	inline GLEScript* getScript() { return m_Script; }

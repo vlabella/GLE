@@ -24,6 +24,8 @@
 #include "grid.h"
 #include <math.h>
 
+using namespace std;
+
 // The constructor, initialise variables and clear the grid
 GLEGrid::GLEGrid(QObject *parent) : QObject(parent)
 {

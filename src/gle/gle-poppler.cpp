@@ -42,6 +42,8 @@
 #include "gle-interface/gle-const.h"
 #include "core.h"
 
+using namespace std;
+
 void gle_write_ostream(void* closure, char* data, int length) {
 	std::ostream* file = (std::ostream*)closure;
 	file->write(data, length);

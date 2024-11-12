@@ -69,6 +69,8 @@
 
 #include <memory>
 
+using namespace std;
+
 #define DEFAULT_STEPS 100
 
 extern int g_nbar;

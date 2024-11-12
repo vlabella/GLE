@@ -52,6 +52,8 @@
 #include "d_interface.h"
 #include "gprint.h"
 
+using namespace std;
+
 #ifdef HAVE_X11
 
 extern struct gmodel g;

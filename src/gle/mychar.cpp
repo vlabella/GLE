@@ -48,6 +48,8 @@ extern struct gmodel g;
 #include "gprint.h"
 #include "file_io.h"
 
+using namespace std;
+
 #ifdef BIGINDIAN
 #define BYTE0 1
 #define BYTE1 0

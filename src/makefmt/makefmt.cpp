@@ -44,6 +44,8 @@
 #include "../gle/file_io.h"
 #include "parseAFM.h"
 
+using namespace std;
+
 
 int debugit = 0;
 #define dbg if (debugit)

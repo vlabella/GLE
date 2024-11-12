@@ -57,6 +57,8 @@
 #include "surface/gsurface.h"
 #include "run.h"
 
+using namespace std;
+
 GLEParser* g_parser;
 
 extern GLESubMap g_Subroutines;

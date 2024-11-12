@@ -66,13 +66,13 @@ int begin_token(int **pcode,int *cp,int *pln,char *srclin,TOKENS tk,int *ntk,cha
 void begin_init(void);
 int begin_next_line(int *pcode, int *cp);
 bool begin_line(int *pln, char *srclin, int *len);
-bool begin_line(int *pln, string& srclin);
-bool begin_line_norep(int *pln, string& srclin);
+bool begin_line(int *pln, std::string& srclin);
+bool begin_line_norep(int *pln, std::string& srclin);
 
-void replace_exp(string& exp);
+void replace_exp(std::string& exp);
 
 double token_next_double(int i);
 
-bool get_block_line(int pln, string& srclin);
+bool get_block_line(int pln, std::string& srclin);
 
 #endif

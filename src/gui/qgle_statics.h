@@ -110,7 +110,7 @@ public:
 	//! Convert GLE to Qt String
 	static QString gleToQString(GLEString* str);
 	//! Convert STL to Qt String
-	static inline QString stlToQString(const string& str) { return QString::fromUtf8(str.c_str(), str.length()); };
+	static inline QString stlToQString(const std::string& str) { return QString::fromUtf8(str.c_str(), str.length()); };
 	//! Convert Qt to GLE String
 	static void qtToGLEString(const QString& str1, GLEString* str2);
 

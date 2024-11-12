@@ -47,6 +47,8 @@
 #include "../cutils.h"
 #include "img2ps.h"
 
+using namespace std;
+
 GLEBitmap::GLEBitmap() {
 	m_Height = 0;
 	m_Width = 0;

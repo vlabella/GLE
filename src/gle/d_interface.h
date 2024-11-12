@@ -86,7 +86,7 @@ public:
 	virtual void move(double zx,double zy) = 0;
 	virtual void narc(dbl r,dbl t1,dbl t2,dbl cx,dbl cy) = 0;
 	virtual void newpath(void) = 0;
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile) = 0;
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile) = 0;
 	virtual void pscomment(char* ss) = 0;
 	virtual void reverse(void)    /* reverse the order of stuff in the current path */ = 0;
 	virtual void set_color(const GLERC<GLEColor>& color) = 0;
@@ -109,7 +109,7 @@ public:
 	virtual FILE* get_file_pointer(void) = 0;
 	virtual int getDeviceType() = 0;
 	virtual void bitmap(GLEBitmap* bitmap, GLEPoint* pos, GLEPoint* scale, int type);
-	virtual void getRecordedBytes(string* output);
+	virtual void getRecordedBytes(std::string* output);
 	void computeBoundingBox(double width, double height, int* int_bb_x, int* int_bb_y);
 	void computeBoundingBox(double width, double height);
 	inline GLEPoint* getBoundingBox() { return &m_boundingBox; }
@@ -122,14 +122,14 @@ public:
 class PSGLEDevice : public GLEDevice {
 protected:
 	GLEFileLocation m_OutputName;
-	ostringstream* m_OutputBuffer;
-	ofstream* m_OutputFile;
-	ostream* m_Out;
+	std::ostringstream* m_OutputBuffer;
+	std::ofstream* m_OutputFile;
+	std::ostream* m_Out;
 	bool m_IsEps;
 	bool m_IsPageSize;
 	int ps_nvec;
 	int first_ellipse;
-	vector<string> comments;
+	std::vector<std::string> comments;
 	FILE *psfile;
 	int i,l,j;
 	int m_FillMethod;
@@ -169,7 +169,7 @@ public:
 	virtual void move(double zx,double zy);
 	virtual void narc(dbl r,dbl t1,dbl t2,dbl cx,dbl cy);
 	virtual void newpath(void);
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual void pscomment(char* ss);
 	virtual void reverse(void)    /* reverse the order of stuff in the current path */;
 	virtual void set_color(const GLERC<GLEColor>& color);
@@ -192,7 +192,7 @@ public:
 	virtual FILE* get_file_pointer(void);
 	virtual int getDeviceType();
 	virtual void bitmap(GLEBitmap* bitmap, GLEPoint* pos, GLEPoint* scale, int type);
-	virtual void getRecordedBytes(string* output);
+	virtual void getRecordedBytes(std::string* output);
 protected:
 	void set_color_impl(const GLERC<GLEColor>& color);
 	void ddfill(GLERectangle* bounds = NULL);
@@ -209,7 +209,7 @@ public:
 	inline bool isEps() { return m_IsEps; }
 	inline bool isOutputPageSize() { return m_IsPageSize; }
 	inline void setOutputPageSize(bool out) { m_IsPageSize = out; }
-	inline ostream& out() { return *m_Out; }
+	inline std::ostream& out() { return *m_Out; }
 	void startRecording();
 	void initialPS();
 };
@@ -265,7 +265,7 @@ public:
 	virtual void move(double zx,double zy);
 	virtual void narc(dbl r,dbl t1,dbl t2,dbl cx,dbl cy);
 	virtual void newpath(void);
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual void pscomment(char* ss);
 	virtual void reverse(void)    /* reverse the order of stuff in the current path */;
 	virtual void set_color(const GLERC<GLEColor>& color);
@@ -288,7 +288,7 @@ public:
 	virtual FILE* get_file_pointer(void);
 	virtual int getDeviceType();
 	virtual void bitmap(GLEBitmap* bitmap, GLEPoint* pos, GLEPoint* scale, int type);
-	virtual void getRecordedBytes(string* output);
+	virtual void getRecordedBytes(std::string* output);
 	void recordData(const unsigned char *data, unsigned int length);
 protected:
 	void set_color_impl(const GLERC<GLEColor>& color);
@@ -308,7 +308,7 @@ class GLECairoDevicePDF : public GLECairoDevice {
 public:
 	GLECairoDevicePDF(bool showerror);
 	virtual ~GLECairoDevicePDF();
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual int getDeviceType();
 };
 
@@ -316,16 +316,16 @@ class GLECairoDeviceEPS : public GLECairoDevice {
 public:
 	GLECairoDeviceEPS(bool showerror);
 	virtual ~GLECairoDeviceEPS();
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual int getDeviceType();
-	virtual void getRecordedBytes(string* output);
+	virtual void getRecordedBytes(std::string* output);
 };
 
 class GLECairoDeviceSVG : public GLECairoDevice {
 public:
 	GLECairoDeviceSVG(bool showerror);
 	virtual ~GLECairoDeviceSVG();
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual int getDeviceType();
 };
 
@@ -342,7 +342,7 @@ public:
 	GLECairoDeviceEMF(bool showerror);
 	virtual ~GLECairoDeviceEMF();
 	virtual void set_matrix(double newmat[3][3]);
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual int getDeviceType();
 	virtual void closedev(void);
 	inline void setDPI(double d) { m_DPI = d; }
@@ -389,7 +389,7 @@ public:
 	virtual void move(double zx,double zy);
 	virtual void narc(dbl r,dbl t1,dbl t2,dbl cx,dbl cy);
 	virtual void newpath(void);
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual void pscomment(char* ss);
 	virtual void reverse(void)    /* reverse the order of stuff in the current path */;
 	virtual void set_color(const GLERC<GLEColor>& color);
@@ -490,7 +490,7 @@ public:
 	virtual void move(double zx,double zy);
 	virtual void narc(dbl r,dbl t1,dbl t2,dbl cx,dbl cy);
 	virtual void newpath(void);
-	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const string& inputfile);
+	virtual void opendev(double width, double height, GLEFileLocation* outputfile, const std::string& inputfile);
 	virtual void pscomment(char* ss);
 	virtual void reverse(void)    /* reverse the order of stuff in the current path */;
 	virtual void set_color(const GLERC<GLEColor>& color);

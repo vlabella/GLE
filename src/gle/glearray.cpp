@@ -56,6 +56,8 @@
 
 #include <memory>
 
+using namespace std;
+
 bool GLEReadFileBinaryGZIP(const string& name, std::vector<GLEBYTE>* contents);
 
 RefCountObject::RefCountObject() {

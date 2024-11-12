@@ -47,6 +47,8 @@
 #include "../file_io.h"
 #include "img2ps.h"
 
+using namespace std;
+
 #define PS_MAXLINE 36
 
 static char* Ascii85Encode(unsigned char* raw) {

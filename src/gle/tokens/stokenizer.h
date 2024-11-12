@@ -63,7 +63,7 @@ public:
 	  m_empty_tokens(drop_empty_tokens) {
 	}
 
-	bool next(string::const_iterator& next, string::const_iterator& end, string& tok) {
+	bool next(std::string::const_iterator& next, std::string::const_iterator& end, std::string& tok) {
 		tok = "";
 		// skip past all dropped_delims
 		if (m_empty_tokens == drop_empty_tokens) {
@@ -121,7 +121,7 @@ private:
 
 	bool is_kept(char E) const {
 		if (m_kept_delims.length()) {
-			return m_kept_delims.find(E) != string::npos;
+			return m_kept_delims.find(E) != std::string::npos;
 		} else if (m_use_ispunct) {
 			return ispunct(E) != 0;
 		} else {
@@ -131,7 +131,7 @@ private:
 
 	bool is_dropped(char E) const {
 		if (m_dropped_delims.length()) {
-			return m_dropped_delims.find(E) != string::npos;
+			return m_dropped_delims.find(E) != std::string::npos;
 		} else if (m_use_isspace) {
 			return isspace(E) != 0;
 		} else {
@@ -152,7 +152,7 @@ public:
 		  m_level_down_delims(level_down) {
 	}
 
-	bool next(string::const_iterator& next, string::const_iterator& end, string& tok) {
+	bool next(std::string::const_iterator& next, std::string::const_iterator& end, std::string& tok) {
 		tok = "";
 		while (next != end && is_dropped(*next)) {
 			++next;
@@ -187,16 +187,16 @@ private:
 	std::string m_level_down_delims;
 
 	bool is_level_up(char E) const {
-		return m_level_up_delims.find(E) != string::npos;
+		return m_level_up_delims.find(E) != std::string::npos;
 	}
 
 	bool is_level_down(char E) const {
-		return m_level_down_delims.find(E) != string::npos;
+		return m_level_down_delims.find(E) != std::string::npos;
 	}
 
 	bool is_kept(char E) const {
 		if (m_kept_delims.length()) {
-			return m_kept_delims.find(E) != string::npos;
+			return m_kept_delims.find(E) != std::string::npos;
 		} else {
 			return false;
 		}
@@ -204,7 +204,7 @@ private:
 
 	bool is_dropped(char E) const {
 		if (m_dropped_delims.length()) {
-			return m_dropped_delims.find(E) != string::npos;
+			return m_dropped_delims.find(E) != std::string::npos;
 		} else {
 			return false;
 		}
@@ -214,7 +214,7 @@ private:
 // A view of a tokenized "sequence"
 template < typename TokenizerFunc = char_separator > class tokenizer {
 public:
-	tokenizer(const string& input, TokenizerFunc& token_func) : m_token_func(token_func) {
+	tokenizer(const std::string& input, TokenizerFunc& token_func) : m_token_func(token_func) {
 		m_input = input;
 		m_current = m_input.begin();
 		m_end = m_input.end();
@@ -231,7 +231,7 @@ public:
 		m_more = m_token_func.next(m_current, m_end, m_next_token);
 	}
 
-	void set_input(const string& input) {
+	void set_input(const std::string& input) {
 		m_input = input;
 		m_current = m_input.begin();
 		m_end = m_input.end();
@@ -242,7 +242,7 @@ public:
 		return m_more;
 	}
 
-	const string& next_token() {
+	const std::string& next_token() {
 		m_cr_token = m_next_token;
 		m_more = m_token_func.next(m_current, m_end, m_next_token);
 		return m_cr_token;

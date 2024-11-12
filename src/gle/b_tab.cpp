@@ -47,6 +47,8 @@
 #define BEGINDEF extern
 #include "begin.h"
 
+using namespace std;
+
 #define true (!false)
 #define false 0
 #define dbg if ((gle_debug & 32)>0)

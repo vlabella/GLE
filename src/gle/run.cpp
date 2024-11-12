@@ -60,6 +60,8 @@ void name_get2(char *n,double *x1,double *y1,double *x2,double *y2);
 #define GRAPHDEF extern
 #include "graph.h"
 
+using namespace std;
+
 extern OPKEY op_begin;
 extern GLESubMap g_Subroutines;
 
