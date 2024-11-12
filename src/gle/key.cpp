@@ -36,6 +36,7 @@
  *                                                                      *
  ************************************************************************/
 
+#include <memory>
 #include "all.h"
 #include "mem_limits.h"
 #include "token.h"
