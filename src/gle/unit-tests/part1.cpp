@@ -207,7 +207,7 @@ void test_expression_evaluator() {
 	reader.read("unit-tests/expressions.txt");
 	GLECSVError* error = reader.getError();
 	unit_test(error->errorCode == GLECSVErrorNone);
-	std::auto_ptr<GLEPolish> polish(new GLEPolish());
+	std::unique_ptr<GLEPolish> polish(new GLEPolish());
 	polish->initTokenizer();
 	for (unsigned int i = 0; i < reader.getNbLines(); i++) {
 		unit_test(reader.getNbColumns(i) == 2);

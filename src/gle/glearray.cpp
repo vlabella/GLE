@@ -212,7 +212,7 @@ void GLEZData::read(const string& fname) {
 	string expanded(GLEExpandEnvironmentVariables(fname));
 	validate_file_name(expanded, false);
 	TokenizerLanguage lang;
-	std::auto_ptr<Tokenizer> tokens;
+	std::unique_ptr<Tokenizer> tokens;
 	std::vector<GLEBYTE> contents;
 	if (str_i_ends_with(expanded, ".gz")) {
 		if (GLEReadFileBinaryGZIP(expanded, &contents)) {

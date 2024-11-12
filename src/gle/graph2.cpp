@@ -39,7 +39,7 @@
 #define GRAPHDEF extern
 
 #include <set>
-
+#include <memory>
 #include "all.h"
 #include "tokens/stokenizer.h"
 #include "cutils.h"
@@ -3910,7 +3910,7 @@ void GLEColorMapBitmap::plotData(GLEZData* zdata, GLEByteStream* output) {
 	if (m_map->hasZMin()) zmin = m_map->getZMin();
 	if (m_map->hasZMax()) zmax = m_map->getZMax();
 	IpolDoubleMatrix ipd(zdata->getData(), zdata->getNX(), zdata->getNY());
-	std::auto_ptr<Ipol> ipol;
+	std::unique_ptr<Ipol> ipol;
 	if (m_map->getIpolType() == IPOL_TYPE_BICUBIC) {
 		ipol.reset(new BicubicIpol(&ipd));
 	} else {
