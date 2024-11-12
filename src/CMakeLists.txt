@@ -316,7 +316,7 @@ if(APPLE)
 	add_compile_definitions(BOOST_MATH_DISABLE_DEPRECATED_03_WARNING)
 endif()
 if(UNIX AND NOT APPLE)
-	# use __unix__ in source code to identify apple/mac platforms which is defined by compiler
+	# use __unix__ in source code to identify linux platforms which is defined by compiler
 	add_compile_definitions(
 #		__unix__
 		HAVE_CONFIG_H
@@ -359,7 +359,7 @@ if(UNIX AND NOT APPLE)
 endif()
 if(WIN32)
 	# GLE specific definitions
-	# use _WIN32 in source code to identify apple/mac platforms which is defined by compiler
+	# use _WIN32 in source code to identify windows platforms which is defined by compiler
 	add_compile_definitions(
 		__WIN32__
 		__NOCYGWIN__
