@@ -59,7 +59,7 @@ int pass_marker(char *s);
 
 const char *binop[] = { "", "+", "-", "*", "/", "^", "=", "<", "<=", ">", ">=", "<>", ".AND.", ".OR." };
 
-struct keyw { char *word; int index; int ret,np,p[5]; } ;
+struct keyw {const char *word; int index; int ret,np,p[5]; } ;
 extern struct keyw keywfn[] ;
 
 double stk[60];
