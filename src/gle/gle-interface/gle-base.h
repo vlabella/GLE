@@ -143,7 +143,7 @@ public:
 	}
 	void clear() {
 		this->deleteAll();
-		vector<T*>::clear();
+		std::vector<T*>::clear();
 	}
 	void deleteAll() {
 		for (typename std::vector<T*>::size_type i = 0; i < std::vector<T*>::size(); i++) {
