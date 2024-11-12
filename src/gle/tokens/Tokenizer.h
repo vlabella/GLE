@@ -56,13 +56,13 @@ int strcontains(const char* str, char ch);
 
 int strposition(const char* str, char ch);
 
-bool is_float(const string& strg);
-bool is_integer(const string& strg);
-bool is_integer_e(const string& strg);
+bool is_float(const std::string& strg);
+bool is_integer(const std::string& strg);
+bool is_integer_e(const std::string& strg);
 
-void strip_string_markers(string& strg);
+void strip_string_markers(std::string& strg);
 
-ostream& mtab(ostream &os, int nb);
+std::ostream& mtab(std::ostream &os, int nb);
 
 class TokenizerPos {
 private:
@@ -82,12 +82,12 @@ public:
 	inline void incCol() { m_col ++; };
 	inline void incTab() { m_col = (m_col/8 + 1)*8; };
 	void incRow();
-	string getString(int tab1, int tab2) const;
-	ostream& write(ostream &os) const;
+	std::string getString(int tab1, int tab2) const;
+	std::ostream& write(std::ostream &os) const;
 	int equals(TokenizerPos& pos) const;
 };
 
-inline ostream& operator<<(ostream& os, const TokenizerPos& pos) {
+inline std::ostream& operator<<(std::ostream& os, const TokenizerPos& pos) {
 	return pos.write(os);
 }
 
@@ -97,30 +97,30 @@ inline ostream& operator<<(ostream& os, const TokenizerPos& pos) {
 class ParserError {
 private:
 	int m_flag;
-	string m_txt;
-	string m_fname;
-	string m_parsestr;
+	std::string m_txt;
+	std::string m_fname;
+	std::string m_parsestr;
 	TokenizerPos m_pos;
 public:
 	ParserError(const string& txt, const TokenizerPos& pos, const char* fname);
 	ParserError(const ParserError& err);
-	ostream& write(ostream& os) const;
-	void toString(string& str) const;
+	std::ostream& write(std::ostream& os) const;
+	void toString(std::string& str) const;
 	void setParserString(const char* str);
-	void setParserString(const string& str);
+	void setParserString(const std::string& str);
 	int equals(ParserError* err) const;
-	inline const string& msg() const { return m_txt; }
-	inline const string& file() const { return m_fname; }
+	inline const std::string& msg() const { return m_txt; }
+	inline const std::string& file() const { return m_fname; }
 	inline int getColumn() { return m_pos.getColumn(); };
 	inline void setColumn(int col) { m_pos.setColumn(col); };
 	inline void incColumn(int nb) { m_pos.incCol(nb); };
-	inline void setMessage(const string& msg) { m_txt = msg; };
+	inline void setMessage(const std::string& msg) { m_txt = msg; };
 	inline bool hasFlag(int flag) { return (m_flag & flag) != 0; };
 	inline void setFlag(int flag) { m_flag |= flag; }
-	inline const string& getParserString() { return m_parsestr; }
+	inline const std::string& getParserString() { return m_parsestr; }
 };
 
-inline ostream& operator<<(ostream& os,const ParserError& err) {
+inline std::ostream& operator<<(std::ostream& os,const ParserError& err) {
 	return err.write(os);
 }
 
@@ -129,9 +129,9 @@ public:
    IThrowsError();
    virtual ~IThrowsError();
 
-   virtual ParserError throwError(int pos, const string& error);
+   virtual ParserError throwError(int pos, const std::string& error);
    virtual ParserError throwError(const char* s1, const char* s2, const char* s3);
-   virtual ParserError throwError(const string& error);
+   virtual ParserError throwError(const std::string& error);
    virtual int getErrorPosition() const;
 };
 
@@ -145,7 +145,7 @@ double tokenizer_string_to_double(const char* value);
 	ParserError g_format_parser_error(va_list format, ...);
 #endif
 
-void g_throw_parser_error(const string& err);
+void g_throw_parser_error(const std::string& err);
 
 void g_throw_parser_error(const char* err, int idx);
 
@@ -159,10 +159,10 @@ class Tokenizer;
 
 class TokenizerLangElem : public RefCountObject  {
 protected:
-	string m_name;
+	std::string m_name;
 public:
-	inline void addName(string& add) { m_name += add; };
-	inline const string& getName() const { return m_name; };
+	inline void addName(std::string& add) { m_name += add; };
+	inline const std::string& getName() const { return m_name; };
 	inline int length() const { return m_name.length(); };
 };
 
@@ -170,12 +170,12 @@ class TokenizerLangHash;
 
 class TokenizerLangHashPtr : public RefCountPtr<TokenizerLangHash> {
  public:
-  inline ostream& write(ostream &os, int tab) const;
+  inline std::ostream& write(std::ostream &os, int tab) const;
   inline void addLangElem(Tokenizer* tokens, TokenizerLangElem* elem);
-  inline void addLangElem(const vector<string>& toks,
+  inline void addLangElem(const std::vector<std::string>& toks,
 			  TokenizerLangElem* elem,
 			  unsigned int pos);
-  inline TokenizerLangHashPtr(const string& name);
+  inline TokenizerLangHashPtr(const std::string& name);
   inline TokenizerLangHashPtr(TokenizerLangHash* src);
   inline TokenizerLangHashPtr();
 };
@@ -185,11 +185,11 @@ private:
 	MutableRefCountPtr<TokenizerLangElem> m_default;
 public:
 	TokenizerLangHash();
-	TokenizerLangHash(const string& name);
+	TokenizerLangHash(const std::string& name);
 	~TokenizerLangHash();
-	ostream& write(ostream &os, int depth) const;
+	std::ostream& write(std::ostream &os, int depth) const;
 	void addLangElem(Tokenizer* tokens, TokenizerLangElem* elem);
-	void addLangElem(const vector<string>& toks,
+	void addLangElem(const std::vector<std::string>& toks,
 			 TokenizerLangElem* elem,
 			 unsigned int pos);
 	inline int hasDefault() const { return !m_default.isNull(); };
@@ -226,7 +226,7 @@ private:
 	CharBitMap m_one_char_tokens;
 	CharBitMap m_space_tokens;
 	CharBitMap m_line_comment_tokens;
-	vector<TokenizerLangHashPtr> m_sublanguage;
+	std::vector<TokenizerLangHashPtr> m_sublanguage;
 	TokLangElemPtr* m_index;
 	RefCountPtr<TokenizerLanguageMultiLevel> m_multi;
 public:
@@ -267,25 +267,25 @@ typedef MutableRefCountPtr<TokenizerLanguage> TokenizerLanguagePtr;
 class TokenAndPos {
 protected:
 	bool m_space;
-	string m_token;
+	std::string m_token;
 	TokenizerPos m_pos;
 public:
 	TokenAndPos();
 	TokenAndPos(const TokenAndPos& copy);
-	TokenAndPos(const string& token, const TokenizerPos& pos, char space);
+	TokenAndPos(const std::string& token, const TokenizerPos& pos, char space);
 	~TokenAndPos();
-	inline const string& getToken() const { return m_token; };
+	inline const std::string& getToken() const { return m_token; };
 	inline const TokenizerPos& getPos() const { return m_pos; };
 	inline bool getSpace() const { return m_space; };
 	inline void setSpace(bool space) { m_space = space; };
-	inline void setToken(const string& token) { m_token = token; };
+	inline void setToken(const std::string& token) { m_token = token; };
 	inline void setPos(const TokenizerPos& pos) { m_pos = pos; };
 };
 
 class Tokenizer : public IThrowsError {
 protected:
 	const char* m_fname;
-	string m_token;
+	std::string m_token;
 	int  m_token_at_end;
 	int  m_token_has_pushback;
 	int  m_token_has_pushback_ch;
@@ -295,7 +295,7 @@ protected:
 	TokenizerPos m_token_count;
 	TokenizerLangHashPtr m_langhash;
 	TokenizerLanguage* m_language;
-	vector<TokenAndPos> m_pushback_tokens;
+	std::vector<TokenAndPos> m_pushback_tokens;
 	char m_token_pushback_ch[MAX_PUSHBACK_CH];
 public:
 
@@ -306,14 +306,14 @@ public:
 	int has_more_tokens();
 	// end of stream not reached
 
-	string& next_token();
+	std::string& next_token();
 	// returns next token.  throws exception if no more tokens.
 
-	string& next_continuous_string_excluding(const char* forbidden);
+	std::string& next_continuous_string_excluding(const char* forbidden);
 
-	string& try_next_token();
+	std::string& try_next_token();
 
-	string& read_line();
+	std::string& read_line();
 
 	double next_double();
 
@@ -339,13 +339,13 @@ public:
 
 	void pushback_token(const TokenAndPos& tkpos);
 
-	void pushback_token(const string& token, const TokenizerPos& pos);
+	void pushback_token(const std::string& token, const TokenizerPos& pos);
 
-	void pushback_token(const string& token);
+	void pushback_token(const std::string& token);
 
 	void pushback_token(const char* token);
 
-	void peek_token(string* token);
+	void peek_token(std::string* token);
 	// look at next token without moving the current token pointer
 
 	bool has_space_before() const { return m_space_before; };
@@ -370,7 +370,7 @@ public:
 
 	int is_next_token_i(const char* token);
 
-	int is_next_token(const string& token) {
+	int is_next_token(const std::string& token) {
 		return is_next_token(token.c_str());
 	}
 	// checks whether next token is [token].  if so, the token is
@@ -417,7 +417,7 @@ public:
 
 	inline void set_fname(const char* fname) { m_fname = fname; };
 
-	inline void set_fname(const string& fname) { m_fname = fname.c_str(); };
+	inline void set_fname(const std::string& fname) { m_fname = fname.c_str(); };
 
 	inline const char* get_fname() { return m_fname; };
 
@@ -427,19 +427,19 @@ public:
 
 	virtual ParserError throwError(const char* s1, const char* s2, const char* s3);
 
-	virtual ParserError throwError(int pos, const string& error);
+	virtual ParserError throwError(int pos, const std::string& error);
 
-	virtual ParserError throwError(const string& error);
+	virtual ParserError throwError(const std::string& error);
 
 	virtual int getErrorPosition() const;
 
-	ParserError error(const string& src) const;
+	ParserError error(const std::string& src) const;
 
 	ParserError error(const char* s1, const char* s2, const char* s3) const;
 
-	ParserError error(const TokenizerPos& pos, const string& src) const;
+	ParserError error(const TokenizerPos& pos, const std::string& src) const;
 
-	ParserError error(int column, const string& src) const;
+	ParserError error(int column, const std::string& src) const;
 
 	ParserError eof_error() const;
 
@@ -469,16 +469,16 @@ protected:
 public:
 	StreamTokenizer();
 	StreamTokenizer(TokenizerLanguage* lang);
-	StreamTokenizer(istream* _is);
-	StreamTokenizer(istream* _is, TokenizerLanguage* lang);
+	StreamTokenizer(std::istream* _is);
+	StreamTokenizer(std::istream* _is, TokenizerLanguage* lang);
 	virtual ~StreamTokenizer();
 	void open_tokens(const char* fname);
-	void open_tokens(const string& fname);
-	void open_tokens(istream* strm, const char* fname);
+	void open_tokens(const std::string& fname);
+	void open_tokens(std::istream* strm, const char* fname);
 	void close_tokens();
 	virtual int stream_ok();
 	virtual int stream_get();
-	inline istream* getStream() { return m_is; };
+	inline std::istream* getStream() { return m_is; };
 };
 
 class StringTokenizer : public Tokenizer {
@@ -497,7 +497,7 @@ public:
 	StringTokenizer(const char* tokens, TokenizerLanguage* lang);
 	virtual ~StringTokenizer();
 	void set_string(const char* tokens);
-	void set_string(const string& tokens);
+	void set_string(const std::string& tokens);
 	virtual int stream_ok();
 	virtual int stream_get();
 	virtual void goto_position(const TokenizerPos& pos);
@@ -514,14 +514,14 @@ public:
 class MyOutputFile {
 protected:
 	filebuf m_FB;
-	ostream* m_OS;
+	std::ostream* m_OS;
 public:
 	MyOutputFile();
 	~MyOutputFile();
 	void open(const char* fname);
-	void open(const string& fname);
+	void open(const std::string& fname);
 	void close();
-	inline ostream& get() { return *m_OS; }
+	inline std::ostream& get() { return *m_OS; }
 	inline int isOpen() { return m_OS != NULL; }
 };
 

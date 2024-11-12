@@ -113,7 +113,7 @@ public:
 	};
 };
 
-template <class T> class RefCountVector : public vector< RefCountPtr<T> > {
+template <class T> class RefCountVector : public std::vector< RefCountPtr<T> > {
 public:
 	inline void add(T* elem) { push_back(RefCountPtr<T>(elem)); }
 	inline T* get(int i) { return (*this)[i].get(); }

@@ -93,15 +93,15 @@ using namespace std;
 
 typedef string name_hash_key;
 
-template <class ElemType> class StringKeyPair : public pair<const name_hash_key, ElemType> {
+template <class ElemType> class StringKeyPair : public std::pair<const name_hash_key, ElemType> {
 public:
 	StringKeyPair(const name_hash_key key, ElemType value) : pair<const name_hash_key, ElemType>(key, value) {
 	}
 };
 
-template <class ElemType> class IntKeyPair : public pair<int, ElemType> {
+template <class ElemType> class IntKeyPair : public std::pair<int, ElemType> {
 public:
-	IntKeyPair(int key, ElemType value) : pair<int, ElemType>(key, value) {
+	IntKeyPair(int key, ElemType value) : std::pair<int, ElemType>(key, value) {
 	}
 };
 
@@ -123,7 +123,7 @@ struct hash_name_hash_key {
 	}
 };
 
-template <class ElemType> class StringKeyIterator : public hash_map<name_hash_key, ElemType>::iterator {
+template <class ElemType> class StringKeyIterator : public std::hash_map<name_hash_key, ElemType>::iterator {
 };
 
 struct eq_int_key {
@@ -137,12 +137,12 @@ struct hash_int_key {
 		#ifdef _MSC_VER
 		return stdext::hash_value<int>(s);
 		#else
-		return hash<int>()(s);
+		return std::hash<int>()(s);
 		#endif
 	}
 };
 
-template <class ElemType> class IntKeyIterator : public hash_map<int, ElemType>::iterator {
+template <class ElemType> class IntKeyIterator : public std::hash_map<int, ElemType>::iterator {
 };
 
 #else
@@ -167,9 +167,9 @@ struct lt_int_key {
 
 template <class ElemType> class StringBasicHash :
 #ifdef GLE_USE_HASHTABLE
-	public hash_map<name_hash_key, ElemType, hash_name_hash_key, eq_name_hash_key> {
+	public std::hash_map<name_hash_key, ElemType, hash_name_hash_key, eq_name_hash_key> {
 #else
-	public map<name_hash_key, ElemType, lt_name_hash_key> {
+	public std::map<name_hash_key, ElemType, lt_name_hash_key> {
 #endif
 };
 
@@ -179,9 +179,9 @@ template <class ElemType> class StringBasicHash :
 
 template <class ElemType> class IntBasicHash :
 #ifdef GLE_USE_HASHTABLE
-	public hash_map<int, ElemType, hash_int_key, eq_int_key> {
+	public std::hash_map<int, ElemType, hash_int_key, eq_int_key> {
 #else
-	public map<int, ElemType, lt_int_key> {
+	public std::map<int, ElemType, lt_int_key> {
 #endif
 };
 
@@ -241,9 +241,9 @@ public:
 template <class ElemType> class StringKeyHash :
 #ifdef GLE_USE_HASHTABLE
     #ifdef _MSC_VER
-	public hash_map<name_hash_key, ElemType , stdext::hash_compare<name_hash_key,eq_name_hash_key> > {
+	public std::hash_map<name_hash_key, ElemType , stdext::hash_compare<name_hash_key,eq_name_hash_key> > {
     #else
-	public hash_map<name_hash_key, ElemType , hash_name_hash_key, eq_name_hash_key> {
+	public std::hash_map<name_hash_key, ElemType , hash_name_hash_key, eq_name_hash_key> {
     #endif
 #else
 	public map<name_hash_key, ElemType, lt_name_hash_key> {
@@ -295,9 +295,9 @@ public:
 
 template <class ElemType> class IntKeyHash :
 #ifdef GLE_USE_HASHTABLE
-	public hash_map<int, ElemType, hash_int_key, eq_int_key> {
+	public std::hash_map<int, ElemType, hash_int_key, eq_int_key> {
 #else
-	public map<int, ElemType, lt_int_key> {
+	public std::map<int, ElemType, lt_int_key> {
 #endif
 public:
 	ElemType try_get(int key) {

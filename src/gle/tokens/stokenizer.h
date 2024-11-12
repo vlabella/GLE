@@ -112,8 +112,8 @@ public:
 	}
 
 private:
-	string m_kept_delims;
-	string m_dropped_delims;
+	std::string m_kept_delims;
+	std::string m_dropped_delims;
 	bool m_use_ispunct;
 	bool m_use_isspace;
 	empty_token_policy m_empty_tokens;
@@ -181,10 +181,10 @@ public:
 	}
 
 private:
-	string m_dropped_delims;
-	string m_kept_delims;
-	string m_level_up_delims;
-	string m_level_down_delims;
+	std::string m_dropped_delims;
+	std::string m_kept_delims;
+	std::string m_level_up_delims;
+	std::string m_level_down_delims;
 
 	bool is_level_up(char E) const {
 		return m_level_up_delims.find(E) != string::npos;
@@ -248,12 +248,12 @@ public:
 		return m_cr_token;
 	}
 
-	const string& cr_token() {
+	const std::string& cr_token() {
 		return m_next_token;
 	}
 private:
 	bool m_more;
-	string m_cr_token, m_next_token, m_input;
-	string::const_iterator m_current, m_end;
+	std::string m_cr_token, m_next_token, m_input;
+	std::string::const_iterator m_current, m_end;
 	TokenizerFunc& m_token_func;
 };
