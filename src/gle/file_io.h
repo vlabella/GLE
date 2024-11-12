@@ -89,10 +89,10 @@ char *line(int i);
 
 bool GLEGetEnv(const std::string& name, std::string& result);
 void CopyGLETop(char* buf);
-std::string GetActualFilename(ifstream* file, const std::string& fname, const std::string* directory);
+std::string GetActualFilename(std::ifstream* file, const std::string& fname, const std::string* directory);
 void FillIncludePaths(std::vector<std::string>& IP);
 void GLEPathToVector(const std::string& path, std::vector<std::string>* vec);
-bool GLEStreamContains(istream& strm, const char* msg);
+bool GLEStreamContains(std::istream& strm, const char* msg);
 void StripDirSep(std::string& fname);
 void StripDirSepButNotRoot(std::string& fname);
 void CorrectDirSep(std::string& fname);
@@ -114,14 +114,14 @@ bool TryDeleteDir(const std::string& fname);
 bool TryDeleteFile(const std::string& fname);
 bool DeleteFileWithExt(const std::string& fname, const char* ext);
 bool DeleteFileWithNewExt(const std::string& fname, const char* ext);
-int ReadFileLine(istream& file, std::string& line);
-int ReadFileLineAllowEmpty(istream& file, std::string& line);
+int ReadFileLine(std::istream& file, std::string& line);
+int ReadFileLineAllowEmpty(std::istream& file, std::string& line);
 bool IsDirectory(const std::string& fname, bool linkok = true);
 bool IsExecutable(const std::string& fname);
 std::string GLETempName();
 std::string GLETempDirName();
 bool GLEMoveFile(const std::string& from, const std::string& to);
-void GLECopyStream(istream& from, ostream& to);
+void GLECopyStream(std::istream& from, ostream& to);
 int GLECopyFile(const std::string& from, const std::string& to, std::string* err = NULL);
 bool GLEGetCrDir(std::string* name);
 bool GLEGetCrDirWin32(std::string* name);
@@ -129,7 +129,7 @@ bool GLEChDir(const std::string& dir);
 void GLEFindFiles(const std::string& dir, std::vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
 std::string GLEFindLibrary(const char* name, GLEProgressIndicator* progress);
 void GLEFindPrograms(std::vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
-int GLESystem(const std::string& cmd, bool wait = true, bool redirout = true, istream* ins = NULL, ostream* outerrs = NULL);
+int GLESystem(const std::string& cmd, bool wait = true, bool redirout = true, std::istream* ins = NULL, ostream* outerrs = NULL);
 int GLERunCommand(const std::string& cmd, std::string& result);
 int GLESendSocket(const std::string& commands);
 bool GetExeName(const char* appname, char **argv, std::string& exe_name);
@@ -164,7 +164,7 @@ public:
 	const char* nextToken();
 	void readNextToken();
 	void close();
-	inline ifstream& getFile() { return m_File; }
+	inline std::ifstream& getFile() { return m_File; }
 };
 
 class GLEFileIO {
