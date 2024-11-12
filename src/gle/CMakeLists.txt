@@ -95,6 +95,7 @@ target_compile_definitions(gle-graphics_s PRIVATE -DHAVE_LIBGLE)
 target_compile_definitions(gle-graphics PRIVATE -DHAVE_LIBGLE)
 add_custom_target( glerc_file ALL DEPENDS glerc )
 
+target_compile_features(gle_common PUBLIC cxx_std_17)
 target_compile_features(gle PUBLIC cxx_std_17)
 target_compile_features(gle-graphics_s PUBLIC cxx_std_17)
 target_compile_features(gle-graphics PUBLIC cxx_std_17)
