@@ -659,7 +659,7 @@ void cmd_save(char *fname, const char *range, const char *format, int ntok) {
 		inlen = 0;
 	}
 	fclose(fptr);
-	if (rename(fname,"manip_.bak")!=0);
+	if (rename(fname,"manip_.bak")!=0){/*intentionally empty*/};
 	if (rename("manip_.tmp",fname)!=0) fner("Unable to rename manip_.tmp");
 }
 
