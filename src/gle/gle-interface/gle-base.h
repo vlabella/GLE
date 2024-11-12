@@ -44,7 +44,7 @@
 // #include <stdlib.h>
 // #include <string.h>
 
-using namespace std;
+// using namespace std; should not reside in header file
 
 class GLERefCountObject {
 private:

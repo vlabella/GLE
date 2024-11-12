@@ -91,7 +91,7 @@
 #include <string>
 #include <vector>
 
-using namespace std;
+// using namespace std; should not reside in header file
 
 #include "gle-base.h"
 #include "gle-const.h"
@@ -168,7 +168,7 @@ public:
 	void updateRange(double value);
 	void clip(double* value);
 	bool contains(double value);
-	ostream& printRange(ostream& out) const;
+	std::ostream& printRange(ostream& out) const;
 	inline double getMin() { return m_Min; }
 	inline double getMax() { return m_Max; }
 	inline double getWidth() { return m_Max - m_Min; }
@@ -181,7 +181,7 @@ public:
 	inline void updateRange(double value, bool miss) { if (!miss) updateRange(value); }
 };
 
-inline ostream& operator<<(ostream& os, const GLERange& range) {
+inline std::ostream& operator<<(std::ostream& os, const GLERange& range) {
 	return range.printRange(os);
 }
 
@@ -246,11 +246,11 @@ public:
 	void updateRange(GLEPoint* pt);
 	void addToRangeX(GLERange* range);
 	void addToRangeY(GLERange* range);
-	ostream& print(ostream& out) const;
+	std::ostream& print(std::ostream& out) const;
 	void toPoint(GLEJustify just, GLEPoint* pt);
 };
 
-inline ostream& operator<<(ostream& os, const GLERectangle& rect) {
+inline std::ostream& operator<<(std::ostream& os, const GLERectangle& rect) {
 	return rect.print(os);
 }
 
@@ -282,10 +282,10 @@ public:
 	DLLFCT void normalize();
 	DLLFCT bool approx(double x, double y);
 	DLLFCT void swap(GLEPoint& other);
-	DLLFCT ostream& write(ostream& os) const;
+	DLLFCT std::ostream& write(std::ostream& os) const;
 };
 
-inline ostream& operator<<(ostream& os, const GLEPoint& pt) {
+inline std::ostream& operator<<(std::ostream& os, const GLEPoint& pt) {
 	return pt.write(os);
 }
 
@@ -308,7 +308,7 @@ public:
 	DLLFCT double norm() const;
 	DLLFCT void normalize();
 	void ortho3DUnit(const GLEPoint3D& p, GLEPoint3D* r);
-	DLLFCT ostream& write(ostream& os) const;
+	DLLFCT std::ostream& write(std::ostream& os) const;
 };
 
 class DLLCLASS GLEMatrix {
@@ -321,7 +321,7 @@ public:
 	~GLEMatrix();
 	void dot(const GLEPoint3D& p, GLEPoint3D* r) const;
 	void setVertVector(int row, int col, const GLEPoint3D& p);
-	DLLFCT ostream& write(ostream& os) const;
+	DLLFCT std::ostream& write(std::ostream& os) const;
 };
 
 class DLLCLASS GLEProjection {
@@ -438,7 +438,7 @@ class DLLCLASS GLEColor : public GLEDataObject {
 protected:
 	bool m_Transparent;
 	double m_Red, m_Green, m_Blue, m_Alpha;
-	string* m_Name;
+	std::string* m_Name;
 	GLERC<GLEFillBase> m_Fill;
 public:
 	GLEColor();
@@ -547,7 +547,7 @@ enum GLEArrowTip {
 
 class GLEProperty {
 private:
-	string m_Name;
+	std::string m_Name;
 	const char* m_SetCmdName;
 	GLEPropertyType m_Type;
 	GLEPropertyID m_ID;
@@ -574,12 +574,12 @@ class GLEPropertyNominal : public GLEProperty {
 private:
 	IntIntHash* m_Value2Name;
 	StringIntHash* m_Name2Value;
-	vector<string> m_NomValues;
+	std::vector<std::string> m_NomValues;
 public:
 	GLEPropertyNominal(const char* name, GLEPropertyType type, GLEPropertyID id);
 	virtual ~GLEPropertyNominal();
 	void addValue(const char* name, int value);
-	virtual void getPropertyAsString(string* result, GLEMemoryCell* value);
+	virtual void getPropertyAsString(std::string* result, GLEMemoryCell* value);
 };
 
 class GLEPropertyLWidth : public GLEProperty {
@@ -628,7 +628,7 @@ public:
 	virtual ~GLEPropertyJustify();
 	virtual bool isEqualToState(GLEPropertyStore* store);
 	virtual void updateState(GLEPropertyStore* store);
-	virtual void getPropertyAsString(string* result, GLEMemoryCell* value);
+	virtual void getPropertyAsString(std::string* result, GLEMemoryCell* value);
 };
 
 class GLEPropertyFillColor : public GLEProperty {
@@ -706,7 +706,7 @@ public:
 	inline GLEFont* getFontProperty(GLEProperty* prop) { return (GLEFont*)m_Values.getObject(prop->getIndex()); }
 	inline GLEString* getStringProperty(GLEProperty* prop) { return (GLEString*)m_Values.getObject(prop->getIndex()); }
 	inline GLEArrayImpl* getArray() { return &m_Values; }
-	void getPropertyAsString(GLEPropertyID id, string* result);
+	void getPropertyAsString(GLEPropertyID id, std::string* result);
 	GLEPropertyStore* clone();
 };
 
@@ -720,19 +720,19 @@ class GLEFileLocationMap;
 class DLLCLASS GLEFileLocation {
 protected:
 	unsigned int m_Flags;
-	string m_Name;
-	string m_Ext;
-	string m_Directory;
-	string m_FullPath;
+	std::string m_Name;
+	std::string m_Ext;
+	std::string m_Directory;
+	std::string m_FullPath;
 public:
 	GLEFileLocation();
 	GLEFileLocation(const char* file);
 	GLEFileLocation(const GLEFileLocation& other);
 	~GLEFileLocation();
-	void fromAbsolutePath(const string& path);
-	void fromRelativePath(const string& dirname, const string& fname);
-	void fromFileNameCrDir(const string& fname);
-	void fromFileNameDir(const string& fname, const string& dirname);
+	void fromAbsolutePath(const std::string& path);
+	void fromRelativePath(const std::string& dirname, const std::string& fname);
+	void fromFileNameCrDir(const std::string& fname);
+	void fromFileNameDir(const std::string& fname, const std::string& dirname);
 	void createStdin();
 	void createStdout();
 	void createIllegal();
@@ -740,20 +740,20 @@ public:
 	void copy(const GLEFileLocation* other);
 	void addExtension(const char* ext);
 	bool isStream();
-	string getFileName();
-	string getMainName();
+	std::string getFileName();
+	std::string getMainName();
 	inline unsigned int getFlags() const { return m_Flags; }
-	inline const string& getName() const { return m_Name; }
-	inline const string& getExt() const { return m_Ext; }
-	inline const string& getDirectory() const { return m_Directory; }
-	inline const string& getFullPath() const { return m_FullPath; }
-	inline string& getFullPathNC() { return m_FullPath; }
+	inline const std::string& getName() const { return m_Name; }
+	inline const std::string& getExt() const { return m_Ext; }
+	inline const std::string& getDirectory() const { return m_Directory; }
+	inline const std::string& getFullPath() const { return m_FullPath; }
+	inline std::string& getFullPathNC() { return m_FullPath; }
 	inline bool isStdin() { return (m_Flags & GLE_FILELOCATION_IS_STDIN) != 0; }
 	inline bool isStdout() { return (m_Flags & GLE_FILELOCATION_IS_STDOUT) != 0; }
-	inline void setName(const string& v) { m_Name = v; }
-	inline void setExt(const string& v) { m_Ext = v; }
-	inline void setDirectory(const string& v) { m_Directory = v; }
-	inline void setFullPath(const string& v) { m_FullPath = v; }
+	inline void setName(const std::string& v) { m_Name = v; }
+	inline void setExt(const std::string& v) { m_Ext = v; }
+	inline void setDirectory(const std::string& v) { m_Directory = v; }
+	inline void setFullPath(const std::string& v) { m_FullPath = v; }
 };
 
 struct surface_struct;
@@ -774,7 +774,7 @@ protected:
 	GLERC<GLEPropertyStoreModel> m_LineModel;
 	GLERC<GLEPropertyStoreModel> m_ShapeModel;
 
-	string* m_InitialPS;
+	std::string* m_InitialPS;
 	GLEFileLocationMap* m_FileInfoMap;
 public:
 	GLEInterface();
@@ -841,7 +841,7 @@ public:
 	GLEFont* getFont(int i);
 
 	// Return the font matching a given name
-	GLEFont* getFont(const string& name);
+	GLEFont* getFont(const std::string& name);
 
 	// Return the font matching a given name
 	GLEFont* getFont(const char* name);
@@ -893,8 +893,8 @@ public:
 
 	DLLFCT void evalString(const char* str, GLEScript* script = NULL);
 
-	DLLFCT string getTempFile();
-	DLLFCT int copyFile(const string& from, const string& to, string* err = NULL);
+	DLLFCT std::string getTempFile();
+	DLLFCT int copyFile(const std::string& from, const std::string& to, std::string* err = NULL);
 
 	void initTextProperties(GLEPropertyStore* prop);
 
@@ -908,7 +908,7 @@ public:
                                   int options,
                                   gle_write_func writeFunc,
                                   void* closure);
-                                  
+
    DLLFCT bool readFileOrGZIPTxt(const char* name, std::string* result);
 
 public:
@@ -926,9 +926,9 @@ public:
 class DLLCLASS GLEErrorMessage {
 private:
 	int m_Line, m_Column, m_Delta;
-	string m_File;
-	string m_LineAbbrev;
-	string m_ErrorMsg;
+	std::string m_File;
+	std::string m_LineAbbrev;
+	std::string m_ErrorMsg;
 public:
 	GLEErrorMessage();
 	~GLEErrorMessage();
@@ -939,11 +939,11 @@ public:
 	inline int getDelta() { return m_Delta; }
 	inline void setDelta(int delta) { m_Delta = delta; }
 	inline const char* getFile() { return m_File.c_str(); }
-	inline void setFile(const string& val) { m_File = val; }
+	inline void setFile(const std::string& val) { m_File = val; }
 	inline const char* getLineAbbrev() { return m_LineAbbrev.c_str(); }
-	inline void setLineAbbrev(const string& val) { m_LineAbbrev = val; }
+	inline void setLineAbbrev(const std::string& val) { m_LineAbbrev = val; }
 	inline const char* getErrorMsg() { return m_ErrorMsg.c_str(); }
-	inline void setErrorMsg(const string& val) { m_ErrorMsg = val; }
+	inline void setErrorMsg(const std::string& val) { m_ErrorMsg = val; }
 };
 
 class DLLCLASS GLEOutputStream {
@@ -1116,29 +1116,29 @@ public:
 class GLETextDO : public GLEDrawObject {
 protected:
 	GLEPoint m_Position;
-	string m_Text;
-	string m_PostScript;
+	std::string m_Text;
+	std::string m_PostScript;
 	GLERectangle m_PSBoundingBox;
 	double m_BaseLine;
 	bool m_Modified;
 public:
 	GLETextDO();
-	GLETextDO(GLEPoint& position, const string& text);
+	GLETextDO(GLEPoint& position, const std::string& text);
 	virtual ~GLETextDO();
 	virtual const char* getPostScriptCode();
 	virtual void getPSBoundingBox(GLERectangle* box);
 	GLEDrawObjectType getType();
 	inline double getBaseLine() { return m_BaseLine; }
 	void initBB(double width, double height, double baseline);
-	inline string* getPostScriptPtr() { return &m_PostScript; }
-	inline const string& getText() { return m_Text; }
+	inline std::string* getPostScriptPtr() { return &m_PostScript; }
+	inline const std::string& getText() { return m_Text; }
 	inline const char* getTextC() { return m_Text.c_str(); }
-	inline void setText(const string& text) { m_Text = text; }
+	inline void setText(const std::string& text) { m_Text = text; }
 	inline void setText(const char* text) { m_Text = text; }
 	inline GLEPoint& getPosition() { return m_Position; }
 	inline void setPosition(const GLEPoint& pos) { m_Position = pos; }
 	virtual bool needsAMove(GLEPoint& pt);
-	virtual void createGLECode(string& code);
+	virtual void createGLECode(std::string& code);
 	virtual void updateBoundingBox();
 	virtual void applyTransformation(bool dir);
 	virtual void initProperties(GLEInterface* iface);
@@ -1191,7 +1191,7 @@ public:
 class GLEObjectDO : public GLEDrawObject {
 protected:
 	GLEPoint m_Position;
-	string m_PostScript;
+	std::string m_PostScript;
 	GLERC<GLEObjectRepresention> m_ObjRep;
 	GLERC<GLEString> m_RefPoint;
 	GLEObjectDOConstructor* m_Cons;
@@ -1201,11 +1201,11 @@ public:
 	virtual const char* getPostScriptCode();
 	virtual void getPSBoundingBox(GLERectangle* box);
 	GLEDrawObjectType getType();
-	inline string* getPostScriptPtr() { return &m_PostScript; }
+	inline std::string* getPostScriptPtr() { return &m_PostScript; }
 	inline GLEPoint& getPosition() { return m_Position; }
 	inline void setPosition(const GLEPoint& pos) { m_Position = pos; }
 	virtual bool needsAMove(GLEPoint& pt);
-	virtual void createGLECode(string& code);
+	virtual void createGLECode(std::string& code);
 	virtual void updateBoundingBox();
 	virtual void applyTransformation(bool dir);
 	virtual void initProperties(GLEInterface* iface);
@@ -1233,8 +1233,8 @@ protected:
 	GLEGlobalSource m_File;
 	GLEPoint m_Size, m_BoundingBox, m_BoundingBoxOrigin;
 	GLERCVector<GLEDrawObject> m_NewObjs;
-	string m_PostScriptCode;
-	string m_PDFCode;
+	std::string m_PostScriptCode;
+	std::string m_PDFCode;
 	int m_CurrObject;
 public:
 	GLEScript();
@@ -1278,7 +1278,7 @@ public:
 	inline void addNewObject(GLEDrawObject* obj) { m_NewObjs.add(obj); }
 	void clearNewObjects();
 	virtual const char* getPostScriptCode();
-	virtual string* getRecordedBytesBuffer(int device);
+	virtual std::string* getRecordedBytesBuffer(int device);
 };
 
 class DLLCLASS GLEColorList {
@@ -1292,12 +1292,12 @@ public:
 	~GLEColorList();
 	void reset();
 	void defineColor(const char* name, unsigned int value);
-	void defineColor(const string& name, unsigned int value);
-	void defineColor(const string& name, GLEColor* color);
+	void defineColor(const std::string& name, unsigned int value);
+	void defineColor(const std::string& name, GLEColor* color);
 	void defineOldColor(const char* name, unsigned int value);
-	void defineOldColor(const string& name, unsigned int value);
-	GLEColor* get(const string& name);
-	DLLFCT GLEColor* getSafeDefaultBlack(const string& name);
+	void defineOldColor(const std::string& name, unsigned int value);
+	GLEColor* get(const std::string& name);
+	DLLFCT GLEColor* getSafeDefaultBlack(const std::string& name);
 	inline int getNbColors() { return m_Colors.size(); }
 	inline GLEColor* getColor(int i) { return m_Colors.get(i); }
 	void defineDefaultColors();

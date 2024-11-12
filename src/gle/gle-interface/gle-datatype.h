@@ -67,7 +67,7 @@ public:
 	virtual ~GLEDataObject();
 	virtual int getType() const;
 	virtual bool equals(GLEDataObject* obj) const;
-	virtual void print(ostream& out) const;
+	virtual void print(std::ostream& out) const;
 };
 
 typedef union {
@@ -143,7 +143,7 @@ inline void GLE_MC_COPY(GLEMemoryCell* a, GLEMemoryCell* b) {
 
 bool gle_memory_cell_equals(GLEMemoryCell* a, GLEMemoryCell* b);
 bool gle_memory_cell_add(GLEMemoryCell* a, GLEMemoryCell* b);
-void gle_memory_cell_print(GLEMemoryCell* a, ostream& out);
+void gle_memory_cell_print(GLEMemoryCell* a, std::ostream& out);
 bool gle_memory_cell_to_double(GLEMemoryCell* a, double* result);
 void gle_memory_cell_check(GLEMemoryCell* a, int expected);
 int gle_memory_cell_type(GLEMemoryCell* a);
@@ -158,7 +158,7 @@ public:
 	virtual ~GLEPointDataObject();
 	virtual int getType() const;
 	virtual bool equals(GLEDataObject* obj) const;
-	virtual void print(ostream& out) const;
+	virtual void print(std::ostream& out) const;
 };
 
 class DLLCLASS GLEString : public GLEDataObject {
@@ -170,7 +170,7 @@ protected:
 public:
 	GLEString();
 	GLEString(const char* utf8);
-	GLEString(const string& utf8);
+	GLEString(const std::string& utf8);
 	virtual ~GLEString();
 	inline unsigned int length() const { return m_Length; }
 	inline unsigned int get(unsigned int i) const { return m_Data[i]; }
@@ -182,14 +182,14 @@ public:
 	bool containsI(unsigned int ch);
 	int strICmp(GLEString* other) const;
 	virtual bool equals(GLEDataObject* obj) const;
-	virtual void print(ostream& out) const;
+	virtual void print(std::ostream& out) const;
 	void fromUTF8(const char* str);
-	void fromUTF8(const string& str);
+	void fromUTF8(const std::string& str);
 	void fromUTF8(const char* str, unsigned int len);
-	ostream& toUTF8(ostream& out) const;
+	std::ostream& toUTF8(std::ostream& out) const;
 	void toUTF8(string& out) const;
 	void toUTF8(char* out) const;
-	string toUTF8() const;
+	sstd::tring toUTF8() const;
 	GLEString* concat(GLEString* other) const;
 	GLEString* substringWithLength(unsigned int from, unsigned int size) const;
 	GLEString* substring(unsigned int from, unsigned int to) const;
@@ -204,7 +204,7 @@ public:
 	static GLEString* getEmptyString();
 };
 
-inline ostream& operator<<(ostream& os, const GLEString& pos) {
+inline std::ostream& operator<<(std::ostream& os, const GLEString& pos) {
 	return pos.toUTF8(os);
 }
 
@@ -257,7 +257,7 @@ public:
 	void ensure(unsigned int size);
 	void resize(unsigned int size);
 	void extend(unsigned int size);
-	void enumStrings(ostream& out);
+	void enumStrings(std::ostream& out);
 	virtual int getType() const;
 private:
 	void resizeMemory(unsigned int size);
@@ -335,7 +335,7 @@ public:
 	void addField(const char* fieldName);
 	virtual int getType() const;
 	virtual bool equals(GLEDataObject* obj) const;
-	virtual void print(ostream& out) const;
+	virtual void print(std::ostream& out) const;
 };
 
 class GLEClassInstance : public GLEDataObject {
@@ -346,7 +346,7 @@ public:
 	GLEClassInstance(GLEClassDefinition* definition);
 	virtual int getType() const;
 	virtual bool equals(GLEDataObject* obj) const;
-	virtual void print(ostream& out) const;
+	virtual void print(std::ostream& out) const;
 	inline GLEClassDefinition* getDefinition() { return m_Definition.get(); }
 	inline GLEArrayImpl* getArray() { return &m_Data; }
 };
