@@ -131,7 +131,7 @@ public:
 	inline int getExtraComponents() { return m_ExtraComponents; }
 	inline void setExtraComponents(int extra) { m_ExtraComponents = extra; }
 	inline const std::string& getError() { return m_Error; }
-	inline void setError(const string& err) { m_Error = err; }
+	inline void setError(const std::string& err) { m_Error = err; }
 	inline void setError(const char* err) { m_Error = err; }
 	rgb* allocPalette(int ncolors);
 	int getScanlineSize();
@@ -196,16 +196,16 @@ class GLETIFF : public GLEBitmap {
 protected:
 	TIFF* m_Tiff;
 	uint16 m_TIFFCompress;
-	string m_fname;
+	std::string m_fname;
 public:
 	GLETIFF();
 	virtual ~GLETIFF();
-	virtual int open(const string& fname);
+	virtual int open(const std::string& fname);
 	virtual int readHeader();
 	virtual int prepare(int mode);
 	virtual int decode(GLEByteStream* output);
 	virtual void close();
-	virtual string getFName();
+	virtual std::string getFName();
 	int isCCITTCompression();
 	uint16 getTIFFCompression() { return m_TIFFCompress; }
 };

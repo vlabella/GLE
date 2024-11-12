@@ -55,8 +55,8 @@
 #endif
 
 #ifndef IN_FILE_IO_H
-	extern string PATH_SEP;
-	extern string DIR_SEP;
+	extern std::string PATH_SEP;
+	extern std::string DIR_SEP;
 #endif
 
 class GLEProgressIndicator {
@@ -155,7 +155,7 @@ class StreamTokenizerMax {
 protected:
 	char* m_LastToken;
 	int m_Sep, m_Max, m_IsOK;
-	ifstream m_File;
+	std::ifstream m_File;
 public:
 	StreamTokenizerMax(const std::string& fname, int sep, int max);
 	~StreamTokenizerMax();
