@@ -269,11 +269,13 @@ include_directories(
 #
 if(APPLE)
 	# GLE specific definitions
+	# shodul not define double underscore identifiers
+	# use __APPLE__ in source code to identify apple/mac platforms which is defined by compiler
 	add_compile_definitions(
-		__MAC__
-		__OSX__
-		__MACOS__
-		__UNIX__
+#		__MAC__  changed to __APPLE__ everywhere in source code
+#		__OSX__    changed to __APPLE__ everywhere in source code
+#		__MACOS__  changed to __APPLE__ everywhere in source code
+		__UNIX__   # is this needed?
 		HAVE_CONFIG_H
 		HAVE_CAIRO
 		HAVE_LIBZ

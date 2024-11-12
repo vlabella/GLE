@@ -28,7 +28,7 @@
 #include "../gle/surface/gsurface.h"
 
 #ifdef HAVE_LIBGLU_H
-#ifdef __OSX__
+#ifdef __APPLE__
 	#include <OpenGL/glu.h>
 #else
 	#include <GL/glu.h>

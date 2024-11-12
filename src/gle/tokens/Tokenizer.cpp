@@ -258,7 +258,7 @@ string TokenizerPos::getString(int tab1, int tab2) const {
 	return string(res);
 }
 
-#if defined(__UNIX__) || defined(__MAC__)
+#if defined(__UNIX__) || defined(__APPLE__)
 	ParserError g_format_parser_error(const char* format, ...) {
 #else
 	ParserError g_format_parser_error(va_list format, ...) {

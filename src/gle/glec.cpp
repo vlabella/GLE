@@ -74,7 +74,7 @@ void GLEAddLibName(string* lib) {
 	*lib += "gle-graphics-";
 	*lib += GLEVN;
 #ifdef __UNIX__
-	#ifdef __MACOS__
+	#ifdef __APPLE__
 		*lib += ".dylib";
 	#else
 		*lib += ".so";

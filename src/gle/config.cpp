@@ -201,10 +201,10 @@ void init_config(ConfigCollection* collection) {
 		strarg->setDefault("gswin64c.exe");
 	#endif
 #endif
-#ifdef __MACOS__
+#ifdef __APPLE__
 	strarg->setDefault("gs,glegs;$EXELOC/glegs");
 #endif
-#if defined(__UNIX__) && !defined(__MACOS__)
+#if defined(__UNIX__) && !defined(__APPLE__)
 	strarg->setDefault("gs");
 #endif
 #ifdef __OS2__
@@ -240,10 +240,10 @@ void init_config(ConfigCollection* collection) {
 		strarg->setDefault("gsdll64.dll");
 	#endif
 #endif
-#ifdef __MACOS__
+#ifdef __APPLE__
 	strarg->setDefault("/Library/Frameworks/Ghostscript.framework,Ghostscript.framework");
 #endif
-#if defined(__UNIX__) && !defined(__MACOS__)
+#if defined(__UNIX__) && !defined(__APPLE__)
 	strarg->setDefault("/usr/lib/libgs.so");
 #endif
 	strarg = section->addStringOption("editor", GLE_TOOL_TEXT_EDITOR);
@@ -504,7 +504,7 @@ void find_deps(const string& loc, GLEInterface* iface) {
 		// Find programs in search path on Unix
 		GLEFindPrograms(tofind, &progress);
 	#endif
-	#ifdef __MACOS__
+	#ifdef __APPLE__
 		// Search for frameworks on Mac
 		GLEFindFiles(string("/Library/Frameworks"), tofind, &progress);
 		string home = GetHomeDir();
