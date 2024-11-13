@@ -150,7 +150,7 @@ typedef char (*(*TOKENS)[500]);
 typedef unsigned char uchar;
 typedef double dbl;
 char *unquote(char *s);
-string gledir(const char *s);
+std::string gledir(const char *s);
 int set_missing(int x, int y);
 double vcell(int x, int y);
 void var_find_rc(int *idx, int *var, int *nd, int c);
