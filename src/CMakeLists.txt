@@ -11,21 +11,21 @@ project (gle VERSION 4.3.5)
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d")
 #
-# -- options for building GUI - default is to build it
-#      pass -DBUILD_GUI=OFF to turn if off
+# -- options
 #
-if(NOT DEFINED BUILD_GUI)
-	set(BUILD_GUI ON)
-endif()
+option(BUILD_GUI "Build the GUI - gle Previewer" ON)
+option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
+option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
+option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
 #
 # -- Windows option for static runtimes
 #
 if(WIN32)
 	#
-	# -- Windows option for runtime library - assume DLL /MD unless USE_STATIC_RUNTIME=ON then use static /MT
+	# -- Windows option for runtime library - assume DLL /MD unless MSVC_USE_STATIC_RUNTIME=ON then use static /MT
 	#
 	set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>DLL")
-	if(DEFINED USE_STATIC_RUNTIME AND USE_STATIC_RUNTIME)
+	if(DEFINED MSVC_USE_STATIC_RUNTIME AND MSVC_USE_STATIC_RUNTIME)
 		set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 		# tag CPACK_SYSTEM_NAME with "s" to denote static runtime - must rebuild the whole name as there is no way to add a tag
 		set(CPACK_SYSTEM_NAME "win64s")

@@ -99,7 +99,7 @@ jobs:
         -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
         -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
-        -DUSE_STATIC_RUNTIME=ON
+        -DMSVC_USE_STATIC_RUNTIME=ON
         -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
