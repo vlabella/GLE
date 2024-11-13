@@ -1,6 +1,6 @@
 {
   "dependencies": [
-    "zlib","boost","libpng","tiff",
+    "zlib","boost-math","libpng","tiff",
     {
       "name":"cairo",
       "default-features":false
