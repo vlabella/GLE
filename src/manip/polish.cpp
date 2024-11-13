@@ -42,6 +42,8 @@ extern int gle_debug;
 
 #include "all.h"
 
+using namespace std;
+
 void token_norm(void);
 
 #define tok(n)  tk[n]

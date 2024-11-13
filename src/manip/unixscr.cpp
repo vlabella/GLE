@@ -41,6 +41,9 @@
 #include <signal.h>
 
 #include "vaxconio.h"
+
+using namespace std;
+
 #define dbg if (1==1)
 
 #define NORET (int) 0

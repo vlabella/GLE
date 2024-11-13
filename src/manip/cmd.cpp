@@ -56,6 +56,8 @@
 #include "edt.h"
 #include "keyword.h"
 
+using namespace std;
+
 extern int in_recover;
 extern int curx;
 extern int cury;

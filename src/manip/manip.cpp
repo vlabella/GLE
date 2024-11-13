@@ -46,6 +46,8 @@
 
 #include "../gle/file_io.h"
 
+using namespace std;
+
 /* function prototypes */
 
 /*

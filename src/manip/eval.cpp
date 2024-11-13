@@ -42,6 +42,8 @@
 #include "mygraph.h"
 #include "eval.h"
 
+using namespace std;
+
 typedef union {
 	struct {unsigned char r,g,b,f;} rgb ;
 	int32 l;

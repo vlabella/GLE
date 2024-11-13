@@ -38,6 +38,8 @@
 
 #include "all.h"
 
+using namespace std;
+
 int var_local;		/* 0 = global, 1 = local */
 char *var_names[100];	/* Global variables */
 int var_type[100];

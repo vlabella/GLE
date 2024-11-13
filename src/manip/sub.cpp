@@ -38,6 +38,8 @@
 
 #include "all.h"
 
+using namespace std;
+
 int var_alloc_local(void);
 int var_free_local(void);
 extern int32 *(*gpcode)[];   /* gpcode is a pointer to an array of pointer to int32 */

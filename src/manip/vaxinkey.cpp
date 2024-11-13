@@ -39,6 +39,8 @@
 #include "all.h"
 #include "edt.h"
 
+using namespace std;
+
 int fner(char *s);
 int scr_manip_refresh(void);
 int scr_getch(void);

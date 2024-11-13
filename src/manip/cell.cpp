@@ -45,6 +45,8 @@
 #define DASHCHAR '.'
 #include "vaxconio.h"
 
+using namespace std;
+
 extern int changed;
 extern int data_x;
 extern int data_y;

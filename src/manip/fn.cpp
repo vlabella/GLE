@@ -39,6 +39,8 @@
 #include "all.h"
 #include "eval.h"
 
+using namespace std;
+
 /*------------------------------------------------------------------*/
 /*      Find the function callped *cp, and return its number        */
 /*------------------------------------------------------------------*/

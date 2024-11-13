@@ -49,24 +49,25 @@ void fner_do(char *output);
 void printmess_do(char *output);
 
 #include "all.h"
+using namespace std;
 
 void fner(const char* fmt,...) {
         va_list args;
-        char string[1024];
+        char str[1024];
 
         va_start(args,fmt);
-        vsprintf(string, fmt, args);
+        vsprintf(str, fmt, args);
         va_end(args);
-	fner_do(string);
+	fner_do(str);
 }
 
 void printmess(const char* fmt,...) {
         va_list args;
-        char string[1024];
+        char str[1024];
 
         va_start(args,fmt);
-        vsprintf(string, fmt, args);
+        vsprintf(str, fmt, args);
         va_end(args);
-	printmess_do(string);
+	printmess_do(str);
 }
 

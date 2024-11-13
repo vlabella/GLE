@@ -38,6 +38,8 @@
 
 #include "all.h"
 
+using namespace std;
+
 void token_init(void);
 void subscript(void);
 

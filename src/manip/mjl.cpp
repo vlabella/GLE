@@ -40,6 +40,8 @@
 #include "edt.h"
 #include "../gle/file_io.h"
 
+using namespace std;
+
 FILE *jouptr;
 extern int in_recover,single_step;
 

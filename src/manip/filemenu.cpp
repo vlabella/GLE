@@ -40,6 +40,8 @@
 #include "color.h"
 #include "edt.h"
 
+using namespace std;
+
 #define WHITE 15
 #define BLACK 0
 #define BEGINDEF extern

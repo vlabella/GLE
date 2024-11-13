@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.18)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
-cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed.
+#cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed. only for cmake 3.30 and later live with the warning for now
 cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 include(CheckIncludeFile)
 include(CheckIncludeFiles)

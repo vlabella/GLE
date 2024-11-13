@@ -38,6 +38,8 @@
 
 #include "all.h"
 
+using namespace std;
+
 delay(int i)
 {}
 int vx_top=1,vx_bot=24;

@@ -41,6 +41,8 @@
 
 #include "all.h"
 
+using namespace std;
+
 void polar_xy(double r, double angle, double *dx, double *dy) {
 	*dx = r*cos(angle*pi/180.0);
 	*dy = r*sin(angle*pi/180.0);

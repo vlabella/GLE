@@ -43,6 +43,8 @@
 #include "nofnkeys.h"
 #endif
 
+using namespace std;
+
 int do_fnkey(void);
 int do_gold(void);
 int escape_seq(void);

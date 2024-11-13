@@ -39,6 +39,8 @@
 #include "all.h"
 #include "unix_extra.h"
 
+using namespace std;
+
 int trimcr(char *s);
 
 int32 coreleft(void) {
