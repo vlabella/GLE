@@ -24,7 +24,12 @@ add_executable(manip
 )
 
 if(WIN32)
-	target_link_libraries(manip LINK_PUBLIC Ws2_32.lib )
+	target_link_libraries(manip LINK_PUBLIC
+		opengl32.lib
+		wsock32.lib
+		Ws2_32.lib
+		msimg32.lib
+	)
 endif()
 
 target_link_libraries(manip PRIVATE ${CURSES_LIBRARIES})
