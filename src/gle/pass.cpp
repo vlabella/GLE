@@ -1797,7 +1797,6 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 					}
 				} else {
 					setSpecial(GLE_PARSER_INCLUDE);
-					get_strexp(pcode);
 					temp_str = tokens->next_token();
 					// file sep character '/' is now a token due to math shortcut operators
 					// so get all tokens to end of line
