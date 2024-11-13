@@ -5,6 +5,6 @@
       "name":"cairo",
       "default-features":false
     },
-    "pixman","qt5","libdeflate","zstd"
+    "pixman","qt5","libdeflate","zstd","curses"
   ]
 }
