@@ -14,6 +14,7 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 # -- options
 #
 option(BUILD_GUI "Build the GUI - gle Previewer" ON)
+option(BUILD_MANIP "Build manip program" ON)
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
@@ -126,12 +127,12 @@ find_package(ZLIB REQUIRED)
 SET(Boost_USE_STATIC_LIBS ON)
 find_package(Boost)
 find_package(JPEG)
-if(UNIX)
+if(BUILD_MANIP)
 	find_package(Curses REQUIRED) # -- for manip
 endif()
 find_package(TIFF)
 
-if(WIN32)
+if(WIN32 AND TIFF_FOUND)
 	#
 	# -- find optional packages for LibTIFF only if linking against static libraries on windows
 	#
@@ -464,7 +465,7 @@ endif()
 
 add_subdirectory(gle)
 add_subdirectory(glebtool)
-if(UNIX)
+if(BUILD_CURSES)
 	add_subdirectory(manip)
 endif()
 add_subdirectory(fbuild)
