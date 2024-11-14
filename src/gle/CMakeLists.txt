@@ -168,12 +168,14 @@ if(POPPLER_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
 		${Poppler_LIBRARIES}
 		GLIB2::GLIB2
-		GLIB2::GOBJECT
+		${GLIB2_GOBJECT_LIBRARIES}
+		#GLIB2::GOBJECT
  	)
 	target_link_libraries ( gle-graphics LINK_PUBLIC
 		${Poppler_LIBRARIES}
 		GLIB2::GLIB2
-		GLIB2::GOBJECT
+		${GLIB2_GOBJECT_LIBRARIES}
+		#GLIB2::GOBJECT
  	)
 endif()
 
