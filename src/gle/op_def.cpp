@@ -38,7 +38,7 @@
 
 #include "op_def.h"
 #include "color.h"
-using namespace std;
+//using namespace std;
 /*--------------------------------------------------------------------------------------*/
 /* Pos = Offset to find the data                                                        */
 /* Idx = For switches, which can only have one value                                    */
