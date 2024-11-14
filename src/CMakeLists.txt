@@ -272,7 +272,7 @@ endif()
 #
 # -- poppler
 #
-#find_package(poppler)
+find_package(poppler)
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
 #
@@ -489,6 +489,9 @@ if(HAVE_SYS_STAT_H)
 endif()
 if(HAVE_UNISTD_H)
 	add_compile_definitions(HAVE_UNISTD_H)
+endif()
+if(POPPLER_FOUND)
+	add_compile_definitions(HAVE_POPPLER)
 endif()
 
 add_subdirectory(gle)
