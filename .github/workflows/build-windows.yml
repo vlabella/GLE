@@ -40,7 +40,7 @@ jobs:
           core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
     - name: Install ECM package using vcpkg
-      run: "${{ github.workspace }}/vcpkg/vcpkg ecm"
+      run: "${{ github.workspace }}/vcpkg/vcpkg install ecm"
       shell: cmd
 
       # header files needed for building of GLE
