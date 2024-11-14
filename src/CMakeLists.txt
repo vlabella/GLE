@@ -274,10 +274,10 @@ endif()
 #
 # -- poppler
 #
-find_package(poppler)
+find_package(Poppler)
 if(POPPLER_FOUND)
 	# poppler must have glib2
-	find_package(glib2 REQUIRED)
+	find_package(GLIB2 REQUIRED)
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime

@@ -303,7 +303,7 @@ void gle_write_cairo_surface_bitmap(cairo_surface_t* surface,
 #include <poppler.h>
 
 void gle_glib_init(int /* argc */, char** /* argv */) {
-	g_type_init();
+	// g_type_init(); -- deprectated since glib 2.36
 }
 
 void gle_convert_pdf_to_image(char* pdfData,
