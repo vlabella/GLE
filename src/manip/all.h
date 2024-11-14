@@ -99,7 +99,6 @@ struct s_range {int col,row,c1,r1,c2,r2,colfirst; };
 typedef struct s_range RANGE;
 
 #include <string>
-#include <string>
 #include <vector>
 #include <fstream>
 
