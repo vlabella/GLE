@@ -315,7 +315,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 		                      void* closure)
 {
 	GError* err = 0;
-	PopplerDocument* doc = poppler_document_new_from_data(pdfData, pdfLength, 0, &err);
+	PopplerDocument* doc = poppler_document_new_from_data(pdfData, pdfLength, 0, &err); // deprecated should use new_from_bytes
 	if (doc == 0) {
 		std::ostringstream errMsg;
 		errMsg << ">> error opening PDF: " << err->message;
