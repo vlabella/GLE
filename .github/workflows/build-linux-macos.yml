@@ -40,7 +40,9 @@ jobs:
             sudo apt-get install cmake freeglut3-dev libboost-dev \
                 libcairo-dev libdeflate-dev libgs-dev \
                 libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
-                libpng-dev libtiff-dev libz-dev qtbase5-dev libpoppler-dev libglib2.0-dev extra-cmake-modules
+                libpng-dev libtiff-dev libz-dev qtbase5-dev \
+                poppler libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt5-dev libpoppler-qt6-dev \
+                libglib2.0-dev extra-cmake-modules
             jobs=$(nproc)
             ;;
           macOS)
