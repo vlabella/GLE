@@ -40,7 +40,7 @@ jobs:
             sudo apt-get install cmake freeglut3-dev libboost-dev \
                 libcairo-dev libdeflate-dev libgs-dev \
                 libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
-                libpng-dev libtiff-dev libz-dev qtbase5-dev libpoppler-dev extra-cmake-modules
+                libpng-dev libtiff-dev libz-dev qtbase5-dev libpoppler-dev libglib2.0-dev extra-cmake-modules
             jobs=$(nproc)
             ;;
           macOS)
@@ -51,7 +51,7 @@ jobs:
             # cmake is preinstalled with Homebrew on GitHub Actions runners and
             # trying to install it again produces an unintelligible warning.
             brew install --quiet boost cairo ghostscript jpeg-turbo \
-                libdeflate libpng libtiff pixman qt@5 zstd poppler extra-cmake-modules
+                libdeflate libpng libtiff pixman qt@5 zstd poppler glib extra-cmake-modules
             echo "-D Qt5_DIR=$(brew --prefix qt@5)/lib/cmake/Qt5" >> configure.args
             jobs=$(sysctl -n hw.activecpu)
             ;;
