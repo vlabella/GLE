@@ -123,8 +123,8 @@ endif()
 
 if(POPPLER_FOUND)
 	list(APPEND QGLE_LIBRARIES
-		${GLIB2_LIBRARIES}
 		${Poppler_LIBRARIES}
+		${GLIB2_LIBRARIES}
  	)
 endif()
 

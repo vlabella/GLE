@@ -166,12 +166,12 @@ endif()
 
 if(POPPLER_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
-		${GLIB2_LIBRARIES}
 		${Poppler_LIBRARIES}
+		${GLIB2_LIBRARIES}
  	)
 	target_link_libraries ( gle-graphics LINK_PUBLIC
-		${GLIB2_LIBRARIES}
 		${Poppler_LIBRARIES}
+		${GLIB2_LIBRARIES}
  	)
 endif()
 
