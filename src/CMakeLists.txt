@@ -280,6 +280,11 @@ find_package(Poppler)
 if(POPPLER_FOUND)
 	# poppler must have glib2
 	find_package(GLIB2 REQUIRED)
+	if(NOT DEFINED GLIB2_GOBJECT_LIBRARIES)
+		# findGLIB2 on ubuntu does not find the object library due to outdated version of ECM 5.9
+		# works fine on macOS - needs ECM >= 6.7
+		find_library(GLIB2_GOBJECT_LIBRARIES NAMES gobject-2.0 HINTS ${PC_GLIB2_LIBDIR})
+	endif()
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
