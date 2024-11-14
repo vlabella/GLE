@@ -12,7 +12,7 @@
 #include <boost/math/special_functions/airy.hpp>
 #include <boost/math/special_functions/chebyshev.hpp>
 
-double myfactorial(unsigned int n);
-double myhermite(unsigned int n, double x);
-double mylaguerre(unsigned int n, double alpha, double x);
+//double myfactorial(unsigned int n);
+//double myhermite(unsigned int n, double x);
+//double mylaguerre(unsigned int n, double alpha, double x);
 

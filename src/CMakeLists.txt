@@ -276,8 +276,8 @@ endif()
 #
 find_package(poppler)
 if(POPPLER_FOUND)
-	# poppler must have glib2
-	find_package(glib2 REQUIRED)
+	# poppler must have glib2 - think poppler comes with glib.h
+	#	find_package(glib2 REQUIRED)
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
@@ -299,7 +299,7 @@ include_directories(
 	${PIXMAN_INCLUDE_DIRS}
 	${GHOSTPDL_INCLUDE_DIRS}
 	${Poppler_INCLUDE_DIRS}
-	${GLIB2_INCLUDE_DIR}
+#	${GLIB2_INCLUDE_DIR}
 )
 #
 # -- compile time definitions

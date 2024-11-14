@@ -159,6 +159,7 @@ bool gle_memory_cell_add(GLEMemoryCell* a, GLEMemoryCell* b) {
 			//aa = reinterpret_cast<GLEString*> a->Entry.ObjectVal;
 			//bb = (GLEString*) b->Entry.ObjectVal;
 			//return aa->concat(bb);
+		default:
 	}
 	return false;
 }

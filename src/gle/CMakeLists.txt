@@ -69,7 +69,7 @@ set(GLE_SOURCES
 	builtin-double.cpp
 	cutils.cpp
 	file_io.cpp
-	specialfunctions.cpp
+#	specialfunctions.cpp  include only
 )
 
 set( GLEBTOOL_SOURCES
@@ -167,11 +167,11 @@ endif()
 if(POPPLER_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
 		${Poppler_LIBRARIES}
- 		GLIB2::GLIB2
+ 		#GLIB2::GLIB2
  	)
 	target_link_libraries ( gle-graphics LINK_PUBLIC
 		${Poppler_LIBRARIES}
-		GLIB2::GLIB2
+		#GLIB2::GLIB2
  	)
 endif()
 

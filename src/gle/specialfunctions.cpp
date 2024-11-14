@@ -2,7 +2,7 @@
 // -- specialfunctions.cpp  - deprecated - using boost now
 //
 //
-
+/*
 using namespace std;
 
 double myfactorial(unsigned int n)
@@ -47,3 +47,4 @@ double mylaguerre(unsigned int n, double alpha, double x)
 	}
 	return ret;
 }
+*/
