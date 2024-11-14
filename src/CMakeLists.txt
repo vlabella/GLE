@@ -275,6 +275,10 @@ endif()
 # -- poppler
 #
 find_package(poppler)
+if(POPPLER_FOUND)
+	# poppler must have glib2
+	find_package(glib2 REQUIRED)
+endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
 #
@@ -294,6 +298,8 @@ include_directories(
 	${CAIRO_INCLUDE_DIRS}
 	${PIXMAN_INCLUDE_DIRS}
 	${GHOSTPDL_INCLUDE_DIRS}
+	${Poppler_INCLUDE_DIRS}
+	${GLIB2_INCLUDE_DIR}
 )
 #
 # -- compile time definitions

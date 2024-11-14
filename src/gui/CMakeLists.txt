@@ -121,6 +121,13 @@ if(LibLZMA_FOUND)
 	)
 endif()
 
+if(POPPLER_FOUND)
+	list(APPEND QGLE_LIBRARIES
+		${Poppler_LIBRARIES}
+ 		GLIB2::GLIB2
+ 	)
+endif()
+
 target_link_libraries ( qgle LINK_PUBLIC
 	${QGLE_LIBRARIES}
 	)
