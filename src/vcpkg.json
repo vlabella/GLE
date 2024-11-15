@@ -9,7 +9,7 @@
     {
       "name":"poppler",
       "default-features":true,
-      "features": [ "cairo","cpp","glib","qt","cms" ]
+      "features": [ "cairo","glib","qt","cms" ]
     },
     "glib","ecm"
   ]
