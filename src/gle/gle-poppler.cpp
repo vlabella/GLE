@@ -357,7 +357,8 @@ void gle_convert_pdf_to_image(char* pdfData,
 // cross platform poppler not reliant on GLIB2
 #include <poppler-document.h>
 #include <poppler-page.h>
-#include <poppler-renderer.h>
+#include <poppler-page-renderer.h>
+#include <poppler-image.h>
 
 void gle_glib_init(int /* argc */, char** /* argv */) {
 // deprecated - should remove
