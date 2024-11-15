@@ -48,7 +48,7 @@ jobs:
       shell: cmd
 
     - name: List directory
-      run: DIR "${{ github.workspace }}/vcpkg/installed"
+      run: DIR "${{ github.workspace }}/vcpkg/installed/x64-windows"
       shell: cmd
 
       # header files needed for building of GLE
@@ -69,7 +69,7 @@ jobs:
         -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
-        -DECM_DIR="${{github.workspace}}/vcpkg/installed/ECM"
+        -DECM_DIR="${{github.workspace}}/vcpkg/installed/x64-windows/ECM"
 
     - name: Build
       run: |
