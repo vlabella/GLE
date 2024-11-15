@@ -372,7 +372,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 		                      gle_write_func writeFunc,
 		                      void* closure)
 {
-	std::vector<char> pop_data(pdfData);
+	std::vector<char> pop_data(pdfData,pdfData+pdfLength);
 	poppler::document *doc = poppler::document::load_from_data(pop_data);
 	if (doc == 0) {
 		std::ostringstream errMsg;
