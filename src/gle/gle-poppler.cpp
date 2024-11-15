@@ -402,7 +402,7 @@ void gle_convert_pdf_to_image(char* pdfData,
     }
     cairo_scale(cr, resolution / PS_POINTS_PER_INCH, resolution / PS_POINTS_PER_INCH);
     poppler::page_renderer rend;
-	poppler::image img(cr,i_width,i_height);
+	poppler::image img(cr,i_width,i_height, poppler::image::format_rgb24);
 	img = rend.render_page(page);
     //poppler_page_render(page, cr);
     gle_write_cairo_surface_bitmap(surface, device, options, writeFunc, closure);
