@@ -25,7 +25,7 @@ option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtim
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
 # CPP interface to poppler is *more* cross platform and does not rely on GLIB2.  vcpkg only installs the cpp interface for windows
-option(POPPLER_INTERFACE "The poppler (PDFLibarary) interface to utilize GLIB or CPP (default)" "CPP")
+set(POPPLER_INTERFACE "CPP"  CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP (default")
 #
 # -- Windows option for static runtimes
 #
