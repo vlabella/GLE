@@ -4,7 +4,7 @@
      {
       "name":"poppler",
       "default-features":true,
-      "features": ["cairo","glib","qt"]
+      "features": ["glib"]
     },
     "zlib",
     "libpng",
