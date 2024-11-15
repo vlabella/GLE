@@ -107,7 +107,7 @@ jobs:
         -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
-        -DECM_DIR="${{github.workspace}}/vcpkg/installed/ECM"
+        -DECM_DIR="${{github.workspace}}/vcpkg/installed/x64-windows/share/ECM"
 
     - name: Build
       run: |

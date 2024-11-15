@@ -43,13 +43,14 @@ jobs:
       run: "${{ github.workspace }}/vcpkg/vcpkg install ecm"
       shell: cmd
 
-    - name: List directory
-      run: DIR /S "${{ github.workspace }}/vcpkg"
-      shell: cmd
+    # for debugging
+    # - name: List directory
+    #   run: DIR /S "${{ github.workspace }}/vcpkg"
+    #   shell: cmd
 
-    - name: List directory
-      run: DIR /S "${{ github.workspace }}/vcpkg/installed/x64-windows/share"
-      shell: cmd
+    # - name: List directory
+    #   run: DIR /S "${{ github.workspace }}/vcpkg/installed/x64-windows/share"
+    #   shell: cmd
 
       # header files needed for building of GLE
     - name: Acquire Ghostscipt/PDL
