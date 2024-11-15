@@ -5,6 +5,12 @@
       "name":"cairo",
       "default-features":false
     },
-    "pixman","qt5","libdeflate","zstd","pdcurses","poppler","glib","ecm"
+    "pixman","qt5","libdeflate","zstd","pdcurses",
+    {
+      "name":"poppler",
+      "default-features":true,
+      "features": [ "core","cpp","glib","qt5" ]
+    },
+    "glib","ecm"
   ]
 }
