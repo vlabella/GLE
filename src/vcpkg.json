@@ -1,16 +1,24 @@
 {
   "dependencies": [
-    "zlib","boost-math","libpng","tiff",
+    "ecm",
+     {
+      "name":"poppler",
+      "default-features":true,
+      "features": ["cairo","glib","qt"]
+    },
+    "zlib",
+    "boost-math",
+    "libpng",
+    "tiff",
     {
       "name":"cairo",
       "default-features":false
     },
-    "pixman","qt5","libdeflate","zstd","pdcurses",
-    {
-      "name":"poppler",
-      "default-features":true,
-      "features": [ "cairo","glib","qt","cms" ]
-    },
-    "glib","ecm"
+    "pixman",
+    "qt5",
+    "libdeflate",
+    "zstd",
+    "pdcurses",
+    "glib"
   ]
 }
