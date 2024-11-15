@@ -8,7 +8,9 @@ include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
 
 find_package(ECM CONFIG NO_MODULE) # optional extra-cmake-modules needed for find_poppler
-list(INSERT CMAKE_MODULE_PATH 0 ${ECM_MODULE_PATH})
+if(ECM_FOUND)
+	list(INSERT CMAKE_MODULE_PATH 0 ${ECM_MODULE_PATH})
+endif()
 
 set( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 project( gle VERSION 4.3.5 )
