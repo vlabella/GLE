@@ -373,7 +373,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 		                      void* closure)
 {
 	std::vector<char> pop_data(pdfData,pdfData+pdfLength);
-	poppler::document *doc = poppler::document::load_from_data(pop_data);
+	poppler::document *doc = poppler::document::load_from_data(&pop_data);
 	if (doc == 0) {
 		std::ostringstream errMsg;
 		errMsg << ">> error opening PDF File ";
@@ -402,7 +402,7 @@ void gle_convert_pdf_to_image(char* pdfData,
     }
     cairo_scale(cr, resolution / PS_POINTS_PER_INCH, resolution / PS_POINTS_PER_INCH);
     poppler::page_renderer rend;
-	poppler::image img(cr);
+	poppler::image img(cr,i_width,i_height);
 	img = rend.render_page(page);
     //poppler_page_render(page, cr);
     gle_write_cairo_surface_bitmap(surface, device, options, writeFunc, closure);
