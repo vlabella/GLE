@@ -372,7 +372,8 @@ void gle_convert_pdf_to_image(char* pdfData,
 		                      gle_write_func writeFunc,
 		                      void* closure)
 {
-	poppler::document *doc = poppler::document::load_from_data(pdfData);
+	std::vector<char> pop_data(pdfData);
+	poppler::document *doc = poppler::document::load_from_data(pop_data);
 	if (doc == 0) {
 		std::ostringstream errMsg;
 		errMsg << ">> error opening PDF File ";
@@ -412,7 +413,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 }
 #endif // poppler_CPP
 
-#if !defined(POPPLER_GLIB) && !defined(POPPLER_GLIB)
+#if !defined(POPPLER_GLIB) && !defined(POPPLER_CPP)
 
 void gle_glib_init(int /* argc */, char** /* argv */) {
 // deprecated - should remove
