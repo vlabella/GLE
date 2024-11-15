@@ -59,6 +59,11 @@ jobs:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
 
+    # for debugging
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}/vcpkg_installed/x64-windows-static-release/include/poppler"
+      shell: cmd
+
     - name: Configure CMake
       run: >
         cmake -S ${{github.workspace}}\src -B ${{github.workspace}}\build
