@@ -287,7 +287,7 @@ if(POPPLER_FOUND)
 		# works fine on macOS - needs ECM >= 6.7
 		find_library(GLIB2_GOBJECT_LIBRARIES NAMES gobject-2.0 HINTS ${PC_GLIB2_LIBDIR})
 	endif()
-	message(${POPPLER_INCLUDE_DIRS})
+	message(STATUS "Poppler_INCLUDE_DIRS ${Poppler_INCLUDE_DIRS}")
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
@@ -308,7 +308,7 @@ include_directories(
 	${CAIRO_INCLUDE_DIRS}
 	${PIXMAN_INCLUDE_DIRS}
 	${GHOSTPDL_INCLUDE_DIRS}
-	${POPPLER_INCLUDE_DIRS}
+	${Poppler_INCLUDE_DIRS}
 	${GLIB2_INCLUDE_DIR}
 )
 #
