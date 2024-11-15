@@ -375,11 +375,11 @@ void gle_convert_pdf_to_image(char* pdfData,
 	if (doc == 0) {
 		std::ostringstream errMsg;
 		errMsg << ">> error opening PDF File ";
+		delete doc;
 		g_throw_parser_error(errMsg.str());
 	}
 	const int pagesNbr = doc->pages();
     if (pagesNbr == 0) {
-    	g_object_unref(doc);
     	g_throw_parser_error(">> error opening PDF: can't read first page");
     }
     poppler::page *page = doc->create_page(0);
@@ -387,7 +387,7 @@ void gle_convert_pdf_to_image(char* pdfData,
     //double width=rect.width(), height=rect->height();
     //poppler_page_get_size(page, &width, &height);
     int i_width = gle_round_int(rect.width() / PS_POINTS_PER_INCH * resolution);
-    int i_height = gle_round_int(rect->height() / PS_POINTS_PER_INCH * resolution);
+    int i_height = gle_round_int(rect.height() / PS_POINTS_PER_INCH * resolution);
     cairo_format_t format = CAIRO_FORMAT_RGB24;
 	if ((options & GLE_OUTPUT_OPTION_TRANSPARENT) != 0 && device == GLE_DEVICE_PNG) {
 		format = CAIRO_FORMAT_ARGB32;
