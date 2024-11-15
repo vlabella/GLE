@@ -17,6 +17,8 @@
     "libdeflate",
     "zstd",
     "pdcurses",
-    "glib"
+    "glib",
+    "boost-math",
+    "qt5"
   ]
 }
