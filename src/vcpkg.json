@@ -3,8 +3,7 @@
     "ecm",
      {
       "name":"poppler",
-      "default-features":true,
-      "features": [""]
+      "default-features":true
     },
     "zlib",
     "libpng",
