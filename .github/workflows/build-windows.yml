@@ -61,7 +61,7 @@ jobs:
 
     # for debugging
     - name: List directory
-      run: DIR /S "${{ github.workspace }}/vcpkg/vcpkg_installed/x64-windows-static-release/include/poppler"
+      run: DIR /S "${{ github.workspace }}/build/vcpkg_installed/x64-windows-static-release/include/poppler"
       shell: cmd
 
     - name: Configure CMake
