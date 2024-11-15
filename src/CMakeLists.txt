@@ -24,6 +24,8 @@ option(BUILD_MANIP "Build manip program" ON)
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
+# CPP interface to poppler is *more* cross platformand does not rely on GLIB2.  vcpkg only installs the cpp interface for windows
+option(POPPLER_INTERFACE, "The poppler (PDFLibarary) interface to utilize GLIB or CPP (default)", "CPP")
 #
 # -- Windows option for static runtimes
 #
@@ -288,6 +290,7 @@ if(POPPLER_FOUND)
 		find_library(GLIB2_GOBJECT_LIBRARIES NAMES gobject-2.0 HINTS ${PC_GLIB2_LIBDIR})
 	endif()
 	message(STATUS "Poppler_INCLUDE_DIRS ${Poppler_INCLUDE_DIRS}")
+
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
@@ -510,6 +513,13 @@ if(HAVE_UNISTD_H)
 endif()
 if(POPPLER_FOUND)
 	add_compile_definitions(HAVE_POPPLER)
+	if(${POPPLER_INTERFACE} STREQUAL "CPP")
+		add_compile_definitions(POPPLER_CPP)
+	elseif(${POPPLER_INTERFACE} STREQUAL "GLIB")
+		add_compile_definitions(POPPLER_GLIB)
+	else()
+		message(STATUS "ERROR Unknown Poppler Interface ${POPPLER_INTERFACE}")
+	endif()
 endif()
 
 add_subdirectory(gle)
