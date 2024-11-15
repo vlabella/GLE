@@ -355,12 +355,12 @@ void gle_convert_pdf_to_image(char* pdfData,
 
 #ifdef POPPLER_CPP
 // cross platform poppler not reliant on GLIB2
-#include "poppler-document.h"
-#include "poppler-page.h"
-#include "poppler-renderer.h"
+#include <poppler-document.h>
+#include <poppler-page.h>
+#include <poppler-renderer.h>
 
 void gle_glib_init(int /* argc */, char** /* argv */) {
-// deprecated - shoudl remove
+// deprecated - should remove
 }
 
 void gle_convert_pdf_to_image(char* pdfData,
@@ -371,7 +371,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 		                      gle_write_func writeFunc,
 		                      void* closure)
 {
-	poppler::docuemnt *doc = poppler::document::load_from_data(pdfData);
+	poppler::document *doc = poppler::document::load_from_data(pdfData);
 	if (doc == 0) {
 		std::ostringstream errMsg;
 		errMsg << ">> error opening PDF File ";
@@ -406,10 +406,16 @@ void gle_convert_pdf_to_image(char* pdfData,
     gle_write_cairo_surface_bitmap(surface, device, options, writeFunc, closure);
     cairo_destroy(cr);
     cairo_surface_destroy(surface);
-    //g_object_unref(page);
-    //g_object_unref(doc);
+    delete doc;
+    delete page;
 }
 #endif // poppler_CPP
+
+#if !defined(POPPLER_GLIB) || !defined(POPPLER_GLIB)
+
+void gle_glib_init(int /* argc */, char** /* argv */) {
+// deprecated - should remove
+}
 
 void gle_convert_pdf_to_image_file(char* pdfData,
 		                           int pdfLength,
@@ -431,6 +437,7 @@ void gle_convert_pdf_to_image_file(char* pdfData,
 			                 static_cast<std::ostream*>(&file));
 	file.close();
 }
+#endif
 
 #endif // HAVE_POPPLER
 
