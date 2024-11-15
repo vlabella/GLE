@@ -72,6 +72,12 @@ jobs:
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
         -DECM_DIR="${{github.workspace}}/vcpkg/installed/x64-windows/share/ECM"
 
+    # for debugging
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}/build/vcpkg_installed/x64-windows-static-release/include/poppler"
+      shell: cmd
+
+
     - name: Build
       run: |
         cmake --build ${{github.workspace}}\build --config ${{env.BUILD_TYPE}}
