@@ -411,7 +411,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 }
 #endif // poppler_CPP
 
-#if !defined(POPPLER_GLIB) || !defined(POPPLER_GLIB)
+#if !defined(POPPLER_GLIB) && !defined(POPPLER_GLIB)
 
 void gle_glib_init(int /* argc */, char** /* argv */) {
 // deprecated - should remove
