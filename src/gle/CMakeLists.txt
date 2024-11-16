@@ -165,18 +165,33 @@ if(LibLZMA_FOUND)
 endif()
 
 if(POPPLER_FOUND)
-	target_link_libraries ( gle LINK_PUBLIC
-		${Poppler_LIBRARIES}
-		GLIB2::GLIB2
-		${GLIB2_GOBJECT_LIBRARIES}
-		#GLIB2::GOBJECT
- 	)
-	target_link_libraries ( gle-graphics LINK_PUBLIC
-		${Poppler_LIBRARIES}
-		GLIB2::GLIB2
-		${GLIB2_GOBJECT_LIBRARIES}
-		#GLIB2::GOBJECT
- 	)
+ 	if(WIN32)
+		target_link_libraries ( gle LINK_PUBLIC
+			${Poppler_LIBRARIES}
+			${Iconv_LIBRARY}
+			${FREETYPE_LIBRARIES}
+			${OPENJPEG_LIBRARIES}
+	 	)
+		target_link_libraries ( gle-graphics LINK_PUBLIC
+			${Poppler_LIBRARIES}
+			${Iconv_LIBRARY}
+			${FREETYPE_LIBRARIES}
+			${OPENJPEG_LIBRARIES}
+	 	)
+	 else()
+	 	target_link_libraries ( gle LINK_PUBLIC
+			${Poppler_LIBRARIES}
+			GLIB2::GLIB2
+			${GLIB2_GOBJECT_LIBRARIES}
+			#GLIB2::GOBJECT
+ 		)
+		target_link_libraries ( gle-graphics LINK_PUBLIC
+			${Poppler_LIBRARIES}
+			GLIB2::GLIB2
+			${GLIB2_GOBJECT_LIBRARIES}
+			#GLIB2::GOBJECT
+ 		)
+ 	endif()
 endif()
 
 if(WIN32)

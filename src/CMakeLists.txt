@@ -290,7 +290,11 @@ if(POPPLER_FOUND)
 		find_library(GLIB2_GOBJECT_LIBRARIES NAMES gobject-2.0 HINTS ${PC_GLIB2_LIBDIR})
 	endif()
 	message(STATUS "Poppler_INCLUDE_DIRS ${Poppler_INCLUDE_DIRS}")
-
+	if(WIN32)
+		find_package(openjpeg)
+		find_package(freetype)
+		find_pacakge(libiconv)
+	endif()
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime

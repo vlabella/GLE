@@ -18,6 +18,9 @@
     "pdcurses",
     "glib",
     "boost-math",
-    "qt5"
+    "qt5",
+    "libiconv",
+    "openjpeg",
+    "freetype"
   ]
 }
