@@ -419,12 +419,6 @@ void gle_convert_pdf_to_image(char* pdfData,
 }
 #endif // poppler_CPP
 
-#if !defined(POPPLER_GLIB) && !defined(POPPLER_CPP)
-
-void gle_glib_init(int /* argc */, char** /* argv */) {
-// deprecated - should remove
-}
-
 void gle_convert_pdf_to_image_file(char* pdfData,
 		                           int pdfLength,
 		                           double resolution,
@@ -445,7 +439,7 @@ void gle_convert_pdf_to_image_file(char* pdfData,
 			                 static_cast<std::ostream*>(&file));
 	file.close();
 }
-#endif
+
 
 #endif // HAVE_POPPLER
 
