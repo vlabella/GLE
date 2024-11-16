@@ -300,7 +300,9 @@ void gle_write_cairo_surface_bitmap(cairo_surface_t* surface,
 #ifdef HAVE_POPPLER
 
 #ifdef POPPLER_GLIB
-// depricated - not cross platform
+//
+// -- poppler - GLIB2 interface - depricated - not cross platform
+//
 #include <glib.h>
 #include <poppler.h>
 
@@ -354,14 +356,17 @@ void gle_convert_pdf_to_image(char* pdfData,
 #endif // POPPLER_GLIB
 
 #ifdef POPPLER_CPP
-// cross platform poppler not reliant on GLIB2
+//
+// -- Poppler cpp interface - cross platform
+//
 #include <poppler-document.h>
 #include <poppler-page.h>
 #include <poppler-page-renderer.h>
 #include <poppler-image.h>
 
 void gle_glib_init(int /* argc */, char** /* argv */) {
-// deprecated - should remove
+	// stub
+	// deprecated - should remove
 }
 
 void gle_convert_pdf_to_image(char* pdfData,
@@ -384,27 +389,27 @@ void gle_convert_pdf_to_image(char* pdfData,
     if (pagesNbr == 0) {
     	g_throw_parser_error(">> error opening PDF: can't read first page");
     }
-    poppler::page *page = doc->create_page(0);
-    poppler::rectf rect = page->page_rect();
-    //double width=rect.width(), height=rect->height();
-    //poppler_page_get_size(page, &width, &height);
-    int i_width = gle_round_int(rect.width() / PS_POINTS_PER_INCH * resolution);
-    int i_height = gle_round_int(rect.height() / PS_POINTS_PER_INCH * resolution);
+    poppler::page *page   = doc->create_page(0);
+    poppler::rectf rect   = page->page_rect();
+    int i_width           = gle_round_int(rect.width()  / PS_POINTS_PER_INCH * resolution);
+    int i_height          = gle_round_int(rect.height() / PS_POINTS_PER_INCH * resolution);
     cairo_format_t format = CAIRO_FORMAT_RGB24;
+    poppler::image::format_enum poppler_format =  poppler::image::format_rgb24;
 	if ((options & GLE_OUTPUT_OPTION_TRANSPARENT) != 0 && device == GLE_DEVICE_PNG) {
-		format = CAIRO_FORMAT_ARGB32;
+        format         = CAIRO_FORMAT_ARGB32;
+        poppler_format = poppler::image::format_argb24;
 	}
-	cairo_surface_t* surface = cairo_image_surface_create(format, i_width, i_height);
-    cairo_t* cr = cairo_create(surface);
+	// render the PDF to the poppler image
+	poppler::page_renderer rend;
+	poppler::image img(i_width,i_height, poppler_format);
+    cairo_surface_t* surface = cairo_image_surface_create(img.data(), format, i_width, i_height);
+    cairo_t* cr              = cairo_create(surface);
     if (format == CAIRO_FORMAT_RGB24) {
     	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
     	cairo_paint(cr);
     }
     cairo_scale(cr, resolution / PS_POINTS_PER_INCH, resolution / PS_POINTS_PER_INCH);
-    poppler::page_renderer rend;
-	poppler::image img(cr,i_width,i_height, poppler::image::format_rgb24);
-	img = rend.render_page(page);
-    //poppler_page_render(page, cr);
+    img = rend.render_page(page);
     gle_write_cairo_surface_bitmap(surface, device, options, writeFunc, closure);
     cairo_destroy(cr);
     cairo_surface_destroy(surface);
