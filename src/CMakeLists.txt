@@ -293,7 +293,7 @@ if(POPPLER_FOUND)
 	if(WIN32)
 		find_package(openjpeg)
 		find_package(freetype)
-		find_pacakge(libiconv)
+		find_package(iconv)
 	endif()
 endif()
 #
