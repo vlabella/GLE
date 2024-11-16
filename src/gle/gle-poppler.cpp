@@ -397,12 +397,12 @@ void gle_convert_pdf_to_image(char* pdfData,
     poppler::image::format_enum poppler_format =  poppler::image::format_rgb24;
 	if ((options & GLE_OUTPUT_OPTION_TRANSPARENT) != 0 && device == GLE_DEVICE_PNG) {
         format         = CAIRO_FORMAT_ARGB32;
-        poppler_format = poppler::image::format_argb24;
+        poppler_format = poppler::image::format_argb32;
 	}
 	// render the PDF to the poppler image
 	poppler::page_renderer rend;
 	poppler::image img(i_width,i_height, poppler_format);
-    cairo_surface_t* surface = cairo_image_surface_create_for_data(img.data(), format, i_width, i_height);
+    cairo_surface_t* surface = cairo_image_surface_create_for_data(std::static_cast<unsigned char*>(img.data()), format, i_width, i_height);
     cairo_t* cr              = cairo_create(surface);
     if (format == CAIRO_FORMAT_RGB24) {
     	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
