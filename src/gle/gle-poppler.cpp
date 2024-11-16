@@ -401,8 +401,9 @@ void gle_convert_pdf_to_image(char* pdfData,
 	}
 	// render the PDF to the poppler image
 	poppler::page_renderer rend;
-	poppler::image img(i_width,i_height, poppler_format);
-    cairo_surface_t* surface = cairo_image_surface_create_for_data(reinterpret_cast<unsigned char*>(img.data()), format, i_width, i_height);
+	poppler::image img(i_width, i_height, poppler_format);
+	int stride = cairo_format_stride_for_width (format, i_width);
+    cairo_surface_t* surface = cairo_image_surface_create_for_data(reinterpret_cast<unsigned char*>(img.data()), format, i_width, i_height,stride);
     cairo_t* cr              = cairo_create(surface);
     if (format == CAIRO_FORMAT_RGB24) {
     	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
