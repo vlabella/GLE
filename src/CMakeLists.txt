@@ -24,8 +24,13 @@ option(BUILD_MANIP "Build manip program" ON)
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
-# CPP interface to poppler is *more* cross platform and does not rely on GLIB2.  vcpkg only installs the cpp interface for windows
-set(POPPLER_INTERFACE "CPP"  CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP (default")
+
+if(NOT DEFINED POPPLER_INTERFACE)
+	# poppler intrface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
+	# CPP interface to poppler is *more* cross platform and does not rely on GLIB2.
+	# vcpkg only installs the cpp interface for windows
+	set(POPPLER_INTERFACE $<$<PLATFORM_ID:Windows>:"CPP":"GLIB"> CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP (default")
+endif()
 #
 # -- Windows option for static runtimes
 #
@@ -282,19 +287,22 @@ endif()
 #
 find_package(Poppler)
 if(POPPLER_FOUND)
-	# poppler must have glib2
-	find_package(GLIB2 REQUIRED)
-	if(NOT DEFINED GLIB2_GOBJECT_LIBRARIES)
-		# findGLIB2 on ubuntu does not find the object library due to outdated version of ECM 5.9
-		# works fine on macOS - needs ECM >= 6.7
-		find_library(GLIB2_GOBJECT_LIBRARIES NAMES gobject-2.0 HINTS ${PC_GLIB2_LIBDIR})
-	endif()
-	message(STATUS "Poppler_INCLUDE_DIRS: ${Poppler_INCLUDE_DIRS}")
-	if(WIN32)
+	add_compile_definitions(HAVE_POPPLER)
+	if(POPPLER_INTERFACE STREQUAL "CPP")
 		find_package(openjpeg)
 		find_package(Freetype)
 		find_package(Iconv)
+	elseif(POPPLER_INTERFACE STREQUAL "GLIB")
+		find_package(GLIB2 REQUIRED)
+		if(NOT DEFINED GLIB2_GOBJECT_LIBRARIES)
+			# findGLIB2 on ubuntu does not find the object library due to outdated version of ECM 5.9
+			# works fine on macOS - needs ECM >= 6.7
+			find_library(GLIB2_GOBJECT_LIBRARIES NAMES gobject-2.0 HINTS ${PC_GLIB2_LIBDIR})
+		endif()
+	else()
+		message(STATUS "Unknown Poppler interface: ${POPPLER_INTERFACE}")
 	endif()
+	message(STATUS "Poppler_INCLUDE_DIRS: ${Poppler_INCLUDE_DIRS}")
 endif()
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
@@ -346,10 +354,10 @@ if(APPLE)
 	CHECK_INCLUDE_FILE(stddef.h    HAVE_STDDEF_H)
 	CHECK_INCLUDE_FILE(string.h    HAVE_STRING_H)
 	CHECK_INCLUDE_FILE(strings.h   HAVE_STRINGS_H)
-	CHECK_INCLUDE_FILE_CXX(cstring     HAVE_CSTRING)
+	CHECK_INCLUDE_FILE_CXX(cstring HAVE_CSTRING)
 	CHECK_INCLUDE_FILE(sys/time.h  HAVE_SYS_TIME_H)
 	CHECK_INCLUDE_FILE(sys/types.h HAVE_SYS_TYPES_H)
-	CHECK_INCLUDE_FILE(sys/wait.h HAVE_SYS_WAIT_H)
+	CHECK_INCLUDE_FILE(sys/wait.h  HAVE_SYS_WAIT_H)
 	CHECK_INCLUDE_FILE(sys/stat.h  HAVE_SYS_STAT_H)
 	CHECK_INCLUDE_FILE(unistd.h    HAVE_UNISTD_H)
 	CHECK_INCLUDE_FILE(sys/socket.h HAVE_SOCKETS)
@@ -388,11 +396,11 @@ if(UNIX AND NOT APPLE)
 	CHECK_INCLUDE_FILE(stddef.h    HAVE_STDDEF_H)
 	CHECK_INCLUDE_FILE(string.h    HAVE_STRING_H)
 	CHECK_INCLUDE_FILE(strings.h   HAVE_STRINGS_H)
-	CHECK_INCLUDE_FILE_CXX(cstring     HAVE_CSTRING)
+	CHECK_INCLUDE_FILE_CXX(cstring HAVE_CSTRING)
 	CHECK_INCLUDE_FILE(sys/time.h  HAVE_SYS_TIME_H)
 	CHECK_INCLUDE_FILE(sys/types.h HAVE_SYS_TYPES_H)
 	CHECK_INCLUDE_FILE(sys/stat.h  HAVE_SYS_STAT_H)
-	CHECK_INCLUDE_FILE(sys/wait.h HAVE_SYS_WAIT_H)
+	CHECK_INCLUDE_FILE(sys/wait.h  HAVE_SYS_WAIT_H)
 	CHECK_INCLUDE_FILE(unistd.h    HAVE_UNISTD_H)
 	CHECK_INCLUDE_FILE(sys/socket.h HAVE_SOCKETS)
 	#set(CONFIG_H_SOURCE "config.h.cmake")
@@ -434,11 +442,11 @@ if(WIN32)
 	CHECK_INCLUDE_FILE(stddef.h    HAVE_STDDEF_H)
 	CHECK_INCLUDE_FILE(string.h    HAVE_STRING_H)
 	CHECK_INCLUDE_FILE(strings.h   HAVE_STRINGS_H)
-	CHECK_INCLUDE_FILE_CXX(cstring  HAVE_CSTRING)
+	CHECK_INCLUDE_FILE_CXX(cstring HAVE_CSTRING)
 	CHECK_INCLUDE_FILE(sys/time.h  HAVE_SYS_TIME_H)
 	CHECK_INCLUDE_FILE(sys/types.h HAVE_SYS_TYPES_H)
 	CHECK_INCLUDE_FILE(sys/stat.h  HAVE_SYS_STAT_H)
-	CHECK_INCLUDE_FILE(sys/wait.h HAVE_SYS_WAIT_H)
+	CHECK_INCLUDE_FILE(sys/wait.h  HAVE_SYS_WAIT_H)
 	CHECK_INCLUDE_FILE(unistd.h    HAVE_UNISTD_H)
 	# should comment out and modify code so these warnings are not thrown
 	add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
@@ -515,12 +523,24 @@ endif()
 if(HAVE_UNISTD_H)
 	add_compile_definitions(HAVE_UNISTD_H)
 endif()
+set(POPPLER_LIBRARIES_GLE )
 if(POPPLER_FOUND)
 	add_compile_definitions(HAVE_POPPLER)
 	if(POPPLER_INTERFACE STREQUAL "CPP")
 		add_compile_definitions(POPPLER_CPP)
+		set(POPPLER_LIBRARIES_GLE )
+			${Poppler_LIBRARIES}
+			${Iconv_LIBRARY}
+			${FREETYPE_LIBRARIES}
+			${OPENJPEG_LIBRARIES}
+	 	)
 	elseif(POPPLER_INTERFACE STREQUAL "GLIB")
 		add_compile_definitions(POPPLER_GLIB)
+		set(POPPLER_LIBRARIES_GLE )
+			${Poppler_LIBRARIES}
+			GLIB2::GLIB2
+			${GLIB2_GOBJECT_LIBRARIES}
+	 	)
 	else()
 		message(STATUS "ERROR Unknown Poppler Interface ${POPPLER_INTERFACE}")
 	endif()

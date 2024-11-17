@@ -19,6 +19,9 @@ add_executable(manip
 	$<$<PLATFORM_ID:Darwin>:unix_extra.cpp>
 	$<$<PLATFORM_ID:Darwin>:unixinkey.cpp>
 	$<$<PLATFORM_ID:Darwin>:unixscr.cpp>
+	$<$<PLATFORM_ID:Windows>:unix_extra.cpp>
+	$<$<PLATFORM_ID:Windows>:unixinkey.cpp>
+	$<$<PLATFORM_ID:Windows>:unixscr.cpp>
 	../gle/cutils.cpp
 	../gle/file_io.cpp
 )
@@ -35,7 +38,7 @@ endif()
 target_link_libraries(manip PRIVATE ${CURSES_LIBRARIES})
 target_include_directories(manip SYSTEM PRIVATE ${CURSES_INCLUDE_DIRS})
 
-set_target_properties(manip  PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+set_target_properties(manip PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 install(TARGETS manip
 		CONFIGURATIONS Release Debug
