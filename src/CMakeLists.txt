@@ -33,7 +33,7 @@ if(NOT DEFINED POPPLER_INTERFACE)
 	if(UNIX OR APPLE)
 		set(POPPLER_INTERFACE_DEFAULT "GLIB")
 	endif()
-	set(POPPLER_INTERFACE POPPLER_INTERFACE_DEFAULT CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP")
+	set(POPPLER_INTERFACE ${POPPLER_INTERFACE_DEFAULT} CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP")
 endif()
 #
 # -- Windows option for static runtimes
