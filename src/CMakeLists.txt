@@ -29,7 +29,7 @@ if(NOT DEFINED POPPLER_INTERFACE)
 	# poppler intrface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
 	# CPP interface to poppler is *more* cross platform and does not rely on GLIB2.
 	# vcpkg only installs the cpp interface for windows
-	set(POPPLER_INTERFACE "$<IF:$<PLATFORM_ID:Windows>,CPP,GLIB>" CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP")
+	set(POPPLER_INTERFACE $<IF:$<PLATFORM_ID:Windows>,"CPP","GLIB"> CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP")
 endif()
 #
 # -- Windows option for static runtimes
