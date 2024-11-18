@@ -9,7 +9,7 @@
 #define MANIP
 
 #ifndef EMXOS2                  /* a.r. */
-   #include <bios.h>
+   //#include <bios.h>
 #else
    #include <sys/video.h>
    #include <sys/winmgr.h>
@@ -17,8 +17,8 @@
    int vx_top = 1, vx_bot = 25;
 #endif
 
-#define false 0
-#define true (!false)
+//#define false 0
+//#define true (!false)
 
 
 #ifndef EMXOS2                  /* a.r. */

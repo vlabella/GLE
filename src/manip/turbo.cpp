@@ -3,7 +3,7 @@
 #if ( ! ( defined _WIN32 || defined EMXOS2 ))       /* a.r. */
    	#include "vaxconio.h"
 #endif
-#include "int32.h"
+//#include "int32.h"
 #define MANIP
 
 //#define true (!false)

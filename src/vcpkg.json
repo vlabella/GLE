@@ -1,26 +1,23 @@
 {
   "dependencies": [
-    "ecm",
-     {
-      "name":"poppler",
-      "default-features":true
-    },
-    "zlib",
-    "libpng",
-    "tiff",
-    {
-      "name":"cairo",
-      "default-features":false
-    },
-    "pixman",
-    "libdeflate",
-    "zstd",
-    "pdcurses",
-    "glib",
     "boost-math",
-    "qt5",
+    {
+      "name": "cairo",
+      "default-features": false
+    },
+    "ecm",
+    "freetype",
+    "glib",
+    "libdeflate",
     "libiconv",
+    "libpng",
     "openjpeg",
-    "freetype"
+    "pdcurses",
+    "pixman",
+    "poppler",
+    "qt5",
+    "tiff",
+    "zlib",
+    "zstd"
   ]
 }

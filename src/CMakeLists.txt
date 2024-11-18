@@ -1,3 +1,6 @@
+#
+# -- CMakeLists.txt for GLE - Graphics Layout Engine
+#
 cmake_minimum_required (VERSION 3.18)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
 #cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed. only for cmake 3.30 and later live with the warning for now
@@ -26,7 +29,7 @@ option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using 
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
 
 if(NOT DEFINED POPPLER_INTERFACE)
-	# poppler intrface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
+	# poppler interface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
 	# CPP interface to poppler is *more* cross platform and does not rely on GLIB2.
 	# vcpkg only installs the cpp interface for windows
 	set(POPPLER_INTERFACE_DEFAULT "CPP")
@@ -53,7 +56,7 @@ if(WIN32)
 	endif()
 endif()
 if (POLICY CMP0069)
-	# link-time or interprocess optimization LTO or IPO
+	# link-time or inter-process optimization LTO or IPO
 	cmake_policy(SET CMP0069 NEW)
 	include(CheckIPOSupported)
 	check_ipo_supported(RESULT IPO_SUPPORTED)

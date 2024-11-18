@@ -6,7 +6,7 @@
 #define MANIP
 
 #ifndef EMXOS2                                  /* a.r. */
-        #include "bios.h"
+        //#include "bios.h"
 #else
         #include <sys/types.h>
         #include <conio.h>
@@ -15,8 +15,8 @@
 #endif
 
 #include "edt.h"
-#define true (!false)
-#define false 0
+//#define true (!false)
+//#define false 0
 int fner(char *s);
 int scr_refresh(void);
 int scr_getch(void);
