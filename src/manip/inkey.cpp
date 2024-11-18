@@ -3,6 +3,7 @@
 #include <string.h>
 #include <assert.h>
 #include "conio.h"
+#define MANIP
 
 #ifndef EMXOS2                                  /* a.r. */
         #include "bios.h"

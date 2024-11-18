@@ -19,9 +19,9 @@ add_executable(manip
 	$<$<PLATFORM_ID:Darwin>:unix_extra.cpp>
 	$<$<PLATFORM_ID:Darwin>:unixinkey.cpp>
 	$<$<PLATFORM_ID:Darwin>:unixscr.cpp>
-	$<$<PLATFORM_ID:Windows>:unix_extra.cpp>
-	#$<$<PLATFORM_ID:Windows>:unixinkey.cpp>
-	#$<$<PLATFORM_ID:Windows>:unixscr.cpp>
+	$<$<PLATFORM_ID:Windows>:turbo.cpp>
+	$<$<PLATFORM_ID:Windows>:turboscr.cpp>
+	$<$<PLATFORM_ID:Windows>:inkey.cpp>
 	../gle/cutils.cpp
 	../gle/file_io.cpp
 )

@@ -1,13 +1,14 @@
 #include <stdlib.h>
 #include <stdio.h>
-#if ( ! ( defined DJ || defined EMXOS2 ))       /* a.r. */
+#if ( ! ( defined _WIN32 || defined EMXOS2 ))       /* a.r. */
    	#include "vaxconio.h"
 #endif
 #include "int32.h"
+#define MANIP
 
-#define true (!false)
-#define false 0
-#if ( ! ( defined DJ || defined EMXOS2 ))       /* a.r. */
+//#define true (!false)
+//#define false 0
+#if ( ! ( defined _WIN32 || defined EMXOS2 ))       /* a.r. */
 getch()
 {
         return tt_inkey();
@@ -17,7 +18,7 @@ int32 coreleft(void)
 {
         return 4000000l;
 }
-#ifndef DJ  /* a.r. */
+#ifndef _WIN32  /* a.r. */
 strlwr(char *s)
 {
         char *ss=s;
@@ -31,7 +32,7 @@ char *strupr(char *s)
         while (*s!=0) {*s = toupper(*s); s++;}
         return ss;
 }
-#if (!(defined DJ || defined EMXOS2 ))      /* a.r. */
+#if (!(defined _WIN32 || defined EMXOS2 ))      /* a.r. */
 unlink(char *filename)
 {
         delete(filename);
@@ -79,7 +80,7 @@ findnext(struct ffblk *ffblk)
         trim_file(ffblk->ff_name);
         return false;
 }
-#endif /* DJ + EMXOS2 */
+#endif /* _WIN32 + EMXOS2 */
 trim_file(char *s)
 {
         char *t;
@@ -89,7 +90,7 @@ trim_file(char *s)
         if (s!=NULL) *t = 0;
 }
 
-#if (defined DJ || defined EMXOS2 )       /* a.r. */
+#if (defined _WIN32 || defined EMXOS2 )       /* a.r. */
 
 char *getsymbol(char *s)
 {

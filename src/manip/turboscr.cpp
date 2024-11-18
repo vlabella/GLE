@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <signal.h>
 #include <float.h>
+#define MANIP
 
 #ifndef EMXOS2                  /* a.r. */
    #include <bios.h>
