@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <cctype>
+#include <cstring>
 #if ( ! ( defined _WIN32 || defined EMXOS2 ))       /* a.r. */
    	#include "vaxconio.h"
 #endif
