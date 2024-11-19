@@ -22,8 +22,14 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 #
 # -- options
 #
+set(BUILD_MANIP_DEFAULT ON)
+if(WIN32)
+	# not working yet
+	set(BUILD_MANIP_DEFAULT OFF)
+endif()
+
 option(BUILD_GUI "Build the GUI - gle Previewer" ON)
-option(BUILD_MANIP "Build manip program" ON)
+option(BUILD_MANIP "Build manip program" BUILD_MANIP_DEFAULT)
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
