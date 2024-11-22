@@ -97,23 +97,15 @@ jobs:
       run: |
         export PATH=${{github.workspace}}/destroot/usr/local/bin:$PATH; make -f Makefile.gcc
 
-    - name: Upload Artifacts - GLE Manual PDF
-      uses: actions/upload-artifact@v4.4.3
-      with:
-        name: GLE Manual PDF
-        case $RUNNER_OS in
-          Linux)
-            path: ${{github.workspace}}/gle-manual/gle-manual.pdf
-            ;;
-          macOS)
-            # dont upload since linux will
-            ;;
-          *)
-            jobs=1
-        esac
-        if-no-files-found: warn
-        retention-days: 0
-        compression-level: 0
+
+#    - name: Upload Artifacts - GLE Manual PDF
+#      uses: actions/upload-artifact@v4.4.3
+#      with:
+#        name: GLE Manual PDF
+#        path: ${{github.workspace}}/gle-manual/gle-manual.pdf
+#        if-no-files-found: warn
+#        retention-days: 0
+#        compression-level: 0
 
     - name: Package GLE
       working-directory: ${{github.workspace}}/build
