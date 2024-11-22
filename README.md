@@ -87,4 +87,4 @@ Cpack can be utilized to create distributable packages.  The gle-manual and gle-
 
 ### CI/CD Github Actions
 
-Several GitHib actions exists that build the binaries and distributable packages for all three platforms.  The build artifacts can be found under the Actions tab and then navigate to the appropriate action.
+Several GitHib actions exist that build the binaries and distributable packages for all three platforms.  The build artifacts can be found under the Actions tab and then navigate to the appropriate action.
