@@ -21,9 +21,12 @@ Libraries needed to build GLE are
 * pixman
 * cairo
 * jpeg
-* Qt5 (for GUI)
+* ghostscipt (headers only - dll/so is loaded at runtime)
+* Qt5 (optional for building GUI qgle  BUILD_GUI=ON)
+* poppler (optional for PDF import support)
+* curses/ncurses/pdcurses (optional for for building manip BUILD_MANIP=ON)
 
-On Unix operating systems, curses or ncurses is additionally required to build the manip tool.
+Note that dependencies for the above libraries will also be needed.  For example the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows.
 
 Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake. If not, cmake will look for them in the system default locations.  For more information consult cmake documentation on find_package or find_library.  
 
@@ -56,11 +59,14 @@ To install gle on your machine after building
 
 ### options that control the build
 
+ * BUILD_GUI - (default: ON) turn off to disable build of the GUI, qgle that requires Qt.
+ * BUILD_MANIP - (default: ON (Linux, Apple) OFF (Windows)) turn off to dsiable build of the manip program.
  * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
- * USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
+ * MSVC_USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
  * ZLIB_USE_STATIC_LIBS - set ON to link to static variants of zlib: .a .lib instead of .so and .dll
  * GLE_EXAMPLES_LIBRARY_PATH - set to the root folder of the gle-library folder on your computer. Utilized during installation and packaging.
  * GLE_USER_MANUAL_PATH - set to the root folder of the gle-manual folder on your computer.  Utilized during installation and packaging.
+ * EXTRA_GSLIB_SEARCH_LOCATION - add extra search path for ghostscipt library in qgle application.
 
 ### Creating packages with cpack
 
@@ -79,3 +85,6 @@ Cpack can be utilized to create distributable packages.  The gle-manual and gle-
 	cd build & cpack -G "DragNDrop;ZIP"
 
 
+### CI/CD Github Actions
+
+Several GitHib actions exists that build the binaries and distributable packages for all three platforms.  The build artifacts can be found under the Actions tab and then navigate to the appropriate action.
