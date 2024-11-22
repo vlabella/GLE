@@ -53,6 +53,9 @@ add_executable(qgle WIN32 MACOSX_BUNDLE
 	qgle.qrc
 	$<$<PLATFORM_ID:Windows>:qgle.rc>
 )
+if(EXTRA_GSLIB_SEARCH_LOCATION)
+target_compile_definitions(qgslibloader.cpp -DEXTRA_GSLIB_SEARCH_LOCATION="${EXTRA_GSLIB_SEARCH_LOCATION}")
+endif()
 #
 # - care must be taken with library order for Linux
 #

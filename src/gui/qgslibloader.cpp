@@ -297,9 +297,9 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 		#endif // HURD
 		#ifdef Q_OS_LINUX
 		#if defined(__x86_64__) || defined(__ppc64__) || defined (__s390x__) || defined (__sparc64__)
-		// try 64 bit libraries on 64 bit system
-		tryLocationLoop("/usr/lib64");
-		tryLocationLoop("/usr/local/lib64");
+			// try 64 bit libraries on 64 bit system
+			tryLocationLoop("/usr/lib64");
+			tryLocationLoop("/usr/local/lib64");
 		#endif // 64 bit
 		tryLocationLoop("/usr/lib");
 		tryLocationLoop("/usr/local/lib");
@@ -307,6 +307,9 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 		#ifdef Q_OS_MACOS
 		tryLocation("/usr/lib/libgs.dylib");
 		tryLocation("/usr/local/lib/libgs.dylib");
+		#endif
+		#ifdef EXTRA_GSLIB_SEARCH_LOCATION
+		tryLocation(EXTRA_GSLIB_SEARCH_LOCATION);
 		#endif
 	} else {
 		m_LibGSLocation = location;
