@@ -4,8 +4,8 @@
     - new NUMROWS feature to data command to limit reading of rows in a data file (rad83).
     - manip program now building on Linux and macOS
     - added back poppler PDF support on all platforms for importing PDF files.
-    - added BUILD_GUI option to turn off building of GUI in CMakeLists.txt
-    - added BUILD_MANIP option to turn off building of manip in CMakeLists.txt
+    - added BUILD_GUI option to control building of GUI in CMakeLists.txt
+    - added BUILD_MANIP option to control building of manip in CMakeLists.txt
     - cmake searches for optional static libtiff dependencies on windows only
     - EXTRA_GSLIB_SEARCH_LOCATION option to add path for searching for gslib in qgle (linux, macOS only)
     - Several code improvements for C++17 and elimination of compiler warnings.
