@@ -1,7 +1,7 @@
 #
-# -- Build for Linux and macOS
+# -- Build for Linux and macOS - used as starting point for current workflows
 #
-name: Build Linux and macOS Original
+name: Deprecated Build Linux and macOS Original
 on:
   workflow_dispatch:
   #pull_request:

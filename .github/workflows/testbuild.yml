@@ -1,7 +1,7 @@
 #
-# -- Windows - build, build manual, package and upload
+# -- Windows - build, build manual, package and upload - used as starting point for current workflows
 #
-name: Windows Build Original
+name: Deprecated Windows Build Original
 on:
   workflow_dispatch:
 env:
