@@ -1,5 +1,15 @@
-4.3.5 (March 2024)
+4.3.5 (Not Released Yet)
     - fixed bug in GLE string function "pos" that caused issues. It was not clearing all its parameters off the stack.
+    - added swap(a,b) function to swap two variables
+    - new NUMROWS feature to data command to limit reading of rows in a data file (rad83).
+    - manip program now building on Linux and macOS
+    - added back poppler PDF support on all platforms for importing PDF files.
+    - added BUILD_GUI option to turn off building of GUI in CMakeLists.txt
+    - added BUILD_MANIP option to turn off building of manip in CMakeLists.txt
+    - cmake searches for optional static libtiff dependencies on windows only
+    - EXTRA_GSLIB_SEARCH_LOCATION option to add path for searching for gslib in qgle (linux, macOS only)
+    - Several code improvements for C++17 and elimination of compiler warnings.
+    - new GitHub Actions (CI/CD) for building and packaging of GLE binaries for Windows, macOS, and Linux.
 4.3.4 (April 2023)
     - built with latest compilers and libraries on all platforms (boost 1.81.0, qt 5.15.8, et al.)
     - added numrows feature to graph data command to limit number of data rows read (R. Machulka)
