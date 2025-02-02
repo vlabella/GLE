@@ -14,7 +14,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      # get the version number from the cmake lists file
     - name: Get Version number
        #run: echo "VERSION=
        run: awk 'tolower($)) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CmakeLists.txt
