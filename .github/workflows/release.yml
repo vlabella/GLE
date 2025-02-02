@@ -17,7 +17,7 @@ jobs:
       # get the version number from the cmake lists file
     - name: Get Version number
        #run: echo "VERSION=
-       run awk 'tolower($)) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CmakeLists.txt
+       run: awk 'tolower($)) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CmakeLists.txt
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
