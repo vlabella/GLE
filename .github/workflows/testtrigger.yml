@@ -20,7 +20,7 @@ jobs:
       - name: Upload and Asset
         uses: actions/upload-release-asset@v1.0.2
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: https://uploads.github.com/repos/vlabella/GLE/releases/${{ github.event.workflow_run.id }}/assets
           asset_path: ./src/CMakeLists.txt
