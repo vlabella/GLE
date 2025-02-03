@@ -17,18 +17,12 @@ jobs:
       - name: Checkout GLE
         uses: actions/checkout@v4
 
-      - name: Get release
-        id: get_release
-        uses: bruceadams/get-release@v1.3.2
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-
       - name: Upload and Asset
         uses: actions/upload-release-asset@v1.0.2
         env:
           GITHUB_TOKEN: ${{ github.token }}
         with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
+          upload_url: https://uploads.github.com/repos/vlabella/GLE/releases/${{ github.event.workflow_run.id }}/assets
           asset_path: ./src/CMakeLists.txt
           asset_name: cmakelists
           asset_content_type: application/octet-stream
