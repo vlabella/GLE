@@ -31,16 +31,15 @@ jobs:
     - name: extract changes for only this version
       # use sed to extract from change log - must have blank l ine between version numbers in change log
       run: sed -n "/$VERSION/,/^$/p" ${{github.workspace}}/doc/ChangeLog.txt > changes.txt
-    - name: build and package linux and macOS
-      uses: ./.github/workflows/build-package-linux-macos
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    - name: Release
+      id: release
+      uses: softprops/action-gh-release@v2
       with:
-          tag_name: v${{ env.VERSION }}
-          release_name: v${{ env.VERSION }}
-          body_path:  ${{github.workspace}}/changes.txt
-          draft: false
-          prerelease: false
+        token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        tag_name: v${{ env.VERSION }}
+        name: v${{ env.VERSION }}
+        body_path:  ${{github.workspace}}/changes.txt
+        draft: false
+        prerelease: false
+    - name: display URL
+        echo ${{ steps.release.outputs.upload_url }}
