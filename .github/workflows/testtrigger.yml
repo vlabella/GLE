@@ -3,6 +3,8 @@
 #
 name: Test Release Trigger
 on:
+  workflow_dispatch:
+  # runs when Create Release is triggered
   release:
     types:
       - created
