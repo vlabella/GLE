@@ -3,12 +3,16 @@
 #
 name: Test Release Trigger
 on:
-  release:
-    types: [created]
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Create Release]
+    types:
+      - completed
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event.release.id != '' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout GLE
         uses: actions/checkout@v4
@@ -25,6 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./src/src/CMakeLists.txt
+          asset_path: ./src/CMakeLists.txt
           asset_name: cmakelists
           asset_content_type: application/octet-stream
