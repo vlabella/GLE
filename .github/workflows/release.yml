@@ -42,4 +42,4 @@ jobs:
         draft: false
         prerelease: false
     - name: display URL
-        echo ${{ steps.release.outputs.upload_url }}
+        run: echo ${{ steps.release.outputs.upload_url }}
