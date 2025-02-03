@@ -1,11 +1,17 @@
 #
 # -- Build and Package for Linux and macOS
 #    build, build manual, package, and upload
-#     runs manually
+#     runs manually or on completion of Create Release workflow
 #
 name: Build & Package Linux and macOS
 on:
+  # runs manually
   workflow_dispatch:
+  # and runs on completion of "Create Release" workflow
+  workflow_run:
+    workflows: [Create Release]
+    types:
+      - completed
 jobs:
   build:
     name: Build & Package on ${{ matrix.os }}

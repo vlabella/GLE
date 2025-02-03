@@ -5,6 +5,11 @@
 name: Build & Package Windows
 on:
   workflow_dispatch:
+  # and runs on completion of "Create Release" workflow
+  workflow_run:
+    workflows: [Create Release]
+    types:
+      - completed
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release

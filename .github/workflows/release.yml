@@ -1,6 +1,14 @@
 #
 # -- create a release - run manually to create a release
 #
+#    - checks out gle source code
+#    - gets version number from CMakeLists.txt file
+#    - creates tag and release using version number
+#    - gets changes from docs/ChangeLog.tct
+#         all lines from version number to first blank line
+#    - when complete it triggers build and package workflows for all three OSes.
+#    - need to upload artefacts from the build process to the release manually for now
+#
 name: Create Release
 on:
   workflow_dispatch:
@@ -23,6 +31,8 @@ jobs:
     - name: extract changes for only this version
       # use sed to extract from change log - must have blank l ine between version numbers in change log
       run: sed -n "/$VERSION/,/^$/p" ${{github.workspace}}/doc/ChangeLog.txt > changes.txt
+    - name: build and package linux and macOS
+      uses: ./.github/workflows/build-package-linux-macos
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -30,7 +40,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
           tag_name: v${{ env.VERSION }}
-          release_name: Release v${{ env.VERSION }}
+          release_name: v${{ env.VERSION }}
           body_path:  ${{github.workspace}}/changes.txt
           draft: false
           prerelease: false
