@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v4
     - name: Get Version Number
       #run: echo "VERSION=4.3.5" >> $GITHUB_ENV
-      run: echo "VERSION=awk 'tolower($0) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CMakeLists.txt" >> $GITHUB_ENV
+      run: echo "VERSION=$(awk 'tolower($0) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CMakeLists.txt)" >> $GITHUB_ENV
     - name: Use the value
       run: printf '%s\n' "$VERSION"
     # - name: Create Release
