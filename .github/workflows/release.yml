@@ -8,23 +8,25 @@ on:
   #push:
   #  branches: [main]
 jobs:
-  build:
+  release:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Get Version number
+    - name: Get Version Number
       run: echo "VERSION=4.3.5" >> $GITHUB_ENV
       #run: awk 'tolower($)) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CmakeLists.txt
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      with:
-         tag_name: $VERSION
-         release_name: Release $VERSION
-         body_path:  ${{github.workspace}}/doc/ChangeLog.txt
-         draft: false
-         prerelease: false
+    - name: Use the value
+      run: printf '%s\n' "$VERSION"
+    # - name: Create Release
+    #   id: create_release
+    #   uses: actions/create-release@v1
+    #   env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+    #   with:
+    #      tag_name: $VERSION
+    #      release_name: Release $VERSION
+    #      body_path:  ${{github.workspace}}/doc/ChangeLog.txt
+    #      draft: false
+    #      prerelease: false
