@@ -11,8 +11,8 @@ on:
   #   types:
   #     - completed
   # and runs on completion of "Create Release" workflow
-  #repository_dispatch:
-  #  types: [release]
+  repository_dispatch:
+    types: [release]
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
