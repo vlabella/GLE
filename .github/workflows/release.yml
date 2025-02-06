@@ -43,3 +43,9 @@ jobs:
         prerelease: false
     - name: display URL
       run: echo ${{ steps.release.outputs.upload_url }}
+    - name: Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        event-type: release
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}"}'
