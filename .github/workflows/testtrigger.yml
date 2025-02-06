@@ -8,10 +8,11 @@ on:
   #   workflows: [Create Release]
   #   types:
   #     - completed
-  repository_dispatch:
-    types: [release]
+  #repository_dispatch:
+  #  types: [release]
 jobs:
   build:
+    name: Test Release Trigger
     runs-on: ubuntu-latest
     steps:
     - name: Checkout GLE

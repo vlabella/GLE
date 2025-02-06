@@ -13,8 +13,8 @@ on:
   #   types:
   #     - completed
   # and runs on completion of "Create Release" workflow
-  #repository_dispatch:
-  #  types: [release]
+  repository_dispatch:
+    types: [release]
 jobs:
   build:
     name: Build & Package on ${{ matrix.os }}
@@ -140,13 +140,10 @@ jobs:
         compression-level: 0
 
   #   #upload to release location if started with from release workflow
-  #   if: ${{ github.event_name == 'repository_dispatch' }}
-  #     - name: Upload to Release
-  #       uses: actions/upload-release-asset@v1.0.2
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         upload_url: ${{ github.event.client_payload.upload_url }}
-  #         asset_path: ${{github.workspace}}/build/destroot/usr/local/gle-*.*
-  # #        asset_name: cmakelists
-  #         asset_content_type: application/octet-stream
+    - name: Upload to Release
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ${{github.workspace}}/build/destroot/usr/local/gle-*.*
+        tag: ${{ github.event.client_payload.tag }}
