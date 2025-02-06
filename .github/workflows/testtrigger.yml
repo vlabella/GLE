@@ -26,3 +26,10 @@ jobs:
         asset_path: ./src/CMakeLists.txt
         asset_name: cmakelists
         asset_content_type: application/octet-stream
+
+    - name: Upload asset based on tag
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ./src/CMakeLists.txt
+        tag: ${{ github.event.client_payload.tag }}

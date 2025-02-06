@@ -48,4 +48,4 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         event-type: release
-        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}"}'
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
