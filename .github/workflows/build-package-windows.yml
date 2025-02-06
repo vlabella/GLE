@@ -1,16 +1,12 @@
 #
 # -- Windows - build, build manual, package, and upload
-#     runs manually
 #
 name: Build & Package Windows
 on:
+  # run manually
   workflow_dispatch:
-  # and runs on completion of "Create Release" workflow
-  # workflow_run:
-  #   workflows: [Create Release]
-  #   types:
-  #     - completed
-  # and runs on completion of "Create Release" workflow
+  # and run on completion of "Create Release" workflow
+  # uploads artifacts to release
   repository_dispatch:
     types: [release]
 env:
@@ -154,7 +150,7 @@ jobs:
         compression-level: 0
 
       # upload to release location if started with from release workflow
-    - name: Upload to Release
+    - name: Upload Binary Distributables to Release Loaction
       if: ${{ github.event_name == 'repository_dispatch' }}
       uses: svenstaro/upload-release-action@v2
       with:
@@ -163,7 +159,7 @@ jobs:
         file: ${{github.workspace}}\stage\gle-*.*
         tag: ${{ github.event.client_payload.tag }}
 
-    - name: Upload Manual to Release
+    - name: Upload Manual to Release Loaction
       if: ${{ github.event_name == 'repository_dispatch' }}
       uses: svenstaro/upload-release-action@v2
       with:

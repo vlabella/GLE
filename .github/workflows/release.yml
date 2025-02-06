@@ -1,13 +1,14 @@
 #
-# -- create a release - run manually to create a release
+# -- Create Release - Run manually to create a release
 #
-#    - checks out gle source code
+#    - check out gle source code
 #    - gets version number from CMakeLists.txt file
-#    - creates tag and release using version number
+#    - creates tag and release using version number on GitHub
 #    - gets changes from docs/ChangeLog.tct
 #         all lines from version number to first blank line
-#    - when complete it triggers build and package workflows for all three OSes.
-#    - need to upload artefacts from the build process to the release manually for now
+#    - triggers build and package workflows for all three OSes, which upload their artifacts to the release
+#
+#    - When completed manually bump version in src/CMakeLists.txt and create new entry in doc/ChangeLog.txt
 #
 name: Create Release
 on:
@@ -29,7 +30,7 @@ jobs:
     - name: Use the value
       run: printf '%s\n' "$VERSION"
     - name: extract changes for only this version
-      # use sed to extract from change log - must have blank l ine between version numbers in change log
+      # use sed to extract from change log - must have blank line between version numbers in change log
       run: sed -n "/$VERSION/,/^$/p" ${{github.workspace}}/doc/ChangeLog.txt > changes.txt
     - name: Release
       id: release

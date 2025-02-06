@@ -1,18 +1,14 @@
 #
 # -- Build and Package for Linux and macOS
 #    build, build manual, package, and upload
-#     runs manually or on completion of Create Release workflow
+#    runs manually or on completion of Create Release workflow
 #
 name: Build & Package Linux and macOS
 on:
-  # runs manually
+  # run manually
   workflow_dispatch:
-  # and runs on completion of "Create Release" workflow
-  # workflow_run:
-  #   workflows: [Create Release]
-  #   types:
-  #     - completed
-  # and runs on completion of "Create Release" workflow
+  # and run on completion of "Create Release" workflow
+  # uploads artifacts to release
   repository_dispatch:
     types: [release]
 jobs:
@@ -140,7 +136,7 @@ jobs:
         compression-level: 0
 
       # upload to release location if started with from release workflow
-    - name: Upload to Release
+    - name: Upload Binary Distributables to Release Loaction
       if: ${{ github.event_name == 'repository_dispatch' }}
       uses: svenstaro/upload-release-action@v2
       with:
