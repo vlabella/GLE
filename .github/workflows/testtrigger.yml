@@ -17,16 +17,6 @@ jobs:
     - name: Checkout GLE
       uses: actions/checkout@v4
 
-    - name: Upload and Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ github.event.client_payload.upload_url }}
-        asset_path: ./src/CMakeLists.txt
-        asset_name: cmakelists
-        asset_content_type: application/octet-stream
-
     - name: Upload asset based on tag
       uses: svenstaro/upload-release-action@v2
       with:
