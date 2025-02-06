@@ -153,18 +153,21 @@ jobs:
         retention-days: 0
         compression-level: 0
 
-  #     #upload to release location if started with from release workflow
-  #     if: ${{ github.event_name == 'repository_dispatch' }}
-  #     - name: Upload to Release
-  #       uses: softprops/action-gh-release@v2
-  #       with:
-  #         files: Release.txt
+      # upload to release location if started with from release workflow
+    - name: Upload to Release
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file_glob: true
+        file: ${{github.workspace}}\stage\gle-*.*
+        tag: ${{ github.event.client_payload.tag }}
 
-  #       uses: actions/upload-release-asset@v1.0.2
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #       with:
-  #         upload_url: ${{ github.event.client_payload.upload_url }}
-  #         asset_path: ${{github.workspace}}\stage\gle-*.*
-  # #        asset_name: cmakelists
-  #         asset_content_type: application/octet-stream
+    - name: Upload Manual to Release
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file_glob: false
+        file: ${{github.workspace}}\gle-manual\gle-manual.pdf
+        tag: ${{ github.event.client_payload.tag }}

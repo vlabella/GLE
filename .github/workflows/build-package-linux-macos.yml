@@ -139,11 +139,12 @@ jobs:
         retention-days: 0
         compression-level: 0
 
-  #   #upload to release location if started with from release workflow
+      # upload to release location if started with from release workflow
     - name: Upload to Release
       if: ${{ github.event_name == 'repository_dispatch' }}
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file_glob: true
         file: ${{github.workspace}}/build/destroot/usr/local/gle-*.*
         tag: ${{ github.event.client_payload.tag }}
