@@ -150,13 +150,13 @@ jobs:
         compression-level: 0
 
       # upload to release location if started with from release workflow
-    - name: Upload Binary Distributables to Release Loaction
+    - name: Upload Binary Distributables to Release Location
       if: ${{ github.event_name == 'repository_dispatch' }}
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file_glob: true
-        file: ${{github.workspace}}\stage\gle-*.*
+        file: ${{github.workspace}}/stage/gle-*.*
         tag: ${{ github.event.client_payload.tag }}
 
     - name: Upload Manual to Release Loaction
@@ -165,5 +165,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file_glob: false
-        file: ${{github.workspace}}\gle-manual\gle-manual.pdf
+        file: ${{github.workspace}}/gle-manual/gle-manual.pdf
         tag: ${{ github.event.client_payload.tag }}
