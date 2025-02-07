@@ -1,4 +1,6 @@
-4.3.5 (January 2025)
+4.3.6 (in production)
+
+4.3.5 (February 2025)
     - fixed bug in GLE string function "pos" that caused issues. It was not clearing all its parameters off the stack.
     - added swap(a,b) function to swap two variables
     - new NUMROWS feature to data command to limit reading of rows in a data file (rad83).
