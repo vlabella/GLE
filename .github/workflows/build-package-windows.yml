@@ -159,7 +159,7 @@ jobs:
         file: ${{github.workspace}}/stage/gle-*.*
         tag: ${{ github.event.client_payload.tag }}
 
-    - name: Upload Manual to Release Loaction
+    - name: Upload Manual to Release Location
       if: ${{ github.event_name == 'repository_dispatch' }}
       uses: svenstaro/upload-release-action@v2
       with:
