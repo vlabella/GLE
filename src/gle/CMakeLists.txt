@@ -69,7 +69,6 @@ set(GLE_SOURCES
 	builtin-double.cpp
 	cutils.cpp
 	file_io.cpp
-#	specialfunctions.cpp  include only
 )
 
 set( GLEBTOOL_SOURCES
