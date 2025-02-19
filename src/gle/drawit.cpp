@@ -86,14 +86,18 @@ GLERun* getGLERunInstance() {
 
 void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* code, GLESourceFile* file);
 
-
-void do_set_vars() {
+void gle_set_constants(){
 	GLEMemoryCell value;
 	GLE_MC_INIT(value);
 	GLE_MC_SET_BOOL(&value, true);
 	var_findadd_set("TRUE", &value);
 	GLE_MC_SET_BOOL(&value, false);
 	var_findadd_set("FALSE", &value);
+	var_findadd_set("PI",boost::math::double_constants::pi);
+	gle_set_math_and_physical_constants();
+}
+
+void do_set_vars() {
 	var_findadd_set("XGMIN", 0.0);
 	var_findadd_set("YGMIN", 0.0);
 	var_findadd_set("XGMAX", 0.0);
@@ -104,8 +108,6 @@ void do_set_vars() {
 	var_findadd_set("Y2GMAX", 0.0);
 	var_findadd_set("ZGMIN", 0.0);
 	var_findadd_set("ZGMAX", 0.0);
-    var_findadd_set("PI",boost::math::double_constants::pi);
-
 	gle_set_constants();
 }
 

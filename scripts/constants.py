@@ -83,37 +83,35 @@ scipy_physical_constants = [
 ]
 
 boost_math_constants = [
-    "pi",
-    "two_pi",
-    "half_pi",
-    "third_pi",
-    "quarter_pi",
-    "one_over_pi",
-    "two_over_pi",
-    "one_over_two_pi",
-    "root_two",
-    "root_three",
-    "root_pi",
-    "root_two_pi",
-    "root_ln_four",
-    "root_e",
-    "root_two_e",
-    "root_ln_two",
-    "one_over_root_two",
-    "half_root_two",
-    "e",
-    "half",
-    "third",
-    "two_thirds",
-    "phi",
-    "ln_phi",
     "catalan",
-    "euler",
     "degree",
-    "radian",
+    "e",
+    "e_pow_pi",
+    "euler",
+    "exp_minus_half",
+    "half",
+    "half_pi",
+    "half_root_two",
+    "ln_phi",
+    "one_div_two_pi",
+    "half_root_two",
     "phi",
-    "zeta_two",
+    "pi",
+    "quarter_pi",
+    "radian",
+    "root_e",
+    "root_half_pi",
+    "root_ln_four",
+    "root_pi",
+    "root_three",
+    "root_two",
+    "root_two_pi",
+    "third",
+    "third_pi",
+    "two_pi",
+    "two_thirds",
     "zeta_three"
+    "zeta_two",
 ]
 
 file = []
@@ -131,7 +129,7 @@ file.append('//  gle variables are case in-sensitive')
 file.append('//')
 file.append('#include <boost/math/constants/constants.hpp>');
 file.append('//')
-file.append('void gle_set_constants(bool numerical=true,bool physical=true)')
+file.append('void gle_set_math_and_physical_constants(bool numerical=true,bool physical=true)')
 file.append("{")
 tb="\t"
 file.append(tb+'// option to omit inclusion of types if desired -- possible future GLE option')

@@ -12,41 +12,38 @@
 //
 #include <boost/math/constants/constants.hpp>
 //
-void gle_set_constants(bool numerical=true,bool physical=true)
+void gle_set_math_and_physical_constants(bool numerical=true,bool physical=true)
 {
 	// option to omit inclusion of types if desired -- possible future GLE option
 	if(numerical){
-		var_findadd_set("mc_pi",boost::math::double_constants::pi);
-		var_findadd_set("mc_two_pi",boost::math::double_constants::two_pi);
-		var_findadd_set("mc_half_pi",boost::math::double_constants::half_pi);
-		var_findadd_set("mc_third_pi",boost::math::double_constants::third_pi);
-		var_findadd_set("mc_quarter_pi",boost::math::double_constants::quarter_pi);
-		var_findadd_set("mc_one_over_pi",boost::math::double_constants::one_over_pi);
-		var_findadd_set("mc_two_over_pi",boost::math::double_constants::two_over_pi);
-		var_findadd_set("mc_one_over_two_pi",boost::math::double_constants::one_over_two_pi);
-		var_findadd_set("mc_root_two",boost::math::double_constants::root_two);
-		var_findadd_set("mc_root_three",boost::math::double_constants::root_three);
-		var_findadd_set("mc_root_pi",boost::math::double_constants::root_pi);
-		var_findadd_set("mc_root_two_pi",boost::math::double_constants::root_two_pi);
-		var_findadd_set("mc_root_ln_four",boost::math::double_constants::root_ln_four);
-		var_findadd_set("mc_root_e",boost::math::double_constants::root_e);
-		var_findadd_set("mc_root_two_e",boost::math::double_constants::root_two_e);
-		var_findadd_set("mc_root_ln_two",boost::math::double_constants::root_ln_two);
-		var_findadd_set("mc_one_over_root_two",boost::math::double_constants::one_over_root_two);
-		var_findadd_set("mc_half_root_two",boost::math::double_constants::half_root_two);
-		var_findadd_set("mc_e",boost::math::double_constants::e);
-		var_findadd_set("mc_half",boost::math::double_constants::half);
-		var_findadd_set("mc_third",boost::math::double_constants::third);
-		var_findadd_set("mc_two_thirds",boost::math::double_constants::two_thirds);
-		var_findadd_set("mc_phi",boost::math::double_constants::phi);
-		var_findadd_set("mc_ln_phi",boost::math::double_constants::ln_phi);
 		var_findadd_set("mc_catalan",boost::math::double_constants::catalan);
-		var_findadd_set("mc_euler",boost::math::double_constants::euler);
 		var_findadd_set("mc_degree",boost::math::double_constants::degree);
-		var_findadd_set("mc_radian",boost::math::double_constants::radian);
+		var_findadd_set("mc_e",boost::math::double_constants::e);
+		var_findadd_set("mc_e_pow_pi",boost::math::double_constants::e_pow_pi);
+		var_findadd_set("mc_euler",boost::math::double_constants::euler);
+		var_findadd_set("mc_exp_minus_half",boost::math::double_constants::exp_minus_half);
+		var_findadd_set("mc_half",boost::math::double_constants::half);
+		var_findadd_set("mc_half_pi",boost::math::double_constants::half_pi);
+		var_findadd_set("mc_half_root_two",boost::math::double_constants::half_root_two);
+		var_findadd_set("mc_ln_phi",boost::math::double_constants::ln_phi);
+		var_findadd_set("mc_one_div_two_pi",boost::math::double_constants::one_div_two_pi);
+		var_findadd_set("mc_half_root_two",boost::math::double_constants::half_root_two);
 		var_findadd_set("mc_phi",boost::math::double_constants::phi);
-		var_findadd_set("mc_zeta_two",boost::math::double_constants::zeta_two);
-		var_findadd_set("mc_zeta_three",boost::math::double_constants::zeta_three);
+		var_findadd_set("mc_pi",boost::math::double_constants::pi);
+		var_findadd_set("mc_quarter_pi",boost::math::double_constants::quarter_pi);
+		var_findadd_set("mc_radian",boost::math::double_constants::radian);
+		var_findadd_set("mc_root_e",boost::math::double_constants::root_e);
+		var_findadd_set("mc_root_half_pi",boost::math::double_constants::root_half_pi);
+		var_findadd_set("mc_root_ln_four",boost::math::double_constants::root_ln_four);
+		var_findadd_set("mc_root_pi",boost::math::double_constants::root_pi);
+		var_findadd_set("mc_root_three",boost::math::double_constants::root_three);
+		var_findadd_set("mc_root_two",boost::math::double_constants::root_two);
+		var_findadd_set("mc_root_two_pi",boost::math::double_constants::root_two_pi);
+		var_findadd_set("mc_third",boost::math::double_constants::third);
+		var_findadd_set("mc_third_pi",boost::math::double_constants::third_pi);
+		var_findadd_set("mc_two_pi",boost::math::double_constants::two_pi);
+		var_findadd_set("mc_two_thirds",boost::math::double_constants::two_thirds);
+		var_findadd_set("mc_zeta_threezeta_two",boost::math::double_constants::zeta_threezeta_two);
 	}
 	if(physical){
 		var_findadd_set("pc_c",299792458.0);
