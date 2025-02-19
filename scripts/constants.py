@@ -110,8 +110,8 @@ boost_math_constants = [
     "third_pi",
     "two_pi",
     "two_thirds",
-    "zeta_three"
-    "zeta_two",
+    "zeta_three",
+    "zeta_two"
 ]
 
 file = []

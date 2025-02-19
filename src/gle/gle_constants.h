@@ -43,7 +43,8 @@ void gle_set_math_and_physical_constants(bool numerical=true,bool physical=true)
 		var_findadd_set("mc_third_pi",boost::math::double_constants::third_pi);
 		var_findadd_set("mc_two_pi",boost::math::double_constants::two_pi);
 		var_findadd_set("mc_two_thirds",boost::math::double_constants::two_thirds);
-		var_findadd_set("mc_zeta_threezeta_two",boost::math::double_constants::zeta_threezeta_two);
+		var_findadd_set("mc_zeta_three",boost::math::double_constants::zeta_three);
+		var_findadd_set("mc_zeta_two",boost::math::double_constants::zeta_two);
 	}
 	if(physical){
 		var_findadd_set("pc_c",299792458.0);
