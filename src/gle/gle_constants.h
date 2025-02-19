@@ -12,7 +12,7 @@
 //
 #include <boost/math/constants/constants.hpp>
 //
-void gle_set_constants(numerical=true,physical=true)
+void gle_set_constants(bool numerical=true,bool physical=true)
 {
 	// option to omit inclusion of types if desired -- possible future GLE option
 	if(numerical){

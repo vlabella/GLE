@@ -131,7 +131,7 @@ file.append('//  gle variables are case in-sensitive')
 file.append('//')
 file.append('#include <boost/math/constants/constants.hpp>');
 file.append('//')
-file.append('void gle_set_constants(numerical=true,physical=true)')
+file.append('void gle_set_constants(bool numerical=true,bool physical=true)')
 file.append("{")
 tb="\t"
 file.append(tb+'// option to omit inclusion of types if desired -- possible future GLE option')
