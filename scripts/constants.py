@@ -130,7 +130,9 @@ file.append('{\\tt pi} \\index{pi}      & 3.14159265358979323846  \\\\')
 for c in boost_math_constants:
 	#print(f"{c} {eval(f"sp.constants.{c}")}")
 	value = 0
-	file.append(f"{{\\tt {mc_wart}{c}}} \\index{{{mc_wart}{c}}}  & {value} \\")
+	name = f"{mc_wart}{c}"
+	name = name.replace("_","\\_")
+	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {value} \\\\")
 
 file.append('\\end{tabular}')
 
@@ -139,7 +141,9 @@ file.append('Physical Constants & Value  \\\\ \\hline')
 
 for c in scipy_physical_constants:
 	#print(f"{c} {eval(f"sp.constants.{c}")}")
-	file.append(f"{{\\tt {pc_wart}{c}}} \\index{{{mc_wart}{c}}}  & {eval(f"sp.constants.{c}")} \\")
+	name = f"{pc_wart}{c}"
+	name = name.replace("_","\\_")
+	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {eval(f"sp.constants.{c}")} \\\\")
 
 file.append('\\end{tabular}')
 
