@@ -3,6 +3,7 @@
 #    uses scipy.constants for physical constants and boost::math::constants for numericla constants
 #
 import scipy as sp
+import subprocess
 
 pc_wart      = "pc_"
 mc_wart      = "mc_"
@@ -45,35 +46,35 @@ scipy_physical_constants = [
 ]
 
 boost_math_constants = [
-    "catalan",
-    "degree",
-    "e",
-    "e_pow_pi",
-    "euler",
-    "exp_minus_half",
-    "half",
-    "half_pi",
-    "half_root_two",
-    "ln_phi",
-    "one_div_two_pi",
-    "half_root_two",
-    "phi",
-    "pi",
-    "quarter_pi",
-    "radian",
-    "root_e",
-    "root_half_pi",
-    "root_ln_four",
-    "root_pi",
-    "root_three",
-    "root_two",
-    "root_two_pi",
-    "third",
-    "third_pi",
-    "two_pi",
-    "two_thirds",
-    "zeta_three",
-    "zeta_two"
+	"catalan",
+	"degree",
+	"e",
+	"e_pow_pi",
+	"euler",
+	"exp_minus_half",
+	"half",
+	"half_pi",
+	"half_root_two",
+	"ln_phi",
+	"one_div_two_pi",
+	"half_root_two",
+	"phi",
+	"pi",
+	"quarter_pi",
+	"radian",
+	"root_e",
+	"root_half_pi",
+	"root_ln_four",
+	"root_pi",
+	"root_three",
+	"root_two",
+	"root_two_pi",
+	"third",
+	"third_pi",
+	"two_pi",
+	"two_thirds",
+	"zeta_three",
+	"zeta_two"
 ]
 #
 # -- generate .cpp file
@@ -115,9 +116,9 @@ tb="\t"
 file.append(tb+"}")
 file.append("}")
 with open(f'../src/gle/{cpp_filename}', 'w') as fp:
-    # Iterate over the list and write each item to the file
-    for line in file:
-        fp.write(line + '\n')
+	# Iterate over the list and write each item to the file
+	for line in file:
+		fp.write(line + '\n')
 
 #
 # -- generate .tex file for documentation
@@ -129,7 +130,30 @@ file.append('{\\tt pi} \\index{pi}      & 3.14159265358979323846  \\\\')
 
 for c in boost_math_constants:
 	#print(f"{c} {eval(f"sp.constants.{c}")}")
-	value = 0
+	cpp_fname = "temp.cpp"
+	cpp_file = []
+	cpp_file.append('#include <iostream>\n')
+	cpp_file.append('#include <boost/math/constants/constants.hpp>\n')
+	cpp_file.append(f'int main(){{std::cout<<boost::math::double_constants::{c};exit(0);}}\n')
+	with open(cpp_fname, "w") as fp:
+		fp.writelines(cpp_file)
+	# compile and run prorgam to get value
+	# Run the system command
+	command = f"cl {cpp_fname}"
+	program = f"{cpp_fname}.exe"
+	result = subprocess.run(command, shell=True, capture_output=True, text=True)
+	if result.returncode == 0:
+		print("compile ok")
+	else:
+		print("compile errror")
+		print(result.stdout)
+		print(result.stderr)
+		exit()
+	result = subprocess.run(program, shell=True, capture_output=True, text=True)
+	# Print the output
+	value=0
+	if result.returncode == 0:
+		value = result.stdout
 	name = f"{mc_wart}{c}"
 	name = name.replace("_","\\_")
 	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {value} \\\\")
@@ -148,9 +172,9 @@ for c in scipy_physical_constants:
 file.append('\\end{tabular}')
 
 with open(f'../../gle-manual/appendix/{tex_filename}', 'w') as fp:
-    # Iterate over the list and write each item to the file
-    for line in file:
-        fp.write(line + '\n')
+	# Iterate over the list and write each item to the file
+	for line in file:
+		fp.write(line + '\n')
 
 
 
