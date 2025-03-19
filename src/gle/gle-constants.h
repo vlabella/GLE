@@ -1,5 +1,5 @@
 //
-// -- gle_constants.h
+// -- gle-constants.h
 //
 //  automatically generated from scripts/constants.py
 //  re-run manually and copy file to src/gle to modify
