@@ -1,9 +1,10 @@
 #
 # -- constants.py - generates cpp and tex code for pysical and numerical constants for GLE
-#    uses scipy.constants for physical constants and boost::math::constants for numericla constants
+#    uses scipy.constants for physical constants and boost::math::constants for numerical constants
 #
 import scipy as sp
 import subprocess
+import os
 
 pc_wart      = "pc_"
 mc_wart      = "mc_"
@@ -128,35 +129,29 @@ file.append('\\begin{tabular}{ll} \\hline')
 file.append('Numerical Constants & Value  \\\\ \\hline')
 file.append('{\\tt pi} \\index{pi}      & 3.14159265358979323846  \\\\')
 
+# read in boost/math/constants/constants.hpp and parse this file
+# have environment variable set BOOSTDIR to point to top level boot folder
+boost_dir = os.getenv('BOOSTDIR')
+
+content = []
+with open(os.path.join(boost_dir,'boost','math','constants','constants.hpp'), 'r') as fp:
+    content = fp.readlines()
+
+lines = [line.strip() for line in content]
+
+if content == None:
+	print("error opening boost constants file")
+	exit()
+
 for c in boost_math_constants:
-	#print(f"{c} {eval(f"sp.constants.{c}")}")
-	cpp_fname = "temp.cpp"
-	cpp_file = []
-	cpp_file.append('#include <iostream>\n')
-	cpp_file.append('#include <boost/math/constants/constants.hpp>\n')
-	cpp_file.append(f'int main(){{std::cout<<boost::math::double_constants::{c};exit(0);}}\n')
-	with open(cpp_fname, "w") as fp:
-		fp.writelines(cpp_file)
-	# compile and run prorgam to get value
-	# Run the system command
-	command = f"cl {cpp_fname}"
-	program = f"{cpp_fname}.exe"
-	result = subprocess.run(command, shell=True, capture_output=True, text=True)
-	if result.returncode == 0:
-		print("compile ok")
-	else:
-		print("compile errror")
-		print(result.stdout)
-		print(result.stderr)
-		exit()
-	result = subprocess.run(program, shell=True, capture_output=True, text=True)
-	# Print the output
-	value=0
-	if result.returncode == 0:
-		value = result.stdout
+	line = [string for string in content if f"BOOST_DEFINE_MATH_CONSTANT({c}" in string][0]
+	#print(line)
+
+	value=line.split(",")[1]
+	print(f"{c} {value}")
 	name = f"{mc_wart}{c}"
 	name = name.replace("_","\\_")
-	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {value} \\\\")
+	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {float(value):.16f} \\\\")
 
 file.append('\\end{tabular}')
 
