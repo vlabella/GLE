@@ -1,5 +1,5 @@
 #
-# -- constants.py - generates cpp and tex code for pysical and numerical constants for GLE
+# -- constants.py - generates cpp and tex code for pysical and mathematical constants for GLE
 #    uses scipy.constants for physical constants and boost::math::constants for numerical constants
 #
 import scipy as sp
@@ -126,7 +126,7 @@ with open(f'../src/gle/{cpp_filename}', 'w') as fp:
 #
 file = []
 file.append('\\begin{tabular}{ll} \\hline')
-file.append('Numerical Constants & Value  \\\\ \\hline')
+file.append('Mathematical Constants & Value  \\\\ \\hline')
 file.append('{\\tt pi} \\index{pi}      & 3.14159265358979323846  \\\\')
 
 # read in boost/math/constants/constants.hpp and parse this file
@@ -154,15 +154,17 @@ for c in boost_math_constants:
 	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {float(value):.16f} \\\\")
 
 file.append('\\end{tabular}')
-
-file.append('\\begin{tabular}{ll} \\hline')
-file.append('Physical Constants & Value  \\\\ \\hline')
+file.append('')
+file.append('')
+file.append('\\begin{tabular}{lll} \\hline')
+file.append('Physical Constants & Value & Units \\\\ \\hline')
 
 for c in scipy_physical_constants:
 	#print(f"{c} {eval(f"sp.constants.{c}")}")
 	name = f"{pc_wart}{c}"
 	name = name.replace("_","\\_")
-	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {eval(f"sp.constants.{c}")} \\\\")
+	units = "SI"
+	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {eval(f"sp.constants.{c}")} & {units} \\\\")
 
 file.append('\\end{tabular}')
 
