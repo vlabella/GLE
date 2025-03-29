@@ -80,7 +80,7 @@ jobs:
     - name: Add MikTeX and Ghostcript to PATH using PowerShell
       shell: pwsh
       run: |
-       echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.04.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+       echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.05.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       # if this fails then gs version is wrong
     - name: Display gs version
