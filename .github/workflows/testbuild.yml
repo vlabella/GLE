@@ -21,6 +21,13 @@ jobs:
         event-type: test-trigger
         repository: vlabella/gle-library
         client-payload: '{"upload_url": "foo", "tag": "bar"}'
+    - name: GLE Manual Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ SECRETS.GLE_MANUAL_PAT }}
+        event-type: test-trigger
+        repository: vlabella/gle-manual
+        client-payload: '{"upload_url": "foo", "tag": "bar"}'
 
 
 
