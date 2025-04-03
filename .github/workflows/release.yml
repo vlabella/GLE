@@ -7,6 +7,7 @@
 #    - gets changes from docs/ChangeLog.tct
 #         all lines from version number to first blank line
 #    - triggers build and package workflows for all three OSes, which upload their artifacts to the release
+#    - triggers build and release workflows for gle-library and gle-manual to create release with same tag
 #
 #    - When completed manually bump version in src/CMakeLists.txt and create new entry in doc/ChangeLog.txt
 #
@@ -54,14 +55,14 @@ jobs:
     - name: GLE-manual Repository Dispatch
       uses: peter-evans/repository-dispatch@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GLE_MANUAL_PAT }}
         repository: vlabella/gle-manual
         event-type: gle-release
         client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
     - name: GLE-library Repository Dispatch
       uses: peter-evans/repository-dispatch@v1
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GLE_LIBRARY_PAT }}
         repository: vlabella/gle-library
         event-type: gle-release
         client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
