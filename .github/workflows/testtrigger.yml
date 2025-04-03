@@ -21,4 +21,8 @@ jobs:
 
     - name: echo info
       shell: bash
-      run: echo ${{ github.event.type }}
+      run: echo ${{ github.event }}
+
+    - name: echo info
+      shell: bash
+      run: echo ${{ github.event_type }}
