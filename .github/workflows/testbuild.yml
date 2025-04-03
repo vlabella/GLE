@@ -1,7 +1,7 @@
 #
 # -- test calling trigger
 #
-name: test calling trigger
+name: Test Calling Trigger
 on:
   workflow_dispatch:
 jobs:
@@ -17,7 +17,7 @@ jobs:
     - name: GLE Library Repository Dispatch
       uses: peter-evans/repository-dispatch@v1
       with:
-        token: ${{ secrets.gle-library_PAT }}
+        token: ${{ SECRETS.GLE_LIBRARY_PAT }}
         event-type: test-trigger
         repository: vlabella/gle-library
         client-payload: '{"upload_url": "foo", "tag": "bar"}'
