@@ -16,5 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: echo info
-      shell: bash
-      run: echo ${{ toJson(github) }}
+      run: |
+          cat << OBJECT
+          ${{ toJson(github) }}
+          OBJECT
