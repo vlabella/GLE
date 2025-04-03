@@ -17,12 +17,4 @@ jobs:
     steps:
     - name: echo info
       shell: bash
-      run: echo ${{ github.event_name }}
-
-    - name: echo info
-      shell: bash
-      run: echo ${{ github.event }}
-
-    - name: echo info
-      shell: bash
-      run: echo ${{ github.event_type }}
+      run: echo ${{ toJson(github) }}
