@@ -44,9 +44,24 @@ jobs:
         prerelease: false
     - name: display URL
       run: echo ${{ steps.release.outputs.upload_url }}
-    - name: Repository Dispatch
+      #dispatch to this repo to build all binaries
+    - name: GLE Repository Dispatch
       uses: peter-evans/repository-dispatch@v1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         event-type: release
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
+    - name: GLE-manual Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: vlabella/gle-manual
+        event-type: gle-release
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
+    - name: GLE-library Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: vlabella/gle-library
+        event-type: gle-release
         client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'

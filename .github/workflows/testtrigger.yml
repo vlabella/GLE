@@ -1,5 +1,5 @@
 #
-# -- testtrigger,yml  - testing of event triggering
+# -- testtrigger.yml  - testing of event triggering
 #
 name: Test Release Trigger
 on:
@@ -8,19 +8,17 @@ on:
   #   workflows: [Create Release]
   #   types:
   #     - completed
-  #repository_dispatch:
-  #  types: [release]
+  repository_dispatch:
+    types: [test-trigger]
 jobs:
   build:
     name: Test Release Trigger
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout GLE
-      uses: actions/checkout@v4
+    - name: echo info
+      shell: bash
+      run: echo ${{ github.event_name }}
 
-    - name: Upload asset based on tag
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: ./src/CMakeLists.txt
-        tag: ${{ github.event.client_payload.tag }}
+    - name: echo info
+      shell: bash
+      run: echo ${{ github.event.type }}
