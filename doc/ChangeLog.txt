@@ -1,12 +1,13 @@
-4.3.6 (in production)
+4.3.6 (April 2025)
     - added the following physical constants in SI units from scipy.constants - start with pc_
-    pc_c, pc_speed_of_light, pc_mu_0, pc_epsilon_0, pc_h, pc_Planck, pc_hbar, pc_G, pc_gravitational_constant, pc_g, pc_e, pc_elementary_charge, pc_R, pc_gas_constant,
-    pc_alpha, pc_fine_structure, pc_N_A, pc_Avogadro, pc_k, pc_Boltzmann, pc_sigma, pc_Stefan_Boltzmann, pc_Wien, pc_Rydberg, pc_m_e, pc_electron_mass, pc_m_p, pc_proton_mass,
-    pc_m_n, pc_neutron_mass, pc_zero_Celsius (vlabella)
+      pc_c, pc_speed_of_light, pc_mu_0, pc_epsilon_0, pc_h, pc_Planck, pc_hbar, pc_G, pc_gravitational_constant, pc_g, pc_e, pc_elementary_charge, pc_R, pc_gas_constant,
+      pc_alpha, pc_fine_structure, pc_N_A, pc_Avogadro, pc_k, pc_Boltzmann, pc_sigma, pc_Stefan_Boltzmann, pc_Wien, pc_Rydberg, pc_m_e, pc_electron_mass, pc_m_p, pc_proton_mass,
+      pc_m_n, pc_neutron_mass, pc_zero_Celsius (vlabella)
     - added the following mathematical constants from boost::math - start with mc_
-    mc_catalan, mc_degree, mc_e, mc_e_pow_pi, mc_euler, mc_exp_minus_half, mc_half, mc_half_pi, mc_half_root_two, mc_ln_phi, mc_one_div_two_pi, mc_half_root_two, mc_phi,
-    mc_pi, mc_quarter_pi, mc_radian, mc_root_e, mc_root_half_pi, mc_root_ln_four, mc_root_pi, mc_root_three, mc_root_two, mc_root_two_pi, mc_third, mc_third_pi, mc_two_pi,
-    mc_two_thirds, mc_zeta_threezeta_two (vlabella)
+      mc_catalan, mc_degree, mc_e, mc_e_pow_pi, mc_euler, mc_exp_minus_half, mc_half, mc_half_pi, mc_half_root_two, mc_ln_phi, mc_one_div_two_pi, mc_half_root_two, mc_phi,
+      mc_pi, mc_quarter_pi, mc_radian, mc_root_e, mc_root_half_pi, mc_root_ln_four, mc_root_pi, mc_root_three, mc_root_two, mc_root_two_pi, mc_third, mc_third_pi, mc_two_pi,
+      mc_two_thirds, mc_zeta_threezeta_two (vlabella)
+    - numerous fixes to workflows to integrate builds and releases between gle gle-manual and gle-library (vlabella)
 
 4.3.5 (February 2025)
     - fixed bug in GLE string function "pos" that caused issues. It was not clearing all its parameters off the stack.
