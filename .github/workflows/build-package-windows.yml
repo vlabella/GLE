@@ -22,28 +22,34 @@ jobs:
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
        # needed for building of manual
-    - name: Choco Install MikTeX
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install miktex --no-progress
-
-      # needed for building of manual
     - name: Choco Install Ghostscript
       uses: crazy-max/ghaction-chocolatey@v3
       with:
         args: install ghostscript --no-progress
 
       # use powersehll to add correct gs path since version number may change
-    - name: Add MikTeX and Ghostcript to PATH using PowerShell
+    - name: Add Ghostcript to PATH using PowerShell
       shell: pwsh
       run: >
-        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" }; $g=$o.FullName+"\bin";
-        echo "C:\Program Files\MikTeX\miktex\bin\x64;"+$g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" };
+        echo $o.FullName+"\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       # if this fails then gs is not in path
     - name: Display gs version
       shell: cmd
       run: gswin64c --version
+
+       # needed for building of manual
+    - name: Choco Install MikTeX
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install miktex --no-progress
+
+    - name: Add MikTeX to PATH using PowerShell
+      shell: pwsh
+      run: |
+        echo "C:\Program Files\MikTeX\miktex\bin\x64;" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
 
     - name: Configure MikTeX
       shell: cmd
