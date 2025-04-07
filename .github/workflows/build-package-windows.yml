@@ -76,13 +76,14 @@ jobs:
       with:
         args: install ghostscript --no-progress
 
-      # gs version number hard coded - will fail when version number changes
+      # use powersehll to add correct gs path since version number may change
     - name: Add MikTeX and Ghostcript to PATH using PowerShell
       shell: pwsh
       run: |
-       echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.05.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" }; $g=$o.FullName+"\bin";
+        echo "C:\Program Files\MikTeX\miktex\bin\x64;"+$g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
-      # if this fails then gs version is wrong
+      # if this fails then gs is not in path
     - name: Display gs version
       shell: cmd
       run: gswin64c --version
@@ -159,11 +160,12 @@ jobs:
         file: ${{github.workspace}}/stage/gle-*.*
         tag: ${{ github.event.client_payload.tag }}
 
-    - name: Upload Manual to Release Location
-      if: ${{ github.event_name == 'repository_dispatch' }}
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file_glob: false
-        file: ${{github.workspace}}/gle-manual/gle-manual.pdf
-        tag: ${{ github.event.client_payload.tag }}
+    # not used anymore since release action triggers manual build and upload in its own repo
+    # - name: Upload Manual to Release Location
+    #   if: ${{ github.event_name == 'repository_dispatch' }}
+    #   uses: svenstaro/upload-release-action@v2
+    #   with:
+    #     repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #     file_glob: false
+    #     file: ${{github.workspace}}/gle-manual/gle-manual.pdf
+    #     tag: ${{ github.event.client_payload.tag }}
