@@ -21,6 +21,43 @@ jobs:
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
+       # needed for building of manual
+    - name: Choco Install MikTeX
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install miktex --no-progress
+
+      # needed for building of manual
+    - name: Choco Install Ghostscript
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install ghostscript --no-progress
+
+      # use powersehll to add correct gs path since version number may change
+    - name: Add MikTeX and Ghostcript to PATH using PowerShell
+      shell: pwsh
+      run: >
+        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" }; $g=$o.FullName+"\bin";
+        echo "C:\Program Files\MikTeX\miktex\bin\x64;"+$g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      # if this fails then gs is not in path
+    - name: Display gs version
+      shell: cmd
+      run: gswin64c --version
+
+    - name: Configure MikTeX
+      shell: cmd
+      run: |
+        initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
+        miktex --admin --verbose packages update-package-database
+        miktex --admin --verbose packages update
+        miktex --verbose packages update
+        miktex --admin --verbose packages install cm-super
+        miktex --admin --verbose fndb refresh
+        initexmf --admin --verbose --update-fndb
+        initexmf --admin --verbose --mklinks --force
+        updmap --admin
+
     - name: Checkout GLE
       uses: actions/checkout@v4
 
@@ -63,43 +100,6 @@ jobs:
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
-
-      # needed for building of manual
-    - name: Choco Install MikTeX
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install miktex --no-progress
-
-      # needed for building of manual
-    - name: Choco Install Ghostscript
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install ghostscript --no-progress
-
-      # use powersehll to add correct gs path since version number may change
-    - name: Add MikTeX and Ghostcript to PATH using PowerShell
-      shell: pwsh
-      run: >
-        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" }; $g=$o.FullName+"\bin";
-        echo "C:\Program Files\MikTeX\miktex\bin\x64;"+$g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
-      # if this fails then gs is not in path
-    - name: Display gs version
-      shell: cmd
-      run: gswin64c --version
-
-    - name: Configure MikTeX
-      shell: cmd
-      run: |
-        initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
-        miktex --admin --verbose packages update-package-database
-        miktex --admin --verbose packages update
-        miktex --verbose packages update
-        miktex --admin --verbose packages install cm-super
-        miktex --admin --verbose fndb refresh
-        initexmf --admin --verbose --update-fndb
-        initexmf --admin --verbose --mklinks --force
-        updmap --admin
 
     - name: Configure CMake
       run: >
