@@ -51,6 +51,9 @@
 !13   Cross
 !14   Plus
 !15   Minus
+!16   Triangle Down
+!17   Filled Triangle Down
+!18   White Triangle Down
 dfont file_name="GLEMARK"
 dfont font_name="GLEMARK"
 dfont design= 10
@@ -200,5 +203,34 @@ dfont  wid=10 hei=10
 size 20 20
 	amove 0  5
 	rline 10 0
+stroke
+dfont endchar
+dfont  char=16
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 10
+	rline 10 0
+	rline -5 -10
+	closepath
+stroke
+dfont endchar
+dfont  char=17
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 10
+	rline 10 0
+	rline -5 -10
+	closepath
+fill
+stroke
+dfont endchar
+dfont  char=18
+dfont  wid=10 hei=10
+size 20 20
+	amove 0 10
+	rline 10 0
+	rline -5 -10
+	closepath
+fillwhite
 stroke
 dfont endchar
