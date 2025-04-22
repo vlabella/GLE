@@ -2423,7 +2423,7 @@ struct mark_struct stdmark[] = {
 	{ "CLUB",      "PSZD",    168,0,0,1.0,        true  },   /* club */
 	{ "CROSS",     "GLEMARK", 13,-0.5,-0.5,0.7,   false },   /* cross */
 	{ "DAG",       "TEXSY",   121,0,0.005,0.78,   true  },   /* dag */
-	{ "DDAG",      "TEXSY",   122,0,0,0.79,       true  },   /* dagg */
+	{ "DDAG",      "TEXSY",   122,0,0,0.79,       true  },   /* ddag */
 	{ "DIAMOND",   "GLEMARK", 10,-0.5,-0.5,0.7,   false },   /* diamond */
 	{ "DIAMONDZ",  "TEXSY",   125,0,0,0.81,       true  },   /* diamondz */
 	{ "DOT",       "GLEMARK", 8,-0.5,-0.5,0.3325, false },   /* dot */
@@ -2431,6 +2431,7 @@ struct mark_struct stdmark[] = {
 	{ "FDIAMOND",  "GLEMARK", 11,-0.5,-0.5,0.7,   false },   /* fdiamond */
 	{ "FLOWER",    "PSZD",    96,0,0.03,0.97,     true  },   /* ZapDingbats */
 	{ "FSQUARE",   "GLEMARK", 5,-0.5,-0.5,0.7,    false },   /* fsquare */
+	{ "FSTARR",    "GLEMARK", 20,-.5,-.5,0.7,     false },   /* fstarr */
 	{ "FTRIANGLE", "GLEMARK", 2,-0.5,-0.35,0.7,   false },   /* ftriangle */
 	{ "FTRIANGLED","GLEMARK", 17,-0.5,-0.65,0.7,  false },   /* ftriangled */
 	{ "HANDPEN",   "PSZD",    45,0,0,0.91,        true  },   /* ZapDingbats */
@@ -2441,6 +2442,7 @@ struct mark_struct stdmark[] = {
 	{ "OMINUS",    "TEXSY",   9,0,0,1.07,         true  },   /* ominus */
 	{ "OPLUS",     "TEXSY",   8,0,0,1.07,         true  },   /* oplus */
 	{ "OTIMES",    "TEXSY",   10,0,0,1.07,        true  },   /* otimes */
+	{ "PCROSS",    "GLEMARK", 22,-0.5,-0.5,0.7,   false },   /* pcross */
 	{ "PHONE",     "PSZD",    37,0,0,1.11,        true  },   /* ZapDingbats */
 	{ "PLANE",     "PSZD",    40,0,0,1.0,         true  },   /* ZapDingbats */
 	{ "PLUS",      "GLEMARK", 14,-0.5,-0.5,0.7,   false },   /* plus */
@@ -2453,14 +2455,16 @@ struct mark_struct stdmark[] = {
 	{ "STAR2",     "PSZD",    69,0,0,1.0,         true  },   /* ZapDingbats */
 	{ "STAR3",     "PSZD",    79,0,0.04,1.0,      true  },   /* ZapDingbats */
 	{ "STAR4",     "PSZD",    98,0,0,1.0,         true  },   /* ZapDingbats */
+	{ "STARR",     "GLEMARK", 19,-0.5,-0.5,0.7,   false },   /* starr */
 	{ "TRIANGLE",  "GLEMARK", 1,-0.5,-0.35,0.7,   false },   /* triangle */
 	{ "TRIANGLED", "GLEMARK", 16,-0.5,-0.65,0.7,  false },   /* triangled */
 	{ "TRIANGLEZ", "TEXSY",   52,0,0,1.0,         true  },   /* trianglez */
 	{ "WCIRCLE",   "GLEMARK", 9,-0.5,-0.5,0.7,    false },   /* wcircle */
+	{ "WDIAMOND",  "GLEMARK", 12,-0.5,-0.5,0.7,   false },   /* wdiamond */
 	{ "WTRIANGLE", "GLEMARK", 3,-0.5,-0.35,0.7,   false },   /* wtriangle */
 	{ "WTRIANGLED","GLEMARK", 18,-0.5,-0.65,0.7,  false },   /* wtriangled */
 	{ "WSQUARE",   "GLEMARK", 6,-0.5,-0.5,0.7,    false },   /* wsquare */
-	{ "WDIAMOND",  "GLEMARK", 12,-0.5,-0.5,0.7,   false },   /* wdiamond */
+	{ "WSTARR",    "GLEMARK", 21,-.5,-.5,0.7,     false },   /* wstarr */
 	{ NULL,        NULL,      0,0,0,0,            false }
 };	/* change range check below when adding markers */
 
@@ -2484,6 +2488,10 @@ GLEMARK
 16   Triangle Down
 17   Filled Triangle Down
 18   White Triangle Down
+19   Star
+20   Filled Star
+21   White Star
+22   Plus Cross
 */
 
 void mark_clear(void) {
