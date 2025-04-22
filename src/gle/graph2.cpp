@@ -880,7 +880,7 @@ void draw_err(GLEDataSet* dataSet, const string& errdescr, bool isUp, bool isHor
 		g_get_hei(&hei);
 		errwd = hei/3;
 	}
-	g_set_color(dataSet->color);
+	g_set_color(dataSet->mcolor.isNull() ? dataSet->color : dataSet->mcolor); // error bars should have the same color as the markers
 	g_set_line_width(dataSet->lwidth);
 	std::vector<GLELineSegment> errData(getErrorBarData(dataSet, errdescr, isUp, isHoriz, descr));
 	for (unsigned int i = 0; i < errData.size(); i++) {
@@ -1280,7 +1280,7 @@ void GLEGraphPartMarkers::drawMarkers(int dn) {
 	GLEDataSet* dataSet = dp[dn];
 	dataSet->checkRanges();
 	GLERC<GLEDataPairs> data = transform_data(dataSet, false);
-	g_set_color(dataSet->color);
+	g_set_color(dataSet->mcolor.isNull() ? dataSet->color : dataSet->mcolor);
 	g_set_line_width(dataSet->lwidth);
 	g_set_line_style("1");
 	double msize = dataSet->msize;
@@ -3283,6 +3283,8 @@ void do_dataset(int d, GLEGraphBlockInstance* graphBlock) {
 			dp[d]->mdist = next_exp;
 		} else kw("MSCALE") {
 			dp[d]->mscale = next_exp;
+		} else kw("MCOLOR") {
+			dp[d]->mcolor = next_color;
 		} else kw("KEY") {
 			next_vquote_cpp(dp[d]->key_name);
 		} else kw("AUTOSCALE") {
@@ -3466,6 +3468,7 @@ void do_dataset_key(int d) {
 		KeyEntry* entry = g_keyInfo->createEntry();
 		entry->fill = dp[d]->key_fill;
 		entry->color = dp[d]->color;
+		entry->mcolor = dp[d]->mcolor;
 		entry->lwidth = dp[d]->lwidth;
 		entry->marker = dp[d]->marker;
 		entry->msize = dp[d]->msize;
@@ -4095,6 +4098,7 @@ GLEDataSet::GLEDataSet(int identifier) {
 	bigfile = NULL;
 	key_fill = 0;
 	color = g_get_color_hex(GLE_COLOR_BLACK);
+	mcolor = 0;
 	errup[0] = 0;
 	errdown[0] = 0;
 	errwidth = 0.0;
@@ -4179,6 +4183,7 @@ void GLEDataSet::copy(GLEDataSet* other) {
 	mdata = other->mdata;
 	color = other->color;
 	mscale = other->mscale;
+	mcolor = other->mcolor;
 	line = other->line;
 	rx1 = other->rx1;
 	ry1 = other->ry1;

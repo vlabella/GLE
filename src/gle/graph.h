@@ -425,6 +425,7 @@ public:
 	char *bigfile;
 	GLERC<GLEColor> key_fill;
 	GLERC<GLEColor> color;
+	GLERC<GLEColor> mcolor;
 	double errwidth;
 	std::string errup;
 	std::string errdown;
