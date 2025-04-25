@@ -1,139 +1,33 @@
 #
-# -- Windows - build, build manual, package and upload - used as starting point for current workflows
+# -- test calling trigger
 #
-name: Deprecated Windows Build Original
+name: Test Calling Trigger
 on:
   workflow_dispatch:
-env:
-  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
-  BUILD_TYPE: Release
 jobs:
   build:
     runs-on: windows-latest
     steps:
-
-    - name: Enable Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1.13.0
-
-    - name: Checkout GLE
-      uses: actions/checkout@v4
-
-    - name: Checkout GLE Library
-      uses: actions/checkout@v4
+    - name: GLE Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
       with:
-        repository: "vlabella/gle-library"
-        path: gle-library
-
-    - name: Checkout GLE Manual
-      uses: actions/checkout@v4
+        token: ${{ secrets.GITHUB_TOKEN }}
+        event-type: test-trigger
+        client-payload: '{"upload_url": "foo", "tag": "bar"}'
+    - name: GLE Library Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
       with:
-        repository: "vlabella/gle-manual"
-        path: gle-manual
-
-    - name: Acquire vcpkg
-      uses: actions/checkout@v4
+        token: ${{ SECRETS.GLE_LIBRARY_PAT }}
+        event-type: test-trigger
+        repository: vlabella/gle-library
+        client-payload: '{"upload_url": "foo", "tag": "bar"}'
+    - name: GLE Manual Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
       with:
-        repository: "Microsoft/vcpkg"
-        path: vcpkg
+        token: ${{ SECRETS.GLE_MANUAL_PAT }}
+        event-type: test-trigger
+        repository: vlabella/gle-manual
+        client-payload: '{"upload_url": "foo", "tag": "bar"}'
 
-    - name: Bootstrap vcpkg
-      run: "${{ github.workspace }}\\vcpkg\\bootstrap-vcpkg.bat"
-      shell: cmd
 
-    - name: Enable GitHub Actions Cache backend
-      uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
-      # header files needed for building of GLE
-    - name: Acquire Ghostscipt/PDL
-      uses: actions/checkout@v4
-      with:
-        repository: "ArtifexSoftware/ghostpdl"
-        path: ghostpdl
-
-      # needed for building of manual
-    - name: Choco Install MikTeX
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install miktex --no-progress
-
-      # needed for building of manual
-    - name: Choco Install Ghostscript
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install ghostscript --no-progress
-
-      # gs version number hard coded - will fail when version number changes
-    - name: Add MikTeX and Ghostcript to PATH using PowerShell
-      shell: pwsh
-      run: |
-       echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.04.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
-      # if this fails then gs version is wrong
-    - name: Display gs version
-      shell: cmd
-      run: gswin64c --version
-
-    - name: Configure MikTeX
-      shell: cmd
-      run: |
-        initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
-        miktex --admin --verbose packages update-package-database
-        miktex --admin --verbose packages update
-        miktex --verbose packages update
-        miktex --admin --verbose packages install cm-super
-        miktex --admin --verbose fndb refresh
-        initexmf --admin --verbose --update-fndb
-        initexmf --admin --verbose --mklinks --force
-        updmap --admin
-
-    - name: Configure CMake
-      run: >
-        cmake -S ${{github.workspace}}\src -B ${{github.workspace}}\build
-        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-        -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
-        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
-        -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
-        -DMSVC_USE_STATIC_RUNTIME=ON
-        -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
-        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
-        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
-
-    - name: Build
-      run: |
-        cmake --build ${{github.workspace}}\build --config ${{env.BUILD_TYPE}}
-
-    - name: Install
-      run: |
-        cmake -DBUILD_TYPE=Release -P ${{github.workspace}}\build\cmake_install.cmake
-
-    - name: Build Manual
-      working-directory: ${{github.workspace}}\gle-manual
-      run: |
-        nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
-
-    - name: Upload Artifacts - Manual PDF
-      uses: actions/upload-artifact@v4.4.3
-      with:
-        name: GLE PDF Manual
-        path: ${{github.workspace}}\gle-manual\gle-manual.pdf
-        if-no-files-found: warn
-        retention-days: 0
-        compression-level: 0
-
-    - name: Package
-      working-directory: ${{github.workspace}}\build
-      run: |
-        cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\stage"
-
-    - name: Upload Artifacts - Binaries
-      uses: actions/upload-artifact@v4.4.3
-      with:
-        name: Windows Binary Executables
-        path: ${{github.workspace}}\stage\gle-*.*
-        if-no-files-found: warn
-        retention-days: 0
-        compression-level: 0

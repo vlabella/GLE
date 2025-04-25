@@ -2,7 +2,7 @@
 
 GLE (Graphics Layout Engine) is a graphics scripting language designed for creating publication quality graphs, plots, diagrams, figures and slides. GLE supports various graph types (function plots, histograms, bar graphs, scatter plots, contour lines, color maps, surface plots, ...) through a simple but flexible set of graphing commands. More complex output can be created by relying on GLE's scripting language, which is full featured with subroutines, variables, and logic control. GLE relies on LaTeX for text output and supports mathematical formulae in graphs and figures. GLE's output formats include EPS, PS, PDF, JPEG, and PNG.
 
-This repo contains the source code to build the executables for GLE.  The [manual](https://github.com/vlabella/gle-manual) and [library of GLE routines and sample code](https://github.com/vlabella/gle-library) that are distributed with the binary packages are contained in separate repositories here: [gle-manual](https://github.com/vlabella/gle-manual) and [gle-library](https://github.com/vlabella/gle-library).
+This repo contains the source code to build the executable for GLE.  The [manual](https://github.com/vlabella/gle-manual) and [library of GLE routines and sample code](https://github.com/vlabella/gle-library) that are distributed with the binary packages are contained in separate repositories here: [gle-manual](https://github.com/vlabella/gle-manual) and [gle-library](https://github.com/vlabella/gle-library).
 
 More information and the binary distributions can be found on the GLE website here http://glx.sourceforge.io or using the link below.
 
@@ -60,7 +60,7 @@ To install gle on your machine after building
 ### options that control the build
 
  * BUILD_GUI - (default: ON) turn off to disable build of the GUI, qgle that requires Qt.
- * BUILD_MANIP - (default: ON (Linux, Apple) OFF (Windows)) turn off to dsiable build of the manip program.
+ * BUILD_MANIP - (default: ON (Linux, Apple) OFF (Windows)) turn off to disable build of the manip program.
  * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
  * MSVC_USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
  * ZLIB_USE_STATIC_LIBS - set ON to link to static variants of zlib: .a .lib instead of .so and .dll
@@ -88,3 +88,5 @@ Cpack can be utilized to create distributable packages.  The gle-manual and gle-
 ### CI/CD Github Actions
 
 Several GitHib actions exist that build the binaries and distributable packages for all three platforms.  The build artifacts can be found under the Actions tab and then navigate to the appropriate action.
+
+The action "Create Release"  will create a release with a tag from the version number contained in CMakeLists.txt file.  It also will trigger the build and package actions for all three operating systems.  After running this action it is important to bump the version number in CMakeLists.txt file.

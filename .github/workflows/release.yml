@@ -1,0 +1,68 @@
+#
+# -- Create Release - Run manually to create a release
+#
+#    - check out gle source code
+#    - gets version number from CMakeLists.txt file
+#    - creates tag and release using version number on GitHub
+#    - gets changes from docs/ChangeLog.tct
+#         all lines from version number to first blank line
+#    - triggers build and package workflows for all three OSes, which upload their artifacts to the release
+#    - triggers build and release workflows for gle-library and gle-manual to create release with same tag
+#
+#    - When completed manually bump version in src/CMakeLists.txt and create new entry in doc/ChangeLog.txt
+#
+name: Create Release
+on:
+  workflow_dispatch:
+  #pull_request:
+  #push:
+  #  branches: [main]
+jobs:
+  release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Get Version Number from CMakeLists.txt file
+      id: version-number
+      #run: echo "VERSION=4.3.5" >> $GITHUB_ENV
+      run: echo "VERSION=$(awk 'tolower($0) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CMakeLists.txt)" >> $GITHUB_ENV
+    - name: Use the value
+      run: printf '%s\n' "$VERSION"
+    - name: extract changes for only this version
+      # use sed to extract from change log - must have blank line between version numbers in change log
+      run: sed -n "/$VERSION/,/^$/p" ${{github.workspace}}/doc/ChangeLog.txt > changes.txt
+    - name: Release
+      id: release
+      uses: softprops/action-gh-release@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        tag_name: v${{ env.VERSION }}
+        name: v${{ env.VERSION }}
+        body_path:  ${{github.workspace}}/changes.txt
+        draft: false
+        prerelease: false
+    - name: display URL
+      run: echo ${{ steps.release.outputs.upload_url }}
+      #dispatch to this repo to build all binaries
+    - name: GLE Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        event-type: release
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
+    - name: GLE-manual Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GLE_MANUAL_PAT }}
+        repository: vlabella/gle-manual
+        event-type: gle-release
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'
+    - name: GLE-library Repository Dispatch
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        token: ${{ secrets.GLE_LIBRARY_PAT }}
+        repository: vlabella/gle-library
+        event-type: gle-release
+        client-payload: '{"upload_url": "${{ steps.release.outputs.upload_url }}", "tag": "v${{ env.VERSION }}"}'

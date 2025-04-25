@@ -1,10 +1,14 @@
 #
 # -- Windows - build, build manual, package, and upload
-#     runs manually
 #
 name: Build & Package Windows
 on:
+  # run manually
   workflow_dispatch:
+  # and run on completion of "Create Release" workflow
+  # uploads artifacts to release
+  repository_dispatch:
+    types: [release]
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
@@ -16,6 +20,49 @@ jobs:
 
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
+
+       # needed for building of manual
+    - name: Choco Install Ghostscript
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install ghostscript --no-progress
+
+      # use powersehll to add correct gs path since version number may change
+    - name: Add Ghostcript to PATH using PowerShell
+      shell: pwsh
+      run: >
+        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" };
+        $g=$o.FullName+"\bin" ; echo $g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      # if this fails then gs is not in path
+    - name: Display gs version
+      shell: cmd
+      run: gswin64c --version
+
+       # needed for building of manual
+    - name: Choco Install MikTeX
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install miktex --no-progress
+
+    - name: Add MikTeX to PATH using PowerShell
+      shell: pwsh
+      run: |
+        echo "C:\Program Files\MikTeX\miktex\bin\x64;" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+
+    - name: Configure MikTeX
+      shell: cmd
+      run: |
+        initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
+        miktex --admin --verbose packages update-package-database
+        miktex --admin --verbose packages update
+        miktex --verbose packages update
+        miktex --admin --verbose packages install cm-super
+        miktex --admin --verbose fndb refresh
+        initexmf --admin --verbose --update-fndb
+        initexmf --admin --verbose --mklinks --force
+        updmap --admin
 
     - name: Checkout GLE
       uses: actions/checkout@v4
@@ -59,42 +106,6 @@ jobs:
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
-
-      # needed for building of manual
-    - name: Choco Install MikTeX
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install miktex --no-progress
-
-      # needed for building of manual
-    - name: Choco Install Ghostscript
-      uses: crazy-max/ghaction-chocolatey@v3
-      with:
-        args: install ghostscript --no-progress
-
-      # gs version number hard coded - will fail when version number changes
-    - name: Add MikTeX and Ghostcript to PATH using PowerShell
-      shell: pwsh
-      run: |
-       echo "C:\Program Files\MikTeX\miktex\bin\x64;C:\Program Files\gs\gs10.04.0\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
-      # if this fails then gs version is wrong
-    - name: Display gs version
-      shell: cmd
-      run: gswin64c --version
-
-    - name: Configure MikTeX
-      shell: cmd
-      run: |
-        initexmf --admin --verbose --set-config-value=[MPM]AutoInstall=1
-        miktex --admin --verbose packages update-package-database
-        miktex --admin --verbose packages update
-        miktex --verbose packages update
-        miktex --admin --verbose packages install cm-super
-        miktex --admin --verbose fndb refresh
-        initexmf --admin --verbose --update-fndb
-        initexmf --admin --verbose --mklinks --force
-        updmap --admin
 
     - name: Configure CMake
       run: >
@@ -144,3 +155,23 @@ jobs:
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
+
+      # upload to release location if started with from release workflow
+    - name: Upload Binary Distributables to Release Location
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file_glob: true
+        file: ${{github.workspace}}/stage/gle-*.*
+        tag: ${{ github.event.client_payload.tag }}
+
+    # not used anymore since release action triggers manual build and upload in its own repo
+    # - name: Upload Manual to Release Location
+    #   if: ${{ github.event_name == 'repository_dispatch' }}
+    #   uses: svenstaro/upload-release-action@v2
+    #   with:
+    #     repo_token: ${{ secrets.GITHUB_TOKEN }}
+    #     file_glob: false
+    #     file: ${{github.workspace}}/gle-manual/gle-manual.pdf
+    #     tag: ${{ github.event.client_payload.tag }}

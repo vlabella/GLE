@@ -56,6 +56,7 @@
 #include "keyword.h"
 #include "run.h"
 #include <boost/math/constants/constants.hpp>
+#include "gle-constants.h"
 
 using namespace std;
 
@@ -85,31 +86,18 @@ GLERun* getGLERunInstance() {
 
 void text_load_include(GLEParser* parser, const string& fname, GLESourceLine* code, GLESourceFile* file);
 
-void gle_set_constants() {
+void gle_set_constants(){
 	GLEMemoryCell value;
 	GLE_MC_INIT(value);
-	//
-	// -- here is where constants are defined within GLE as variables
-	//	  it is equivalent to the user adding the code
-	//    PI = 3.14159....
-	//  the GLE_PI constants are defined in all.h
-	//var_findadd_set("PI", GLE_PI);
-	// use boost::math::constants for best precisison
-	var_findadd_set("PI",boost::math::double_constants::pi);
-	var_findadd_set("TWO_PI",boost::math::double_constants::two_pi);
-	var_findadd_set("ROOT_PI",boost::math::double_constants::root_two);
-	var_findadd_set("HALF_PI",boost::math::double_constants::half_pi);
-	var_findadd_set("ROOT_TWO",boost::math::double_constants::root_two);
-	var_findadd_set("ROOT_THREE",boost::math::double_constants::root_three);
-	var_findadd_set("_E_",boost::math::double_constants::e);
 	GLE_MC_SET_BOOL(&value, true);
 	var_findadd_set("TRUE", &value);
 	GLE_MC_SET_BOOL(&value, false);
 	var_findadd_set("FALSE", &value);
+	var_findadd_set("PI",boost::math::double_constants::pi);
+	gle_set_math_and_physical_constants();
 }
 
 void do_set_vars() {
-	gle_set_constants();
 	var_findadd_set("XGMIN", 0.0);
 	var_findadd_set("YGMIN", 0.0);
 	var_findadd_set("XGMAX", 0.0);
@@ -120,6 +108,7 @@ void do_set_vars() {
 	var_findadd_set("Y2GMAX", 0.0);
 	var_findadd_set("ZGMIN", 0.0);
 	var_findadd_set("ZGMAX", 0.0);
+	gle_set_constants();
 }
 
 /*---------------------------------------------------------------------------*/

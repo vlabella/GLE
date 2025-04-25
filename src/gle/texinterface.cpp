@@ -1146,9 +1146,10 @@ bool create_bitmap_file_ghostscript(GLEFileLocation* fname, int device, int dpi,
 		return run_ghostscript(gsargs.str(), outputfile, !fname->isStdout(), &postscript);
 	}
 }
-
+// poppler bitmap creation not working on win32 CPP library - need to fix
+// in the meantime use gs for windows always
 bool create_bitmap_file(GLEFileLocation* fname, int device, int dpi, int options, GLEScript* script) {
-#ifdef HAVE_POPPLER
+#if defined (HAVE_POPPLER) && ( defined(__unix__) || defined(__APPLE__) )
 	bool supportsBitmapType = g_bitmap_supports_type(g_device_to_bitmap_type(device));
 	string* bytesPDF = script->getRecordedBytesBuffer(GLE_DEVICE_PDF);
 	if (supportsBitmapType && !bytesPDF->empty()) {
@@ -1160,8 +1161,9 @@ bool create_bitmap_file(GLEFileLocation* fname, int device, int dpi, int options
 		gle_convert_pdf_to_image_file((char*)bytesPDF->c_str(), (int)bytesPDF->size(), dpi, device, options, myFName.c_str());
 		return true;
 	}
-#endif // HAVE_POPPLER
+#else
 	return create_bitmap_file_ghostscript(fname, device, dpi, options, script);
+#endif // HAVE_POPPLER
 }
 
 bool create_pdf_file_ghostscript(GLEFileLocation* fname, int dpi, GLEScript* script) {

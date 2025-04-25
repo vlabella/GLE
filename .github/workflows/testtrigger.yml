@@ -1,0 +1,22 @@
+#
+# -- testtrigger.yml  - testing of event triggering
+#
+name: Test Release Trigger
+on:
+  workflow_dispatch:
+  # workflow_run:
+  #   workflows: [Create Release]
+  #   types:
+  #     - completed
+  repository_dispatch:
+    types: [test-trigger]
+jobs:
+  build:
+    name: Test Release Trigger
+    runs-on: ubuntu-latest
+    steps:
+    - name: echo info
+      run: |
+          cat << OBJECT
+          ${{ toJson(github) }}
+          OBJECT

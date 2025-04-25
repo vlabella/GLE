@@ -1,11 +1,16 @@
 #
 # -- Build and Package for Linux and macOS
 #    build, build manual, package, and upload
-#     runs manually
+#    runs manually or on completion of Create Release workflow
 #
 name: Build & Package Linux and macOS
 on:
+  # run manually
   workflow_dispatch:
+  # and run on completion of "Create Release" workflow
+  # uploads artifacts to release
+  repository_dispatch:
+    types: [release]
 jobs:
   build:
     name: Build & Package on ${{ matrix.os }}
@@ -129,3 +134,13 @@ jobs:
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
+
+      # upload to release location if started with from release workflow
+    - name: Upload Binary Distributables to Release Loaction
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file_glob: true
+        file: ${{github.workspace}}/build/destroot/usr/local/gle-*.*
+        tag: ${{ github.event.client_payload.tag }}
