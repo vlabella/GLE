@@ -10,6 +10,7 @@ pc_wart      = "pc_"
 mc_wart      = "mc_"
 cpp_filename = "gle-constants.h"
 tex_filename = "constants.tex"
+gle_filename = "test_constants.gle"
 # variable names in scipy.constants.
 # add use of database value(key) if needed
 scipy_physical_constants = [
@@ -103,7 +104,8 @@ file.append(tb+"if(numerical){")
 tb="\t\t"
 for c in boost_math_constants:
 	#print(f"{c} {eval(f"sp.constants.{c}")}")
-	file.append(f"{tb}var_findadd_set(\"{mc_wart}{c}\",boost::math::double_constants::{c});")
+	s = f"{mc_wart}{c}"
+	file.append(f"{tb}var_findadd_set(\"{s.upper()}\",boost::math::double_constants::{c});")
 
 tb="\t"
 file.append(tb+"}")
@@ -111,7 +113,8 @@ file.append(tb+"if(physical){")
 tb="\t\t"
 for c in scipy_physical_constants:
 	#print(f"{c} {eval(f"sp.constants.{c}")}")
-	file.append(f"{tb}var_findadd_set(\"{pc_wart}{c}\",{eval(f"sp.constants.{c}")});")
+	s = f"{pc_wart}{c}"
+	file.append(f"{tb}var_findadd_set(\"{s.upper()}\",{eval(f"sp.constants.{c}")});")
 
 tb="\t"
 file.append(tb+"}")
@@ -148,7 +151,7 @@ for c in boost_math_constants:
 	#print(line)
 
 	value=line.split(",")[1]
-	print(f"{c} {value}")
+	#print(f"{c} {value}")
 	name = f"{mc_wart}{c}"
 	name = name.replace("_","\\_")
 	file.append(f"{{\\tt {name}}} \\index{{{name}}}  & {float(value):.16f} \\\\")
@@ -173,6 +176,23 @@ with open(f'../../gle-manual/appendix/{tex_filename}', 'w') as fp:
 	for line in file:
 		fp.write(line + '\n')
 
+#
+# -- generate gle file for testing
+#
+file = []
+file.append('!')
+file.append('! -- testing of constants')
+file.append(f"print \"pi = \"  pi")
+for c in boost_math_constants:
+	file.append(f"print \"{mc_wart}{c} = \"  {mc_wart}{c}")
+
+for c in scipy_physical_constants:
+	file.append(f"print \"{pc_wart}{c} = \" {pc_wart}{c}")
+
+with open(f'../src/gletests/{gle_filename}', 'w') as fp:
+	# Iterate over the list and write each item to the file
+	for line in file:
+		fp.write(line + '\n')
 
 
 
