@@ -2369,93 +2369,103 @@ void mystrcpy(char **d, const char *s) {
 struct mark_struct { const char *name; const char *font; int cc; double rx; double ry; double scl; bool center;};
 
 struct mark_struct stdmark_v35[] = {
-	{ "DOT",      "RM",      46,-.125,-.0435,3.0,false },   /* dot */
-	{ "CROSS",    "TEXSY",   2,-.375,-.24,1.0,   false },   /* cross */
-	{ "FCIRCLE",  "GLEMARK", 8,-.5,-.5,0.7,      false },   /* fcircle */
-	{ "FSQUARE",  "GLEMARK", 5,-.5,-.5,0.7,      false },   /* fsquare */
-	{ "FTRIANGLE","GLEMARK", 2,-.5,-.433,0.7,    false },   /* ftriangle */
-	{ "FDIAMOND", "GLEMARK", 11,-.5,-.5,0.7,     false },   /* fdiamond */
-	{ "CIRCLE",   "GLEMARK", 7,-.5,-.5,0.7,      false },   /* circle */
-	{ "SQUARE",   "GLEMARK", 4,-.5,-.5,0.7,      false },   /* square */
-	{ "TRIANGLE", "GLEMARK", 1,-.5,-.433,0.7,    false },   /* triangle */
-	{ "DIAMOND",  "GLEMARK", 10,-.5,-.5,0.7,     false },   /* diamond */
-	{ "PLUS",     "TEXCMR",  43,-.375,-.24,1.0,  false },   /* plus, fixed */
-	{ "CLUB",     "TEXSY",   124,-.38,-.3,1.0,   false },   /* club */
-	{ "HEART",    "TEXSY",   126,-.38,-.34,1.0,  false },   /* heart */
-	{ "DIAMONDZ", "TEXSY",   125,-.38,-.26,1.0,  false },   /* diamondz */
-	{ "SPADE",    "TEXSY",   127,-.375,-.24,1.0, false },   /* spade (needs fixing) */
-	{ "STAR",     "TEXMI",   63,-.25,-.21,1.0,   false },   /* star */
-	{ "SNAKE",    "TEXSY",   120,-.21,-.22,1.0,  false },   /* snake */
-	{ "DAG",      "TEXSY",   121,-.21,-.22,1.0,  false },   /* dag */
-	{ "DDAG",     "TEXSY",   122,-.21,-.22,1.0,  false },   /* dagg */
-	{ "ASTERIX",  "TEXSY",   3,-.25,-.24,1.0,    false },   /* asterix */
-	{ "ASTERISK", "TEXSY",   3,-.25,-.24,1.0,    false },   /* asterix */
-	{ "OPLUS",    "TEXSY",   8,-.40,-.24,1.0,    false },   /* oplus */
-	{ "OMINUS",   "TEXSY",   9,-.40,-.24,1.0,    false },   /* ominus */
-	{ "OTIMES",   "TEXSY",   10,-.40,-.24,1.0,   false },   /* otimes */
-	{ "ODOT",     "TEXSY",   12,-.40,-.24,1.0,   false },   /* odot */
-	{ "TRIANGLEZ","TEXSY",   52,-.44,-.26,1.0,   false },   /* trianglez */
-	{ "DIAMONDZ", "TEXSY",   125,-.38,-.26,1.0,  false },   /* diamondz */
-	{ "WCIRCLE",  "GLEMARK", 9,-.5,-.5,0.7,      false },   /* wcircle */
-	{ "WTRIANGLE","GLEMARK", 3,-.5,-.433,0.7,    false },   /* wtriangle */
-	{ "WSQUARE",  "GLEMARK", 6,-.5,-.5,0.7,      false },   /* wsquare */
-	{ "WDIAMOND", "GLEMARK", 12,-.5,-.5,0.7,     false },   /* wdiamond */
-	{ "PLANE",    "PSZD",    40,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "HANDPEN",  "PSZD",    45,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "SCIRCLE",  "PSZD",    109,0.0,0.0,1.0,    false },   /* ZapDingbats */
-	{ "SSQUARE",  "PSZD",    111,0.0,0.0,1.0,    false },   /* ZapDingbats */
-	{ "PHONE",    "PSZD",    37,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "LETTER",   "PSZD",    41,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "STAR2",    "PSZD",    69,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "STAR3",    "PSZD",    79,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "STAR4",    "PSZD",    98,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ "FLOWER",   "PSZD",    96,0.0,0.0,1.0,     false },   /* ZapDingbats */
-	{ NULL,       NULL,      0,0,0,0,            false }
+	{ "DOT",       "RM",      46,-.125,-.0435,3.0,false },   /* dot */
+	{ "CROSS",     "TEXSY",   2,-.375,-.24,1.0,   false },   /* cross */
+	{ "FCIRCLE",   "GLEMARK", 8,-.5,-.5,0.7,      false },   /* fcircle */
+	{ "FSQUARE",   "GLEMARK", 5,-.5,-.5,0.7,      false },   /* fsquare */
+	{ "FTRIANGLE", "GLEMARK", 2,-.5,-.433,0.7,    false },   /* ftriangle */
+	{ "FTRIANGLED","GLEMARK", 17,-.5,-.567,0.7,   false },   /* ftriangle */
+	{ "FDIAMOND",  "GLEMARK", 11,-.5,-.5,0.7,     false },   /* fdiamond */
+	{ "CIRCLE",    "GLEMARK", 7,-.5,-.5,0.7,      false },   /* circle */
+	{ "SQUARE",    "GLEMARK", 4,-.5,-.5,0.7,      false },   /* square */
+	{ "TRIANGLE",  "GLEMARK", 1,-.5,-.433,0.7,    false },   /* triangle */
+	{ "TRIANGLED", "GLEMARK", 16,-.5,-.567,0.7,   false },   /* triangle */
+	{ "DIAMOND",   "GLEMARK", 10,-.5,-.5,0.7,     false },   /* diamond */
+	{ "PLUS",      "TEXCMR",  43,-.375,-.24,1.0,  false },   /* plus, fixed */
+	{ "CLUB",      "TEXSY",   124,-.38,-.3,1.0,   false },   /* club */
+	{ "HEART",     "TEXSY",   126,-.38,-.34,1.0,  false },   /* heart */
+	{ "DIAMONDZ",  "TEXSY",   125,-.38,-.26,1.0,  false },   /* diamondz */
+	{ "SPADE",     "TEXSY",   127,-.375,-.24,1.0, false },   /* spade (needs fixing) */
+	{ "STAR",      "TEXMI",   63,-.25,-.21,1.0,   false },   /* star */
+	{ "SNAKE",     "TEXSY",   120,-.21,-.22,1.0,  false },   /* snake */
+	{ "DAG",       "TEXSY",   121,-.21,-.22,1.0,  false },   /* dag */
+	{ "DDAG",      "TEXSY",   122,-.21,-.22,1.0,  false },   /* dagg */
+	{ "ASTERIX",   "TEXSY",   3,-.25,-.24,1.0,    false },   /* asterix */
+	{ "ASTERISK",  "TEXSY",   3,-.25,-.24,1.0,    false },   /* asterix */
+	{ "OPLUS",     "TEXSY",   8,-.40,-.24,1.0,    false },   /* oplus */
+	{ "OMINUS",    "TEXSY",   9,-.40,-.24,1.0,    false },   /* ominus */
+	{ "OTIMES",    "TEXSY",   10,-.40,-.24,1.0,   false },   /* otimes */
+	{ "ODOT",      "TEXSY",   12,-.40,-.24,1.0,   false },   /* odot */
+	{ "TRIANGLEZ", "TEXSY",   52,-.44,-.26,1.0,   false },   /* trianglez */
+	{ "DIAMONDZ",  "TEXSY",   125,-.38,-.26,1.0,  false },   /* diamondz */
+	{ "WCIRCLE",   "GLEMARK", 9,-.5,-.5,0.7,      false },   /* wcircle */
+	{ "WTRIANGLE", "GLEMARK", 3,-.5,-.433,0.7,    false },   /* wtriangle */
+	{ "WTRIANGLED","GLEMARK", 18,-.5,-.567,0.7,   false },   /* wtriangle */
+	{ "WSQUARE",   "GLEMARK", 6,-.5,-.5,0.7,      false },   /* wsquare */
+	{ "WDIAMOND",  "GLEMARK", 12,-.5,-.5,0.7,     false },   /* wdiamond */
+	{ "PLANE",     "PSZD",    40,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "HANDPEN",   "PSZD",    45,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "SCIRCLE",   "PSZD",    109,0.0,0.0,1.0,    false },   /* ZapDingbats */
+	{ "SSQUARE",   "PSZD",    111,0.0,0.0,1.0,    false },   /* ZapDingbats */
+	{ "PHONE",     "PSZD",    37,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "LETTER",    "PSZD",    41,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "STAR2",     "PSZD",    69,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "STAR3",     "PSZD",    79,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "STAR4",     "PSZD",    98,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ "FLOWER",    "PSZD",    96,0.0,0.0,1.0,     false },   /* ZapDingbats */
+	{ NULL,        NULL,      0,0,0,0,            false }
 };
 
 struct mark_struct stdmark[] = {
-	{ "ASTERISK", "TEXSY",   3,0,0.0,1.67,       true  },   /* asterisk */
-	{ "ASTERIX",  "TEXSY",   3,0,0.0,1.67,       true  },   /* asterisk (for compatibility) */
-	{ "CIRCLE",   "GLEMARK", 7,-0.5,-0.5,0.7,    false },   /* circle */
-	{ "CLUB",     "PSZD",    168,0,0,1.0,        true  },   /* club */
-	{ "CROSS",    "GLEMARK", 13,-0.5,-0.5,0.7,   false },   /* cross */
-	{ "DAG",      "TEXSY",   121,0,0.005,0.78,   true  },   /* dag */
-	{ "DDAG",     "TEXSY",   122,0,0,0.79,       true  },   /* dagg */
-	{ "DIAMOND",  "GLEMARK", 10,-0.5,-0.5,0.7,   false },   /* diamond */
-	{ "DIAMONDZ", "TEXSY",   125,0,0,0.81,       true  },   /* diamondz */
-	{ "DOT",      "GLEMARK", 8,-0.5,-0.5,0.3325, false },   /* dot */
-	{ "FCIRCLE",  "GLEMARK", 8,-0.5,-0.5,0.7,    false },   /* fcircle */
-	{ "FDIAMOND", "GLEMARK", 11,-0.5,-0.5,0.7,   false },   /* fdiamond */
-	{ "FLOWER",   "PSZD",    96,0,0.03,0.97,     true  },   /* ZapDingbats */
-	{ "FSQUARE",  "GLEMARK", 5,-0.5,-0.5,0.7,    false },   /* fsquare */
-	{ "FTRIANGLE","GLEMARK", 2,-0.5,-0.35,0.7,   false },   /* ftriangle */
-	{ "HANDPEN",  "PSZD",    45,0,0,0.91,        true  },   /* ZapDingbats */
-	{ "HEART",    "TEXSY",   126,0,-0.06,0.96,   true  },   /* heart */
-	{ "LETTER",   "PSZD",    41,0,0,1.15,        true  },   /* ZapDingbats */
-	{ "MINUS",    "GLEMARK", 15,-0.5,-0.5,0.7,   false },   /* minus */
-	{ "ODOT",     "TEXSY",   12,0,0,1.07,        true  },   /* odot */
-	{ "OMINUS",   "TEXSY",   9,0,0,1.07,         true  },   /* ominus */
-	{ "OPLUS",    "TEXSY",   8,0,0,1.07,         true  },   /* oplus */
-	{ "OTIMES",   "TEXSY",   10,0,0,1.07,        true  },   /* otimes */
-	{ "PHONE",    "PSZD",    37,0,0,1.11,        true  },   /* ZapDingbats */
-	{ "PLANE",    "PSZD",    40,0,0,1.0,         true  },   /* ZapDingbats */
-	{ "PLUS",     "GLEMARK", 14,-0.5,-0.5,0.7,   false },   /* plus */
-	{ "SCIRCLE",  "PSZD",    109,0,0,0.90,       true  },   /* ZapDingbats */
-	{ "SNAKE",    "TEXSY",   120,0,0,0.785,      true  },   /* snake */
-	{ "SPADE",    "PSZD",    171,0,0,1.0,        true  },   /* spade */
-	{ "SQUARE",   "GLEMARK", 4,-0.5,-0.5,0.7,    false },   /* square */
-	{ "SSQUARE",  "PSZD",    111,0,0,1.0,        true  },   /* ZapDingbats */
-	{ "STAR",     "TEXMI",   63,0,0.03,1.5,      true  },   /* star */
-	{ "STAR2",    "PSZD",    69,0,0,1.0,         true  },   /* ZapDingbats */
-	{ "STAR3",    "PSZD",    79,0,0.04,1.0,      true  },   /* ZapDingbats */
-	{ "STAR4",    "PSZD",    98,0,0,1.0,         true  },   /* ZapDingbats */
-	{ "TRIANGLE", "GLEMARK", 1,-0.5,-0.35,0.7,   false },   /* triangle */
-	{ "TRIANGLEZ","TEXSY",   52,0,0,1.0,         true  },   /* trianglez */
-	{ "WCIRCLE",  "GLEMARK", 9,-0.5,-0.5,0.7,    false },   /* wcircle */
-	{ "WTRIANGLE","GLEMARK", 3,-0.5,-0.35,0.7,   false },   /* wtriangle */
-	{ "WSQUARE",  "GLEMARK", 6,-0.5,-0.5,0.7,    false },   /* wsquare */
-	{ "WDIAMOND", "GLEMARK", 12,-0.5,-0.5,0.7,   false },   /* wdiamond */
-	{ NULL,       NULL,      0,0,0,0,            false }
+	{ "ASTERISK",  "TEXSY",   3,0,0.0,1.67,       true  },   /* asterisk */
+	{ "ASTERIX",   "TEXSY",   3,0,0.0,1.67,       true  },   /* asterisk (for compatibility) */
+	{ "CIRCLE",    "GLEMARK", 7,-0.5,-0.5,0.7,    false },   /* circle */
+	{ "CLUB",      "PSZD",    168,0,0,1.0,        true  },   /* club */
+	{ "CROSS",     "GLEMARK", 13,-0.5,-0.5,0.7,   false },   /* cross */
+	{ "DAG",       "TEXSY",   121,0,0.005,0.78,   true  },   /* dag */
+	{ "DDAG",      "TEXSY",   122,0,0,0.79,       true  },   /* ddag */
+	{ "DIAMOND",   "GLEMARK", 10,-0.5,-0.5,0.7,   false },   /* diamond */
+	{ "DIAMONDZ",  "TEXSY",   125,0,0,0.81,       true  },   /* diamondz */
+	{ "DOT",       "GLEMARK", 8,-0.5,-0.5,0.3325, false },   /* dot */
+	{ "FCIRCLE",   "GLEMARK", 8,-0.5,-0.5,0.7,    false },   /* fcircle */
+	{ "FDIAMOND",  "GLEMARK", 11,-0.5,-0.5,0.7,   false },   /* fdiamond */
+	{ "FLOWER",    "PSZD",    96,0,0.03,0.97,     true  },   /* ZapDingbats */
+	{ "FSQUARE",   "GLEMARK", 5,-0.5,-0.5,0.7,    false },   /* fsquare */
+	{ "FSTARR",    "GLEMARK", 20,-.5,-.5,0.7,     false },   /* fstarr */
+	{ "FTRIANGLE", "GLEMARK", 2,-0.5,-0.35,0.7,   false },   /* ftriangle */
+	{ "FTRIANGLED","GLEMARK", 17,-0.5,-0.65,0.7,  false },   /* ftriangled */
+	{ "HANDPEN",   "PSZD",    45,0,0,0.91,        true  },   /* ZapDingbats */
+	{ "HEART",     "TEXSY",   126,0,-0.06,0.96,   true  },   /* heart */
+	{ "LETTER",    "PSZD",    41,0,0,1.15,        true  },   /* ZapDingbats */
+	{ "MINUS",     "GLEMARK", 15,-0.5,-0.5,0.7,   false },   /* minus */
+	{ "ODOT",      "TEXSY",   12,0,0,1.07,        true  },   /* odot */
+	{ "OMINUS",    "TEXSY",   9,0,0,1.07,         true  },   /* ominus */
+	{ "OPLUS",     "TEXSY",   8,0,0,1.07,         true  },   /* oplus */
+	{ "OTIMES",    "TEXSY",   10,0,0,1.07,        true  },   /* otimes */
+	{ "PCROSS",    "GLEMARK", 22,-0.5,-0.5,0.7,   false },   /* pcross */
+	{ "PHONE",     "PSZD",    37,0,0,1.11,        true  },   /* ZapDingbats */
+	{ "PLANE",     "PSZD",    40,0,0,1.0,         true  },   /* ZapDingbats */
+	{ "PLUS",      "GLEMARK", 14,-0.5,-0.5,0.7,   false },   /* plus */
+	{ "SCIRCLE",   "PSZD",    109,0,0,0.90,       true  },   /* ZapDingbats */
+	{ "SNAKE",     "TEXSY",   120,0,0,0.785,      true  },   /* snake */
+	{ "SPADE",     "PSZD",    171,0,0,1.0,        true  },   /* spade */
+	{ "SQUARE",    "GLEMARK", 4,-0.5,-0.5,0.7,    false },   /* square */
+	{ "SSQUARE",   "PSZD",    111,0,0,1.0,        true  },   /* ZapDingbats */
+	{ "STAR",      "TEXMI",   63,0,0.03,1.5,      true  },   /* star */
+	{ "STAR2",     "PSZD",    69,0,0,1.0,         true  },   /* ZapDingbats */
+	{ "STAR3",     "PSZD",    79,0,0.04,1.0,      true  },   /* ZapDingbats */
+	{ "STAR4",     "PSZD",    98,0,0,1.0,         true  },   /* ZapDingbats */
+	{ "STARR",     "GLEMARK", 19,-0.5,-0.5,0.7,   false },   /* starr */
+	{ "TRIANGLE",  "GLEMARK", 1,-0.5,-0.35,0.7,   false },   /* triangle */
+	{ "TRIANGLED", "GLEMARK", 16,-0.5,-0.65,0.7,  false },   /* triangled */
+	{ "TRIANGLEZ", "TEXSY",   52,0,0,1.0,         true  },   /* trianglez */
+	{ "WCIRCLE",   "GLEMARK", 9,-0.5,-0.5,0.7,    false },   /* wcircle */
+	{ "WDIAMOND",  "GLEMARK", 12,-0.5,-0.5,0.7,   false },   /* wdiamond */
+	{ "WTRIANGLE", "GLEMARK", 3,-0.5,-0.35,0.7,   false },   /* wtriangle */
+	{ "WTRIANGLED","GLEMARK", 18,-0.5,-0.65,0.7,  false },   /* wtriangled */
+	{ "WSQUARE",   "GLEMARK", 6,-0.5,-0.5,0.7,    false },   /* wsquare */
+	{ "WSTARR",    "GLEMARK", 21,-.5,-.5,0.7,     false },   /* wstarr */
+	{ NULL,        NULL,      0,0,0,0,            false }
 };	/* change range check below when adding markers */
 
 /*
@@ -2475,6 +2485,13 @@ GLEMARK
 13   Cross
 14   Plus
 15   Minus
+16   Triangle Down
+17   Filled Triangle Down
+18   White Triangle Down
+19   Star
+20   Filled Star
+21   White Star
+22   Plus Cross
 */
 
 void mark_clear(void) {

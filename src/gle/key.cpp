@@ -231,6 +231,7 @@ void GLEKeyBlockInstance::executeLine(GLESourceLine& sline)	{
 			else kw("MSIZE") entry->msize = next_exp;
 			else kw("MSCALE") entry->msize = (next_exp) * zzhei;
 			else kw("COLOR") entry->color = next_color;
+			else kw("MCOLOR") entry->mcolor = next_color;
 			else kw("TEXTCOLOR") entry->textcolor = next_color;
 			else kw("FILL") {
 				GLERC<GLEColor> fillColor(next_fill);
@@ -267,8 +268,8 @@ GLEKeyBlockBase::GLEKeyBlockBase():
 		"BASE", "LPOS", "LLEN", "NOBOX", "NOLINE", "COMPACT",
 		"OFF", "HEI", "POSITION", "POS", "BOXCOLOR", "SEPARATOR",
 		"LSTYLE", "JUSTIFY", "JUST", "DIST", "COLDIST", "TEXT",
-		"MARKER", "MSIZE", "MSCALE", "COLOR", "TEXTCOLOR", "FILL",
-		"PATTERN", "LINE", "LWIDTH", ""};
+		"MARKER", "MSIZE", "MSCALE", "COLOR", "MCOLOR", "TEXTCOLOR",
+		"FILL", "PATTERN", "LINE", "LWIDTH", ""};
 	for (int i = 0; commands[i][0] != 0; ++i) {
 		addKeyWord(commands[i]);
 	}
@@ -794,7 +795,15 @@ void do_draw_key(double ox, double oy, bool notxt, KeyInfo* info) {
 			if (entry->marker != 0) {
 				double z = entry->msize;
 				if (z == 0) z = khei;
-				g_marker(entry->marker, z);
+				if (!entry->mcolor.isNull()){
+					GLERC<GLEColor> old_color(g_get_color());
+					g_set_color(entry->mcolor);
+					g_marker(entry->marker, z);
+					g_set_color(old_color);
+				}
+				else{
+					g_marker(entry->marker, z);
+				}
 			}
 			g_set_line_width(savelw);         
 			g_rmove(col_info->mright+info->getDist(),-info->getLinePos());
@@ -856,6 +865,7 @@ KeyEntry::KeyEntry(int col) {
 	lstyle[0] = 0;
 	lwidth = 0.0;
 	color = 0;
+	mcolor = 0;
 	marker = 0;
 	msize = 0.0;
 	fill = new GLEColor();
