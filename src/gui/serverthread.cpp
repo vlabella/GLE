@@ -232,7 +232,8 @@ void GLERenderThread::renderGLEToImage(GLEScript* script, const QString& outFile
 void GLERenderThread::renderOutputFromMemoryToImage(GLEScript* script, const QString& epsFile, double dpi, const QSize& area)
 {
 	QMutexLocker locker(&mutex);
-#ifdef HAVE_POPPLER
+// poppler only works on linux and macOS for now - even though gle is built with poppler on windows - need to fix
+#ifdef HAVE_POPPLER && ( defined(__unix__) || defined(__APPLE__) )
 	string* bytesPDF = script->getRecordedBytesBuffer(GLE_DEVICE_PDF);
 	string* bytesEPS = script->getRecordedBytesBuffer(GLE_DEVICE_EPS);
 	if (!bytesPDF->empty()) {
