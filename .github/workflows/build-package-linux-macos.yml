@@ -57,7 +57,7 @@ jobs:
                 libpng-dev libtiff-dev libz-dev qtbase5-dev \
                 libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt5-dev \
                 libglib2.0-dev extra-cmake-modules \
-                ghostscript texlive texlive-latex-extra texlive-science dvipng
+                ghostscript texlive texlive-latex-extra texlive-science dvipng latexmk
             jobs=$(nproc)
             ;;
           macOS)
