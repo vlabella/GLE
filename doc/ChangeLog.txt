@@ -1,3 +1,14 @@
+4.3.7 (May 2025)
+    - fix for constants added in previous version
+    - fix for missing cross references and index in manual built on Linux
+    - fix for Windows version not making PNG files (must still use ghostscript on windows)
+    - Add new markers (glemark) (PiauV)
+        Triangle Down : (f/w)triangled
+        Star (5 branches) : (f/w)starr (star already exists)
+        Plus+cross combination : pcross
+    - Add new keyword to set the marker color : mcolor (in graph or key block) (PiauV)
+        sets the color of the markers and the error bars (if there is any), but not the line color
+        it is optional : if not set, marker and line color is still set using the color keyword
 4.3.6 (April 2025)
     - added the following physical constants in SI units from scipy.constants - start with pc_
       pc_c, pc_speed_of_light, pc_mu_0, pc_epsilon_0, pc_h, pc_Planck, pc_hbar, pc_G, pc_gravitational_constant, pc_g, pc_e, pc_elementary_charge, pc_R, pc_gas_constant,
