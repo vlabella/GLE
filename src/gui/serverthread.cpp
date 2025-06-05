@@ -489,7 +489,8 @@ void gle_write_data_vector(void* closure, char* data, int length) {
 	}
 }
 
-#ifdef HAVE_POPPLER
+// poppler only works on linux and macOS for now - even though gle is built with poppler on windows - need to fix
+#ifdef HAVE_POPPLER && ( defined(__unix__) || defined(__APPLE__) )
 void GLERenderThread::renderPDFToImageInternalFromMemory(GLEScript* script, double dpi, const QSize& area) {
 	// Auto scale new files to size of drawing area
 	bool newDPI = false;
