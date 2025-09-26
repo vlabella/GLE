@@ -1,3 +1,6 @@
+4.3.8 (October 2025)
+    - fix for missing inittex.ini in binary distributions.  File is made during mckae build phase instead of install phase.
+
 4.3.7 (May 2025)
     - fix for constants added in previous version
     - fix for missing cross references and index in manual built on Linux
