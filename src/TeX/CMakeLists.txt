@@ -1,8 +1,8 @@
 #
 # -- generate inittex.ini from init.tex
 #
-#set(GLE_DIR ${CMAKE_BINARY_DIR}/gle$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,/Debug,/Release>>)
-#set(GLE gle$<$<CONFIG:Debug>:d>)
+set(GLE_DIR ${CMAKE_BINARY_DIR}/gle$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,/Debug,/Release>>)
+set(GLE gle$<$<CONFIG:Debug>:d>)
 # inittex.ini is generated from init.tex by running "gle -mkinittex"
 # for gle to run:
 #  - init.tex must reside one directory level up from location of the gle executable.
@@ -28,12 +28,12 @@ add_custom_target(inittex ALL DEPENDS
  	gle
 )
 
-#install(FILES
-# 	inittex.ini
-#  	init.tex
-#  	CONFIGURATIONS Release Debug
-#  	DESTINATION .
-#)
+install(FILES
+ 	inittex.ini
+  	init.tex
+  	CONFIGURATIONS Release Debug
+  	DESTINATION .
+)
 
 # old method does not work as inittex.ini does not get included in the distrubtions with cpack
 # install(FILES
