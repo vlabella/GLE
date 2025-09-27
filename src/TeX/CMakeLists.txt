@@ -15,17 +15,16 @@ add_custom_command(
  	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/init.tex
  	WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
  	COMMENT "Generating inittex.ini from init.tex in ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${GLE_DIR}"
-# 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/glerc ${CMAKE_BINARY_DIR}/glerc2
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/glerc ${CMAKE_BINARY_DIR}/glerc2
 # 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${GLE_DIR}/..
-	COMMAND ${GLE} -mkinittex
+#	COMMAND ${GLE} -mkinittex
 # 	COMMAND ${CMAKE_COMMAND} -E rename ${GLE_DIR}/../inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
 # 	COMMAND ${CMAKE_COMMAND} -E rm ${GLE_DIR}/../init.tex
 # 	COMMAND ${CMAKE_COMMAND} -E rm ${GLE_DIR}/../glerc
 )
 
-add_custom_target(inittex ALL DEPENDS
- 	inittex.ini
- 	gle
+add_custom_target(inittex ALL
+	DEPENDS inittex.ini
 )
 
 install(FILES
