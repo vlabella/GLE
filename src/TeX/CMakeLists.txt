@@ -7,23 +7,23 @@ set(GLE gle$<$<CONFIG:Debug>:d>)
 # for gle to run:
 #  - init.tex must reside one directory level up from location of the gle executable.
 #  - glerc    must reside one directory level up from location of the gle executable.
+#  - font.dat must reside one directory level up from location of the gle executable in font folder
 # gle creates inittex.ini in the same location as init.tex.
 # inittex.ini is moved back to the source folder with init.tex so it can get installed.
 # Both files must ship with GLE.
-
-#Generating inittex.ini from init.tex in 
-#/home/runner/work/GLE/GLE/build 
-#/home/runner/work/GLE/GLE/src/TeX 
+#Generating inittex.ini from init.tex in
+#/home/runner/work/GLE/GLE/build
+#/home/runner/work/GLE/GLE/src/TeX
 #/home/runner/work/GLE/GLE/build/gle
 add_custom_command(
  	OUTPUT inittex.ini
  	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/init.tex
  	WORKING_DIRECTORY ${GLE_DIR}
- 	COMMENT "Generating inittex.ini from init.tex"
- 	COMMENT "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}"
- 	COMMENT "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}"
- 	COMMENT "GLE_DIR: ${GLE_DIR}"
- 	COMMENT "GLE: ${GLE}"
+ 	#COMMENT "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}"
+ 	#COMMENT "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}"
+ 	#COMMENT "GLE_DIR: ${GLE_DIR}"
+ 	#COMMENT "GLE: ${GLE}"
+ 	COMMENT "== Generating inittex.ini from init.tex =="
  	COMMAND ${CMAKE_COMMAND} -E copy ${GLE_DIR}/glerc ${CMAKE_BINARY_DIR}
  	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}
  	COMMAND ${CMAKE_COMMAND} -E create_symlink ${GLE_DIR}/font ${CMAKE_BINARY_DIR}/font
@@ -31,6 +31,7 @@ add_custom_command(
  	COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
  	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/init.tex
  	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/glerc
+ 	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/font
 )
 
 add_custom_target(inittex ALL
