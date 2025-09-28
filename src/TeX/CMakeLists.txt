@@ -35,6 +35,7 @@ add_custom_command(
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/glerc>"
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/font>"
  	VERBATIM
+ 	COMMAND_EXPAND_LISTS
 )
 
 add_custom_target(inittex ALL
