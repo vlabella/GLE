@@ -576,7 +576,7 @@ add_dependencies(fonts fbuild makefmt)
 add_dependencies(inittex gle fonts fbuild makefmt)
 if(BUILD_GUI)
 add_subdirectory(gui)
-add_dependencies(qgle gle)
+add_dependencies(qgle gle inittex)
 endif()
 
 # documentation file installation in doc folder
