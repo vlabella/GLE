@@ -25,7 +25,7 @@ add_custom_command(
  	#COMMENT "GLE_DIR: ${GLE_DIR}"
  	#COMMENT "GLE: ${GLE}"
  	COMMENT "== Generating inittex.ini from init.tex =="
- 	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;copy ${GLE_DIR}/glerc;${CMAKE_BINARY_DIR}/glerc>"
+ 	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;copy;${GLE_DIR}/glerc;${CMAKE_BINARY_DIR}/glerc>"
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;create_symlink;${GLE_DIR}/font;${CMAKE_BINARY_DIR}/font>"
  	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
 	COMMAND ${GLE} -mkinittex
