@@ -10,17 +10,26 @@ set(GLE gle$<$<CONFIG:Debug>:d>)
 # gle creates inittex.ini in the same location as init.tex.
 # inittex.ini is moved back to the source folder with init.tex so it can get installed.
 # Both files must ship with GLE.
+
+#Generating inittex.ini from init.tex in 
+#/home/runner/work/GLE/GLE/build 
+#/home/runner/work/GLE/GLE/src/TeX 
+#/home/runner/work/GLE/GLE/build/gle
 add_custom_command(
  	OUTPUT inittex.ini
  	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/init.tex
  	WORKING_DIRECTORY ${GLE_DIR}
- 	COMMENT "Generating inittex.ini from init.tex in ${CMAKE_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${GLE_DIR}"
-# 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}/glerc ${CMAKE_BINARY_DIR}/glerc2
- 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${GLE_DIR}/..
+ 	COMMENT "Generating inittex.ini from init.tex"
+ 	COMMENT "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}"
+ 	COMMENT "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}"
+ 	COMMENT "GLE_DIR: ${GLE_DIR}"
+ 	COMMENT "GLE: ${GLE}"
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${GLE_DIR}/glerc ${CMAKE_BINARY_DIR}
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}
 	COMMAND ${GLE} -mkinittex
-# 	COMMAND ${CMAKE_COMMAND} -E rename ${GLE_DIR}/../inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
-# 	COMMAND ${CMAKE_COMMAND} -E rm ${GLE_DIR}/../init.tex
-# 	COMMAND ${CMAKE_COMMAND} -E rm ${GLE_DIR}/../glerc
+ 	COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
+ 	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/init.tex
+ 	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/glerc
 )
 
 add_custom_target(inittex ALL
