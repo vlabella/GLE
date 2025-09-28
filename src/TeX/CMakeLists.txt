@@ -29,12 +29,12 @@ add_custom_command(
  	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
  	COMMAND "$<IF:$<PLATFORM_ID:Windows>,,${CMAKE_COMMAND} -E create_symlink ${GLE_DIR}/font ${CMAKE_BINARY_DIR}/font>"
 	COMMAND ${GLE} -mkinittex
+	COMMAND ${CMAKE_COMMAND} -E copy   ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_BINARY_DIR}/TeX
  	COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
  	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
  	COMMAND "$<IF:$<PLATFORM_ID:Windows>,,${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/glerc>"
  	COMMAND "$<IF:$<PLATFORM_ID:Windows>,,${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}/font>"
 )
-
 
 add_custom_target(inittex ALL
 	DEPENDS inittex.ini
