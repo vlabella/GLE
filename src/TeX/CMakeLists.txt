@@ -10,6 +10,7 @@ set(GLE gle$<$<CONFIG:Debug>:d>)
 #  - font.dat must reside one directory level up from location of the gle executable in font folder
 # gle creates inittex.ini in the same location as init.tex.
 # inittex.ini is moved back to the source folder with init.tex so it can get installed.
+# inittex.ini is copied to the TeX folder to convince cmake that target has been built
 # Both files must ship with GLE.
 #Generating inittex.ini from init.tex in
 #/home/runner/work/GLE/GLE/build
