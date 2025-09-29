@@ -9,7 +9,7 @@ set(GLE gle$<$<CONFIG:Debug>:d>)
 #  - glerc    must reside one directory level up from location of the gle executable.
 #  - font.dat must reside one directory level up from location of the gle executable in font folder
 # gle creates inittex.ini in the same location as init.tex.
-# inittex.ini is moved back to the source folder with init.tex so it can get installed.
+# no inittex.ini is moved back to the source folder with init.tex so it can get installed.
 # inittex.ini is copied to the TeX folder to convince cmake that target has been built
 # Both files must ship with GLE.
 #Generating inittex.ini from init.tex in
@@ -30,8 +30,8 @@ add_custom_command(
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;create_symlink;${GLE_DIR}/font;${CMAKE_BINARY_DIR}/font>"
  	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
 	COMMAND ${GLE} -mkinittex
-	COMMAND ${CMAKE_COMMAND} -E copy   ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_BINARY_DIR}/TeX
- 	COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
+	COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_BINARY_DIR}/TeX
+ 	#COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
  	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;rm;${CMAKE_BINARY_DIR}/glerc>"
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;rm;${CMAKE_BINARY_DIR}/font>"
