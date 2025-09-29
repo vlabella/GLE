@@ -43,12 +43,18 @@ add_custom_target(inittex ALL
 	DEPENDS inittex.ini
 )
 
+install(TARGETS
+ 	inittex
+  	CONFIGURATIONS Release Debug
+  	DESTINATION .
+)
+
 install(FILES
- 	inittex.ini
   	init.tex
   	CONFIGURATIONS Release Debug
   	DESTINATION .
 )
+
 
 
 # old method does not work as inittex.ini does not get included in the distrubtions with cpack
