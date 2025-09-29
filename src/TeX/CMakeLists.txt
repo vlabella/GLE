@@ -9,10 +9,10 @@ set(GLE gle$<$<CONFIG:Debug>:d>)
 #  - glerc    must reside one directory level up from location of the gle executable.
 #  - font.dat must reside one directory level up from location of the gle executable in font folder
 # gle creates inittex.ini in the same location as init.tex.
-# no inittex.ini is moved back to the source folder with init.tex so it can get installed.
-# inittex.ini is copied to the TeX folder to convince cmake that target has been built
-# Both files must ship with GLE.
-#Generating inittex.ini from init.tex in
+# inittex.ini is moved back to the source folder with init.tex so it can get installed.
+# inittex.ini is copied to the ${CMAKE_BINARY_DIR}/TeX folder to convince cmake that target has been built
+# Both init.tex and inittex.ini ship with GLE.
+#
 #/home/runner/work/GLE/GLE/build
 #/home/runner/work/GLE/GLE/src/TeX
 #/home/runner/work/GLE/GLE/build/gle
@@ -30,9 +30,10 @@ add_custom_command(
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;create_symlink;${GLE_DIR}/font;${CMAKE_BINARY_DIR}/font>"
  	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
 	COMMAND ${GLE} -mkinittex
-	COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_BINARY_DIR}/TeX/inittex.ini
- 	#COMMAND ${CMAKE_COMMAND} -E rename ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}/inittex.ini
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_BINARY_DIR}/TeX
  	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
+ 	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;rm;${CMAKE_BINARY_DIR}/glerc>"
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;rm;${CMAKE_BINARY_DIR}/font>"
  	VERBATIM
@@ -43,14 +44,9 @@ add_custom_target(inittex ALL
 	DEPENDS inittex.ini
 )
 
-install(TARGETS
- 	inittex
-  	CONFIGURATIONS Release Debug
-  	DESTINATION .
-)
-
 install(FILES
   	init.tex
+  	inittex.ini
   	CONFIGURATIONS Release Debug
   	DESTINATION .
 )
