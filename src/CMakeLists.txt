@@ -1,10 +1,11 @@
 #
 # -- CMakeLists.txt for GLE - Graphics Layout Engine
 #
-cmake_minimum_required (VERSION 3.18)
+cmake_minimum_required (VERSION 3.30)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
 #cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed. only for cmake 3.30 and later live with the warning for now
 cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
+set(CMAKE_CXX_STANDARD 17)
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
@@ -30,10 +31,14 @@ endif()
 
 option(BUILD_GUI "Build the GUI - gle Previewer" ON)
 option(BUILD_MANIP "Build manip program" BUILD_MANIP_DEFAULT)
+option(BUILD_GLEBTOOL "Build glebtool program - deprecated" OFF)
+option(INSTALL_FBUILD "Install the fbuild program - only needed during gle build phase" OFF)
+option(INSTALL_MAKEFMT "Install the makefmt program - only needed during gle build phase" OFF)
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
 option(EXTRA_GSLIB_SEARCH_LOCATION "Extra path for searching for gslib on linux and macOS" OFF)
+# option(BITMAP_CREATION_POPPLER "Use poppler library for bitmap creation instead of ghostscript" OFF)
 
 if(NOT DEFINED POPPLER_INTERFACE)
 	# poppler interface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
@@ -302,10 +307,14 @@ endif()
 find_package(Poppler)
 if(POPPLER_FOUND)
 	add_compile_definitions(HAVE_POPPLER)
+	#if(BITMAP_CREATION_POPPLER)
+	#	add_compile_definitions(BITMAP_CREATION_POPPLER)
+	#endif()
 	if(POPPLER_INTERFACE STREQUAL "CPP")
-		find_package(openjpeg)
 		find_package(Freetype)
+#		find_package(openjpeg)
 		find_package(Iconv)
+		find_package(BZip2)
 	elseif(POPPLER_INTERFACE STREQUAL "GLIB")
 		find_package(GLIB2 REQUIRED)
 		if(NOT DEFINED GLIB2_GOBJECT_LIBRARIES)
@@ -466,6 +475,7 @@ if(WIN32)
 	add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
 	add_compile_definitions(_SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS)
 	add_compile_definitions(_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS)
+	add_compile_options(/FS)
 	add_compile_options(/wd4290)
 	add_compile_options(/wd4244)
 	add_compile_options(/wd4099)
@@ -544,9 +554,10 @@ if(POPPLER_FOUND)
 		add_compile_definitions(POPPLER_CPP)
 		set(POPPLER_LIBRARIES_GLE
 			${Poppler_LIBRARIES}
-			${Iconv_LIBRARY}
-			${FREETYPE_LIBRARIES}
+			Iconv::Iconv
+			Freetype::Freetype
 			${OPENJPEG_LIBRARIES}
+			${BZIP2_LIBRARIES}
 	 	)
 	elseif(POPPLER_INTERFACE STREQUAL "GLIB")
 		add_compile_definitions(POPPLER_GLIB)
@@ -571,7 +582,9 @@ add_subdirectory(fonts)
 add_subdirectory(TeX)
 add_dependencies(fbuild gle)
 add_dependencies(makefmt gle)
+if(BUILD_GLEBTOOL)
 add_dependencies(glebtool gle)
+endif()
 add_dependencies(fonts fbuild makefmt)
 add_dependencies(inittex gle fonts fbuild makefmt)
 if(BUILD_GUI)
