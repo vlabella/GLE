@@ -15,9 +15,10 @@
     "pdcurses",
     "pixman",
     "poppler",
-    "qt",
     "tiff",
     "zlib",
-    "zstd"
+    "zstd",
+    "qtbase",
+    "qt5compat"
   ]
 }
