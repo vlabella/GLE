@@ -166,7 +166,7 @@ if(POPPLER_FOUND)
 	target_link_libraries ( gle LINK_PUBLIC
 		${POPPLER_LIBRARIES_GLE}
  	)
-	target_link_libraries ( gle-graphics LINK_PUBLIC
+	target_link_libraries ( gle-graphics LINK_PRIVATE
 		${POPPLER_LIBRARIES_GLE}
  	)
 endif()

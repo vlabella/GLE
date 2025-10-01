@@ -338,6 +338,7 @@ void GLEDrawingArea::paintEvent(QPaintEvent *event)
 	QPainter painter(this);
 	// Fill the widget with white.
 	painter.setRenderHint(QPainter::Antialiasing);
+	painter.setRenderHint(QPainter::SmoothPixmapTransform);
 
 	QPointF nearestPoint;
 	createSelectionHandles();

@@ -1985,7 +1985,8 @@ void GLEMainWindow::openGhostScriptLogDialogue()
 	buttonLayout->addWidget(okButton);
 	layout->addLayout(buttonLayout);
 	gsLogDialog.setLayout(layout);
-	QRect size = QApplication::desktop()->screenGeometry(&gsLogDialog);
+	//QRect size = QApplication::desktop()->screenGeometry(&gsLogDialog);
+	QRect size = QGuiApplication::primaryScreen()->geometry();
 	gsLogDialog.resize(size.width()/2, size.height()/2);
 	gsLogDialog.exec();
 }
@@ -1995,7 +1996,8 @@ void GLEMainWindow::openEvaluator()
 	if (evaluatorDialog == NULL)
 	{
 		evaluatorDialog = new EvaluatorDialog(this);
-		QRect size = QApplication::desktop()->screenGeometry(evaluatorDialog);
+		//QRect size = QApplication::desktop()->screenGeometry(evaluatorDialog);
+		QRect size = QGuiApplication::primaryScreen()->geometry();
 		evaluatorDialog->resize(size.width()/3, size.height()/2);
 	}
 	evaluatorDialog->show();

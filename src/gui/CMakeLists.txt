@@ -1,23 +1,47 @@
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# #
+# # -- Qt5  set Qt5_DIR
+# #
+# set(CMAKE_AUTOMOC ON)
+# set(CMAKE_AUTORCC ON)
+# set(CMAKE_AUTOUIC ON)
+
+# find_package(Qt5 COMPONENTS
+# 	Widgets
+# 	Network
+# 	DBus
+# 	Gui
+# 	OpenGL
+# 	REQUIRED)
+
 #
-# -- Qt5  set Qt5_DIR
+# -- Qt6  set Qt6_DIR
 #
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt5 COMPONENTS
+find_package(Qt6 COMPONENTS
+	Core
 	Widgets
 	Network
 	DBus
 	Gui
 	OpenGL
+	OpenGLWidgets
+	Core5Compat
 	REQUIRED)
 
+if (WIN32)
+    add_compile_definitions(_HAS_STD_BYTE=1)
+    add_compile_options(/FS)
+endif()
+
+
 add_executable(qgle WIN32 MACOSX_BUNDLE
-	3dviewer.cpp
 	about.cpp
+	3dviewer.cpp
 	amove.cpp
 	arc.cpp
 	circle.cpp
@@ -80,6 +104,8 @@ list(APPEND QGLE_LIBRARIES
 	Qt::Network
 	Qt::Widgets
 	Qt::OpenGL
+	Qt::OpenGLWidgets
+	Qt::Core5Compat
 	${CAIRO_LIBRARIES}
 	${CMAKE_DL_LIBS}
 )
@@ -99,7 +125,6 @@ if(WIN32)
 	 glu32.lib
 	)
 endif()
-
 if(ZSTD_FOUND)
 	list(APPEND QGLE_LIBRARIES
  		zstd::libzstd_static

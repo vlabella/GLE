@@ -251,9 +251,9 @@ LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS *info) {
 	}
 	TCHAR szCommandLine[2*MAX_PATH];
 	lstrcpy(szCommandLine, szModuleName);
-	lstrcat(szCommandLine, " -crashrecover \"");
+	lstrcat(szCommandLine, L" -crashrecover \"");
 	lstrcat(szCommandLine, szTempName);
-	lstrcat(szCommandLine, "\"");
+	lstrcat(szCommandLine, L"\"");
 	STARTUPINFO si;
 	ZeroMemory(&si, sizeof(si));
 	si.cb = sizeof(si);

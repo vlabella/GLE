@@ -1,8 +1,10 @@
 4.3.8 (October 2025)
     - fix for missing inittex.ini in binary distributions.  File is now created during cmake build phase instead of install phase.
-    - add cmake option BUILD_GLEBTOOL which is OFF by default for building glebtool, which is not needed to build manual anymore.
+    - deprecate glebtool. Added cmake option BUILD_GLEBTOOL which is OFF by default for building glebtool, which is not needed to build manual anymore.
     - add cmake options INSTALL_FBUILD and INSTALL_MAKEFMT, which are OFF by default for installing fbuild and makemft, which are only needed for building gle.
     - glebtool, fbuild, and makefmt are no longer included in binary distributions and installers.
+    - Upgrade to Qt6
+    - Windows: Fix issues with using poppler to create bitmaps in qgle and png files on command line.
 
 4.3.7 (May 2025)
     - fix for constants added in previous version

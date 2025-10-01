@@ -19,6 +19,7 @@
  * Also add information on how to contact you by electronic and paper mail.        *
  ***********************************************************************************/
 
+#include <QVariant>
 #include "mainwindow.h"
 #include "objectblocks.h"
 
@@ -55,7 +56,8 @@ void GLEObjectBlocksList::updateFile(QStandardItem *parent, GLESourceFile* file)
 	for (int i = 0; i < file->getNbObjectDOConstructors(); i++) {
 		GLEObjectDOConstructor* cons = file->getObjectDOConstructor(i);
 		QStandardItem* child = new QStandardItem(QString::fromUtf8(cons->getName().c_str()).toLower());
-		child->setData(qVariantFromValue((void*)cons));
+		//child->setData(qVariantFromValue((void*)cons));
+		child->setData(QVariant::fromValue((void*)cons));
 		item->appendRow(child);
 		consList.add(cons);
 	}

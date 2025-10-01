@@ -1,5 +1,5 @@
 #
-# -- Build for Linux and macOS - used as starting point for current workflows
+# -- DEPRECATED Build for Linux and macOS - used as starting point for current workflows
 #
 name: Deprecated Build Linux and macOS Original
 on:

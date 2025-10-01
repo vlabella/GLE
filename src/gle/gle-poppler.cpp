@@ -282,6 +282,7 @@ void gle_write_cairo_surface_bitmap(cairo_surface_t* surface,
 		                            gle_write_func writeFunc,
 		                            void* closure)
 {
+	//cout << "gle_write_cairo_surface_bitmap"<<endl;
 #ifdef HAVE_LIBPNG
     if (device == GLE_DEVICE_PNG) {
     	gle_write_cairo_surface_png(surface, options, writeFunc, closure);
@@ -377,6 +378,7 @@ void gle_convert_pdf_to_image(char* pdfData,
 		                      gle_write_func writeFunc,
 		                      void* closure)
 {
+	//cout << "gle_convert_pdf_to_image"<<endl;
 	std::vector<char> pop_data(pdfData,pdfData+pdfLength);
 	poppler::document *doc = poppler::document::load_from_data(&pop_data);
 	if (doc == 0) {
@@ -390,9 +392,9 @@ void gle_convert_pdf_to_image(char* pdfData,
     	g_throw_parser_error(">> error opening PDF: can't read first page");
     }
     poppler::page *page   = doc->create_page(0);
-    poppler::rectf rect   = page->page_rect();
-    int i_width           = gle_round_int(rect.width()  / PS_POINTS_PER_INCH * resolution);
-    int i_height          = gle_round_int(rect.height() / PS_POINTS_PER_INCH * resolution);
+    //poppler::rectf rect   = page->page_rect();
+    //int i_width           = gle_round_int(rect.width()  / PS_POINTS_PER_INCH * resolution);
+    //int i_height          = gle_round_int(rect.height() / PS_POINTS_PER_INCH * resolution);
     cairo_format_t format = CAIRO_FORMAT_RGB24;
     poppler::image::format_enum poppler_format =  poppler::image::format_rgb24;
 	if ((options & GLE_OUTPUT_OPTION_TRANSPARENT) != 0 && device == GLE_DEVICE_PNG) {
@@ -400,22 +402,78 @@ void gle_convert_pdf_to_image(char* pdfData,
         poppler_format = poppler::image::format_argb32;
 	}
 	// render the PDF to the poppler image
+	//poppler::image img(i_width, i_height, poppler_format);
+	//int stride = cairo_format_stride_for_width (format, i_width);
+    //cairo_surface_t* surface = cairo_image_surface_create_for_data(reinterpret_cast<unsigned char*>(img.data()), format, i_width, i_height,stride);
+	//cairo_surface_t* surface = cairo_image_surface_create(format, i_width, i_height);
+    //cairo_t* cr              = cairo_create(surface);
+    //if (format == CAIRO_FORMAT_RGB24) {
+    //	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
+    //	cairo_paint(cr);
+    //}
+    //cairo_scale(cr, resolution / PS_POINTS_PER_INCH, resolution / PS_POINTS_PER_INCH);
 	poppler::page_renderer rend;
-	poppler::image img(i_width, i_height, poppler_format);
-	int stride = cairo_format_stride_for_width (format, i_width);
-    cairo_surface_t* surface = cairo_image_surface_create_for_data(reinterpret_cast<unsigned char*>(img.data()), format, i_width, i_height,stride);
-    cairo_t* cr              = cairo_create(surface);
-    if (format == CAIRO_FORMAT_RGB24) {
-    	cairo_set_source_rgb (cr, 1.0, 1.0, 1.0);
-    	cairo_paint(cr);
-    }
-    cairo_scale(cr, resolution / PS_POINTS_PER_INCH, resolution / PS_POINTS_PER_INCH);
-    img = rend.render_page(page);
+	rend.set_image_format(poppler_format);
+	rend.set_render_hint(poppler::page_renderer::render_hint::antialiasing,true);
+	rend.set_render_hint(poppler::page_renderer::render_hint::text_antialiasing,true);
+	rend.set_render_hint(poppler::page_renderer::render_hint::text_hinting,true);
+    auto img = rend.render_page(page,resolution,resolution);
+	// Allocate buffer for Cairo surface
+	int stride = cairo_format_stride_for_width(format, img.width());
+	unsigned char* cairo_data = static_cast<unsigned char*>(malloc(stride * img.height()));
+	// Copy pixel data from poppler::image to Cairo buffer
+	const char* src = img.data();
+	int src_stride = img.bytes_per_row();
+	for (int y = 0; y < img.height(); ++y) {
+		const char* src_row = src + y * src_stride;
+		if (format == CAIRO_FORMAT_RGB24) {
+			unsigned char* dst_row = cairo_data + y * stride;
+			for (int x = 0; x < img.width(); ++x) {
+				int i = x * 3;  // RGB24: 3 bytes per pixel
+				int j = x * 4;  // Cairo RGB24: 4 bytes per pixel
+				dst_row[j + 0] = src_row[i + 2]; // B
+				dst_row[j + 1] = src_row[i + 1]; // G
+				dst_row[j + 2] = src_row[i + 0]; // R
+				dst_row[j + 3] = 0x00;           // padding byte
+			}
+		}
+		else if (format == CAIRO_FORMAT_ARGB32) {
+			uint32_t* dst_row = reinterpret_cast<uint32_t*>(cairo_data + y * stride);
+			for (int x = 0; x < img.width(); ++x) {
+				int i = x * 4;
+				uint8_t a = src_row[i + 0];
+				uint8_t r = src_row[i + 1];
+				uint8_t g = src_row[i + 2];
+				uint8_t b = src_row[i + 3];
+				// Premultiply RGB by alpha
+				uint8_t r_p = (r * a + 127) / 255;
+				uint8_t g_p = (g * a + 127) / 255;
+				uint8_t b_p = (b * a + 127) / 255;
+				dst_row[x] = (a << 24) | (r_p << 16) | (g_p << 8) | b_p;
+			}
+		}
+	}
+	// Create Cairo surface
+	cairo_surface_t* surface = cairo_image_surface_create_for_data(
+		cairo_data,
+		format,
+		img.width(),
+		img.height(),
+		stride
+	);
+	// Attach destroy callback to free memory when surface is destroyed
+	//cairo_surface_set_user_data(
+		//surface,
+		//nullptr,
+		//cairo_data,
+		//[](){ free(data); }
+	//);
     gle_write_cairo_surface_bitmap(surface, device, options, writeFunc, closure);
-    cairo_destroy(cr);
+    //cairo_destroy(cr);
     cairo_surface_destroy(surface);
     delete doc;
     delete page;
+    free(cairo_data);
 }
 #endif // poppler_CPP
 

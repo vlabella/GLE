@@ -199,7 +199,8 @@ GSInterpreterLib::GSInterpreterLib() :
 	m_width(0),
 	m_height(0),
 	m_dpi(100.0),
-	m_media(QString::null),
+	//m_media(QString::null),
+	m_media(QString()),
 	m_Gwidth(0),
 	m_Gheight(0),
 	m_imageChar(0),
@@ -286,7 +287,8 @@ bool GSInterpreterLib::start(bool setStdio)
 	call = m_gs->gsapi_init_with_args(ghostScriptInstance, m_argsCCount, m_argsChar);
 	if (call && !handleExit(call)) return false;
 	QString set;
-	set.sprintf("<< /Orientation %d >> setpagedevice .locksafe",m_orientation);
+	//set.sprintf("<< /Orientation %d >> setpagedevice .locksafe",m_orientation);
+	set.asprintf("<< /Orientation %d >> setpagedevice .locksafe",m_orientation);
 	QByteArray strdata = set.toLatin1();
 	m_gs->gsapi_run_string_with_length(ghostScriptInstance, strdata.constData(), set.length(), 0, &call);
 	m_running = handleExit (call);
@@ -709,7 +711,8 @@ void GSInterpreterLib::argsToChar()
 			}
 		}
 		internalArgs << "-sDEVICE=display";
-		internalArgs << QString().sprintf("-dDisplayFormat=%d", format);
+		//internalArgs << QString().sprintf("-dDisplayFormat=%d", format);
+		internalArgs << QString().asprintf("-dDisplayFormat=%d", format);
 	}
 
 	int t=internalArgs.count();

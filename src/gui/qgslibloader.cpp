@@ -117,23 +117,23 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 		// windows builds
 		#if _WIN64
 			// VS builds
-			m_LibGSLocation = "gsdll64.dll";	
+			m_LibGSLocation = "gsdll64.dll";
 		#endif
 		#if __GNUC__
 			// gcc builds
 			#if __x86_64__ || __ppc64__
-				m_LibGSLocation = "gsdll64.dll";	
+				m_LibGSLocation = "gsdll64.dll";
 			#endif
 		#endif
 		#endif
 		std::string tmp = m_LibGSLocation.toStdString();
-		//hmodule = LoadLibrary((const WCHAR*)m_LibGSLocation.unicode());
-		hmodule = LoadLibrary(tmp.c_str());
+		hmodule = LoadLibrary((const WCHAR*)m_LibGSLocation.unicode());
+		//hmodule = LoadLibrary(tmp.c_str());
 	} else {
 		m_LibGSLocation = location;
 		std::string tmp = m_LibGSLocation.toStdString();
-		//hmodule = LoadLibrary((const WCHAR*)m_LibGSLocation.unicode());
-		hmodule = LoadLibrary(tmp.c_str());
+		hmodule = LoadLibrary((const WCHAR*)m_LibGSLocation.unicode());
+		//hmodule = LoadLibrary(tmp.c_str());
 	}
 	if (hmodule < (HINSTANCE)HINSTANCE_ERROR) {
 		/* Failed */

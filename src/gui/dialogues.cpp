@@ -20,6 +20,8 @@
  ***********************************************************************************/
 
 #include <QtGui>
+#include <QScreen>
+#include <QRegExp>
 
 #include "qgle_statics.h"
 #include "dialogues.h"
@@ -357,8 +359,9 @@ SoftwareLocateDialogue::SoftwareLocateDialogue(GLEMainWindow *parent, GLEInterfa
 	layout->addLayout(top);
 	layout->addLayout(buttonLayout);
 	setLayout(layout);
-	QDesktopWidget* desk = QApplication::desktop();
-	QRect size = desk->screenGeometry(this);
+	//QDesktopWidget* desk = QApplication::desktop();
+	//QRect size = desk->screenGeometry(this);
+	QRect size = QGuiApplication::primaryScreen()->geometry();
 	resize(size.width()/2, size.height()/2);
 	connect(&output, SIGNAL(print(const QString)), this, SLOT(print(const QString)));
 	getGLEInterface()->setOutputStream(&output);
@@ -642,7 +645,8 @@ void CrashRecoverDialogue::viewReport()
 	buttonLayout->addWidget(okButton);
 	layout->addLayout(buttonLayout);
 	viewReportDial.setLayout(layout);
-	QRect size = QApplication::desktop()->screenGeometry(&viewReportDial);
+	// QRect size = QApplication::desktop()->screenGeometry(&viewReportDial);
+	QRect size = QGuiApplication::primaryScreen()->geometry();
 	viewReportDial.resize(size.width()/2, size.height()/2);
 	viewReportDial.exec();
 }
@@ -682,7 +686,8 @@ void CrashRecoverDialogue::requestFinished(int id, bool error)
 			buttonLayout->addWidget(okButton);
 			layout->addLayout(buttonLayout);
 			mydial.setLayout(layout);
-			QRect size = QApplication::desktop()->screenGeometry(&mydial);
+			//QRect size = QApplication::desktop()->screenGeometry(&mydial);
+			QRect size = QGuiApplication::primaryScreen()->geometry();
 			mydial.resize(size.width()/3, size.height()/3);
 			mydial.exec();
 			close();

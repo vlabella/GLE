@@ -21,11 +21,17 @@
 
 #include <QtGui>
 #include <QtOpenGL>
+#include <QOpenGLWidget>
 #include "3dviewer.h"
 #include "../config.h"
 #include "../gle/cutils.h"
 #include "../gle/gle-block.h"
 #include "../gle/surface/gsurface.h"
+
+#ifdef Q_OS_WIN32
+	#include <windows.h>
+#endif
+
 
 #ifdef HAVE_LIBGLU_H
 #ifdef __APPLE__
@@ -38,7 +44,7 @@
 #include <math.h>
 
 QGLE3DWidget::QGLE3DWidget(QWidget *parent, GLEInterface* iface)
-     : QGLWidget(parent)
+     : QOpenGLWidget(parent)
 {
 	 gleInterface = iface;
      object = 0;
@@ -72,34 +78,35 @@ QSize QGLE3DWidget::sizeHint() const
 
 void QGLE3DWidget::zoom(double zoom) {
 	proj.zoom(zoom);
-	updateGL();
+	update();
 }
 
 void QGLE3DWidget::rotate(double angle, bool horiz) {
 	proj.rotate(angle, horiz);
-	updateGL();
+	update();
 }
 
 void QGLE3DWidget::reference(const GLEPoint3D& p) {
 	proj.reference(p);
-	updateGL();
+	update();
 }
 
 void QGLE3DWidget::adjustV(double angle) {
 	proj.adjustV(angle);
-	updateGL();
+	update();
 }
 
 void QGLE3DWidget::perspectiveAngle(double delta) {
 	perspAngle += delta;
 	if (perspAngle < 5) perspAngle = 5;
 	if (perspAngle > 85) perspAngle = 85;
-	updateGL();
+	update();
 }
 
 void QGLE3DWidget::initializeGL()
 {
-    qglClearColor(Qt::white);
+    //qglClearColor(Qt::white);
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f); /// Alternatively: QColorConstants::Svg::white
     object = makeObject();
     glShadeModel(GL_FLAT);
     glEnable(GL_DEPTH_TEST);
@@ -151,7 +158,7 @@ void QGLE3DWidget::mouseMoveEvent(QMouseEvent *event)
     if (event->buttons() & Qt::LeftButton) {
     	proj.rotate(-dx*0.1, true);
     	proj.rotate(dy*0.1, false);
-    	updateGL();
+    	update();
     }
     lastPos = event->pos();
 }

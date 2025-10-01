@@ -19,6 +19,8 @@
  * Also add information on how to contact you by electronic and paper mail.        *
  ***********************************************************************************/
 
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 #include <QtGui>
 #include "qgle_statics.h"
 #include "qgle_definitions.h"
@@ -48,14 +50,19 @@ QString QGLE::prettyDate(QString datestr)
 	// provided date
 	QDate dt = QDate::fromString(datestr, "dd/MM/yyyy");
 	QString prettyString = dt.toString("d MMMM yyyy");
-	QRegExp rx("^(\\d?)(\\d)(?= )");
+	//QRegExp rx("^(\\d?)(\\d)(?= )");
+	QRegularExpression rx("^(\\d?)(\\d)(?= )");
 	QString suffix;
-	if(rx.indexIn(prettyString) > -1)
+	//if(rx.indexIn(prettyString) > -1)
+	QRegularExpressionMatch match = rx.match(prettyString);
+	if(match.hasMatch())
 	{
-		if (rx.capturedTexts()[1].toInt() == 1)
+		//if (rx.capturedTexts()[1].toInt() == 1)
+		if (match.captured(1).toInt() == 1)
 			suffix = "th";
 		else
-			switch(rx.capturedTexts()[2].toInt())
+			//switch(rx.capturedTexts()[2].toInt())
+		    switch(match.captured(2).toInt())
 			{
 				case 1:
 					suffix = "st";
@@ -69,7 +76,8 @@ QString QGLE::prettyDate(QString datestr)
 				default:
 					suffix = "th";
 			}
-		prettyString.replace(rx, rx.capturedTexts()[0] + suffix);
+		//prettyString.replace(rx, rx.capturedTexts()[0] + suffix);
+		prettyString.replace(rx, match.captured(0) + suffix);
 	}
 	return(prettyString);
 
@@ -378,17 +386,19 @@ int QGLE::computeAutoScaleDPIFromPts(const QSize& bitmapSize, int inset, double 
 
 QString QGLE::GetExeName()
 {
-	QString result = QString::null;
+	// QString result = QString::null;
+	QString result;
 #ifdef Q_OS_WIN32
 	char name[1024];
 	DWORD res = GetModuleFileNameA(NULL, name, 1023);
 	if (res > 0)
 	{
-		name[res] = 0;
+		//name[res] = 0;
 		result = name;
 	}
 #elif defined(Q_OS_HURD) || defined Q_OS_LINUX
-	return(QFileInfo("/proc/self/exe").readLink());
+	//return(QFileInfo("/proc/self/exe").readLink());
+	return(QFileInfo("/proc/self/exe").readSymLink());
 #else
 	return(QApplication::applicationFilePath());
 #endif

@@ -23,10 +23,10 @@
 #define _3DVIEWER_H
 
 #include <QDialog>
-#include <QGLWidget>
+#include <QOpenGLWidget>
 #include "mainwindow.h"
 
- class QGLE3DWidget : public QGLWidget
+ class QGLE3DWidget : public QOpenGLWidget
  {
      Q_OBJECT
 

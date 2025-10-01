@@ -22,6 +22,7 @@
 #include <QtCore>
 #include <QtNetwork>
 #include <QtDebug>
+#include <QRegularExpression>
 
 #include "qgs.h"
 #include "serverthread.h"
@@ -136,7 +137,8 @@ void GLEServerThread::run()
 			}
 
 			// Break it up into separate lines
-			QStringList parts = gleCommand.split(QRegExp("[\\r\\n]+"));
+			//QStringList parts = gleCommand.split(QRegExp("[\\r\\n]+"));
+			QStringList parts = gleCommand.split(QRegularExpression("[\\r\\n]+"));
 			QString part, glefname;
 
 			// Find the bits we're interested in
@@ -232,8 +234,7 @@ void GLERenderThread::renderGLEToImage(GLEScript* script, const QString& outFile
 void GLERenderThread::renderOutputFromMemoryToImage(GLEScript* script, const QString& epsFile, double dpi, const QSize& area)
 {
 	QMutexLocker locker(&mutex);
-// poppler only works on linux and macOS for now - even though gle is built with poppler on windows - need to fix
-#ifdef HAVE_POPPLER && ( defined(__unix__) || defined(__APPLE__) )
+#ifdef HAVE_POPPLER
 	string* bytesPDF = script->getRecordedBytesBuffer(GLE_DEVICE_PDF);
 	string* bytesEPS = script->getRecordedBytesBuffer(GLE_DEVICE_EPS);
 	if (!bytesPDF->empty()) {
@@ -489,8 +490,7 @@ void gle_write_data_vector(void* closure, char* data, int length) {
 	}
 }
 
-// poppler only works on linux and macOS for now - even though gle is built with poppler on windows - need to fix
-#ifdef HAVE_POPPLER && ( defined(__unix__) || defined(__APPLE__) )
+#ifdef HAVE_POPPLER
 void GLERenderThread::renderPDFToImageInternalFromMemory(GLEScript* script, double dpi, const QSize& area) {
 	// Auto scale new files to size of drawing area
 	bool newDPI = false;

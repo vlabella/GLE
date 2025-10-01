@@ -162,7 +162,8 @@ QWidget* AboutBox::createLicensePanel()
 		// Get the text and put it in the label
 		label->setPlainText(licenseFileTxt.c_str());
 		QFontMetrics fm(font);
-		m_minWidth = fm.width("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		//m_minWidth = fm.width("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		m_minWidth = fm.horizontalAdvance("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 	} else {
 		label->setPlainText(tr("File not found: '%1'").arg(fileName));
 	}

@@ -23,6 +23,7 @@
 #define __QGLE_STATICS_H
 
 #include <QtWidgets>
+#include <QRegExp>
 #include "../gle/gle-interface/gle-interface.h"
 
 //! Class providing static helper functions for the main code
