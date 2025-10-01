@@ -400,7 +400,7 @@ QString QGLE::GetExeName()
 	}
 #elif defined(Q_OS_HURD) || defined Q_OS_LINUX
 	//return(QFileInfo("/proc/self/exe").readLink());
-	return(QFileInfo("/proc/self/exe").filesystemReadSymLink());
+	return(QFileInfo("/proc/self/exe").symLinkTarget());
 #else
 	return(QApplication::applicationFilePath());
 #endif
