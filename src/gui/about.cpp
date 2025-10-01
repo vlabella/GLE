@@ -23,6 +23,7 @@
  * about.cpp: The class implementation for the about box.      *
  ***************************************************************/
 
+#include <filesystem>
 #include <QtGui>
 #include "about.h"
 #include "qgle_statics.h"

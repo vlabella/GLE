@@ -25,6 +25,7 @@
 #ifndef __ABOUTBOX_H
 #define __ABOUTBOX_H
 
+#include <filesystem>
 #include <QtWidgets>
 
 class GLEInterface;
