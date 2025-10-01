@@ -22,6 +22,8 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 #include <QtGui>
+#include <QFileInfo>
+#include <filesystem>
 #include "qgle_statics.h"
 #include "qgle_definitions.h"
 #include "drawingobject.h"
