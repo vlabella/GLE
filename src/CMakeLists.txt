@@ -16,7 +16,7 @@ if(ECM_FOUND)
 	list(INSERT CMAKE_MODULE_PATH 0 ${ECM_MODULE_PATH})
 endif()
 
-set( CMAKE_OSX_DEPLOYMENT_TARGET "10.14" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
+set( CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
 project( gle VERSION 4.3.8 )
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d")
