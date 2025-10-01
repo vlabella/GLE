@@ -1,7 +1,7 @@
 #
 # -- Create Release - Run manually to create a release
 #
-#    - check out gle source code
+#    - checks out gle source code
 #    - gets version number from CMakeLists.txt file
 #    - creates tag and release using version number on GitHub
 #    - gets changes from docs/ChangeLog.tct

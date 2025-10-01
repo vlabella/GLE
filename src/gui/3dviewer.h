@@ -22,6 +22,7 @@
 #ifndef _3DVIEWER_H
 #define _3DVIEWER_H
 
+#include <filesystem>
 #include <QDialog>
 #include <QOpenGLWidget>
 #include "mainwindow.h"
