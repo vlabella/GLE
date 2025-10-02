@@ -12,11 +12,23 @@ on:
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
+  TRIPLET: x64-windows-static-release
+  VCPKG_INSTALLED_ROOT: d:\a\vi
+  VCPKG_BUILD_TREES_ROOT: d:\a\vb
+  VCPKG_PACAKGES_ROOT: d:\a\vp
+
 jobs:
   build:
     name: Build & Package Windows
     runs-on: windows-latest
     steps:
+
+    - name: Enable GitHub Actions Cache backend
+      uses: actions/github-script@v7
+      with:
+        script: |
+          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
@@ -74,9 +86,6 @@ jobs:
         initexmf --admin --verbose --mklinks --force
         updmap --admin
 
-    - name: Checkout GLE
-      uses: actions/checkout@v4
-
     - name: Checkout GLE Library
       uses: actions/checkout@v4
       with:
@@ -88,6 +97,20 @@ jobs:
       with:
         repository: "vlabella/gle-manual"
         path: gle-manual
+
+    - name: Checkout GLE
+      uses: actions/checkout@v4
+
+    - name: Cache vcpkg artifacts
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{env.VCPKG_INSTALLED_ROOT}}
+          ${{env.VCPKG_BUILD_TREES_ROOT}}
+          ${{env.VCPKG_PACAKGES_ROOT}}
+        key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
+        restore-keys: |
+          vcpkg-${{ runner.os }}-
 
     - name: Acquire vcpkg
       uses: actions/checkout@v4
@@ -103,21 +126,23 @@ jobs:
       working-directory: ${{ github.workspace }}/src
       run: >
         ..\vcpkg\vcpkg install
-        --x-buildtrees-root=d:\a\v\b
-        --x-install-root=d:\a\v\i
-        --x-packages-root=d:\a\v\p
-        --triplet x64-windows-static-release
+        --x-buildtrees-root=${{env.VCPKG_BUILD_TREES_ROOT}}
+        --x-install-root=${{env.VCPKG_INSTALLED_ROOT}}
+        --x-packages-root=${{env.VCPKG_PACAKGES_ROOT}}
+        --triplet ${{env.TRIPLET}}
       shell: cmd
-
-    - name: Enable GitHub Actions Cache backend
-      uses: actions/github-script@v7
-      with:
-        script: |
-          core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
-          core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
     - name: Install ECM package using vcpkg
       run: "${{ github.workspace }}/vcpkg/vcpkg install ecm"
+      shell: cmd
+
+      #for debugging
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}/vcpkg"
+      shell: cmd
+
+    - name: List directory
+      run: DIR /S "${{env.VCPKG_INSTALLED_ROOT}}"
       shell: cmd
 
       # header files needed for building of GLE
@@ -128,30 +153,45 @@ jobs:
         path: ghostpdl
 
     - name: Configure CMake
+      working-directory: ${{ github.workspace }}
+      env:
+        VCPKG_INSTALLED_DIR: ${{env.VCPKG_INSTALLED_ROOT}}
       run: >
-        cmake -S ${{github.workspace}}\src -B ${{github.workspace}}\build
-        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
-        -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
+        cmake -B build -S src
         -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
+        -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
         -DMSVC_USE_STATIC_RUNTIME=ON
         -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
         -DECM_DIR="${{github.workspace}}/vcpkg/installed/x64-windows/share/ECM"
+      shell: cmd
+
+    # for debugging
+    #- name: List directory
+    #  run: DIR /S "${{ github.workspace }}/build/vcpkg_installed/x64-windows-static-release/include/poppler"
+    #  shell: cmd
+
 
     - name: Build
+      working-directory: ${{ github.workspace }}
       run: |
-        cmake --build ${{github.workspace}}\build --config ${{env.BUILD_TYPE}}
+        cmake --build build --config ${{env.BUILD_TYPE}}
+      shell: cmd
 
     - name: Install
+      working-directory: ${{ github.workspace }}
       run: |
-        cmake -DBUILD_TYPE=Release -P ${{github.workspace}}\build\cmake_install.cmake
+        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
+      shell: cmd
 
     - name: Build Manual
       working-directory: ${{github.workspace}}\gle-manual
       run: |
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
+      shell: cmd
 
     - name: Upload Artifacts - GLE Manual PDF
       uses: actions/upload-artifact@v4.4.3
