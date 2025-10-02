@@ -20,8 +20,5 @@
     "zstd",
     "qtbase",
     "qt5compat"
-  ],
-  "installOptions":{
-    "x-buildtrees-root": "D:/a/bt"
-  }
+  ]
 }
