@@ -122,6 +122,7 @@ jobs:
         cmake -S ${{github.workspace}}\src -B ${{github.workspace}}\build
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
+        -DVCPKG_BUILDTREES_DIR=D:/a/b
         -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
         -DMSVC_USE_STATIC_RUNTIME=ON
