@@ -33,9 +33,9 @@ jobs:
       shell: cmd
 
     - name: Install dependencies with custom buildtrees
-      working-directory: ${{ github.workspace }}
+      working-directory: ${{ github.workspace }}/src
       run: >
-        .\vcpkg\vcpkg install
+        ..\vcpkg\vcpkg install
         --x-buildtrees-root=d:\a\v\b
         --x-install-root=d:\a\v\i
         --x-packages-root=d:\a\v\p
