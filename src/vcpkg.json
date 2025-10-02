@@ -14,7 +14,10 @@
     "openjpeg",
     "pdcurses",
     "pixman",
-    "poppler",
+    {
+      "name": "poppler",
+      "default-features": false
+    },
     "tiff",
     "zlib",
     "zstd",
