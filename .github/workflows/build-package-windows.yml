@@ -100,13 +100,14 @@ jobs:
       shell: cmd
 
     - name: Install dependencies with custom buildtrees
+      working-directory: ${{ github.workspace }}/src
       run: >
-        .\vcpkg\vcpkg install
-        --x-buildtrees-root=D:\a\v\b
-        --x-install-root=D:\a\v\i
-        --x-packages-root=D:\a\v\p
+        ..\vcpkg\vcpkg install
+        --x-buildtrees-root=d:\a\v\b
+        --x-install-root=d:\a\v\i
+        --x-packages-root=d:\a\v\p
+        --triplet x64-windows-static-release
       shell: cmd
-
 
     - name: Enable GitHub Actions Cache backend
       uses: actions/github-script@v7
