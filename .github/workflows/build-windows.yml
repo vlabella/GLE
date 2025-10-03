@@ -76,6 +76,7 @@ jobs:
       shell: cmd
 
     - name: Configure NuGet source
+      shell: pwsh
       run:
         $nuget = & ${{env.VCPKG_ROOT}}/vcpkg.exe fetch nuget
         & $nuget sources Add -Name github `
