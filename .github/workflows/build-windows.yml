@@ -13,10 +13,10 @@ on:
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
-  TRIPLET: x64-windows-static-release-only
-  VCPKG_INSTALLED_ROOT: d:\a\vi
-  VCPKG_BUILD_TREES_ROOT: d:\a\vb
-  VCPKG_PACAKGES_ROOT: d:\a\vp
+  TRIPLET: x64-windows-static-release
+  VCPKG_ROOT: d:/vcpkg
+#  VCPKG_BUILD_TREES_ROOT: d:\a\vb
+#  VCPKG_PACAKGES_ROOT: d:\a\vp
 
 jobs:
   build:
@@ -38,9 +38,9 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          ${{env.VCPKG_INSTALLED_ROOT}}
-          ${{env.VCPKG_BUILD_TREES_ROOT}}
-          ${{env.VCPKG_PACAKGES_ROOT}}
+          ${{env.VCPKG_ROOT}}
+ #         ${{env.VCPKG_BUILD_TREES_ROOT}}
+ #         ${{env.VCPKG_PACAKGES_ROOT}}
         key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
         restore-keys: |
           vcpkg-${{ runner.os }}-
@@ -49,38 +49,38 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: "Microsoft/vcpkg"
-        path: vcpkg
+        path: ${{env.VCPKG_ROOT}}
 
     - name: Bootstrap vcpkg
-      run: "${{ github.workspace }}\\vcpkg\\bootstrap-vcpkg.bat"
+      run: "${{env.VCPKG_ROOT}}/bootstrap-vcpkg.bat"
       shell: cmd
 
-    - name: Copy custom triplet to vcpkg
-      run: copy src\x64-windows-static-release-only.cmake vcpkg\triplets\
-      shell: cmd
+    #- name: Copy custom triplet to vcpkg
+    #  run: copy src\x64-windows-static-release-only.cmake vcpkg\triplets\
+     # shell: cmd
 
-    - name: Install dependencies with custom buildtrees
-      working-directory: ${{ github.workspace }}/src
-      run: >
-        ..\vcpkg\vcpkg install
-        --x-buildtrees-root=${{env.VCPKG_BUILD_TREES_ROOT}}
-        --x-install-root=${{env.VCPKG_INSTALLED_ROOT}}
-        --x-packages-root=${{env.VCPKG_PACAKGES_ROOT}}
-        --triplet ${{env.TRIPLET}}
-      shell: cmd
+    #- name: Install dependencies with custom buildtrees
+    #  working-directory: ${{ github.workspace }}/src
+    #  run: >
+      #   ..\vcpkg\vcpkg install
+      #   --x-buildtrees-root=${{env.VCPKG_BUILD_TREES_ROOT}}
+      #   --x-install-root=${{env.VCPKG_ROOT}}
+      #   --x-packages-root=${{env.VCPKG_PACAKGES_ROOT}}
+      #   --triplet ${{env.TRIPLET}}
+      # shell: cmd
 
     - name: Install ECM package using vcpkg
-      run: "${{ github.workspace }}/vcpkg/vcpkg install ecm"
+      run: "{{env.VCPKG_ROOT}}/vcpkg install ecm"
       shell: cmd
 
       #for debugging
-    - name: List directory
-      run: DIR /S "${{ github.workspace }}/vcpkg"
-      shell: cmd
+    # - name: List directory
+    #   run: DIR /S "${{ github.workspace }}/vcpkg"
+    #   shell: cmd
 
-    - name: List directory
-      run: DIR /S "${{env.VCPKG_INSTALLED_ROOT}}"
-      shell: cmd
+    # - name: List directory
+    #   run: DIR /S "${{env.VCPKG_ROOT}}"
+    #   shell: cmd
 
       # header files needed for building of GLE
     - name: Acquire Ghostscipt/PDL
@@ -92,10 +92,10 @@ jobs:
     - name: Configure CMake
       working-directory: ${{ github.workspace }}
       env:
-        VCPKG_INSTALLED_DIR: ${{env.VCPKG_INSTALLED_ROOT}}
+        VCPKG_INSTALLED_DIR: ${{env.VCPKG_ROOT}}
       run: >
         cmake -B build -S src
-        -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
+        -DCMAKE_TOOLCHAIN_FILE={{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
