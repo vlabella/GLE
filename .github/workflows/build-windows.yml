@@ -15,6 +15,8 @@ env:
   BUILD_TYPE: Release
   TRIPLET: x64-windows-static-release
   VCPKG_ROOT: d:/vp
+  VCPKG_BINARY_SOURCES: "clear;nuget,https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json,readwrite"
+
 #  VCPKG_BUILD_TREES_ROOT: d:\a\vb
 #  VCPKG_PACAKGES_ROOT: d:\a\vp
 
@@ -49,6 +51,15 @@ jobs:
       shell: pwsh
       run: |
           Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
+
+
+    - name: Configure NuGet source
+      run: |
+        mono $(${{env.VCPKG_ROOT}}/vcpkg fetch nuget | tail -n 1) sources add \
+          -Name github \
+          -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
+          -Username ${{ github.repository_owner }} \
+          -Password ${{ secrets.GH_PACKAGES_TOKEN }}
 
     - name: Cache vcpkg artifacts
       uses: actions/cache@v3
