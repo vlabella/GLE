@@ -78,8 +78,8 @@ jobs:
     - name: Configure NuGet source
       shell: pwsh
       run: |
-        $nugetPath = & "d:/vp/vcpkg.exe" fetch nuget
-        & $nugetPath sources Add -Name github `
+        $nuget = ${{env.VCPKG_ROOT}}/vcpkg fetch nuget
+        & $nuget sources Add -Name github `
         -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json `
         -Username ${{ github.repository_owner }} `
         -Password "${{ secrets.GLE_NUGET_CACHE_PAT }}"
