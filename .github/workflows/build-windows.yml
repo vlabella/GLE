@@ -53,7 +53,7 @@ jobs:
 
       #for debugging
     - name: List directory
-      run: DIR /S "${{ github.workspace }}/vcpkg"
+      run: DIR /S "${{ github.workspace }}"
       shell: cmd
 
     - name: Move Vcpkg to VCPKG_ROOT
