@@ -17,9 +17,6 @@ env:
   VCPKG_ROOT: d:/vp
   VCPKG_BINARY_SOURCES: "clear;nuget,https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json,readwrite"
 
-#  VCPKG_BUILD_TREES_ROOT: d:\a\vb
-#  VCPKG_PACAKGES_ROOT: d:\a\vp
-
 jobs:
   build:
     name: Build Windows
@@ -42,34 +39,10 @@ jobs:
         repository: "Microsoft/vcpkg"
         path: vcpkg
 
-    #for debugging
-   # - name: List directory
-   #   run: DIR /S "${{ github.workspace }}/vcpkg"
-   #   shell: cmd
-
-
-      #for debugging
-    #- name: List directory
-    #  run: DIR /S "${{ github.workspace }}"
-     # shell: cmd
-
     - name: Move Vcpkg to VCPKG_ROOT
       shell: pwsh
       run: |
           Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
-
-    
- #    - name: Cache vcpkg artifacts
- #      uses: actions/cache@v3
- #      with:
- #        path: |
- #          ${{env.VCPKG_ROOT}}
- # #         ${{env.VCPKG_BUILD_TREES_ROOT}}
- # #         ${{env.VCPKG_PACAKGES_ROOT}}
- #        key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
- #        restore-keys: |
- #          vcpkg-${{ runner.os }}-
-
 
     - name: Bootstrap vcpkg
       run: "${{env.VCPKG_ROOT}}/bootstrap-vcpkg.bat"
@@ -83,7 +56,6 @@ jobs:
       run: |
         $nugetPath = & "$env:VCPKG_ROOT/vcpkg" fetch nuget
         & $nugetPath sources Add -Name github -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "$env:GH_PAT"
-
 
     #- name: Copy custom triplet to vcpkg
     #  run: copy src\x64-windows-static-release-only.cmake vcpkg\triplets\
@@ -102,15 +74,6 @@ jobs:
     - name: Install ECM package using vcpkg
       run: "${{env.VCPKG_ROOT}}/vcpkg install ecm"
       shell: cmd
-
-      #for debugging
-    # - name: List directory
-    #   run: DIR /S "${{ github.workspace }}/vcpkg"
-    #   shell: cmd
-
-    # - name: List directory
-    #   run: DIR /S "${{env.VCPKG_ROOT}}"
-    #   shell: cmd
 
       # header files needed for building of GLE
     - name: Acquire Ghostscipt/PDL
@@ -140,7 +103,6 @@ jobs:
     #- name: List directory
     #  run: DIR /S "${{ github.workspace }}/build/vcpkg_installed/x64-windows-static-release/include/poppler"
     #  shell: cmd
-
 
     - name: Build
       working-directory: ${{ github.workspace }}
