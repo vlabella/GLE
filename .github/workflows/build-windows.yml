@@ -42,6 +42,14 @@ jobs:
         repository: "Microsoft/vcpkg"
         path: vcpkg
 
+    - name: Configure NuGet source
+      run: |
+        mono $(${{github.workspace}}/vcpkg/vcpkg fetch nuget | tail -n 1) sources add \
+          -Name github \
+          -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
+          -Username ${{ github.repository_owner }} \
+          -Password ${{ secrets.GH_PACKAGES_TOKEN }}
+
       #for debugging
     #- name: List directory
     #  run: DIR /S "${{ github.workspace }}"
@@ -52,14 +60,7 @@ jobs:
       run: |
           Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
 
-    - name: Configure NuGet source
-      run: |
-        mono $(d:\vp\vcpkg fetch nuget | tail -n 1) sources add \
-          -Name github \
-          -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
-          -Username ${{ github.repository_owner }} \
-          -Password ${{ secrets.GH_PACKAGES_TOKEN }}
-
+    
  #    - name: Cache vcpkg artifacts
  #      uses: actions/cache@v3
  #      with:
