@@ -12,7 +12,7 @@ on:
 env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
-  TRIPLET: x64-windows-static-release
+  TRIPLET: x64-windows-static-release-only
   VCPKG_INSTALLED_ROOT: d:\a\vi
   VCPKG_BUILD_TREES_ROOT: d:\a\vb
   VCPKG_PACAKGES_ROOT: d:\a\vp
@@ -120,6 +120,10 @@ jobs:
 
     - name: Bootstrap vcpkg
       run: "${{ github.workspace }}\\vcpkg\\bootstrap-vcpkg.bat"
+      shell: cmd
+
+    - name: Copy custom triplet to vcpkg
+      run: copy src\x64-windows-static-release-only.cmake vcpkg\triplets\
       shell: cmd
 
     - name: Install dependencies with custom buildtrees
