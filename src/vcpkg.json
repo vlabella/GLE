@@ -21,7 +21,7 @@
     "tiff",
     "zlib",
     "zstd",
-    "qt6-base",
+    "qtbase",
     "qt5compat",
     "qt6-dbus"
   ]
