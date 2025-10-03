@@ -82,7 +82,7 @@ jobs:
         & $nugetPath sources Add -Name github `
         -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json `
         -Username ${{ github.repository_owner }} `
-        -Password "${{ secrets.GH_PACKAGES_TOKEN }}"
+        -Password "${{ secrets.GLE_NUGET_CACHE_PAT }}"
 
 
     #- name: Copy custom triplet to vcpkg
