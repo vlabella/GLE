@@ -51,7 +51,12 @@ jobs:
         repository: "Microsoft/vcpkg"
       #  path: ${{env.VCPKG_ROOT}}
 
-    - name: Move Vcpkg to D:\
+      #for debugging
+     - name: List directory
+       run: DIR /S "${{ github.workspace }}/vcpkg"
+       shell: cmd
+
+    - name: Move Vcpkg to VCPKG_ROOT
       shell: pwsh
       run: |
           Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
