@@ -54,7 +54,7 @@ jobs:
 
     - name: Configure NuGet source
       run: |
-        mono $(${{env.VCPKG_ROOT}}\vcpkg fetch nuget | tail -n 1) sources add \
+        mono $(d:\vp\vcpkg fetch nuget | tail -n 1) sources add \
           -Name github \
           -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
           -Username ${{ github.repository_owner }} \
