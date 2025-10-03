@@ -52,9 +52,9 @@ jobs:
       #  path: ${{env.VCPKG_ROOT}}
 
       #for debugging
-     - name: List directory
-       run: DIR /S "${{ github.workspace }}/vcpkg"
-       shell: cmd
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}/vcpkg"
+      shell: cmd
 
     - name: Move Vcpkg to VCPKG_ROOT
       shell: pwsh
