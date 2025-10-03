@@ -42,9 +42,14 @@ jobs:
         repository: "Microsoft/vcpkg"
         path: vcpkg
 
+    #for debugging
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}/vcpkg"
+      shell: cmd
+
     - name: Configure NuGet source
       run: |
-        mono $(${{github.workspace}}/vcpkg/vcpkg fetch nuget | tail -n 1) sources add \
+        mono $( ${{github.workspace}}\vcpkg\vcpkg fetch nuget | tail -n 1) sources add \
           -Name github \
           -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
           -Username ${{ github.repository_owner }} \
