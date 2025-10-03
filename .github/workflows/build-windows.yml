@@ -14,7 +14,7 @@ env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
   TRIPLET: x64-windows-static-release
-  VCPKG_ROOT: d:/a/vcpkg
+  VCPKG_ROOT: d:/vcpkg
 #  VCPKG_BUILD_TREES_ROOT: d:\a\vb
 #  VCPKG_PACAKGES_ROOT: d:\a\vp
 
@@ -49,7 +49,13 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: "Microsoft/vcpkg"
-        path: ${{env.VCPKG_ROOT}}
+      #  path: ${{env.VCPKG_ROOT}}
+
+    - name: Move Vcpkg to D:\
+      shell: pwsh
+      run: |
+          Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
+
 
     - name: Bootstrap vcpkg
       run: "${{env.VCPKG_ROOT}}/bootstrap-vcpkg.bat"
