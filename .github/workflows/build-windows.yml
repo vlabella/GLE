@@ -34,17 +34,6 @@ jobs:
     - name: Checkout GLE
       uses: actions/checkout@v4
 
-    - name: Cache vcpkg artifacts
-      uses: actions/cache@v3
-      with:
-        path: |
-          ${{env.VCPKG_ROOT}}
- #         ${{env.VCPKG_BUILD_TREES_ROOT}}
- #         ${{env.VCPKG_PACAKGES_ROOT}}
-        key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
-        restore-keys: |
-          vcpkg-${{ runner.os }}-
-
     - name: Acquire vcpkg
       uses: actions/checkout@v4
       with:
@@ -60,6 +49,17 @@ jobs:
       shell: pwsh
       run: |
           Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
+
+    - name: Cache vcpkg artifacts
+      uses: actions/cache@v3
+      with:
+        path: |
+          ${{env.VCPKG_ROOT}}
+ #         ${{env.VCPKG_BUILD_TREES_ROOT}}
+ #         ${{env.VCPKG_PACAKGES_ROOT}}
+        key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
+        restore-keys: |
+          vcpkg-${{ runner.os }}-
 
 
     - name: Bootstrap vcpkg
