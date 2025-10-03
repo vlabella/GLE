@@ -47,13 +47,6 @@ jobs:
       run: DIR /S "${{ github.workspace }}/vcpkg"
       shell: cmd
 
-    - name: Configure NuGet source
-      run: |
-        mono $( ${{github.workspace}}\vcpkg\vcpkg fetch nuget | tail -n 1) sources add \
-          -Name github \
-          -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
-          -Username ${{ github.repository_owner }} \
-          -Password ${{ secrets.GH_PACKAGES_TOKEN }}
 
       #for debugging
     #- name: List directory
@@ -81,6 +74,14 @@ jobs:
     - name: Bootstrap vcpkg
       run: "${{env.VCPKG_ROOT}}/bootstrap-vcpkg.bat"
       shell: cmd
+
+    - name: Configure NuGet source
+      run: |
+        mono $( ${{env.VCPKG_ROOT}}/vcpkg fetch nuget | tail -n 1) sources add \
+          -Name github \
+          -Source https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json \
+          -Username ${{ github.repository_owner }} \
+          -Password ${{ secrets.GH_PACKAGES_TOKEN }}
 
     #- name: Copy custom triplet to vcpkg
     #  run: copy src\x64-windows-static-release-only.cmake vcpkg\triplets\
