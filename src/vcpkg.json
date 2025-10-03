@@ -23,6 +23,6 @@
     "zstd",
     "qtbase",
     "qt5compat",
-    "qt6-dbus"
+    "qtdbus"
   ]
 }
