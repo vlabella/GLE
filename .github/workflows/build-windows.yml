@@ -14,7 +14,7 @@ env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
   TRIPLET: x64-windows-static-release
-  VCPKG_ROOT: d:/vcpkg
+  VCPKG_ROOT: d:/vp
 #  VCPKG_BUILD_TREES_ROOT: d:\a\vb
 #  VCPKG_PACAKGES_ROOT: d:\a\vp
 
@@ -52,9 +52,9 @@ jobs:
         path: vcpkg
 
       #for debugging
-    - name: List directory
-      run: DIR /S "${{ github.workspace }}"
-      shell: cmd
+    #- name: List directory
+    #  run: DIR /S "${{ github.workspace }}"
+     # shell: cmd
 
     - name: Move Vcpkg to VCPKG_ROOT
       shell: pwsh
@@ -81,7 +81,7 @@ jobs:
       # shell: cmd
 
     - name: Install ECM package using vcpkg
-      run: "{{env.VCPKG_ROOT}}/vcpkg install ecm"
+      run: "${{env.VCPKG_ROOT}}/vcpkg install ecm"
       shell: cmd
 
       #for debugging
