@@ -81,8 +81,7 @@ jobs:
         GH_PAT: ${{ secrets.GLE_NUGET_CACHE_PAT }}
         VCPKG_ROOT: ${{ env.VCPKG_ROOT }}
       run: |
-        $nugetPath = & "$env:VCPKG_ROOT/vcpkg" fetch nuget
-         & $nugetPath sources Add -Name github `
+        $nugetPath = & "$env:VCPKG_ROOT/vcpkg" fetch nuget & $nugetPath sources Add -Name github `
         -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" `
         -Username "${{ github.repository_owner }}" `
         -Password "$env:GH_PAT"
