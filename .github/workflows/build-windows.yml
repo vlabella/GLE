@@ -106,7 +106,7 @@ jobs:
         VCPKG_INSTALLED_DIR: ${{env.VCPKG_ROOT}}
       run: >
         cmake -B build -S src
-        -DCMAKE_TOOLCHAIN_FILE={{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
+        -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
@@ -114,7 +114,7 @@ jobs:
         -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
-        -DECM_DIR="${{github.workspace}}/vcpkg/installed/x64-windows/share/ECM"
+        -DECM_DIR="${{env.VCPKG_ROOT}}/installed/x64-windows/share/ECM"
       shell: cmd
 
     # for debugging
