@@ -21,8 +21,10 @@
     "tiff",
     "zlib",
     "zstd",
-    "qtbase",
-    "qt5compat",
-    "qt6dbus"
+    {
+      "name": "qtbase",
+      "default-features": false
+    },
+    "qt5compat"
   ]
 }
