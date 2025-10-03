@@ -11,7 +11,7 @@ on:
   #push:
   #  branches: [main]
 env:
-  VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+  #VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
   TRIPLET: x64-windows-static-release
   VCPKG_ROOT: d:/vp
@@ -52,7 +52,6 @@ jobs:
       run: |
           Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
 
-
     - name: Configure NuGet source
       run: |
         mono $(${{env.VCPKG_ROOT}}/vcpkg fetch nuget | tail -n 1) sources add \
@@ -61,16 +60,16 @@ jobs:
           -Username ${{ github.repository_owner }} \
           -Password ${{ secrets.GH_PACKAGES_TOKEN }}
 
-    - name: Cache vcpkg artifacts
-      uses: actions/cache@v3
-      with:
-        path: |
-          ${{env.VCPKG_ROOT}}
- #         ${{env.VCPKG_BUILD_TREES_ROOT}}
- #         ${{env.VCPKG_PACAKGES_ROOT}}
-        key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
-        restore-keys: |
-          vcpkg-${{ runner.os }}-
+ #    - name: Cache vcpkg artifacts
+ #      uses: actions/cache@v3
+ #      with:
+ #        path: |
+ #          ${{env.VCPKG_ROOT}}
+ # #         ${{env.VCPKG_BUILD_TREES_ROOT}}
+ # #         ${{env.VCPKG_PACAKGES_ROOT}}
+ #        key: vcpkg-${{ runner.os }}-${{ hashFiles('src/vcpkg.json') }}
+ #        restore-keys: |
+ #          vcpkg-${{ runner.os }}-
 
 
     - name: Bootstrap vcpkg
