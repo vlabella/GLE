@@ -14,7 +14,7 @@ env:
   VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
   BUILD_TYPE: Release
   TRIPLET: x64-windows-static-release
-  VCPKG_ROOT: d:/vcpkg
+  VCPKG_ROOT: d:/a/vcpkg
 #  VCPKG_BUILD_TREES_ROOT: d:\a\vb
 #  VCPKG_PACAKGES_ROOT: d:\a\vp
 
