@@ -158,11 +158,6 @@ jobs:
         cmake --build build --config ${{env.BUILD_TYPE}}
       shell: cmd
 
-    - name: Install
-      working-directory: ${{ github.workspace }}
-      run: |
-        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
-      shell: cmd
       #
       # -- end build-windows.yml
       #
@@ -186,6 +181,12 @@ jobs:
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
+
+    - name: Install
+      working-directory: ${{ github.workspace }}
+      run: |
+        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
+      shell: cmd
 
     - name: Package
       working-directory: ${{github.workspace}}\build
