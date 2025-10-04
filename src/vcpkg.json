@@ -14,17 +14,11 @@
     "openjpeg",
     "pdcurses",
     "pixman",
-    {
-      "name": "poppler",
-      "default-features": false
-    },
+    "poppler",
     "tiff",
     "zlib",
     "zstd",
-    {
-      "name": "qtbase",
-      "default-features": false
-    },
+    "qtbase",
     "qt5compat"
   ]
 }
