@@ -26,11 +26,10 @@ find_package(Qt6 COMPONENTS
 	Core
 	Widgets
 	Network
-#	DBus
 	Gui
 	OpenGL
 	OpenGLWidgets
-	Core5Compat
+	Core5Compat  # needed for QRegExp move to QRegularExpression in Qt 6
 	REQUIRED)
 
 if (WIN32)
@@ -91,7 +90,7 @@ list(APPEND QGLE_LIBRARIES
 	${PIXMAN_LIBRARIES}
 )
 if(UNIX OR APPLE)
-	# these come in QT on windows ??
+	# these come in QT on windows
 	list(APPEND QGLE_LIBRARIES
 		${JPEG_LIBRARIES}
 		TIFF::TIFF
