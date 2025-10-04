@@ -26,7 +26,7 @@ find_package(Qt6 COMPONENTS
 	Core
 	Widgets
 	Network
-	DBus
+#	DBus
 	Gui
 	OpenGL
 	OpenGLWidgets
