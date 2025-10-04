@@ -89,6 +89,10 @@ jobs:
         repository: "vlabella/gle-manual"
         path: gle-manual
 
+    # for debugging
+    - name: List directory
+        run: DIR /S "${{ github.workspace }}"
+        shell: cmd
       #
       # -- same as build-windows.yml from here
       #
@@ -164,7 +168,7 @@ jobs:
       #
 
     - name: Build Manual
-      working-directory: ${{github.workspace}}/gle-manual
+      working-directory: ${{github.workspace}}/gle-manual/gle-manual
       run: |
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
       shell: cmd
