@@ -91,8 +91,8 @@ jobs:
 
     # for debugging
     - name: List directory
-        run: DIR /S "${{ github.workspace }}"
-        shell: cmd
+      run: DIR /S "${{ github.workspace }}"
+      shell: cmd
       #
       # -- same as build-windows.yml from here
       #
