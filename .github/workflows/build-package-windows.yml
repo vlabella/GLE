@@ -167,6 +167,11 @@ jobs:
       # -- end build-windows.yml
       #
 
+      # for debugging
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}"
+      shell: cmd
+
     - name: Build Manual
       working-directory: ${{github.workspace}}\gle-manual
       run: |
