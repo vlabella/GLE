@@ -13,7 +13,7 @@ on:
 env:
   BUILD_TYPE: Release
   TRIPLET: x64-windows-static-release
-  VCPKG_ROOT: d:/vp
+  MY_VCPKG_ROOT: d:/vp
   VCPKG_BINARY_SOURCES: "clear;nuget,https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json,readwrite"
 
 jobs:
@@ -32,26 +32,26 @@ jobs:
         path: vcpkg
 
       # move to shorter path for Qt6
-    - name: Move Vcpkg to VCPKG_ROOT
+    - name: Move Vcpkg to MY_VCPKG_ROOT
       shell: pwsh
       run: |
-          Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.VCPKG_ROOT}}"
+          Move-Item -Path "$env:GITHUB_WORKSPACE\vcpkg" -Destination "${{env.MY_VCPKG_ROOT}}"
 
     - name: Bootstrap vcpkg
-      run: "${{env.VCPKG_ROOT}}/bootstrap-vcpkg.bat"
+      run: "${{env.MY_VCPKG_ROOT}}/bootstrap-vcpkg.bat"
       shell: cmd
 
     - name: Configure NuGet Source for Caching
       shell: pwsh
       env:
         GH_PAT: ${{ secrets.GLE_NUGET_CACHE_PAT }}
-        VCPKG_ROOT: ${{ env.VCPKG_ROOT }}
+        MY_VCPKG_ROOT: ${{ env.MY_VCPKG_ROOT }}
       run: |
-        $nugetPath = & "$env:VCPKG_ROOT/vcpkg" fetch nuget
+        $nugetPath = & "$env:MY_VCPKG_ROOT/vcpkg" fetch nuget
         & $nugetPath sources Add -Name github -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "$env:GH_PAT"
 
     - name: Install ECM package using vcpkg
-      run: "${{env.VCPKG_ROOT}}/vcpkg install ecm"
+      run: "${{env.MY_VCPKG_ROOT}}/vcpkg install ecm"
       shell: cmd
 
       # header files needed for building of GLE
@@ -64,10 +64,10 @@ jobs:
     - name: Configure CMake
       working-directory: ${{ github.workspace }}
       env:
-        VCPKG_INSTALLED_DIR: ${{env.VCPKG_ROOT}}
+        VCPKG_INSTALLED_DIR: ${{env.MY_VCPKG_ROOT}}
       run: >
         cmake -B build -S src
-        -DCMAKE_TOOLCHAIN_FILE=${{env.VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
+        -DCMAKE_TOOLCHAIN_FILE=${{env.MY_VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
@@ -75,7 +75,7 @@ jobs:
         -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
-        -DECM_DIR="${{env.VCPKG_ROOT}}/installed/x64-windows/share/ECM"
+        -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
       shell: cmd
 
     - name: Build
@@ -122,7 +122,7 @@ jobs:
     #  run: >
       #   ..\vcpkg\vcpkg install
       #   --x-buildtrees-root=${{env.VCPKG_BUILD_TREES_ROOT}}
-      #   --x-install-root=${{env.VCPKG_ROOT}}
+      #   --x-install-root=${{env.MY_VCPKG_ROOT}}
       #   --x-packages-root=${{env.VCPKG_PACAKGES_ROOT}}
       #   --triplet ${{env.TRIPLET}}
       # shell: cmd
