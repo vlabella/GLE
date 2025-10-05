@@ -1148,7 +1148,7 @@ bool create_bitmap_file_ghostscript(GLEFileLocation* fname, int device, int dpi,
 }
 bool create_bitmap_file(GLEFileLocation* fname, int device, int dpi, int options, GLEScript* script) {
 #ifdef HAVE_POPPLER
-//#ifdef BITMAP_CREATION_POPPLER
+	//#ifdef BITMAP_CREATION_POPPLER
 	//cout << "creating bitmap poppler 1"<<endl;
 	bool supportsBitmapType = g_bitmap_supports_type(g_device_to_bitmap_type(device));
 	//cout << "creating bitmap poppler supported "<<supportsBitmapType<<endl;
@@ -1166,7 +1166,11 @@ bool create_bitmap_file(GLEFileLocation* fname, int device, int dpi, int options
 		//g_message(std::string("[Poppler PDF conversion: ") + myFName + "]");
 		gle_convert_pdf_to_image_file((char*)bytesPDF->c_str(), (int)bytesPDF->size(), dpi, device, options, myFName.c_str());
 		return true;
+	}else{
+		//cout << "creating bitmap poppler - ghostscript"<<endl;
+		return create_bitmap_file_ghostscript(fname, device, dpi, options, script);
 	}
+	return false;
 #else // BITMAP_CREATION_GHOSTSCRIPT
 	//cout << "creating bitmap gs"<<endl;
 	return create_bitmap_file_ghostscript(fname, device, dpi, options, script);
