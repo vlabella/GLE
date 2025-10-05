@@ -24,6 +24,15 @@ jobs:
     - name: Enable Developer Command Prompt
       uses: ilammy/msvc-dev-cmd@v1.13.0
 
+    - name: Configure NuGet Source for Caching
+      shell: pwsh
+      env:
+        GH_PAT: ${{ secrets.GLE_NUGET_CACHE_PAT }}
+        MY_VCPKG_ROOT: ${{ env.MY_VCPKG_ROOT }}
+      run: |
+        $nugetPath = & "$env:MY_VCPKG_ROOT/vcpkg" fetch nuget
+        & $nugetPath sources Add -Name github -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "$env:GH_PAT"
+
       # needed for building of manual
     - name: Choco Install Ghostscript
       uses: crazy-max/ghaction-chocolatey@v3
@@ -77,22 +86,10 @@ jobs:
         initexmf --admin --verbose --mklinks --force
         updmap --admin
 
-    - name: Checkout GLE Library
-      uses: actions/checkout@v4
-      with:
-        repository: "vlabella/gle-library"
-        path: gle-library
-
-    - name: Checkout GLE Manual
-      uses: actions/checkout@v4
-      with:
-        repository: "vlabella/gle-manual"
-        path: gle-manual
-
-    # for debugging
-    - name: List directory
-      run: DIR /S "${{ github.workspace }}"
-      shell: cmd
+      # for debugging
+    # - name: List directory
+    #   run: DIR /S "${{ github.workspace }}"
+    #   shell: cmd
       #
       # -- same as build-windows.yml from here
       #
@@ -115,15 +112,6 @@ jobs:
       run: "${{env.MY_VCPKG_ROOT}}/bootstrap-vcpkg.bat"
       shell: cmd
 
-    - name: Configure NuGet Source for Caching
-      shell: pwsh
-      env:
-        GH_PAT: ${{ secrets.GLE_NUGET_CACHE_PAT }}
-        MY_VCPKG_ROOT: ${{ env.MY_VCPKG_ROOT }}
-      run: |
-        $nugetPath = & "$env:MY_VCPKG_ROOT/vcpkg" fetch nuget
-        & $nugetPath sources Add -Name github -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "$env:GH_PAT"
-
     - name: Install ECM package using vcpkg
       run: "${{env.MY_VCPKG_ROOT}}/vcpkg install ecm"
       shell: cmd
@@ -134,6 +122,22 @@ jobs:
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
+
+    - name: Checkout GLE Library
+      uses: actions/checkout@v4
+      with:
+        repository: "vlabella/gle-library"
+        path: gle-library
+
+    - name: Checkout GLE Manual
+      uses: actions/checkout@v4
+      with:
+        repository: "vlabella/gle-manual"
+        path: gle-manual
+
+    - name: List directory
+      run: DIR "${{ github.workspace }}"
+      shell: cmd
 
     - name: Configure CMake
       working-directory: ${{ github.workspace }}
@@ -146,9 +150,9 @@ jobs:
         -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
         -DMSVC_USE_STATIC_RUNTIME=ON
-        -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
-        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
-        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
+        -DCMAKE_INSTALL_PREFIX=stage
+        -DGLE_EXAMPLES_LIBRARY_PATH=gle-library
+        -DGLE_USER_MANUAL_PATH=gle-manual
         -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
       shell: cmd
 
@@ -164,7 +168,20 @@ jobs:
 
       # for debugging
     - name: List directory
-      run: DIR /S "${{ github.workspace }}"
+      run: DIR "${{ github.workspace }}"
+      shell: cmd
+
+      # must install to build manual ... but gle-manual.pdf does not exist - does not seem toe create error
+      # and manul gets included in distributions with cpack step .. so it seems ok.
+    - name: Install
+      working-directory: ${{ github.workspace }}
+      run: |
+        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
+      shell: cmd
+
+      # for debugging
+    - name: List directory
+      run: DIR /S "${{ github.workspace }}\stage"
       shell: cmd
 
     - name: Build Manual
@@ -181,12 +198,6 @@ jobs:
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
-
-    - name: Install
-      working-directory: ${{ github.workspace }}
-      run: |
-        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
-      shell: cmd
 
     - name: Package
       working-directory: ${{github.workspace}}\build
