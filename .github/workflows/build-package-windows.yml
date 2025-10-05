@@ -151,8 +151,8 @@ jobs:
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
         -DMSVC_USE_STATIC_RUNTIME=ON
         -DCMAKE_INSTALL_PREFIX=stage
-        -DGLE_EXAMPLES_LIBRARY_PATH=gle-library
-        -DGLE_USER_MANUAL_PATH=gle-manual
+        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
+        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
         -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
       shell: cmd
 
@@ -171,8 +171,6 @@ jobs:
       run: DIR "${{ github.workspace }}"
       shell: cmd
 
-      # must install to build manual ... but gle-manual.pdf does not exist - does not seem toe create error
-      # and manul gets included in distributions with cpack step .. so it seems ok.
     - name: Install
       working-directory: ${{ github.workspace }}
       run: |
@@ -188,6 +186,13 @@ jobs:
       working-directory: ${{github.workspace}}\gle-manual
       run: |
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
+      shell: cmd
+
+      # must run again to install the manual
+    - name: Install Manual
+      working-directory: ${{ github.workspace }}
+      run: |
+        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
       shell: cmd
 
     - name: Upload Artifacts - GLE Manual PDF
