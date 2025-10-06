@@ -158,7 +158,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/../project_info.mak
 #
 find_package(ZLIB REQUIRED)
 SET(Boost_USE_STATIC_LIBS ON)
-find_package(Boost)
+find_package(Boost CONFIG)
 find_package(JPEG)
 if(BUILD_MANIP)
 	# manip needs curses or pdcurses on windows
