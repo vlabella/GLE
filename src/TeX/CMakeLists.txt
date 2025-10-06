@@ -1,8 +1,9 @@
 #
 # -- generate inittex.ini from init.tex
 #
-set(GLE_DIR ${CMAKE_BINARY_DIR}/gle$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,/Debug,/Release>>)
-set(GLE gle$<$<CONFIG:Debug>:d>)
+set(GLE_TOP     ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>)
+set(GLE_BIN_DIR ${CMAKE_BINARY_DIR}/gle$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,/Debug,/Release>>)
+set(GLE         gle$<$<CONFIG:Debug>:d>)
 # inittex.ini is generated from init.tex by running "gle -mkinittex"
 # for gle to run:
 #  - init.tex must reside one directory level up from location of the gle executable.
@@ -20,20 +21,22 @@ set(GLE gle$<$<CONFIG:Debug>:d>)
 add_custom_command(
  	OUTPUT inittex.ini
  	DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/init.tex
- 	WORKING_DIRECTORY ${GLE_DIR}
+ 	WORKING_DIRECTORY ${GLE_BIN_DIR}
  	#COMMENT "CMAKE_BINARY_DIR: ${CMAKE_BINARY_DIR}"
  	#COMMENT "CMAKE_CURRENT_SOURCE_DIR: ${CMAKE_CURRENT_SOURCE_DIR}"
- 	#COMMENT "GLE_DIR: ${GLE_DIR}"
+ 	#COMMENT "GLE_BIN_DIR: ${GLE_BIN_DIR}"
  	#COMMENT "GLE: ${GLE}"
  	COMMENT "== Generating inittex.ini from init.tex =="
- 	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;copy;${GLE_DIR}/glerc;${CMAKE_BINARY_DIR}/glerc>"
- 	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;create_symlink;${GLE_DIR}/font;${CMAKE_BINARY_DIR}/font>"
- 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
-	COMMAND ${GLE} -mkinittex
- 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}
- 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini ${CMAKE_BINARY_DIR}/TeX
- 	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/init.tex
- 	COMMAND ${CMAKE_COMMAND} -E rm ${CMAKE_BINARY_DIR}$<$<PLATFORM_ID:Windows>:/gle>/inittex.ini
+ 	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;copy;${GLE_BIN_DIR}/glerc;${GLE_TOP}/glerc>"
+ 	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;create_symlink;${GLE_BIN_DIR}/font;${GLE_TOP}/font>"
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${GLE_TOP}/init.tex
+ 	# set GLE_TOP to this version of GLE to not confuse with an installed version
+ 	#COMMAND ${CMAKE_COMMAND} -E env GLE_TOP=${GLE_TOP} gle -info
+ 	COMMAND ${CMAKE_COMMAND} -E env GLE_TOP=${GLE_TOP} gle -mkinittex
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${GLE_TOP}/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}
+ 	COMMAND ${CMAKE_COMMAND} -E copy ${GLE_TOP}/inittex.ini ${CMAKE_BINARY_DIR}/TeX
+ 	COMMAND ${CMAKE_COMMAND} -E rm ${GLE_TOP}/init.tex
+ 	COMMAND ${CMAKE_COMMAND} -E rm ${GLE_TOP}/inittex.ini
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;rm;${CMAKE_BINARY_DIR}/glerc>"
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;rm;${CMAKE_BINARY_DIR}/font>"
  	VERBATIM
@@ -74,10 +77,12 @@ install(FILES
 
 
 
+#"$<IF:$<PLATFORM_ID:Windows>,set;GLE_TOP=${GLE_TOP}&&;gle;-mkinittex,GLE_TOP=${GLE_TOP};gle;-mkinittex>"
+	#COMMAND ${GLE} -mkinittex
 # #
 # # -- generate inittex.ini from init.tex
 # #
-# set(GLE_DIR ${CMAKE_BINARY_DIR}/gle$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,/Debug,/Release>>)
+# set(GLE_BIN_DIR ${CMAKE_BINARY_DIR}/gle$<$<PLATFORM_ID:Windows>:$<IF:$<CONFIG:debug>,/Debug,/Release>>)
 # set(GLE gle$<$<CONFIG:Debug>:d>)
 # # inittex.ini is generated from init.tex by running "gle -mkinittex"
 # # for gle to run:
