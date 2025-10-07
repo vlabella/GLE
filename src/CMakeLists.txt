@@ -198,7 +198,7 @@ if(WIN32 AND TIFF_FOUND)
 	# -- find optional packages for LibTIFF only if linking against static libraries on windows
 	#
 	find_package(LibLZMA) # -- for libTIFF optional
-	find_package(JBIG) # -- for libtiff optional
+	find_package(JBIG QUIET) # -- for libtiff optional
 	if(JBIG_FOUND)
 		message(STATUS "Found JBIG" )
 	endif()
@@ -313,7 +313,7 @@ if(POPPLER_FOUND)
 	#endif()
 	if(POPPLER_INTERFACE STREQUAL "CPP")
 		find_package(Freetype)
-		find_package(openjpeg)
+		find_package(openjpeg QUIET)
 		find_package(Iconv)
 		find_package(BZip2)
 	elseif(POPPLER_INTERFACE STREQUAL "GLIB")
@@ -599,14 +599,14 @@ install(FILES
 	../doc/README.txt
 	../doc/ChangeLog.txt
 	CONFIGURATIONS Release Debug
-	DESTINATION ./doc
+	DESTINATION doc
 )
 #
 # -- install include files from gle-library repo
 #
 install(DIRECTORY
 	${GLE_EXAMPLES_LIBRARY_PATH}/include/
-	DESTINATION ./gleinc
+	DESTINATION gleinc
 	CONFIGURATIONS Release Debug
 	OPTIONAL
 	PATTERN "*.gle"
@@ -617,7 +617,7 @@ install(DIRECTORY
 #
 install(FILES
 	${GLE_USER_MANUAL_PATH}/gle-manual.pdf
-	DESTINATION ./doc
+	DESTINATION doc
 	CONFIGURATIONS Release Debug
 	OPTIONAL
 )
