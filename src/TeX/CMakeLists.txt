@@ -31,8 +31,8 @@ add_custom_command(
  	COMMAND "$<$<NOT:$<PLATFORM_ID:Windows>>:${CMAKE_COMMAND};-E;create_symlink;${GLE_BIN_DIR}/font;${GLE_TOP}/font>"
  	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/init.tex ${GLE_TOP}/init.tex
  	# set GLE_TOP to this version of GLE to not confuse with an installed version
- 	COMMAND ${CMAKE_COMMAND} -E env GLE_TOP=${GLE_TOP} ./gle -info
- 	COMMAND ${CMAKE_COMMAND} -E env GLE_TOP=${GLE_TOP} ./gle -mkinittex
+ 	COMMAND ${CMAKE_COMMAND} -E env GLE_TOP=${GLE_TOP} ./${GLE} -info
+ 	COMMAND ${CMAKE_COMMAND} -E env GLE_TOP=${GLE_TOP} ./${GLE} -mkinittex
 	#COMMAND "$<IF:$<PLATFORM_ID:Windows>,set;GLE_TOP=${GLE_TOP}&&;gle;-mkinittex,GLE_TOP=${GLE_TOP};gle;-mkinittex>"
  	COMMAND ${CMAKE_COMMAND} -E copy ${GLE_TOP}/inittex.ini ${CMAKE_CURRENT_SOURCE_DIR}
  	COMMAND ${CMAKE_COMMAND} -E copy ${GLE_TOP}/inittex.ini ${CMAKE_BINARY_DIR}/TeX
