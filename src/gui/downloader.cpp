@@ -31,6 +31,7 @@
 #include <QProgressBar>
 #include <QListWidget>
 #include <QNetworkAccessManager>
+#include <QRegularExpression>
 
 #include "downloader.h"
 
@@ -339,36 +340,67 @@ void QGLEDownloaderMirror::httpRequestFinished(int requestId, bool error)
 		QMessageBox::information(this, tr("Mirror List"),
 		                         tr("Failed to download mirror list: %1.").arg(http->errorString()));
 	} else {
-		mirrorList->clear();
-		QRegExp rxurl(".*\\<a href\\=\"http\\:\\/\\/([^\"\\/]+).*");
-		QRegExp rxname(".*\\<td\\>([^\\<]+)\\<\\/td\\>.*");
-		QRegExp rxmirr(".*\\?use_mirror\\=([^\"]+)\".*");
-/*
+		/*
 	<td><a href="http://www.heanet.ie"><img alt="heanet logo" border="0" src="http://images.sourceforge.net/images/prdownloads/heanet_100x34.gif" /></a></td>
 		<td>Dublin, Ireland</td>
 		<td>Europe</td>
 		<td><a href="/glx/gle_4.0.11_src.zip?use_mirror=heanet"><b>Download</b></a></td>
 	</tr> <tr >
-*/
+		*/
+		mirrorList->clear();
+		// old qt5
+		// QRegExp rxurl(".*\\<a href\\=\"http\\:\\/\\/([^\"\\/]+).*");
+		// QRegExp rxname(".*\\<td\\>([^\\<]+)\\<\\/td\\>.*");
+		// QRegExp rxmirr(".*\\?use_mirror\\=([^\"]+)\".*");
+		// QString line, item, url, toadd;
+		// file->reset();
+		// while(!file->atEnd())
+		// {
+		// 	QByteArray data = file->readLine();
+		// 	QString line = QString::fromUtf8(data.constData());
+		// 	if (rxmirr.exactMatch(line)) {
+		// 		toadd = url;
+		// 		if (item != "") {
+		// 			toadd += " ("; toadd += item; toadd += ")";
+		// 		}
+		// 		mirrorList->addItem(toadd);
+		// 	} else if (rxurl.exactMatch(line)) {
+		// 		url = rxurl.capturedTexts()[1];
+		// 		item = "";
+		// 	} else if (rxname.exactMatch(line)) {
+		// 		if (item != "") item += ", ";
+		// 		item += rxname.capturedTexts()[1];
+		// 	}
+		// }
+
+		QRegularExpression rxurl(".*<a href=\"http://([^\"/]+).*");
+		QRegularExpression rxname(".*<td>([^<]+)</td>.*");
+		QRegularExpression rxmirr(".*\\?use_mirror=([^\"]+)\".*");
+
 		QString line, item, url, toadd;
 		file->reset();
-		while(!file->atEnd())
-		{
-			QByteArray data = file->readLine();
-			QString line = QString::fromUtf8(data.constData());
-			if (rxmirr.exactMatch(line)) {
-				toadd = url;
-				if (item != "") {
-					toadd += " ("; toadd += item; toadd += ")";
-				}
-				mirrorList->addItem(toadd);
-			} else if (rxurl.exactMatch(line)) {
-				url = rxurl.capturedTexts()[1];
-				item = "";
-			} else if (rxname.exactMatch(line)) {
-				if (item != "") item += ", ";
-				item += rxname.capturedTexts()[1];
-			}
+
+		while (!file->atEnd()) {
+		    QByteArray data = file->readLine();
+		    QString line = QString::fromUtf8(data.constData());
+
+		    QRegularExpressionMatch matchMirr = rxmirr.match(line);
+		    QRegularExpressionMatch matchUrl = rxurl.match(line);
+		    QRegularExpressionMatch matchName = rxname.match(line);
+
+		    if (matchMirr.hasMatch()) {
+		        toadd = url;
+		        if (!item.isEmpty()) {
+		            toadd += " (" + item + ")";
+		        }
+		        mirrorList->addItem(toadd);
+		    } else if (matchUrl.hasMatch()) {
+		        url = matchUrl.captured(1);
+		        item.clear();
+		    } else if (matchName.hasMatch()) {
+		        if (!item.isEmpty()) item += ", ";
+		        item += matchName.captured(1);
+		    }
 		}
 		file->close();
 		mirrorList->setEnabled(true);

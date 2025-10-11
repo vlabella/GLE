@@ -220,17 +220,30 @@ GLEMainWindow::GLEMainWindow(int argc, char *argv[])
 	updateWindowTitle();
 
 	// Check for arguments
-	QRegExp rx = QGLE::fileRegExp();
+	// QRegExp rx = QGLE::fileRegExp();
 
-	for(int i=0;i<argc;i++)
-	{
-		if (rx.exactMatch(QString(argv[i])))
-		{
-			QFileInfo filename(rx.capturedTexts()[2]);
-			openFile(filename.absoluteFilePath(), true);
-			break;
-		}
+	// for(int i=0;i<argc;i++)
+	// {
+	// 	if (rx.exactMatch(QString(argv[i])))
+	// 	{
+	// 		QFileInfo filename(rx.capturedTexts()[2]);
+	// 		openFile(filename.absoluteFilePath(), true);
+	// 		break;
+	// 	}
+	// }
+	QRegularExpression rx = QGLE::fileRegExp();
+
+	for (int i = 0; i < argc; i++) {
+	    QString arg = QString::fromUtf8(argv[i]);
+	    QRegularExpressionMatch match = rx.match(arg);
+
+	    if (match.hasMatch()) {
+	        QFileInfo filename(match.captured(2));
+	        openFile(filename.absoluteFilePath(), true);
+	        break;
+	    }
 	}
+
 }
 
 QString GLEMainWindow::createTempFile(QString ext)
@@ -353,18 +366,22 @@ void GLEMainWindow::dropEvent(QDropEvent *event)
 	// multi-document interface
 	QString uri = event->mimeData()->urls().at(0).toString();
 
-	QRegExp rx = QGLE::fileRegExp();
+	// QRegExp rx = QGLE::fileRegExp();
+	// if (rx.exactMatch(uri))
+	// {
+	// 	openFile(rx.capturedTexts()[2]);
+	// }
 
-	if (rx.exactMatch(uri))
-	{
-		openFile(rx.capturedTexts()[2]);
+	QRegularExpression rx = QGLE::fileRegExp();
+	QRegularExpressionMatch match = rx.match(uri);
+	if (match.hasMatch()) {
+    	openFile(match.captured(2));
 	}
 	else
 		QMessageBox::information(this,
 				"Drop Event",
 				"Dropped file cannot be opened",
 				QMessageBox::Ok);
-
 
 	event->acceptProposedAction();
 }
@@ -2203,8 +2220,54 @@ void GLEMainWindow::openFile(QString fileName, bool isOnStartup)
 		QFileInfo fname(fileName);
 		settings->setPwd(fname.dir().path());
 		// Regular expressions to check whether it's an EPS file or a GLE file
-		QRegExp rxeps(".*\\.eps$", Qt::CaseInsensitive);
-		QRegExp rxgle(".*\\.gle$", Qt::CaseInsensitive);
+		// old qt5
+		// QRegExp rxeps(".*\\.eps$", Qt::CaseInsensitive);
+		// QRegExp rxgle(".*\\.gle$", Qt::CaseInsensitive);
+
+		// // Clear other mode file info
+		// getNonCurrentModeFileInfo()->clear();
+
+		// // Add file to recent file list
+		// setCurrentFile(fileName);
+
+		// // Restart file monitor and notify "GLE -p" process
+		// todoList.append(ToDoAfterFileOpen);
+
+		// // Stop the timer
+		// updateFileMonitor(false);
+
+		// // An EPS file, so open it.
+		// GLEFileInfo* currFile = getCurrentFile();
+		// if(rxeps.exactMatch(fileName))
+		// {
+		// 	currFile->clear();
+		// 	currFile->setEpsFile(fileName);
+		// 	getNonCurrentModeFileInfo()->setEpsFile(fileName);
+		// 	currFile->updateTimeStamp();
+		// 	resetDrawing();
+		// 	clearConsoleWindow();
+		// 	if (currentMode == GLESettings::PreviewMode) renderEPS(fileName, dpi, scaleSize);
+		// 	else previewModeAct->setChecked(true);
+		// }
+		// // A GLE file, so render it and open the resulting EPS file
+		// else if (rxgle.exactMatch(fileName))
+		// {
+		// 	currFile->clear();
+		// 	resetDrawing();
+		// 	clearConsoleWindow();
+		// 	gleScript = gleInterface->loadGLEFile(fileName.toLatin1().constData());
+		// 	if (!gleScript.isNull()) {
+		// 		currFile->setGleFile(fileName);
+		// 		currFile->updateTimeStamp();
+		// 		initTempFilesGLE();
+		// 		renderGLE(dpi, scaleSize);
+		// 	} else {
+		// 		renderComplete(QImage());
+		// 	}
+		// }
+
+		QRegularExpression rxeps(".*\\.eps$", QRegularExpression::CaseInsensitiveOption);
+		QRegularExpression rxgle(".*\\.gle$", QRegularExpression::CaseInsensitiveOption);
 
 		// Clear other mode file info
 		getNonCurrentModeFileInfo()->clear();
@@ -2220,32 +2283,32 @@ void GLEMainWindow::openFile(QString fileName, bool isOnStartup)
 
 		// An EPS file, so open it.
 		GLEFileInfo* currFile = getCurrentFile();
-		if(rxeps.exactMatch(fileName))
-		{
-			currFile->clear();
-			currFile->setEpsFile(fileName);
-			getNonCurrentModeFileInfo()->setEpsFile(fileName);
-			currFile->updateTimeStamp();
-			resetDrawing();
-			clearConsoleWindow();
-			if (currentMode == GLESettings::PreviewMode) renderEPS(fileName, dpi, scaleSize);
-			else previewModeAct->setChecked(true);
+		if (rxeps.match(fileName).hasMatch()) {
+		    currFile->clear();
+		    currFile->setEpsFile(fileName);
+		    getNonCurrentModeFileInfo()->setEpsFile(fileName);
+		    currFile->updateTimeStamp();
+		    resetDrawing();
+		    clearConsoleWindow();
+		    if (currentMode == GLESettings::PreviewMode)
+		        renderEPS(fileName, dpi, scaleSize);
+		    else
+		        previewModeAct->setChecked(true);
 		}
 		// A GLE file, so render it and open the resulting EPS file
-		else if (rxgle.exactMatch(fileName))
-		{
-			currFile->clear();
-			resetDrawing();
-			clearConsoleWindow();
-			gleScript = gleInterface->loadGLEFile(fileName.toLatin1().constData());
-			if (!gleScript.isNull()) {
-				currFile->setGleFile(fileName);
-				currFile->updateTimeStamp();
-				initTempFilesGLE();
-				renderGLE(dpi, scaleSize);
-			} else {
-				renderComplete(QImage());
-			}
+		else if (rxgle.match(fileName).hasMatch()) {
+		    currFile->clear();
+		    resetDrawing();
+		    clearConsoleWindow();
+		    gleScript = gleInterface->loadGLEFile(fileName.toLatin1().constData());
+		    if (!gleScript.isNull()) {
+		        currFile->setGleFile(fileName);
+		        currFile->updateTimeStamp();
+		        initTempFilesGLE();
+		        renderGLE(dpi, scaleSize);
+		    } else {
+		        renderComplete(QImage());
+		    }
 		}
 	}
 }
@@ -2281,8 +2344,14 @@ void GLEMainWindow::newFile()
 		if (fileName.isEmpty())	return;
 
 		// Add a .gle if there isn't one already
-		QRegExp rxGLE(".*\\.[gG][lL][eE]");
-		if(!rxGLE.exactMatch(fileName))	fileName += ".gle";
+		// old qt5
+		//QRegExp rxGLE(".*\\.[gG][lL][eE]");
+		//if(!rxGLE.exactMatch(fileName))	fileName += ".gle";
+
+		QRegularExpression rxGLE(".*\\.[gG][lL][eE]");
+		if (!rxGLE.match(fileName).hasMatch()) {
+    		fileName += ".gle";
+		}
 	}
 
 	// Stop the timer
@@ -2451,9 +2520,15 @@ bool copyPDFMac(const string& fname);
 //! Action causing the current figure to be copied to the clipboard as PDF
 void GLEMainWindow::copyPDF() {
 	QString tempDir = QDir::tempPath();
-	QRegExp rxEndSlash(".*[\\\\/]$");
-	if (!rxEndSlash.exactMatch(tempDir))
-		tempDir += QDir::separator();
+	// old qt5
+	//QRegExp rxEndSlash(".*[\\\\/]$");
+	//if (!rxEndSlash.exactMatch(tempDir))
+	//	tempDir += QDir::separator();
+
+	QRegularExpression rxEndSlash(".*[\\\\/]$");
+	if (!rxEndSlash.match(tempDir).hasMatch()) {
+    	tempDir += QDir::separator();
+	}
 	QString pdfname = tempDir + tr("qgle_copy.pdf");
 	GLEInterface* iface = getGLEInterface();
 	clearConsoleWindow();
@@ -2590,10 +2665,17 @@ void GLEMainWindow::openInTextEditor(const QString& file)
 
 #ifdef Q_WS_MAC
 		// This checks whether we're on a Mac and if so, handles .app files appropriately
-		QRegExp rxApp(".*\\.app");
-		if (rxApp.exactMatch(editor))
-		{
-			res = edit.startDetached("open", QStringList() << "-a" << editor << filename);
+
+		// old qt5
+		// QRegExp rxApp(".*\\.app");
+		// if (rxApp.exactMatch(editor))
+		// {
+		// 	res = edit.startDetached("open", QStringList() << "-a" << editor << filename);
+		// }
+
+		QRegularExpression rxApp(".*\\.app");
+		if (rxApp.match(editor).hasMatch()) {
+    		res = edit.startDetached("open", QStringList() << "-a" << editor << filename);
 		}
 		else
 #endif

@@ -21,7 +21,8 @@
 
 #include <QtGui>
 #include <QScreen>
-#include <QRegExp>
+//#include <QRegExp>
+#include <QRegularExpression>
 
 #include "qgle_statics.h"
 #include "dialogues.h"
@@ -496,12 +497,24 @@ CrashRecoverDialogue::CrashRecoverDialogue(const QString& file) : QDialog(NULL)
 	crashLogLines.append(QString());
 	QFile myfile(file);
     if (myfile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-		QRegExp glefile("GLE file:\\s*'(.*)'");
+    	// old qt5
+		// QRegExp glefile("GLE file:\\s*'(.*)'");
+		// QTextStream in(&myfile);
+		// while (!in.atEnd()) {
+		// 	QString line = in.readLine();
+		// 	if (glefile.exactMatch(line)) gleFileName.setFile(glefile.capturedTexts()[1]);
+		// 	else crashLogLines.append(line);
+		// }
+		QRegularExpression glefile("GLE file:\\s*'(.*)'");
 		QTextStream in(&myfile);
 		while (!in.atEnd()) {
-			QString line = in.readLine();
-			if (glefile.exactMatch(line)) gleFileName.setFile(glefile.capturedTexts()[1]);
-			else crashLogLines.append(line);
+		    QString line = in.readLine();
+		    QRegularExpressionMatch match = glefile.match(line);
+		    if (match.hasMatch()) {
+		        gleFileName.setFile(match.captured(1));
+		    } else {
+		        crashLogLines.append(line);
+		    }
 		}
 		myfile.close();
 	}
@@ -585,18 +598,35 @@ QString CrashRecoverDialogue::createReport()
 			if (myfile.open(QIODevice::ReadOnly | QIODevice::Text)) {
 				lines.append(QString());
 				lines.append(tr("%% File: '%1'").arg(gleFileName.fileName()));
-				QRegExp glefile("^\\s*include\\s+\\\"([^\\\"]+)\\\"");
-				QRegExp csvfile("^\\s*data\\s+\\\"([^\\\"]+)\\\"");
+				// old qt5
+				// QRegExp glefile("^\\s*include\\s+\\\"([^\\\"]+)\\\"");
+				// QRegExp csvfile("^\\s*data\\s+\\\"([^\\\"]+)\\\"");
+				// QTextStream in(&myfile);
+				// while (!in.atEnd()) {
+				// 	QString line = in.readLine();
+				// 	if (glefile.indexIn(line) != -1) {
+				// 		foundFile(&files, mydir, glefile.capturedTexts()[1]);
+				// 	}
+				// 	if (csvfile.indexIn(line) != -1) {
+				// 		foundFile(&files, mydir, csvfile.capturedTexts()[1]);
+				// 	}
+				// 	lines.append(line);
+				// }
+
+				QRegularExpression glefile("^\\s*include\\s+\\\"([^\\\"]+)\\\"");
+				QRegularExpression csvfile("^\\s*data\\s+\\\"([^\\\"]+)\\\"");
 				QTextStream in(&myfile);
 				while (!in.atEnd()) {
-					QString line = in.readLine();
-					if (glefile.indexIn(line) != -1) {
-						foundFile(&files, mydir, glefile.capturedTexts()[1]);
-					}
-					if (csvfile.indexIn(line) != -1) {
-						foundFile(&files, mydir, csvfile.capturedTexts()[1]);
-					}
-					lines.append(line);
+				    QString line = in.readLine();
+				    QRegularExpressionMatch gleMatch = glefile.match(line);
+				    if (gleMatch.hasMatch()) {
+				        foundFile(&files, mydir, gleMatch.captured(1));
+				    }
+				    QRegularExpressionMatch csvMatch = csvfile.match(line);
+				    if (csvMatch.hasMatch()) {
+				        foundFile(&files, mydir, csvMatch.captured(1));
+				    }
+				    lines.append(line);
 				}
 				myfile.close();
 			}
@@ -659,12 +689,20 @@ void CrashRecoverDialogue::requestFinished(int id, bool error)
 		buffer->seek(0);
 		QString result_txt = buffer->readAll();
 		delete buffer;
-		QRegExp redir("%%\\s+GLE-Redirect:\\s+(\\S+)\\s+(\\S+)");
-		if (!error && redir.indexIn(result_txt) != -1)
-		{
-			QString url = redir.capturedTexts()[1];
-			QString script = redir.capturedTexts()[2];
-			performRequest(url, script);
+		// old qt5
+		// QRegExp redir("%%\\s+GLE-Redirect:\\s+(\\S+)\\s+(\\S+)");
+		// if (!error && redir.indexIn(result_txt) != -1)
+		// {
+		// 	QString url = redir.capturedTexts()[1];
+		// 	QString script = redir.capturedTexts()[2];
+		// 	performRequest(url, script);
+		// }
+		QRegularExpression redir("%%\\s+GLE-Redirect:\\s+(\\S+)\\s+(\\S+)");
+		QRegularExpressionMatch match = redir.match(result_txt);
+		if (!error && match.hasMatch()) {
+    		QString url = match.captured(1);
+    		QString script = match.captured(2);
+    		performRequest(url, script);
 		}
 		else
 		{

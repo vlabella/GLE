@@ -23,7 +23,7 @@
 #define __QGLE_STATICS_H
 
 #include <QtWidgets>
-#include <QRegExp>
+#include <QRegularExpression>
 #include "../gle/gle-interface/gle-interface.h"
 
 //! Class providing static helper functions for the main code
@@ -184,7 +184,8 @@ public:
 	static double angleBetweenTwoPoints(QPointF one, QPointF two);
 
 	//! Static member used to give OS dependent file regular expression
-	static QRegExp fileRegExp();
+	//static QRegExp fileRegExp();
+	static QRegularExpression fileRegExp();
 
 	//! Static member providing the GS lib file name
 	static QString gsLibFileName();

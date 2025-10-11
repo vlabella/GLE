@@ -67,8 +67,11 @@ void GLEServerThread::run()
 	// This is the bit that runs in a different thread
 
 	// Set up some handy regexps
-	QRegExp glefile(".*glefile: *\"([^\"]*)\".*");
-	QRegExp rxdpi(".*dpi: *\"([^\"]*)\".*");
+	//QRegExp glefile(".*glefile: *\"([^\"]*)\".*");
+	//QRegExp rxdpi(".*dpi: *\"([^\"]*)\".*");
+
+	QRegularExpression glefile(".*glefile: *\"([^\"]*)\".*");
+	QRegularExpression rxdpi(".*dpi: *\"([^\"]*)\".*");
 	QString rxdone = tr("*DONE*");
 
 	// Create a new server and listen on the requested port
@@ -144,14 +147,26 @@ void GLEServerThread::run()
 			// Find the bits we're interested in
 			foreach(part, parts)
 			{
-				if(rxdpi.exactMatch(part))
-				{
-					// do something with dpi?
+				// old qt5
+				// if(rxdpi.exactMatch(part))
+				// {
+				// 	// do something with dpi?
+				// }
+				// if(glefile.exactMatch(part))
+				// {
+				// 	glefname = glefile.capturedTexts()[1];
+				// }
+
+				QRegularExpressionMatch matchDpi = rxdpi.match(part);
+				if (matchDpi.hasMatch()) {
+				    // do something with matchDpi.captured(1)
 				}
-				if(glefile.exactMatch(part))
-				{
-					glefname = glefile.capturedTexts()[1];
+
+				QRegularExpressionMatch matchGle = glefile.match(part);
+				if (matchGle.hasMatch()) {
+				    glefname = matchGle.captured(1);
 				}
+
 			}
 
 			// Now make QGLE render this file
@@ -422,38 +437,73 @@ void GLERenderThread::renderEPSToImageInternalFromFile(const QString& fname, dou
 	double width = 0.0;
 	double height = 0.0;
 
-	QRegExp rxbb("^%%BoundingBox:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*$");
-	QRegExp rxbbh("^%%HiResBoundingBox:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*$");
+	// old qt5
+	// QRegExp rxbb("^%%BoundingBox:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*$");
+	// QRegExp rxbbh("^%%HiResBoundingBox:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*$");
+
+	// QTextStream in(&file);
+	// while (!in.atEnd())
+	// {
+	// 	QString line = in.readLine();
+	// 	if (rxbb.exactMatch(line))
+	// 	{
+	// 		b1 = (double)rxbb.capturedTexts()[1].toInt();
+	// 		b2 = (double)rxbb.capturedTexts()[2].toInt();
+	// 		b3 = (double)rxbb.capturedTexts()[3].toInt();
+	// 		b4 = (double)rxbb.capturedTexts()[4].toInt();
+	// 		width = b3-b1+1;
+	// 		height = b4-b2+1;
+	// 		if (!in.atEnd())
+	// 		{
+	// 			// GLE writes a HiResBoundingBox right after the BoundingBox
+	// 			line = in.readLine();
+	// 			if (rxbbh.exactMatch(line))
+	// 			{
+	// 				b1 = rxbb.capturedTexts()[1].toDouble();
+	// 				b2 = rxbb.capturedTexts()[2].toDouble();
+	// 				b3 = rxbb.capturedTexts()[3].toDouble();
+	// 				b4 = rxbb.capturedTexts()[4].toDouble();
+	// 				width = b3-b1;
+	// 				height = b4-b2;
+	// 			}
+	// 		}
+	// 		break;
+	// 	}
+	// }
+
+	QRegularExpression rxbb("^%%BoundingBox:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*$");
+	QRegularExpression rxbbh("^%%HiResBoundingBox:\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s+(\\S+)\\s*$");
 
 	QTextStream in(&file);
-	while (!in.atEnd())
-	{
-		QString line = in.readLine();
-		if (rxbb.exactMatch(line))
-		{
-			b1 = (double)rxbb.capturedTexts()[1].toInt();
-			b2 = (double)rxbb.capturedTexts()[2].toInt();
-			b3 = (double)rxbb.capturedTexts()[3].toInt();
-			b4 = (double)rxbb.capturedTexts()[4].toInt();
-			width = b3-b1+1;
-			height = b4-b2+1;
-			if (!in.atEnd())
-			{
-				// GLE writes a HiResBoundingBox right after the BoundingBox
-				line = in.readLine();
-				if (rxbbh.exactMatch(line))
-				{
-					b1 = rxbb.capturedTexts()[1].toDouble();
-					b2 = rxbb.capturedTexts()[2].toDouble();
-					b3 = rxbb.capturedTexts()[3].toDouble();
-					b4 = rxbb.capturedTexts()[4].toDouble();
-					width = b3-b1;
-					height = b4-b2;
-				}
-			}
-			break;
-		}
+	while (!in.atEnd()) {
+	    QString line = in.readLine();
+	    QRegularExpressionMatch matchBB = rxbb.match(line);
+
+	    if (matchBB.hasMatch()) {
+	        b1 = matchBB.captured(1).toInt();
+	        b2 = matchBB.captured(2).toInt();
+	        b3 = matchBB.captured(3).toInt();
+	        b4 = matchBB.captured(4).toInt();
+	        width = b3 - b1 + 1;
+	        height = b4 - b2 + 1;
+
+	        if (!in.atEnd()) {
+	            // GLE writes a HiResBoundingBox right after the BoundingBox
+	            line = in.readLine();
+	            QRegularExpressionMatch matchBBH = rxbbh.match(line);
+	            if (matchBBH.hasMatch()) {
+	                b1 = matchBBH.captured(1).toDouble();
+	                b2 = matchBBH.captured(2).toDouble();
+	                b3 = matchBBH.captured(3).toDouble();
+	                b4 = matchBBH.captured(4).toDouble();
+	                width = b3 - b1;
+	                height = b4 - b2;
+	            }
+	        }
+	        break;
+	    }
 	}
+
 
 	bool newDPI = false;
 	// this class has this defined as a member so no need to redfine - causes error

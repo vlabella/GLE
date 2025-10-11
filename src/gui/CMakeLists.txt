@@ -29,7 +29,7 @@ find_package(Qt6 COMPONENTS
 	Gui
 	OpenGL
 	OpenGLWidgets
-	Core5Compat  # needed for QRegExp move to QRegularExpression in Qt 6
+#	Core5Compat  # needed for QRegExp move to QRegularExpression in Qt 6
 	REQUIRED)
 
 if (WIN32)
@@ -104,7 +104,7 @@ list(APPEND QGLE_LIBRARIES
 	Qt::Widgets
 	Qt::OpenGL
 	Qt::OpenGLWidgets
-	Qt::Core5Compat
+#	Qt::Core5Compat
 	${CAIRO_LIBRARIES}
 	${CMAKE_DL_LIBS}
 )

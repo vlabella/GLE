@@ -427,16 +427,29 @@ QString QGLE::GetDirName(QString fname)
 	// return(fi.absolutePath());
 }
 
-QRegExp QGLE::fileRegExp()
+// old qt5
+// QRegExp QGLE::fileRegExp()
+// {
+// #ifdef Q_OS_WIN32
+// 	QRegExp rx("(file:///)?(.*\\.(?:gle|eps))", Qt::CaseInsensitive);
+// #else
+// //#elif defined(Q_OS_HURD) || defined(Q_OS_LINUX)
+// 	QRegExp rx("(file://)?(.*\\.(?:gle|eps))", Qt::CaseInsensitive);
+// #endif
+// 	return(rx);
+// }
+
+
+QRegularExpression QGLE::fileRegExp()
 {
 #ifdef Q_OS_WIN32
-	QRegExp rx("(file:///)?(.*\\.(?:gle|eps))", Qt::CaseInsensitive);
+    QRegularExpression rx("(file:///)?(.*\\.(?:gle|eps))", QRegularExpression::CaseInsensitiveOption);
 #else
-//#elif defined(Q_OS_HURD) || defined(Q_OS_LINUX)
-	QRegExp rx("(file://)?(.*\\.(?:gle|eps))", Qt::CaseInsensitive);
+    QRegularExpression rx("(file://)?(.*\\.(?:gle|eps))", QRegularExpression::CaseInsensitiveOption);
 #endif
-	return(rx);
+    return rx;
 }
+
 
 QString QGLE::gsLibFileName()
 {
@@ -880,10 +893,15 @@ QString QGLE::addFileNameExtension(const QString& name, const char* ext)
 }
 
 void QGLE::ensureFileNameExtension(QString* str, const char* ext) {
-	QRegExp rxExt(QString(".*\\.") + ext);
-	rxExt.setCaseSensitivity(Qt::CaseInsensitive);
-	if (!rxExt.exactMatch(*str)) {
-		*str += ".";
-		*str += ext;
+	//QRegExp rxExt(QString(".*\\.") + ext);
+	//rxExt.setCaseSensitivity(Qt::CaseInsensitive);
+	//if (!rxExt.exactMatch(*str)) {
+	//	*str += ".";
+	//	*str += ext;
+	//}
+	QRegularExpression rxExt(".*\\." + QRegularExpression::escape(ext), QRegularExpression::CaseInsensitiveOption);
+	if (!rxExt.match(*str).hasMatch()) {
+    	*str += ".";
+    	*str += ext;
 	}
 }
