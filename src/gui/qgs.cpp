@@ -479,6 +479,8 @@ bool GSInterpreterLib::run(const string* data)
 		offset += readNow;
 		toRead -= readNow;
 	}
+	return_code = m_gs->gsapi_run_string_continue(ghostScriptInstance,"quit", 4, 0, &exit_code);
+	if (exit_code && !handleExit(exit_code)) return false;
 	return_code = m_gs->gsapi_run_string_end(ghostScriptInstance, 0, &exit_code);
 	if (exit_code && !handleExit(exit_code)) return false;
 	return true;

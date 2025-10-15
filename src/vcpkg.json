@@ -19,6 +19,7 @@
     "zlib",
     "zstd",
     "qtbase",
-    "qtimageformats"
+    "qtimageformats",
+    "qt5compat"
   ]
 }
