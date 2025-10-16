@@ -1,7 +1,7 @@
 4.3.9 (not released yet)
     - qgle: eliminate ghostscript stack underflow error in output window when rendering with ghostscript.
     - qgle: Change Qt5 QRegExp to Qt6 QRegularExpression to eliminate need for Core5Compat library
-    - silence cmake warnings when optional libraries jbig and openjpeg are not found.
+    - windows: silence cmake warnings when optional libraries jbig and openjpeg are not found.
     - eliminate cmake warnings about install paths.
     - improve inittex.ini generation by setting GLE_TOP during creation.
 
