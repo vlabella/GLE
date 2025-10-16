@@ -1,3 +1,9 @@
+4.3.9 (not released yet)
+    - qgle: eliminate ghostscript stack underflow error in output window when rendering with ghostscript.
+    - silence cmake warnings when optional libraries jbig and openjpeg are not found.
+    - eliminate cmake warnings about install paths.
+    - improve inittex.ini generation by setting GLE_TOP during creation.
+
 4.3.8 (October 2025)
     - Upgrade to Qt6
     - Windows: Fix issues with using poppler to create bitmaps in qgle and png files on command line.

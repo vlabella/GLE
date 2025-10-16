@@ -3,7 +3,6 @@
 #
 cmake_minimum_required (VERSION 3.30)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
-#cmake_policy(SET CMP0167 NEW)	# The FindBoost module is removed. only for cmake 3.30 and later live with the warning for now
 cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -18,7 +17,7 @@ if(ECM_FOUND)
 endif()
 
 set( CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
-project( gle VERSION 4.3.8 )
+project( gle VERSION 4.3.9 )
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d")
 #
