@@ -4,6 +4,7 @@
     - windows: silence cmake warnings when optional libraries jbig and openjpeg are not found.
     - eliminate cmake warnings about install paths.
     - improve inittex.ini generation by setting GLE_TOP during creation.
+    - qgle: remove out of date ghostscript library header files.
 
 4.3.8 (October 2025)
     - Upgrade to Qt6
