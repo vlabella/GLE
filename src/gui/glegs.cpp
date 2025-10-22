@@ -25,16 +25,9 @@
     #include "../config_noauto.h"
 #endif
 
-// do not use these gsapi internal headers - 
-// use latest ones from ghostpdl distribution /psi directory which must be in include path
-// can override but but internal headers get out of date with latest gs version
-#ifdef USE_INTERNAL_GSAPI
-#include "gsinc/ierrors.h"
-#include "gsinc/iapi.h"
-#else
+// ghostscript headers
 #include <ierrors.h>
 #include <iapi.h>
-#endif
 
 #if STDC_HEADERS
 	#include <stdlib.h>

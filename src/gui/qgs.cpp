@@ -17,8 +17,11 @@
  * MA  02110-1301  USA                                                     *
  ***************************************************************************/
 
-#include "qgs.h"
+#include <iostream>
 #include <math.h>
+#include <QtGui>
+#include <QtDebug>
+#include "qgs.h"
 
 using namespace std;
 
@@ -64,7 +67,6 @@ int close(void *, void *)
 {
 	return 0;
 }
-
 
 int presize(void *, void * device, int width, int height,
         int raster, unsigned int format)
@@ -114,76 +116,31 @@ int rectangle_request(void *handle, void *device,void **memory, int *ox, int *oy
 	return 0;
 }
 
-#ifdef USE_INTERNAL_GSAPI
-	// old gs api - deprecated - 9.2 and earlier
-	// will not work with newer gs that has V3
-	#define GS_ERROR(name) e_##name
-	#ifdef QGS_USE_MAJOR_V2
-	// Newer versions of GhostScript support "separation", but we don't need this
-	typedef display_callback display_callback_qgs;
-	display_callback_qgs device = {
-		sizeof ( display_callback_qgs ),
-		DISPLAY_VERSION_MAJOR,
-		DISPLAY_VERSION_MINOR,
-		&open,
-		&preclose,
-		&close,
-		&presize,
-		&size,
-		&sync,
-		&page,
-		&update,
-		NULL,
-		NULL,
-		&separation
-	};
-	#else
-	// For now use older version of structure, which is compatible with GhostScript 8.15
-	// This version is shipped with Fedora Core 5
-	typedef struct display_callback_v1_s display_callback_qgs;
-	display_callback_qgs device = {
-		sizeof ( display_callback_qgs ),
-		DISPLAY_VERSION_MAJOR_V1,
-		DISPLAY_VERSION_MINOR_V1,
-		&open,
-		&preclose,
-		&close,
-		&presize,
-		&size,
-		&sync,
-		&page,
-		&update,
-		NULL,
-		NULL
-	};
-	#endif
-#else
-	// using latest and greatest version of ghostpdl
-	#define GS_ERROR(name) gs_error_##name
-	//
-	// latest and greatest V3 has adjust_band_height rectangle_request which are not utilized
-	// but must be present for when using gsapi_register_callout function
-	//
-	typedef struct display_callback_s display_callback_qgs;
-	display_callback_qgs device = {
-		sizeof ( display_callback_qgs ),
-		DISPLAY_VERSION_MAJOR,
-		DISPLAY_VERSION_MINOR,
-		&open,
-		&preclose,
-		&close,
-		&presize,
-		&size,
-		&sync,
-		&page,
-		&update,
-		NULL,
-		NULL,
-		&separation,
-		NULL,
-		&rectangle_request
-	};
-#endif
+// using latest and greatest version of ghostpdl
+#define GS_ERROR(name) gs_error_##name
+//
+// latest and greatest V3 has adjust_band_height rectangle_request which are not utilized
+// but must be present for when using gsapi_register_callout function
+//
+typedef struct display_callback_s display_callback_qgs;
+display_callback_qgs device = {
+	sizeof ( display_callback_qgs ),
+	DISPLAY_VERSION_MAJOR,
+	DISPLAY_VERSION_MINOR,
+	&open,
+	&preclose,
+	&close,
+	&presize,
+	&size,
+	&sync,
+	&page,
+	&update,
+	NULL,
+	NULL,
+	&separation,
+	NULL,
+	&rectangle_request
+};
 
 }
 
@@ -642,15 +599,8 @@ bool GSInterpreterLib::handleExit(int code)
 			case GS_ERROR(Info):
 			case GS_ERROR(InterpreterExit):
 			case GS_ERROR(NeedInput):
-#ifdef USE_INTERNAL_GSAPI
-			case GS_ERROR(RemapColor):
-			case GS_ERROR(NeedStdin):
-			case GS_ERROR(NeedStdout):
-			case GS_ERROR(NeedStderr):
-#else
 			case GS_ERROR(Remap_Color):
 			case GS_ERROR(NeedFile):
-#endif
 			case GS_ERROR(VMreclaim):
 			default:
 				return true;

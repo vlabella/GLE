@@ -20,9 +20,9 @@
 #ifndef _GSINTERPETERLIB_H_
 #define _GSINTERPETERLIB_H_
 
-#include <QtGui>
-#include <QtDebug>
-
+//
+// -- ghostscript includes
+//
 #define GSDLLEXPORT
 #ifdef Q_OS_WIN32
 	#define _Windows
@@ -30,28 +30,12 @@
 	#define GSDLLAPI
 	#define GSDLLCALL
 #endif
-
-// do not use these gsapi internal headers - 
-// use latest ones from ghostpdl distribution /psi directory which must be in include path
-// can override but but internal headers get out of date with latest gs version
-#ifdef USE_INTERNAL_GSAPI
-#include "gsinc/iapi.h"
-#include "gsinc/gdevdsp.h"
-#include "gsinc/ierrors.h"
-#else
 #include <ierrors.h>
 #include <iapi.h>
 #include <gdevdsp.h>
 
-#endif
-
-
-#include <iostream>
-
 #define QGS_DISPLAY_32 0
 #define QGS_DISPLAY_24 1
-
-// using namespace std;  should not reside in header file
 
 /** @namespace GSApiWrapper Namespace containing the callback functions for communication with
     the ghostscript library.

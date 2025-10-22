@@ -22,6 +22,7 @@
 #include <QtCore>
 #include <QtNetwork>
 #include <QtDebug>
+#include <QtGui>
 #include <QRegularExpression>
 
 #include "qgs.h"
