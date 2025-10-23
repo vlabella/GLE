@@ -15,7 +15,8 @@
     "pdcurses",
     "pixman",
     "poppler",
-    "qt5",
+    "qtbase",
+    "qtimageformats",
     "tiff",
     "zlib",
     "zstd"
