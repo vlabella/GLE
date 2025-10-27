@@ -1,7 +1,7 @@
 #
 # -- CMakeLists.txt for GLE - Graphics Layout Engine
 #
-cmake_minimum_required (VERSION 3.30)
+cmake_minimum_required (VERSION 3.25)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
 cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
 set(CMAKE_CXX_STANDARD 17)

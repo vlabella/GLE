@@ -268,9 +268,9 @@ void writefmt(const char* fmtname, const char* encname, FontInfo *fi) {
 					printf("error: too few tokens at line '%s'\n", line.c_str());
 				}
 				string name = tokens.next_token();
-				// cout << "unicode: '" << unicode_pt << "'" << endl;
-				// cout << "code: '" << code_pt << "'" << endl;
-				// cout << "name: '" << name << "'" << endl;
+				cout << "unicode: '" << unicode_pt << "'" << endl;
+				cout << "code: '" << code_pt << "'" << endl;
+				cout << "name: '" << name << "'" << endl;
 				charcodes[name] = code_pt;
 				encoding_unicode.push_back(unicode_pt);
 				encoding_code.push_back(code_pt);

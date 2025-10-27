@@ -1,6 +1,6 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !                                                                      !
-! GLE - Graphics Layout Engine <http://glx.sourceforge.net/>          !
+! GLE - Graphics Layout Engine <http://glx.sourceforge.net/>           !
 !                                                                      !
 ! Modified BSD License                                                 !
 !                                                                      !
@@ -35,11 +35,9 @@
 ! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
 !                                                                      !
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 !$FFFF, 45; hyphen
 !$FFFF, 164; fraction
 !$FFFF, 197; macron
-
 $0020, 32; space
 $0021, 33; exclam
 $0022, 34; quotedbl
