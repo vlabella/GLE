@@ -1,22 +1,5 @@
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-# #
-# # -- Qt5  set Qt5_DIR
-# #
-# set(CMAKE_AUTOMOC ON)
-# set(CMAKE_AUTORCC ON)
-# set(CMAKE_AUTOUIC ON)
-
-# find_package(Qt5 COMPONENTS
-# 	Widgets
-# 	Network
-# 	DBus
-# 	Gui
-# 	OpenGL
-# 	REQUIRED)
-
 #
-# -- Qt6  set Qt6_DIR
+# -- qgle requires Qt6
 #
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
@@ -29,14 +12,12 @@ find_package(Qt6 COMPONENTS
 	Gui
 	OpenGL
 	OpenGLWidgets
-#	Core5Compat  # needed for QRegExp move to QRegularExpression in Qt 6
 	REQUIRED)
 
 if (WIN32)
     add_compile_definitions(_HAS_STD_BYTE=1)
     add_compile_options(/FS)
 endif()
-
 
 add_executable(qgle WIN32 MACOSX_BUNDLE
 	about.cpp
@@ -104,7 +85,6 @@ list(APPEND QGLE_LIBRARIES
 	Qt::Widgets
 	Qt::OpenGL
 	Qt::OpenGLWidgets
-#	Qt::Core5Compat
 	${CAIRO_LIBRARIES}
 	${CMAKE_DL_LIBS}
 )
@@ -114,7 +94,6 @@ if(UNIX AND NOT APPLE)
  		glut
  		GLU
  		GL
-# 		Qt5::QWaylandIntegrationPlugin
 	)
 endif()
 if(WIN32)
@@ -181,7 +160,8 @@ if(APPLE)
     "-framework Carbon"
 	)
 endif()
-target_compile_features(qgle PUBLIC cxx_std_17)
 set_target_properties(qgle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-install(TARGETS qgle RUNTIME BUNDLE DESTINATION bin )
+install(TARGETS qgle
+		CONFIGURATIONS Release Debug
+		RUNTIME )
