@@ -300,9 +300,13 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 			// try 64 bit libraries on 64 bit system
 			tryLocationLoop("/usr/lib64");
 			tryLocationLoop("/usr/local/lib64");
+			tryLocationLoop("/usr/lib64/x86_64-linux-gnu");
+			tryLocationLoop("/usr/local/lib64/x86_64-linux-gnu");
 		#endif // 64 bit
 		tryLocationLoop("/usr/lib");
 		tryLocationLoop("/usr/local/lib");
+		tryLocationLoop("/usr/lib/x86_64-linux-gnu");
+		tryLocationLoop("/usr/local/lib/x86_64-linux-gnu");
 		#endif // Q_OS_LINUX
 		#ifdef Q_OS_MACOS
 		tryLocation("/usr/lib/libgs.dylib");

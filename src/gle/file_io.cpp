@@ -1179,9 +1179,15 @@ string GLEFindLibrary(const char* name, GLEProgressIndicator* progress) {
 		libpath += ":";
 	}
 	#ifdef __x86_64__
-		libpath += "/usr/lib64:/usr/local/lib64:";
+		libpath += "/usr/lib64:";
+		libpath += "/usr/local/lib64:";
+		libpath += "/usr/lib64/x86_64-linux-gnu:";
+		libpath += "/usr/local/lib64/x86_64-linux-gnu:";
 	#endif
-	libpath += "/usr/lib:/usr/local/lib";
+	libpath += "/usr/lib:";
+	libpath += "/usr/local/lib:";
+	libpath += "/usr/lib/x86_64-linux-gnu:";
+	libpath += "/usr/local/lib/x86_64-linux-gnu:";
 	string tofind = name;
 	tofind += ".";
 	char_separator separator(":", "");

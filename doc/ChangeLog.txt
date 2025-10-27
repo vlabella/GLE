@@ -5,6 +5,7 @@
     - eliminate cmake warnings about install paths.
     - improve inittex.ini generation by setting GLE_TOP during creation.
     - qgle: remove out of date ghostscript library header files.
+    - linux fix for searching for libgs.so: added x86_64-linux-gnu to end of search paths
 
 4.3.8 (October 2025)
     - Upgrade to Qt6
