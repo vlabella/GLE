@@ -638,19 +638,23 @@ bool try_load_config_sub(string& conf_name, vector<string>& triedLocations) {
 
 bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, ConfigCollection& coll) {
 	// Set GLE_TOP
+	// also sets GLE_BIN_DIR
 	// -> prefer environment var GLE_TOP
 	// -> otherwise, locate relative to executable location
 	string conf_name;
 	bool has_top = false;
 	bool has_config = false;
 	const char* top = getenv("GLE_TOP");
+	string exe_name;
+	bool has_exe_name = GetExeName(appname, argv, exe_name);
+	if (has_exe_name) {
+		GetDirName(exe_name, GLE_BIN_DIR);
+		StripDirSep(GLE_BIN_DIR);
+	}
 	vector<string> triedLocations;
 	if (top == NULL || top[0] == 0) {
-		string exe_name;
-		bool has_exe_name = GetExeName(appname, argv, exe_name);
+		// search for GLE_TOP relative to exe_name
 		if (has_exe_name) {
-			GetDirName(exe_name, GLE_BIN_DIR);
-			StripDirSep(GLE_BIN_DIR);
 			#ifdef GLETOP_CD
 				// Try relative path
 				GLE_TOP_DIR = GLEAddRelPath(exe_name, GLETOP_CD+1, GLETOP_REL);

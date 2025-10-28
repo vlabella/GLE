@@ -299,7 +299,7 @@ void do_show_info() {
 		cout << "Build date:              " << bdate << endl;
 	}
 	cout << "GLE_TOP:                 " << GLE_TOP_DIR << endl;
-	cout << "GLE_BIN:                 " << GLE_BIN_DIR << endl;
+	cout << "GLE_BIN_DIR:             " << GLE_BIN_DIR << endl;
 	/* Location of GhostScript */
 	string gs_dir;
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
