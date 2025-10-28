@@ -677,21 +677,27 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 		// environment veraialbe GLE_TOP not found
 		// search for GLE_TOP relative to exe_name
 		if (has_exe_name) {
-			// search
+			// search for GLE_TOP - try to find glerc
 			GLE_TOP_DIR = GLE_BIN_DIR;
-			// Try one level higher than executable
+			// Start one level higher than executable
 			StripPathComponents(&GLE_TOP_DIR, 1);
-			// add nothing on windows only search one level up
+			string save = GLE_TOP_DIR;
 			#if defined(__unix__) || defined(__APPLE__)
-			   	// Try one level higher than executable in share/gle
-				string save = GLE_TOP_DIR;
+				// linux FHS complaince first
+			   	// FHS Try one level higher than executable in share/gle
 				GLE_TOP_DIR += DIR_SEP + "share/gle";
 				has_config = try_load_config_sub(conf_name, triedLocations);
 				if(!has_config){
 					// try Debian package location
 					GLE_TOP_DIR = save + DIR_SEP + "share/gle-graphics";
 				}
+				has_config = try_load_config_sub(conf_name, triedLocations);
+				if(!has_config){
+					// try one level up from executable for non FHS installations
+					GLE_TOP_DIR = save;
+				}
 			#endif
+			// add nothing on windows only search one level up
 			has_config = try_load_config_sub(conf_name, triedLocations);
 			/*
 			#ifdef GLETOP_CD
