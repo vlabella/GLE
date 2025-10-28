@@ -637,25 +637,65 @@ bool try_load_config_sub(string& conf_name, vector<string>& triedLocations) {
 }
 
 bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, ConfigCollection& coll) {
-	// Set GLE_TOP
-	// also sets GLE_BIN_DIR
-	// -> prefer environment var GLE_TOP
+	//
+	// -- Sets GLE_TOP from environment or searching for glerc
+	//    also sets GLE_BIN_DIR
+	//    GLE_TOP is location of glerc et al.
+	//
+	// -> prefer environment variable GLE_TOP
 	// -> otherwise, locate relative to executable location
+	//      Windows: search up one directory from the executable
+	//      C:\Program Files\gle\bin\gle.exe   <<- executable
+	//      C:\Program Files\gle\bin           << -- GLE_BIN_DIR
+	//      C:\Program Files\gle			   << -- GLE_TOP
+	//    Linux and macOS: search up one directory in share/gle or share/gle-graphics
+	//      /usr/bin/gle    <<-- executable
+	//      /usr/bin        <<-- GLE_BIN_DIR
+	//      /usr/share/gle  <<-- GLE_TOP
+	//      or for Debian
+	//      /usr/share/gle-graphics  <<-- GLE_TOP
+	//
 	string conf_name;
-	bool has_top = false;
-	bool has_config = false;
-	const char* top = getenv("GLE_TOP");
 	string exe_name;
-	bool has_exe_name = GetExeName(appname, argv, exe_name);
+    bool has_top      = false;
+    bool has_config   = false;
+    bool has_exe_name = false;
+    // get from environment
+    const char* top = getenv("GLE_TOP");
+    if (top != NULL && top[0] != 0) {
+        has_top     = true;
+        GLE_TOP_DIR = top;
+    }
+    // get exe name and path
+	has_exe_name = GetExeName(appname, argv, exe_name);
 	if (has_exe_name) {
 		GetDirName(exe_name, GLE_BIN_DIR);
 		StripDirSep(GLE_BIN_DIR);
 	}
 	vector<string> triedLocations;
-	if (top == NULL || top[0] == 0) {
+	if (!has_top) {
+		// environment veraialbe GLE_TOP not found
 		// search for GLE_TOP relative to exe_name
 		if (has_exe_name) {
+			// search
+			GLE_TOP_DIR = GLE_BIN_DIR;
+			// Try one level higher than executable
+			StripPathComponents(&GLE_TOP_DIR, 1);
+			// add nothing on windows only search one level up
+			#if defined(__unix__) || defined(__APPLE__)
+			   	// Try one level higher than executable in share/gle
+				string save = GLE_TOP_DIR;
+				GLE_TOP_DIR += DIR_SEP + "share/gle";
+				has_config = try_load_config_sub(conf_name, triedLocations);
+				if(!has_config){
+					// try Debian package location
+					GLE_TOP_DIR = save + DIR_SEP + "share/gle-graphics";
+				}
+			#endif
+			has_config = try_load_config_sub(conf_name, triedLocations);
+			/*
 			#ifdef GLETOP_CD
+				// not sure what this is doing
 				// Try relative path
 				GLE_TOP_DIR = GLEAddRelPath(exe_name, GLETOP_CD+1, GLETOP_REL);
 				has_config = try_load_config_sub(conf_name, triedLocations);
@@ -670,16 +710,13 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 					has_config = try_load_config_sub(conf_name, triedLocations);
 				}
 			#else
-				GLE_TOP_DIR = exe_name;
-				StripPathComponents(&GLE_TOP_DIR, 2);
 			#endif
+			*/
 		} else {
+			// cannot find exe so cannot search for GLE_TOP
 			// The user will see as error message: "$GLE_TOP/some_file" not found.
 			GLE_TOP_DIR = "$GLE_TOP";
 		}
-	} else {
-		has_top = true;
-		GLE_TOP_DIR = top;
 	}
 	StripDirSep(GLE_TOP_DIR);
 	if (!has_config) {

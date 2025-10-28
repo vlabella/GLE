@@ -255,7 +255,7 @@ void gle_cleanup() {
 
 void do_run_other_version(ConfigCollection& coll, int argc, char **argv) {
 	// Scan command line for -v option
-	// Note: can not use cmdline here because older versions might have different options
+	// Note: cannot use cmdline here because older versions might have different options
 	// which would result in an error message
 	string version = "";
 	for (int i = 1; i < argc-1; i++) {

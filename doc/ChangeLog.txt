@@ -6,6 +6,13 @@
     - improve inittex.ini generation by setting GLE_TOP during creation.
     - qgle: remove out of date ghostscript library header files.
     - linux fix for searching for libgs.so: added x86_64-linux-gnu to end of search paths
+    - gle -info now reports GLE_BIN_DIR when GLE_TOP is set
+    - linux: if GLE_TOP not set it will search relative to executable location in FHS compliant directories
+             for example: gle is in /usr/bin  it will search for glerc in /usr/share/gle or /usr/share/gle-graphics to set GLE_TOP
+    - linux gui: will search in FHS compliant directory first for gle-manaul.pdf
+             if GLE_TOP is /usr/share/gle  it will search in /usr/share/doc/gle
+             if GLE_TOP is /usr/share/gle-graphics  it will search in /usr/share/doc/gle-graphics
+             if not found then it will also search in non FHS compliant locations: /usr/share/gle/doc /usr/share/gle-graphics/doc
 
 4.3.8 (October 2025)
     - Upgrade to Qt6

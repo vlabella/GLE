@@ -656,7 +656,7 @@ string GLEInterface::getUserConfigLocation() {
 	#if defined(__unix__) || defined(__APPLE__) || defined (__OS2__)
 		GLEGetEnv("HOME", location);
 	#endif
-	#ifdef _WIN32	
+	#ifdef _WIN32
 		GLEGetEnv("APPDATA", location);
 		if (location != "") {
 			AddDirSep(location);
@@ -670,8 +670,46 @@ string GLEInterface::getUserConfigLocation() {
 	return location;
 }
 
-string GLEInterface::getManualLocation() {
+string GLEInterface::getManualLocation()
+{
+	// used in GUI to find the manual.
+	// must account for different locations on different systems
+	//  windows:  GLE_TOP = C:\Program Files\gle
+	//     location is always GLE_TOP\doc
+	//  linux:    GLE_TOP = /usr/share/gle
+	//     location should be for FHS compliance
+	//     /usr/share/doc/gle          ==> GLE_TOP/../doc/gle
+	//     or
+	//     /usr/share/doc/gle-graphics ==> GLE_TOP/../doc/gle-graphics
+	//     but could also be subdir of GLE_TOP, which is not FHS complaint.
+	//     /usr/share/gle/doc          ==> GLE_TOP/doc
+	//     or
+	//     /usr/share/gle-graphics/doc ==> GLE_TOP/doc
 	string loc;
+	#if defined(__unix__) || defined(__APPLE__)
+		// try FHS location of GLE_TOP
+		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle", "gle-manual.pdf", loc)) {
+			return loc;
+		}
+		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle", "gle-manual.pdf.gz", loc)) {
+			return loc;
+		}
+		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle-graphics", "gle-manual.pdf", loc)) {
+			return loc;
+		}
+		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle-graphics", "gle-manual.pdf.gz", loc)) {
+			return loc;
+		}
+	#endif
+	// these should work on windows and all systems - subdir of GLE_TOP
+	if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 0, "doc", "gle-manual.pdf", loc)) {
+		return loc;
+	}
+	if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 0, "doc", "gle-manual.pdf.gz", loc)) {
+		return loc;
+	}
+	/*
+
 #ifdef GLEDOC_CD
 	if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, GLEDOC_CD, GLEDOC_REL, "gle-manual.pdf", loc)) {
 		return loc;
@@ -680,12 +718,7 @@ string GLEInterface::getManualLocation() {
 		return loc;
 	}
 #endif
-	if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 0, "doc", "gle-manual.pdf", loc)) {
-		return loc;
-	}
-	if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 0, "doc", "gle-manual.pdf.gz", loc)) {
-		return loc;
-	}
+
 #ifdef GLEDOC_ABS
 	if (GLEAddRelPathAndFileTry(GLEDOC_ABS, 0, NULL, "gle-manual.pdf", loc)) {
 		return loc;
@@ -694,6 +727,7 @@ string GLEInterface::getManualLocation() {
 		return loc;
 	}
 #endif
+*/
 	return loc;
 }
 
