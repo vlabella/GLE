@@ -30,7 +30,7 @@ if(WIN32)
 endif()
 
 option(BUILD_GUI "Build the GUI - gle Previewer" ON)
-option(BUILD_MANIP "Build manip program" BUILD_MANIP_DEFAULT)
+option(BUILD_MANIP "Build manip program" ${BUILD_MANIP_DEFAULT})
 option(BUILD_GLEBTOOL "Build glebtool program - deprecated" OFF)
 option(INSTALL_FBUILD "Install the fbuild program - only needed during gle build phase" OFF)
 option(INSTALL_MAKEFMT "Install the makefmt program - only needed during gle build phase" OFF)
