@@ -108,7 +108,7 @@ GLE will search the environment variable `GLE_USRLIB` for include files.  Set it
 
 GLE automatically searches and finds `GLE_TOP` when run but setting it can be helpful. 
 
-### options that control the build
+### Options that control the build
 
 | Option Name                  | Description                                                                                          | Default Value                     |
 |-----------------------------|------------------------------------------------------------------------------------------------------|-----------------------------------|
