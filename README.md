@@ -51,6 +51,10 @@ To install gle on your machine after building
 
 Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.
 
+After installation have gle find its dependencies using the following command
+
+	gle -finddeps
+
 ### Building on Windows with Visual Studio as 64 bit executable
 
 	cmake -S src -B build -A x64 -T host=x64
@@ -59,6 +63,54 @@ Installation on Linux is now FHS compliant starting with version 4.3.9.  Binarie
 To install gle on your machine after building
 
 	cd build & cmake --install . --config Release
+
+Installation on windows will install all gle files to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.
+
+### Post Installation Configuration and Testing
+
+#### Finding Dependencies
+
+After installation run
+
+	gle -finddeps
+
+To have GLE search for it dependency files such as Ghostcript and LaTeX.
+
+To test the installation run.
+
+	gle -info
+
+and output should look something like this on windows
+
+	GLE version:             4.3.9
+	Build date:              Oct 29 2025 12:22:58
+	GLE_TOP:                 C:\Program Files\GLE
+	GLE_BIN_DIR:             C:\Program Files\GLE\bin
+	GLE_USRLIB:              
+	GhostScript:             C:\Program Files\gs\gs10.06.0\bin\gswin64c.exe
+	GS library:              C:\Program Files\gs\gs10.06.0\bin\gsdll64.dll
+	Bitmap import:           JPEG, PNG, TIFF, GIF
+	Cairo rendering support: Yes
+	Poppler PDF support:     Yes
+
+and this on Linux
+
+	GLE version:             4.3.9
+	Build date:              Oct 29 2025 10:21:42
+	GLE_TOP:                 /usr/local/share/gle
+	GLE_BIN_DIR:             /usr/local/bin
+	GLE_USRLIB:
+	GhostScript:             /usr/bin/gs
+	GS library:              /usr/lib/x86_64-linux-gnu/libgs.so
+	Bitmap import:           JPEG, PNG, TIFF, GIF
+	Cairo rendering support: Yes
+	Poppler PDF support:     Yes
+
+#### Optional set GLE_USRLIB and GLE_TOP
+
+	GLE will search the environment variable `GLE_USRLIB` for include files.  Set it to a location where you store your include files.
+
+	GLE automatically searches and finds `GLE_TOP` when run but setting it can be helpful. 
 
 ### options that control the build
 
