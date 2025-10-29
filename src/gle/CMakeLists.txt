@@ -197,9 +197,16 @@ endif()
 
 install(TARGETS gle
 		CONFIGURATIONS Release Debug
-		RUNTIME )
+		RUNTIME  )
+
+# assume system installation FHS
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gle)
+if(DEVELOPER_INSTALLATION OR WIN32)
+	# install one directory above executable
+	set(MY_DESTINATION .)
+endif()
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/glerc
 		CONFIGURATIONS Release Debug
-		DESTINATION . )
+		DESTINATION ${MY_DESTINATION} )
 

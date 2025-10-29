@@ -618,12 +618,12 @@ string GLEInterface::getGhostScriptLocation() {
 	string name = "gsdll32.dll";
 	#if _WIN64
 		// VS builds
-		name = "gsdll64.dll";	
+		name = "gsdll64.dll";
 	#endif
 	#if __GNUC__
 		// gcc builds
 		#if __x86_64__ || __ppc64__
-			name = "gsdll64.dll";	
+			name = "gsdll64.dll";
 		#endif
 	#endif
 	string result = ((CmdLineArgString*)tools->getOptionValue(GLE_TOOL_GHOSTSCRIPT_CMD))->getValue();

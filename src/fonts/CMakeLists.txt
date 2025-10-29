@@ -8,7 +8,7 @@
 #
 # -- list of targets to build
 #
-set(FVE_FILES 
+set(FVE_FILES
 	glemark.fve
 	plba.fve
 	plcc.fve
@@ -41,8 +41,8 @@ set(FVE_FILES
 	texcmtt.fve
 )
 
-set(FMT_FILES 
-	glemark.fmt 
+set(FMT_FILES
+	glemark.fmt
 	plba.fmt
 	plcc.fmt
 	plcg.fmt
@@ -76,22 +76,22 @@ set(FMT_FILES
 	texcmssi.fmt
 	texcmsy.fmt
 	texcmti.fmt
-	texcmtt.fmt 
-	cyrillic/arial8.fmt    
-	cyrillic/arialbd8.fmt  
-	cyrillic/arialbi8.fmt 
+	texcmtt.fmt
+	cyrillic/arial8.fmt
+	cyrillic/arialbd8.fmt
+	cyrillic/arialbi8.fmt
 	cyrillic/ariali8.fmt
-	cyrillic/cokoi8b.fmt  
-	cyrillic/cokoi8bi.fmt  
-	cyrillic/cokoi8i.fmt  
-	cyrillic/cokoi8n.fmt  
-	cyrillic/times8.fmt 
+	cyrillic/cokoi8b.fmt
+	cyrillic/cokoi8bi.fmt
+	cyrillic/cokoi8i.fmt
+	cyrillic/cokoi8n.fmt
+	cyrillic/times8.fmt
 	cyrillic/timesbd8.fmt
-	cyrillic/timesbi8.fmt 
+	cyrillic/timesbi8.fmt
 	cyrillic/timesi8.fmt
 )
 # specialization for Adboe files the source names are not the same as the target names
-set(ADOBE_FMT_FILES 
+set(ADOBE_FMT_FILES
 	psagb.fmt
 	psagbo.fmt
 	psagd.fmt
@@ -269,12 +269,12 @@ file(MAKE_DIRECTORY ${OUTPUT_DIR})
 #)
 
 add_custom_target(fonts ALL
-	DEPENDS 
+	DEPENDS
 #	create_font_dir
-	adobe_fmt_fonts 
-	fmt_fonts 
+	adobe_fmt_fonts
+	fmt_fonts
 	fve_fonts
-	font.dat 
+	font.dat
 	psfont.dat
 )
 
@@ -286,29 +286,35 @@ list(TRANSFORM ADOBE_FMT_FILES REPLACE "^.*/" "")
 list(TRANSFORM FVE_FILES PREPEND "${OUTPUT_DIR}/")
 list(TRANSFORM FMT_FILES PREPEND "${OUTPUT_DIR}/")
 list(TRANSFORM ADOBE_FMT_FILES PREPEND "${OUTPUT_DIR}/")
-add_custom_target(adobe_fmt_fonts DEPENDS 
+add_custom_target(adobe_fmt_fonts DEPENDS
 	${ADOBE_FMT_FILES}
 	makefmt
 )
 
-add_custom_target(fmt_fonts DEPENDS 
+add_custom_target(fmt_fonts DEPENDS
 	adobe_fmt_fonts
 	${FMT_FILES}
 	makefmt
 )
 
-add_custom_target(fve_fonts DEPENDS 
+add_custom_target(fve_fonts DEPENDS
 	${FVE_FILES}
 	fbuild
 )
 
+# assume system installation FHS
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gle/font)
+if(DEVELOPER_INSTALLATION OR WIN32)
+	# install one directory above executable
+	set(MY_DESTINATION font)
+endif()
 
-install(FILES 
-	font.dat 
-	psfont.dat 
-	${ADOBE_FMT_FILES} 
-	${FMT_FILES} 
+install(FILES
+	font.dat
+	psfont.dat
+	${ADOBE_FMT_FILES}
+	${FMT_FILES}
 	${FVE_FILES}
 	CONFIGURATIONS Release Debug
-	DESTINATION font)
+	DESTINATION ${MY_DESTINATION})
 

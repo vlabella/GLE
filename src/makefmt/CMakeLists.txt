@@ -1,5 +1,5 @@
 #
-# -- makefmt - used durgin build phase to create font .fmt files
+# -- makefmt - used during build phase to create font .fmt files
 #
 add_executable(makefmt
 	makefmt.cpp

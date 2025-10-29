@@ -164,5 +164,5 @@ set_target_properties(qgle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 install(TARGETS qgle
 		CONFIGURATIONS Release Debug
-		RUNTIME DESTINATION bin
-		BUNDLE DESTINATION bin)  # should be Applicaitons for system wide installation
+		RUNTIME
+		BUNDLE )  # should be Applicaitons for system wide installation

@@ -4,12 +4,19 @@
 cmake_minimum_required (VERSION 3.25)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
 cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
+if(POLICY CMP0144)
+  cmake_policy(SET CMP0144 NEW)  # upper case pacakge root variables
+endif()
+
+project( gle VERSION 4.3.9 LANGUAGES CXX C)
+enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
+include(GNUInstallDirs)
 
 find_package(ECM CONFIG NO_MODULE) # optional extra-cmake-modules needed for find_poppler
 if(ECM_FOUND)
@@ -17,7 +24,7 @@ if(ECM_FOUND)
 endif()
 
 set( CMAKE_OSX_DEPLOYMENT_TARGET "10.15" CACHE STRING "Minimum OS X deployment version")	# minimum supported by apple
-project( gle VERSION 4.3.9 )
+
 add_compile_definitions(GLEVN="${PROJECT_VERSION}")
 set( CMAKE_DEBUG_POSTFIX  "d")
 #
@@ -25,10 +32,13 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 #
 set(BUILD_MANIP_DEFAULT ON)
 if(WIN32)
-	# not working yet
+	# Disable manip build on Windows due to compatibility issues
 	set(BUILD_MANIP_DEFAULT OFF)
 endif()
-
+message("CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}")
+message("DATAROOTDIR ${CMAKE_INSTALL_DATAROOTDIR}")
+message("BINDIR ${CMAKE_INSTALL_BINDIR}")
+message("DOCDIR ${CMAKE_INSTALL_DOCDIR}")
 option(BUILD_GUI "Build the GUI - gle Previewer" ON)
 option(BUILD_MANIP "Build manip program" ${BUILD_MANIP_DEFAULT})
 option(BUILD_GLEBTOOL "Build glebtool program - deprecated" OFF)
@@ -38,7 +48,7 @@ option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtim
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
 option(EXTRA_GSLIB_SEARCH_LOCATION "Extra path for searching for gslib on linux and macOS" OFF)
-# option(BITMAP_CREATION_POPPLER "Use poppler library for bitmap creation instead of ghostscript" OFF)
+option(DEVELOPER_INSTALLATION "Linux only: Install all files in staging area, otherwise install in FHS paths on system." OFF)
 
 if(NOT DEFINED POPPLER_INTERFACE)
 	# poppler interface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
@@ -593,31 +603,42 @@ add_dependencies(glebtool gle)
 endif()
 
 # documentation file installation in doc folder
+# assume system installation FHS
+set(MY_DESTINATION ${CMAKE_INSTALL_DOCDIR})
+if(DEVELOPER_INSTALLATION OR WIN32)
+	# install one directory above executable
+	set(MY_DESTINATION doc)
+endif()
 install(FILES
 	../doc/LICENSE.txt
 	../doc/README.txt
 	../doc/ChangeLog.txt
 	CONFIGURATIONS Release Debug
-	DESTINATION doc
-)
-#
-# -- install include files from gle-library repo
-#
-install(DIRECTORY
-	${GLE_EXAMPLES_LIBRARY_PATH}/include/
-	DESTINATION gleinc
-	CONFIGURATIONS Release Debug
-	OPTIONAL
-	PATTERN "*.gle"
-
+	DESTINATION ${MY_DESTINATION}
 )
 #
 # -- install manual from gle-manual repo
 #
 install(FILES
 	${GLE_USER_MANUAL_PATH}/gle-manual.pdf
-	DESTINATION doc
+	DESTINATION ${MY_DESTINATION}
 	CONFIGURATIONS Release Debug
 	OPTIONAL
+)
+#
+# -- install include files from gle-library repo
+#
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gle/gleinc)
+if(DEVELOPER_INSTALLATION OR WIN32)
+	# install one directory above executable
+	set(MY_DESTINATION gleinc)
+endif()
+
+install(DIRECTORY
+	${GLE_EXAMPLES_LIBRARY_PATH}/include/
+	DESTINATION ${MY_DESTINATION}
+	CONFIGURATIONS Release Debug
+	OPTIONAL
+	PATTERN "*.gle"
 )
 
