@@ -47,7 +47,9 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 
 To install gle on your machine after building
 
-	cd build ; make install
+	cd build ; cmake --install . [--config Release]
+
+Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.
 
 ### Building on Windows with Visual Studio as 64 bit executable
 
@@ -56,18 +58,24 @@ To install gle on your machine after building
 
 To install gle on your machine after building
 
-	cmake -P build/cmake_install.cmake
+	cd build & cmake --install . [--config Release]
 
 ### options that control the build
 
- * BUILD_GUI - (default: ON) turn off to disable build of the GUI, qgle that requires Qt.
- * BUILD_MANIP - (default: ON (Linux, Apple) OFF (Windows)) turn off to disable build of the manip program.
- * CMAKE_INSTALL_PREFIX - set this to a different location than the default on your system if desired.
- * MSVC_USE_STATIC_RUNTIME - set this ON to build against Visual Studio static runtimes: /MT instead of /MD.  Also set Boost_USE_STATIC_RUNTIME=ON and have all other libraries built with /MT as well.
- * ZLIB_USE_STATIC_LIBS - set ON to link to static variants of zlib: .a .lib instead of .so and .dll
- * GLE_EXAMPLES_LIBRARY_PATH - set to the root folder of the gle-library folder on your computer. Utilized during installation and packaging.
- * GLE_USER_MANUAL_PATH - set to the root folder of the gle-manual folder on your computer.  Utilized during installation and packaging.
- * EXTRA_GSLIB_SEARCH_LOCATION - add extra search path for ghostscipt library in qgle application.
+| Option Name                  | Description                                                                                          | Default Value                     |
+|-----------------------------|------------------------------------------------------------------------------------------------------|-----------------------------------|
+| `BUILD_GUI`                 | Turn off to disable build of the GUI (`qgle`) that requires Qt.                                      | ON                                |
+| `BUILD_MANIP`              | Turn off to disable build of the `manip` program.                                                    | ON (Linux, Apple), OFF (Windows) |
+| `CMAKE_INSTALL_PREFIX`     | Set this to a different install location than the default (`/usr/local` or `C:\Program Files\gle`). | System default                    |
+| `MSVC_USE_STATIC_RUNTIME`  | Set ON to build against Visual Studio static runtimes (`/MT` instead of `/MD`). Also set `Boost_USE_STATIC_RUNTIME=ON` and ensure all other libraries are built with `/MT`. | OFF                               |
+| `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF                               |
+| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library` folder on your computer. Used during install/packaging.  | Not set                           |
+| `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | Not set                           |
+| `EXTRA_GSLIB_SEARCH_LOCATION` | Add extra search path for Ghostscript library in `qgle` application.                              | Not set                           |
+| `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                                               | OFF                               |
+| `INSTALL_FBUILD`           | Install the `fbuild` program – only needed during GLE build phase.                                   | OFF                               |
+| `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.                                  | OFF                               |
+| `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF                               |
 
 ### Creating packages with cpack
 
