@@ -291,7 +291,7 @@ void do_run_other_version(ConfigCollection& coll, int argc, char **argv) {
 }
 
 void do_show_info() {
-	string version, bdate;
+	string version, bdate, usrlib;
 	g_get_version(&version);
 	g_get_build_date(&bdate);
 	cout << "GLE version:             " << version << endl;
@@ -300,7 +300,11 @@ void do_show_info() {
 	}
 	cout << "GLE_TOP:                 " << GLE_TOP_DIR << endl;
 	cout << "GLE_BIN_DIR:             " << GLE_BIN_DIR << endl;
-	cout << "GLE_USRLIB:              " << getenv("GLE_USRLIB") << endl;
+	const char* pusr_lib = getenv("GLE_USRLIB");
+	if (pusr_lib != NULL) {
+		usrlib = getenv("GLE_USRLIB");
+	}
+	cout << "GLE_USRLIB:              " << usrlib << endl;
 	/* Location of GhostScript */
 	string gs_dir;
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
