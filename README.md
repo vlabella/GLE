@@ -50,7 +50,7 @@ Installation on Linux is now FHS compliant starting with version 4.3.9.  Binarie
 
 ### Building on Windows with Visual Studio as 64 bit executable
 
-To acquire the needed libraries for GLE on Windows it is highly recommended to use [vcpkg](https://vcpkg.io/).  There is a `vcpkg.json` file in the GLE repository that can be utilized to install all the needed dependencies.  Use the `CMAKE_TOOLCHAIN_FILE` and `-DVCPKG_TARGET_TRIPLET` cmake options which will have cmake call vcpkg to install all the needed dependencies.
+To acquire the needed libraries for GLE on Windows it is highly recommended to use [vcpkg](https://vcpkg.io/).  There is a `vcpkg.json` file in the GLE repository that can be utilized to install all the needed dependencies.  Use the `CMAKE_TOOLCHAIN_FILE` and `VCPKG_TARGET_TRIPLET` cmake options which will have cmake call vcpkg to install all the needed dependencies automatically.  Be patient it will take some time.  Consult vcpkg and cmake documentation for more information.
 
 The command to build GLE on windows (without vcpkg) is
 
