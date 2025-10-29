@@ -51,10 +51,6 @@ To install gle on your machine after building
 
 Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.
 
-After installation have gle find its dependencies using the following command
-
-	gle -finddeps
-
 ### Building on Windows with Visual Studio as 64 bit executable
 
 	cmake -S src -B build -A x64 -T host=x64
@@ -108,9 +104,9 @@ and this on Linux
 
 #### Optional set GLE_USRLIB and GLE_TOP
 
-	GLE will search the environment variable `GLE_USRLIB` for include files.  Set it to a location where you store your include files.
+GLE will search the environment variable `GLE_USRLIB` for include files.  Set it to a location where you store your include files.
 
-	GLE automatically searches and finds `GLE_TOP` when run but setting it can be helpful. 
+GLE automatically searches and finds `GLE_TOP` when run but setting it can be helpful. 
 
 ### options that control the build
 
