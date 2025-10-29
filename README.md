@@ -44,6 +44,9 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 
 If you want a complete installation with documentation, examples, and include files download (or clone) the [gle-library](https://github.com/vlabella/gle-library) and latest [gle-manual.pdf](https://github.com/vlabella/GLE/releases/latest).  Place them in separate locations and pass the `GLE_EXAMPLES_LIBRARY_PATH` and `GLE_USER_MANUAL_PATH` options in the initial call to cmake.  For example `-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual`.
 
+### Acquire Extra Cmake Moudules (ECM)
+
+The (ECM)[https://github.com/KDE/extra-cmake-modules] package has the needed code for cmake to find the poppler PDF library .
 
 ### Building on Linux or macOS
 
@@ -58,6 +61,10 @@ To install gle on your machine after building
 Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and Documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 ### Building on Windows with Visual Studio as 64 bit executable
+
+To acquire the needed libraries for GLE on Windows it is highly recommended to use [vcpkg](https://vcpkg.io/).  There is a `vcpkg.json` file in the GLE repository that can be utilized to install all the needed dependencies.  Use the `CMAKE_TOOLCHAIN_FILE` and `-DVCPKG_TARGET_TRIPLET` cmake options which will have cmake call vcpkg to install all the needed dependencies.
+
+The command to build GLE on windows (without vcpkg) is
 
 	cmake -S src -B build -A x64 -T host=x64
 	cmake --build build
