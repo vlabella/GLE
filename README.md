@@ -26,7 +26,7 @@ GLE can be built on Windows, macOS, and Linux using cmake and system specific to
 * Qt6 (optional for building GUI qgle  BUILD_GUI=ON)
 * curses/ncurses/pdcurses (optional for for building manip BUILD_MANIP=ON)
 
-That dependencies for the above libraries will also be needed.  For example the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows.
+Dependencies for the above libraries will be needed as well.  For example, the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows.
 
 Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake. If not, cmake will look for them in the system default locations.  For more information consult cmake documentation on find_package or find_library.  
 
