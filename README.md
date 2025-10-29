@@ -47,7 +47,7 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 
 To install gle on your machine after building
 
-	cd build ; cmake --install . [--config Release]
+	cd build ; cmake --install . --config Release
 
 Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.
 
@@ -58,7 +58,7 @@ Installation on Linux is now FHS compliant starting with version 4.3.9.  Binarie
 
 To install gle on your machine after building
 
-	cd build & cmake --install . [--config Release]
+	cd build & cmake --install . --config Release
 
 ### options that control the build
 
