@@ -55,7 +55,7 @@ To install gle on your machine after building
 
 	sudo cmake --install . --config Release
 
-Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
+Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and Documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 ### Building on Windows with Visual Studio as 64 bit executable
 
