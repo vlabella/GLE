@@ -20,13 +20,13 @@ Libraries needed to build GLE are
 * zlib
 * pixman
 * cairo
+* poppler
 * jpeg
 * ghostscipt (headers only - dll/so is loaded at runtime)
-* Qt5 (optional for building GUI qgle  BUILD_GUI=ON)
-* poppler (optional for PDF import support)
+* Qt6 (optional for building GUI qgle  BUILD_GUI=ON)
 * curses/ncurses/pdcurses (optional for for building manip BUILD_MANIP=ON)
 
-Note that dependencies for the above libraries will also be needed.  For example the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows.
+That dependencies for the above libraries will also be needed.  For example the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows.
 
 Cmake uses find_package or find_library to resolve the paths for these libraries.  These variables must be set in your environment or passed to cmake. If not, cmake will look for them in the system default locations.  For more information consult cmake documentation on find_package or find_library.  
 
@@ -37,14 +37,15 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 * CAIRO_ROOT
 * PIXMAN_ROOT
 * GHOSTPDL_ROOT
-* Qt5_DIR
+* POPPLER_ROOT
+* Qt_DIR
 
 ### Building on Linux or macOS
 
 	cmake -S src -B build
 	cd build ; make
 
-to install gle on your machine after building
+To install gle on your machine after building
 
 	cd build ; make install
 
