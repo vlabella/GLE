@@ -44,9 +44,9 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 
 If you want a complete installation with documentation, examples, and include files download (or clone) the [gle-library](https://github.com/vlabella/gle-library) and latest [gle-manual.pdf](https://github.com/vlabella/GLE/releases/latest).  Place them in separate locations and pass the `GLE_EXAMPLES_LIBRARY_PATH` and `GLE_USER_MANUAL_PATH` options in the initial call to cmake.  For example `-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual`.
 
-### Acquire Extra Cmake Moudules (ECM)
+### Acquire Extra Cmake Modules (ECM)
 
-The (ECM)[https://github.com/KDE/extra-cmake-modules] package has the needed code for cmake to find the poppler PDF library .
+The [ECM](https://github.com/KDE/extra-cmake-modules) package has the needed code for cmake to find the poppler PDF library.
 
 ### Building on Linux or macOS
 
