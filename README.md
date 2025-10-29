@@ -55,7 +55,7 @@ To install gle on your machine after building
 
 	sudo cmake --install . --config Release
 
-Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
+Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 ### Building on Windows with Visual Studio as 64 bit executable
 
@@ -76,7 +76,7 @@ After installation run
 
 	gle -finddeps
 
-To have GLE search for it dependency files such as Ghostcript and LaTeX.
+To have GLE search for it dependency files such as Ghostscript and LaTeX.
 
 To test the installation run.
 
@@ -110,9 +110,9 @@ and this on Linux
 
 #### Optional set GLE_USRLIB and GLE_TOP
 
-GLE will search the environment variable `GLE_USRLIB` for include files.  Set it to a location where you store your include files.
+GLE will search the path pointed to by environment variable `GLE_USRLIB` for include files.  Set it to a location where you store your include files.  GLE also searches for include files in the current script directory, GLE_BIN_DIR, and GLE_TOP/gleinc by default.  GLE_USRLIB will be searched after these locations.
 
-GLE automatically searches and finds `GLE_TOP` when run but setting it can be helpful. 
+GLE automatically searches and finds `GLE_TOP` when run but setting it as an environment variable can be helpful. 
 
 ### Options that control the build
 
