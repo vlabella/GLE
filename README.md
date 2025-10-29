@@ -42,7 +42,7 @@ The [ECM](https://github.com/KDE/extra-cmake-modules) package has the needed cod
 	cd build
 	make
 
-To install gle on your machine after building
+To install gle on your machine to `usr/local/bin`
 
 	sudo cmake --install . --config Release
 
@@ -57,7 +57,7 @@ The command to build GLE on windows (without vcpkg) is
 	cmake -S src -B build -A x64 -T host=x64
 	cmake --build build
 
-To install gle on your machine after building
+To install gle on your machine in `C:\Program Files\gle`
 
 	cd build & cmake --install . --config Release
 
