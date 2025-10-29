@@ -12,7 +12,7 @@ More information and the binary distributions can be found on the GLE website he
 
 GLE can be built on Windows, macOS, and Linux using cmake and system specific toolchains: Visual Studio, Xcode, and gcc.
 
-Libraries needed to build GLE are
+### Libraries needed to build GLE
 
 * boost
 * libtiff
@@ -40,16 +40,22 @@ Cmake uses find_package or find_library to resolve the paths for these libraries
 * POPPLER_ROOT
 * Qt_DIR
 
+### Acquire gle-library and gle-manual (optional)
+
+If you want a complete installation with documentation, examples, and include files download (or clone) the [gle-library](https://github.com/vlabella/gle-library) and latest [gle-manual.pdf](https://github.com/vlabella/GLE/releases/latest).  Place them in separate locations and pass the `GLE_EXAMPLES_LIBRARY_PATH` and `GLE_USER_MANUAL_PATH` options in the initial call to cmake.  For example `-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual`.
+
+
 ### Building on Linux or macOS
 
 	cmake -S src -B build
-	cd build ; make
+	cd build
+	make
 
 To install gle on your machine after building
 
-	cd build ; cmake --install . --config Release
+	sudo cmake --install . --config Release
 
-Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.
+Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local. Fonts and includes will be in /usr/share/gle and Documentation in /usr/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 ### Building on Windows with Visual Studio as 64 bit executable
 
@@ -60,7 +66,7 @@ To install gle on your machine after building
 
 	cd build & cmake --install . --config Release
 
-Installation on windows will install all gle files to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.
+Installation on Windows will install all gle files to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
 
 ### Post Installation Configuration and Testing
 
