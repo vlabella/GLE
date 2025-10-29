@@ -6,13 +6,20 @@
     - improve inittex.ini generation by setting GLE_TOP during creation.
     - qgle: remove out of date ghostscript library header files.
     - linux: fix for searching for libgs.so: added x86_64-linux-gnu to end of search paths
-    - gle -info now reports GLE_BIN_DIR when GLE_TOP is set
-    - linux: auto searching for GLE_TOP if not set. It will search relative to executable location in FHS compliant directories.
-             for example: gle is in /usr/bin  it will search for glerc in /usr/share/gle or /usr/share/gle-graphics
-    - linux gui: will search in FHS compliant directory first for gle-manaul.pdf
-             if GLE_TOP is /usr/share/gle  it will search in /usr/share/doc/gle
-             if GLE_TOP is /usr/share/gle-graphics  it will search in /usr/share/doc/gle-graphics
-             if not found then it will also search in non FHS compliant locations: /usr/share/gle/doc /usr/share/gle-graphics/doc
+    - gle -info displays GLE_BIN_DIR when GLE_TOP is set
+    - gle -info displays value of GLE_USRLIB
+    - fix default value of BUILD_MANIP in cmake file
+    - linux FHS compliance:
+        -automatically sets GLE_TOP if empty by searching for glerc similar to Windows.
+         Search is relative to executable location in FHS compliant directories.
+         If gle is in /usr/bin it will search in /usr/share/gle then /usr/share/gle-graphics
+         one directory up from gle executable.
+         Search is not dne if GLE_TOP is set.
+         Search also works if gle is in /user/local/bin
+    - linux gui FHS compliance: Searches in FHS compliant directories for gle-manual.pdf
+         if GLE_TOP is /usr/share/gle it will search in /usr/share/doc/gle
+         if GLE_TOP is /usr/share/gle-graphics it will search in /usr/share/doc/gle-graphics
+         if not found then it will also search in non FHS compliant locations: /usr/share/gle/doc /usr/share/gle-graphics/doc
 
 4.3.8 (October 2025)
     - Upgrade to Qt6
