@@ -52,7 +52,7 @@ For a complete installation with documentation, examples, and include files down
 	sudo cmake --install . --config Release
 	```
 
-Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and Documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
+Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 ### Building on Windows with Visual Studio as 64 bit executable
 
