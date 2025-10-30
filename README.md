@@ -137,18 +137,18 @@ All gle files will be installed similar to Linux. The installation location can 
 
 #### Install Needed Software
 
-	To run GLE these software pacakges need to be installed:
+To run GLE these software pacakges need to be installed:
 
-	1. LaTeX - A powerful document preparation system widely used for technical and scientific writing. 
+1. LaTeX - A powerful document preparation system widely used for technical and scientific writing. 
 
-		* Windows: visit [MikTeX](https://miktex.org). Download and install the latest version.
-		* Linux: `sudo apt install texlive texlive-latex-extra texlive-science dvipng latexmk`.
-		* macOS: `brew install texlive`
+	* Windows: visit [MikTeX](https://miktex.org). Download and install the latest version.
+	* Linux: `sudo apt install texlive texlive-latex-extra texlive-science dvipng latexmk`.
+	* macOS: `brew install texlive`
 
-	2. GhostScript - PS/PDF interpreter
-		* Windows: Visit [Ghostscript](https://www.ghostscript.com/). Download and install the latest version.
-		* Linux: `sudo apt install ghostscript`.
-		* macOS: `brew install ghostscript`
+2. GhostScript - PS/PDF interpreter
+	* Windows: Visit [Ghostscript](https://www.ghostscript.com/). Download and install the latest version.
+	* Linux: `sudo apt install ghostscript`.
+	* macOS: `brew install ghostscript`
 
 #### Finding Dependencies
 
