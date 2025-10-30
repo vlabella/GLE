@@ -8,9 +8,9 @@ More information and the binary distributions can be found on the GLE website he
 
 [![Download GLE - Graphics Layout Engine](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/glx/files/latest/download)
 
-## Building with CMAKE
+## Building GLE
 
-GLE can be built on Windows, macOS, and Linux using cmake and system specific toolchains: Visual Studio, Xcode, and gcc.
+GLE can be built on Windows, macOS, and Linux using cmake and system specific compilers: Visual Studio, Xcode, and gcc.
 
 ### Libraries needed to build GLE
 
@@ -26,7 +26,7 @@ GLE can be built on Windows, macOS, and Linux using cmake and system specific to
 * Qt6 (optional for building GUI qgle  BUILD_GUI=ON)
 * curses/ncurses/pdcurses (optional for for building manip BUILD_MANIP=ON)
 
-Dependencies for the above libraries will be needed as well.  For example, the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows. Cmake uses find_package or find_library to resolve the paths for these libraries.  Cmake will search the system default locations. If you installed to other locations then you will need to pass several `<package_name_ROOT>` variables to cmake.  For more information consult cmake documentation on find_package or find_library.  
+Dependencies for the above libraries will be needed as well.  For example, the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows. Cmake uses find_package or find_library to resolve the paths for these libraries.  Cmake will search the system default locations. If they are installed to other locations `<package_name_ROOT>` variables will need to be passed to cmake.  For more information consult the cmake documentation on `find_package` or `find_library`.  
 
 ### Acquire gle-library and gle-manual (optional)
 
