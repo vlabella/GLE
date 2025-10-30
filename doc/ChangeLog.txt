@@ -23,6 +23,7 @@
     - cmake install command on Linux installs to FHS compliant locations by default unless DEVELOPER_INSTALLATION is ON (see below)
     - cmake option DEVELOPER_INSTALLATION (default OFF) if ON will install all files to same location on linux similar to Windows
       which is not FHS compliant but useful in development and testing.
+    - Fixed one definiation rule (ODR) violation for struct keyw which prevented optimizations (LTO/IPO) on Linux.
 
 4.3.8 (October 2025)
     - Upgrade to Qt6
