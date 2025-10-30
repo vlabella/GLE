@@ -22,6 +22,8 @@ For a complete installation with documentation, examples, and include files down
 
 
 
+
+
 ### Building on Linux
 
 1. Install packages
@@ -54,18 +56,48 @@ For a complete installation with documentation, examples, and include files down
 
 Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
-### Building on Windows with Visual Studio as 64 bit executable
 
-To acquire the needed libraries for GLE on Windows it is highly recommended to use [vcpkg](https://vcpkg.io/).  There is a `vcpkg.json` file in the GLE repository that can be utilized to install all the needed dependencies.  Use the `CMAKE_TOOLCHAIN_FILE` and `VCPKG_TARGET_TRIPLET` cmake options which will have cmake call vcpkg to install all the needed dependencies automatically.  Be patient it will take some time.  Consult vcpkg and cmake documentation for more information.
 
-The command to build GLE on windows (without vcpkg) is
 
-	cmake -S src -B build -A x64 -T host=x64
-	cmake --build build
+### Building on Windows
 
-To install gle on your machine in `C:\Program Files\gle`
+Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/), [cmake](https://cmake.org/), and [vcpkg](https://vcpkg.io/) to be installed.  To create binary installers with cpack [NSIS](https://nsis.sourceforge.io/) is needed.
 
-	cd build & cmake --install . --config Release
+1. Install the ECM package
+	```
+	vcpkg install ecm
+	```
+
+2. Install ghostpdl library
+
+	Visit [ghostpdl GitHub page](https://github.com/ArtifexSoftware/ghostpdl) and clone the repo or download and unpack the source code.  Only the ghostpdl headers are needed to build GLE.  So building ghostpdl is not required.
+
+2. Run cmake in the gle directory
+
+	```
+	cmake -B build -S src
+    -DCMAKE_TOOLCHAIN_FILE=VCPKGROOT/scripts/buildsystems/vcpkg.cmake
+        -DCMAKE_BUILD_TYPE=Release
+        -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
+        -DGHOSTPDL_ROOT=/path/to/ghostpdl
+        -DGLE_EXAMPLES_LIBRARY_PATH="/path/to/gle-library"
+        -DGLE_USER_MANUAL_PATH="/path/to/gle-manual"
+        -DECM_DIR="VCPKGROOT/installed/x64-windows/share/ECM"
+	```
+
+	Replace VCPKGROOT with the location of vcpkg. This will run vcpkg and download and build the needed libraries.  Be patient it will take some time.
+
+3. Build 
+
+	```
+	cmake --build build --config Release
+	```
+
+4. Install gle in `C:\Program Files\gle`
+
+	```
+	cmake -DBUILD_TYPE=Release -P build\cmake_install.cmake
+	```
 
 Installation on Windows will install all gle files to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
 
