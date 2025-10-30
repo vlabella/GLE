@@ -78,7 +78,7 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 	cmake -B build -S src
     -DCMAKE_TOOLCHAIN_FILE=VCPKGROOT/scripts/buildsystems/vcpkg.cmake
         -DCMAKE_BUILD_TYPE=Release
-        -DVCPKG_TARGET_TRIPLET=x64-windows-static-release
+        -DVCPKG_TARGET_TRIPLET=x64-windows-release
         -DGHOSTPDL_ROOT=/path/to/ghostpdl
         -DGLE_EXAMPLES_LIBRARY_PATH="/path/to/gle-library"
         -DGLE_USER_MANUAL_PATH="/path/to/gle-manual"
