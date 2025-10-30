@@ -26,7 +26,7 @@ For a complete installation with documentation, examples, and include files down
 
 ### Building on Linux
 
-Building on linux requires the gcc compiler and the standard C and C++ library to be installed on the computer.
+Building on linux requires the gcc compiler and the standard C/C++ libraries.
 
 1. Install the needed packages
 
