@@ -264,7 +264,10 @@ void* dlopenImpl(const char* fname) {
 	#ifdef RTLD_DEEPBIND
 		return dlopen(fname, RTLD_NOW | RTLD_DEEPBIND);
 	#else
-		#warning "dlopen - not using RTLD_DEEPBIND"
+		#ifdef Q_OS_LINUX
+			// Only pertains to Linux so silence warning on other OS
+			#warning "dlopen - not using RTLD_DEEPBIND"
+		#endif
 		return dlopen(fname, RTLD_NOW);
 	#endif
 }
