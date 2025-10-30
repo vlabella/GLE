@@ -40,9 +40,11 @@ The [ECM](https://github.com/KDE/extra-cmake-modules) package has the needed cma
 
 1. Install packages
 
+	```
 	sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev libjpeg-turbo8-dev liblzma-dev libpixman-1-dev 
                 libpng-dev libtiff-dev libz-dev qt6-base-dev libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt6-dev 
                 libglib2.0-dev extra-cmake-modules
+    ```
 
 2. Run cmake in the gle directory
 
