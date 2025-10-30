@@ -28,21 +28,32 @@ GLE can be built on Windows, macOS, and Linux using cmake and system specific co
 
 Dependencies for the above libraries will be needed as well.  For example, the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows. Cmake uses find_package or find_library to resolve the paths for these libraries.  Cmake will search the system default locations. If they are installed to other locations `<package_name_ROOT>` variables will need to be passed to cmake.  For more information consult the cmake documentation on `find_package` or `find_library`.  
 
-### Acquire gle-library and gle-manual (optional)
+### Acquire gle-library and gle-manual
 
-If you want a complete installation with documentation, examples, and include files download (or clone) the [gle-library](https://github.com/vlabella/gle-library) and latest [gle-manual.pdf](https://github.com/vlabella/GLE/releases/latest).  Place them in separate locations and pass the `GLE_EXAMPLES_LIBRARY_PATH` and `GLE_USER_MANUAL_PATH` options in the initial call to cmake.  For example `-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual`.
+For a complete installation with documentation, examples, and include files download (or clone) the [gle-library](https://github.com/vlabella/gle-library) and latest [gle-manual.pdf](https://github.com/vlabella/GLE/releases/latest).  Place them in separate locations and pass the `GLE_EXAMPLES_LIBRARY_PATH` and `GLE_USER_MANUAL_PATH` options in the initial call to cmake.  For example `-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual`.
 
 ### Acquire Extra Cmake Modules (ECM)
 
-The [ECM](https://github.com/KDE/extra-cmake-modules) package has the needed code for cmake to find the poppler PDF library.
+The [ECM](https://github.com/KDE/extra-cmake-modules) package has the needed cmake modules to find the poppler PDF library.
 
-### Building on Linux or macOS
+### Building on Linux
 
-	cmake -S src -B build
+1. Install packages
+
+	sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev libjpeg-turbo8-dev liblzma-dev libpixman-1-dev 
+                libpng-dev libtiff-dev libz-dev qt6-base-dev libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt6-dev 
+                libglib2.0-dev extra-cmake-modules
+
+2. Run cmake in the gle directory
+
+	cmake -S src -B build -DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual
+
+3. Build 
+
 	cd build
 	make
 
-To install gle on your machine to `usr/local/bin`
+4. Install gle in `usr/local/bin`
 
 	sudo cmake --install . --config Release
 
