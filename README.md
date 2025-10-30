@@ -219,15 +219,15 @@ To create binary installers with cpack [NSIS](https://nsis.sourceforge.io/) is n
 
 	windows:
 
-	cd build & cpack -G "NSIS;ZIP;7Z"
+	cd build && cpack -G "NSIS;ZIP;7Z"
 
 	linux
 
-	cd build & cpack -G "DEB;ZIP"
+	cd build && cpack -G "DEB;ZIP"
 
 	macOS
 
-	cd build & cpack -G "DragNDrop;ZIP"
+	cd build && cpack -G "DragNDrop;ZIP"
 
 
 ### CI/CD Github Actions
