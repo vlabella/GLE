@@ -69,7 +69,7 @@ jobs:
             # trying to install it again produces an unintelligible warning.
             brew install --quiet boost cairo ghostscript jpeg-turbo \
                 libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules \
-                ghostscript texlive
+                texlive
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             jobs=$(sysctl -n hw.activecpu)
             ;;
@@ -91,11 +91,11 @@ jobs:
 
     - name: Build GLE
       run: |
-        xargs -t < build.args cmake --build build --verbose
+        xargs -t < build.args cmake --build build --config Release
 
     - name: Install GLE
       run: |
-        DESTDIR=destroot cmake --install build
+        DESTDIR=destroot cmake --install build --config Release
 
     - name: Build GLE Manual
       working-directory: ${{github.workspace}}/gle-manual
@@ -117,7 +117,7 @@ jobs:
       run: |
         case $RUNNER_OS in
           Linux)
-            cpack -G "DEB;ZIP;7Z" -C Release -B destroot/usr/local
+            cpack -G "ZIP;7Z" -C Release -B destroot/usr/local
             ;;
           macOS)
             cpack -G "DragNDrop;ZIP;7Z" -C Release -B destroot/usr/local

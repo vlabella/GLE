@@ -26,7 +26,9 @@ For a complete installation with documentation, examples, and include files down
 
 ### Building on Linux
 
-1. Install packages
+Building on linux requires the gcc compiler and the standard C and C++ library to be installed on the computer.
+
+1. Install the needed packages
 
 	```
 	sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev 
@@ -38,31 +40,29 @@ For a complete installation with documentation, examples, and include files down
 2. Run cmake in the gle directory
 
 	```
-	cmake -S src -B build -DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library 
+	cmake -S src -B build -DCMAKE_BUILD_TYPE=Release
+	-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library 
 	-DGLE_USER_MANUAL_PATH=/path/to/gle-manual
 	```
 
 3. Build 
 
 	```
-	cd build
-	make
+	cmake --build build
 	```
 
 4. Install gle in `usr/local/bin`
 
 	```
-	sudo cmake --install . --config Release
+	sudo cmake --install build
 	```
 
 Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 
-
-
 ### Building on Windows
 
-Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/), [cmake](https://cmake.org/), and [vcpkg](https://vcpkg.io/) to be installed.  To create binary installers with cpack [NSIS](https://nsis.sourceforge.io/) is needed.
+Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/), [cmake](https://cmake.org/), and [vcpkg](https://vcpkg.io/) to be installed.  
 
 1. Install the ECM package
 	```
@@ -73,12 +73,11 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 
 	Visit [ghostpdl GitHub page](https://github.com/ArtifexSoftware/ghostpdl) and clone the repo or download and unpack the source code.  Only the ghostpdl headers are needed to build GLE.  So building ghostpdl is not required.
 
-2. Run cmake in the gle directory
+3. Run cmake in the gle directory
 
 	```
 	cmake -B build -S src
     -DCMAKE_TOOLCHAIN_FILE=VCPKGROOT/scripts/buildsystems/vcpkg.cmake
-        -DCMAKE_BUILD_TYPE=Release
         -DVCPKG_TARGET_TRIPLET=x64-windows-release
         -DGHOSTPDL_ROOT=/path/to/ghostpdl
         -DGLE_EXAMPLES_LIBRARY_PATH="/path/to/gle-library"
@@ -88,21 +87,68 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 
 	Replace VCPKGROOT with the location of vcpkg. This will run vcpkg and download and build the needed libraries.  Be patient it will take some time.
 
+4. Build 
+
+	```
+	cmake --build build --config Release
+	```
+
+5. Install gle in `C:\Program Files\gle`
+
+	```
+	cmake --install build --config Release
+	```
+
+All gle files will be installed to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
+
+### Building on macOS
+
+Building on macOS requires [XCode](https://developer.apple.com/xcode/), [cmake](https://cmake.org/), and [Homebrew](https://brew.sh/) to be installed.
+
+1. Install the needed packages
+	```
+	brew install --quiet boost cairo ghostscript jpeg-turbo 
+    libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules
+	```
+
+2. Run cmake in the gle directory
+
+	```
+	cmake -S src -B build
+        -DGLE_EXAMPLES_LIBRARY_PATH="/path/to/gle-library"
+        -DGLE_USER_MANUAL_PATH="path/to/gle-manual"
+	```
+
 3. Build 
 
 	```
 	cmake --build build --config Release
 	```
 
-4. Install gle in `C:\Program Files\gle`
+4. Install gle in `/usr/local/bin`
 
 	```
-	cmake -DBUILD_TYPE=Release -P build\cmake_install.cmake
+	cmake --install build --config Release
 	```
 
-Installation on Windows will install all gle files to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
+All gle files will be installed similar to Linux. The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
 
 ### Post Installation Configuration and Testing
+
+#### Install Needed Software
+
+	To run GLE these software pacakges need to be installed:
+
+	1. LaTeX - A powerful document preparation system widely used for technical and scientific writing. 
+
+		* Windows: visit [MikTeX](https://miktex.org). Download and install the latest version.
+		* Linux: `sudo apt install texlive texlive-latex-extra texlive-science dvipng latexmk`.
+		* macOS: `brew install texlive`
+
+	2. GhostScript - PS/PDF interpreter
+		* Windows: Visit [Ghostscript](https://www.ghostscript.com/). Download and install the latest version.
+		* Linux: `sudo apt install ghostscript`.
+		* macOS: `brew install ghostscript`
 
 #### Finding Dependencies
 
@@ -168,6 +214,8 @@ GLE automatically searches and finds `GLE_TOP` when run but setting it as an env
 ### Creating packages with cpack
 
 Cpack can be utilized to create distributable packages.  The gle-manual and gle-library repos should be checked out and built to get included in the package.  Windows platform utilizes NSIS for self installing exe building.  All other packages are for self installers.
+
+To create binary installers with cpack [NSIS](https://nsis.sourceforge.io/) is needed.
 
 	windows:
 

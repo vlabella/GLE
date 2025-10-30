@@ -347,6 +347,8 @@ list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
 find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
 
+message("GhostPDL Inlcude: ${GHOSTPDL_INCLUDE_DIRS}")
+
 include_directories(
 	${ZLIB_INCLUDE_DIRS}
 	${JPEG_INCLUDE_DIRS}

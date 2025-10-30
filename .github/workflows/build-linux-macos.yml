@@ -70,10 +70,10 @@ jobs:
         xargs -t < configure.args cmake -S src -B build -D CMAKE_BUILD_TYPE=Release
     - name: Build GLE
       run: |
-        xargs -t < build.args cmake --build build --verbose
+        xargs -t < build.args cmake --build build --config Release
     - name: Install GLE
       run: |
-        DESTDIR=destroot cmake --install build
+        DESTDIR=destroot cmake --install build --config Release
     - name: Upload Artifacts - GLE Binaries
       uses: actions/upload-artifact@v4.4.3
       with:
