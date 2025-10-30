@@ -12,7 +12,9 @@ More information and the binary distributions can be found on the GLE website he
 
 GLE can be built on Windows, macOS, and Linux using cmake and system specific compilers: Visual Studio, Xcode, and gcc.
 
-### Clone the GLE repo or download and unpack the source code.
+### Get the GLE code
+
+Clone the GLE repository or download and unpack the source code.
 
 ### Acquire gle-library and gle-manual
 
