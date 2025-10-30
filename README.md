@@ -137,7 +137,7 @@ All gle files will be installed similar to Linux. The installation location can 
 
 #### Install Needed Software
 
-To run GLE these software pacakges need to be installed:
+To run GLE these software packages required:
 
 1. LaTeX - A powerful document preparation system widely used for technical and scientific writing. 
 
@@ -145,7 +145,7 @@ To run GLE these software pacakges need to be installed:
 	* Linux: `sudo apt install texlive texlive-latex-extra texlive-science dvipng latexmk`.
 	* macOS: `brew install texlive`
 
-2. GhostScript - PS/PDF interpreter
+2. GhostScript - PS/PDF interpreter.
 	* Windows: Visit [Ghostscript](https://www.ghostscript.com/). Download and install the latest version.
 	* Linux: `sudo apt install ghostscript`.
 	* macOS: `brew install ghostscript`
@@ -156,7 +156,7 @@ After installation run
 
 	gle -finddeps
 
-To have GLE search for it dependency files such as Ghostscript and LaTeX.
+To have GLE search for it dependency files such as GhostScript and LaTeX.
 
 To test the installation run.
 
@@ -192,7 +192,7 @@ and this on Linux
 
 GLE will search the path pointed to by environment variable `GLE_USRLIB` for include files.  Set it to a location where you store your include files.  GLE also searches for include files in the current script directory, GLE_BIN_DIR, and GLE_TOP/gleinc by default.  GLE_USRLIB will be searched after these locations.
 
-GLE automatically searches and finds `GLE_TOP` when run but setting it as an environment variable can be helpful. 
+GLE automatically searches and finds `GLE_TOP` when it starts but setting it as an environment variable can be helpful. 
 
 ### Options that control the build
 
@@ -213,9 +213,8 @@ GLE automatically searches and finds `GLE_TOP` when run but setting it as an env
 
 ### Creating packages with cpack
 
-Cpack can be utilized to create distributable packages.  The gle-manual and gle-library repos should be checked out and built to get included in the package.  Windows platform utilizes NSIS for self installing exe building.  All other packages are for self installers.
+Cpack can be utilized to create distributable packages.  The gle-manual and gle-library repos should be checked out and built to get included in the package.  Windows platform utilizes [NSIS](https://nsis.sourceforge.io/) for self installing exe building.  All other packages are for manual installation.
 
-To create binary installers with cpack [NSIS](https://nsis.sourceforge.io/) is needed.
 
 	windows:
 
@@ -236,25 +235,3 @@ Several GitHib actions exist that build the binaries and distributable packages 
 
 The action "Create Release"  will create a release with a tag from the version number contained in CMakeLists.txt file.  It also will trigger the build and package actions for all three operating systems.  After running this action it is important to bump the version number in CMakeLists.txt file.
 
-
-
-### Libraries needed to build GLE
-
-* boost
-* libtiff
-* libpng
-* zlib
-* pixman
-* cairo
-* poppler
-* jpeg
-* ghostscipt (headers only - dll/so is loaded at runtime)
-* Qt6 (optional for building GUI qgle  BUILD_GUI=ON)
-* curses/ncurses/pdcurses (optional for for building manip BUILD_MANIP=ON)
-
-Dependencies for the above libraries will be needed as well.  For example, the poppler library requires GLIB2 on Linux and Apple platforms and freetype, openjpeg, and iconv on windows. Cmake uses find_package or find_library to resolve the paths for these libraries.  Cmake will search the system default locations. If they are installed to other locations `<package_name_ROOT>` variables will need to be passed to cmake.  For more information consult the cmake documentation on `find_package` or `find_library`.  
-
-### Acquire Extra Cmake Modules (ECM)
-
-
-The [ECM](https://github.com/KDE/extra-cmake-modules) package has the needed cmake modules to find the poppler PDF library.
