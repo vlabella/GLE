@@ -38,7 +38,8 @@ For a complete installation with documentation, examples, and include files down
 2. Run cmake in the gle directory
 
 	```
-	cmake -S src -B build -DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual
+	cmake -S src -B build -DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library 
+	-DGLE_USER_MANUAL_PATH=/path/to/gle-manual
 	```
 
 3. Build 
