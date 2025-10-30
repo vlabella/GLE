@@ -1858,6 +1858,7 @@ void g_set_state(gmodel* s) {
 	test_unit();
 }
 
+
 void g_set_partial_state(gmodel* s) {
 	g_set_color(s->color);
 	g_set_fill(s->fill);

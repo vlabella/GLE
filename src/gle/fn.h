@@ -85,6 +85,12 @@
 #define FN_CHEBYSHEV_SECOND     119
 #define FN_TEST_PRINT			120
 
+struct keyw {
+	const char *word;
+	int index;
+	int ret, np, p[5];
+};
 
+int binsearch(char *word, struct keyw tab[], int n);
 
 

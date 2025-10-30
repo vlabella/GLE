@@ -56,8 +56,10 @@ using namespace std;
 // current max is 105 ==> FN_FACTORIAL
 // see eval.cpp for implementation of these functions
 
+
 #define NKEYS (sizeof keywfn / sizeof(struct keyw))
-struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
+
+struct keyw keywfn[] = {
 	{ " ",           0,             1,0, { 0,0,0,0,0 } },
 	{ "+",           1,             1,0, { 0,0,0,0,0 } },
 	{ "-",           2,             1,0, { 0,0,0,0,0 } },
@@ -186,23 +188,6 @@ struct keyw { const char *word; int index; int ret,np,p[5]; } keywfn[] = {
 	{ "YMIN",        43,            1,1, { 0,0,0,0,0 } },
 	{ "YPOS",        44,            1,0, { 0,0,0,0,0 } }
 };
-
-/*
-ASSOCIATED_LAGUERRE
-SPHERICAL_HARMONIC
-FACTORIAL
-DOUBLE_FACTORIAL
-HERMITE
-ASSOCIATED_LEGENDRE
-BESSEL_FIRST
-BESSEL_SECOND
-
-AIRY_FIRST
-AIRY_SECOND
-CHEBYSHEV_FIRST
-CHEBYSHEV_SECOND
-*/
-int binsearch(char *word, struct keyw tab[], int n);
 
 void find_un(char *cp, int *idx,int *ret,int *np,int **plist)
 {

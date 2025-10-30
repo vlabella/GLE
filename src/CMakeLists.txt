@@ -35,10 +35,11 @@ if(WIN32)
 	# Disable manip build on Windows due to compatibility issues
 	set(BUILD_MANIP_DEFAULT OFF)
 endif()
-message("CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}")
-message("DATAROOTDIR ${CMAKE_INSTALL_DATAROOTDIR}")
-message("BINDIR ${CMAKE_INSTALL_BINDIR}")
-message("DOCDIR ${CMAKE_INSTALL_DOCDIR}")
+#message("CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}")
+#message("DATAROOTDIR ${CMAKE_INSTALL_DATAROOTDIR}")
+#message("BINDIR ${CMAKE_INSTALL_BINDIR}")
+#message("DOCDIR ${CMAKE_INSTALL_DOCDIR}")
+#message("DOCDIR ${CMAKE_INSTALL_DOCDIR}")
 option(BUILD_GUI "Build the GUI - gle Previewer" ON)
 option(BUILD_MANIP "Build manip program" ${BUILD_MANIP_DEFAULT})
 option(BUILD_GLEBTOOL "Build glebtool program - deprecated" OFF)
@@ -346,8 +347,6 @@ find_path(GDIR2 gdevdsp.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices 
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
 find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
-
-message("GhostPDL Inlcude: ${GHOSTPDL_INCLUDE_DIRS}")
 
 include_directories(
 	${ZLIB_INCLUDE_DIRS}

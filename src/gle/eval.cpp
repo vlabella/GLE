@@ -106,14 +106,18 @@ string pcode_to_string(int p){
 	return "";
 }
 
+/*
+moved to fn.h
 struct keyw
 {
 	const char *word;
 	int index;
 	int ret,np,p[5];
 } ;
+*/
 
-extern struct keyw keywfn[] ;
+extern struct keyw keywfn[];
+
 
 int stk_var[100];
 int stk_strlen[100];
