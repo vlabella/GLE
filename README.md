@@ -35,16 +35,22 @@ For a complete installation with documentation, examples, and include files down
 
 2. Run cmake in the gle directory
 
+	```
 	cmake -S src -B build -DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library -DGLE_USER_MANUAL_PATH=/path/to/gle-manual
+	```
 
 3. Build 
 
+	```
 	cd build
 	make
+	```
 
 4. Install gle in `usr/local/bin`
 
+	```
 	sudo cmake --install . --config Release
+	```
 
 Installation on Linux is now FHS compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and Documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
