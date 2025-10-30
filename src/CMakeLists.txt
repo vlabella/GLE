@@ -84,6 +84,7 @@ if (POLICY CMP0069)
 	include(CheckIPOSupported)
 	check_ipo_supported(RESULT IPO_SUPPORTED)
 	if ( IPO_SUPPORTED )
+		message("LTO/IPO Supported")
 		# only set for release builds - this will apply to all targets: .obj, .exe, .so, .dll, .lib, .a
 		set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
 		set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_DEBUG OFF)
@@ -347,6 +348,7 @@ find_path(GDIR2 gdevdsp.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices 
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
 find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
+message("GHOSTPDL_INCLUDE_DIRS ${GHOSTPDL_INCLUDE_DIRS}")
 
 include_directories(
 	${ZLIB_INCLUDE_DIRS}
