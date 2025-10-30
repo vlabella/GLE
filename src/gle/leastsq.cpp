@@ -156,6 +156,9 @@ double brent(double ax, double bx, double cx, double (*f)(double), double tol, d
 	return fx;
 }
 
+// this is old FORTRAN to C code with offset arrays so 1 based indexing can be used!
+// this throws warning in Linux
+
 #undef ITMAX
 #undef CGOLD
 #undef ZEPS
@@ -328,6 +331,7 @@ void powell(double p[],double **xi, int n, double ftol, int *iter, double *fret,
 
 #include <stdio.h>
 
+
 double *mk_vector(int nl, int nh) {
 	double *v;
 	v=(double *)malloc((unsigned) (nh-nl+1)*sizeof(double));
@@ -351,6 +355,7 @@ double **matrix(int nrl, int nrh, int ncl, int nch) {
 
 void free_vector(double* v, int nl, int nh) {
 	// to silence warnings on Linux
+	// this does not work
 	double* to_free = v+nl;
 	free((char*) to_free);
 }
