@@ -49,6 +49,7 @@ For a complete installation with documentation, examples, and include files down
 4. Install gle in `usr/local/bin`
 
 	```
+	cd build
 	sudo cmake --install . --config Release
 	```
 
