@@ -350,7 +350,9 @@ double **matrix(int nrl, int nrh, int ncl, int nch) {
 }
 
 void free_vector(double* v, int nl, int nh) {
-	free((char*) (v+nl));
+	// to silence warnings on Linux
+	double* to_free = v+nl;
+	free((char*) to_free);
 }
 
 void free_matrix(double** m, int nrl, int nrh, int ncl, int nch) {
