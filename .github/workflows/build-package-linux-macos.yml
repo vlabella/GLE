@@ -117,7 +117,7 @@ jobs:
       run: |
         case $RUNNER_OS in
           Linux)
-            cpack -G "ZIP;7Z" -C Release -B destroot/usr/local
+            cpack -G "DEB;ZIP;7Z" -C Release -B destroot/usr/local
             ;;
           macOS)
             cpack -G "DragNDrop;ZIP;7Z" -C Release -B destroot/usr/local
