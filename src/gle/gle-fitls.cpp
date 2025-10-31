@@ -41,12 +41,30 @@
 #include <stdio.h>
 #include <algorithm>
 #include <cmath>
+#include <limits>
 #include <boost/math/constants/constants.hpp>
 #include "all.h"
+#include "tokens/stokenizer.h"
+#include "cutils.h"
+#include "file_io.h"
+#include "bitmap/img2ps.h"
+#include "op_def.h"
+#include "mem_limits.h"
+#include "token.h"
+#include "gle-interface/gle-interface.h"
+#include "glearray.h"
+#include "polish.h"
+#include "pass.h"
+#include "var.h"
 #include "gprint.h"
-#include "leastsq.h"
+#include "numberformat.h"
+#include "gle-fitls.h"
 
 using namespace std;
+
+double **matrix(int nrh, int nch);
+void free_matrix(double** m, int nrh, int nch);
+void powell(double *p, double **xi, int n, double ftol, int& iter, double& fret, GLEPowellFunc* func);
 
 GLEPowellFunc::GLEPowellFunc() {
 }
@@ -54,9 +72,126 @@ GLEPowellFunc::GLEPowellFunc() {
 GLEPowellFunc::~GLEPowellFunc() {
 }
 
+GLEFitLS::GLEFitLS() {
+	m_IdxX = -1;
+	m_NIter = 0;
+	m_RSquare = 0.0;
+	m_Function = new GLEFunctionParserPcode();
+}
 
-// this is old FORTRAN to C code with offset arrays so 1 based indexing can be used!
-// this throws warning in Linux
+GLEFitLS::~GLEFitLS() {
+}
+
+void GLEFitLS::polish(const string& str) {
+	m_FunctionStr = str;
+	m_Function->polish(str.c_str(), &m_VarMap);
+	/* Iterate over variables in expression */
+	for (StringIntHash::const_iterator i = m_VarMap.begin(); i != m_VarMap.end(); i++ ) {
+		if (i->first != "X") {
+			m_Vars.push_back(i->second);
+		}
+	}
+}
+
+void GLEFitLS::setXY(vector<double>* x, vector<double>* y) {
+	m_X = x;
+	m_Y = y;
+}
+
+void GLEFitLS::testFit() {
+	int nxy = m_X->size();
+	double sumy = 0.0;
+	for (int i = 0; i < nxy; i++) {
+		sumy = sumy + (*m_Y)[i];
+	}
+	double meany = sumy/nxy;
+	double sum1 = 0.0, sum2 = 0.0;
+	for (int i = 0; i < nxy; i++) {
+		var_set(m_IdxX, (*m_X)[i]);
+		double value = m_Function->evalDouble();
+		double y = (*m_Y)[i];
+		double r1 = value - y;
+		double r2 = meany - y;
+		sum1 = sum1 + r1*r1;
+		sum2 = sum2 + r2*r2;
+	}
+	m_RSquare = 1 - sum1/sum2;
+}
+
+double GLEFitLS::fitMSE(double* vals) {
+	/* Set all variables to given values */
+	setVarsVals(vals);
+	/* Compute MSE */
+	double tot = 0.0;
+	for (vector<double>::size_type i = 0; i < m_X->size(); i++) {
+		var_set(m_IdxX, (*m_X)[i]);
+		double value = m_Function->evalDouble();
+		double residue = (*m_Y)[i] - value;
+		tot += residue*residue;
+	}
+	/* Return error */
+	return tot / m_X->size();
+}
+
+void GLEFitLS::toFunctionStr(const string& format, string* str) {
+	*str = "";
+	string fmt_str = format;
+	if (fmt_str == "") fmt_str = "fix 3";
+	GLENumberFormat fmt(fmt_str);
+	GLEPolish* polish = get_global_polish();
+	Tokenizer* tokens = polish->getTokens(m_FunctionStr);
+	string uc_token, v_str;
+	bool has_plus = false;
+	while (tokens->has_more_tokens()) {
+		const string& token = tokens->next_token();
+		str_to_uppercase(token, uc_token);
+		int v_idx = m_VarMap.try_get(uc_token);
+		if (uc_token != "X" && v_idx != -1) {
+			double value;
+			var_get(v_idx, &value);
+			fmt.format(value, &v_str);
+			if (has_plus && value >= 0) *str = *str + "+";
+			*str = *str + v_str;
+			has_plus = false;
+		} else {
+			if (has_plus) *str = *str + "+";
+			has_plus = token == "+";
+			if (!has_plus) *str = *str + token;
+		}
+	}
+}
+
+void GLEFitLS::setVarsVals(double* vals) {
+	/* Set all variables to given values */
+	int naz = m_Vars.size();
+	for (int i = 0; i < naz; i++) {
+		int v_idx = m_Vars[i];
+		if (v_idx >= 0) var_set(v_idx, vals[i]);
+	}
+}
+
+void GLEFitLS::fit() {
+	int naz = m_Vars.size();
+	double** xi = matrix(naz,naz);
+	for (int i = 0; i < naz; i++) {
+		for (int j = 0; j < naz; j++) {
+			xi[i][j] = 0.0;
+		}
+		xi[i][i] = 1.0;
+	}
+	double* pms = new double[naz];
+	for (int i = 0; i < naz; i++) {
+		int v_idx = m_Vars[i];
+		var_get(v_idx, &pms[i]);
+	}
+	int vtype;
+    double fret   = 0.0;
+    double anstol = 1.0e-4;
+	var_findadd("X", &m_IdxX, &vtype);
+	powell(pms, xi, naz, anstol, m_NIter, fret, this);
+	free_matrix(xi,naz,naz);
+	setVarsVals(pms);
+}
 
 // replace these macros with C++ functions
 //#define MAX(a,b) ((a) > (b) ? (a) : (b))
@@ -77,46 +212,46 @@ inline double square(double a) {
     return a * a;
 }
 
-double *mk_vector(int nl, int nh) {
+double *mk_vector(int nh) {
 	double *v;
-	v=(double *)malloc((unsigned) (nh-nl+1)*sizeof(double));
+	v=(double *)malloc((unsigned) nh*sizeof(double));
 	if (!v) gle_abort("allocation failure in vector()");
-	return v-nl;
+	return v;
 }
 
-void free_vector(double* v, int nl, int nh) {
-	free((char*) (v+nl));
+void free_vector(double* v) {
+	free(v);
 }
 
-double **matrix(int nrl, int nrh, int ncl, int nch) {
+double **matrix(int nrh, int nch) {
 	int i;
 	double **m;
-	m=(double **) malloc((unsigned) (nrh-nrl+1)*sizeof(double*));
+	m=(double **) malloc((unsigned) nrh*sizeof(double*));
 	if (!m) gle_abort("allocation failure 1 in matrix()");
-	m -= nrl;
-	for(i=nrl;i<=nrh;i++) {
-		m[i]=(double *) malloc((unsigned) (nch-ncl+1)*sizeof(double));
+	//m -= nrl;
+	for(i=0;i<nrh;i++) {
+		m[i]=(double *) malloc((unsigned) nch*sizeof(double));
 		if (!m[i]) gle_abort("allocation failure 2 in matrix()");
-		m[i] -= ncl;
+		//m[i] -= ncl;
 	}
 	return m;
 }
 
-void free_matrix(double** m, int nrl, int nrh, int ncl, int nch) {
-	for(int i=nrh;i>=nrl;i--) free((char*) (m[i]+ncl));
-	free((char*) (m+nrl));
+void free_matrix(double** m, int nrh, int nch) {
+	for(int i=nrh-1;i>=0;i--) free(m[i]);
+	free(m);
 }
 
-double brent(double ax, double bx, double cx, double (*f)(double), double tol, double *xmin) {
+double brent(double ax, double bx, double cx, double (*f)(double), double tol, double& xmin) {
 	//#define ITMAX 100
 	//#define CGOLD 0.3819660
 	//#define ZEPS 1.0e-10
     const double ITMAX = 100;
     //const double CGOLD = 0.3819660;
     constexpr double CGOLD = 1.0/(1.0+boost::math::double_constants::phi);
-    const double ZEPS  = numeric_limits<double>.epsilon()*1.0e-3;
+    constexpr double ZEPS = std::numeric_limits<double>::epsilon() * 1.0e-3;
 
-	int iter;
+    int iter;
 	double a,b,d = 0.0,etemp,fu,fv,fw,fx,p,q,r,tol1,tol2,u,v,w,x,xm;
 	double e=0.0;
 
@@ -128,7 +263,7 @@ double brent(double ax, double bx, double cx, double (*f)(double), double tol, d
 		xm=0.5*(a+b);
 		tol2=2.0*(tol1=tol*fabs(x)+ZEPS);
 		if (fabs(x-xm) <= (tol2-0.5*(b-a))) {
-			*xmin=x;
+			xmin=x;
 			return fx;
 		}
 		if (fabs(e) > tol1) {
@@ -172,11 +307,11 @@ double brent(double ax, double bx, double cx, double (*f)(double), double tol, d
 		}
 	}
 	gprint("Too many iterations in BRENT\n");
-	*xmin=x;
+	xmin=x;
 	return fx;
 }
 
-void mnbrak(double* ax, double* bx, double* cx, double *fa, double* fb, double* fc, double (*func)(double)) {
+void mnbrak(double& ax, double& bx, double& cx, double& fa, double& fb, double& fc, double (*func)(double)) {
 	//#define GOLD 1.618034
 	//#define GLIMIT 100.0
 	//#define TINY 1.0e-20
@@ -186,50 +321,50 @@ void mnbrak(double* ax, double* bx, double* cx, double *fa, double* fb, double* 
 
 	double ulim,u,r,q,fu,dum;
 
-	*fa=(*func)(*ax);
-	*fb=(*func)(*bx);
-	if (*fb > *fa) {
-		shift(dum,*ax,*bx,dum);
-		shift(dum,*fb,*fa,dum);
+	fa=(*func)(ax);
+	fb=(*func)(bx);
+	if (fb > fa) {
+		shift(dum,ax,bx,dum);
+		shift(dum,fb,fa,dum);
 	}
-	*cx=(*bx)+GOLD*(*bx-*ax);
-	*fc=(*func)(*cx);
-	while (*fb > *fc) {
-		r=(*bx-*ax)*(*fb-*fc);
-		q=(*bx-*cx)*(*fb-*fa);
-		u=(*bx)-((*bx-*cx)*q-(*bx-*ax)*r)/
+	cx=bx+GOLD*(bx-ax);
+	fc=(*func)(cx);
+	while (fb > fc) {
+		r=(bx-ax)*(fb-fc);
+		q=(bx-cx)*(fb-fa);
+		u=(bx)-((bx-cx)*q-(bx-ax)*r)/
 			(2.0*std::copysign(std::max(fabs(q-r),TINY),q-r));
-		ulim=(*bx)+GLIMIT*(*cx-*bx);
-		if ((*bx-u)*(u-*cx) > 0.0) {
+		ulim=(bx)+GLIMIT*(cx-bx);
+		if ((bx-u)*(u-cx) > 0.0) {
 			fu=(*func)(u);
-			if (fu < *fc) {
-				*ax=(*bx);
-				*bx=u;
-				*fa=(*fb);
-				*fb=fu;
+			if (fu < fc) {
+				ax=bx;
+				bx=u;
+				fa=fb;
+				fb=fu;
 				return;
-			} else if (fu > *fb) {
-				*cx=u;
-				*fc=fu;
+			} else if (fu > fb) {
+				cx=u;
+				fc=fu;
 				return;
 			}
-			u=(*cx)+GOLD*(*cx-*bx);
+			u=cx+GOLD*(cx-bx);
 			fu=(*func)(u);
-		} else if ((*cx-u)*(u-ulim) > 0.0) {
+		} else if ((cx-u)*(u-ulim) > 0.0) {
 			fu=(*func)(u);
-			if (fu < *fc) {
-				shift(*bx,*cx,u,*cx+GOLD*(*cx-*bx));
-				shift(*fb,*fc,fu,(*func)(u));
+			if (fu < fc) {
+				shift(bx,cx,u,cx+GOLD*(cx-bx));
+				shift(fb,fc,fu,(*func)(u));
 			}
-		} else if ((u-ulim)*(ulim-*cx) >= 0.0) {
+		} else if ((u-ulim)*(ulim-cx) >= 0.0) {
 			u=ulim;
 			fu=(*func)(u);
 		} else {
-			u=(*cx)+GOLD*(*cx-*bx);
+			u=cx+GOLD*(cx-bx);
 			fu=(*func)(u);
 		}
-		shift(*ax,*bx,*cx,u);
-		shift(*fa,*fb,*fc,fu);
+		shift(ax,bx,cx,u);
+		shift(fa,fb,fc,fu);
 	}
 }
 
@@ -241,128 +376,89 @@ GLEPowellFunc* nrfunc;
 double f1dim(double x) {
 	int j;
 	double f,*xt;
-	xt=mk_vector(1,ncom);
-	for (j=1;j<=ncom;j++) xt[j]=pcom[j]+x*xicom[j];
+	xt=mk_vector(ncom);
+	for (j=0;j<ncom;j++) xt[j]=pcom[j]+x*xicom[j];
 	f=nrfunc->fitMSE(xt);
-	free_vector(xt,1,ncom);
+	free_vector(xt);
 	return f;
 }
 
-void linmin(double* p, double* xi, int n, double* fret, GLEPowellFunc* func) {
+void linmin(double* p, double* xi, int n, double& fret, GLEPowellFunc* func) {
 	//#define TOL 2.0e-4
 	const double TOL = 2.0e-4;
 	int j;
 	double xx,xmin,fx,fb,fa,bx,ax;
 
 	ncom=n;
-	pcom=mk_vector(1,n);
-	xicom=mk_vector(1,n);
+	pcom=mk_vector(n);
+	xicom=mk_vector(n);
 	nrfunc=func;
-	for (j=1;j<=n;j++) {
+	for (j=0;j<n;j++) {
 		pcom[j]=p[j];
 		xicom[j]=xi[j];
 	}
 	ax=0.0;
 	xx=1.0;
 	bx=2.0;
-	mnbrak(&ax,&xx,&bx,&fa,&fx,&fb,f1dim);
-	*fret=brent(ax,xx,bx,f1dim,TOL,&xmin);
-	for (j=1;j<=n;j++) {
+	mnbrak(ax,xx,bx,fa,fx,fb,f1dim);
+	fret=brent(ax,xx,bx,f1dim,TOL,xmin);
+	for (j=0;j<n;j++) {
 		xi[j] *= xmin;
 		p[j] += xi[j];
 	}
-	free_vector(xicom,1,n);
-	free_vector(pcom,1,n);
+	free_vector(xicom);
+	free_vector(pcom);
 	//#undef TOL
 }
 
-void powell(double p[],double **xi, int n, double ftol, int *iter, double *fret, GLEPowellFunc* func) {
+void powell(double p[],double **xi, int n, double ftol, int& iter, double& fret, GLEPowellFunc* func)
+{
 	//#define ITMAX 200
 	const int ITMAX = 200;
 	int i,ibig,j;
 	double t,fptt,fp,del;
 	double *pt,*ptt,*xit;
 
-	pt=mk_vector(1,n);
-	ptt=mk_vector(1,n);
-	xit=mk_vector(1,n);
-	*fret = func->fitMSE(p);
-	for (j=1;j<=n;j++) pt[j]=p[j];
-	for (*iter=1;;(*iter)++) {
-		fp=(*fret);
+	pt=mk_vector(n);
+	ptt=mk_vector(n);
+	xit=mk_vector(n);
+	fret = func->fitMSE(p);
+	for (j=0;j<n;j++) pt[j]=p[j];
+	for (iter=1 ;; iter++) {
+		fp=fret;
 		ibig=0;
 		del=0.0;
-		for (i=1;i<=n;i++) {
-			for (j=1;j<=n;j++) xit[j]=xi[j][i];
-			fptt=(*fret);
+		for (i=0;i<n;i++) {
+			for (j=0;j<n;j++) xit[j]=xi[j][i];
+			fptt=fret;
 			linmin(p,xit,n,fret,func);
-			if (fabs(fptt-(*fret)) > del) {
-				del=fabs(fptt-(*fret));
+			if (fabs(fptt-fret) > del) {
+				del=fabs(fptt-fret);
 				ibig=i;
 			}
 		}
-		if (2.0*fabs(fp-(*fret)) <= ftol*(fabs(fp)+fabs(*fret))) {
-			free_vector(xit,1,n);
-			free_vector(ptt,1,n);
-			free_vector(pt,1,n);
+		if (2.0*fabs(fp-fret) <= ftol*(fabs(fp)+fabs(fret))) {
+			free_vector(xit);
+			free_vector(ptt);
+			free_vector(pt);
 			return;
 		}
-		if (*iter == ITMAX) {
+		if (iter == ITMAX) {
 			gprint("Too many iterations in routine POWELL\n");
+			return;
 		}
-		for (j=1;j<=n;j++) {
+		for (j=0;j<n;j++) {
 			ptt[j]=2.0*p[j]-pt[j];
 			xit[j]=p[j]-pt[j];
 			pt[j]=p[j];
 		}
 		fptt=func->fitMSE(ptt);
 		if (fptt < fp) {
-			t=2.0*(fp-2.0*(*fret)+fptt)*square(fp-(*fret)-del)-del*square(fp-fptt);
+			t=2.0*(fp-2.0*fret+fptt)*square(fp-fret-del)-del*square(fp-fptt);
 			if (t < 0.0) {
 				linmin(p,xit,n,fret,func);
-				for (j=1;j<=n;j++) xi[j][ibig]=xit[j];
+				for (j=0;j<n;j++) xi[j][ibig]=xit[j];
 			}
 		}
 	}
 }
-
-
-
-
-/*
-// deprecated - using boost function
-void least_square(vector<double>* x,vector<double>* y,double* slope, double* offset, double* rsquared) {
-	//
-	// does a linear least squares fit to the data x and y which have n elements
-	// x,y.... the values
-	// n the size of the x and y arrays
-	// slope... the tresulting slope
-	// offset.. the resulting offset
-	// rsquared.. the goodness of fit 1=ideal 0 = poor
-	//
-	double sum_x=0, sum_y=0, sum_xy=0, sum_xx=0, delta=0, y_avg = 0, n = static_cast<double>(x->size());
-	for (size_t i = 0; i < x->size(); i++) {
-		// printf("x[%d]=%0.6f y[%d]=%0.6f\n",i,(*x)[i],i,(*y)[i]);
-		sum_x += (*x)[i];
-		sum_y += (*y)[i];
-		sum_xy += (*x)[i]*(*y)[i];
-		sum_xx += (*x)[i]*(*x)[i];
-	}
-	delta = n*sum_xx - sum_x*sum_x;
-	*slope = (n*sum_xy - sum_x*sum_y)/delta;
-	*offset = (sum_xx*sum_y - sum_x*sum_xy)/delta;
-	y_avg = sum_y / n;
-	//
-	// compute rsquared
-	//
-	*rsquared = 0;
-	double residue = 0.0,syy=0.0;
-
-	for (int i = 0; i < n; i++) {
-		residue += pow((*y)[i] - (*slope) * (*x)[i] - *offset,2.0);
-		syy += pow((*y)[i] - y_avg,2.0);
-	}
-
-	*rsquared = 1 - residue/syy;
-}
-*/

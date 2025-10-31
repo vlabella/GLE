@@ -56,7 +56,7 @@
 #include "graph.h"
 #include "begin.h"
 #include "color.h"
-#include "leastsq.h"
+//#include "leastsq.h"
 #include "core.h"
 #include "axis.h"
 #include "gprint.h"
@@ -66,7 +66,9 @@
 #include "run.h"
 #include "sub.h"
 #include "numberformat.h"
+#include "gle-fitls.h"
 
+#include <boost/math/statistics/linear_regression.hpp>
 #include <memory>
 
 using namespace std;
@@ -1694,7 +1696,7 @@ public:
 	DataFillDimension(GLEFunctionParserPcode* fct);
 	~DataFillDimension();
 	void setRange(GLERange* range, bool log);
-	bool isYValid();	
+	bool isYValid();
 	inline bool isLog() { return m_Log; }
 	inline GLERange* getRange() { return &m_Range; }
 	inline void setDoubleAt(double v, int i) { m_Values->setDoubleAt(v, i); }
@@ -2149,150 +2151,6 @@ bool GLECheckWindow::valid(double x, double y) {
 	return true;
 }
 
-class GLEFitLS : public GLEPowellFunc {
-protected:
-	int m_IdxX, m_NIter;
-	double m_RSquare;
-	vector<int> m_Vars;
-	vector<double>* m_X;
-	vector<double>* m_Y;
-	StringIntHash m_VarMap;
-	string m_FunctionStr;
-	GLERC<GLEFunctionParserPcode> m_Function;
-public:
-	GLEFitLS();
-	virtual ~GLEFitLS();
-	void polish(const string& str);
-	void setXY(vector<double>* x, vector<double>* y);
-	void fit();
-	void testFit();
-	void setVarsVals(double* vals);
-	void toFunctionStr(const string& format, string* str);
-	virtual double fitMSE(double* vals);
-	inline GLEFunctionParserPcode* getFunction() { return m_Function.get(); }
-	inline double getRSquare() { return m_RSquare; }
-};
-
-GLEFitLS::GLEFitLS() {
-	m_IdxX = -1;
-	m_NIter = 0;
-	m_RSquare = 0.0;
-	m_Function = new GLEFunctionParserPcode();
-}
-
-GLEFitLS::~GLEFitLS() {
-}
-
-void GLEFitLS::polish(const string& str) {
-	m_FunctionStr = str;
-	m_Function->polish(str.c_str(), &m_VarMap);
-	/* Iterate over variables in expression */
-	for (StringIntHash::const_iterator i = m_VarMap.begin(); i != m_VarMap.end(); i++ ) {
-		if (i->first != "X") {
-			m_Vars.push_back(i->second);
-		}
-	}
-}
-
-void GLEFitLS::setXY(vector<double>* x, vector<double>* y) {
-	m_X = x;
-	m_Y = y;
-}
-
-void GLEFitLS::fit() {
-	int naz = m_Vars.size();
-	double** xi = matrix(1,naz,1,naz);
-	for (int i = 1; i <= naz; i++) {
-		for (int j = 1; j <= naz; j++) {
-			xi[i][j] = 0;
-		}
-		xi[i][i] = 1;
-	}
-	double* pms = new double[naz+1];
-	for (int i = 1; i <= naz; i++) {
-		int v_idx = m_Vars[i-1];
-		var_get(v_idx, &pms[i]);
-	}
-	int vtype;
-	double fret = 0;
-	double anstol = 1e-4;
-	var_findadd("X", &m_IdxX, &vtype);
-	powell(pms, xi, naz, anstol, &m_NIter, &fret, this);
-	free_matrix(xi,1,naz,1,naz);
-	setVarsVals(pms);
-}
-
-void GLEFitLS::testFit() {
-	int nxy = m_X->size();
-	double sumy = 0.0;
-	for (int i = 0; i < nxy; i++) {
-		sumy = sumy + (*m_Y)[i];
-	}
-	double meany = sumy/nxy;
-	double sum1 = 0.0, sum2 = 0.0;
-	for (int i = 0; i < nxy; i++) {
-		var_set(m_IdxX, (*m_X)[i]);
-		double value = m_Function->evalDouble();
-		double y = (*m_Y)[i];
-		double r1 = value - y;
-		double r2 = meany - y;
-		sum1 = sum1 + r1*r1;
-		sum2 = sum2 + r2*r2;
-	}
-	m_RSquare = 1 - sum1/sum2;
-}
-
-void GLEFitLS::setVarsVals(double* vals) {
-	/* Set all variables to given values */
-	int naz = m_Vars.size();
-	for (int i = 1; i <= naz; i++) {
-		int v_idx = m_Vars[i-1];
-		if (v_idx >= 0) var_set(v_idx, vals[i]);
-	}
-}
-
-double GLEFitLS::fitMSE(double* vals) {
-	/* Set all variables to given values */
-	setVarsVals(vals);
-	/* Compute MSE */
-	double tot = 0.0;
-	for (vector<double>::size_type i = 0; i < m_X->size(); i++) {
-		var_set(m_IdxX, (*m_X)[i]);
-		double value = m_Function->evalDouble();
-		double residue = (*m_Y)[i] - value;
-		tot += residue*residue;
-	}
-	/* Return error */
-	return tot / m_X->size();
-}
-
-void GLEFitLS::toFunctionStr(const string& format, string* str) {
-	*str = "";
-	string fmt_str = format;
-	if (fmt_str == "") fmt_str = "fix 3";
-	GLENumberFormat fmt(fmt_str);
-	GLEPolish* polish = get_global_polish();
-	Tokenizer* tokens = polish->getTokens(m_FunctionStr);
-	string uc_token, v_str;
-	bool has_plus = false;
-	while (tokens->has_more_tokens()) {
-		const string& token = tokens->next_token();
-		str_to_uppercase(token, uc_token);
-		int v_idx = m_VarMap.try_get(uc_token);
-		if (uc_token != "X" && v_idx != -1) {
-			double value;
-			var_get(v_idx, &value);
-			fmt.format(value, &v_str);
-			if (has_plus && value >= 0) *str = *str + "+";
-			*str = *str + v_str;
-			has_plus = false;
-		} else {
-			if (has_plus) *str = *str + "+";
-			has_plus = token == "+";
-			if (!has_plus) *str = *str + token;
-		}
-	}
-}
 
 class GLELet {
 protected:
@@ -2794,7 +2652,11 @@ void GLELet::doFitFunction() {
 	double slope = 0, offset = 0, rsquared = 0;
 	char* new_let = new char[1000];
 	if (linfit) {
-		least_square(&x, &y, &slope, &offset, &rsquared);
+		//least_square(&x, &y, &slope, &offset, &rsquared);
+		auto result = boost::math::statistics::simple_ordinary_least_squares_with_R_squared(x, y);
+		offset   = std::get<0>(result);
+		slope    = std::get<1>(result);
+		rsquared = std::get<2>(result);
 		if (m_limitDataY || m_limitData) {
 			// find x values from ymax and min
 			// y=slope*x+offset
@@ -2815,7 +2677,11 @@ void GLELet::doFitFunction() {
 		for (vector<double>::iterator vdi = y.begin(); vdi != y.end(); ++vdi) {
 			(*vdi) = log(*vdi);
 		}
-		least_square(&x, &y, &slope, &offset, &rsquared);
+		//least_square(&x, &y, &slope, &offset, &rsquared);
+		auto result = boost::math::statistics::simple_ordinary_least_squares_with_R_squared(x, y);
+		offset   = std::get<0>(result);
+		slope    = std::get<1>(result);
+		rsquared = std::get<2>(result);
 		if (m_limitDataY || m_limitData) {
 			// find x values from ymax and min
 			// y=exp(offset)*exp(slope*x)
@@ -2837,7 +2703,11 @@ void GLELet::doFitFunction() {
 		for (vector<double>::iterator vdi = y.begin(); vdi != y.end(); ++vdi) {
 			(*vdi) = log10(*vdi);
 		}
-		least_square(&x,&y,&slope,&offset,&rsquared);
+		//least_square(&x,&y,&slope,&offset,&rsquared);
+		auto result = boost::math::statistics::simple_ordinary_least_squares_with_R_squared(x, y);
+		offset   = std::get<0>(result);
+		slope    = std::get<1>(result);
+		rsquared = std::get<2>(result);
 		if (m_limitDataY || m_limitData) {
 			// find x values from ymax and min
 			// y=exp(offset)*exp(slope*x)
@@ -2862,7 +2732,11 @@ void GLELet::doFitFunction() {
 		for (vector<double>::iterator vdi = x.begin(); vdi != x.end(); ++vdi) {
 			(*vdi) = log(*vdi);
 		}
-		least_square(&x, &y, &slope, &offset, &rsquared);
+		//least_square(&x, &y, &slope, &offset, &rsquared);
+		auto result = boost::math::statistics::simple_ordinary_least_squares_with_R_squared(x, y);
+		offset   = std::get<0>(result);
+		slope    = std::get<1>(result);
+		rsquared = std::get<2>(result);
 		if (m_limitDataY || m_limitData) {
 			// find x values from ymax and min
 			// y=exp(offset)*x^(slope)

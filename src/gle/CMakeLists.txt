@@ -34,11 +34,12 @@ set(GLE_SOURCES
 	general.cpp
 	op_def.cpp
 	gprint.cpp
+	#leastsq.cpp
+	gle-fitls.cpp
 	graph.cpp
 	graph2.cpp
 	key.cpp
 	keyword.cpp
-	leastsq.cpp
 	memory.cpp
 	mychar.cpp
 	pass.cpp

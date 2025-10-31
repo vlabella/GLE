@@ -53,6 +53,8 @@ double **matrix(int a, int b, int c, int d);
 void free_matrix(double** m, int nrl, int nrh, int ncl, int nch);
 
 void powell(double *p, double **xi, int n, double ftol, int *iter, double *fret, GLEPowellFunc* func);
-void least_square(std::vector<double>* x,std::vector<double>* y,double* slope, double* offset, double* rsquared);
+
+// deprecated using boost function
+//void least_square(std::vector<double>* x,std::vector<double>* y,double* slope, double* offset, double* rsquared);
 
 #endif
