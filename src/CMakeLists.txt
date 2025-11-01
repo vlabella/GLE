@@ -48,8 +48,10 @@ option(INSTALL_MAKEFMT "Install the makefmt program - only needed during gle bui
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
-option(EXTRA_GSLIB_SEARCH_LOCATION "Extra path for searching for gslib on linux and macOS" OFF)
+#option(EXTRA_GSLIB_SEARCH_LOCATION "Extra path for searching for gslib on linux and macOS" OFF)
 option(DEVELOPER_INSTALLATION "Linux only: Install all files in staging area, otherwise install in FHS paths on system." OFF)
+option(BUILD_TESTS "Build Testing Programs." OFF)
+option(INSTALL_TESTS "Install Testing Programs." OFF)
 
 if(NOT DEFINED POPPLER_INTERFACE)
 	# poppler interface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
@@ -84,7 +86,7 @@ if (POLICY CMP0069)
 	include(CheckIPOSupported)
 	check_ipo_supported(RESULT IPO_SUPPORTED)
 	if ( IPO_SUPPORTED )
-		message("LTO/IPO Supported")
+		message(STATUS "LTO/IPO Supported - Turning On")
 		# only set for release builds - this will apply to all targets: .obj, .exe, .so, .dll, .lib, .a
 		set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
 		set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_DEBUG OFF)
@@ -348,7 +350,7 @@ find_path(GDIR2 gdevdsp.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices 
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
 find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
-message("GHOSTPDL_INCLUDE_DIRS ${GHOSTPDL_INCLUDE_DIRS}")
+message(STATUS "GHOSTPDL_INCLUDE_DIRS: ${GHOSTPDL_INCLUDE_DIRS}")
 
 include_directories(
 	${ZLIB_INCLUDE_DIRS}
@@ -603,6 +605,11 @@ endif()
 if(BUILD_GLEBTOOL)
 add_subdirectory(glebtool)
 add_dependencies(glebtool gle)
+endif()
+if(BUILD_TESTS)
+	message(STATUS "Building Tests")
+	add_subdirectory(tests)
+	add_dependencies(findgs gle)
 endif()
 
 # documentation file installation in doc folder

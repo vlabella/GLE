@@ -295,6 +295,13 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 	gsapi_revision_t rv;
 	/* Try to load the library */
 	if (location == "") {
+		#ifdef Q_OS_LINUX
+		tryLocation("libgs.so");
+		#endif
+		#ifdef Q_OS_MACOS
+		tryLocation("libgs.dylib");
+		#endif
+		/*
 		#ifdef Q_OS_HURD
 		tryLocationLoop("/usr/lib/i386-gnu/");
 		#endif // HURD
@@ -318,6 +325,7 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 		#ifdef EXTRA_GSLIB_SEARCH_LOCATION
 		tryLocation(EXTRA_GSLIB_SEARCH_LOCATION);
 		#endif
+		*/
 	} else {
 		m_LibGSLocation = location;
 		QString libloc = location;
