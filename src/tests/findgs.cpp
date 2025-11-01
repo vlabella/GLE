@@ -16,9 +16,10 @@ using namespace std;
     #define LAST_ERROR GetLastError()
 #else
     #include <dlfcn.h>
-    const char* libName = "libgs.so";
     #ifdef __APPLE__
-    libName = "libgs.dylib";
+    const char* libName = "libgs.dylib";
+    #else
+    const char* libName = "libgs.so";
     #endif
     typedef void* LibHandle;
     #define LOAD_LIBRARY(name) dlopen(name, RTLD_LAZY)
