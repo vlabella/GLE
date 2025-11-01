@@ -55,6 +55,7 @@ jobs:
             brew install --quiet boost cairo ghostscript jpeg-turbo \
                 libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
+            ls -la /opt/homebrew/opt/ghostscript/lib
             jobs=$(sysctl -n hw.activecpu)
             ;;
           Windows)
