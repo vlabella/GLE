@@ -48,9 +48,6 @@ jobs:
         case $RUNNER_OS in
           Linux)
             sudo apt-get update
-            # Add libjbig-dev and libzstd-dev once GLE can find them without
-            # relying on nonexistent cmake config files.
-            # See https://github.com/vlabella/GLE/issues/16
             sudo apt-get install cmake freeglut3-dev libboost-dev \
                 libcairo-dev libdeflate-dev libgs-dev \
                 libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
@@ -61,9 +58,6 @@ jobs:
             jobs=$(nproc)
             ;;
           macOS)
-            # Add jbigkit once GLE can find it without relying on nonexistent
-            # cmake config files.
-            # See https://github.com/vlabella/GLE/issues/16
             # liblzma and libz are already in macOS.
             # cmake is preinstalled with Homebrew on GitHub Actions runners and
             # trying to install it again produces an unintelligible warning.
@@ -72,9 +66,6 @@ jobs:
                 texlive
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             jobs=$(sysctl -n hw.activecpu)
-            ;;
-          Windows)
-            # see build-windows.yml
             ;;
           *)
             jobs=1
