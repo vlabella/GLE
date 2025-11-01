@@ -61,6 +61,24 @@ jobs:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
 
+      # needed for running tests findgs
+    - name: Choco Install Ghostscript
+      uses: crazy-max/ghaction-chocolatey@v3
+      with:
+        args: install ghostscript --no-progress
+
+      # use powershell to add correct gs path since version number may change
+    - name: Add Ghostcript to PATH using PowerShell
+      shell: pwsh
+      run: >
+        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory | Where-Object { $_.Name -like "gs*" };
+        $g=$o.FullName+"\bin" ; echo $g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+      # if this fails then gs is not in path
+    - name: Display gs version
+      shell: cmd
+      run: gswin64c --version
+
     - name: Configure CMake
       working-directory: ${{ github.workspace }}
       env:
