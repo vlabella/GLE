@@ -68,7 +68,6 @@ jobs:
       run: >
         cmake -B build -S src
         -DCMAKE_TOOLCHAIN_FILE=${{env.MY_VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
-        -DCMAKE_BUILD_TYPE=${{env.BUILD_TYPE}}
         -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
         -DMSVC_USE_STATIC_RUNTIME=ON
@@ -76,6 +75,7 @@ jobs:
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
         -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
+        -DBUILD_TESTS=ON
       shell: cmd
 
     - name: Build

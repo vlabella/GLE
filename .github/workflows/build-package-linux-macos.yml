@@ -88,6 +88,7 @@ jobs:
         -DCMAKE_BUILD_TYPE=Release
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
+        -DBUILD_TESTS=ON
 
     - name: Build GLE
       run: |

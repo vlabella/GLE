@@ -66,8 +66,10 @@ jobs:
 
         echo "--parallel $jobs" >> build.args
     - name: Configure cmake
-      run: |
-        xargs -t < configure.args cmake -S src -B build -D CMAKE_BUILD_TYPE=Release
+      run: >
+        xargs -t < configure.args cmake -S src -B build
+        -DCMAKE_BUILD_TYPE=Release
+        -DBUILD_TESTS=ON
     - name: Build GLE
       run: |
         xargs -t < build.args cmake --build build --config Release
