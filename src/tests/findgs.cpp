@@ -16,7 +16,7 @@ using namespace std;
     #define LAST_ERROR GetLastError()
 #else
     #include <dlfcn.h>
-    const char* libName ="libgs.so";
+    const char* libName = "libgs.so";
     #ifdef __APPLE__
     libName = "libgs.dylib";
     #endif
@@ -57,9 +57,9 @@ int main() {
             }
         }
     #else
-        Dl_info info;
-        if (dladdr(gsapi_revision, &info) && info.dli_fname) {
-            cout << "Library loaded from: " << info.dli_fname << endl;
+        Dl_info dlinfo;
+        if (dladdr((void*)gsapi_revision, &dlinfo) && dlinfo.dli_fname) {
+            cout << "Library loaded from: " << dlinfo.dli_fname << endl;
         } else {
             cerr << "dladdr failed to retrieve library path." << endl;
         }
