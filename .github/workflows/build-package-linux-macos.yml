@@ -45,7 +45,7 @@ jobs:
         set -x
         touch configure.args
 
-        case $RUNNER_OS in
+        case "$RUNNER_OS" in
           Linux)
             sudo apt-get update
             sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev \
@@ -80,7 +80,7 @@ jobs:
 
     - name: Build GLE
       run: |
-        case $RUNNER_OS in
+        case "$RUNNER_OS" in
         macOS)
           export DYLD_LIBRARY_PATH=/opt/homebrew/opt/ghostscript/lib:$DYLD_LIBRARY_PATH
         ;;
@@ -96,7 +96,6 @@ jobs:
       run: |
         export PATH=${{github.workspace}}/destroot/usr/local/bin:$PATH; make -f Makefile.gcc
 
-
 #    - name: Upload Artifacts - GLE Manual PDF
 #      uses: actions/upload-artifact@v4.4.3
 #      with:
@@ -109,7 +108,7 @@ jobs:
     - name: Package GLE
       working-directory: ${{github.workspace}}/build
       run: |
-        case $RUNNER_OS in
+        case "$RUNNER_OS" in
           Linux)
             cpack -G "ZIP;7Z" -C Release -B destroot/usr/local
             ;;
@@ -117,7 +116,6 @@ jobs:
             cpack -G "DragNDrop;ZIP;7Z" -C Release -B destroot/usr/local
             ;;
           *)
-            jobs=1
         esac
 
     - name: Upload Artifacts - GLE Binary Distributables
