@@ -48,22 +48,19 @@ jobs:
         case $RUNNER_OS in
           Linux)
             sudo apt-get update
-            sudo apt-get install cmake freeglut3-dev libboost-dev \
-                libcairo-dev libdeflate-dev libgs-dev \
-                libjpeg-turbo8-dev liblzma-dev libpixman-1-dev \
-                libpng-dev libtiff-dev libz-dev qt6-base-dev libqt6core5compat6-dev \
-                libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt6-dev \
-                libglib2.0-dev extra-cmake-modules \
-                ghostscript texlive texlive-latex-extra texlive-science dvipng latexmk
+            sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev \
+                libgs-dev libjpeg-turbo8-dev liblzma-dev libpixman-1-dev libpng-dev libtiff-dev \
+                libz-dev qt6-base-dev libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev \
+                libpoppler-qt6-dev libglib2.0-dev extra-cmake-modules ghostscript \
+                texlive texlive-latex-extra texlive-science dvipng latexmk
             jobs=$(nproc)
             ;;
           macOS)
             # liblzma and libz are already in macOS.
             # cmake is preinstalled with Homebrew on GitHub Actions runners and
             # trying to install it again produces an unintelligible warning.
-            brew install --quiet boost cairo ghostscript jpeg-turbo \
-                libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules \
-                texlive
+            brew install --quiet boost cairo ghostscript jpeg-turbo libdeflate libpng libtiff \
+                pixman qt zstd poppler glib extra-cmake-modules texlive
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             jobs=$(sysctl -n hw.activecpu)
             ;;
@@ -83,6 +80,11 @@ jobs:
 
     - name: Build GLE
       run: |
+        case $RUNNER_OS in
+        macOS)
+          export DYLD_LIBRARY_PATH=/opt/homebrew/opt/ghostscript/lib:$DYLD_LIBRARY_PATH
+        ;;
+        esac
         xargs -t < build.args cmake --build build --config Release
 
     - name: Install GLE
