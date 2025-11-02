@@ -63,9 +63,9 @@ jobs:
     - name: Build GLE
       run: |
         case $RUNNER_OS in
-        macOS)
-          export DYLD_LIBRARY_PATH=/opt/homebrew/opt/ghostscript/lib:$DYLD_LIBRARY_PATH
-        ;;
+          macOS)
+            export DYLD_LIBRARY_PATH=/opt/homebrew/opt/ghostscript/lib:$DYLD_LIBRARY_PATH
+          ;;
         esac
         xargs -t < build.args cmake --build build --config Release
     - name: Install GLE
