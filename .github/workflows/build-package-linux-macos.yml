@@ -114,6 +114,7 @@ jobs:
             ;;
           macOS)
             cpack -G "DragNDrop;ZIP;7Z" -C Release -B destroot/usr/local
+            cat /Users/runner/work/GLE/GLE/build/destroot/usr/local/_CPack_Packages/Darwin/DragNDrop/PreinstallOutput.log
             ;;
         esac
 
