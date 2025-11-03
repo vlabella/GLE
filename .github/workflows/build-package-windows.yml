@@ -192,7 +192,7 @@ jobs:
     - name: Install Manual
       working-directory: ${{ github.workspace }}
       run: |
-        cmake -DBUILD_TYPE=${{env.BUILD_TYPE}} -P build\cmake_install.cmake
+        cmake --install build --config ${{env.BUILD_TYPE}}
       shell: cmd
 
     - name: Upload Artifacts - GLE Manual PDF
