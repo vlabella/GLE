@@ -120,8 +120,7 @@ jobs:
             cpack -G "ZIP;7Z" -C Release -B ${{github.workspace}}/stage
             ;;
           macOS)
-      #     cpack -G "DragNDrop;ZIP;7Z" -C Release -B ${{github.workspace}}/stage
-            cpack -G "ZIP;7Z" -C Release -B ${{github.workspace}}/stage
+            cpack -G "DragNDrop;ZIP;7Z" -C Release -B ${{github.workspace}}/stage
             ;;
         esac
 
