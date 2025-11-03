@@ -77,6 +77,7 @@ jobs:
         -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
         -DBUILD_TESTS=ON
+        -DCMAKE_INSTALL_PREFIX=stage
         -DDEVELOPER_INSTALLATION=ON
 
     - name: Build GLE
@@ -90,17 +91,17 @@ jobs:
 
     - name: Install GLE
       run: |
-        DESTDIR=destroot cmake --install build --config Release
+        cmake --install build --config Release
 
     - name: Build GLE Manual
       working-directory: ${{github.workspace}}/gle-manual
       run: |
-        export PATH=${{github.workspace}}/destroot/usr/local/bin:$PATH; make -f Makefile.gcc
+        export PATH=${{github.workspace}}/stage/bin:$PATH; make -f Makefile.gcc
 
       # must run again to install the manual
     - name: Install Manual
       run: |
-        DESTDIR=destroot cmake --install build --config Release
+        cmake --install build --config Release
 
 #    - name: Upload Artifacts - GLE Manual PDF
 #      uses: actions/upload-artifact@v4.4.3
@@ -116,11 +117,10 @@ jobs:
       run: |
         case "$RUNNER_OS" in
           Linux)
-            cpack -G "ZIP;7Z" -C Release -B destroot/usr/local
+            cpack -G "ZIP;7Z" -C Release -B ${{github.workspace}}/stage
             ;;
           macOS)
-            cpack -G "DragNDrop;ZIP;7Z" -C Release -B destroot/usr/local
-            cat /Users/runner/work/GLE/GLE/build/destroot/usr/local/_CPack_Packages/Darwin/DragNDrop/PreinstallOutput.log
+            cpack -G "DragNDrop;ZIP;7Z" -C Release -B ${{github.workspace}}/stage
             ;;
         esac
 
@@ -128,7 +128,7 @@ jobs:
       uses: actions/upload-artifact@v4.4.3
       with:
         name: GLE Binary Distributables ${{ runner.os }}
-        path: ${{github.workspace}}/build/destroot/usr/local/gle-*.*
+        path: ${{github.workspace}}/stage/gle-*.*
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
@@ -140,5 +140,5 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file_glob: true
-        file: ${{github.workspace}}/build/destroot/usr/local/gle-*.*
+        file: ${{github.workspace}}/stage/gle-*.*
         tag: ${{ github.event.client_payload.tag }}
