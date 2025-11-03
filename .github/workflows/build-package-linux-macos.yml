@@ -44,7 +44,7 @@ jobs:
       run: |
         set -x
         touch configure.args
-
+        jobs=1
         case "$RUNNER_OS" in
           Linux)
             sudo apt-get update
@@ -64,10 +64,7 @@ jobs:
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             jobs=$(sysctl -n hw.activecpu)
             ;;
-          *)
-            jobs=1
         esac
-
         echo "--parallel $jobs" >> build.args
 
     - name: Configure cmake
