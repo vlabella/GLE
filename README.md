@@ -165,10 +165,13 @@ To test the installation run.
 and output should look something like this on windows
 
 	GLE version:             4.3.9
-	Build date:              Oct 29 2025 12:22:58
-	GLE_TOP:                 C:\Program Files\GLE
-	GLE_BIN_DIR:             C:\Program Files\GLE\bin
+	Build date:              Nov 5 2025 14:44:22
+	GLE_TOP:                 C:\Program Files\gle-graphics
+	GLE_BIN_DIR:             C:\Program Files\gle-graphics\bin
 	GLE_USRLIB:              
+	GLERC (global):          C:\Program Files\gle-graphics\glerc
+	GLERC (user):            C:\Users\<username>\AppData\Roaming\gle-graphics\.glerc
+	inittex.ini:             C:\Program Files\gle-graphics\inittex.ini
 	GhostScript:             C:\Program Files\gs\gs10.06.0\bin\gswin64c.exe
 	GS library:              C:\Program Files\gs\gs10.06.0\bin\gsdll64.dll
 	Bitmap import:           JPEG, PNG, TIFF, GIF
