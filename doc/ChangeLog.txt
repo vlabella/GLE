@@ -5,20 +5,21 @@
     - eliminate cmake warnings about install paths.
     - improve inittex.ini generation by setting GLE_TOP during creation.
     - qgle: remove out of date ghostscript library header files.
-    - linux: fix for searching for libgs.so: added x86_64-linux-gnu to end of search paths
+    - fixed searching for GhostScript library on linux.  Does not rely on searching paths anymore. Uses dlopen/LoadLibrary
+      which eliminates need to hard code architecture dependent paths for linux.
     - gle -info displays GLE_BIN_DIR when GLE_TOP is set
     - gle -info displays value of GLE_USRLIB
     - fix default value of BUILD_MANIP in cmake file
     - linux FHS compliance:
         -automatically sets GLE_TOP if empty by searching for glerc similar to Windows.
          Search is relative to executable location in FHS compliant directories.
-         If gle is in /usr/bin it will search in /usr/share/gle then /usr/share/gle-graphics
+         If gle is in /usr/local/bin it will search in /usr/local/share/gle-graphics then /usr/local/share/gle
          one directory up from gle executable.
          Search is not performed if GLE_TOP is set.
-         Search also works if gle is in /user/local/bin
+         Search also works if gle is in /user/bin
     - linux gui FHS compliance: Searches in FHS compliant directories for gle-manual.pdf
-         if GLE_TOP is /usr/share/gle it will search in /usr/share/doc/gle
          if GLE_TOP is /usr/share/gle-graphics it will search in /usr/share/doc/gle-graphics
+         if GLE_TOP is /usr/share/gle it will search in /usr/share/doc/gle
          if not found then it will also search in non FHS compliant locations: /usr/share/gle/doc /usr/share/gle-graphics/doc
     - cmake install command on Linux installs to FHS compliant locations by default unless DEVELOPER_INSTALLATION is ON (see below)
     - cmake option DEVELOPER_INSTALLATION (default OFF) if ON will install all files to same location on linux similar to Windows
