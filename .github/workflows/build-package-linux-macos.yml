@@ -96,9 +96,13 @@ jobs:
         export PATH=${{github.workspace}}/stage/bin:$PATH; make -f Makefile.gcc
 
       # must run again to install the manual
-    - name: Install Manual
+    - name: Install Test Debugging
       run: |
-        cmake --install build --config Release
+        case "$RUNNER_OS" in
+          macOS)
+            /opt/homebrew/bin/cmake --build . --config Release --target preinstall
+          ;;
+        esac
 
 #    - name: Upload Artifacts - GLE Manual PDF
 #      uses: actions/upload-artifact@v4.4.3
