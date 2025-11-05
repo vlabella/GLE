@@ -97,6 +97,7 @@ endif()
 # -- cpack information
 #
 set(CPACK_PACKAGE_VENDOR "GLE")
+set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION})
 set(CPACK_VERBATIM_VARIABLES true)
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GLE Graphics Programming Language")
 #set(CPACK_PACKAGE_DESCRIPTION_FILE )
@@ -139,12 +140,14 @@ set (CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
   DeleteRegKey HKCR 'GLEFile'
 ")
 #
-# -- Debian pacakge specific settings
+# -- Debian package specific settings
 #
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 set(CPACK_DEBIAN_PACKAGE_SECTION "graphics")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "GLE Graphics Layout Engine")
+set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "glx.sourceforge.io")
 set(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 #
 # -- wix specific settings unused no .msi generated
