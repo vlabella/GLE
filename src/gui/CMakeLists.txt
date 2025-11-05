@@ -162,7 +162,7 @@ if(APPLE)
 endif()
 set_target_properties(qgle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-install(TARGETS qgle
-		CONFIGURATIONS Release Debug
-		RUNTIME
-		BUNDLE DESTINATION bin )  # should it be Applicaitons for system installation??
+#install(TARGETS qgle
+#		CONFIGURATIONS Release Debug
+#		RUNTIME
+#		BUNDLE DESTINATION Applications )  # should it be Applicaitons for system installation??
