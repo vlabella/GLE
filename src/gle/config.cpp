@@ -179,28 +179,10 @@ void init_config(ConfigCollection* collection) {
 	/* GhostScript Program */
 	strarg = section->addStringOption("ghostscript", GLE_TOOL_GHOSTSCRIPT_CMD);
 #ifdef _WIN32
-	#define ENVIRONMENT32
-	#if _WIN32 || _WIN64
-		// Visual Studio builds with cl.exe
-		#if _WIN64
-			#define ENVIRONMENT64
-		#else
-			#define ENVIRONMENT32
-		#endif
-	#endif
-	#if __GNUC__
-		// gcc builds
-		#if __x86_64__ || __ppc64__
-			#define ENVIRONMENT64
-		#else
-			#define ENVIRONMENT32
-		#endif
-	#endif
-	#ifdef ENVIRONMENT32
-		strarg->setDefault("gswin32c.exe");
-	#endif
-	#ifdef ENVIRONMENT64
+	#if defined(_WIN64) || defined(__x86_64__)
 		strarg->setDefault("gswin64c.exe");
+	#else
+		strarg->setDefault("gswin32c.exe");
 	#endif
 #endif
 #ifdef __APPLE__
@@ -218,35 +200,18 @@ void init_config(ConfigCollection* collection) {
 	/* GhostScript Library */
 	strarg = section->addStringOption("libgs", GLE_TOOL_GHOSTSCRIPT_LIB);
 #ifdef _WIN32
-	#define ENVIRONMENT32
-	#if _WIN32 || _WIN64
-		// Visual Studio builds with cl.exe
-		#if _WIN64
-			#define ENVIRONMENT64
-		#else
-			#define ENVIRONMENT32
-		#endif
-	#endif
-	#if __GNUC__
-		// gcc builds
-		#if __x86_64__ || __ppc64__
-			#define ENVIRONMENT64
-		#else
-			#define ENVIRONMENT32
-		#endif
-	#endif
-	#ifdef ENVIRONMENT32
-		strarg->setDefault("gsdll32.dll");
-	#endif
-	#ifdef ENVIRONMENT64
+	#if defined(_WIN64) || defined(__x86_64__)
 		strarg->setDefault("gsdll64.dll");
+	#else
+		strarg->setDefault("gsdll32.dll");
 	#endif
 #endif
 #ifdef __APPLE__
-	strarg->setDefault("/Library/Frameworks/Ghostscript.framework,Ghostscript.framework");
+	strarg->setDefault("libgs.dylib");
+	//strarg->setDefault("/Library/Frameworks/Ghostscript.framework,Ghostscript.framework");
 #endif
 #if defined(__unix__) && !defined(__APPLE__)
-	strarg->setDefault("/usr/lib/libgs.so");
+	strarg->setDefault("libgs.so");
 #endif
 	strarg = section->addStringOption("editor", GLE_TOOL_TEXT_EDITOR);
 	strarg = section->addStringOption("pdfviewer", GLE_TOOL_PDF_VIEWER);
@@ -461,6 +426,7 @@ void find_deps(const string& loc, GLEInterface* iface) {
 		tokenizer<char_separator> tokens(strarg->getDefault(), separator);
 		while (tokens.has_more()) {
 			const string& toolName = tokens.next_token();
+			//cout <<"toolname: "<<toolName<<endl;
 			if (toolName == ";") {
 				if (tokens.has_more() && strarg->isDefault()) {
 					findTool->setNotFound(tokens.next_token());
@@ -518,14 +484,23 @@ void find_deps(const string& loc, GLEInterface* iface) {
 	for (unsigned int i = 0; i < tofind.size(); i++) {
 		tofind[i]->updateResult(true);
 	}
-	#if defined(__unix__) || defined(__APPLE__)
-		// Search for libraries in typical directories and in LD_LIBRARY_PATH
-		string gslibloc = GLEFindLibrary("libgs", &progress);
-		if (gslibloc != "") {
-			CmdLineArgString* gslib_stra = (CmdLineArgString*)tools->getOption(GLE_TOOL_GHOSTSCRIPT_LIB)->getArg(0);
-			gslib_stra->setValue(gslibloc.c_str());
-		}
+	string name = "libgs.so";
+	#ifdef __APPLE__
+	name = "libgs.dylib"
 	#endif
+	#ifdef _WIN32
+	name = "gsdll64.dll";
+	#endif
+	// Search for libgs using dlopen/LoadLibrary
+	string gslibloc = GLEFindLibrary(name.c_str(), &progress,"gsapi_revision");
+	// dlopen/LoadLibrary will only find it if it is installed properly.
+	// if it cannot be found this way then it is not install properly
+	// set to empty to warn the user - even if the initial search found it in a directory that
+	// it is not supposed to be in.
+	//if (gslibloc != "") {
+		CmdLineArgString* gslib_stra = (CmdLineArgString*)tools->getOption(GLE_TOOL_GHOSTSCRIPT_LIB)->getArg(0);
+		gslib_stra->setValue(gslibloc.c_str());
+	//}
 	output->println();
 	// Write installed GLE's to config section
 	ConfigSection* gle = collection->getSection(GLE_CONFIG_GLE);
@@ -684,12 +659,12 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 			string save = GLE_TOP_DIR;
 			#if defined(__unix__) || defined(__APPLE__)
 				// linux FHS complaince first
-			   	// FHS Try one level higher than executable in share/gle
-				GLE_TOP_DIR += DIR_SEP + "share/gle";
+			   	// FHS Try one level higher than executable in share/gle-graphics
+				GLE_TOP_DIR += DIR_SEP + "share/gle-graphics";
 				has_config = try_load_config_sub(conf_name, triedLocations);
 				if(!has_config){
-					// try Debian package location
-					GLE_TOP_DIR = save + DIR_SEP + "share/gle-graphics";
+					// try alternate location
+					GLE_TOP_DIR = save + DIR_SEP + "share/gle";
 				}
 				has_config = try_load_config_sub(conf_name, triedLocations);
 				if(!has_config){

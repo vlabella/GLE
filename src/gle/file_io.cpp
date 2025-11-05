@@ -70,6 +70,7 @@
 	#include <limits.h>
 	#include <unistd.h>
 	#include <fcntl.h>
+	#include <dlfcn.h>
 	#include <sys/types.h>
 	#include <sys/wait.h>
 	#include <dirent.h>
@@ -140,7 +141,7 @@ bool GLEGetEnv(const string& name, string& result) {
 //
 
 void FillIncludePaths(vector<string> &IP) {
-	// fills containor with paths to search for
+	// fills container with paths to search for
 	// file.  This is called if it can't find file
 	// in current directory
 	//
@@ -1170,13 +1171,84 @@ void GLEFindFiles(const string& dirname, vector<GLEFindEntry*>& tofind, GLEProgr
 	}
 }
 
-string GLEFindLibrary(const char* name, GLEProgressIndicator* progress) {
-#if defined(__unix__) || defined(__APPLE__)
+
+string GLEFindLibrary(const char* libName, GLEProgressIndicator* progress, string symbol_name )
+{
+	//
+	// -- Find a Shared Library base on library name and symbol name
+	//
+	// New routine - works on windows, mac, and linux
+	//
+	// dlopen and LoadLibrary will open library if it is installed in the proper path
+	// Linux/mac:  LD_IRBARY_PATH
+	// Windows:    PATH
+	// If these calls fail then library is not installed properly and this is a system
+	// config problem, not a GLE problem.
+	//
+	// Finding the path requires symbol name from that library (i.e. function number)
+	//
+	// GLE should not search paths to find shared libraries
+	// this can lead to problems for different architectures and system setups
+	// as well as false positives id the library is on the disk but not in the proper location
+	//
+	#ifdef _WIN32
+	    typedef HMODULE LibHandle;
+	    #define LOAD_LIBRARY(name) LoadLibraryA(name)
+	    #define GET_SYMBOL(handle, name) GetProcAddress(handle, name)
+	    #define CLOSE_LIBRARY(handle) FreeLibrary(handle)
+	    #define LAST_ERROR GetLastError()
+	#else
+	    typedef void* LibHandle;
+	    #define LOAD_LIBRARY(name) dlopen(name, RTLD_LAZY)
+	    #define GET_SYMBOL(handle, name) dlsym(handle, name)
+	    #define CLOSE_LIBRARY(handle) dlclose(handle)
+	    #define LAST_ERROR dlerror()
+	#endif
+
+    LibHandle handle = LOAD_LIBRARY(libName);
+    if (!handle) {
+    	//cout <<"cannot open library"<<libName<<endl;
+        return "";
+    }
+    // Clear any existing errors
+    LAST_ERROR;
+    void* symbol = (void*)GET_SYMBOL(handle, symbol_name.c_str());
+    if(!symbol){
+    	return "";
+    }
+    // get the path to the shared library
+    #ifdef _WIN32
+        HMODULE hMod = nullptr;
+        if (GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS, (LPCTSTR)symbol, &hMod)) {
+            char path[MAX_PATH];
+            if (GetModuleFileNameA(hMod, path, MAX_PATH)) {
+                return path;
+            }
+        }
+    #else
+        Dl_info dlinfo;
+        if (dladdr((void*)symbol, &dlinfo) && dlinfo.dli_fname) {
+        	return dlinfo.dli_fname;
+        }
+    #endif
+    return "";
+}
+
+/*
+string GLEFindLibraryOLD(const char* name, GLEProgressIndicator* progress) {
+	// old deprecated - GLE should not search paths to find shared library
+	// this only works for unix and mac
+	#if defined(__unix__) || defined(__APPLE__)
+	string ext = ".so";
+	#ifdef __APPLE__
+	ext=".dylib";
+	#endif
+	#endif
 	string libpath;
 	const char* ldlibpath = getenv("LD_LIBRARY_PATH");
 	if (ldlibpath != NULL && ldlibpath[0] != 0) {
 		libpath = ldlibpath;
-		libpath += ":";
+	//	libpath += ":";
 	}
 	#ifdef __x86_64__
 		libpath += "/usr/lib64:";
@@ -1200,25 +1272,18 @@ string GLEFindLibrary(const char* name, GLEProgressIndicator* progress) {
 			struct dirent* entry = readdir(dir);
 			while (entry != NULL) {
 				string fname = entry->d_name;
-				if (str_starts_with(fname, tofind.c_str()) && str_i_str(fname, ".so") != -1) {
+				if (str_starts_with(fname, tofind.c_str()) && str_i_str(fname, ext.c_str()) != -1) {
 					string result = dirname + DIR_SEP + fname;
 					return result;
 				}
-#ifdef __APPLE__
-				if (str_starts_with(fname, tofind.c_str()) && str_i_str(fname, ".dylib") != -1) {
-					string result = dirname + DIR_SEP + fname;
-					return result;
-				}
-#endif
 				entry = readdir(dir);
 			}
 			closedir(dir);
 		}
 	}
-#endif
 	return string("");
 }
-
+*/
 void GLEFindPrograms(vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress) {
 #if defined(__unix__) || defined(__APPLE__)
 	const char* path = getenv("PATH");

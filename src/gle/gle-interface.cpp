@@ -615,6 +615,7 @@ bool GLEInterface::hasCmdLineOptionString(const char* name) {
 string GLEInterface::getGhostScriptLocation() {
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
 #ifdef _WIN32
+	// gs DLL is in path next to ghostscript executable
 	string name = "gsdll32.dll";
 	#if _WIN64
 		// VS builds
@@ -660,13 +661,15 @@ string GLEInterface::getUserConfigLocation() {
 		GLEGetEnv("APPDATA", location);
 		if (location != "") {
 			AddDirSep(location);
-			location += "glx.sourceforge.net";
+			location += "gle-graphics";
 		}
+//		cout << "WIN32 getUserConfigLocation() "<<location<<endl;
 	#endif
 	if (location != "") {
 		AddDirSep(location);
 		location += ".glerc";
 	}
+//	cout << "getUserConfigLocation() "<<location<<endl;
 	return location;
 }
 
@@ -688,16 +691,16 @@ string GLEInterface::getManualLocation()
 	string loc;
 	#if defined(__unix__) || defined(__APPLE__)
 		// try FHS location of GLE_TOP
-		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle", "gle-manual.pdf", loc)) {
-			return loc;
-		}
-		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle", "gle-manual.pdf.gz", loc)) {
-			return loc;
-		}
 		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle-graphics", "gle-manual.pdf", loc)) {
 			return loc;
 		}
 		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle-graphics", "gle-manual.pdf.gz", loc)) {
+			return loc;
+		}
+		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle", "gle-manual.pdf", loc)) {
+			return loc;
+		}
+		if (GLEAddRelPathAndFileTry(GLE_TOP_DIR, 1, "doc/gle", "gle-manual.pdf.gz", loc)) {
 			return loc;
 		}
 	#endif
