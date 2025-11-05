@@ -294,6 +294,7 @@ void do_show_info() {
 	string version, bdate, usrlib;
 	g_get_version(&version);
 	g_get_build_date(&bdate);
+	GLEInterface* iface = GLEGetInterfacePointer();
 	cout << "GLE version:             " << version << endl;
 	if (!bdate.empty()) {
 		cout << "Build date:              " << bdate << endl;
@@ -305,6 +306,23 @@ void do_show_info() {
 		usrlib = getenv("GLE_USRLIB");
 	}
 	cout << "GLE_USRLIB:              " << usrlib << endl;
+	// test for existence for these files
+	const string not_found_red = " \033[91m NOT FOUND\033[0m";
+	string fname = GLE_TOP_DIR+DIR_SEP+"glerc";
+	string exists = "";
+	if(!GLEFileExists(fname)) exists = not_found_red;
+	cout << "GLERC (global):          " << fname << exists << endl;
+
+	fname = iface->getUserConfigLocation();
+	exists = "";
+	if(!GLEFileExists(fname)) exists = not_found_red;
+	cout << "GLERC (user):            " << fname << exists << endl;
+
+	fname = GLE_TOP_DIR+DIR_SEP+"inittex.ini";
+	exists = "";
+	if(!GLEFileExists(fname)) exists = not_found_red;
+	cout << "inittex.ini:             " << fname << exists << endl;
+
 	/* Location of GhostScript */
 	string gs_dir;
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);

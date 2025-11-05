@@ -5,24 +5,26 @@
     - eliminate cmake warnings about install paths.
     - improve inittex.ini generation by setting GLE_TOP during creation.
     - qgle: remove out of date ghostscript library header files.
-    - fixed searching for GhostScript library on linux.  Does not rely on searching paths anymore. Uses dlopen/LoadLibrary
-      which eliminates need to hard code architecture dependent paths for linux.
-    - gle -info displays GLE_BIN_DIR when GLE_TOP is set
+    - fixed searching for GhostScript library on Linux.  Does not rely on searching paths anymore. Uses dlopen/LoadLibrary
+      which eliminates need to hard code architecture dependent paths for Linux.
+    - no longer write to global glerc file on Windows - all configs saved to user's .glerc file
+    - gle -info displays value of GLE_BIN_DIR
     - gle -info displays value of GLE_USRLIB
+    - gle -info displays locations of glerc, .glerc, and inittex.ini and will warn user (in red) if not found
     - fix default value of BUILD_MANIP in cmake file
-    - linux FHS compliance:
+    - Linux FHS compliance:
         -automatically sets GLE_TOP if empty by searching for glerc similar to Windows.
          Search is relative to executable location in FHS compliant directories.
          If gle is in /usr/local/bin it will search in /usr/local/share/gle-graphics then /usr/local/share/gle
          one directory up from gle executable.
          Search is not performed if GLE_TOP is set.
          Search also works if gle is in /user/bin
-    - linux gui FHS compliance: Searches in FHS compliant directories for gle-manual.pdf
+    - Linux gui FHS compliance: Searches in FHS compliant directories for gle-manual.pdf
          if GLE_TOP is /usr/share/gle-graphics it will search in /usr/share/doc/gle-graphics
          if GLE_TOP is /usr/share/gle it will search in /usr/share/doc/gle
          if not found then it will also search in non FHS compliant locations: /usr/share/gle/doc /usr/share/gle-graphics/doc
     - cmake install command on Linux installs to FHS compliant locations by default unless DEVELOPER_INSTALLATION is ON (see below)
-    - cmake option DEVELOPER_INSTALLATION (default OFF) if ON will install all files to same location on linux similar to Windows
+    - cmake option DEVELOPER_INSTALLATION (default OFF) if ON will install all files to same location on Linux similar to Windows
       which is not FHS compliant but useful in development and testing.
     - Fixed one definition rule (ODR) violation for struct keyw which prevented optimizations (LTO/IPO) on Linux.
     - Revised fitting code (linfit) to use boost C++ linear regression instead of hand coded routine.

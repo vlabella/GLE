@@ -613,22 +613,25 @@ bool try_load_config_sub(string& conf_name, vector<string>& triedLocations) {
 
 bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, ConfigCollection& coll) {
 	//
-	// -- Sets GLE_TOP from environment or searching for glerc
+	// -- loads the config file glerc from global location and user location
+	//
+	// -- Sets GLE_TOP if not set from environment or by searching for glerc
 	//    also sets GLE_BIN_DIR
-	//    GLE_TOP is location of glerc et al.
+	//    GLE_TOP is location of global glerc, init.tex, and inittex.ini
+	//
+	//    GLE_TOP_DIR and GLE_BIN_DIR are program global variables
 	//
 	// -> prefer environment variable GLE_TOP
 	// -> otherwise, locate relative to executable location
 	//      Windows: search up one directory from the executable
-	//      C:\Program Files\gle\bin\gle.exe   <<- executable
+	//      C:\Program Files\gle\bin\gle.exe   << -- executable
 	//      C:\Program Files\gle\bin           << -- GLE_BIN_DIR
 	//      C:\Program Files\gle			   << -- GLE_TOP
-	//    Linux and macOS: search up one directory in share/gle or share/gle-graphics
-	//      /usr/bin/gle    <<-- executable
-	//      /usr/bin        <<-- GLE_BIN_DIR
-	//      /usr/share/gle  <<-- GLE_TOP
-	//      or for Debian
-	//      /usr/share/gle-graphics  <<-- GLE_TOP
+	//    Linux and macOS: search up one directory in share/gle-graphics or share/gle
+	//      /usr/local/bin/gle                 << -- executable
+	//      /usr/local/bin                     << -- GLE_BIN_DIR
+	//      /usr/local/share/gle-graphics      << -- GLE_TOP
+	//      /usr/local/share/gle               << -- GLE_TOP (deprecated)
 	//
 	string conf_name;
 	string exe_name;
@@ -649,7 +652,7 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 	}
 	vector<string> triedLocations;
 	if (!has_top) {
-		// environment veraialbe GLE_TOP not found
+		// environment variable GLE_TOP not found
 		// search for GLE_TOP relative to exe_name
 		if (has_exe_name) {
 			// search for GLE_TOP - try to find glerc
@@ -658,22 +661,24 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 			StripPathComponents(&GLE_TOP_DIR, 1);
 			string save = GLE_TOP_DIR;
 			#if defined(__unix__) || defined(__APPLE__)
-				// linux FHS complaince first
+				// FHS complaince first
 			   	// FHS Try one level higher than executable in share/gle-graphics
 				GLE_TOP_DIR += DIR_SEP + "share/gle-graphics";
 				has_config = try_load_config_sub(conf_name, triedLocations);
 				if(!has_config){
-					// try alternate location
+					// try alternate location (deprecated)
 					GLE_TOP_DIR = save + DIR_SEP + "share/gle";
+					has_config = try_load_config_sub(conf_name, triedLocations);
 				}
-				has_config = try_load_config_sub(conf_name, triedLocations);
 				if(!has_config){
 					// try one level up from executable for non FHS installations
 					GLE_TOP_DIR = save;
+					has_config = try_load_config_sub(conf_name, triedLocations);
 				}
-			#endif
-			// add nothing on windows only search one level up
+			#else // Windows
+			// search one level up
 			has_config = try_load_config_sub(conf_name, triedLocations);
+			#endif
 			/*
 			#ifdef GLETOP_CD
 				// not sure what this is doing
@@ -719,7 +724,7 @@ bool do_load_config(const char* appname, char **argv, CmdLineObj& cmdline, Confi
 	GLEInterface* iface = GLEGetInterfacePointer();
 	string uconf = iface->getUserConfigLocation();
 	if (uconf != "") {
-		// -> on Unix also $HOME/.glerc
+		// load user config
 		try_load_config(uconf);
 	}
 	// Set values for -v option
@@ -738,13 +743,24 @@ void do_find_deps_sub(GLEInterface* iface, const string& loc) {
 }
 
 void do_save_config() {
+	//
+	// -- saves config to users .glerc file
+	//
 	GLEInterface* iface = GLEGetInterfacePointer();
 	string conf_name = GLE_TOP_DIR + DIR_SEP + "glerc";
-	bool is_ok = try_save_config(conf_name, iface, false);
-	if (!is_ok) {
-		string user_conf = iface->getUserConfigLocation();
-		is_ok = try_save_config(user_conf, iface, true);
-	}
+	// should NOT save in global location - this is bad form.
+	// always save in user location
+	// only root can save in GLE_TOP/share/gle-graphics on linux
+	// only administrator can save in GLE_TOP on windows
+	// it is bad form to write in these locations for security reasons
+	// removed starting 4.3.9
+	//bool is_ok = try_save_config(conf_name, iface, false);
+	//if (!is_ok) {
+	//	string user_conf = iface->getUserConfigLocation();
+	//	is_ok = try_save_config(user_conf, iface, true);
+	//}
+	string user_conf = iface->getUserConfigLocation();
+	bool is_ok = try_save_config(user_conf, iface, true);
 	if (!is_ok) {
 		ostringstream err;
 		err << ">>> Can't write to config file '" << conf_name << "'" << endl;
