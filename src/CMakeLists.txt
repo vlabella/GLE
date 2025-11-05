@@ -8,7 +8,7 @@ if(POLICY CMP0144)
   cmake_policy(SET CMP0144 NEW)  # upper case pacakge root variables
 endif()
 
-project( gle VERSION 4.3.9 LANGUAGES CXX C)
+project( gle-graphics VERSION 4.3.9 LANGUAGES CXX C)
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,6 +17,7 @@ include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
 include(GNUInstallDirs)
+include(InstallRequiredSystemLibraries)
 
 find_package(ECM CONFIG NO_MODULE) # optional extra-cmake-modules needed for find_poppler
 if(ECM_FOUND)
@@ -93,7 +94,7 @@ if (POLICY CMP0069)
 	endif()
 endif()
 #
-# -- cpack information  (need more here for NSIS and others - manual and sample gle files)
+# -- cpack information
 #
 set(CPACK_PACKAGE_VENDOR "GLE")
 set(CPACK_VERBATIM_VARIABLES true)
@@ -102,7 +103,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GLE Graphics Programming Language")
 #set(CPACK_RESOURCE_FILE_WELCOME )
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/../doc/LICENSE.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/../doc/README.txt")
-set(CPACK_PACKAGE_INSTALL_DIRECTORY "GLE")
+set(CPACK_PACKAGE_INSTALL_DIRECTORY ${PROJECT_NAME})
 #
 # - NSIS specific settings
 #
@@ -135,8 +136,16 @@ set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
 ")
 set (CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
 	DeleteRegKey HKCR '.gle'
-    DeleteRegKey HKCR 'GLEFile'
+  DeleteRegKey HKCR 'GLEFile'
 ")
+#
+# -- Debian pacakge specific settings
+#
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+set(CPACK_DEBIAN_PACKAGE_SECTION "graphics")
+set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+set(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
 #
 # -- wix specific settings unused no .msi generated
 # dont change these GUIDs once generated
@@ -638,7 +647,7 @@ install(FILES
 #
 # -- install include files from gle-library repo
 #
-set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gle/gleinc)
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/gleinc)
 if(DEVELOPER_INSTALLATION OR WIN32)
 	# install one directory above executable
 	set(MY_DESTINATION gleinc)

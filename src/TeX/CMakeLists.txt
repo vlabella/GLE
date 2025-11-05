@@ -49,7 +49,7 @@ add_custom_target(inittex ALL
 )
 
 # assume system installation FHS
-set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gle)
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
 if(DEVELOPER_INSTALLATION OR WIN32)
 	# install one directory above executable
 	set(MY_DESTINATION .)

@@ -303,7 +303,7 @@ add_custom_target(fve_fonts DEPENDS
 )
 
 # assume system installation FHS
-set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/gle/font)
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/font)
 if(DEVELOPER_INSTALLATION OR WIN32)
 	# install one directory above executable
 	set(MY_DESTINATION font)

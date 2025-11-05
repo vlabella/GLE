@@ -1,4 +1,9 @@
 4.3.9 (not released yet)
+    - Change project name to gle-graphics in cmake file to be conststant with existing Debian package
+        This changes the default install location on Windows to be
+        C:\Program Files\gle-graphics
+        Linux installation is FHS complain see below
+    - cpack can produce a debian package if desired.
     - qgle: eliminate ghostscript stack underflow error in output window when rendering with ghostscript.
     - qgle: Change Qt5 QRegExp to Qt6 QRegularExpression to eliminate need for Core5Compat library
     - windows: silence cmake warnings when optional libraries jbig and openjpeg are not found.
