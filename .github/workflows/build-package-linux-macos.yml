@@ -95,15 +95,15 @@ jobs:
       run: |
         export PATH=${{github.workspace}}/stage/bin:$PATH; make -f Makefile.gcc
 
-      # must run again to install the manual
-    - name: Install Test Debugging
-      working-directory: ${{github.workspace}}/build
-      run: |
-        case "$RUNNER_OS" in
-          macOS)
-            /opt/homebrew/bin/cmake --build . --config Release --target preinstall
-          ;;
-        esac
+    #   # must run again to install the manual
+    # - name: Install Test Debugging
+    #   working-directory: ${{github.workspace}}/build
+    #   run: |
+    #     case "$RUNNER_OS" in
+    #       macOS)
+    #         /opt/homebrew/bin/cmake --build . --config Release --target preinstall
+    #       ;;
+    #     esac
 
 #    - name: Upload Artifacts - GLE Manual PDF
 #      uses: actions/upload-artifact@v4.4.3
@@ -122,6 +122,7 @@ jobs:
             cpack -G "ZIP;7Z" -C Release -B ${{github.workspace}}/stage
             ;;
           macOS)
+            export DYLD_LIBRARY_PATH=/opt/homebrew/opt/ghostscript/lib:$DYLD_LIBRARY_PATH
             cpack -G "DragNDrop;ZIP;7Z" -C Release -B ${{github.workspace}}/stage
             ;;
         esac
