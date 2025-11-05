@@ -486,7 +486,7 @@ void find_deps(const string& loc, GLEInterface* iface) {
 	}
 	string name = "libgs.so";
 	#ifdef __APPLE__
-	name = "libgs.dylib"
+	name = "libgs.dylib";
 	#endif
 	#ifdef _WIN32
 	name = "gsdll64.dll";
