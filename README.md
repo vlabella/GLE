@@ -57,7 +57,7 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
 	sudo cmake --install build
 	```
 
-Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle-graphics and documentation in /usr/local/share/doc/gle-graphics.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
+Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in `/usr/local/bin`. Font, config files, and includes will be in `/usr/local/share/gle-graphics` and documentation in `/usr/local/share/doc/gle-graphics`.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 
 ### Building on Windows
@@ -99,7 +99,7 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 	cmake --install build --config Release
 	```
 
-All gle files will be installed to C:\Program Files\gle-graphics by default.  Add C:\Program Files\gle-graphics\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
+All gle files will be installed to `C:\Program Files\gle-graphics` by default.  Add `C:\Program Files\gle-graphics\bin` to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
 
 ### Building on macOS
 
