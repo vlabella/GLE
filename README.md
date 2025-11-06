@@ -57,7 +57,7 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
 	sudo cmake --install build
 	```
 
-Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle and documentation in /usr/local/share/doc/gle.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
+Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in /usr/local/bin. Fonts and includes will be in /usr/local/share/gle-graphics and documentation in /usr/local/share/doc/gle-graphics.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
 
 
 ### Building on Windows
@@ -93,13 +93,13 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 	cmake --build build --config Release
 	```
 
-5. Install gle in `C:\Program Files\gle`
+5. Install gle in `C:\Program Files\gle-graphics`
 
 	```
 	cmake --install build --config Release
 	```
 
-All gle files will be installed to C:\Program Files\gle by default.  Add C:\Program Files\gle\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
+All gle files will be installed to C:\Program Files\gle-graphics by default.  Add C:\Program Files\gle-graphics\bin to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
 
 ### Building on macOS
 
@@ -152,17 +152,17 @@ To run GLE these software packages required:
 
 #### Finding Dependencies
 
-After installation run
+After installation run:
 
 	gle -finddeps
 
-To have GLE search for it dependency files such as GhostScript and LaTeX.
+to have GLE search for it dependency files such as GhostScript and LaTeX.
 
-To test the installation run.
+To test the installation run:
 
 	gle -info
 
-and output should look something like this on windows
+the output should look something like this on Windows:
 
 	GLE version:             4.3.9
 	Build date:              Nov 5 2025 14:44:22
@@ -178,15 +178,18 @@ and output should look something like this on windows
 	Cairo rendering support: Yes
 	Poppler PDF support:     Yes
 
-and this on Linux
+and this on Linux:
 
 	GLE version:             4.3.9
-	Build date:              Oct 29 2025 10:21:42
-	GLE_TOP:                 /usr/local/share/gle
+	Build date:              Nov 5 2025 19:28:28
+	GLE_TOP:                 /usr/local/share/gle-graphics
 	GLE_BIN_DIR:             /usr/local/bin
 	GLE_USRLIB:
+	GLERC (global):          /usr/local/share/gle-graphics/glerc
+	GLERC (user):            /home/<username>/.glerc
+	inittex.ini:             /usr/local/share/gle-graphics/inittex.ini
 	GhostScript:             /usr/bin/gs
-	GS library:              /usr/lib/x86_64-linux-gnu/libgs.so
+	GS library:              /lib/x86_64-linux-gnu/libgs.so
 	Bitmap import:           JPEG, PNG, TIFF, GIF
 	Cairo rendering support: Yes
 	Poppler PDF support:     Yes
@@ -208,15 +211,15 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 | `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF                               |
 | `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library` folder on your computer. Used during install/packaging.  | Not set                           |
 | `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | Not set                           |
-| `EXTRA_GSLIB_SEARCH_LOCATION` | Add extra search path for Ghostscript library in `qgle` application.                              | Not set                           |
 | `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                                               | OFF                               |
+| `BUILD_TEST    `           | Build testing programs.                                                                              | OFF                               |
 | `INSTALL_FBUILD`           | Install the `fbuild` program – only needed during GLE build phase.                                   | OFF                               |
 | `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.                                  | OFF                               |
 | `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF                               |
 
 ### Creating packages with cpack
 
-Cpack can be utilized to create distributable packages.  The gle-manual and gle-library repos should be checked out and built to get included in the package.  Windows platform utilizes [NSIS](https://nsis.sourceforge.io/) for self installing exe building.  All other packages are for manual installation.
+Cpack can be utilized to create distributable packages.  The gle-manual and gle-library repos should be checked out and built to get included in the package.  Windows platform utilizes [NSIS](https://nsis.sourceforge.io/) for self installing exe building.  Debain packages can be created and require `dpkg-dev` to be installed on the local machine.
 
 
 	windows:
@@ -225,11 +228,11 @@ Cpack can be utilized to create distributable packages.  The gle-manual and gle-
 
 	linux
 
-	cd build && cpack -G "DEB;ZIP"
+	cd build && cpack -G "DEB;ZIP;7Z"
 
 	macOS
 
-	cd build && cpack -G "DragNDrop;ZIP"
+	cd build && cpack -G "DragNDrop;ZIP;7Z"
 
 
 ### CI/CD Github Actions
