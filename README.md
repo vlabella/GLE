@@ -71,7 +71,7 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 
 2. Install ghostpdl library
 
-	Visit [ghostpdl GitHub page](https://github.com/ArtifexSoftware/ghostpdl) and clone the repo or download and unpack the source code.  Only the ghostpdl headers are needed to build GLE.  So building ghostpdl is not required.
+	Visit [ghostpdl GitHub page](https://github.com/ArtifexSoftware/ghostpdl) and clone the repo or download and unpack the source code.  Only the ghostpdl headers are needed to build GLE.  Building ghostpdl is not required.
 
 3. Run cmake in the gle directory
 
