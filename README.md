@@ -77,15 +77,15 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 
 	```
 	cmake -B build -S src
-    -DCMAKE_TOOLCHAIN_FILE=VCPKGROOT/scripts/buildsystems/vcpkg.cmake
+    -DCMAKE_TOOLCHAIN_FILE=<VCPKGROOT>/scripts/buildsystems/vcpkg.cmake
         -DVCPKG_TARGET_TRIPLET=x64-windows-release
         -DGHOSTPDL_ROOT=/path/to/ghostpdl
         -DGLE_EXAMPLES_LIBRARY_PATH="/path/to/gle-library"
         -DGLE_USER_MANUAL_PATH="/path/to/gle-manual"
-        -DECM_DIR="VCPKGROOT/installed/x64-windows/share/ECM"
+        -DECM_DIR="<VCPKGROOT>/installed/x64-windows/share/ECM"
 	```
 
-	Replace VCPKGROOT with the location of vcpkg. This will run vcpkg and download and build the needed libraries.  Be patient it will take some time.
+	Replace `<VCPKGROOT>` with the location of vcpkg. This will run vcpkg and download and build the needed libraries.  Be patient it will take some time.
 
 4. Build 
 
