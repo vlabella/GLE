@@ -178,7 +178,7 @@ the output should look something like this on Windows:
 	Cairo rendering support: Yes
 	Poppler PDF support:     Yes
 
-and this on Linux:
+and this on Linux/macOS:
 
 	GLE version:             4.3.9
 	Build date:              Nov 5 2025 19:28:28
