@@ -9,8 +9,10 @@ if(WIN32)
 endif()
 
 set_target_properties(glebtool PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+
 install(TARGETS glebtool
-		CONFIGURATIONS Release Debug
-		RUNTIME )
+        CONFIGURATIONS Release Debug
+        RUNTIME
+    )
 
 

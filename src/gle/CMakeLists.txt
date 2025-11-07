@@ -197,8 +197,9 @@ if(APPLE AND NOT LibLZMA_FOUND)
 endif()
 
 install(TARGETS gle
-		CONFIGURATIONS Release Debug
-		RUNTIME  )
+        CONFIGURATIONS Release Debug
+        RUNTIME
+    )
 
 # assume system installation FHS
 set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})

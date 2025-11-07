@@ -29,6 +29,9 @@
 #ifdef Q_OS_WIN32
 	#include <windows.h>
 #endif
+#if defined(Q_OS_HURD) || defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
+	#include <dlfcn.h>
+#endif
 
 #include <string>
 #include <sstream>
@@ -113,20 +116,10 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 	/* Try to open the library */
 	if (location == "") {
 		m_LibGSLocation = "gsdll32.dll";
-		#ifdef _WIN32
-		// windows builds
-		#if _WIN64
-			// VS builds
+		#if defined(_WIN64) || defined(__x86_64__)
 			m_LibGSLocation = "gsdll64.dll";
 		#endif
-		#if __GNUC__
-			// gcc builds
-			#if __x86_64__ || __ppc64__
-				m_LibGSLocation = "gsdll64.dll";
-			#endif
-		#endif
-		#endif
-		std::string tmp = m_LibGSLocation.toStdString();
+	std::string tmp = m_LibGSLocation.toStdString();
 		hmodule = LoadLibrary((const WCHAR*)m_LibGSLocation.unicode());
 		//hmodule = LoadLibrary(tmp.c_str());
 	} else {
@@ -258,8 +251,6 @@ void GSLibFunctions::freeLibrary() {
 
 #if defined(Q_OS_HURD) || defined(Q_OS_LINUX) || defined(Q_OS_MACOS)
 
-#include <dlfcn.h>
-
 void* dlopenImpl(const char* fname) {
 	#ifdef RTLD_DEEPBIND
 		return dlopen(fname, RTLD_NOW | RTLD_DEEPBIND);
@@ -293,7 +284,9 @@ void GSLibFunctions::tryLocationLoop(const char* prefix) {
 
 int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 	gsapi_revision_t rv;
-	/* Try to load the library */
+	// try to open the library
+	// no need to hard code paths - dlopen() searches in appropriate locations
+	// if it fails then its not installed properly
 	if (location == "") {
 		#ifdef Q_OS_LINUX
 		tryLocation("libgs.so");
