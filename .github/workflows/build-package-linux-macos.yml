@@ -76,6 +76,7 @@ jobs:
         -DBUILD_TESTS=ON
         -DCMAKE_INSTALL_PREFIX=stage
         -DDEVELOPER_INSTALLATION=ON
+        -DINCLUDE_EXAMPLES=ON
 
     - name: Build GLE
       run: |
