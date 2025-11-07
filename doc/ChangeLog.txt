@@ -35,8 +35,9 @@
     - Revised fitting code (linfit) to use boost C++ linear regression instead of hand coded routine.
     - Rewrote fitting code (fit) that utilizes Powell minimization in more modern C++, which eliminates linker
       warnings on Linux about freeing non zero offset pointers.  Old code was based on 1 based indexing FORTRAN code.
-    - include five examples from the gle-library repo in the distributions if cmake option INCLUDE_EXAMPLES=ON
+    - Include five examples from the gle-library repo in the distributions if cmake option INCLUDE_EXAMPLES=ON
       examples are defined by EXAMPLES_TO_INCLUDE.
+    - Documentation from gle-library include files is now located in doc directory with manual.
 
 4.3.8 (October 2025)
     - Upgrade to Qt6

@@ -212,10 +212,11 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 | `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library` folder on your computer. Used during install/packaging.  | Not set                           |
 | `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | Not set                           |
 | `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                                               | OFF                               |
-| `BUILD_TEST    `           | Build testing programs.                                                                              | OFF                               |
+| `BUILD_TEST`               | Build testing programs.                                                                              | OFF                               |
 | `INSTALL_FBUILD`           | Install the `fbuild` program – only needed during GLE build phase.                                   | OFF                               |
 | `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.                                  | OFF                               |
 | `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF                               |
+| `INCLUDE_EXAMPLES`         | Include examples from the gle-library repo in the installation & distributions. Examples are defined in EXAMPLES_TO_INCLUDE.   |OFF            |
 
 ### Creating packages with cpack
 

@@ -18,7 +18,7 @@ include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
 include(GNUInstallDirs)
 if(UNIX AND NOT APPLE)
-	# needed for making .deb package
+# needed for making .deb package
 include(InstallRequiredSystemLibraries)
 endif()
 
@@ -50,17 +50,12 @@ option(BUILD_GLEBTOOL "Build glebtool program - deprecated" OFF)
 option(INSTALL_FBUILD "Install the fbuild program - only needed during gle build phase" OFF)
 option(INSTALL_MAKEFMT "Install the makefmt program - only needed during gle build phase" OFF)
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
-option(MSVC_INSTALL_MSVC_RUNTIME "Install MSVC runtime DLLs with the application" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
 option(DEVELOPER_INSTALLATION "Linux only: Install all files in staging area, otherwise install in FHS paths on system." OFF)
 option(BUILD_TESTS "Build Testing Programs." OFF)
 option(INSTALL_TESTS "Install Testing Programs." OFF)
 option(INSTALL_EXAMPLES "Install examples from gle-library defined by EXAMPLES_TO_INSTALL." OFF)
-#option(CREATE_FILETYPE_ASSOCIATION "Windows only: Create filetype association .gle to qgle.exe during installation." OFF)
-if(MSVC_USE_STATIC_RUNTIME)
-	set(MSVC_INSTALL_MSVC_RUNTIME OFF)
-endif()
 #
 # -- List names of examples to include from gle-library in installation and distributable packages
 #
