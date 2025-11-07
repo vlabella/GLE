@@ -17,7 +17,10 @@ include(CheckIncludeFiles)
 include(CheckIncludeFileCXX)
 include(CMakePrintHelpers)
 include(GNUInstallDirs)
+if(UNIX AND NOT APPLE)
+# needed for making .deb package
 include(InstallRequiredSystemLibraries)
+endif()
 
 find_package(ECM CONFIG NO_MODULE) # optional extra-cmake-modules needed for find_poppler
 if(ECM_FOUND)
@@ -49,10 +52,14 @@ option(INSTALL_MAKEFMT "Install the makefmt program - only needed during gle bui
 option(MSVC_USE_STATIC_RUNTIME "Build and link against the windows static runtime (/MT) (windows only)" OFF)
 option(GLE_EXAMPLES_LIBRARY_PATH "Path to gle-examples.  Only needed when using cpack to build distributables" "./gle-examples")
 option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  Only needed when using cpack to build distributables" "./gle-manual")
-#option(EXTRA_GSLIB_SEARCH_LOCATION "Extra path for searching for gslib on linux and macOS" OFF)
 option(DEVELOPER_INSTALLATION "Linux only: Install all files in staging area, otherwise install in FHS paths on system." OFF)
 option(BUILD_TESTS "Build Testing Programs." OFF)
 option(INSTALL_TESTS "Install Testing Programs." OFF)
+option(INSTALL_EXAMPLES "Install examples from gle-library defined by EXAMPLES_TO_INSTALL." OFF)
+#
+# -- List names of examples to include from gle-library in installation and distributable packages
+#
+set(EXAMPLES_TO_INSTALL "hello" "pythagorean" "semitrans" "ascatterplot" "fitls" )
 
 if(NOT DEFINED POPPLER_INTERFACE)
 	# poppler interface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin
@@ -128,12 +135,12 @@ set(CPACK_NSIS_MENU_LINKS
 set(CPACK_NSIS_EXTRA_INSTALL_COMMANDS "
 	Exec \"$INSTDIR\\bin\\qgle.exe -finddeps '$INSTDIR\\glerc.old'\"
 	WriteRegStr HKCR '.gle' '' 'GLEFile'
-  	WriteRegStr HKCR 'GLEFile' '' 'GLE Script'
-  	WriteRegStr HKCR 'GLEFile\\DefaultIcon' '' '$INSTDIR\\bin\\qgle.exe,0'
-  	WriteRegStr HKCR 'GLEFile\\shell\\open\\command' '' '$INSTDIR\\bin\\qgle.exe \"%1\"'
-  	WriteRegStr HKCR 'GLEFile\\shell\\edit' '' 'Edit GLE Script'
-  	WriteRegStr HKCR 'GLEFile\\shell\\edit\\command' '' '$INSTDIR\\bin\\qgle.exe \"%1\"'
-  	System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
+  WriteRegStr HKCR 'GLEFile' '' 'GLE Script'
+  WriteRegStr HKCR 'GLEFile\\DefaultIcon' '' '$INSTDIR\\bin\\qgle.exe,0'
+  WriteRegStr HKCR 'GLEFile\\shell\\open\\command' '' '$INSTDIR\\bin\\qgle.exe \"%1\"'
+  WriteRegStr HKCR 'GLEFile\\shell\\edit' '' 'Edit GLE Script'
+  WriteRegStr HKCR 'GLEFile\\shell\\edit\\command' '' '$INSTDIR\\bin\\qgle.exe \"%1\"'
+  System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 ")
 set (CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
 	DeleteRegKey HKCR '.gle'
@@ -145,7 +152,7 @@ set (CPACK_NSIS_EXTRA_UNINSTALL_COMMANDS "
 set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 set(CPACK_DEBIAN_PACKAGE_SECTION "graphics")
 set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Your Name")
+set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Vincent LaBella")
 set(CPACK_DEBIAN_PACKAGE_DESCRIPTION "GLE Graphics Layout Engine")
 set(CPACK_DEBIAN_PACKAGE_HOMEPAGE "glx.sourceforge.io")
 set(CPACK_DEBIAN_ARCHITECTURE ${CMAKE_SYSTEM_PROCESSOR})
@@ -648,7 +655,21 @@ install(FILES
 	OPTIONAL
 )
 #
-# -- install include files from gle-library repo
+# -- install any documentation files from the library in the doc directory
+#
+install(DIRECTORY
+	${GLE_EXAMPLES_LIBRARY_PATH}/include/
+	DESTINATION ${MY_DESTINATION}
+	CONFIGURATIONS Release Debug
+	OPTIONAL
+	FILES_MATCHING
+	PATTERN "*.txt"
+	PATTERN "*.pdf"
+	PATTERN "compat" EXCLUDE
+)
+
+#
+# -- install include files from gle-library repo in gleinc
 #
 set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/gleinc)
 if(DEVELOPER_INSTALLATION OR WIN32)
@@ -661,6 +682,29 @@ install(DIRECTORY
 	DESTINATION ${MY_DESTINATION}
 	CONFIGURATIONS Release Debug
 	OPTIONAL
+	FILES_MATCHING
 	PATTERN "*.gle"
 )
+
+set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/examples)
+if(DEVELOPER_INSTALLATION OR WIN32)
+	# install one directory above executable
+	set(MY_DESTINATION examples)
+endif()
+
+if(INSTALL_EXAMPLES)
+foreach(ITEM IN LISTS EXAMPLES_TO_INSTALL)
+	message(STATUS "Including example ${ITEM} in installation.")
+	install(DIRECTORY
+		${GLE_EXAMPLES_LIBRARY_PATH}/src/${ITEM}
+		DESTINATION ${MY_DESTINATION}
+		CONFIGURATIONS Release Debug
+		OPTIONAL
+		FILES_MATCHING
+		PATTERN "*.gle"
+		PATTERN "*.csv"
+		PATTERN "*.dat"
+	)
+endforeach()
+endif()
 

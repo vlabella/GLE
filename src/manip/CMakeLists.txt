@@ -40,6 +40,28 @@ target_include_directories(manip SYSTEM PRIVATE ${CURSES_INCLUDE_DIRS})
 
 set_target_properties(manip PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
-install(TARGETS manip
-		CONFIGURATIONS Release Debug
-		RUNTIME )
+set(TARGET_NAME manip)
+install(TARGETS ${TARGET_NAME}
+        CONFIGURATIONS Release Debug
+        RUNTIME
+    )
+
+# if(MSVC_INSTALL_MSVC_RUNTIME OR NOT WIN32)
+#     install(TARGETS ${TARGET_NAME}
+#       CONFIGURATIONS Release Debug
+#       RUNTIME
+#       BUNDLE DESTINATION bin  # setting this to Applications causes problems with cpack
+#     )
+# else()
+#     install(TARGETS ${TARGET_NAME}
+#       CONFIGURATIONS Release Debug
+#       RUNTIME
+#         PRE_EXCLUDE_REGEXES
+#             ".*msvcp.*"
+#             ".*vcruntime.*"
+#             ".*concrt.*"
+#             ".*api-ms-win.*"
+#             ".*ucrtbase.*"
+#     )
+# endif()
+

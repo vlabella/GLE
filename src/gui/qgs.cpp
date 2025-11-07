@@ -392,7 +392,8 @@ bool GSInterpreterLib::sendOriginTranslate()
 
 bool GSInterpreterLib::run(QFile& file)
 {
-	int exit_code;
+	int exit_code=0;
+	int return_code=0;
 	char buf[4096];
 	if (!m_gs->isLoaded()) return false;
 	if (!running()) start();
@@ -410,6 +411,8 @@ bool GSInterpreterLib::run(QFile& file)
 		m_gs->gsapi_run_string_continue(ghostScriptInstance, buf, nbRead, 0, &exit_code);
 		if (exit_code && !handleExit(exit_code)) return false;
 	}
+	return_code = m_gs->gsapi_run_string_continue(ghostScriptInstance,"quit", 4, 0, &exit_code);
+	if (exit_code && !handleExit(exit_code)) return false;
 	m_gs->gsapi_run_string_end(ghostScriptInstance, 0, &exit_code);
 	if (exit_code && !handleExit(exit_code)) return false;
 	return true;
@@ -417,8 +420,8 @@ bool GSInterpreterLib::run(QFile& file)
 
 bool GSInterpreterLib::run(const string* data)
 {
-	int exit_code;
-	int return_code;
+	int exit_code=0;
+	int return_code=0;
 	if (!m_gs->isLoaded()) return false;
 	if (!running()) start();
 	m_wasPage = false;
@@ -465,6 +468,9 @@ bool GSInterpreterLib::nextRender(const char* str)
 bool GSInterpreterLib::endRender()
 {
 	int exit_code = 0;
+	int return_code=0;
+	return_code = m_gs->gsapi_run_string_continue(ghostScriptInstance,"quit", 4, 0, &exit_code);
+	if (exit_code && !handleExit(exit_code)) return false;
 	m_gs->gsapi_run_string_end(ghostScriptInstance, 0, &exit_code);
 	if (exit_code && !handleExit(exit_code)) return false;
 	else return true;

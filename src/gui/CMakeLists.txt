@@ -163,6 +163,7 @@ endif()
 set_target_properties(qgle PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
 
 install(TARGETS qgle
-		CONFIGURATIONS Release Debug
-		RUNTIME
-		BUNDLE DESTINATION bin )  # setting this to Applications causes problems with cpack
+    	CONFIGURATIONS Release Debug
+    	RUNTIME
+    	BUNDLE DESTINATION bin  # setting this to Applications causes problems with cpack
+    )

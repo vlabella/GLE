@@ -113,12 +113,12 @@ jobs:
       run: |
         case "$RUNNER_OS" in
           Linux)
-            cpack -G "DEB;ZIP;7Z" -C Release -B ${{github.workspace}}/stage
+            cpack -G "DEB;ZIP;7Z;TGZ" -C Release -B ${{github.workspace}}/stage
             ;;
           macOS)
             # need this export for testgs to work - dont need if BUILD_TESTS=OFF
             export DYLD_LIBRARY_PATH=/opt/homebrew/opt/ghostscript/lib:$DYLD_LIBRARY_PATH
-            cpack -G "DragNDrop;ZIP;7Z" -C Release -B ${{github.workspace}}/stage
+            cpack -G "DragNDrop;ZIP;7Z;TGZ" -C Release -B ${{github.workspace}}/stage
             ;;
         esac
 
