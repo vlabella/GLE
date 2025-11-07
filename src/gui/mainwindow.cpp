@@ -83,8 +83,12 @@ GLEMainWindow::GLEMainWindow(int argc, char *argv[])
 	drawingArea = new GLEDrawingArea(gleInterface, this);
 	scrollArea = new QScrollArea(this);
 	scrollArea->setWidget(drawingArea);
+	//light gray - default is white on windows and gray on linux
+	// light gray helps to discern the boarder of the image
+	scrollArea->setStyleSheet("background-color: #D3D3D3;");
 
 	splitWindow = new QSplitter(Qt::Vertical, this);
+
 	splitWindow->addWidget(scrollArea);
 	consoleWindow = new ConsoleWindow(this, splitWindow);
 	splitWindow->addWidget(consoleWindow);
