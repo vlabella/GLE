@@ -59,7 +59,7 @@ option(INSTALL_EXAMPLES "Install examples from gle-library defined by EXAMPLES_T
 #
 # -- List names of examples to include from gle-library in installation and distributable packages
 #
-set(EXAMPLES_TO_INSTALL "hello" "pythagorean" "semitrans" "ascatterplot" "fitls" )
+set(EXAMPLES_TO_INSTALL "hello_world" "scatter_plot" "bar_chart" "math_mode_plot" "polar_plot" "fitting" "pythagorean" "semitrans")
 
 if(NOT DEFINED POPPLER_INTERFACE)
 	# poppler interface defaults if not set -> CPP for Windows, GLIB for Linux and Apple/Darwin

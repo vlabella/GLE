@@ -253,7 +253,9 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 	if (!silent && g_verbosity() > 0) {
 		string version;
 		g_get_version(&version);
-		cerr << "GLE " << version << "[" << script->getLocation()->getName() << "]-C";
+		string GLE = "GLE";
+		string colorized_GLE = "\033[1;31mG\033[1;32mL\033[1;34mE\033[0m";  // red green blue
+		cerr << colorized_GLE << " " << version << "[" << script->getLocation()->getName() << "]-C";
 		cerr.flush();
 		g_set_console_output(false);
 	}
