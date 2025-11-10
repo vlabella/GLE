@@ -209,7 +209,7 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 | `CMAKE_INSTALL_PREFIX`     | Set this to a different install location than the default (`/usr/local` or `C:\Program Files`). | System default                    |
 | `MSVC_USE_STATIC_RUNTIME`  | Set ON to build against Visual Studio static runtimes (`/MT` instead of `/MD`). Also set `Boost_USE_STATIC_RUNTIME=ON` and ensure all other libraries are built with `/MT`. | OFF                               |
 | `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF                               |
-| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library`. Needed for installation gle include files in gleinc.  | empty                           |
+| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library`. Needed for installation gle include files in `gleinc`.  | empty                           |
 | `INSTALL_EXAMPLES`         | Include examples from the gle-library repo in the installation & distributions. Examples are defined in EXAMPLES_TO_INCLUDE.   |OFF            |
 | `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | empty                           |
 | `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                                               | OFF                               |
