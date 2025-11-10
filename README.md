@@ -131,7 +131,7 @@ Building on macOS requires [XCode](https://developer.apple.com/xcode/), [cmake](
 	cmake --install build --config Release
 	```
 
-All gle files will be installed similar to Linux. The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
+All gle files will be installed similar to Linux. The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call. For example, to install in `/usr` instead of `/usr/local` pass `-DMAKE_INSTAL_PREFIX=/usr` to the initial cmake call.
 
 ### Post Installation Configuration and Testing
 
