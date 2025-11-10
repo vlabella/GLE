@@ -40,6 +40,7 @@
     - Documentation from gle-library include files is now located in doc directory with manual.
     - qgle: Windows set light gray background in drawing area to discern boarder of GLE figure similar to Linux.
     - manip: fix buffer length compiler warnings for fgets.
+    - print GLE in color on the console when running.
 
 4.3.8 (October 2025)
     - Upgrade to Qt6
