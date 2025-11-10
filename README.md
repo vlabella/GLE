@@ -57,7 +57,7 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
 	sudo cmake --install build
 	```
 
-Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in `/usr/local/bin`. Font, config files, and includes will be in `/usr/local/share/gle-graphics` and documentation in `/usr/local/share/doc/gle-graphics`.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).
+Installation destinations are [FHS](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/index.html) compliant starting with version 4.3.9.  Binaries will be placed in `/usr/local/bin`. Font, config files, and includes will be in `/usr/local/share/gle-graphics` and documentation in `/usr/local/share/doc/gle-graphics`.  This can be altered with `CMAKE_INSTALL_PREFIX` and `DEVELOPER_INSTALLATION` options (see below).  For example, to install in `/usr` instead of `/usr/local` pass `-DMAKE_INSTAL_PREFIX=/usr` to the initial cmake call.
 
 
 ### Building on Windows
@@ -209,14 +209,15 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 | `CMAKE_INSTALL_PREFIX`     | Set this to a different install location than the default (`/usr/local` or `C:\Program Files`). | System default                    |
 | `MSVC_USE_STATIC_RUNTIME`  | Set ON to build against Visual Studio static runtimes (`/MT` instead of `/MD`). Also set `Boost_USE_STATIC_RUNTIME=ON` and ensure all other libraries are built with `/MT`. | OFF                               |
 | `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF                               |
-| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library` folder on your computer. Used during install/packaging.  | Not set                           |
-| `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | Not set                           |
+| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library`. Used for install gle include files.  | empty                           |
+| `INSTALL_EXAMPLES`         | Include examples from the gle-library repo in the installation & distributions. Examples are defined in EXAMPLES_TO_INCLUDE.   |OFF            |
+| `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | empty                           |
 | `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                                               | OFF                               |
 | `BUILD_TEST`               | Build testing programs.                                                                              | OFF                               |
 | `INSTALL_FBUILD`           | Install the `fbuild` program – only needed during GLE build phase.                                   | OFF                               |
 | `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.                                  | OFF                               |
 | `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF                               |
-| `INCLUDE_EXAMPLES`         | Include examples from the gle-library repo in the installation & distributions. Examples are defined in EXAMPLES_TO_INCLUDE.   |OFF            |
+
 
 ### Creating packages with cpack
 
@@ -229,11 +230,11 @@ Cpack can be utilized to create distributable packages.  The gle-manual and gle-
 
 	linux
 
-	cd build && cpack -G "DEB;ZIP;7Z"
+	cd build && cpack -G "DEB;ZIP;7Z;TGZ"
 
 	macOS
 
-	cd build && cpack -G "DragNDrop;ZIP;7Z"
+	cd build && cpack -G "DragNDrop;ZIP;7Z;TGZ"
 
 
 ### CI/CD Github Actions

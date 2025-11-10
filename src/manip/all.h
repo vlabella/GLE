@@ -212,7 +212,7 @@ void show_ifcell(int x, int y);
 char *scell(int x, int y);
 void fner_clear(void);
 void show_cellwide(int x, int y);
-int read_command(int *cmd,char *ans,const char *ques);
+int read_command(int *cmd, char *ans, const char *ques, const size_t answer_size);
 void do_arrow(int k);
 void hi_cell(int x,int y);
 void fix_cur(void);

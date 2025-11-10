@@ -92,7 +92,8 @@ void init_gle_top(char **argv);
 
 int main(int argc, char **argv) {
         int i;
-        char ans[90];
+        const size_t answer_size = 90;
+        char ans[answer_size];
         int cmd;
         static char atfile[80];
 
@@ -134,7 +135,7 @@ xx1:
                 top_line();
                 hi_cell(curx,cury);
                 mjl_flush();
-                read_command(&cmd,ans,"% ");
+                read_command(&cmd,ans,"% ",answer_size);
                 if (cmd==eescape || cmd==equit) break;
                 if (cmd==0)         do_command(ans);
                 else if (cmd==eload) {
@@ -419,14 +420,14 @@ void fnerxx(char *s) {
         scr_refresh();
 }
 
-int read_command(int *cmd,char *ans,const char *ques) {
+int read_command(int *cmd,char *ans,const char *ques,const size_t answer_size) {
         static char *lastline[22];
         int cl=0;
         int rr,i;
         int direc=0;
 
         if (isating) {
-                if (!at_read(ans)) goto contxx;
+                if (!at_read(ans,answer_size)) goto contxx;
                 window(1,21,80,WEND);
                 gotoxy(1,WLEN);
                 scr_inv();

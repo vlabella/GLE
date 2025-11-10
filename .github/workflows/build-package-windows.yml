@@ -154,7 +154,7 @@ jobs:
         -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
         -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
         -DBUILD_TESTS=ON
-        -DINCLUDE_EXAMPLES=ON
+        -DINSTALL_EXAMPLES=ON
       shell: cmd
 
     - name: Build

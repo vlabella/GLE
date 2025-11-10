@@ -1009,7 +1009,8 @@ void cmd_insert(char *range) {
 
 void cmd_data(char *range) {
 	RANGE rr;
-	static char ans[155];
+	const size_t answer_size = 155;
+	static char ans[answer_size];
 	int cmd;
 	if (!range_def(range,&rr)) {
 		fner("Invalid range given (%s)%d \n",range,strlen(range));
@@ -1020,7 +1021,7 @@ void cmd_data(char *range) {
 		mjl_flush();
 xxx:        set_newxy(rr.col,rr.row);
 		if (!iserr) fner("Press ^Z or ESC when data entry finished\n");
-		read_command(&cmd,ans,"DATA% ");
+		read_command(&cmd,ans,"DATA% ",answer_size);
 		if (cmd==eescape || cmd==equit) break;
 		if (cmd!=0) {
 			do_arrow(cmd);
@@ -1135,13 +1136,13 @@ void at_open(char *fname) {
 	isating = true;
 }
 
-bool at_read(char *s) {
+bool at_read(char *s, size_t buffer_size) {
 	s[0] = 0;
 	if (feof(atfile)) {
 		fclose(atfile); atfile = NULL; isating = false; return false;
 	}
 	s[0] = 0;
-	if (fgets(s,200,atfile)==NULL) return false;
+	if (fgets(s,buffer_size,atfile)==NULL) return false;
 	return true;
 }
 

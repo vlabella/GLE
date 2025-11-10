@@ -75,7 +75,7 @@ void log_write(char *s);
 void log_close();
 void add_dotman(char *s);
 void at_open(char *fname);
-bool at_read(char *s);
+bool at_read(char *s,const size_t buffer_size);
 void strip_colon(char *s);
 void cmd_parsum(char *range, char *dest);
 void cmd_sum(char *range);

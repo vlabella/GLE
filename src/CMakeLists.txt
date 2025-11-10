@@ -685,26 +685,27 @@ install(DIRECTORY
 	FILES_MATCHING
 	PATTERN "*.gle"
 )
-
-set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/examples)
-if(DEVELOPER_INSTALLATION OR WIN32)
-	# install one directory above executable
-	set(MY_DESTINATION examples)
-endif()
-
+#
+# -- Install examples
+#
 if(INSTALL_EXAMPLES)
-foreach(ITEM IN LISTS EXAMPLES_TO_INSTALL)
-	message(STATUS "Including example ${ITEM} in installation.")
-	install(DIRECTORY
-		${GLE_EXAMPLES_LIBRARY_PATH}/src/${ITEM}
-		DESTINATION ${MY_DESTINATION}
-		CONFIGURATIONS Release Debug
-		OPTIONAL
-		FILES_MATCHING
-		PATTERN "*.gle"
-		PATTERN "*.csv"
-		PATTERN "*.dat"
-	)
-endforeach()
-endif()
+	set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/examples)
+	if(DEVELOPER_INSTALLATION OR WIN32)
+		# install one directory above executable
+		set(MY_DESTINATION examples)
+	endif()
 
+	foreach(ITEM IN LISTS EXAMPLES_TO_INSTALL)
+		message(STATUS "Including example ${ITEM} in installation.")
+		install(DIRECTORY
+			${GLE_EXAMPLES_LIBRARY_PATH}/src/${ITEM}
+			DESTINATION ${MY_DESTINATION}
+			CONFIGURATIONS Release Debug
+			OPTIONAL
+			FILES_MATCHING
+			PATTERN "*.gle"
+			PATTERN "*.csv"
+			PATTERN "*.dat"
+		)
+	endforeach()
+endif()
