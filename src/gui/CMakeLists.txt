@@ -138,7 +138,7 @@ target_link_libraries ( qgle LINK_PUBLIC
 	)
 
 if(UNIX AND NOT APPLE)
- 	target_link_options(qgle PUBLIC -no-pie)
+ 	#target_link_options(qgle PUBLIC -no-pie)
 	qt_import_plugins( qgle
   		INCLUDE_BY_TYPE platforms
 	)
