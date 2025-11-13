@@ -1172,7 +1172,7 @@ void GLEFindFiles(const string& dirname, vector<GLEFindEntry*>& tofind, GLEProgr
 }
 
 
-string GLEFindLibrary(const char* libName, GLEProgressIndicator* progress, string symbol_name )
+string GLEFindLibrary(const string libName, GLEProgressIndicator* progress, const string symbol_name )
 {
 	//
 	// -- Find a Shared Library base on library name and symbol name
@@ -1205,7 +1205,7 @@ string GLEFindLibrary(const char* libName, GLEProgressIndicator* progress, strin
 	    #define LAST_ERROR dlerror()
 	#endif
 
-    LibHandle handle = LOAD_LIBRARY(libName);
+    LibHandle handle = LOAD_LIBRARY(libName.c_str());
     if (!handle) {
     	//cout <<"cannot open library"<<libName<<endl;
         return "";

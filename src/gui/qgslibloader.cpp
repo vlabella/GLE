@@ -289,7 +289,7 @@ int GSLibFunctions::loadLibrary(const QString& location, QString& last_error) {
 	// if it fails then its not installed properly
 	if (location == "") {
 		#ifdef Q_OS_LINUX
-		tryLocation("libgs.so");
+		tryLocationLoop("libgs.so");
 		#endif
 		#ifdef Q_OS_MACOS
 		tryLocation("libgs.dylib");

@@ -127,7 +127,7 @@ bool GLEGetCrDir(std::string* name);
 bool GLEGetCrDirWin32(std::string* name);
 bool GLEChDir(const std::string& dir);
 void GLEFindFiles(const std::string& dir, std::vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
-std::string GLEFindLibrary(const char* libName, GLEProgressIndicator* progress, std::string symbol_name);
+std::string GLEFindLibrary(const std::string libName, GLEProgressIndicator* progress, const std::string symbol_name);
 void GLEFindPrograms(std::vector<GLEFindEntry*>& tofind, GLEProgressIndicator* progress);
 int GLESystem(const std::string& cmd, bool wait = true, bool redirout = true, std::istream* ins = NULL, std::ostream* outerrs = NULL);
 int GLERunCommand(const std::string& cmd, std::string& result);

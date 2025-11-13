@@ -484,15 +484,28 @@ void find_deps(const string& loc, GLEInterface* iface) {
 	for (unsigned int i = 0; i < tofind.size(); i++) {
 		tofind[i]->updateResult(true);
 	}
+	// Search for libgs using dlopen/LoadLibrary
+	#ifdef __unix__
+	// unix must search for versioned libraries.  ghostscript package installs versioned libgs.so.10
+	// libgs-dev package installs the non versioned libgs.so
 	string name = "libgs.so";
+	string gslibloc = GLEFindLibrary(name, &progress,"gsapi_revision");
+	size_t version = 15;
+	while(gslibloc == "" && version > 8){
+		std::ostringstream toTry;
+		toTry << name << "." << version;
+		gslibloc = GLEFindLibrary(toTry.str(), &progress,"gsapi_revision");
+		version--;
+	}
+	#endif
 	#ifdef __APPLE__
-	name = "libgs.dylib";
+	string name = "libgs.dylib";
+	string gslibloc = GLEFindLibrary(name, &progress,"gsapi_revision");
 	#endif
 	#ifdef _WIN32
-	name = "gsdll64.dll";
+	string name = "gsdll64.dll";
+	string gslibloc = GLEFindLibrary(name, &progress,"gsapi_revision");
 	#endif
-	// Search for libgs using dlopen/LoadLibrary
-	string gslibloc = GLEFindLibrary(name.c_str(), &progress,"gsapi_revision");
 	// dlopen/LoadLibrary will only find it if it is installed properly.
 	// if it cannot be found this way then it is not install properly
 	// set to empty to warn the user - even if the initial search found it in a directory that
