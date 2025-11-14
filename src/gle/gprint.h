@@ -39,12 +39,15 @@
 #if defined(NO_CYGWIN)
 	#include <stdarg.h>
 #endif
-#if defined(__unix__) || defined(__APPLE__)
-	void gprint(const char* arg_list, ...);
-#else
-	void gprint(va_list arg_list, ...);
-#endif
 
+// not needed cuases compile errors on windows
+// #if defined(__unix__) || defined(__APPLE__)
+// 	void gprint(const char* arg_list, ...);
+// #else
+// 	void gprint(va_list arg_list, ...);
+// #endif
+
+void gprint(const char* arg_list, ...);
 void gprint(const std::string& output);
 
 void g_set_error_column(int col);

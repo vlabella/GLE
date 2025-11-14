@@ -202,21 +202,22 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 
 ### Options that control the build
 
-| Option Name                  | Description                                                                                          | Default Value                     |
-|-----------------------------|------------------------------------------------------------------------------------------------------|-----------------------------------|
-| `BUILD_GUI`                 | Turn off to disable build of the GUI (`qgle`) that requires Qt.                                      | ON                                |
-| `BUILD_MANIP`              | Turn off to disable build of the `manip` program.                                                    | ON (Linux, Apple), OFF (Windows) |
-| `CMAKE_INSTALL_PREFIX`     | Set this to a different install location than the default (`/usr/local` or `C:\Program Files`). | System default                    |
-| `MSVC_USE_STATIC_RUNTIME`  | Set ON to build against Visual Studio static runtimes (`/MT` instead of `/MD`). Also set `Boost_USE_STATIC_RUNTIME=ON` and ensure all other libraries are built with `/MT`. | OFF                               |
-| `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF                               |
-| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library`. Needed for installation gle include files in the `gleinc` folder.  | empty                           |
+| Option Name                  | Description                                                                 | Default Value                     |
+|-----------------------------|-----------------------------------------------------------------------------------------|-------------------------|
+| `BUILD_GUI`                 | Turn off to disable build of the GUI (`qgle`) that requires Qt.                                      | ON         |
+| `BUILD_MANIP`              | Turn off to disable build of the `manip` program.                             | ON (Linux, Apple), OFF (Windows) |
+| `CMAKE_INSTALL_PREFIX`     | Set this to a different install location than the default (`/usr/local` or `C:\Program Files`). | System default  |
+| `MSVC_USE_STATIC_RUNTIME`  | Set ON to build against Visual Studio static runtimes (`/MT` instead of `/MD`). Also set `Boost_USE_STATIC_RUNTIME=ON` and ensure all other libraries are built with `/MT`. | OFF        |
+| `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF        |
+| `GLE_EXAMPLES_LIBRARY_PATH`| Set to the root folder of the `gle-library`. Needed for installation gle include files in the `gleinc` folder.  | empty    |
 | `INSTALL_EXAMPLES`         | Include examples from the `gle-library` in the installation & distributables in the `examples` folder. Examples are defined in EXAMPLES_TO_INCLUDE.   |OFF            |
-| `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | empty                           |
-| `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                                               | OFF                               |
-| `BUILD_TEST`               | Build testing programs.                                                                              | OFF                               |
-| `INSTALL_FBUILD`           | Install the `fbuild` program – only needed during GLE build phase.                                   | OFF                               |
-| `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.                                  | OFF                               |
-| `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF                               |
+| `GLE_USER_MANUAL_PATH`     | Set to the root folder of the `gle-manual` folder on your computer. Used during install/packaging.   | empty    |
+| `BUILD_GLEBTOOL`           | Build `glebtool` program (deprecated).                                        | OFF        |
+| `BUILD_TEST`               | Build testing programs.                                                       | OFF        |
+| `INSTALL_FBUILD`           | Install the `fbuild` program – only needed during GLE build phase.            | OFF        |
+| `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.           | OFF        |
+| `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF      |
+| `CONSOLE_COLORS`            | Use ANSI color codes for console output. | ON      |
 
 
 ### Creating packages with cpack

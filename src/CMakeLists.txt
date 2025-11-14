@@ -10,7 +10,7 @@ endif()
 
 project( gle-graphics VERSION 4.3.9 LANGUAGES CXX C)
 enable_language(CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(CheckIncludeFile)
 include(CheckIncludeFiles)
@@ -56,6 +56,7 @@ option(DEVELOPER_INSTALLATION "Linux only: Install all files in staging area, ot
 option(BUILD_TESTS "Build Testing Programs." OFF)
 option(INSTALL_TESTS "Install Testing Programs." OFF)
 option(INSTALL_EXAMPLES "Install examples from gle-library defined by EXAMPLES_TO_INSTALL." OFF)
+option(CONSOLE_COLORS "Use ANSI color codes for console output." ON)
 #
 # -- List names of examples to include from gle-library in installation and distributable packages
 #
@@ -604,7 +605,9 @@ if(POPPLER_FOUND)
 		message(STATUS "ERROR Unknown Poppler Interface ${POPPLER_INTERFACE}")
 	endif()
 endif()
-
+if(NOT CONSOLE_COLORS)
+	add_compile_definitions(NO_CONSOLE_COLORS)
+endif()
 add_subdirectory(gle)
 if(BUILD_MANIP)
 	add_subdirectory(manip)

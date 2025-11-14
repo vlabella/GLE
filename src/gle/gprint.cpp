@@ -67,24 +67,41 @@ void check_new_error();
 
 extern GLEGlobalSource* g_Source;
 
-#if defined(__unix__) || defined(__APPLE__)
-	void gprint(const char* arg_list, ...)
-#else
-	void gprint(va_list arg_list, ...)
-#endif
-/* Prints an error message */
-{
-	va_list arg_ptr;
-	char *format;
-	char output[1024];
-	va_start(arg_ptr, arg_list);
-	format = (char*)arg_list;
-	vsprintf(output, format, arg_ptr);
-	output[1023] = 0;
-	check_new_error();
-	gprint_send(output);
-	g_set_error_column(-1);
+
+// not needed cuases compile errors on windows
+// #if defined(__unix__) || defined(__APPLE__)
+// 	void gprint(const char* arg_list, ...)
+// #else
+// 	void gprint(va_list arg_list, ...)
+// #endif
+// /* Prints an error message */
+// {
+// 	va_list arg_ptr;
+// 	char *format;
+// 	char output[1024];
+// 	va_start(arg_ptr, arg_list);
+// 	format = (char*)arg_list;
+// 	vsprintf(output, format, arg_ptr);
+// 	output[1023] = 0;
+// 	check_new_error();
+// 	gprint_send(output);
+// 	g_set_error_column(-1);
+// }
+
+void gprint(const char* format, ...) {
+    va_list arg_ptr;
+    char output[1024];
+
+    va_start(arg_ptr, format);
+    vsnprintf(output, sizeof(output), format, arg_ptr);
+    va_end(arg_ptr);
+
+    output[sizeof(output) - 1] = '\0'; // Ensure null termination
+    check_new_error();
+    gprint_send(output);
+    g_set_error_column(-1);
 }
+
 
 void gprint(const string& output) {
 	check_new_error();

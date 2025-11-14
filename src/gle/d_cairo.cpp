@@ -49,6 +49,7 @@
 #include <cairo-ps.h>
 #include <cairo-pdf.h>
 #include <cairo-svg.h>
+#include "console_colors.h"
 
 using namespace std;
 
@@ -200,7 +201,7 @@ void GLECairoDevice::closedev(void) {
 		string mainname;
 		string extension(g_device_to_ext(getDeviceType()));
 		GetMainNameExt(m_OutputName.getName(), extension.c_str(), mainname);
-		cerr << "[" << mainname << "][" << extension << "]";
+		cerr << "[" << ColorOutputFile(mainname) << "][" << ColorOutputFile(extension) << "]";
 		g_set_console_output(false);
 	}
 }

@@ -57,6 +57,7 @@
 #include "run.h"
 #include <boost/math/constants/constants.hpp>
 #include "gle-constants.h"
+#include "console_colors.h"
 
 using namespace std;
 
@@ -243,8 +244,9 @@ void validate_file_name(const string& fname, bool isread) {
 }
 
 void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bool silent) {
-	GLEGlobalSource* glecode = script->getSource();
-	GLEInterface* iface = script->getGLEInterface();
+
+    GLEGlobalSource* glecode = script->getSource();
+    GLEInterface* iface      = script->getGLEInterface();
 	script->cleanUp();
 	g_Source = glecode;
 	abort_flag = false;
@@ -253,9 +255,7 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 	if (!silent && g_verbosity() > 0) {
 		string version;
 		g_get_version(&version);
-		string GLE = "GLE";
-		string colorized_GLE = "\033[1;31mG\033[1;32mL\033[1;34mE\033[0m";  // red green blue
-		cerr << colorized_GLE << " " << version << "[" << script->getLocation()->getName() << "]-C";
+		cerr << GLELogoColor << " " << version << "[" <<  ColorInputFile(script->getLocation()->getName())  << "]-C";
 		cerr.flush();
 		g_set_console_output(false);
 	}

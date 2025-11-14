@@ -38,6 +38,11 @@
 
 #define GLE_MAIN_CPP
 
+#include <set>
+#ifdef _WIN32
+	#include <io.h>
+#endif
+
 #include "all.h"
 #include "tokens/Tokenizer.h"
 #include "core.h"
@@ -50,12 +55,7 @@
 #include "drawit.h"
 #include "gle-interface/gle-interface.h"
 #include "gle-poppler.h"
-
-#ifdef _WIN32
-	#include <io.h>
-#endif
-
-#include <set>
+#include "console_colors.h"
 
 using namespace std;
 
@@ -170,7 +170,7 @@ int main(int argc, char **argv) {
 		if (g_CmdLine.getNbMainArgs() == 0 || g_CmdLine.hasOption(GLE_OPT_HELP)) {
 			string version;
 			g_get_version(&version);
-			cerr << "GLE version " << version << endl;
+			cerr << GLELogoColor << " version " << version << endl;
 			cerr << "Usage: gle [options] filename.gle" << endl;
 			cerr << "More information: gle " << g_CmdLine.getOptionPrefix() << "help" << endl;
 			if (g_CmdLine.hasOption(GLE_OPT_HELP)) {
@@ -295,7 +295,7 @@ void do_show_info() {
 	g_get_version(&version);
 	g_get_build_date(&bdate);
 	GLEInterface* iface = GLEGetInterfacePointer();
-	cout << "GLE version:             " << version << endl;
+	cout << GLELogoColor <<" version:             " << version << endl;
 	if (!bdate.empty()) {
 		cout << "Build date:              " << bdate << endl;
 	}
@@ -957,7 +957,7 @@ bool GLELoadOneFileManager::process_one_file_tex() {
 
 void GLELoadOneFileManager::do_output_type(const char* type) {
 	if (g_verbosity() > 0) {
-		cerr << "[" << type << "]";
+		cerr << "[" << ColorOutputFile(type) << "]";
 		g_set_console_output(false);
 	}
 }

@@ -54,6 +54,7 @@
 #ifdef _WIN32
 #include <time.h>
 #endif
+#include "console_colors.h"
 
 using namespace std;
 
@@ -290,13 +291,12 @@ void PSGLEDevice::closedev() {
 	}
 	if (g_verbosity() > 0) {
 		string mainname;
+		string ext = ".ps";
 		if (isEps()) {
-			GetMainNameExt(m_OutputName.getName(), ".eps", mainname);
-			cerr << "[" << mainname << "][.eps]";
-		} else {
-			GetMainNameExt(m_OutputName.getName(), ".ps", mainname);
-			cerr << "[" << mainname << "][.ps]";
+			ext = ".eps";
 		}
+		GetMainNameExt(m_OutputName.getName(), ext.c_str(), mainname);
+		cerr << "[" << ColorOutputFile(mainname) << "]["<<ColorOutputFile(ext)<<"]";
 		g_set_console_output(false);
 	}
 }

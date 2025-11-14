@@ -258,20 +258,37 @@ string TokenizerPos::getString(int tab1, int tab2) const {
 	return string(res);
 }
 
-#if defined(__unix__) || defined(__APPLE__)
-	ParserError g_format_parser_error(const char* format, ...) {
-#else
-	ParserError g_format_parser_error(va_list format, ...) {
-#endif
-	string str;
-	va_list ap;
-	va_start(ap, format);
-	str_format(&str, (const char*)format, ap);
-	va_end(ap);
-	TokenizerPos pos;
-	pos.setColumn(-1);
-	return ParserError(str, pos, NULL);
+// not needed - causes compile errors on windows
+// #if defined(__unix__) || defined(__APPLE__)
+// 	ParserError g_format_parser_error(const char* format, ...) {
+// #else
+// 	ParserError g_format_parser_error(va_list format, ...) {
+// #endif
+// 	string str;
+// 	va_list ap;
+// 	va_start(ap, format);
+// 	str_format(&str, (const char*)format, ap);
+// 	va_end(ap);
+// 	TokenizerPos pos;
+// 	pos.setColumn(-1);
+// 	return ParserError(str, pos, NULL);
+// }
+
+
+ParserError g_format_parser_error(const char* format, ...) {
+    va_list ap;
+    va_start(ap, format);
+
+    std::string str;
+    str_format(&str, format, ap);
+
+    va_end(ap);
+
+    TokenizerPos pos;
+    pos.setColumn(-1);
+    return ParserError(str, pos, NULL);
 }
+
 
 
 void g_throw_parser_error(const string& err) {
