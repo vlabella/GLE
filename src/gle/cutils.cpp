@@ -51,6 +51,8 @@
     #include "../config_noauto.h"
 #endif
 
+/*
+no needed anymore C++ defines these functions
 // For visual C++ -- should use numeric limits?
 #if defined(_WIN32) && !defined(NO_CYGWIN)
 #include<float.h>
@@ -77,7 +79,6 @@ static inline int isinf_f  (float       x) { return isnan (x - x); }
 static inline int isinf_d  (double      x) { return isnan (x - x); }
 static inline int isinf_ld (long double x) { return isnan (x - x); }
 #endif
-
 int gle_isnan(double v) {
 	// Do not include <iostream> or <cmath> before gle_isnan
 	// otherwise gle_isnan will break on macOS and OS/2
@@ -90,6 +91,8 @@ int gle_isinf(double v) {
 	return isinf(v);
 }
 
+*/
+
 #include <string>
 #include <vector>
 #include <sstream>
@@ -98,6 +101,15 @@ int gle_isinf(double v) {
 #include "tokens/stokenizer.h"
 
 using namespace std;
+
+// use C++ built in functions
+int gle_isnan(double v) {
+	return std::isnan(v);
+}
+
+int gle_isinf(double v) {
+	return std::isinf(v);
+}
 
 bool equals_rel(double v1, double v2) {
 	if (v1 != 0.0) {
