@@ -386,7 +386,7 @@ public:
 
 GLEProgressIndicatorInterface::GLEProgressIndicatorInterface(GLEInterface* iface) {
 	m_Iface = iface;
-	m_chars = "-\\|/-";
+	m_chars = "|/-\\";
 	m_count = 0;
 }
 
@@ -394,10 +394,11 @@ GLEProgressIndicatorInterface::~GLEProgressIndicatorInterface() {
 }
 
 void GLEProgressIndicatorInterface::indicate() {
-	//m_Iface->getOutput()->printflush(".");
-	m_Iface->getOutput()->printflush(m_chars[m_count]+"\b");
-	m_count++;
-	if(m_count >= m_chars.length()){m_count=0;}
+	m_Iface->getOutput()->printflush(".");
+	//m_Iface->getOutput()->printflush(&m_chars[m_count]);
+	//m_Iface->getOutput()->printflush("\b");
+	//m_count++;
+	//if(m_count >= m_chars.length()){m_count=0;}
 }
 
 string get_tool_path(int tool, ConfigSection* tools) {

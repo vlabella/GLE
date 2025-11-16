@@ -79,18 +79,29 @@ public:
 //
 // -- Global GLE specific colors
 //
-inline std::string ColorInputFile(std::string s){
-    return ConsoleColor::BRIGHT_BLUE + s + ConsoleColor::RESET;
-}
-inline std::string ColorOutputFile(std::string s){
-    return ConsoleColor::BRIGHT_GREEN + s + ConsoleColor::RESET;
-}
+const std::string InputFileColor = ConsoleColor::BRIGHT_BLUE;
+const std::string OutputFileColor = ConsoleColor::BRIGHT_GREEN;
+const std::string LineNumberColor = ConsoleColor::BRIGHT_YELLOW;
+const std::string ErrorMessageColor = ConsoleColor::BRIGHT_RED;
+const std::string WarningMessageColor = ConsoleColor::BRIGHT_YELLOW;
 
 const std::string GLELogoColor =
     std::string(ConsoleColor::BRIGHT_RED) + "G" +
     std::string(ConsoleColor::BRIGHT_GREEN) + "L" +
     std::string(ConsoleColor::BRIGHT_BLUE) + "E" +
     std::string(ConsoleColor::RESET);
+
+// helper functions
+inline std::string ColorInputFile(std::string s){
+    return InputFileColor + s + ConsoleColor::RESET;
+}
+inline std::string ColorOutputFile(std::string s){
+    return OutputFileColor + s + ConsoleColor::RESET;
+}
+inline std::string ColorLineNumber(const int i){
+    return LineNumberColor + std::to_string(i) + ConsoleColor::RESET;
+}
+
 
 
 

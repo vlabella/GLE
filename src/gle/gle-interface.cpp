@@ -62,6 +62,7 @@
 #include "keyword.h"
 #include "run.h"
 #include "gle-poppler.h"
+#include "console_colors.h"
 
 using namespace std;
 
@@ -954,6 +955,7 @@ void GLEOutputStream::println() {
 
 void GLEOutputStream::println(const char* str) {
 	cerr << str << endl;
+	cerr << ConsoleColor::RESET;
 }
 
 void GLEOutputStream::printflush(const char* str) {
@@ -966,7 +968,7 @@ void GLEOutputStream::error(GLEErrorMessage* msg) {
 	const char* abbrev = msg->getLineAbbrev();
 	ostringstream output;
 	output << endl;
-	output << ">> " << file << " (" << msg->getLine() << ")";
+	output << ErrorMessageColor << ">> " << InputFileColor << file << ErrorMessageColor<<" (" << LineNumberColor << msg->getLine() <<ErrorMessageColor<< ")";
 	if (abbrev[0] != 0) {
 		output << " |" << abbrev << "|";
 	}
@@ -976,13 +978,11 @@ void GLEOutputStream::error(GLEErrorMessage* msg) {
 		output << ">> ";
 		sprintf(number, "%d", msg->getLine());
 		int nbspc = strlen(file) + strlen(number) + 4 + msg->getColumn() - msg->getDelta();
-		for (int i = 0; i < nbspc; i++) {
-			output << " ";
-		}
-		output << "^";
+		std::string spaces(nbspc, ' ');
+		output << spaces << "^";
 	}
-	output << msg->getErrorMsg();
-	g_message(output.str().c_str());
+	output << msg->getErrorMsg() << ConsoleColor::RESET;
+	g_message(output.str());
 }
 
 GLEDrawObject::GLEDrawObject() {
