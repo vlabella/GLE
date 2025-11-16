@@ -92,18 +92,19 @@ const std::string GLELogoColor =
     std::string(ConsoleColor::RESET);
 
 // helper functions
-inline std::string ColorInputFile(std::string s){
+inline std::string ColorInputFile(const std::string s){
     return InputFileColor + s + ConsoleColor::RESET;
 }
-inline std::string ColorOutputFile(std::string s){
+inline std::string ColorOutputFile(const std::string s){
     return OutputFileColor + s + ConsoleColor::RESET;
 }
 inline std::string ColorLineNumber(const int i){
     return LineNumberColor + std::to_string(i) + ConsoleColor::RESET;
 }
-
-
-
-
+inline std::string ColorErrorMessage(const std::string s){
+    return ErrorMessageColor + s + ConsoleColor::RESET;
+}
+inline std::string ColorWarningMessage(const std::string s){
+    return WarningMessageColor + s + ConsoleColor::RESET;
+}
 #endif
-

@@ -618,15 +618,8 @@ string GLEInterface::getGhostScriptLocation() {
 #ifdef _WIN32
 	// gs DLL is in path next to ghostscript executable
 	string name = "gsdll32.dll";
-	#if _WIN64
-		// VS builds
+	#if defined(_WIN64) || defined(__x86_64__) || defined(__ppc64__)
 		name = "gsdll64.dll";
-	#endif
-	#if __GNUC__
-		// gcc builds
-		#if __x86_64__ || __ppc64__
-			name = "gsdll64.dll";
-		#endif
 	#endif
 	string result = ((CmdLineArgString*)tools->getOptionValue(GLE_TOOL_GHOSTSCRIPT_CMD))->getValue();
 	if (IsAbsPath(result)) {
@@ -968,21 +961,20 @@ void GLEOutputStream::error(GLEErrorMessage* msg) {
 	const char* abbrev = msg->getLineAbbrev();
 	ostringstream output;
 	output << endl;
-	output << ErrorMessageColor << ">> " << InputFileColor << file << ErrorMessageColor<<" (" << LineNumberColor << msg->getLine() <<ErrorMessageColor<< ")";
+	output << ">> " << file << " (" << msg->getLine() << ")";
 	if (abbrev[0] != 0) {
-		output << " |" << abbrev << "|";
+		output << " |" << abbrev << "|" << endl;
 	}
 	if (msg->getColumn() != -1) {
 		char number[50];
-		output << endl;
 		output << ">> ";
 		sprintf(number, "%d", msg->getLine());
 		int nbspc = strlen(file) + strlen(number) + 4 + msg->getColumn() - msg->getDelta();
 		std::string spaces(nbspc, ' ');
 		output << spaces << "^";
 	}
-	output << msg->getErrorMsg() << ConsoleColor::RESET;
-	g_message(output.str());
+	//output << msg->getErrorMsg();
+	g_message(ColorErrorMessage(output.str()));
 }
 
 GLEDrawObject::GLEDrawObject() {
