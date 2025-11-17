@@ -118,15 +118,15 @@ void output_error(ParserError& err) {
 	g_set_error_column(-1);
 	if (err.hasFlag(TOK_PARSER_ERROR_ATEND)) {
 		// Otherwise, the message would be "unexpected end of file"
-		err.setMessage("unexpected end of line");
+		err.setMessage(ColorErrorMessage("unexpected end of line"));
 	}
 	if (err.hasFlag(TOK_PARSER_ERROR_PSTRING)) {
 		if (err.file() == "") {
-			gprint(string(">> Error: ")+err.msg()+"\n");
+			gprint(ColorErrorMessage(string(">> Error: ")+err.msg()+"\n"));
 		} else {
 			string err_str;
 			err.toString(err_str);
-			gprint(string(">> Error: ")+err_str+"\n");
+			gprint(ColorErrorMessage(string(">> Error: ")+err_str+"\n"));
 		}
 		if (err.getColumn() != -1) {
 			stringstream pos_strm;
@@ -138,18 +138,18 @@ void output_error(ParserError& err) {
 				pos_strm << " ";
 			}
 			pos_strm << "^" << endl;
-			gprint(pos_strm.str());
+			gprint(ColorErrorMessage(pos_strm.str()));
 		}
 	} else {
 		if (err.file() == "") {
 			// Error in the GLE file
 			g_set_error_column(err.getColumn());
-			gprint(string(">> Error: ")+err.msg()+"\n");
+			gprint(ColorErrorMessage(string(">> Error: ")+err.msg()+"\n"));
 		} else {
 			// Error while reading a data file
 			string err_str;
 			err.toString(err_str);
-			gprint(string(">> Error: ")+err_str+"\n");
+			gprint(ColorErrorMessage(string(">> Error: ")+err_str+"\n"));
 		}
 	}
 }
@@ -158,22 +158,22 @@ void output_error_cerr(ParserError& err) {
 	// Used by GLE "as a calculator", i.e., if no GLE file is active
 	if (err.hasFlag(TOK_PARSER_ERROR_ATEND)) {
 		// Otherwise, the message would be "unexpected end of file"
-		err.setMessage("unexpected end of line");
+		err.setMessage(ColorErrorMessage("unexpected end of line"));
 	}
 	if (err.hasFlag(TOK_PARSER_ERROR_PSTRING)) {
-		cerr << ">> Error: " << err.msg() << endl;
+		stringstream pos_strm;
+		pos_strm << ">> Error: " << err.msg() << endl;
 		if (err.getColumn() != -1) {
-			cerr << ">> In: '" << err.getParserString() << "'" << endl;
-			stringstream pos_strm;
+			pos_strm << ">> In: '" << err.getParserString() << "'" << endl;
 			pos_strm << ">>";
 			for (int i = 0; i < err.getColumn()+5; i++) {
 				pos_strm << " ";
 			}
 			pos_strm << "^" << endl;
-			cerr << pos_strm.str();
+			cerr << ColorErrorMessage(pos_strm.str());
 		}
 	} else {
-		cerr << ">> Error: " << err.msg() << endl;
+		cerr << ColorErrorMessage(">> Error: ") << ColorErrorMessage(err.msg()) << endl;
 	}
 }
 
@@ -354,7 +354,7 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 	if (ngerror > 0){
 		reset_new_error(true);
 		g_message("");
-		g_throw_parser_error("errors, aborting");
+		g_throw_parser_error(ColorErrorMessage("errors, aborting"));
 	}
 	try {
 		//
