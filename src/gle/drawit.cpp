@@ -350,11 +350,13 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 	script->setRun(run);
 	g_GLERun = run;
 	g_compatibility_settings();
-	// Exit if parser error (not: this should be done after GLERun has been created!)
+	// Exit if parser error (note: this should be done after GLERun has been created!)
 	if (ngerror > 0){
 		reset_new_error(true);
 		g_message("");
-		g_throw_parser_error(ColorErrorMessage("errors, aborting"));
+		stringstream msg;
+		msg << ErrorMessageColor << "Errors, "<<GLELogoColor<<ErrorMessageColor<<" aborting."<<ConsoleColor::RESET;
+		g_throw_parser_error(msg.str());
 	}
 	try {
 		//

@@ -961,17 +961,17 @@ void GLEOutputStream::error(GLEErrorMessage* msg) {
 	const char* abbrev = msg->getLineAbbrev();
 	ostringstream output;
 	output << endl;
-	output << ">> " << file << " (" << msg->getLine() << ")";
+	output << ">> " << ColorInputFile(file) << " (" << ColorLineNumber(msg->getLine()) << ")";
 	if (abbrev[0] != 0) {
-		output << " |" << abbrev << "|" << endl;
+		output << " |" << ColorGLECode(abbrev) << "|" << endl;
 	}
 	if (msg->getColumn() != -1) {
 		char number[50];
-		output << ">> ";
+		output << ConsoleColor::BRIGHT_RED << ">> ";
 		sprintf(number, "%d", msg->getLine());
 		int nbspc = strlen(file) + strlen(number) + 4 + msg->getColumn() - msg->getDelta();
 		std::string spaces(nbspc, ' ');
-		output << spaces << "^";
+		output << spaces << "^" << ConsoleColor::RESET;
 	}
 	//output << msg->getErrorMsg();
 	g_message(ColorErrorMessage(output.str()));
