@@ -77,10 +77,10 @@ jobs:
       run: gswin64c --version
 
       # ensure ninja is the version needed
-    - name: Ensure Ninja >= 1.13.1 (idempotent)
-      shell: pwsh
-      run: |
-       $required = [version]'1.13.1' $installedVer = [version]'0.0.0' if (Get-Command ninja -ErrorAction SilentlyContinue) { try { $verText = (ninja --version).Trim() $installedVer = [version]$verText } catch { Write-Host "Could not parse ninja --version output: (_.Exception.Message)" } } Write-Host "Installed: $installedVer, Required: $required" if ($installedVer -lt $required) { choco install ninja --version=1.13.1 -y refreshenv } ninja --version
+    # - name: Ensure Ninja >= 1.13.1 (idempotent)
+    #   shell: pwsh
+    #   run: |
+    #    $required = [version]'1.13.1' $installedVer = [version]'0.0.0' if (Get-Command ninja -ErrorAction SilentlyContinue) { try { $verText = (ninja --version).Trim() $installedVer = [version]$verText } catch { Write-Host "Could not parse ninja --version output: (_.Exception.Message)" } } Write-Host "Installed: $installedVer, Required: $required" if ($installedVer -lt $required) { choco install ninja --version=1.13.1 -y refreshenv } ninja --version
 
     - name: Install ECM package using vcpkg
       run: "${{env.MY_VCPKG_ROOT}}/vcpkg install ecm"
