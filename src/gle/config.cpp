@@ -134,13 +134,13 @@ void init_config(ConfigCollection* collection) {
 	CmdLineOption* option;
 	CmdLineArgString* strarg;
 	CmdLineArgSet* setarg;
-/* GLE */
+	/* GLE */
 	section = new ConfigSection("gle");
 	strarg = section->addStringOption("current", GLE_CONFIG_GLE_VERSION);
 	strarg->setDefault("");
 	section->addSPairListOption("versions", GLE_CONFIG_GLE_INSTALL);
 	collection->addSection(section, GLE_CONFIG_GLE);
-/* Tools */
+	/* Tools */
 	section = new ConfigSection("tools");
 	/* LaTeX */
 	strarg = section->addStringOption("latex", GLE_TOOL_LATEX_CMD);
@@ -153,7 +153,7 @@ void init_config(ConfigCollection* collection) {
 #ifdef __OS2__
 	strarg->setDefault("vlatexp.cmd");
 #endif
-	section->addStringOption("latex_options", GLE_TOOL_LATEX_OPTIONS);
+	//section->addStringOption("latex_options", GLE_TOOL_LATEX_OPTIONS);
 
 	/* PdfLaTeX */
 	strarg = section->addStringOption("pdflatex", GLE_TOOL_PDFTEX_CMD);
@@ -162,7 +162,7 @@ void init_config(ConfigCollection* collection) {
 #else
 	strarg->setDefault("pdflatex");
 #endif
-	section->addStringOption("pdflatex_options", GLE_TOOL_PDFTEX_OPTIONS);
+	//section->addStringOption("pdflatex_options", GLE_TOOL_PDFTEX_OPTIONS);
 
 	/* DVIPS */
 	strarg = section->addStringOption("dvips", GLE_TOOL_DVIPS_CMD);
@@ -175,7 +175,8 @@ void init_config(ConfigCollection* collection) {
 #ifdef __OS2__
 	strarg->setDefault("dvips.exe");
 #endif
-	section->addStringOption("dvips_options", GLE_TOOL_DVIPS_OPTIONS);
+	//section->addStringOption("dvips_options", GLE_TOOL_DVIPS_OPTIONS);
+
 	/* GhostScript Program */
 	strarg = section->addStringOption("ghostscript", GLE_TOOL_GHOSTSCRIPT_CMD);
 #ifdef _WIN32
@@ -194,7 +195,7 @@ void init_config(ConfigCollection* collection) {
 #ifdef __OS2__
 	strarg->setDefault("gsos2.exe");
 #endif
-	section->addStringOption("ghostscript_options", GLE_TOOL_GHOSTSCRIPT_OPTIONS);
+	//section->addStringOption("ghostscript_options", GLE_TOOL_GHOSTSCRIPT_OPTIONS);
 
 	collection->addSection(section, GLE_CONFIG_TOOLS);
 	/* GhostScript Library */
@@ -215,7 +216,7 @@ void init_config(ConfigCollection* collection) {
 #endif
 	strarg = section->addStringOption("editor", GLE_TOOL_TEXT_EDITOR);
 	strarg = section->addStringOption("pdfviewer", GLE_TOOL_PDF_VIEWER);
-/* TeX config */
+	/* TeX config */
 	section = new ConfigSection("tex");
 	option = new CmdLineOption("system");
 	setarg = new CmdLineArgSet("device-names");
@@ -230,7 +231,7 @@ void init_config(ConfigCollection* collection) {
 	option->addArg(setarg);
 	section->addOption(option, GLE_TEX_SYSTEM);
 	collection->addSection(section, GLE_CONFIG_TEX);
-/* Config paper */
+	/* Config paper */
 	section = new ConfigSection("paper");
 	strarg = section->addStringOption("size", GLE_CONFIG_PAPER_SIZE);
 	strarg->setDefault("a4paper");

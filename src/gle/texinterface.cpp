@@ -1314,11 +1314,13 @@ bool create_pdf_file_pdflatex(const string& fname, GLEScript* script) {
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
 	string cmdline(get_tool_path(GLE_TOOL_PDFTEX_CMD, tools));
 	str_try_add_quote(cmdline);
+	/* options unused
 	const string pdftex_opts(tools->getOptionString(GLE_TOOL_PDFTEX_OPTIONS));
 	if (!pdftex_opts.empty()) {
 		cmdline += " ";
 		cmdline += pdftex_opts;
 	}
+	*/
 	cmdline += string(" \"") + file + ".tex\"";
 	string outfile = file + ".pdf";
 	if (g_verbosity() >= 5) {
@@ -1355,11 +1357,14 @@ bool run_latex(const string& dir, const string& file) {
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
 	string cmdline(get_tool_path(GLE_TOOL_LATEX_CMD, tools));
 	str_try_add_quote(cmdline);
+	/*
+	options unused
 	const string latex_opts(tools->getOptionString(GLE_TOOL_LATEX_OPTIONS));
 	if (!latex_opts.empty()) {
 		cmdline += " ";
 		cmdline += latex_opts;
 	}
+	*/
 	cmdline += string(" \"") + file + ".tex\"";
 	string outfile = file + ".dvi";
 	if (g_verbosity() >= 5) {
@@ -1432,11 +1437,14 @@ bool run_ghostscript(const string& args, const string& outfile, bool redirout, i
 	ConfigSection* tools = g_Config.getSection(GLE_CONFIG_TOOLS);
 	string cmdline(get_tool_path(GLE_TOOL_GHOSTSCRIPT_CMD, tools));
 	str_try_add_quote(cmdline);
+	/*
+	options unused
 	const string gs_opts(tools->getOptionString(GLE_TOOL_GHOSTSCRIPT_OPTIONS));
 	if (!gs_opts.empty()) {
 		cmdline += " ";
 		cmdline += gs_opts;
 	}
+	*/
 	cmdline += " ";
 	cmdline += args;
 	if (g_verbosity() >= 5) {
@@ -1489,8 +1497,10 @@ bool run_dvips(const string& file, bool eps) {
 		// construct dvips arguments
 		ostringstream dvipsargs;
 		dvipsargs << dvips_cmd;
+		/* options unused
 		const string dvips_opts(tools->getOptionString(GLE_TOOL_DVIPS_OPTIONS));
 		if (!dvips_opts.empty()) dvipsargs << " " << dvips_opts;
+		*/
 		if (eps) dvipsargs << " -E";
 		const string outfile(file + (eps ? ".eps" : ".ps"));
 		dvipsargs << " -o \"" << outfile << "\" \"" << file << ".dvi\"";
