@@ -42,6 +42,7 @@
     - manip: fix buffer length compiler warnings for fgets.
     - add color to console output.
     - remove searching for pdflatex_options and other options that are unused and show up missing when running gle -finddeps
+    - added install.sh installation script for Linux/macOS installations.
 
 4.3.8 (October 2025)
     - Upgrade to Qt6
