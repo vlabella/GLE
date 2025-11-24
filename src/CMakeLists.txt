@@ -633,7 +633,9 @@ if(BUILD_TESTS)
 	add_subdirectory(tests)
 	add_dependencies(findgs gle)
 endif()
-
+#
+# -- install supportting files
+#
 # documentation file installation in doc folder
 # assume system installation FHS
 set(MY_DESTINATION ${CMAKE_INSTALL_DOCDIR})
@@ -670,7 +672,6 @@ install(DIRECTORY
 	PATTERN "*.pdf"
 	PATTERN "compat" EXCLUDE
 )
-
 #
 # -- install include files from gle-library repo in gleinc
 #
@@ -711,4 +712,23 @@ if(INSTALL_EXAMPLES)
 			PATTERN "*.dat"
 		)
 	endforeach()
+endif()
+#
+# -- install install.sh script
+#
+if(UNIX)
+	# assume system installation FHS
+	set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
+	if(DEVELOPER_INSTALLATION OR WIN32)
+		# install one directory above executable
+		set(MY_DESTINATION .)
+	endif()
+
+	install(FILES ../scripts/install.sh
+			CONFIGURATIONS Release Debug
+			DESTINATION ${MY_DESTINATION}
+			PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+                GROUP_READ GROUP_EXECUTE
+                WORLD_READ WORLD_EXECUTE
+			)
 endif()
