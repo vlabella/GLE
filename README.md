@@ -99,7 +99,7 @@ Building on windows requires [Visual Studio](https://visualstudio.microsoft.com/
 	cmake --install build --config Release
 	```
 
-All gle files will be installed to `C:\Program Files\gle-graphics` by default.  Add `C:\Program Files\gle-graphics\bin` to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call.
+All gle files will be installed to `C:\Program Files\gle-graphics` by default.  Add `C:\Program Files\gle-graphics\bin` to your PATH environment variable.  The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call. Filetype associations (.gle to qgle) will be created if INSTALL_CREATE_FILETYPE_ASSOCIATION is set ON in initial cmake call.
 
 ### Building on macOS
 
@@ -131,7 +131,7 @@ Building on macOS requires [XCode](https://developer.apple.com/xcode/), [cmake](
 	cmake --install build --config Release
 	```
 
-All gle files will be installed similar to Linux. The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call. For example, to install in `/usr` instead of `/usr/local` pass `-DMAKE_INSTAL_PREFIX=/usr` to the initial cmake call.
+All gle files will be installed similar to Linux. The installation location can be changed by setting `CMAKE_INSTALL_PREFEX` on the initial cmake call. For example, to install in `/usr` instead of `/usr/local` pass `-DMAKE_INSTAL_PREFIX=/usr` to the initial cmake call.  Filetype associations (.gle to qgle) will be created if INSTALL_CREATE_FILETYPE_ASSOCIATION is set ON in initial cmake call.
 
 ### Post Installation Configuration and Testing
 
@@ -218,6 +218,7 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 | `INSTALL_MAKEFMT`          | Install the `makefmt` program – only needed during GLE build phase.           | OFF        |
 | `DEVELOPER_INSTALLATION`   | Linux only: Install all files in staging area; otherwise install in FHS paths on system.             | OFF      |
 | `CONSOLE_COLORS`            | Use ANSI color codes for console output. | ON      |
+| `INSTALL_CREATE_FILETYPE_ASSOCIATION` | Create filetype (.gle) associations for qgle during installation phase | OFF |
 
 
 ### Creating packages with cpack

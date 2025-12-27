@@ -43,6 +43,9 @@
     - add color to console output.
     - remove searching for pdflatex_options and other options that are unused and show up missing when running gle -finddeps
     - added install.sh installation script for Linux/macOS installations.
+    - added install.cmd installation script for Windows installations.
+    - added ability to create filetype assocations during cmake install phase with installation
+      scripts using INSTALL_CREATE_FILETYPE_ASSOCIATION option.
 
 4.3.8 (October 2025)
     - Upgrade to Qt6

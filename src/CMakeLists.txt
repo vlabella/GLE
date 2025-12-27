@@ -57,6 +57,7 @@ option(BUILD_TESTS "Build Testing Programs." OFF)
 option(INSTALL_TESTS "Install Testing Programs." OFF)
 option(INSTALL_EXAMPLES "Install examples from gle-library defined by EXAMPLES_TO_INSTALL." OFF)
 option(CONSOLE_COLORS "Use ANSI color codes for console output." ON)
+option(INSTALL_CREATE_FILETYPE_ASSOCIATION "Create filetype association for .gle files during installation phase" OFF)
 #
 # -- List names of examples to include from gle-library in installation and distributable packages
 #
@@ -714,16 +715,15 @@ if(INSTALL_EXAMPLES)
 	endforeach()
 endif()
 #
-# -- install install.sh script
+# -- install the installation script and run it to create filetype association
 #
 if(UNIX)
 	# assume system installation FHS
 	set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
-	if(DEVELOPER_INSTALLATION OR WIN32)
+	if(DEVELOPER_INSTALLATION)
 		# install one directory above executable
 		set(MY_DESTINATION .)
 	endif()
-
 	install(FILES ../scripts/install.sh
 			CONFIGURATIONS Release Debug
 			DESTINATION ${MY_DESTINATION}
@@ -731,4 +731,28 @@ if(UNIX)
                 GROUP_READ GROUP_EXECUTE
                 WORLD_READ WORLD_EXECUTE
 			)
+	if(INSTALL_CREATE_FILETYPE_ASSOCIATION)
+		message(${MY_DESTINATION})
+		install(CODE
+			"execute_process(COMMAND ${CMAKE_INSTALL_PREFIX}/${MY_DESTINATION}/install.sh --create_filetype_association)"
+    )
+	endif()
+endif()
+if(WIN32)
+	# assume system installation FHS
+	set(MY_DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME})
+	if(DEVELOPER_INSTALLATION)
+		# install one directory above executable
+		set(MY_DESTINATION .)
+	endif()
+	install(FILES ../scripts/install.cmd
+			CONFIGURATIONS Release Debug
+			DESTINATION ${MY_DESTINATION}
+			)
+	if(INSTALL_CREATE_FILETYPE_ASSOCIATION)
+		message(${MY_DESTINATION})
+		install(CODE
+			"execute_process(COMMAND ${CMAKE_INSTALL_PREFIX}/${MY_DESTINATION}/install.cmd --create_filetype_association)"
+    )
+	endif()
 endif()
