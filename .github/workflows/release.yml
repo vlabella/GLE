@@ -77,7 +77,7 @@ jobs:
         endif()
         CMK
         # Run the script and capture the version (strip whitespace/newlines)
-        ver="$(cmake -P "$SCRIPT" | tail -n 1 | tr -d '\r' | awk 'NF{print $0}')"
+        ver="$(cmake -P "$SCRIPT" --log-level=ERROR | tail -n 1 | tr -d '\r' | awk 'NF{print $0}')"
         rm -f "$SCRIPT"
         if [[ -z "${ver:-}" ]]; then
           echo "Failed to extract VERSION from src/CMakeLists.txt" >&2
