@@ -44,7 +44,7 @@ jobs:
             if (DEFINED CMAKE_MATCH_1)
               message("${CMAKE_MATCH_1}")
             endif ()
-CMK
+          CMK
           ))
           if [[ -z "${ver:-}" ]]; then
             echo "Failed to extract VERSION (with optional pre-release) from src/CMakeLists.txt" >&2
