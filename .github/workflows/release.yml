@@ -24,10 +24,33 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Get Version Number from CMakeLists.txt file
-      id: version-number
+#    - name: Get Version Number from CMakeLists.txt file
+#      id: version-number
       #run: echo "VERSION=4.3.5" >> $GITHUB_ENV
-      run: echo "VERSION=$(awk 'tolower($0) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CMakeLists.txt)" >> $GITHUB_ENV
+#      run: echo "VERSION=$(awk 'tolower($0) ~ /project\([[:blank:]]*[[:alnum:]]+[[:blank:]]+version[[:blank:]]+[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+[[:blank:]]*\)/{print $4}' src/CMakeLists.txt)" >> $GITHUB_ENV
+
+    - name: Extract version via CMake script
+      id: version-number
+      shell: bash
+      run: |
+          set -euo pipefail
+          ver=$(cmake -P <(cat <<'CMK'
+file(READ "src/CMakeLists.txt" _cml)
+# Extract the project(...) invocation (robust to formatting)
+string(REGEX MATCH "project\\([^\\)]*\\)" _proj "${_cml}")
+# Match VERSION followed by MAJOR.MINOR.PATCH and optional -prerelease
+# prerelease: letters/digits/dots/dashes (e.g., rc1, beta.2)
+string(REGEX MATCH "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z\\.-]+)?)" _ver "${_proj}")
+if (DEFINED CMAKE_MATCH_1)
+  message("${CMAKE_MATCH_1}")
+endif ()
+CMK
+          ))
+          if [[ -z "${ver:-}" ]]; then
+            echo "Failed to extract VERSION (with optional pre-release) from src/CMakeLists.txt" >&2
+            exit 1
+          fi
+          echo "VERSION=$ver" >> "$GITHUB_ENV"
     - name: Use the value
       run: printf '%s\n' "$VERSION"
     - name: extract changes for only this version
