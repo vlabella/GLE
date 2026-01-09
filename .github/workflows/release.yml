@@ -34,33 +34,56 @@ jobs:
       shell: bash
       run: |
         set -euo pipefail
-        # Create a temporary CMake script
+
+        # Create a temporary CMake script (seekable file)
         SCRIPT="$(mktemp)"
         cat > "$SCRIPT" <<'CMK'
-            # Read the CMakeLists.txt
-            file(READ "src/CMakeLists.txt" _cml)
-            # Extract the project(...) invocation (robust to formatting, spans multiple lines)
-            string(REGEX MATCH "[Pp][Rr][Oo][Jj][Ee][Cc][Tt]\\([^\\)]*\\)" _proj "${_cml}")
-            # Full SemVer:
-            #   core: MAJOR.MINOR.PATCH
-            #   optional pre-release: -ident(.ident)*   where ident = [0-9A-Za-z-]+
-            #   optional build:      +ident(.ident)*
-            #
-            # NOTE: CMake doesn't support non-capturing groups, so we use capturing groups.
-            # The *first* capture group (CMAKE_MATCH_1) is the entire version.
-            string(REGEX MATCH
-                   "[Vv][Ee][Rr][Ss][Ii][Oo][Nn][[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?)"
-                   _ver "${_proj}")
-            if (DEFINED CMAKE_MATCH_1)
-              message("${CMAKE_MATCH_1}")
-            endif ()
+        # Read CMakeLists.txt
+        file(READ "src/CMakeLists.txt" _cml)
+
+        # Try to capture the project(...) invocation (allows newlines inside)
+        string(REGEX MATCH "[Pp][Rr][Oo][Jj][Ee][Cc][Tt]\\([^\\)]*\\)" _proj "${_cml}")
+
+        # Diagnostic: show whether project(...) was found
+        if (DEFINED _proj)
+          message(STATUS "Found project(): ${_proj}")
+        else()
+          message(STATUS "No project() found in src/CMakeLists.txt")
+        endif()
+
+        # Define a full SemVer pattern for VERSION:
+        #   MAJOR.MINOR.PATCH
+        #   optional -prerelease (dot-separated identifiers of [0-9A-Za-z-]+)
+        #   optional +build (dot-separated identifiers)
+        set(_semver_re "[Vv][Ee][Rr][Ss][Ii][Oo][Nn][[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?)")
+
+        # First, try matching inside project()
+        if (DEFINED _proj)
+          string(REGEX MATCH "${_semver_re}" _ver "${_proj}")
+        endif()
+
+        # Fallback: search whole file if not found inside project()
+        if (NOT DEFINED CMAKE_MATCH_1)
+          message(STATUS "VERSION not found inside project(), trying whole file...")
+          string(REGEX MATCH "${_semver_re}" _ver "${_cml}")
+        endif()
+
+        # Emit the captured version (CMAKE_MATCH_1), if present
+        if (DEFINED CMAKE_MATCH_1)
+          # Output only the version (no status prefix) so caller captures cleanly
+          message("${CMAKE_MATCH_1}")
+        else()
+          # Emit nothing; caller will treat as failure
+        endif()
         CMK
-        # Run the CMake script
-        ver="$(cmake -P "$SCRIPT" || true)"
+        # Run the script and capture the version (strip whitespace/newlines)
+        ver="$(cmake -P "$SCRIPT" | tail -n 1 | tr -d '\r' | awk 'NF{print $0}')"
         rm -f "$SCRIPT"
         if [[ -z "${ver:-}" ]]; then
-         echo "Failed to extract VERSION from src/CMakeLists.txt" >&2
-         exit 1
+          echo "Failed to extract VERSION from src/CMakeLists.txt" >&2
+          echo "Tip: Ensure your CMakeLists.txt contains something like:" >&2
+          echo "      project( gle-graphics VERSION 4.3.9 LANGUAGES CXX C )" >&2
+          exit 1
         fi
         echo "VERSION=$ver" >> "$GITHUB_ENV"
     - name: Use the value
