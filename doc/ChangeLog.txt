@@ -1,4 +1,4 @@
-4.3.9 (not released yet)
+4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be conststant with existing Debian package
         This changes the default install location on Windows to be
         C:\Program Files\gle-graphics
