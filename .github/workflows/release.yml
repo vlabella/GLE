@@ -35,16 +35,16 @@ jobs:
       run: |
           set -euo pipefail
           ver=$(cmake -P <(cat <<'CMK'
-file(READ "src/CMakeLists.txt" _cml)
-# Extract the project(...) invocation (robust to formatting)
-string(REGEX MATCH "project\\([^\\)]*\\)" _proj "${_cml}")
-# Match VERSION followed by MAJOR.MINOR.PATCH and optional -prerelease
-# prerelease: letters/digits/dots/dashes (e.g., rc1, beta.2)
-string(REGEX MATCH "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z\\.-]+)?)" _ver "${_proj}")
-if (DEFINED CMAKE_MATCH_1)
-  message("${CMAKE_MATCH_1}")
-endif ()
-CMK
+            file(READ "src/CMakeLists.txt" _cml)
+            # Extract the project(...) invocation (robust to formatting)
+            string(REGEX MATCH "project\\([^\\)]*\\)" _proj "${_cml}")
+            # Match VERSION followed by MAJOR.MINOR.PATCH and optional -prerelease
+            # prerelease: letters/digits/dots/dashes (e.g., rc1, beta.2)
+            string(REGEX MATCH "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z\\.-]+)?)" _ver "${_proj}")
+            if (DEFINED CMAKE_MATCH_1)
+              message("${CMAKE_MATCH_1}")
+            endif ()
+            CMK
           ))
           if [[ -z "${ver:-}" ]]; then
             echo "Failed to extract VERSION (with optional pre-release) from src/CMakeLists.txt" >&2
