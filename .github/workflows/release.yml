@@ -34,23 +34,32 @@ jobs:
       shell: bash
       run: |
           set -euo pipefail
-          ver=$(cmake -P <(cat <<'CMK'
+          # Create a temporary CMake script
+          SCRIPT="$(mktemp)"
+          cat > "$SCRIPT" <<'CMK'
+            # Read the CMakeLists.txt
             file(READ "src/CMakeLists.txt" _cml)
             # Extract the project(...) invocation (robust to formatting)
             string(REGEX MATCH "project\\([^\\)]*\\)" _proj "${_cml}")
-            # Match VERSION followed by MAJOR.MINOR.PATCH and optional -prerelease
-            # prerelease: letters/digits/dots/dashes (e.g., rc1, beta.2)
-            string(REGEX MATCH "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z\\.-]+)?)" _ver "${_proj}")
+            # --- Choose one of the two regexes below ---
+            # 1) Pre-release only (e.g., -rc1, -beta.2)
+            # string(REGEX MATCH "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z\\.-]+)?)" _ver "${_proj}")
+            # 2) Full SemVer (pre-release AND build metadata, e.g., -rc1+build.5)
+            string(REGEX MATCH
+                   "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?)"
+                   _ver "${_proj}")
             if (DEFINED CMAKE_MATCH_1)
               message("${CMAKE_MATCH_1}")
             endif ()
-          CMK
-          ))
-          if [[ -z "${ver:-}" ]]; then
-            echo "Failed to extract VERSION (with optional pre-release) from src/CMakeLists.txt" >&2
-            exit 1
-          fi
-          echo "VERSION=$ver" >> "$GITHUB_ENV"
+         CMK
+         # Run the CMake script
+         ver="$(cmake -P "$SCRIPT" || true)"
+         rm -f "$SCRIPT"
+         if [[ -z "${ver:-}" ]]; then
+           echo "Failed to extract VERSION from src/CMakeLists.txt" >&2
+           exit 1
+         fi
+        echo "VERSION=$ver" >> "$GITHUB_ENV"
     - name: Use the value
       run: printf '%s\n' "$VERSION"
     - name: extract changes for only this version
