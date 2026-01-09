@@ -114,6 +114,10 @@ jobs:
     - name: Extract changes from ChangeLog.txt for only this version
       # use sed to extract from change log - must have blank line between version numbers in change log
       run: sed -n "/$VERSION/,/^$/p" ${{github.workspace}}/doc/ChangeLog.txt > changes.txt
+    - name: Wrap changes.txt in Markdown code fences
+      run: |
+        { echo '```'; cat changes.txt; echo '```'; } > changes_fenced.txt
+        mv changes_fenced.txt changes.txt
     - name: Release
       id: release
       uses: softprops/action-gh-release@v2
