@@ -39,14 +39,17 @@ jobs:
         cat > "$SCRIPT" <<'CMK'
             # Read the CMakeLists.txt
             file(READ "src/CMakeLists.txt" _cml)
-            # Extract the project(...) invocation (robust to formatting)
-            string(REGEX MATCH "project\\([^\\)]*\\)" _proj "${_cml}")
-            # --- Choose one of the two regexes below ---
-            # 1) Pre-release only (e.g., -rc1, -beta.2)
-            # string(REGEX MATCH "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z\\.-]+)?)" _ver "${_proj}")
-            # 2) Full SemVer (pre-release AND build metadata, e.g., -rc1+build.5)
+            # Extract the project(...) invocation (robust to formatting, spans multiple lines)
+            string(REGEX MATCH "[Pp][Rr][Oo][Jj][Ee][Cc][Tt]\\([^\\)]*\\)" _proj "${_cml}")
+            # Full SemVer:
+            #   core: MAJOR.MINOR.PATCH
+            #   optional pre-release: -ident(.ident)*   where ident = [0-9A-Za-z-]+
+            #   optional build:      +ident(.ident)*
+            #
+            # NOTE: CMake doesn't support non-capturing groups, so we use capturing groups.
+            # The *first* capture group (CMAKE_MATCH_1) is the entire version.
             string(REGEX MATCH
-                   "VERSION[[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(?:-[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?)"
+                   "[Vv][Ee][Rr][Ss][Ii][Oo][Nn][[:space:]]+([0-9]+\\.[0-9]+\\.[0-9]+(-[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?(\\+[0-9A-Za-z-]+(\\.[0-9A-Za-z-]+)*)?)"
                    _ver "${_proj}")
             if (DEFINED CMAKE_MATCH_1)
               message("${CMAKE_MATCH_1}")
