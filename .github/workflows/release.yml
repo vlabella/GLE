@@ -33,10 +33,10 @@ jobs:
       id: version-number
       shell: bash
       run: |
-          set -euo pipefail
-          # Create a temporary CMake script
-          SCRIPT="$(mktemp)"
-          cat > "$SCRIPT" <<'CMK'
+        set -euo pipefail
+        # Create a temporary CMake script
+        SCRIPT="$(mktemp)"
+        cat > "$SCRIPT" <<'CMK'
             # Read the CMakeLists.txt
             file(READ "src/CMakeLists.txt" _cml)
             # Extract the project(...) invocation (robust to formatting)
@@ -51,14 +51,14 @@ jobs:
             if (DEFINED CMAKE_MATCH_1)
               message("${CMAKE_MATCH_1}")
             endif ()
-         CMK
-         # Run the CMake script
-         ver="$(cmake -P "$SCRIPT" || true)"
-         rm -f "$SCRIPT"
-         if [[ -z "${ver:-}" ]]; then
-           echo "Failed to extract VERSION from src/CMakeLists.txt" >&2
-           exit 1
-         fi
+        CMK
+        # Run the CMake script
+        ver="$(cmake -P "$SCRIPT" || true)"
+        rm -f "$SCRIPT"
+        if [[ -z "${ver:-}" ]]; then
+         echo "Failed to extract VERSION from src/CMakeLists.txt" >&2
+         exit 1
+        fi
         echo "VERSION=$ver" >> "$GITHUB_ENV"
     - name: Use the value
       run: printf '%s\n' "$VERSION"
