@@ -4,7 +4,7 @@
 #    - checks out gle source code
 #    - gets version number from CMakeLists.txt file
 #    - creates tag and release using version number on GitHub
-#    - gets changes from docs/ChangeLog.tct
+#    - gets changes from docs/ChangeLog.txt
 #         all lines from version number to first blank line
 #    - triggers build and package workflows for all three OSes, which upload their artifacts to the release
 #    - triggers build and release workflows for gle-library and gle-manual to create release with same tag
