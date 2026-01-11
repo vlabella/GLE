@@ -25,6 +25,14 @@
  ******************************************************************************/
 
 #include <QApplication>
+#include <QtPlugin>
+#ifdef Q_OS_WIN32
+Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
+#endif
+#ifdef Q_OS_LINUX
+// Q_IMPORT_PLUGIN(QWaylandIntegrationPlugin)
+#endif
+
 #include "mainwindow.h"
 #include "dialogues.h"
 
@@ -271,12 +279,6 @@ LONG WINAPI MyUnhandledExceptionFilter(EXCEPTION_POINTERS *info) {
 }
 #endif
 
-#ifdef Q_OS_WIN32
-Q_IMPORT_PLUGIN(QWindowsIntegrationPlugin)
-#endif
-#ifdef Q_OS_LINUX
-// Q_IMPORT_PLUGIN(QWaylandIntegrationPlugin)
-#endif
 
 int main(int argc, char *argv[]) {
 	QLocale curLocale("C");
