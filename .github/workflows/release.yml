@@ -97,7 +97,7 @@ jobs:
           exit 1
         fi
         echo "VERSION=$VERSION" >> "$GITHUB_ENV"
-    - name: PRint the version number for confiramtion
+    - name: Print the version number for confiramtion
       run: printf '%s\n' "$VERSION"
     - name: Validate VERSION before release
       shell: bash

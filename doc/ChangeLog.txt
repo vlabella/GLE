@@ -1,8 +1,8 @@
 4.3.9 (January 2026)
-    - Change project name to gle-graphics in cmake file to be conststant with existing Debian package
+    - Change project name to gle-graphics in cmake file to be consistent with existing Debian package
         This changes the default install location on Windows to be
         C:\Program Files\gle-graphics
-        Linux installation is FHS comppliant (see below)
+        Linux installation is FHS compliant (see below)
     - cpack can produce a debian package if desired.
     - qgle: eliminate ghostscript stack underflow error in output window when rendering with ghostscript.
     - qgle: Change Qt5 QRegExp to Qt6 QRegularExpression to eliminate need for Core5Compat library
@@ -23,7 +23,7 @@
          If gle is in /usr/local/bin it will search in /usr/local/share/gle-graphics then /usr/local/share/gle
          one directory up from gle executable.
          Search is not performed if GLE_TOP is set.
-         Search also works if gle is in /user/bin
+         Search also works if gle is in /usr/bin
     - Linux gui FHS compliance: Searches in FHS compliant directories for gle-manual.pdf
          if GLE_TOP is /usr/share/gle-graphics it will search in /usr/share/doc/gle-graphics
          if GLE_TOP is /usr/share/gle it will search in /usr/share/doc/gle
@@ -44,7 +44,7 @@
     - remove searching for pdflatex_options and other options that are unused and show up missing when running gle -finddeps
     - added install.sh installation script for Linux/macOS installations.
     - added install.cmd installation script for Windows installations.
-    - added ability to create filetype assocations during cmake install phase with installation
+    - added ability to create filetype associations during cmake install phase with installation
       scripts using INSTALL_CREATE_FILETYPE_ASSOCIATION option.
 
 4.3.8 (October 2025)
