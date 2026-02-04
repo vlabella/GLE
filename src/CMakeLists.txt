@@ -34,7 +34,9 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 #
 # -- options
 #
-set(BUILD_MANIP_DEFAULT ON)
+# Disable manip build due to issues on HURD et al.
+# user can enable by setting BUILD_MANIP=ON
+set(BUILD_MANIP_DEFAULT OFF)
 if(WIN32)
 	# Disable manip build on Windows due to compatibility issues
 	set(BUILD_MANIP_DEFAULT OFF)
