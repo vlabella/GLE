@@ -1,0 +1,129 @@
+.\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+.\" !                                                                      !
+.\" ! GLE - Graphics Layout Engine <http://www.gle-graphics.org/>          !
+.\" !                                                                      !
+.\" ! Modified BSD License                                                 !
+.\" !                                                                      !
+.\" ! Copyright (C) 2009 GLE.                                              !
+.\" !                                                                      !
+.\" ! Redistribution and use in source and binary forms, with or without   !
+.\" ! modification, are permitted provided that the following conditions   !
+.\" ! are met:                                                             !
+.\" !                                                                      !
+.\" !    1. Redistributions of source code must retain the above copyright !
+.\" ! notice, this list of conditions and the following disclaimer.        !
+.\" !                                                                      !
+.\" !    2. Redistributions in binary form must reproduce the above        !
+.\" ! copyright notice, this list of conditions and the following          !
+.\" ! disclaimer in the documentation and/or other materials provided with !
+.\" ! the distribution.                                                    !
+.\" !                                                                      !
+.\" !    3. The name of the author may not be used to endorse or promote   !
+.\" ! products derived from this software without specific prior written   !
+.\" ! permission.                                                          !
+.\" !                                                                      !
+.\" ! THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR   !
+.\" ! IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED       !
+.\" ! WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE   !
+.\" ! ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY       !
+.\" ! DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL   !
+.\" ! DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE    !
+.\" ! GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS        !
+.\" ! INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER !
+.\" ! IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR      !
+.\" ! OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN  !
+.\" ! IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        !
+.\" !                                                                      !
+.\" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+.\" 
+.\" Process this file with
+.\" groff -man -Tascii foo.1
+.\"
+.TH GLE 1 "MARCH 2025" @GLE_VERSION@ "User Manuals"
+.SH NAME
+gle \- Graphics Layout Engine
+.SH SYNOPSIS
+.B gle
+[options]
+.I file.gle
+.B ...
+.SH DESCRIPTION
+GLE (Graphics Layout Engine) is a graphics scripting language designed for creating publication quality graphs, plots, diagrams, figures and slides. GLE supports various graph types (function plots, histograms, bar graphs, scatter plots, contour lines, color maps, surface plots, ...) through a simple but flexible set of graphing commands. More complex output can be created by relying on GLE's scripting language, which is full featured with subroutines, variables, and logic control. GLE relies on LaTeX for text output and supports mathematical formulea in graphs and figures. GLE's output formats include EPS, PS, PDF, JPEG, and PNG.
+.SH DOCUMENTATION
+GLE's documentation is distributed in PDF format and can be found at the GLE website:
+.P
+<http://www.gle\-graphics.org>
+.SH OPTIONS
+.IP \-help
+Shows help about command line options.
+.IP \-info
+Outputs software version, build date, GLE_TOP, GLE_BIN, etc..
+.IP \-verbosity
+Sets the verbosity level of GLE console output.
+.IP \-device
+Selects output device(s).
+.IP \-cairo
+Use cairo output device.
+.IP \-resolution
+Sets the resolution for bitmap and PDF output.
+.IP \-fullpage
+Selects full page output.
+.IP \-landscape
+Selects full page landscape output.
+.IP \-output
+Specifies the name of the output file.
+.IP \-nosave
+Don't write output file to disk (dry-run).
+.IP \-preview
+Previews the output with QGLE.
+.IP \-gs
+Previews the output with GhostScript.
+.IP \-version
+Selects a GLE version to run.
+.IP \-compatibility
+Selects a GLE compatibility mode.
+.IP \-calc
+Runs GLE in "calculator" mode.
+.IP \-catcsv
+Pretty print a CSV file to standard output.
+.IP \-tex
+Indicates that the script includes LaTeX expressions.
+.IP \-inc
+Creates an .inc file with LaTeX code.
+.IP \-texincprefix
+Adds the given subdirectory to the path in the .inc file.
+.IP \-mkinittex
+Creates "inittex.ini" from "init.tex".
+.IP \-nocolor
+Forces grayscale output.
+.IP \-transparent
+Creates transparent output (with \-d png).
+.IP \-noctrl\-d
+Excludes CTRL-D from the PostScript output.
+.IP \-nomaxpath
+Disables the upper-bound on the drawing path complexity.
+.IP \-noligatures
+Disable the use of ligatures for 'fl' and 'fi'.
+.IP \-gsoptions
+Specify additional options for GhostScript.
+.IP \-safemode
+Disables reading/writing to the file system.
+.IP \-allowread
+Allows reading from the given path.
+.IP \-allowwrite
+Allows writing to the given path.
+.IP \-keep
+Don't delete temporary files.
+.SH FILES
+.I @GLE_INSTALL_DATA@/glerc
+.RS
+The system wide configuration file.
+.RE
+.I ~/.glerc
+.RS
+Per user configuration file.
+.SH ENVIRONMENT
+.IP GLE_USRLIB
+The search path for include files.
+.IP GLE_TOP
+The location of the fonts and other resources.
