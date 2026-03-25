@@ -59,7 +59,7 @@ jobs:
             # liblzma and libz are already in macOS.
             # cmake is preinstalled with Homebrew on GitHub Actions runners and
             # trying to install it again produces an unintelligible warning.
-            brew install --quiet boost cairo ghostscript jpeg-turbo libdeflate libpng libtiff docbook-to-man \
+            brew install --quiet boost cairo ghostscript jpeg-turbo libdeflate libpng libtiff \
                 pixman qt zstd poppler glib extra-cmake-modules texlive
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             jobs=$(sysctl -n hw.activecpu)

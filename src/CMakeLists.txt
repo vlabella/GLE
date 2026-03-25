@@ -44,7 +44,7 @@ endif()
 
 # defult for unix
 set(BUILD_MANPAGES_DEFAULT ON)
-if(WIN32)
+if(WIN32 OR APPLE)
 	# Disable manip build on Windows due to compatibility issues
 	set(BUILD_MANPAGES_DEFAULT OFF)
 endif()

@@ -252,7 +252,7 @@ GLE automatically searches and finds `GLE_TOP` when it starts but setting it as 
 |-----------------------------|-----------------------------------------------------------------------------------------|-------------------------|
 | `BUILD_GUI`                 | Turn off to disable build of the GUI (`qgle`) that requires Qt.                                      | ON         |
 | `BUILD_MANIP`              | Turn off to disable build of the `manip` program.                             | OFF |
-| `BUILD_MAPAGES`              | Turn off to disable build of the manpages.                             | ON (Linux, Apple), OFF (Windows) |
+| `BUILD_MAPAGES`              | Turn off to disable build of the manpages.                             | ON (Linux), OFF (Windows, Apple) |
 | `CMAKE_INSTALL_PREFIX`     | Set this to a different install location than the default (`/usr/local` or `C:\Program Files`). | System default  |
 | `MSVC_USE_STATIC_RUNTIME`  | Set ON to build against Visual Studio static runtimes (`/MT` instead of `/MD`). Also set `Boost_USE_STATIC_RUNTIME=ON` and ensure all other libraries are built with `/MT`. | OFF        |
 | `ZLIB_USE_STATIC_LIBS`     | Set ON to link to static variants of zlib (`.a`, `.lib` instead of `.so`, `.dll`).                   | OFF        |
