@@ -30,16 +30,62 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
 
 1. Install the needed packages
 
+	#### Debian & Linux Mint Debian Edition
+
+	Depending on the Debian release, either `libjpeg-turbo8-dev` or `libjpeg62-turbo-dev` maybe availible. Linux Mint only provides libjpeg62-turbo-dev.
+
+	```shell
+	sudo apt install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev 
+	libjpeg62-turbo-dev liblzma-dev libpixman-1-dev libpng-dev libtiff-dev zlib1g-dev qt6-base-dev 
+	libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt6-dev libglib2.0-dev 
+	extra-cmake-modules
 	```
+
+	#### Ubuntu (22.04 / 24.04)
+
+	```shell
 	sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev 
 	libjpeg-turbo8-dev liblzma-dev libpixman-1-dev libpng-dev libtiff-dev libz-dev qt6-base-dev 
 	libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt6-dev libglib2.0-dev 
 	extra-cmake-modules
     ```
+    #### Fedora / RHEL / Rocky / Alma Linux
+
+    ```shell
+    sudo dnf install cmake freeglut-devel boost-devel cairo-devel libdeflate-devel ghostscript-devel 
+    libjpeg-turbo-devel xz-devel pixman-devel libpng-devel libtiff-devel zlib-devel qt6-qtbase-devel 
+    poppler-devel poppler-cpp-devel poppler-glib-devel glib2-devel mesa-libGL-devel 
+  	extra-cmake-modules
+    ```
+
+    #### Arch Linux / Manjaro
+
+    ```shell
+    sudo pacman -S cmake freeglut boost cairo libdeflate ghostscript libjpeg-turbo xz pixman 
+    libpng libtiff zlib qt6-base poppler glib2 
+    extra-cmake-modules
+    ```
+
+    #### openSUSE (Leap / Tumbleweed)
+
+	```shell
+    sudo zypper install cmake freeglut-devel boost-devel cairo-devel libdeflate-devel ghostscript-devel 
+    libjpeg8-devel xz-devel pixman-devel libpng-devel libtiff-devel zlib-devel qt6-base-devel 
+    poppler-devel poppler-cpp-devel poppler-glib-devel glib2-devel 
+  	extra-cmake-modules
+    ```
+
+    #### Gentoo
+
+	```shell
+    sudo emerge dev-util/cmake media-libs/freeglut dev-libs/boost x11-libs/cairo app-text/ghostscript-gpl 
+    media-libs/libjpeg-turbo sys-libs/zlib media-libs/libpng media-libs/tiff dev-qt/qtbase app-text/poppler 
+    dev-libs/glib
+    ```
 
 2. Run cmake in the gle directory
 
-	```
+	```shell
 	cmake -S src -B build -DCMAKE_BUILD_TYPE=Release
 	-DGLE_EXAMPLES_LIBRARY_PATH=/path/to/gle-library 
 	-DGLE_USER_MANUAL_PATH=/path/to/gle-manual
