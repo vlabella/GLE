@@ -8,7 +8,7 @@ find_program(DOCBOOK_TO_MAN docbook-to-man)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/gle.1.in
                ${CMAKE_CURRENT_BINARY_DIR}/gle.1 @ONLY)
 
-# 2) SGML → *.1 via xmlto
+# 2) SGML → *.1 via docbook-to-man
 set(SGML_MAN_SOURCES
   ${CMAKE_CURRENT_SOURCE_DIR}/glebtool.sgml
   ${CMAKE_CURRENT_SOURCE_DIR}/glx.sgml
@@ -18,8 +18,8 @@ set(SGML_MAN_SOURCES
 
 set(MAN1_GENERATED ${CMAKE_CURRENT_BINARY_DIR}/gle.1)
 
-if(NOT XMLTO)
-  message(FATAL_ERROR "xmlto not found. Install it (e.g., apt install xmlto).")
+if(NOT DOCBOOK_TO_MAN)
+  message(FATAL_ERROR "docbook-to-man not found. Install it (e.g., apt install docbook-to-man).")
 endif()
 
 foreach(s ${SGML_MAN_SOURCES})
