@@ -35,7 +35,7 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
 	Depending on the Debian release, either `libjpeg-turbo8-dev` or `libjpeg62-turbo-dev` maybe available. Linux Mint only provides libjpeg62-turbo-dev.
 
 	```shell
-	sudo apt install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev 
+	sudo apt install cmake freeglut3-dev libboost-dev libcairo2-dev libdeflate-dev libgs-dev 
 	libjpeg62-turbo-dev liblzma-dev libpixman-1-dev libpng-dev libtiff-dev zlib1g-dev qt6-base-dev 
 	libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev libpoppler-qt6-dev libglib2.0-dev 
 	extra-cmake-modules
