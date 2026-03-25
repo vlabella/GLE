@@ -36,5 +36,14 @@ endforeach()
 
 add_custom_target(manpages ALL DEPENDS ${MAN1_GENERATED})
 
-install(FILES ${MAN1_GENERATED}
-        DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+# assume system installation FHS
+set(MY_DESTINATION ${CMAKE_INSTALL_MANDIR}/man1)
+if(DEVELOPER_INSTALLATION OR WIN32)
+  # install one directory above executable
+  set(MY_DESTINATION man1)
+endif()
+
+install(FILES
+  ${MAN1_GENERATED}
+  CONFIGURATIONS Release Debug
+  DESTINATION ${MY_DESTINATION})

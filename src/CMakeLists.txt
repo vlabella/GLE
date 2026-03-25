@@ -3,12 +3,12 @@
 #
 cmake_minimum_required (VERSION 3.25)
 cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
-cmake_policy(SET CMP0074 NEW)	# uses <PackageName>_ROOT variables.
+cmake_policy(SET CMP0074 NEW)	  # uses <PackageName>_ROOT variables.
 if(POLICY CMP0144)
   cmake_policy(SET CMP0144 NEW)  # upper case pacakge root variables
 endif()
 
-project( gle-graphics VERSION 4.3.9 LANGUAGES CXX C)
+project( gle-graphics VERSION 4.3.10 LANGUAGES CXX C)
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -34,12 +34,19 @@ set( CMAKE_DEBUG_POSTFIX  "d")
 #
 # -- options
 #
-# Disable manip build due to issues on HURD and other problems
+# Disable manip build due to issues on HURD et al.
 # user can enable by setting BUILD_MANIP=ON
 set(BUILD_MANIP_DEFAULT OFF)
 if(WIN32)
 	# Disable manip build on Windows due to compatibility issues
 	set(BUILD_MANIP_DEFAULT OFF)
+endif()
+
+# defult for unix
+set(BUILD_MANPAGES_DEFAULT ON)
+if(WIN32)
+	# Disable manip build on Windows due to compatibility issues
+	set(BUILD_MANPAGES_DEFAULT OFF)
 endif()
 #message("CMAKE_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX}")
 #message("DATAROOTDIR ${CMAKE_INSTALL_DATAROOTDIR}")
@@ -57,6 +64,7 @@ option(GLE_USER_MANUAL_PATH "Path to gle-manual when gle-manual.pdf resides.  On
 option(DEVELOPER_INSTALLATION "Linux only: Install all files in staging area, otherwise install in FHS paths on system." OFF)
 option(BUILD_TESTS "Build Testing Programs." OFF)
 option(INSTALL_TESTS "Install Testing Programs." OFF)
+option(BUILD_MANPAGES "Build manpages for Linux." ${BUILD_MANPAGES_DEFAULT})
 option(INSTALL_EXAMPLES "Install examples from gle-library defined by EXAMPLES_TO_INSTALL." OFF)
 option(CONSOLE_COLORS "Use ANSI color codes for console output." ON)
 option(INSTALL_CREATE_FILETYPE_ASSOCIATION "Create filetype association for .gle files during installation phase" OFF)
@@ -630,6 +638,9 @@ endif()
 if(BUILD_GLEBTOOL)
 add_subdirectory(glebtool)
 add_dependencies(glebtool gle)
+endif()
+if(BUILD_MANPAGES)
+add_subdirectory(docs/man)
 endif()
 if(BUILD_TESTS)
 	message(STATUS "Building Tests")
