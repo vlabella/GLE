@@ -32,7 +32,7 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
 
 	#### Debian & Linux Mint Debian Edition
 
-	Depending on the Debian release, either `libjpeg-turbo8-dev` or `libjpeg62-turbo-dev` maybe availible. Linux Mint only provides libjpeg62-turbo-dev.
+	Depending on the Debian release, either `libjpeg-turbo8-dev` or `libjpeg62-turbo-dev` maybe available. Linux Mint only provides libjpeg62-turbo-dev.
 
 	```shell
 	sudo apt install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev libgs-dev 
@@ -69,18 +69,18 @@ Building on linux requires the gcc compiler and the standard C/C++ libraries.
     #### openSUSE (Leap / Tumbleweed)
 
 	```shell
-    sudo zypper install cmake freeglut-devel boost-devel cairo-devel libdeflate-devel ghostscript-devel 
-    libjpeg8-devel xz-devel pixman-devel libpng-devel libtiff-devel zlib-devel qt6-base-devel 
-    poppler-devel poppler-cpp-devel poppler-glib-devel glib2-devel 
+    sudo zypper install cmake freeglut-devel boost-devel cairo-devel libdeflate-devel 
+    ghostscript-devel libjpeg8-devel xz-devel pixman-devel libpng-devel libtiff-devel 
+    zlib-devel qt6-base-devel poppler-devel poppler-cpp-devel poppler-glib-devel glib2-devel 
   	extra-cmake-modules
     ```
 
     #### Gentoo
 
 	```shell
-    sudo emerge dev-util/cmake media-libs/freeglut dev-libs/boost x11-libs/cairo app-text/ghostscript-gpl 
-    media-libs/libjpeg-turbo sys-libs/zlib media-libs/libpng media-libs/tiff dev-qt/qtbase app-text/poppler 
-    dev-libs/glib
+    sudo emerge dev-util/cmake media-libs/freeglut dev-libs/boost x11-libs/cairo 
+    app-text/ghostscript-gpl media-libs/libjpeg-turbo sys-libs/zlib media-libs/libpng 
+    media-libs/tiff dev-qt/qtbase app-text/poppler dev-libs/glib
     ```
 
 2. Run cmake in the gle directory
