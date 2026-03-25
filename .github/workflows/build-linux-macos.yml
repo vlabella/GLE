@@ -45,7 +45,7 @@ jobs:
             # cmake is preinstalled with Homebrew on GitHub Actions runners and
             # trying to install it again produces an unintelligible warning.
             brew install --quiet boost cairo ghostscript jpeg-turbo \
-                libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules
+                libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules xmlto
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             ls -la /opt/homebrew/opt/ghostscript/lib
             jobs=$(sysctl -n hw.activecpu)
