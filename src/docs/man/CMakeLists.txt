@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 include(GNUInstallDirs)
-find_program(XMLTO xmlto)
+find_program(DOCBOOK_TO_MAN docbook-to-man)
 
 # 1) Template → gle.1
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/gle.1.in
@@ -27,7 +27,7 @@ foreach(s ${SGML_MAN_SOURCES})
   set(out ${CMAKE_CURRENT_BINARY_DIR}/${name}.1)
   add_custom_command(
     OUTPUT ${out}
-    COMMAND ${XMLTO} man ${s}
+    COMMAND ${DOCBOOK_TO_MAN} ${s} > ${out}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     DEPENDS ${s}
     VERBATIM)

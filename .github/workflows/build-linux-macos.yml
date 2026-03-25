@@ -37,7 +37,7 @@ jobs:
             sudo apt-get install cmake freeglut3-dev libboost-dev libcairo-dev libdeflate-dev \
                 libgs-dev libjpeg-turbo8-dev liblzma-dev libpixman-1-dev libpng-dev libtiff-dev \
                 libz-dev qt6-base-dev libpoppler-dev libpoppler-cpp-dev libpoppler-glib-dev \
-                libpoppler-qt6-dev libglib2.0-dev extra-cmake-modules ghostscript dpkg-dev xmlto
+                libpoppler-qt6-dev libglib2.0-dev extra-cmake-modules ghostscript dpkg-dev docbook-to-man
             jobs=$(nproc)
             ;;
           macOS)
@@ -45,7 +45,7 @@ jobs:
             # cmake is preinstalled with Homebrew on GitHub Actions runners and
             # trying to install it again produces an unintelligible warning.
             brew install --quiet boost cairo ghostscript jpeg-turbo \
-                libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules xmlto
+                libdeflate libpng libtiff pixman qt zstd poppler glib extra-cmake-modules docbook-to-man
             echo "-D Qt6_DIR=$(brew --prefix qt)/lib/cmake/Qt6" >> configure.args
             ls -la /opt/homebrew/opt/ghostscript/lib
             jobs=$(sysctl -n hw.activecpu)
