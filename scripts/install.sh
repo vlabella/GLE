@@ -140,6 +140,7 @@ if $INSTALL; then
     cp -v doc/* "$INSTALL_PREFIX/share/doc/gle-graphics/"
     cp -r gleinc "$INSTALL_PREFIX/share/gle-graphics/gleinc"
     cp -r font "$INSTALL_PREFIX/share/gle-graphics/font"
+    cp -r man1 "$INSTALL_PREFIX/share/man"
     # set environment variable
     export GLE_TOP=$INSTALL_PREFIX/share/gle-graphics
     # run finddeps

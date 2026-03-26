@@ -24,14 +24,28 @@ endif()
 
 foreach(s ${SGML_MAN_SOURCES})
   get_filename_component(name ${s} NAME_WE)
-  set(out ${CMAKE_CURRENT_BINARY_DIR}/${name}.1)
+
+  set(man    ${CMAKE_CURRENT_BINARY_DIR}/${name}.1)
+  set(man_gz ${CMAKE_CURRENT_BINARY_DIR}/${name}.1.gz)
+
+  # Generate the man page
   add_custom_command(
-    OUTPUT ${out}
-    COMMAND ${DOCBOOK_TO_MAN} ${s} > ${out}
+    OUTPUT ${man}
+    COMMAND ${DOCBOOK_TO_MAN} ${s} > ${man}
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
     DEPENDS ${s}
-    VERBATIM)
-  list(APPEND MAN1_GENERATED ${out})
+    VERBATIM
+  )
+
+  # Compress it
+  add_custom_command(
+    OUTPUT ${man_gz}
+    COMMAND gzip -f -c ${man} > ${man_gz}
+    DEPENDS ${man}
+    VERBATIM
+  )
+
+  list(APPEND MAN1_GENERATED ${man_gz})
 endforeach()
 
 add_custom_target(manpages ALL DEPENDS ${MAN1_GENERATED})
