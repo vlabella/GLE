@@ -10,11 +10,22 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/gle.1.in
 
 # 2) SGML → *.1 via docbook-to-man
 set(SGML_MAN_SOURCES
-  ${CMAKE_CURRENT_SOURCE_DIR}/glebtool.sgml
   ${CMAKE_CURRENT_SOURCE_DIR}/glx.sgml
-  ${CMAKE_CURRENT_SOURCE_DIR}/manip.sgml
   ${CMAKE_CURRENT_SOURCE_DIR}/qgle.sgml
 )
+
+if(BUILD_GLEBTOOL)
+  list(APPEND SGML_MAN_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/glebtool.sgml
+  )
+endif()
+
+if(BUILD_MANIP)
+  list(APPEND SGML_MAN_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/manip.sgml
+  )
+endif()
+
 
 set(MAN1_GENERATED ${CMAKE_CURRENT_BINARY_DIR}/gle.1)
 

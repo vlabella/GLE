@@ -95,6 +95,10 @@ if $UNINSTALL; then
     rm "$INSTALL_PREFIX/bin/gle" "$INSTALL_PREFIX/bin/qgle" "$INSTALL_PREFIX/bin/manip"
     rm -rf "$INSTALL_PREFIX/share/gle-graphics"
     rm -rf "$INSTALL_PREFIX/share/doc/gle-graphics"
+    rm -f "$INSTALL_PREFIX/share/man/man1/gle.1.gz"
+    rm -f "$INSTALL_PREFIX/share/man/man1/qgle.1.gz"
+    rm -f "$INSTALL_PREFIX/share/man/man1/manip.1.gz"
+    rm -f "$INSTALL_PREFIX/share/man/man1/glebtool.1.gz"
     rm $DESKTOP_FILE
     rm $MIME_XML
     sed -i "/^$MIME_TYPE=/d" "$USER_HOME/.config/mimeapps.list"
