@@ -2,10 +2,10 @@
 # -- CMakeLists.txt for GLE - Graphics Layout Engine
 #
 cmake_minimum_required (VERSION 3.25)
-cmake_policy(SET CMP0091 NEW) 	# windows static runtimes selection
-cmake_policy(SET CMP0074 NEW)	  # uses <PackageName>_ROOT variables.
+cmake_policy(SET CMP0091 NEW) 	 # windows static runtime selection
+cmake_policy(SET CMP0074 NEW)	   # uses <PackageName>_ROOT variables.
 if(POLICY CMP0144)
-  cmake_policy(SET CMP0144 NEW)  # upper case pacakge root variables
+  cmake_policy(SET CMP0144 NEW)  # upper case package root variables
 endif()
 
 project( gle-graphics VERSION 4.3.10 LANGUAGES CXX C)
@@ -648,7 +648,7 @@ if(BUILD_TESTS)
 	add_dependencies(findgs gle)
 endif()
 #
-# -- install supportting files
+# -- install supporting files
 #
 # documentation file installation in doc folder
 # assume system installation FHS
