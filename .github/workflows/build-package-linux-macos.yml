@@ -101,7 +101,7 @@ jobs:
     #    cmake --install build --config Release
 
 #    - name: Upload Artifacts - GLE Manual PDF
-#      uses: actions/upload-artifact@v4.4.3
+#      uses: actions/upload-artifact@v7
 #      with:
 #        name: GLE Manual PDF
 #        path: ${{github.workspace}}/gle-manual/gle-manual.pdf
@@ -124,7 +124,7 @@ jobs:
         esac
 
     - name: Upload Artifacts - GLE Binary Distributables
-      uses: actions/upload-artifact@v4.4.3
+      uses: actions/upload-artifact@v7
       with:
         name: GLE Binary Distributables ${{ runner.os }}
         path: ${{github.workspace}}/stage/gle-*.*

@@ -60,7 +60,7 @@ jobs:
 
       # needed for running tests findgs
     - name: Choco Install Ghostscript
-      uses: crazy-max/ghaction-chocolatey@v3
+      uses: crazy-max/ghaction-chocolatey@v4
       with:
         args: install ghostscript --no-progress
 
@@ -116,7 +116,7 @@ jobs:
       shell: cmd
 
     - name: Upload Artifacts - zip file of installation folder
-      uses: actions/upload-artifact@v4.4.3
+      uses: actions/upload-artifact@v7
       with:
         name: Windows Binaries
         path: ${{github.workspace}}/stage

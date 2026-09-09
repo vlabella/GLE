@@ -21,12 +21,12 @@ jobs:
     runs-on: windows-latest
     steps:
 
-    - name: Enable Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1.13.0
+   # - name: Enable Developer Command Prompt
+   #   uses: ilammy/msvc-dev-cmd@v1.13.0
 
       # needed for building of manual
     - name: Choco Install Ghostscript
-      uses: crazy-max/ghaction-chocolatey@v3
+      uses: crazy-max/ghaction-chocolatey@v4
       with:
         args: install ghostscript --no-progress
 
@@ -50,7 +50,7 @@ jobs:
 
       # needed for building of package
     - name: Choco Install NSIS
-      uses: crazy-max/ghaction-chocolatey@v3
+      uses: crazy-max/ghaction-chocolatey@v4
       with:
         args: install nsis --no-progress
 
@@ -61,7 +61,7 @@ jobs:
 
       # needed for building of manual
     - name: Choco Install MikTeX
-      uses: crazy-max/ghaction-chocolatey@v3
+      uses: crazy-max/ghaction-chocolatey@v4
       with:
         args: install miktex --no-progress
 
@@ -204,7 +204,7 @@ jobs:
       shell: cmd
 
     - name: Upload Artifacts - GLE Manual PDF
-      uses: actions/upload-artifact@v4.4.3
+      uses: actions/upload-artifact@v7
       with:
         name: GLE PDF Manual
         path: ${{github.workspace}}\gle-manual\gle-manual.pdf
@@ -218,7 +218,7 @@ jobs:
         cpack -G "NSIS;ZIP;7Z" -C ${{env.BUILD_TYPE}} -B "${{github.workspace}}\stage"
 
     - name: Upload Artifacts - GLE Binary Distributables
-      uses: actions/upload-artifact@v4.4.3
+      uses: actions/upload-artifact@v7
       with:
         name: GLE Binary Distributables ${{ runner.os }}
         path: ${{github.workspace}}\stage\gle-*.*
