@@ -90,18 +90,19 @@ jobs:
       working-directory: ${{ github.workspace }}
       env:
         VCPKG_INSTALLED_DIR: ${{env.MY_VCPKG_ROOT}}
-      run: >
-        cmake -B build -S src
-        -DCMAKE_TOOLCHAIN_FILE=${{env.MY_VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake
-        -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}}
-        -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
-        -DMSVC_USE_STATIC_RUNTIME=ON
-        -DCMAKE_INSTALL_PREFIX=${{github.workspace}}/stage
-        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
-        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
-        -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
+      run: |
+        $WS = "${{ github.workspace }}".Replace('\','/')
+        cmake -B build -S src `
+        -DCMAKE_TOOLCHAIN_FILE=${{env.MY_VCPKG_ROOT}}/scripts/buildsystems/vcpkg.cmake `
+        -DVCPKG_TARGET_TRIPLET=${{env.TRIPLET}} `
+        -DGHOSTPDL_ROOT=$WS/ghostpdl `
+        -DMSVC_USE_STATIC_RUNTIME=ON `
+        -DCMAKE_INSTALL_PREFIX=$WS/stage `
+        -DGLE_EXAMPLES_LIBRARY_PATH="$WS/gle-library" `
+        -DGLE_USER_MANUAL_PATH="$WS/gle-manual" `
+        -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM" `
         -DBUILD_TESTS=ON
-      shell: cmd
+      shell: pwsh
 
     - name: Build
       working-directory: ${{ github.workspace }}
