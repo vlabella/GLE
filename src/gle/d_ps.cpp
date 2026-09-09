@@ -296,7 +296,7 @@ void PSGLEDevice::closedev() {
 			ext = ".eps";
 		}
 		GetMainNameExt(m_OutputName.getName(), ext.c_str(), mainname);
-		cerr << "[" << ColorOutputFile(mainname) << "]["<<ColorOutputFile(ext)<<"]";
+		cout << "[" << ColorOutputFile(mainname) << "]["<<ColorOutputFile(ext)<<"]";
 		g_set_console_output(false);
 	}
 }

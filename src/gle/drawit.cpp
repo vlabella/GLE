@@ -255,8 +255,8 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 	if (!silent && g_verbosity() > 0) {
 		string version;
 		g_get_version(&version);
-		cerr << GLELogoColor << " " << version << "[" <<  ColorInputFile(script->getLocation()->getName())  << "]-C";
-		cerr.flush();
+		cout << GLELogoColor << " " << version << "[" <<  ColorInputFile(script->getLocation()->getName())  << "]-C";
+		cout.flush();
 		g_set_console_output(false);
 	}
 	g_clear();
@@ -362,7 +362,7 @@ void DrawIt(GLEScript* script, GLEFileLocation* outfile, CmdLineObj* cmdline, bo
 		//
 		// -- now run the pcode in the driver
 		//
-		if (!silent && g_verbosity() > 0) cerr << "-R-";
+		if (!silent && g_verbosity() > 0) cout << "-R-";
 		if (ngpcode != glecode->getNbLines()) {
 			cerr << "error pcode and text size mismatch"<<endl;
 			cerr << "pcode size = " << ngpcode <<" text size = "<<glecode->getNbLines()<<endl;

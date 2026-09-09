@@ -1,5 +1,6 @@
 4.3.10 (not released yet)
-    - added manpages for Linux distrubutions
+    - added manpages for Linux distrubutions.
+    - prints to stdout instead oif stderr for help, info, and version options as well as status message.
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package

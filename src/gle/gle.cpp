@@ -170,13 +170,13 @@ int main(int argc, char **argv) {
 		if (g_CmdLine.getNbMainArgs() == 0 || g_CmdLine.hasOption(GLE_OPT_HELP)) {
 			string version;
 			g_get_version(&version);
-			cerr << GLELogoColor << " version " << version << endl;
-			cerr << "Usage: gle [options] filename.gle" << endl;
-			cerr << "More information: gle " << g_CmdLine.getOptionPrefix() << "help" << endl;
+			cout << GLELogoColor << " version " << version << endl;
+			cout << "Usage: gle [options] filename.gle" << endl;
+			cout << "More information: gle " << g_CmdLine.getOptionPrefix() << "help" << endl;
 			if (g_CmdLine.hasOption(GLE_OPT_HELP)) {
 				g_CmdLine.showHelp(GLE_OPT_HELP);
 				if (!g_CmdLine.getOption(GLE_OPT_HELP)->hasArgument()) {
-					cerr << "Give more help about a given option: " << g_CmdLine.getOptionPrefix() << "help option" << endl;
+					cout << "Give more help about a given option: " << g_CmdLine.getOptionPrefix() << "help option" << endl;
 				}
 			}
 			return 0;
@@ -957,7 +957,7 @@ bool GLELoadOneFileManager::process_one_file_tex() {
 
 void GLELoadOneFileManager::do_output_type(const char* type) {
 	if (g_verbosity() > 0) {
-		cerr << "[" << ColorOutputFile(type) << "]";
+		cout << "[" << ColorOutputFile(type) << "]";
 		g_set_console_output(false);
 	}
 }

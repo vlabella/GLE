@@ -201,7 +201,7 @@ void GLECairoDevice::closedev(void) {
 		string mainname;
 		string extension(g_device_to_ext(getDeviceType()));
 		GetMainNameExt(m_OutputName.getName(), extension.c_str(), mainname);
-		cerr << "[" << ColorOutputFile(mainname) << "][" << ColorOutputFile(extension) << "]";
+		cout << "[" << ColorOutputFile(mainname) << "][" << ColorOutputFile(extension) << "]";
 		g_set_console_output(false);
 	}
 }

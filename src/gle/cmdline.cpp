@@ -349,14 +349,14 @@ bool CmdLineArgSet::isDefault() {
 }
 
 void CmdLineArgSet::showExtraHelp() {
-	cerr << "   Possible values: ";
+	cout << "   Possible values: ";
 	for (vector<int>::size_type i = 0; i < m_Values.size(); i++) {
 		if (m_HasValue[i] != CMDLINE_UNSUPPORTED) {
 			if (i != 0) cerr << ", ";
-			cerr << m_Values[i];
+			cout << m_Values[i];
 		}
 	}
-	cerr << endl;
+	cout << endl;
 }
 
 void CmdLineArgSet::addPossibleValue(const char* value) {
@@ -456,19 +456,19 @@ void CmdLineOption::addAlias(const char* alias) {
 }
 
 void CmdLineOption::showHelp() {
-	cerr << "Option: " << getObject()->getOptionPrefix() << getName() << endl;
+	cout << "Option: " << getObject()->getOptionPrefix() << getName() << endl;
 	if (getNbNames() > 1) {
-		cerr << "Abbreviation(s): ";
+		cout << "Abbreviation(s): ";
 		for (int i = 1; i < getNbNames(); i++) {
 			if (i != 1) cerr << ", ";
-			cerr << getObject()->getOptionPrefix() << getName(i);
+			cout << getObject()->getOptionPrefix() << getName(i);
 		}
-		cerr << endl;
+		cout << endl;
 	}
 	cerr << getHelp() << endl;
 	for (int i = 0; i < getMaxNbArgs(); i++) {
 		CmdLineOptionArg* argi = getArg(i);
-		cerr << "   Argument '" << argi->getName() << "': " << argi->getHelp() << endl;
+		cout << "   Argument '" << argi->getName() << "': " << argi->getHelp() << endl;
 		argi->showExtraHelp();
 	}
 }
@@ -569,27 +569,27 @@ void CmdLineOptionList::showHelp(int helpid) {
 		} else {
 			CmdLineOption* opt = getOption(value);
 			if (opt == NULL) {
-				cerr << ">> Unknown option '" << getOptionPrefix() << value << "'" << endl;
+				cout << ">> Unknown option '" << getOptionPrefix() << value << "'" << endl;
 			} else {
-				cerr << endl;
+				cout << endl;
 				opt->showHelp();
 			}
 			return;
 		}
 	}
-	cerr << endl << "Options:" << endl;
+	cout << endl << "Options:" << endl;
 	for (vector<CmdLineOption*>::size_type i = 0; i < m_Options.size(); i++) {
 		CmdLineOption* opt = m_Options[i];
 		if (opt != NULL && (!opt->isExpert() || expert)) {
 			string str = " ";
 			str += getOptionPrefix();
 			str += opt->getName();
-			cerr << str;
-			for (int i = str.length(); i < 17; i++) cerr << ' ';
-			cerr << opt->getHelp() << endl;
+			cout << str;
+			for (int i = str.length(); i < 17; i++) cout << ' ';
+			cout << opt->getHelp() << endl;
 		}
 	}
-	if (!expert) cerr << endl << "Show expert options: " << getOptionPrefix() << "help expert" << endl;
+	if (!expert) cout << endl << "Show expert options: " << getOptionPrefix() << "help expert" << endl;
 }
 
 bool CmdLineOptionList::hasOption(const string& name) {
