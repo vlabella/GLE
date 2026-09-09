@@ -91,7 +91,7 @@ jobs:
       # -- same as build-windows.yml from here
       #
     - name: Acquire vcpkg
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "Microsoft/vcpkg"
         path: vcpkg
@@ -121,23 +121,23 @@ jobs:
       shell: cmd
 
     - name: Checkout GLE
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
       # header files needed for building of GLE
     - name: Acquire Ghostscipt/PDL
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl
 
     - name: Checkout GLE Library
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "vlabella/gle-library"
         path: gle-library
 
     - name: Checkout GLE Manual
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "vlabella/gle-manual"
         path: gle-manual

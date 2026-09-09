@@ -23,10 +23,10 @@ jobs:
     steps:
 
     - name: Checkout GLE
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Acquire vcpkg
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "Microsoft/vcpkg"
         path: vcpkg
@@ -53,7 +53,7 @@ jobs:
 
       # header files needed for building of GLE
     - name: Acquire Ghostscipt/PDL
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "ArtifexSoftware/ghostpdl"
         path: ghostpdl

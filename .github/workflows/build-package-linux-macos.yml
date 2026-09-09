@@ -26,16 +26,16 @@ jobs:
         shell: bash
     steps:
     - name: Checkout GLE
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Checkout GLE Library
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "vlabella/gle-library"
         path: gle-library
 
     - name: Checkout GLE Manual
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: "vlabella/gle-manual"
         path: gle-manual
