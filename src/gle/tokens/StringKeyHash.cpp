@@ -38,19 +38,18 @@
 
 #include "StringKeyHash.h"
 using namespace std;
-//#ifdef GLE_USE_HASHTABLE
 
 int StringIntHash::try_get(const name_hash_key& key) const {
-	StringBasicHash<int>::const_iterator i = find(key);
-	if (i != end()) {
-		return i->second;
-	} else {
-		return -1;
-	}
+ 	StringBasicHash<int>::const_iterator i = find(key);
+ 	if (i != end()) {
+ 		return i->second;
+ 	} else {
+ 		return -1;
+ 	}
 }
 
 void StringIntHash::add_item(const name_hash_key& key, int elem) {
-	insert(StringKeyPair<int>(key, elem));
+ 	insert(StringKeyPair<int>(key, elem));
 }
 
 void* StringVoidPtrHash::try_get(const name_hash_key& key) const {
@@ -77,8 +76,6 @@ void StringVoidPtrHash::deleteRecursive(int depth) {
 		}
 	}
 }
-
-//#endif
 
 int IntIntHash::try_get(int key) const {
 	IntBasicHash<int>::const_iterator i = find(key);

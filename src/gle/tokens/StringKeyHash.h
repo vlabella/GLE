@@ -39,31 +39,33 @@
 #ifndef STRINGKEYHASH_H
 #define STRINGKEYHASH_H
 
-#ifndef _MSC_VER
-	// Use hash table except when compiling with MSVC
-	//#define GLE_USE_HASHTABLE
-#else
-	#pragma warning( disable : 4996 )
-#endif
+// #ifndef _MSC_VER
+// 	// Use hash table except when compiling with MSVC
+// 	//#define GLE_USE_HASHTABLE
+// #else
+// 	#pragma warning( disable : 4996 )
+// #endif
 
-#define EXT_HASH
-#ifdef _MSC_VER
-	#undef EXT_HASH
-#endif
-#ifdef GCC2
-	#undef EXT_HASH
-#endif
-#ifdef EXT_HASH
-//	#include <ext/hash_map>
-#else
-	#ifdef _MSC_VER
-	#include <hash_map>
-	using namespace stdext;
-//	typedef hash _Hash;
-	#else
-	#include <hash_map.h>
-	#endif
-#endif
+// #define EXT_HASH
+// #ifdef _MSC_VER
+// 	#undef EXT_HASH
+// #endif
+// #ifdef GCC2
+// 	#undef EXT_HASH
+// #endif
+// #ifdef EXT_HASH
+// //	#include <ext/hash_map>
+// #else
+// 	#ifdef _MSC_VER
+// 	#include <hash_map>
+// 	using namespace stdext;
+// //	typedef hash _Hash;
+// 	#else
+// 	#include <hash_map.h>
+// 	#endif
+// #endif
+
+
 #include <algorithm>
 #include <string>
 #include <string.h>
@@ -74,12 +76,12 @@
 
 // using namespace std;  should not reside in header file
 
-#ifndef GCC2
-#ifndef _MSC_VER
-	// gcc on macOS is complaining about this; not sure if it's needed
-	// using namespace __gnu_cxx;  // using gnu extensions such as "hash"
-#endif
-#endif
+// #ifndef GCC2
+// #ifndef _MSC_VER
+// 	// gcc on macOS is complaining about this; not sure if it's needed
+// 	// using namespace __gnu_cxx;  // using gnu extensions such as "hash"
+// #endif
+// #endif
 
 #include "RefCount.h"
 #include "BinIO.h"
@@ -105,47 +107,47 @@ public:
 	}
 };
 
-#ifdef GLE_USE_HASHTABLE
+// #ifdef GLE_USE_HASHTABLE
 
-struct eq_name_hash_key {
-	inline bool operator() (const name_hash_key& s1, const name_hash_key& s2) const {
-	    return s1 == s2;
-	}
-};
+// struct eq_name_hash_key {
+// 	inline bool operator() (const name_hash_key& s1, const name_hash_key& s2) const {
+// 	    return s1 == s2;
+// 	}
+// };
 
-struct hash_name_hash_key {
-	inline size_t operator() (const name_hash_key& s) const {
-		#ifdef _MSC_VER
-		return stdext::hash_value<const char *>(s.c_str());
-		#else
-		return hash<const char *>()(s.c_str());
-		#endif
-	}
-};
+// struct hash_name_hash_key {
+// 	inline size_t operator() (const name_hash_key& s) const {
+// 		#ifdef _MSC_VER
+// 		return stdext::hash_value<const char *>(s.c_str());
+// 		#else
+// 		return hash<const char *>()(s.c_str());
+// 		#endif
+// 	}
+// };
 
-template <class ElemType> class StringKeyIterator : public std::hash_map<name_hash_key, ElemType>::iterator {
-};
+// template <class ElemType> class StringKeyIterator : public std::hash_map<name_hash_key, ElemType>::iterator {
+// };
 
-struct eq_int_key {
-	inline bool operator() (int s1, int s2) const {
-	    return s1 == s2;
-	}
-};
+// struct eq_int_key {
+// 	inline bool operator() (int s1, int s2) const {
+// 	    return s1 == s2;
+// 	}
+// };
 
-struct hash_int_key {
-	inline size_t operator() (int s) const {
-		#ifdef _MSC_VER
-		return stdext::hash_value<int>(s);
-		#else
-		return std::hash<int>()(s);
-		#endif
-	}
-};
+// struct hash_int_key {
+// 	inline size_t operator() (int s) const {
+// 		#ifdef _MSC_VER
+// 		return stdext::hash_value<int>(s);
+// 		#else
+// 		return std::hash<int>()(s);
+// 		#endif
+// 	}
+// };
 
-template <class ElemType> class IntKeyIterator : public std::hash_map<int, ElemType>::iterator {
-};
+// template <class ElemType> class IntKeyIterator : public std::hash_map<int, ElemType>::iterator {
+// };
 
-#else
+// #else
 
 struct lt_name_hash_key {
 	bool operator()(const name_hash_key& s1, const name_hash_key& s2) const {
@@ -159,7 +161,7 @@ struct lt_int_key {
 	}
 };
 
-#endif
+//#endif
 
 /**************************************************************************************************
  * Hashtable string -> ElemType                                                                   *
@@ -186,15 +188,15 @@ template <class ElemType> class IntBasicHash :
 };
 
 /**************************************************************************************************
- * Hashtable string -> int (currently not used, might be used for variables?)                     *
+ * Hashtable string -> int
  **************************************************************************************************/
 
 //#ifdef GLE_USE_HASHTABLE
 
 class StringIntHash : public StringBasicHash<int> {
 public:
-	int try_get(const name_hash_key& key) const;
-	void add_item(const name_hash_key& key, int elem);
+ 	int try_get(const name_hash_key& key) const;
+ 	void add_item(const name_hash_key& key, int elem);
 };
 
 //#endif
@@ -203,16 +205,16 @@ public:
  * Hashtable string -> void*                                                                      *
  **************************************************************************************************/
 
-//#ifdef GLE_USE_HASHTABLE
+// //#ifdef GLE_USE_HASHTABLE
 
 class StringVoidPtrHash : public StringBasicHash<void*> {
 public:
-	void* try_get(const name_hash_key& key) const;
-	void add_item(const name_hash_key& key, void* elem);
-	void deleteRecursive(int depth);
+ 	void* try_get(const name_hash_key& key) const;
+ 	void add_item(const name_hash_key& key, void* elem);
+ 	void deleteRecursive(int depth);
 };
 
-//#endif
+// //#endif
 
 /**************************************************************************************************
  * Hashtable int -> int                                                                           *
