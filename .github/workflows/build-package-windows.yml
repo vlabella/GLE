@@ -21,6 +21,11 @@ jobs:
     runs-on: windows-latest
     steps:
 
+    - name: Set WS
+      shell: pwsh
+      run: |
+        "WS=${{ github.workspace }}".Replace('\','/') >> $env:GITHUB_ENV
+
    # - name: Enable Developer Command Prompt
    #   uses: ilammy/msvc-dev-cmd@v1.13.0
 
@@ -157,8 +162,8 @@ jobs:
         -DGHOSTPDL_ROOT=${{github.workspace}}/ghostpdl
         -DMSVC_USE_STATIC_RUNTIME=ON
         -DCMAKE_INSTALL_PREFIX=stage
-        -DGLE_EXAMPLES_LIBRARY_PATH="${{github.workspace}}/gle-library"
-        -DGLE_USER_MANUAL_PATH="${{github.workspace}}/gle-manual"
+        -DGLE_EXAMPLES_LIBRARY_PATH="${{ env.WS }}/gle-library"
+        -DGLE_USER_MANUAL_PATH="${{ env.WS }}/gle-manual"
         -DECM_DIR="${{env.MY_VCPKG_ROOT}}/installed/x64-windows/share/ECM"
         -DBUILD_TESTS=ON
         -DINSTALL_EXAMPLES=ON
