@@ -26,8 +26,13 @@ jobs:
       run: |
         "WS=${{ github.workspace }}".Replace('\','/') >> $env:GITHUB_ENV
 
-   # - name: Enable Developer Command Prompt
-   #   uses: ilammy/msvc-dev-cmd@v1.13.0
+      # needed for nmake
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v3
+
+    # out dated
+    #- name: Enable Developer Command Prompt
+    #  uses: ilammy/msvc-dev-cmd@v1.13.0
 
       # needed for building of manual
     - name: Choco Install Ghostscript
