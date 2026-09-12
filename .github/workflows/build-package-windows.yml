@@ -31,8 +31,8 @@ jobs:
       uses: microsoft/setup-msbuild@v3
 
     # out dated
-    - name: Enable Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1.13.0
+    #- name: Enable Developer Command Prompt
+    #  uses: ilammy/msvc-dev-cmd@v1.13.0
 
       # needed for building of manual
     - name: Choco Install Ghostscript
@@ -206,7 +206,7 @@ jobs:
         nmake /nologo -f Makefile.vc GLE_TOP=${{github.workspace}}\stage
       shell: cmd
 
-      # must run again to install the manual
+      # run again to install the manual
     - name: Install Manual
       working-directory: ${{ github.workspace }}
       run: |
