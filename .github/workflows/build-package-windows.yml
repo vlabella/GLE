@@ -41,7 +41,7 @@ jobs:
 
         Write-Host "Added MSVC binary folder $bin to PATH"
 
-       # needed for building of manual
+      # needed for building of manual
     - name: Choco Install Ghostscript
       uses: crazy-max/ghaction-chocolatey@v4
       with:

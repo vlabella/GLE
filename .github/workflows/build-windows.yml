@@ -56,7 +56,15 @@ jobs:
         $nugetPath = & "$env:MY_VCPKG_ROOT/vcpkg" fetch nuget
         & $nugetPath sources Add -Name github -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "$env:GH_PAT"
 
-      # header files needed for building of GLE
+
+      # GhostSCript and GhostPDL header files needed for building of GLE
+    - name: Setup Ghostscript
+      uses: ./.github/actions/setup-ghostscript-win
+      with:
+        checkout-ghostpdl: "true"
+
+
+
     - name: Acquire Ghostscipt/PDL
       uses: actions/checkout@v7
       with:
