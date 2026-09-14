@@ -1,0 +1,43 @@
+#
+# -- SEtup Ghostscript on Windows.  Needs chocolatey installed option to install ghostpdl
+#
+name: Setup Ghostscript
+description: Install Ghostscript and optionally checkout GhostPDL
+
+inputs:
+  checkout-ghostpdl:
+    description: "Whether to checkout ArtifexSoftware/ghostpdl"
+    required: false
+    default: "false"
+
+runs:
+  using: composite
+
+  steps:
+    # installs ghostpdl headers - only needed if building software that wants to link against ghostPDL
+    - name: Acquire GhostPDL
+      if: ${{ inputs.checkout-ghostpdl == 'true' }}
+      uses: actions/checkout@v4
+      with:
+        repository: ArtifexSoftware/ghostpdl
+        path: ghostpdl
+
+    - name: Install Ghostscript
+      uses: crazy-max/ghaction-chocolatey@v4
+      with:
+        args: install ghostscript --no-progress
+
+    - name: Add Ghostscript to PATH
+      shell: pwsh
+      run: |
+        $o = Get-ChildItem -Path "C:\Program Files\gs" -Directory |
+             Where-Object { $_.Name -like "gs*" } |
+             Sort-Object Name -Descending |
+             Select-Object -First 1
+
+        $g = Join-Path $o.FullName "bin"
+        $g | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+
+    - name: Verify Ghostscript
+      shell: cmd
+      run: gswin64c --version
