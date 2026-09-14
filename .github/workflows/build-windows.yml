@@ -22,7 +22,7 @@ jobs:
     runs-on: windows-latest
     steps:
 
-    - name: Set WS
+    - name: Set WS as forward slashed workspace path
       shell: pwsh
       run: |
         "WS=${{ github.workspace }}".Replace('\','/') >> $env:GITHUB_ENV
@@ -56,7 +56,7 @@ jobs:
         $nugetPath = & "$env:MY_VCPKG_ROOT/vcpkg" fetch nuget
         & $nugetPath sources Add -Name github -Source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" -Username "${{ github.repository_owner }}" -Password "$env:GH_PAT"
 
-      # GhostScript and GhostPDL header files needed for building of GLE
+      # Ghostscript and GhostPDL header files needed for building of GLE
     - name: Setup Ghostscript
       uses: ./.github/actions/setup-ghostscript-win
       with:
