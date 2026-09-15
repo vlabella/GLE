@@ -1,5 +1,5 @@
 #
-# -- SEtup Ghostscript on Windows.  Needs chocolatey installed option to install ghostpdl
+# -- Setup Ghostscript on Windows.  Needs chocolatey installed option to install ghostpdl
 #
 name: Setup Ghostscript
 description: Install Ghostscript and optionally checkout GhostPDL
