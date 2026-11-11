@@ -49,6 +49,7 @@
 #include "pass.h"
 #include "var.h"
 #include "graph.h"
+#include "GLELet.h"
 #include "begin.h"
 #include "axis.h"
 #include "gprint.h"
@@ -795,7 +796,16 @@ void do_hscale(int& ct) {
 
 void do_letsave(GLESourceLine& sline) {
 	GLELet* let = parseLet(sline);
-	g_letCmds.push_back(let);
+	 if (let->shouldMaterialize()) {
+        // Generate the dataset immediately and permanently.
+        // Do not place this LET in g_letCmds because it must not
+        // participate in provisional or final LET reevaluation.
+        doLet(let, true);
+        deleteLet(let);
+    } else {
+        // Preserve the existing deferred LET behavior.
+        g_letCmds.push_back(let);
+    }
 }
 
 void do_size(int& ct) {

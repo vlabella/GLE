@@ -335,7 +335,6 @@ char *un_quote(char *ct);
 class fill_data {
 public:
 	fill_data();
-	
 public:
 	int layer;
 	int da, db;	/* fill from, too */

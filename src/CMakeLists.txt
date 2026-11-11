@@ -317,7 +317,23 @@ else()
 endif()
 find_path(CAIRO_INCLUDE_DIRS cairo.h PATHS ${CAIRO_ROOT} PATH_SUFFIXES include include/cairo REQUIRED)
 if(CAIRO_FOUND)
-	message(STATUS "Found CAIRO: ${CAIRO_LIBRARIES}" )
+	file(STRINGS
+    "${CAIRO_INCLUDE_DIRS}/cairo-version.h"
+    CAIRO_VERSION_LINES
+    REGEX "^#define CAIRO_VERSION_(MAJOR|MINOR|MICRO)[ \t]+[0-9]+"
+	)
+	foreach(line ${CAIRO_VERSION_LINES})
+    if(line MATCHES "CAIRO_VERSION_MAJOR[ \t]+([0-9]+)")
+        set(CAIRO_VERSION_MAJOR "${CMAKE_MATCH_1}")
+    elseif(line MATCHES "CAIRO_VERSION_MINOR[ \t]+([0-9]+)")
+        set(CAIRO_VERSION_MINOR "${CMAKE_MATCH_1}")
+    elseif(line MATCHES "CAIRO_VERSION_MICRO[ \t]+([0-9]+)")
+        set(CAIRO_VERSION_MICRO "${CMAKE_MATCH_1}")
+    endif()
+	endforeach()
+	set(CAIRO_VERSION
+    "${CAIRO_VERSION_MAJOR}.${CAIRO_VERSION_MINOR}.${CAIRO_VERSION_MICRO}")
+	message(STATUS "Found CAIRO: ${CAIRO_LIBRARIES} ${CAIRO_VERSION}" )
 endif()
 #
 # -- pixman library - cmake does not supply findPIXMAN.cmake
@@ -382,6 +398,61 @@ list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
 find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
 message(STATUS "GHOSTPDL_INCLUDE_DIRS: ${GHOSTPDL_INCLUDE_DIRS}")
+
+
+set(BUILD_REPORT "")
+
+
+string(APPEND BUILD_REPORT
+    "Compiler=${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "C Compiler=${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "Operating System=${CMAKE_SYSTEM_NAME}\n")
+
+string(APPEND BUILD_REPORT
+    "OS Version=${CMAKE_SYSTEM_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "Target Architecture=${CMAKE_SYSTEM_PROCESSOR}\n")
+
+string(APPEND BUILD_REPORT
+    "ZLIB=${ZLIB_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "JPEG=${JPEG_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "Boost=${Boost_VERSION_STRING}\n")
+
+string(APPEND BUILD_REPORT
+    "TIFF=${TIFF_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "PNG=${PNG_VERSION_STRING}\n")
+
+string(APPEND BUILD_REPORT
+    "Cairo=${CAIRO_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "Pixman=${PIXMAN_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "GhostPDL=${GHOSTPDL_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "Poppler=${Poppler_VERSION}\n")
+
+string(APPEND BUILD_REPORT
+    "GLib2=${GLIB2_VERSION}\n")
+
+file(WRITE
+    ${CMAKE_BINARY_DIR}/build_manifest.txt
+    "${BUILD_REPORT}")
+
+message(STATUS "Creating ${CMAKE_BINARY_DIR}/build_manifest.txt")
 
 include_directories(
 	${ZLIB_INCLUDE_DIRS}

@@ -1,7 +1,10 @@
 4.3.10 (not released yet)
-    - added manpages for Linux distrubutions.
+    - added manpages for Linux distributions.
     - prints to stdout instead of stderr for help, info, and version options as well as status message.
-    - removed uneeded and outdated hash_map in favor of STD C++ map.
+    - removed unneeded and outdated hash_map in favor of STD C++ map.
+    - added range checking and error messages to some function in graphutil.gle
+    - Added a new MATERIALIZE option for LET statements that evaluates data series immediately rather than
+      deferring evaluation until the end of the graph block.
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package
