@@ -17,7 +17,7 @@ runs:
     # installs ghostpdl headers - only needed if building software that wants to link against ghostPDL
     - name: Acquire GhostPDL
       if: ${{ inputs.checkout-ghostpdl == 'true' }}
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         repository: ArtifexSoftware/ghostpdl
         path: ghostpdl
