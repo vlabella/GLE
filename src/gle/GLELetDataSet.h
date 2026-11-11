@@ -3,15 +3,14 @@
 
 class GLELetDataSet {
 
-	static constexpr int GLE_DS_L = 0;
-   static constexpr int GLE_DS_R = 1;
+private:
 
 	typedef struct {
 		double x, y[2];
 	} DataSetVal;
 
-	inline bool DataSetValCMP(const DataSetVal& e1, const DataSetVal& e2) {
-   	return e1.x < e2.x;
+	static bool DataSetValCMP(const DataSetVal& e1, const DataSetVal& e2) {
+   		return e1.x < e2.x;
 	}
 
 protected:
@@ -25,6 +24,9 @@ protected:
 	std::vector<double> m_MissX;
 
 public:
+
+   static constexpr int GLE_DS_L = 0;
+   static constexpr int GLE_DS_R = 1;
 
 	GLELetDataSet();
 	~GLELetDataSet();
