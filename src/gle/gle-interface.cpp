@@ -38,6 +38,9 @@
 
 #include <fstream>
 #include <set>
+#include <algorithm>
+#include <cctype>
+#include <cmath>
 #include <string>
 
 #include "all.h"
@@ -1898,6 +1901,196 @@ GLEFillBase* GLEPatternFill::clone() {
 	return result;
 }
 
+
+
+struct GLEColorScalePoint {
+    double position;
+    double red;
+    double green;
+    double blue;
+};
+
+template <std::size_t N>
+void interpolateColorScale(
+    double value,
+    const GLEColorScalePoint (&points)[N],
+    double& red,
+    double& green,
+    double& blue)
+{
+    static_assert(N >= 2, "A color scale requires at least two points");
+
+    value = std::clamp(value, 0.0, 1.0);
+
+    if (value <= points[0].position) {
+        red   = points[0].red;
+        green = points[0].green;
+        blue  = points[0].blue;
+        return;
+    }
+
+    if (value >= points[N - 1].position) {
+        red   = points[N - 1].red;
+        green = points[N - 1].green;
+        blue  = points[N - 1].blue;
+        return;
+    }
+
+    for (std::size_t i = 1; i < N; ++i) {
+        if (value <= points[i].position) {
+            const GLEColorScalePoint& lower = points[i - 1];
+            const GLEColorScalePoint& upper = points[i];
+
+            const double width = upper.position - lower.position;
+            const double fraction =
+                width > 0.0
+                    ? (value - lower.position) / width
+                    : 0.0;
+
+            red = lower.red +
+                fraction * (upper.red - lower.red);
+
+            green = lower.green +
+                fraction * (upper.green - lower.green);
+
+            blue = lower.blue +
+                fraction * (upper.blue - lower.blue);
+
+            return;
+        }
+    }
+
+    // Defensive fallback. The earlier range tests should make this
+    // unreachable.
+    red   = points[N - 1].red;
+    green = points[N - 1].green;
+    blue  = points[N - 1].blue;
+}
+
+std::string normalizeColorScaleName(const std::string& name)
+{
+    std::string normalized;
+    normalized.reserve(name.size());
+
+    for (unsigned char character : name) {
+        if (std::isspace(character) || character == '-') {
+            normalized.push_back('_');
+        } else {
+            normalized.push_back(
+                static_cast<char>(std::toupper(character))
+            );
+        }
+    }
+
+    return normalized;
+}
+
+/*
+ * Multi-point scales use normalized RGB components.
+ *
+ * The sequential scientific scales are represented by sampled control
+ * points and interpolated linearly in RGB space.
+ */
+
+static const GLEColorScalePoint verdigrisScale[] = {
+    { 0.00, 0.000, 0.100, 0.080 },
+    { 0.25, 0.000, 0.300, 0.250 },
+    { 0.50, 0.150, 0.550, 0.470 },
+    { 0.75, 0.450, 0.750, 0.650 },
+    { 1.00, 0.800, 0.950, 0.850 }
+};
+
+static const GLEColorScalePoint thermalScale[] = {
+    { 0.00, 0.000, 0.000, 0.000 },
+    { 0.25, 0.500, 0.000, 0.500 },
+    { 0.50, 1.000, 0.000, 0.000 },
+    { 0.75, 1.000, 1.000, 0.000 },
+    { 1.00, 1.000, 1.000, 1.000 }
+};
+
+static const GLEColorScalePoint coolScale[] = {
+    { 0.00, 0.000, 1.000, 1.000 },
+    { 1.00, 1.000, 0.000, 1.000 }
+};
+
+static const GLEColorScalePoint rainbowScale[] = {
+    { 0.0000, 0.500, 0.000, 1.000 },
+    { 0.1667, 0.000, 0.000, 1.000 },
+    { 0.3333, 0.000, 1.000, 1.000 },
+    { 0.5000, 0.000, 1.000, 0.000 },
+    { 0.6667, 1.000, 1.000, 0.000 },
+    { 0.8333, 1.000, 0.500, 0.000 },
+    { 1.0000, 1.000, 0.000, 0.000 }
+};
+
+static const GLEColorScalePoint viridisScale[] = {
+    { 0.00, 0.267004, 0.004874, 0.329415 },
+    { 0.10, 0.282623, 0.140926, 0.457517 },
+    { 0.20, 0.253935, 0.265254, 0.529983 },
+    { 0.30, 0.206756, 0.371758, 0.553117 },
+    { 0.40, 0.163625, 0.471133, 0.558148 },
+    { 0.50, 0.127568, 0.566949, 0.550556 },
+    { 0.60, 0.134692, 0.658636, 0.517649 },
+    { 0.70, 0.266941, 0.748751, 0.440573 },
+    { 0.80, 0.477504, 0.821444, 0.318195 },
+    { 0.90, 0.741388, 0.873449, 0.149561 },
+    { 1.00, 0.993248, 0.906157, 0.143936 }
+};
+
+static const GLEColorScalePoint plasmaScale[] = {
+    { 0.00, 0.050383, 0.029803, 0.527975 },
+    { 0.10, 0.254627, 0.013882, 0.615419 },
+    { 0.20, 0.417642, 0.000564, 0.658390 },
+    { 0.30, 0.562738, 0.051545, 0.641509 },
+    { 0.40, 0.692840, 0.165141, 0.564522 },
+    { 0.50, 0.798216, 0.280197, 0.469538 },
+    { 0.60, 0.881443, 0.392529, 0.383229 },
+    { 0.70, 0.949217, 0.517763, 0.295662 },
+    { 0.80, 0.988260, 0.652325, 0.211364 },
+    { 0.90, 0.988648, 0.809579, 0.145357 },
+    { 1.00, 0.940015, 0.975158, 0.131326 }
+};
+
+static const GLEColorScalePoint infernoScale[] = {
+    { 0.00, 0.001462, 0.000466, 0.013866 },
+    { 0.10, 0.087411, 0.044556, 0.224813 },
+    { 0.20, 0.258234, 0.038571, 0.406485 },
+    { 0.30, 0.416331, 0.090203, 0.432943 },
+    { 0.40, 0.578304, 0.148039, 0.404411 },
+    { 0.50, 0.735683, 0.215906, 0.330245 },
+    { 0.60, 0.865006, 0.316822, 0.226055 },
+    { 0.70, 0.954506, 0.468744, 0.099874 },
+    { 0.80, 0.987622, 0.645320, 0.039886 },
+    { 0.90, 0.964394, 0.843848, 0.273391 },
+    { 1.00, 0.988362, 0.998364, 0.644924 }
+};
+
+static const GLEColorScalePoint magmaScale[] = {
+    { 0.00, 0.001462, 0.000466, 0.013866 },
+    { 0.10, 0.078815, 0.054184, 0.211667 },
+    { 0.20, 0.232077, 0.059889, 0.437695 },
+    { 0.30, 0.390384, 0.100379, 0.501864 },
+    { 0.40, 0.550287, 0.161158, 0.505719 },
+    { 0.50, 0.716387, 0.214982, 0.475290 },
+    { 0.60, 0.868793, 0.287728, 0.409303 },
+    { 0.70, 0.967671, 0.439703, 0.359810 },
+    { 0.80, 0.994738, 0.624350, 0.427397 },
+    { 0.90, 0.995680, 0.812706, 0.572645 },
+    { 1.00, 0.987053, 0.991438, 0.749504 }
+};
+
+static const GLEColorScalePoint blueWhiteRedScale[] = {
+    { 0.00, 0.000, 0.000, 1.000 },
+    { 0.50, 1.000, 1.000, 1.000 },
+    { 1.00, 1.000, 0.000, 0.000 }
+};
+
+static const GLEColorScalePoint redWhiteBlueScale[] = {
+    { 0.00, 1.000, 0.000, 0.000 },
+    { 0.50, 1.000, 1.000, 1.000 },
+    { 1.00, 0.000, 0.000, 1.000 }
+};
+
 GLEColor::GLEColor() :
 	m_Name(0)
 {
@@ -2030,6 +2223,161 @@ void GLEColor::setRGBA255(double r, double g, double b, double a) {
 
 void GLEColor::setGray(double gray) {
 	setRGB(gray, gray, gray);
+}
+
+void GLEColor::setHSV(double h, double s, double v)
+{
+    h = std::fmod(h, 360.0);
+    if (h < 0.0) {
+        h += 360.0;
+    }
+
+    double c = v * s;
+    double hp = h / 60.0;
+    double x = c * (1.0 - std::fabs(std::fmod(hp, 2.0) - 1.0));
+
+    double r = 0.0;
+    double g = 0.0;
+    double b = 0.0;
+
+    if (hp < 1.0) {
+        r = c;
+        g = x;
+    } else if (hp < 2.0) {
+        r = x;
+        g = c;
+    } else if (hp < 3.0) {
+        g = c;
+        b = x;
+    } else if (hp < 4.0) {
+        g = x;
+        b = c;
+    } else if (hp < 5.0) {
+        r = x;
+        b = c;
+    } else {
+        r = c;
+        b = x;
+    }
+
+    double m = v - c;
+
+    setRGB(r + m, g + m, b + m);
+}
+
+void GLEColor::setHSL(double h, double s, double l)
+{
+    h = std::fmod(h, 360.0);
+    if (h < 0.0) {
+        h += 360.0;
+    }
+
+    double c = (1.0 - std::fabs(2.0 * l - 1.0)) * s;
+    double hp = h / 60.0;
+    double x = c * (1.0 - std::fabs(std::fmod(hp, 2.0) - 1.0));
+
+    double r = 0.0;
+    double g = 0.0;
+    double b = 0.0;
+
+    if (hp < 1.0) {
+        r = c;
+        g = x;
+    } else if (hp < 2.0) {
+        r = x;
+        g = c;
+    } else if (hp < 3.0) {
+        g = c;
+        b = x;
+    } else if (hp < 4.0) {
+        g = x;
+        b = c;
+    } else if (hp < 5.0) {
+        r = x;
+        b = c;
+    } else {
+        r = c;
+        b = x;
+    }
+
+    double m = l - c / 2.0;
+
+    setRGB(r + m, g + m, b + m);
+}
+
+void GLEColor::setCMYK(double c, double m, double y, double k)
+{
+    setRGB(
+        (1.0 - c) * (1.0 - k),
+        (1.0 - m) * (1.0 - k),
+        (1.0 - y) * (1.0 - k)
+    );
+}
+
+bool GLEColor::setColorScale(
+    double value,
+    const std::string& scale)
+{
+    value = std::clamp(value, 0.0, 1.0);
+    const std::string name = normalizeColorScaleName(scale);
+    // Simple single-channel and additive scales.
+    if (name == "GRAY" || name == "GREY") {
+        setRGB(value, value, value);
+        return true;
+    }
+    if (name == "RED") {
+        setRGB(value, 0.0, 0.0);
+        return true;
+    }
+    if (name == "GREEN") {
+        setRGB(0.0, value, 0.0);
+        return true;
+    }
+    if (name == "BLUE") {
+        setRGB(0.0, 0.0, value);
+        return true;
+    }
+    if (name == "CYAN") {
+        setRGB(0.0, value, value);
+        return true;
+    }
+    if (name == "MAGENTA") {
+        setRGB(value, 0.0, value);
+        return true;
+    }
+    if (name == "YELLOW") {
+        setRGB(value, value, 0.0);
+        return true;
+    }
+	// -- Interpolated scales.
+	double red;
+    double green;
+    double blue;
+    if (name == "VERDIGRIS") {
+        interpolateColorScale(value, verdigrisScale, red, green, blue);
+    } else if (name == "THERMAL") {
+        interpolateColorScale(value, thermalScale, red, green, blue);
+    } else if (name == "COOL") {
+        interpolateColorScale(value, coolScale, red, green, blue);
+    } else if (name == "RAINBOW") {
+        interpolateColorScale(value, rainbowScale, red, green, blue);
+    } else if (name == "VIRIDIS") {
+        interpolateColorScale(value, viridisScale, red, green, blue);
+    } else if (name == "PLASMA") {
+        interpolateColorScale(value, plasmaScale, red, green, blue);
+    } else if (name == "INFERNO") {
+        interpolateColorScale(value, infernoScale, red, green, blue);
+    } else if (name == "MAGMA") {
+        interpolateColorScale(value, magmaScale, red, green, blue);
+    } else if (name == "BLUE_WHITE_RED") {
+        interpolateColorScale(value, blueWhiteRedScale, red, green, blue);
+    } else if (name == "RED_WHITE_BLUE") {
+        interpolateColorScale(value, redWhiteBlueScale, red, green, blue);
+    } else {
+        return false;
+    }
+    setRGB(red, green, blue);
+    return true;
 }
 
 void GLEColor::setHexValue(unsigned int v) {

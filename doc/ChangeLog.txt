@@ -2,9 +2,26 @@
     - added manpages for Linux distributions.
     - prints to stdout instead of stderr for help, info, and version options as well as status message.
     - removed unneeded and outdated hash_map in favor of STD C++ map.
-    - added range checking and error messages to some function in graphutil.gle
+    - added range checking and error messages to some functions in graphutil.gle
     - Added a new MATERIALIZE option for LET statements that evaluates data series immediately rather than
       deferring evaluation until the end of the graph block.
+    - Added mathematical functions cbrt, ceil, erfc, expm1, floor,
+      gamma, hypot, log1p, log_gamma, round, and sinc using the C++
+      standard library and Boost.Math.
+    - Added modified Bessel functions of the first and second kinds and
+      spherical Bessel functions of the first and second kinds using
+      Boost.Math.
+    - Added sph_bessel and sph_neumann as aliases for the spherical Bessel
+      functions of the first and second kinds, respectively.
+    - Added RANDOM as a more descriptive alias for the RND random-number function.
+    - Added HSV, HSL, and CMYK color functions for specifying colors in
+      alternative color spaces. Colors are converted internally to GLE's
+      RGB color representation.
+    - Added the colorscale(value, scale$) color function for generating
+        colors from named normalized color scales. Supported scales include
+        grayscale, single- and dual-channel scales, thermal and rainbow
+        scales, Viridis, Plasma, Inferno, Magma, and diverging red/white/blue
+        scales.
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package

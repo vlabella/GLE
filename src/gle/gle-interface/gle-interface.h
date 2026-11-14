@@ -456,6 +456,10 @@ public:
     DLLFCT void setRGB255(double r, double g, double b);
     void setRGBA255(double r, double g, double b, double a);
 	void setGray(double gray);
+	void setHSV(double h, double s, double v);
+	void setHSL(double h, double s, double l);
+	void setCMYK(double c, double m, double y, double k);
+	DLLFCT bool setColorScale(double value, const std::string& scale);
 	DLLFCT const char* getName();
 	void setName(const std::string& name);
 	void setName(const std::string* name);

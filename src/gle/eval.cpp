@@ -37,7 +37,7 @@
  ************************************************************************/
 
 #define GRAPHDEF extern
-
+#include <cmath>
 #include "all.h"
 #include "tokens/stokenizer.h"
 #include "core.h"
@@ -70,6 +70,7 @@
 #include <boost/math/special_functions/bessel.hpp>
 #include <boost/math/special_functions/airy.hpp>
 #include <boost/math/special_functions/chebyshev.hpp>
+#include <boost/math/special_functions/sinc.hpp>
 
 using namespace std;
 
@@ -695,13 +696,82 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			setEvalStack(stk, stk->last(), boost::math::legendre_p(getEvalStackInt(stk, stk->last()), getEvalStackInt(stk, stk->last()+1), getEvalStackDouble(stk, stk->last()+2)));
 			break;
 		case FN_BUILTIN_MAGIC + FN_BESSEL_FIRST:
-			stk->decrementSize(1);
-			setEvalStack(stk, stk->last(), boost::math::cyl_bessel_j( getEvalStackDouble(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
-			break;
+		    stk->decrementSize(1);
+		    setEvalStack(
+		        stk,
+		        stk->last(),
+		        boost::math::cyl_bessel_j(
+		            getEvalStackDouble(stk, stk->last()),
+		            getEvalStackDouble(stk, stk->last() + 1)
+		        )
+		    );
+		    break;
+		case FN_BUILTIN_MAGIC + FN_BESSEL_MODIFIED_FIRST:
+		    stk->decrementSize(1);
+		    setEvalStack(
+		        stk,
+		        stk->last(),
+		        boost::math::cyl_bessel_i(
+		            getEvalStackDouble(stk, stk->last()),
+		            getEvalStackDouble(stk, stk->last() + 1)
+		        )
+		    );
+		    break;
+		case FN_BUILTIN_MAGIC + FN_BESSEL_MODIFIED_SECOND:
+		    stk->decrementSize(1);
+		    setEvalStack(
+		        stk,
+		        stk->last(),
+		        boost::math::cyl_bessel_k(
+		            getEvalStackDouble(stk, stk->last()),
+		            getEvalStackDouble(stk, stk->last() + 1)
+		        )
+		    );
+	    break;
 		case FN_BUILTIN_MAGIC + FN_BESSEL_SECOND:
+		    stk->decrementSize(1);
+		    setEvalStack(
+		        stk,
+		        stk->last(),
+		        boost::math::cyl_neumann(
+		            getEvalStackDouble(stk, stk->last()),
+		            getEvalStackDouble(stk, stk->last() + 1)
+		        )
+		    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_SPHERICAL_BESSEL_FIRST:
+			{
 			stk->decrementSize(1);
-			setEvalStack(stk, stk->last(), boost::math::cyl_neumann( getEvalStackDouble(stk, stk->last()) , getEvalStackDouble(stk, stk->last()+1)));
-			break;
+			int n = getEvalStackInt(stk, stk->last());
+			if (n < 0) {
+			    g_throw_parser_error("spherical Bessel order must be non-negative");
+			}
+			setEvalStack(
+			    stk,
+			    stk->last(),
+			    boost::math::sph_bessel(
+			        static_cast<unsigned int>(n),
+			        getEvalStackDouble(stk, stk->last() + 1)
+			    )
+			);
+			}
+	    break;
+		case FN_BUILTIN_MAGIC + FN_SPHERICAL_BESSEL_SECOND:
+			{
+			int n = getEvalStackInt(stk, stk->last());
+			if (n < 0) {
+			    g_throw_parser_error("spherical Bessel order must be non-negative");
+			}
+			setEvalStack(
+			    stk,
+			    stk->last(),
+			    boost::math::sph_neumann(
+			        static_cast<unsigned int>(n),
+			        getEvalStackDouble(stk, stk->last() + 1)
+			    )
+			);
+			}
+	    break;
 		case FN_BUILTIN_MAGIC + FN_SPHERICAL_HARMONIC:
 			stk->decrementSize(3);
 			setEvalStack(stk, stk->last(),
@@ -727,6 +797,107 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::chebyshev_u( getEvalStackUnsignedInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
+		case FN_BUILTIN_MAGIC + FN_CBRT:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	std::cbrt(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_CEIL:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	std::ceil(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_ERFC:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	boost::math::erfc(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_EXPM1:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	std::expm1(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_FLOOR:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	std::floor(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_GAMMA:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	boost::math::tgamma(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_HYPOT:
+	    	stk->decrementSize(1);
+	    	setEvalStack(
+		        stk,
+		        stk->last(),
+	    	    std::hypot(
+	        	    getEvalStackDouble(stk, stk->last()),
+	            getEvalStackDouble(stk, stk->last() + 1)
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_LOG1P:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	std::log1p(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_LOG_GAMMA:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	boost::math::lgamma(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_ROUND:
+		    setEvalStack(
+		        stk,
+	    	    stk->last(),
+	        	std::round(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
+		case FN_BUILTIN_MAGIC + FN_SINC:
+	    	setEvalStack(
+	        stk,
+	        stk->last(),
+	        boost::math::sinc_pi(
+	            getEvalStackDouble(stk, stk->last())
+	        )
+	    );
+	    break;
 		case FN_BUILTIN_MAGIC + FN_TEST_PRINT: // test_print
 			// simple for loop that evaluates a function that is passed to it
 			//{
@@ -875,7 +1046,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), str->substringWithLength(str->toStringIndex(-number), number));
 			}
 			break;
-		case 82: /* rnd */
+		case 82: /* rnd  or random*/
 			setEvalStack(stk, stk->last(), ((double) rand()/(double)RAND_MAX)*getEvalStackDouble(stk, stk->last()));
 			break;
 		case 83: /* seg$ */
@@ -983,8 +1154,10 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			break;
 		case 105: /* CVTGRAY(.5) */
 			{
-				GLERC<GLEColor> color(new GLEColor(getEvalStackDouble(stk, stk->last())));
-				setEvalStack(stk, stk->last(), color.get());
+				const double value = getEvalStackDouble(stk, stk->last());
+		        GLERC<GLEColor> color(new GLEColor());
+        		color->setColorScale(value, "GRAY");
+		        setEvalStack(stk, stk->last(), color.get());
 			}
 			break;
 		case 106: /* CVTINT(2) */
@@ -1041,6 +1214,23 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), color.get());
 			}
 			break;
+		case FN_BUILTIN_MAGIC + FN_COLOR_SCALE:
+		    {
+		        const double value = getEvalStackDouble(stk, stk->last() - 1);
+		        const std::string scale = getEvalStackStringStd(stk, stk->last());
+		        GLERC<GLEColor> color(new GLEColor());
+		        if (!color->setColorScale(value, scale)) {
+		            std::ostringstream message;
+		            message
+		                << "colorscale: unknown color scale '"
+		                << scale
+		                << "'";
+		            g_throw_parser_error(message.str());
+		        }
+		        stk->decrementSize(1);
+		        setEvalStack(stk, stk->last(), color.get());
+		    }
+	    break;
 		case FN_BUILTIN_MAGIC + FN_NDATA: /* Number of datapoints in a dateset */
 			i = get_dataset_identifier(getEvalStackStringStd(stk, stk->last()), false);
 			setEvalStack(stk, stk->last(), dp[i] == 0 ? 0 : (int)dp[i]->np);
@@ -1104,6 +1294,48 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			setEvalStack(stk, stk->last() - 2, yg3d(getEvalStackDouble(stk, stk->last() - 2), getEvalStackDouble(stk, stk->last() - 1), getEvalStackDouble(stk, stk->last())));
 			stk->decrementSize(2);
 			break;
+		case FN_BUILTIN_MAGIC + FN_HSV:
+		    {
+		        GLERC<GLEColor> color(new GLEColor());
+
+		        color->setHSV(
+		            getEvalStackDouble(stk, stk->last()-2),
+		            getEvalStackDouble(stk, stk->last()-1),
+		            getEvalStackDouble(stk, stk->last())
+		        );
+
+		        stk->decrementSize(2);
+		        setEvalStack(stk, stk->last(), color.get());
+		    }
+	    break;
+	    case FN_BUILTIN_MAGIC + FN_HSL:
+		    {
+		        GLERC<GLEColor> color(new GLEColor());
+		        color->setHSL(
+		            getEvalStackDouble(stk, stk->last()-2),
+		            getEvalStackDouble(stk, stk->last()-1),
+		            getEvalStackDouble(stk, stk->last())
+		        );
+
+		        stk->decrementSize(2);
+		        setEvalStack(stk, stk->last(), color.get());
+		    }
+	    break;
+	    case FN_BUILTIN_MAGIC + FN_CMYK:
+		    {
+		        GLERC<GLEColor> color(new GLEColor());
+
+		        color->setCMYK(
+		            getEvalStackDouble(stk, stk->last()-3),
+		            getEvalStackDouble(stk, stk->last()-2),
+		            getEvalStackDouble(stk, stk->last()-1),
+		            getEvalStackDouble(stk, stk->last())
+		        );
+
+		        stk->decrementSize(3);
+		        setEvalStack(stk, stk->last(), color.get());
+		    }
+	    break;
 		default:  /* User function, LOCAL_START_INDEX..nnn , or error */
 			/* Is it a user defined function */
 			if (*(pcode+c) >= LOCAL_START_INDEX) {

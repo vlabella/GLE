@@ -83,7 +83,27 @@
 #define FN_AIRY_SECOND          117
 #define FN_CHEBYSHEV_FIRST      118
 #define FN_CHEBYSHEV_SECOND     119
-#define FN_TEST_PRINT			120
+#define FN_CBRT                        120
+#define FN_CEIL                        121
+#define FN_ERFC                        122
+#define FN_EXPM1                       123
+#define FN_FLOOR                       124
+#define FN_GAMMA                       125
+#define FN_HYPOT                       126
+#define FN_LOG1P                       127
+#define FN_LOG_GAMMA                   128
+#define FN_ROUND                       129
+#define FN_SINC                        130
+#define FN_BESSEL_MODIFIED_FIRST       131
+#define FN_BESSEL_MODIFIED_SECOND      132
+#define FN_SPHERICAL_BESSEL_FIRST      133
+#define FN_SPHERICAL_BESSEL_SECOND     134
+#define FN_HSV                         135
+#define FN_HSL                         136
+#define FN_CMYK                        137
+#define FN_COLOR_SCALE                 138
+
+#define FN_TEST_PRINT                  999
 
 struct keyw {
 	const char *word;
