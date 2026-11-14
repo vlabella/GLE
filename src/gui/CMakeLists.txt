@@ -1,19 +1,6 @@
 #
 # -- qgle requires Qt6
 #
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-set(CMAKE_AUTOUIC ON)
-
-find_package(Qt6 COMPONENTS
-	Core
-	Widgets
-	Network
-	Gui
-	OpenGL
-	OpenGLWidgets
-	REQUIRED)
-
 if (WIN32)
     add_compile_definitions(_HAS_STD_BYTE=1)
     add_compile_options(/FS)

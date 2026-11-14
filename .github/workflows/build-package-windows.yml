@@ -224,6 +224,16 @@ jobs:
         retention-days: 0
         compression-level: 0
 
+      # Upload build report as an artifact
+    - name: Upload Artifact - Build Report
+      uses: actions/upload-artifact@v7
+      with:
+        name: GLE Build Report Windows
+        path: ${{ github.workspace }}/stage/doc/gle-build-report.txt
+        if-no-files-found: error
+        retention-days: 0
+        compression-level: 0
+
       # upload to release location if started with from release workflow
     - name: Upload Binary Distributables to Release Location
       if: ${{ github.event_name == 'repository_dispatch' }}
@@ -232,6 +242,20 @@ jobs:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file_glob: true
         file: ${{github.workspace}}/stage/gle-*.*
+        tag: ${{ github.event.client_payload.tag }}
+
+    - name: Rename Build Report for Release
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      shell: bash
+      run: cp ${{github.workspace}}/stage/doc/gle-build-report.txt ${{ github.workspace }}/gle-build-report-windows.txt
+
+      # Upload build report to GitHub Release
+    - name: Upload Build Report to Release Location
+      if: ${{ github.event_name == 'repository_dispatch' }}
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: ${{ github.workspace }}/gle-build-report-windows.txt
         tag: ${{ github.event.client_payload.tag }}
 
     # not used anymore since release action triggers manual build and upload in its own repo

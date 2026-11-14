@@ -331,8 +331,7 @@ if(CAIRO_FOUND)
         set(CAIRO_VERSION_MICRO "${CMAKE_MATCH_1}")
     endif()
 	endforeach()
-	set(CAIRO_VERSION
-    "${CAIRO_VERSION_MAJOR}.${CAIRO_VERSION_MINOR}.${CAIRO_VERSION_MICRO}")
+	set(CAIRO_VERSION "${CAIRO_VERSION_MAJOR}.${CAIRO_VERSION_MINOR}.${CAIRO_VERSION_MICRO}")
 	message(STATUS "Found CAIRO: ${CAIRO_LIBRARIES} ${CAIRO_VERSION}" )
 endif()
 #
@@ -360,7 +359,25 @@ else()
 endif()
 find_path(PIXMAN_INCLUDE_DIRS pixman.h PATHS ${PIXMAN_ROOT} PATH_SUFFIXES include include/pixman-1 REQUIRED)
 if(PIXMAN_FOUND)
-	message(STATUS "Found PIXMAN: ${PIXMAN_LIBRARIES}" )
+	set(_PIXMAN_VERSION_HEADER "${PIXMAN_INCLUDE_DIRS}/pixman-version.h")
+	if(EXISTS "${_PIXMAN_VERSION_HEADER}")
+		file(STRINGS "${_PIXMAN_VERSION_HEADER}" _PIXMAN_VERSION_LINES
+			REGEX "^#define PIXMAN_VERSION_(MAJOR|MINOR|MICRO)[ \t]+[0-9]+"
+		)
+		foreach(_line IN LISTS _PIXMAN_VERSION_LINES)
+			if(_line MATCHES "^#define PIXMAN_VERSION_MAJOR[ \t]+([0-9]+)")
+				set(PIXMAN_VERSION_MAJOR "${CMAKE_MATCH_1}")
+			elseif(_line MATCHES "^#define PIXMAN_VERSION_MINOR[ \t]+([0-9]+)")
+				set(PIXMAN_VERSION_MINOR "${CMAKE_MATCH_1}")
+			elseif(_line MATCHES "^#define PIXMAN_VERSION_MICRO[ \t]+([0-9]+)")
+				set(PIXMAN_VERSION_MICRO "${CMAKE_MATCH_1}")
+			endif()
+		endforeach()
+		set(PIXMAN_VERSION
+			"${PIXMAN_VERSION_MAJOR}.${PIXMAN_VERSION_MINOR}.${PIXMAN_VERSION_MICRO}"
+		)
+	endif()
+	message(STATUS "Found PIXMAN: ${PIXMAN_LIBRARIES} (version ${PIXMAN_VERSION})")
 endif()
 #
 # -- poppler
@@ -386,6 +403,22 @@ if(POPPLER_FOUND)
 	else()
 		message(STATUS "Unknown Poppler interface: ${POPPLER_INTERFACE}")
 	endif()
+	if(POPPLER_FOUND)
+	find_file(POPPLER_VERSION_HEADER
+		NAMES poppler-version.h
+		PATHS ${POPPLER_INCLUDE_DIRS}
+		NO_DEFAULT_PATH
+	)
+	if(POPPLER_VERSION_HEADER)
+		file(STRINGS "${POPPLER_VERSION_HEADER}" _POPPLER_VERSION_LINE
+			REGEX "^#define POPPLER_VERSION \"[^\"]+\""
+		)
+		if(_POPPLER_VERSION_LINE MATCHES "^#define POPPLER_VERSION \"([^\"]+)\"")
+			set(POPPLER_VERSION "${CMAKE_MATCH_1}")
+		endif()
+	endif()
+	message(STATUS "Poppler version: ${POPPLER_VERSION}")
+endif()
 	message(STATUS "Poppler_INCLUDE_DIRS: ${Poppler_INCLUDE_DIRS}")
 endif()
 #
@@ -397,62 +430,109 @@ find_path(GDIR2 gdevdsp.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices 
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR2} )
 find_path(GDIR3 gserrors.h PATHS ${GHOSTPDL_ROOT} PATH_SUFFIXES psi base devices ghostscript )
 list(APPEND GHOSTPDL_INCLUDE_DIRS ${GDIR3} )
+#
+# -- Get GhostPDL/Ghostscript version
+#
+set(GHOSTPDL_VERSION_MAK "${GHOSTPDL_ROOT}/base/version.mak")
+if(EXISTS "${GHOSTPDL_VERSION_MAK}")
+	file(STRINGS "${GHOSTPDL_VERSION_MAK}" GHOSTPDL_VERSION_LINES
+		REGEX "^GS_VERSION_(MAJOR|MINOR)="
+	)
+	foreach(_line IN LISTS GHOSTPDL_VERSION_LINES)
+		if(_line MATCHES "^GS_VERSION_MAJOR=([0-9]+)")
+			set(GHOSTPDL_VERSION_MAJOR "${CMAKE_MATCH_1}")
+		elseif(_line MATCHES "^GS_VERSION_MINOR=([0-9]+)")
+			set(GHOSTPDL_VERSION_MINOR "${CMAKE_MATCH_1}")
+		endif()
+	endforeach()
+	if(DEFINED GHOSTPDL_VERSION_MAJOR AND DEFINED GHOSTPDL_VERSION_MINOR)
+		set(GHOSTPDL_VERSION
+			"${GHOSTPDL_VERSION_MAJOR}.${GHOSTPDL_VERSION_MINOR}"
+		)
+	endif()
+endif()
 message(STATUS "GHOSTPDL_INCLUDE_DIRS: ${GHOSTPDL_INCLUDE_DIRS}")
+if(BUILD_GUI)
+	# GUI - qgle requires Qt6
+	set(CMAKE_AUTOMOC ON)
+	set(CMAKE_AUTORCC ON)
+	set(CMAKE_AUTOUIC ON)
 
-
-set(BUILD_REPORT "")
-
-
-string(APPEND BUILD_REPORT
-    "Compiler=${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "C Compiler=${CMAKE_C_COMPILER_ID} ${CMAKE_C_COMPILER_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "Operating System=${CMAKE_SYSTEM_NAME}\n")
-
-string(APPEND BUILD_REPORT
-    "OS Version=${CMAKE_SYSTEM_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "Target Architecture=${CMAKE_SYSTEM_PROCESSOR}\n")
-
-string(APPEND BUILD_REPORT
-    "ZLIB=${ZLIB_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "JPEG=${JPEG_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "Boost=${Boost_VERSION_STRING}\n")
-
-string(APPEND BUILD_REPORT
-    "TIFF=${TIFF_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "PNG=${PNG_VERSION_STRING}\n")
-
-string(APPEND BUILD_REPORT
-    "Cairo=${CAIRO_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "Pixman=${PIXMAN_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "GhostPDL=${GHOSTPDL_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "Poppler=${Poppler_VERSION}\n")
-
-string(APPEND BUILD_REPORT
-    "GLib2=${GLIB2_VERSION}\n")
+	find_package(Qt6 COMPONENTS
+		Core
+		Widgets
+		Network
+		Gui
+		OpenGL
+		OpenGLWidgets
+		REQUIRED)
+endif()
+# -----------------------------------------------------------------------------
+# Build report
+# -----------------------------------------------------------------------------
+set(BUILD_REPORT_FILENAME "gle-build-info.txt")
+string(TIMESTAMP BUILD_DATE "%Y-%m-%d %H:%M:%S")
+set(BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "# -- GLE gle-graphics Build Report\n")
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "GLE version         : ${PROJECT_VERSION}\n")
+string(APPEND BUILD_REPORT "Build Date          : ${BUILD_DATE}\n")
+string(APPEND BUILD_REPORT "Operating System    : ${CMAKE_SYSTEM_NAME}\n")
+string(APPEND BUILD_REPORT "OS Version          : ${CMAKE_SYSTEM_VERSION}\n")
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+	set(BUILD_BITNESS "64-bit")
+elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+	set(BUILD_BITNESS "32-bit")
+else()
+	set(BUILD_BITNESS "Unknown")
+endif()
+string(APPEND BUILD_REPORT "Target Architecture : ${CMAKE_SYSTEM_PROCESSOR} (${BUILD_BITNESS})\n")
+string(APPEND BUILD_REPORT "Compiler            : ${CMAKE_CXX_COMPILER_ID} ${CMAKE_CXX_COMPILER_VERSION}\n")
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "# -- External Libraries\n")
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "ZLIB                : ${ZLIB_VERSION}\n")
+string(APPEND BUILD_REPORT "JPEG                : ${JPEG_VERSION}\n")
+string(APPEND BUILD_REPORT "Boost               : ${Boost_VERSION_STRING}\n")
+string(APPEND BUILD_REPORT "TIFF                : ${TIFF_VERSION}\n")
+string(APPEND BUILD_REPORT "PNG                 : ${PNG_VERSION_STRING}\n")
+string(APPEND BUILD_REPORT "Cairo               : ${CAIRO_VERSION}\n")
+string(APPEND BUILD_REPORT "Pixman              : ${PIXMAN_VERSION}\n")
+string(APPEND BUILD_REPORT "GhostPDL            : ${GHOSTPDL_VERSION}\n")
+string(APPEND BUILD_REPORT "Poppler             : ${POPPLER_VERSION}\n")
+if(BUILD_GUI)
+string(APPEND BUILD_REPORT "Qt                  : ${Qt6_VERSION}\n")
+endif()
+if(UNIX)
+string(APPEND BUILD_REPORT "GLib2               : ${GLIB2_VERSION}\n")
+endif()
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "# -- CMake Build Options\n")
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "BUILD_GUI                       : ${BUILD_GUI}\n")
+string(APPEND BUILD_REPORT "BUILD_MANIP                     : ${BUILD_MANIP}\n")
+string(APPEND BUILD_REPORT "BUILD_GLEBTOOL                  : ${BUILD_GLEBTOOL}\n")
+string(APPEND BUILD_REPORT "INSTALL_FBUILD                  : ${INSTALL_FBUILD}\n")
+string(APPEND BUILD_REPORT "INSTALL_MAKEFMT                 : ${INSTALL_MAKEFMT}\n")
+string(APPEND BUILD_REPORT "MSVC_USE_STATIC_RUNTIME         : ${MSVC_USE_STATIC_RUNTIME}\n")
+string(APPEND BUILD_REPORT "DEVELOPER_INSTALLATION          : ${DEVELOPER_INSTALLATION}\n")
+string(APPEND BUILD_REPORT "BUILD_TESTS                     : ${BUILD_TESTS}\n")
+string(APPEND BUILD_REPORT "INSTALL_TESTS                   : ${INSTALL_TESTS}\n")
+string(APPEND BUILD_REPORT "BUILD_MANPAGES                  : ${BUILD_MANPAGES}\n")
+string(APPEND BUILD_REPORT "INSTALL_EXAMPLES                : ${INSTALL_EXAMPLES}\n")
+string(APPEND BUILD_REPORT "CONSOLE_COLORS                  : ${CONSOLE_COLORS}\n")
+string(APPEND BUILD_REPORT "INSTALL_CREATE_FILETYPE_ASSOCIATION : ${INSTALL_CREATE_FILETYPE_ASSOCIATION}\n")
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "# -- External Content Paths\n")
+string(APPEND BUILD_REPORT "#\n")
+string(APPEND BUILD_REPORT "GLE_EXAMPLES_LIBRARY_PATH : ${GLE_EXAMPLES_LIBRARY_PATH}\n")
+string(APPEND BUILD_REPORT "GLE_USER_MANUAL_PATH      : ${GLE_USER_MANUAL_PATH}\n")
 
 file(WRITE
-    ${CMAKE_BINARY_DIR}/build_manifest.txt
+    ${CMAKE_BINARY_DIR}/${BUILD_REPORT_FILENAME}
     "${BUILD_REPORT}")
 
-message(STATUS "Creating ${CMAKE_BINARY_DIR}/build_manifest.txt")
+message(STATUS "Creating ${CMAKE_BINARY_DIR}/${BUILD_REPORT_FILENAME}")
 
 include_directories(
 	${ZLIB_INCLUDE_DIRS}
@@ -732,6 +812,7 @@ install(FILES
 	../doc/LICENSE.txt
 	../doc/README.txt
 	../doc/ChangeLog.txt
+	"${CMAKE_BINARY_DIR}/${BUILD_REPORT_FILENAME}"
 	CONFIGURATIONS Release Debug
 	DESTINATION ${MY_DESTINATION}
 )
