@@ -470,7 +470,7 @@ endif()
 # -----------------------------------------------------------------------------
 # Build report
 # -----------------------------------------------------------------------------
-set(BUILD_REPORT_FILENAME "gle-build-info.txt")
+set(BUILD_REPORT_FILENAME "gle-build-report.txt")
 string(TIMESTAMP BUILD_DATE "%Y-%m-%d %H:%M:%S")
 set(BUILD_REPORT "#\n")
 string(APPEND BUILD_REPORT "# -- GLE gle-graphics Build Report\n")
