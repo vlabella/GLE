@@ -89,19 +89,19 @@ jobs:
         -DBUILD_TESTS=ON
       shell: cmd
 
-    - name: Build
+    - name: Build GLE
       working-directory: ${{ github.workspace }}
       run: |
         cmake --build build --config ${{env.BUILD_TYPE}}
       shell: cmd
 
-    - name: Install
+    - name: Install GLE
       working-directory: ${{ github.workspace }}
       run: |
         cmake --install build --config ${{env.BUILD_TYPE}}
       shell: cmd
 
-    - name: Upload Artifacts - zip file of installation folder
+    - name: Upload Artifacts - GLE Binaries - zip file of installation folder
       uses: actions/upload-artifact@v7
       with:
         name: Windows Binaries
@@ -109,6 +109,17 @@ jobs:
         if-no-files-found: warn
         retention-days: 0
         compression-level: 0
+
+      # Upload build report as an artifact
+    - name: Upload Artifact - Build Report
+      uses: actions/upload-artifact@v7
+      with:
+        name: GLE Build Report ${{ runner.os }}
+        path: ${{ github.workspace }}/stage/doc/gle-build-report.txt
+        if-no-files-found: error
+        retention-days: 0
+        compression-level: 0
+
 
 
 # for debugging
