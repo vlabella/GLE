@@ -651,6 +651,15 @@ void gle_preview_file(const char* name, CmdLineObj& cmdline) {
 	cerr << endl;
 }
 
+static void set_render_engine_from_options(CmdLineObj& cmdline)
+{
+    if (cmdline.hasOption(GLE_OPT_CAIRO)) {
+        g_set_render_engine(GLERenderEngine::Cairo);
+    } else {
+        g_set_render_engine(GLERenderEngine::Ghostscript);
+    }
+}
+
 bool has_pdflatex(CmdLineObj* cmdline) {
 	if (cmdline->hasOption(GLE_OPT_NO_PDFTEX)) {
 		return false;
@@ -1201,6 +1210,7 @@ void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code
 	GLEGetInterfacePointer()->getConfig()->setAllowConfigBlocks(false);
 	GLEChDir(script->getLocation()->getDirectory());
 	get_out_name(script->getLocation(), cmdline, &out_name);
+	set_render_engine_from_options(cmdline);
 	g_set_console_output(false);
 	g_message_first_newline(true);
 	GLEGetColorList()->reset();

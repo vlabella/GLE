@@ -62,7 +62,7 @@ using namespace std;
 /*---------------------------------------------------------------------------*/
 /* bin = 10..29  (now 31), binstr = 30..49, fn= 60...139, userfn=LOCAL_START_INDEX..nnn */
 #define stack_bin(i,p) stack_op(pcode, stk, stkp, &nstk, i + BINARY_OPERATOR_OFFSET, p + curpri)
-#define stack_fn(i)    stack_op(pcode, stk, stkp, &nstk, i + FN_BUILTIN_MAGIC, 10 + curpri)
+#define stack_fn(i)    stack_op(pcode, stk, stkp, &nstk, i + FN_BUILTIN_OFFSET, 10 + curpri)
 #define dbg if ((gle_debug & 4)>0)
 
 // #define dbg
@@ -234,7 +234,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 				//
 				dbg gprint("Found built in function\n");
 				get_params(pcode, np, plist, uc_token);
-				pcode.addFunction(idx + FN_BUILTIN_MAGIC);
+				pcode.addFunction(idx + FN_BUILTIN_OFFSET);
 				unary = 2;
 				break;
 			} else if (idx > 0 && idx <= 3) {
@@ -333,7 +333,7 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 			}
 			if ((first_char == 'd' || first_char == 'D') && token_len == 1 && m_tokens.is_next_token("[")) {
 				get_array_index(pcode);
-				pcode.addFunction(FN_DI + FN_BUILTIN_MAGIC);
+				pcode.addFunction(FN_DI + FN_BUILTIN_OFFSET);
 				unary = 2;
 				break;
 			}

@@ -22,6 +22,9 @@
         grayscale, single- and dual-channel scales, thermal and rainbow
         scales, Viridis, Plasma, Inferno, Magma, and diverging red/white/blue
         scales.
+    - Add iscairo(), isghostscript(), and render_engine() GLE functions to allow
+      scripts to detect whether they are being rendered using Cairo or Ghostscript.
+    - fixed typo in font CmakeLists.txt file that prevented pssym font being built
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package

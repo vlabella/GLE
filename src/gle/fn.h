@@ -36,11 +36,14 @@
  *                                                                      *
  ************************************************************************/
 
-// constants for the built in functions
-
-// built in functions take the lower 60
-// see eval.cpp and fn.cpp
-#define FN_BUILTIN_MAGIC        60
+// Built-in function IDs.
+//
+// Built-in function opcodes are encoded in expression pcode by adding
+// FN_BUILTIN_OFFSET to the function ID.  The offset separates built-in
+// function opcodes from operators and other low-numbered pcode values.
+//
+// See fn.cpp and eval.cpp.
+#define FN_BUILTIN_OFFSET        60
 
 #define FN_RGB                  47
 #define FN_EVAL                 76
@@ -102,6 +105,9 @@
 #define FN_HSL                         136
 #define FN_CMYK                        137
 #define FN_COLOR_SCALE                 138
+#define FN_ISCAIRO                     139
+#define FN_ISGHOSTSCRIPT               140
+#define FN_RENDER_ENGINE               141
 
 #define FN_TEST_PRINT                  999
 

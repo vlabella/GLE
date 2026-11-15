@@ -163,10 +163,13 @@ GLECore* g_get_core() {
 // Called only once g_clear is called for each script.
 void g_init() {
 	clean_surface();
-	g.devtype = GLE_DEVICE_NONE;
-	g.dev = NULL;
-	g.console_output = false;
-	g.needs_newline = true;
+	// Traditional/default GLE rendering pipeline:
+    // GLE -> PostScript -> Ghostscript.
+    g.renderEngine   = GLERenderEngine::Ghostscript;
+    g.devtype        = GLE_DEVICE_NONE;
+    g.dev            = NULL;
+    g.console_output = false;
+    g.needs_newline  = true;
 	g_graph_init();
 }
 
@@ -304,6 +307,42 @@ bool g_is_dummy_device() {
 void g_devcmd(const char *s) {
 	g.dev->devcmd(s);
 }
+
+
+void g_set_render_engine(GLERenderEngine engine)
+{
+    g.renderEngine = engine;
+}
+
+GLERenderEngine g_get_render_engine()
+{
+    return g.renderEngine;
+}
+
+bool g_is_render_engine_cairo()
+{
+    return g.renderEngine == GLERenderEngine::Cairo;
+}
+
+bool g_is_render_engine_ghostscript()
+{
+    return g.renderEngine == GLERenderEngine::Ghostscript;
+}
+
+const char* g_get_render_engine_name()
+{
+    switch (g.renderEngine) {
+    case GLERenderEngine::Cairo:
+        return "CAIRO";
+
+    case GLERenderEngine::Ghostscript:
+        return "GHOSTSCRIPT";
+    }
+
+    // Defensive fallback for an invalid enum value.
+    return "UNKNOWN";
+}
+
 
 void g_resetfont() {
 	g.dev->resetfont();

@@ -90,6 +90,11 @@ public:
 	double angle;
 };
 
+enum class GLERenderEngine {
+    Ghostscript,
+    Cairo
+};
+
 struct gmodel {
 	double image[3][3];
 	double fontn,fontsz;	/* up to here for font caching */
@@ -127,6 +132,9 @@ struct gmodel {
 	int pdfimgformat;
 	int intconst[GLEC_MAX_INT];
 	double floatconst[GLEC_MAX_DOUBLE];
+	// Rendering pipeline requested by the user.
+    // This is independent of the temporary active device.
+    GLERenderEngine renderEngine;
 };
 
 class GLESaveRestore {
@@ -207,6 +215,7 @@ unsigned int farcoreleft();
 
 #define SIZEOFSTATE sizeof(gmodel)
 
+
 void g_init();
 void g_get_version(std::string* version);
 void g_get_build_date(std::string* date);
@@ -232,10 +241,9 @@ void g_set_console_output(bool set);
 void g_get_usersize(double *x,double *y);
 void g_get_userbox_undev(GLERectangle* rect);
 GLECore* g_get_core();
-
 //
 // -- no need to ifdef these
-// they will simply print warning message if libraries are not linked
+//    they will simply print warning message if libraries are not linked
 //
 void g_bitmap(std::string& fname, double wx, double wy, int type);
 void g_bitmap_info(std::string& fname, int xvar, int yvar, int type);
@@ -263,7 +271,9 @@ bool g_is_bbtweak();
 double g_get_angle_deg();
 void g_get_scale(double* sx, double* sy);
 double g_get_avg_scale();
-
+//
+// -- device
+//
 const char* g_device_to_ext(int device);
 GLEDevice* g_select_device(int device);
 GLEDevice* g_get_device_ptr();
@@ -271,6 +281,15 @@ GLEDevice* g_set_dummy_device();
 void g_restore_device(GLEDevice* device);
 int g_get_device();
 bool g_is_dummy_device();
+//
+// -- render engine
+//
+void g_set_render_engine(GLERenderEngine engine);
+GLERenderEngine g_get_render_engine();
+bool g_is_render_engine_cairo();
+bool g_is_render_engine_ghostscript();
+const char* g_get_render_engine_name();
+
 void g_resetfont();
 
 void g_arrow(double dx, double dy, int can_fillpath);
