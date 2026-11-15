@@ -137,7 +137,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: GLE Build Report ${{ runner.os }}
-        path: ${{ github.workspace }}/stage/doc/gle-build-report.txt
+        path: ${{ github.workspace }}/stage/gle-build-report.txt
         if-no-files-found: error
         retention-days: 0
         compression-level: 0
