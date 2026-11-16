@@ -52,23 +52,38 @@ These are gleaned from the file var.c
 also I had to modify the files sub.c polish.c eval.c to
 include LOCAL_START_INDEX
 
+This is not quite correct anymore
 it seems that all the commands, functions and variables are indexed by one variable
-
 if the index is > LOCAL_START_INDEX then it is treated as a local variable
 and stored in the lvar_name and lvar_val
-
 else the variable is a global variable
 */
-#define NUM_GLOBAL 1000	 //number of global variables
-#define NUM_LOCAL  500  //number of local variables each subroutine can have
-#define MAX_GLOBAL NUM_GLOBAL-1 //GLE will warn the user
-#define MAX_LOCAL  NUM_LOCAL-1  //GLE will warn the user
+
+#define NUM_GLOBAL 1000  // Number of global variables (currently unused)
+#define NUM_LOCAL   500  // Maximum number of local variables per subroutine
+
+#define MAX_GLOBAL (NUM_GLOBAL - 1)
+#define MAX_LOCAL  (NUM_LOCAL - 1)
+#define MAX_INDEX  (NUM_GLOBAL + NUM_LOCAL)
+
+// User-defined function opcodes start at this index.
+// Must be greater than the highest built-in function opcode.
+// See fn.h and FN_BUILTIN_OFFSET.
+#define LOCAL_START_INDEX 10000
+
+
+
+// old
+// #define NUM_GLOBAL 1000
+// #define NUM_LOCAL  500  // number of local variables each subroutine can have
+// #define MAX_GLOBAL NUM_GLOBAL-1 //GLE will warn the user
+// #define MAX_LOCAL  NUM_LOCAL-1  //GLE will warn the user
 //
 // all the variables are kept on the same stack except that the
 // local variables start at a higher index (don't change these)
 //
-#define MAX_INDEX		NUM_GLOBAL+NUM_LOCAL
-#define LOCAL_START_INDEX	NUM_GLOBAL
+// #define MAX_INDEX		NUM_GLOBAL+NUM_LOCAL
+// #define LOCAL_START_INDEX	NUM_GLOBAL
 
 //
 // for the token arrays

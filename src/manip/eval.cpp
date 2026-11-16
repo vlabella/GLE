@@ -372,6 +372,19 @@ void eval(int32 *pcode,int *cp,double *oval,char *ostr,int *otyp) {
 	*cp = *cp + plen + 1;
 }
 
+const char* find_builtin_function_name(int opcode)
+{
+    int fn_index = opcode - FN_BUILTIN_OFFSET;
+
+    for (const auto& fn : keywfn) {
+        if (fn.index == fn_index) {
+            return fn.word;
+        }
+    }
+
+    return "<unknown>";
+}
+
 void debug_polish(int32 *pcode,int *zcp) {
 	int32 *cp,cpval;
 	int plen,c,cde;
@@ -406,8 +419,9 @@ void debug_polish(int32 *pcode,int *zcp) {
 			gprint("# Binary operator {%s} \n",binop[cde-10]);
 		} else if (cde<49) {
 			gprint("# Binary string op {%s} \n",binop[cde-30]);
-		} else if (cde<200) {
-			gprint("# Built in function (with salt) {%s} \n",keywfn[cde-60].word);
+		} else if (cde<LOCAL_START_INDEX) {
+			//gprint("# Built in function (with salt) {%s} \n",keywfn[cde-60].word);
+			gprint("# Built in function {%s}\n",find_builtin_function_name(cde));
 		} else {
 			gprint("# User defined function %d \n",cde);
 		}

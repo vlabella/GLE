@@ -92,10 +92,22 @@ double xg3d(double x, double y, double z);
 double yg3d(double x, double y, double z);
 
 /*---------------------------------------------------------------------------*/
-/* bin = 10..29, binstr = 30..49, fn= 60...139, userfn=LOCAL_START_INDEX..nnn */
-/* pcode:,  1=exp,len  2=float,val 3=var,int 4,string_var, 5=string,.../0 */
+/* Expression pcode opcode ranges:                                           */
+/*                                                                           */
+/*   binary numeric operators : 10 ... 29                                    */
+/*   binary string operators  : 30 ... 49                                    */
+/*   built-in functions       : FN_BUILTIN_OFFSET ... LOCAL_START_INDEX - 1  */
+/*   user-defined functions   : LOCAL_START_INDEX ...                        */
+/*                                                                           */
+/* Built-in function opcodes are formed by adding FN_BUILTIN_OFFSET to the   */
+/* function ID defined in fn.h. The resulting opcode must be less than       */
+/* LOCAL_START_INDEX, which is defined in mem_limits.h.                      */
+/*                                                                           */
+/* Pcode element types: 1=expression/length, 2=float, 3=numeric variable,    */
+/*                      4=string variable, 5=string                          */
+/*                                                                           */
+/* Input is expression pcode; output is a number or string.                   */
 /*---------------------------------------------------------------------------*/
-/* Input is exp-pcode, output is number or string */
 
 // for debugging
 const char *binop[] = { "", "+", "-", "*", "/", "^", "=", "<", "<=", ">", ">=", "<>", ".AND.", ".OR.", "%", "+=", "-=", "*=" , "/=", "++", "--"};
@@ -1366,7 +1378,8 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				pass the address of some numbers
 				pass address of variables if possible
 				*/
-				GLESub* sub = sub_get(*(pcode + c) - LOCAL_START_INDEX);
+				int sub_index = *(pcode + c) - LOCAL_START_INDEX;
+				GLESub* sub = sub_get(sub_index);
 				getGLERunInstance()->sub_call_stack(sub, stk);
 			} else {
 				stringstream ss;

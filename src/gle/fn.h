@@ -39,10 +39,15 @@
 // Built-in function IDs.
 //
 // Built-in function opcodes are encoded in expression pcode by adding
-// FN_BUILTIN_OFFSET to the function ID.  The offset separates built-in
+// FN_BUILTIN_OFFSET to the function ID. The offset separates built-in
 // function opcodes from operators and other low-numbered pcode values.
 //
-// See fn.cpp and eval.cpp.
+// The resulting opcode must be less than LOCAL_START_INDEX, defined in
+// mem_limits.h. Built-in function IDs must therefore satisfy:
+//
+//     FN_BUILTIN_OFFSET + function ID < LOCAL_START_INDEX
+//
+// See fn.cpp, eval.cpp, and mem_limits.h.
 #define FN_BUILTIN_OFFSET        60
 
 #define FN_RGB                  47

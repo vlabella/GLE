@@ -43,19 +43,19 @@
 using namespace std;
 
 /*-------------------------------------------------------------------*/
-/*      Find the function called *cp, and return its number          */
+/* Find the function called by *cp and return its function ID.        */
 /*-------------------------------------------------------------------*/
 
-/* You can add a function, you MUST place it in alphabetical order   */
-/* and give it the next unused index number			                 */
+/* To add a new function, place it in alphabetical order and assign   */
+/* it the next unused function ID.                                    */
 
-/* ret = Type of returned value,  1=number, 2=string                 */
-/* np = number of parameters expected                                 */
-/* Parameters p0...p4  ==  1=number, 2=string, 0=none (e.g. height()).*/
+/* ret = return type:          1 = number, 2 = string                 */
+/* np  = number of parameters expected                                */
+/* p0...p4 = parameter types:  0 = none, 1 = number, 2 = string      */
+/* For functions with no parameters (e.g. height()), set np to 0.     */
 
-// Function indices are defined in fn.h.
-// See eval.cpp for implementation of these functions.
-
+/* Function IDs are defined in fn.h.                                  */
+/* See eval.cpp for the implementation of the built-in functions.     */
 
 #define NKEYS (sizeof keywfn / sizeof(struct keyw))
 

@@ -309,6 +309,14 @@ GLESub* GLESubMap::add(const string& name) {
 	GLESub* sub = add();
 	m_Map.add_item(name, sub->getIndex());
 	sub->setName(name);
+	/*
+	gprint(
+		"SUB: index=%d opcode=%d name=%s\n",
+		sub->getIndex(),
+		LOCAL_START_INDEX + sub->getIndex(),
+		name.c_str()
+	);
+	*/
 	return sub;
 }
 
