@@ -117,6 +117,8 @@
 #define FN_IS_CLOSE                    143
 #define FN_IS_CLOSE_ABS                144
 #define FN_COLOR_INTENSITY             145
+#define FN_LERP                        146
+#define FN_REMAP                       147
 
 #define FN_TEST_PRINT                  999
 

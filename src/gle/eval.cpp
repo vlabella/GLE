@@ -711,6 +711,34 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStackBool(stk, stk->last(), result);
 			}
 			break;
+		case FN_BUILTIN_OFFSET + FN_LERP:
+			{
+                const double a      = getEvalStackDouble(stk, stk->last() - 2);
+                const double b      = getEvalStackDouble(stk, stk->last() - 1);
+                const double t      = getEvalStackDouble(stk, stk->last());
+                const double result = a + t * (b - a);
+				stk->decrementSize(2);
+				setEvalStack(stk, stk->last(), result);
+			}
+			break;
+		case FN_BUILTIN_OFFSET + FN_REMAP:
+			{
+                const double value   = getEvalStackDouble(stk, stk->last() - 4);
+                const double in_min  = getEvalStackDouble(stk, stk->last() - 3);
+                const double in_max  = getEvalStackDouble(stk, stk->last() - 2);
+                const double out_min = getEvalStackDouble(stk, stk->last() - 1);
+                const double out_max = getEvalStackDouble(stk, stk->last());
+				if (in_min == in_max) {
+					g_throw_parser_error(
+						"remap: input range must not have zero length"
+					);
+				}
+                const double t      = (value - in_min) / (in_max - in_min);
+                const double result = out_min + t * (out_max - out_min);
+				stk->decrementSize(4);
+				setEvalStack(stk, stk->last(), result);
+			}
+			break;
 		case FN_BUILTIN_OFFSET + FN_SDIV: /* sdiv */
 			if (getEvalStackDouble(stk, stk->last()) == 0.0) setEvalStack(stk, stk->last()-1, 0.0);
 			else setEvalStack(stk, stk->last()-1, getEvalStackDouble(stk, stk->last()-1) / getEvalStackDouble(stk, stk->last()));
