@@ -113,6 +113,10 @@
 #define FN_ISCAIRO                     139
 #define FN_ISGHOSTSCRIPT               140
 #define FN_RENDER_ENGINE               141
+#define FN_CLAMP                       142
+#define FN_IS_CLOSE                    143
+#define FN_IS_CLOSE_ABS                144
+#define FN_COLOR_INTENSITY             145
 
 #define FN_TEST_PRINT                  999
 

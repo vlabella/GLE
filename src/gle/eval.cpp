@@ -659,6 +659,58 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			stk->decrementSize(1);
 			if (getEvalStackDouble(stk, stk->last()+1) > getEvalStackDouble(stk, stk->last())) setEvalStack(stk, stk->last(), getEvalStackDouble(stk, stk->last()+1));
 			break;
+			case FN_BUILTIN_OFFSET + FN_CLAMP:
+			{
+			const double value   = getEvalStackDouble(stk, stk->last() - 2);
+			const double minimum = getEvalStackDouble(stk, stk->last() - 1);
+			const double maximum = getEvalStackDouble(stk, stk->last());
+			if (minimum > maximum) {
+				g_throw_parser_error(
+					"clamp: minimum must not be greater than maximum"
+				);
+			}
+			double result = value;
+			if (result < minimum) {
+				result = minimum;
+			} else if (result > maximum) {
+				result = maximum;
+			}
+			stk->decrementSize(2);
+			setEvalStack(stk, stk->last(), result);
+			}
+			break;
+		case FN_BUILTIN_OFFSET + FN_IS_CLOSE:
+			{
+                const double a         = getEvalStackDouble(stk, stk->last() - 2);
+                const double b         = getEvalStackDouble(stk, stk->last() - 1);
+                const double tolerance = getEvalStackDouble(stk, stk->last());
+				if (tolerance < 0.0) {
+					g_throw_parser_error(
+						"is_close: relative tolerance must be non-negative"
+					);
+				}
+				const double difference = std::fabs(a - b);
+				const double scale = std::max(std::fabs(a), std::fabs(b));
+				const bool result =	difference <= tolerance * scale;
+				stk->decrementSize(2);
+				setEvalStackBool(stk, stk->last(), result);
+			}
+			break;
+		case FN_BUILTIN_OFFSET + FN_IS_CLOSE_ABS:
+			{
+                const double a         = getEvalStackDouble(stk, stk->last() - 2);
+                const double b         = getEvalStackDouble(stk, stk->last() - 1);
+                const double tolerance = getEvalStackDouble(stk, stk->last());
+				if (tolerance < 0.0) {
+					g_throw_parser_error(
+						"is_close_abs: absolute tolerance must be non-negative"
+					);
+				}
+				const bool result =	std::fabs(a - b) <= tolerance;
+				stk->decrementSize(2);
+				setEvalStackBool(stk, stk->last(), result);
+			}
+			break;
 		case FN_BUILTIN_OFFSET + FN_SDIV: /* sdiv */
 			if (getEvalStackDouble(stk, stk->last()) == 0.0) setEvalStack(stk, stk->last()-1, 0.0);
 			else setEvalStack(stk, stk->last()-1, getEvalStackDouble(stk, stk->last()-1) / getEvalStackDouble(stk, stk->last()));
@@ -1371,6 +1423,21 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        g_get_render_engine_name()
 		    );
 		    break;
+		case FN_BUILTIN_OFFSET + FN_COLOR_INTENSITY:
+			{
+				GLEColor* color = getEvalStackColor(stk, stk->last());
+				const double red   = color->getRed();
+				const double green = color->getGreen();
+				const double blue  = color->getBlue();
+				const double intensity =
+					255.0 * (
+						0.299 * red +
+						0.587 * green +
+						0.114 * blue
+					);
+				setEvalStack(stk, stk->last(), intensity);
+			}
+			break;
 		default:  /* User function, LOCAL_START_INDEX..nnn , or error */
 			/* Is it a user defined function */
 			if (*(pcode+c) >= LOCAL_START_INDEX) {
