@@ -62,7 +62,8 @@
 
 using namespace std;
 
-constexpr int GLE_DEFAULT_PS_FONT = 1;
+// -- see font.dat for font id numbers
+constexpr int GLE_DEFAULT_PS_FONT = 1;      // rm
 constexpr int GLE_DEFAULT_CAIRO_FONT = 17;  // texcmr
 
 void g_graph_init();
@@ -4104,7 +4105,7 @@ int g_font_fallback(int font) {
 				core->setShowNoteAboutFallback(false);
 				g_message(">> PostScript fonts not supported with '-cairo'; using 'texcmr' instead");
 			}
-			return 17;
+			return GLE_DEFAULT_CAIRO_FONT;
 		}
 	}
 	return font;
