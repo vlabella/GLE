@@ -25,6 +25,11 @@
     - Add iscairo(), isghostscript(), and render_engine() GLE functions to allow
       scripts to detect whether they are being rendered using Cairo or Ghostscript.
     - fixed typo in font CmakeLists.txt file that prevented pssym font being built
+    - Improved code comments and constant definitions for built-in and user-defined functions.
+    - When using the Cairo render engine, texcmr is now the default font. A warning
+        is issued only when a PostScript font is explicitly selected, in which case GLE
+        falls back to texcmr. This eliminates the unsupported PostScript font warning
+        when no font is explicitly selected.
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package

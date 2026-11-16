@@ -62,6 +62,9 @@
 
 using namespace std;
 
+constexpr int GLE_DEFAULT_PS_FONT = 1;
+constexpr int GLE_DEFAULT_CAIRO_FONT = 17;  // texcmr
+
 void g_graph_init();
 void dis_mat(char *s,double m[3][3]);
 
@@ -1357,7 +1360,8 @@ void g_on_open() {
 	g_set_line_width(0.02);
 	g_set_color(GLE_COLOR_BLACK);
 	g_set_fill(GLE_FILL_CLEAR);
-	g_set_font(1);           /* Load and set default font */
+//	g_set_font(1);           /* Load and set default font */
+	g_set_font(g_is_render_engine_cairo()? GLE_DEFAULT_CAIRO_FONT: GLE_DEFAULT_PS_FONT);
 	g_set_font_width(-1);    /* Load and set default font */
 	if (g_get_compatibility() <= GLE_COMPAT_35) {
 		g_set_hei(1);
@@ -1400,7 +1404,8 @@ void g_restore_defaults() {
 	g_set_line_width(0.02);
 	g_set_color(GLE_COLOR_BLACK);
 	g_set_fill(GLE_FILL_CLEAR);
-	g_set_font(1);           /* Load and set default font */
+	//g_set_font(1);           /* Load and set default font */
+	g_set_font(g_is_render_engine_cairo()? GLE_DEFAULT_CAIRO_FONT: GLE_DEFAULT_PS_FONT);
 	g_set_font_width(-1);    /* Load and set default font */
 	if (g_get_compatibility() <= GLE_COMPAT_35) {
 		g_set_hei(1);
@@ -4092,7 +4097,8 @@ int g_font_fallback(int font) {
 	GLECoreFont* coreFont = get_core_font_ensure_loaded(font);
 	if (coreFont->info.encoding <= 2) {
 		CmdLineObj* cmdLine = GLEGetInterfacePointer()->getCmdLine();
-		if (cmdLine->hasOption(GLE_OPT_CAIRO)) {
+		//if (cmdLine->hasOption(GLE_OPT_CAIRO)) {
+		if (g_is_render_engine_cairo()) {
 			GLECore* core = g_get_core();
 			if (core->isShowNoteAboutFallback()) {
 				core->setShowNoteAboutFallback(false);
