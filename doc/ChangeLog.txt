@@ -19,9 +19,8 @@
       RGB color representation.
     - Added the colorscale(value, scale$) color function for generating
         colors from named normalized color scales. Supported scales include
-        grayscale, single- and dual-channel scales, thermal and rainbow
-        scales, Viridis, Plasma, Inferno, Magma, and diverging red/white/blue
-        scales.
+        gray, red, green, blue, cyan, magenta, yellow, thermal, cool, rainbow,
+        Viridis, Plasma, Inferno, Magma, blue_white_red, red_white_blue.
     - Add iscairo(), isghostscript(), and render_engine() GLE functions to allow
       scripts to detect whether they are being rendered using Cairo or Ghostscript.
     - fixed typo in font CmakeLists.txt file that prevented pssym font being built
