@@ -1,8 +1,8 @@
 4.3.10 (not released yet)
-    - added manpages for Linux distributions.
-    - prints to stdout instead of stderr for help, info, and version options as well as status message.
-    - removed unneeded and outdated hash_map in favor of STD C++ map.
-    - added range checking and error messages to some functions in graphutil.gle
+    - Added manpages for Linux distributions.
+    - Prints to stdout instead of stderr for help, info, and version options as well as status message.
+    - Removed unneeded and outdated hash_map in favor of STD C++ map.
+    - Added range checking and error messages to some functions in graphutil.gle
     - Added a new MATERIALIZE option for LET statements that evaluates data series immediately rather than
       deferring evaluation until the end of the graph block.
     - Added mathematical functions cbrt, ceil, erfc, expm1, floor,
