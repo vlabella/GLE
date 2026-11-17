@@ -119,6 +119,9 @@
 #define FN_COLOR_INTENSITY             145
 #define FN_LERP                        146
 #define FN_LINEAR_INTERPOLATE          147
+#define FN_CODATA                      148
+#define FN_CODATA_UNITS                149
+#define FN_CODATA_UNCERTAINTY          150
 
 #define FN_TEST_PRINT                  999
 

@@ -34,6 +34,11 @@
     - Added `color_intensity()` for calculating the perceived intensity of a color from its RGB components.
     - Added `lerp(y1,y2,t)` for normalized linear interpolation between two values.
     - Added `linear_interpolate(x,x1,x2,y1,y2)` for linear interpolation between two values.
+    - Added access to the complete SciPy CODATA physical constants database
+        through codata(), codata_units(), and codata_uncertainty(), providing
+        constant values, units, and standard uncertainties without a runtime
+        dependency on SciPy.
+
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package

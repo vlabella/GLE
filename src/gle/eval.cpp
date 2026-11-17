@@ -56,6 +56,7 @@
 #include "graph.h"
 #include "sub.h"
 #include "file_io.h"
+#include "gle-constants.h"
 #ifdef _WIN32
 #include <time.h>
 #endif
@@ -989,6 +990,33 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
+   		case FN_BUILTIN_OFFSET + FN_CODATA:
+			setEvalStack(
+				stk,
+				stk->last(),
+				gle_codata(
+					getEvalStackStringStd(stk, stk->last())
+				)
+			);
+			break;
+		case FN_BUILTIN_OFFSET + FN_CODATA_UNCERTAINTY:
+			setEvalStack(
+				stk,
+				stk->last(),
+				gle_codata_uncertainty(
+					getEvalStackStringStd(stk, stk->last())
+				)
+			);
+			break;
+		case FN_BUILTIN_OFFSET + FN_CODATA_UNITS:
+			setEvalStack(
+				stk,
+				stk->last(),
+				gle_codata_units(
+					getEvalStackStringStd(stk, stk->last())
+				)
+			);
+			break;
 		case FN_BUILTIN_OFFSET + FN_TEST_PRINT: // test_print
 			// simple for loop that evaluates a function that is passed to it
 			//{

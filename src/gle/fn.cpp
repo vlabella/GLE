@@ -40,6 +40,7 @@
 #include "cutils.h"
 #include "fn.h"
 
+
 using namespace std;
 
 /*-------------------------------------------------------------------*/
@@ -94,6 +95,9 @@ struct keyw keywfn[] = {
 	{ "CHEBYSHEV_SECOND",   	FN_CHEBYSHEV_SECOND,  	1,2, { 1,1,0,0,0 } },
 	{ "CHR$",        52,            2,1, { 1,0,0,0,0 } },
 	{ "CLAMP",       FN_CLAMP,       1,3, { 1,1,1,0,0 } },
+	{ "CODATA",             FN_CODATA,             1,1, { 2,0,0,0,0 } },
+	{ "CODATA_UNCERTAINTY", FN_CODATA_UNCERTAINTY, 1,1, { 2,0,0,0,0 } },
+	{ "CODATA_UNITS",       FN_CODATA_UNITS,       2,1, { 2,0,0,0,0 } },
 	{ "CMYK",        FN_CMYK,        1,4, { 1,1,1,1,0 } },
 	{ "COLOR_INTENSITY", FN_COLOR_INTENSITY, 1,1, { 1,0,0,0,0 } },
 	{ "COLORSCALE",   FN_COLOR_SCALE,   1,2, { 1,2,0,0,0 } },
