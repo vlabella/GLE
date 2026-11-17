@@ -37,7 +37,6 @@ print "pc_epsilon_0 = " pc_epsilon_0
 print "pc_h = " pc_h
 print "pc_Planck = " pc_Planck
 print "pc_hbar = " pc_hbar
-print "pc_G = " pc_G
 print "pc_gravitational_constant = " pc_gravitational_constant
 print "pc_g = " pc_g
 print "pc_e = " pc_e

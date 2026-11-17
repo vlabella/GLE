@@ -21,7 +21,7 @@ scipy_physical_constants = [
 	"h",
 	"Planck",
 	"hbar",
-	"G",
+	#"G",  GLE is case insensitive so this clashes with little g - use graviational_constant instead
 	"gravitational_constant",
 	"g",
 	"e",

@@ -721,20 +721,20 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), result);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_REMAP:
+		case FN_BUILTIN_OFFSET + FN_LINEAR_INTERPOLATE:
 			{
-                const double value   = getEvalStackDouble(stk, stk->last() - 4);
-                const double in_min  = getEvalStackDouble(stk, stk->last() - 3);
-                const double in_max  = getEvalStackDouble(stk, stk->last() - 2);
-                const double out_min = getEvalStackDouble(stk, stk->last() - 1);
-                const double out_max = getEvalStackDouble(stk, stk->last());
-				if (in_min == in_max) {
+                const double value = getEvalStackDouble(stk, stk->last() - 4);
+                const double x1    = getEvalStackDouble(stk, stk->last() - 3);
+                const double x2    = getEvalStackDouble(stk, stk->last() - 2);
+                const double y1    = getEvalStackDouble(stk, stk->last() - 1);
+                const double y2    = getEvalStackDouble(stk, stk->last());
+				if (x1 == x2) {
 					g_throw_parser_error(
-						"remap: input range must not have zero length"
+						"interpolate: input range must not have zero length"
 					);
 				}
-                const double t      = (value - in_min) / (in_max - in_min);
-                const double result = out_min + t * (out_max - out_min);
+                const double t      = (value - x1) / (x2 - x1);
+                const double result = y1 + t * (y2 - y1);
 				stk->decrementSize(4);
 				setEvalStack(stk, stk->last(), result);
 			}

@@ -54,7 +54,6 @@ void gle_set_math_and_physical_constants(bool numerical=true,bool physical=true)
 		var_findadd_set("PC_H",6.62607015e-34);
 		var_findadd_set("PC_PLANCK",6.62607015e-34);
 		var_findadd_set("PC_HBAR",1.0545718176461565e-34);
-		var_findadd_set("PC_G",6.6743e-11);
 		var_findadd_set("PC_GRAVITATIONAL_CONSTANT",6.6743e-11);
 		var_findadd_set("PC_G",9.80665);
 		var_findadd_set("PC_E",1.602176634e-19);

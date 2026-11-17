@@ -32,8 +32,8 @@
     - Added `clamp()` for constraining a value to a specified range.
     - Added `is_close()` and `is_close_abs()` for relative and absolute floating-point comparisons.
     - Added `color_intensity()` for calculating the perceived intensity of a color from its RGB components.
-    - Added `lerp()` for linear interpolation between two values.
-    - Added `remap()` for mapping a value from one range to another.
+    - Added `lerp(y1,y2,t)` for normalized linear interpolation between two values.
+    - Added `linear_interpolate(x,x1,x2,y1,y2)` for linear interpolation between two values.
 
 4.3.9 (January 2026)
     - Change project name to gle-graphics in cmake file to be consistent with existing Debian package
