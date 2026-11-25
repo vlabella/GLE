@@ -432,20 +432,56 @@ endif()
 endif()
 if(WIN32 AND Iconv_FOUND)
     get_filename_component(_ICONV_LIBDIR "${Iconv_LIBRARIES}" DIRECTORY)
-    set_property(TARGET Iconv::Iconv PROPERTY
-        IMPORTED_CONFIGURATIONS "DEBUG;RELEASE"
-    )
-    set_property(TARGET Iconv::Iconv PROPERTY
-        IMPORTED_LOCATION_RELEASE
-        "${_ICONV_LIBDIR}/libiconv.lib"
-    )
-    set_property(TARGET Iconv::Iconv PROPERTY
-        IMPORTED_LOCATION_DEBUG
-        "${_ICONV_LIBDIR}/libiconvd.lib"
-    )
+    #
+	# -- Iconv naming differs between installations:
+	#      libiconv.lib / libiconvd.lib
+	#      iconv.lib    / iconvd.lib
+	#
+	find_library(ICONV_RELEASE
+		NAMES libiconv iconv
+		PATHS "${_ICONV_LIBDIR}"
+		NO_DEFAULT_PATH
+	)
+
+	find_library(ICONV_DEBUG
+		NAMES libiconvd iconvd
+		PATHS "${_ICONV_LIBDIR}"
+		NO_DEFAULT_PATH
+	)
+	#
+	# -- Configure Release library if found.
+	#
+	if(ICONV_RELEASE)
+		set_property(TARGET Iconv::Iconv PROPERTY
+			IMPORTED_LOCATION_RELEASE "${ICONV_RELEASE}"
+		)
+	endif()
+
+	#
+	# -- Configure Debug library if found.  If no separate Debug
+	#    library exists, use the Release library for Debug as well.
+	#
+	if(ICONV_DEBUG)
+		set_property(TARGET Iconv::Iconv PROPERTY
+			IMPORTED_CONFIGURATIONS "DEBUG;RELEASE"
+		)
+
+		set_property(TARGET Iconv::Iconv PROPERTY
+			IMPORTED_LOCATION_DEBUG "${ICONV_DEBUG}"
+		)
+	elseif(ICONV_RELEASE)
+		set_property(TARGET Iconv::Iconv PROPERTY
+			IMPORTED_CONFIGURATIONS "DEBUG;RELEASE"
+		)
+
+		set_property(TARGET Iconv::Iconv PROPERTY
+			IMPORTED_LOCATION_DEBUG "${ICONV_RELEASE}"
+		)
+	endif()
+
     set_property(TARGET Iconv::Iconv PROPERTY INTERFACE_LINK_LIBRARIES
- 	   "$<$<CONFIG:Debug>:${_ICONV_LIBDIR}/libiconvd.lib>"
-	   "$<$<NOT:$<CONFIG:Debug>>:${_ICONV_LIBDIR}/libiconv.lib>"
+ 	   "$<$<CONFIG:Debug>:${ICONV_DEBUG}>"
+	   "$<$<NOT:$<CONFIG:Debug>>:${ICONV_RELEASE}>"
 	)
     #debugging
    	message(STATUS "Iconv_FOUND        = ${Iconv_FOUND}")
