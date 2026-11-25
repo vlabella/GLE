@@ -39,13 +39,14 @@
 #ifndef INCLUDE_POLISH
 #define INCLUDE_POLISH
 
-#define PCODE_EXPR 1
-#define PCODE_DOUBLE 2
-#define PCODE_VAR 3
-#define PCODE_STRVAR 4
-#define PCODE_STRING 5
-#define PCODE_OBJECT 6
+#define PCODE_EXPR     1
+#define PCODE_DOUBLE   2
+#define PCODE_VAR      3
+#define PCODE_STRVAR   4
+#define PCODE_STRING   5
+#define PCODE_OBJECT   6
 #define PCODE_NEXT_CMD 7
+#define PCODE_DATASET  9  // 8 is reserved for constants??
 
 class GLESub;
 
@@ -87,6 +88,13 @@ double getEvalStackDouble(GLEArrayImpl* stk, int pos);
 char* getEvalStackString(GLEArrayImpl* stk, int pos);
 GLEColor* getEvalStackColor(GLEArrayImpl* stk, int pos);
 
+class GLEDataObject;
+void setEvalStack(GLEArrayImpl* stk, int pos, GLEDataObject* value);
+GLEDataObject* getEvalStackObject(GLEArrayImpl* stk, int pos);
+
+class GLEDataSet;
+GLEDataSet* getEvalStackDataSet(GLEArrayImpl* stk, int pos);
+
 class GLEPcodeList : public RefCountObject {
 public:
 	inline int size() const { return m_ConstObjects.size(); }
@@ -118,6 +126,8 @@ public:
 	void addStringNoID(const std::string& str);
 	void addStringChar(const char* str);
 	void addStringNoIDChar(const char* str);
+	void addObject(GLEDataObject* object);
+	void addDataSet(int datasetID);
 	void show();
 	void show(int start);
 };
@@ -137,15 +147,19 @@ class GLEFunctionParserPcode : public GLERefCountObject {
 protected:
 	GLEPcode m_Pcode;
 	GLEPcodeList m_PcodeList;
+	int m_ReturnType;
 public:
 	GLEFunctionParserPcode();
 	~GLEFunctionParserPcode();
 	void polish(const char* fct, StringIntHash* vars = NULL);
 	void polishPos(const char* fct, int pos, StringIntHash* vars = NULL);
 	void polishX();
+	GLEMemoryCell* evalGeneric(GLEArrayImpl* stack);
 	double evalDouble();
 	bool evalBool();
 	inline GLEPcode* getCode() { return &m_Pcode; }
+	inline int getReturnType() const {return m_ReturnType;}
+
 };
 
 class GLEPolish : public RefCountObject {
@@ -153,6 +167,7 @@ protected:
 	TokenizerLanguage m_lang;
 	StringTokenizer m_tokens;
 	StringIntHash* m_vars;
+
 public:
 	GLEPolish();
 	~GLEPolish();

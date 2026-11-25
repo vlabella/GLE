@@ -73,6 +73,21 @@ typedef std::vector<std::string> _Tokens;
 typedef std::vector<std::string>::iterator _itTokens;
 typedef std::vector<std::string>::const_iterator _citTokens;
 
+//
+// --  needed for exit()
+//
+class GLEExitException {
+public:
+    explicit GLEExitException(int code)
+        : m_Code(code){}
+    int code() const noexcept {
+        return m_Code;
+    }
+private:
+    int m_Code;
+};
+
+
 #include "glepro.h"
 
 #endif

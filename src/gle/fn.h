@@ -35,8 +35,15 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                        *
  *                                                                      *
  ************************************************************************/
+//
+// -- Built-in function parameter types and return types
+//
+#define FN_TYPE_NONE     0
+#define FN_TYPE_NUMBER   1
+#define FN_TYPE_STRING   2
+#define FN_TYPE_DATASET  3
 
-// Built-in function IDs.
+// -- Built-in function IDs.
 //
 // Built-in function opcodes are encoded in expression pcode by adding
 // FN_BUILTIN_OFFSET to the function ID. The offset separates built-in
@@ -48,6 +55,9 @@
 //     FN_BUILTIN_OFFSET + function ID < LOCAL_START_INDEX
 //
 // See fn.cpp, eval.cpp, and mem_limits.h.
+//
+// The oringinal builtin offset value is 60
+//
 #define FN_BUILTIN_OFFSET              60
 
 #define FN_RGB                         47
@@ -122,8 +132,19 @@
 #define FN_CODATA                      148
 #define FN_CODATA_UNITS                149
 #define FN_CODATA_UNCERTAINTY          150
+#define FN_COPY						   151
+#define FN_CLIP                        152
+#define FN_DERIVATIVE                  153
+#define FN_INTEGRAL                    154
+#define FN_INTEGRATE                   155
+#define FN_NORMALIZE                   156
+#define FN_SLICE                       157
+#define FN_SMOOTH                      158
 
-#define FN_TEST_PRINT                  999
+
+#ifndef _NDEBUG
+#define FN_ZZDEBUG_TEST                999
+#endif
 
 struct keyw {
 	const char *word;
@@ -132,5 +153,10 @@ struct keyw {
 };
 
 int binsearch(char *word, struct keyw tab[], int n);
+
+constexpr int builtin_opcode(int function_id) noexcept
+{
+    return FN_BUILTIN_OFFSET + function_id;
+}
 
 

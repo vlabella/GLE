@@ -12,6 +12,7 @@ private:
 	static bool DataSetValCMP(const DataSetVal& e1, const DataSetVal& e2) {
    		return e1.x < e2.x;
 	}
+	void loadFrom(GLEDataSet* dataSet);
 
 protected:
 
@@ -30,7 +31,9 @@ public:
 
 	GLELetDataSet();
 	~GLELetDataSet();
+	void clear();
 	void initializeFrom(int dn, int var);
+	void initializeFrom(GLEDataSet* dataSet);
 	void complainNoFunction();
 	bool interpolateTo(double x, int lr);
 	inline int getNbValues() { return m_Vals.size(); }

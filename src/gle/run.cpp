@@ -54,6 +54,8 @@
 #include "file_io.h"
 #include "sub.h"
 #include "gle-interface/gle-interface.h"
+#include "color.h"
+#include "console_colors.h"
 
 void name_get2(char *n,double *x1,double *y1,double *x2,double *y2);
 
@@ -511,6 +513,7 @@ GLERun::GLERun(GLEScript* script, GLEFileLocation* outfile, GLEPcodeIndexed* pco
 	allowBeforeSize(GLE_KW_WHILE);
 	allowBeforeSize(GLE_KW_END);
 	allowBeforeSize(GLE_KW_SWAP);
+	allowBeforeSize(GLE_KW_EXIT);
 }
 
 GLERun::~GLERun() {
@@ -1604,13 +1607,46 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 				if (!ifValue) *srclin = jj;
 		  	}
 			break;
-		  case 32: /* PRINT */
-		  case 49: /* WRITE */
+		  case GLE_KW_PRINT_COLOR: { // like PRINT but with color
+		  	GLERC<GLEColor> gleColor = evalColor(getStack(), getPcodeList(), pcode, &cp);
+    	    temp_str = "";
+		    /*
+		     * The parser stores each argument using GLE_KW_PRINT as its
+		     * expression marker, followed by the expression type and pcode.
+		     */
+		    while (cp < cmd_plen) {
+		        readlong(t);
+		        if (t != GLE_KW_PRINT) {
+		            g_throw_parser_error("pcode error in PRINT_COLOR");
+		        }
+		        /*
+		         * Expression type. evalString() consumes the compiled
+		         * expression beginning at the updated pcode position.
+		         */
+		        readlong(t);
+		        gstr = evalString(getStack(),getPcodeList(),pcode,&cp,true);
+		        if (!temp_str.empty()) {
+		            temp_str += " ";
+		        }
+		        temp_str += gstr->toUTF8();
+		    }
+		    // Paint() automatically handles RESET and NO_CONSOLE_COLORS.
+		    const std::string ansiColor =
+		        ConsoleColor::ForegroundRGB(
+		            static_cast<int>(gleColor->getRed()   * 255.0 + 0.5),
+		            static_cast<int>(gleColor->getGreen() * 255.0 + 0.5),
+		            static_cast<int>(gleColor->getBlue()  * 255.0 + 0.5)
+		        );
+		    g_message(ConsoleColor::Paint(temp_str, ansiColor));
+		  }
+		  break;
+		  case GLE_KW_PRINT: /* PRINT */
+		  case GLE_KW_WRITE: /* WRITE */
 			g_get_xy(&orig);
 			temp_str = "";
 			while (cp < cmd_plen) {
 				readlong(t);
-				if (t != 49 && t != 32) {
+				if (t != GLE_KW_WRITE && t != GLE_KW_PRINT) {
 					g_throw_parser_error("pcode error in print/write");
 				}
 				readlong(t);
@@ -1620,8 +1656,8 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 				}
 				temp_str += gstr->toUTF8();
 			}
-			if (p == 49) {
-				/* WRITE */
+			if (p == GLE_KW_WRITE) {
+				/* WRITE - on the GLE figure*/
 				if (g_get_tex_labels()) {
 					TeXInterface::getInstance()->draw(temp_str.c_str());
 				} else {
@@ -1634,7 +1670,7 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 				}
 				g_move(orig);
 			} else {
-				/* PRINT */
+				/* PRINT - to the console*/
 				g_message(temp_str);
 			}
 			break;
@@ -1689,6 +1725,19 @@ void GLERun::do_pcode(GLESourceLine &sline, int *srclin, int *pcode, int plen, i
 				var_set(jj2,x);
 		  	}
 			break;
+		   case GLE_KW_EXIT: {
+    			int hasStatus;
+			    readlong(hasStatus);
+			    int status = 0;
+			    if (hasStatus) {
+			    	readval(status);
+			    }
+			    if (status < 0 || status > 255) {
+			        g_throw_parser_error(
+			            "EXIT status must be an integer from 0 through 255");
+			    }
+			    throw GLEExitException(status);
+			}
 		  default :
 		  	byte_code_error(PCODE_UNKNOWN_COMMAND);
 		}

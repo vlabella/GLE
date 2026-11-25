@@ -411,7 +411,7 @@ private:
 
 class GLEAxis;
 
-class GLEDataSet {
+class GLEDataSet : public GLEDataObject  {
 public:
 	int id;
 	int nomiss;
@@ -478,6 +478,21 @@ public:
 	inline GLEDataSetDimension* getDim(int i) { return &dims[i]; }
 	inline GLEArrayImpl* getData() { return &m_data; }
 	inline GLEArrayImpl* getDataBackup() { return &m_dataBackup; }
+	virtual int getType() const;
+
+	// data series function API
+	// see GLEDataSetOps.cpp for implementations
+	// Returns independent, unregistered numeric X/Y data.
+	// all return new series and map to GLE function FN_
+	[[nodiscard]] GLERC<GLEDataSet> smoothY(unsigned int window) const;
+    [[nodiscard]] GLERC<GLEDataSet> normalizeY() const;
+    [[nodiscard]] GLERC<GLEDataSet> clampY(double lo, double hi) const;
+    // Zero-based, half-open [first, last), matching this implementation.
+    [[nodiscard]] GLERC<GLEDataSet> slice(unsigned int first, unsigned int last) const;
+    [[nodiscard]] GLERC<GLEDataSet> differentiateY() const;
+    [[nodiscard]] GLERC<GLEDataSet> cumulativeIntegral() const;
+    [[nodiscard]] double definiteIntegral(double xFrom, double xTo) const;
+
 };
 
 #define GLE_DIM_X 0
@@ -503,11 +518,11 @@ public:
 	bar_struct();
 };
 
-#ifdef __TURBOC__
-#define MAXTEMP 2000
-#else
-#define MAXTEMP 10000
-#endif
+//#ifdef __TURBOC__
+//#define MAXTEMP 2000
+//#else
+//#define MAXTEMP 10000
+//#endif
 
 #ifdef GRAPHDEF
 #else

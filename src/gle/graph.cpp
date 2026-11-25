@@ -796,10 +796,16 @@ void do_hscale(int& ct) {
 
 void do_letsave(GLESourceLine& sline) {
 	GLELet* let = parseLet(sline);
-	 if (let->shouldMaterialize()) {
-        // Generate the dataset immediately and permanently.
-        // Do not place this LET in g_letCmds because it must not
-        // participate in provisional or final LET reevaluation.
+	/*
+	 * Explicit MATERIALIZE and dataset-returning functions such as
+	 * COPY() are evaluated immediately.
+	 *
+	 * A dataset-returning expression already produces a complete
+	 * materialized dataset and must not be reevaluated by the deferred
+	 * graph LET machinery.
+	 */
+	if (let->shouldMaterialize() ||
+	    let->isDataSetExpression()) {
         doLet(let, true);
         deleteLet(let);
     } else {

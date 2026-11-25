@@ -18,30 +18,55 @@
 
 using namespace std;
 
-GLELetDataSet::GLELetDataSet() {
-    m_DN         = -1;
-    m_Var        = -1;
-    m_CrP        = 0;
-    m_IsFunction = true;
-    m_IsXRangeDS = false;
+GLELetDataSet::GLELetDataSet()
+	: m_DN(-1),
+	  m_Var(-1),
+	  m_CrP(0),
+	  m_IsFunction(true),
+	  m_IsXRangeDS(false)
+{
 }
 
 GLELetDataSet::~GLELetDataSet() {
 }
 
-void GLELetDataSet::initializeFrom(int dn, int var) {
+void GLELetDataSet::clear()
+{
+    m_DN         = -1;
+    m_Var        = -1;
+    m_CrP        = 0;
+    m_IsFunction = true;
+    m_IsXRangeDS = false;
+	m_Vals.clear();
+	m_MissX.clear();
+}
+
+void GLELetDataSet::initializeFrom(int dn, int var)
+{
+	clear();
+
 	m_DN = dn;
 	m_Var = var;
-	/* points */
-	GLEDataSet* dataSet = dp[dn];
+
+	loadFrom(dp[dn]);
+}
+
+void GLELetDataSet::initializeFrom(GLEDataSet* dataSet)
+{
+	clear();
+
+	loadFrom(dataSet);
+}
+void GLELetDataSet::loadFrom(GLEDataSet* dataSet)
+{
 	GLEDataPairs pairs(dataSet);
 	double* xv = pairs.getX();
 	double* yv = pairs.getY();
 	int* mm = pairs.getM();
-	/* get data from datasets */
-	/* record x-values for which y-value is missing separately */
+
 	int nbvals = 0;
 	double xprev = GLE_INF;
+
 	for (unsigned int i = 0; i < dataSet->np; i++) {
 		if (!mm[i]) {
 			if (xv[i] == xprev && nbvals > 0) {
@@ -53,7 +78,9 @@ void GLELetDataSet::initializeFrom(int dn, int var) {
 				val.x = xv[i];
 				val.y[GLE_DS_L] = yv[i];
 				val.y[GLE_DS_R] = yv[i];
+
 				m_Vals.push_back(val);
+
 				xprev = val.x;
 				nbvals++;
 			}
@@ -61,19 +88,25 @@ void GLELetDataSet::initializeFrom(int dn, int var) {
 			m_MissX.push_back(xv[i]);
 		}
 	}
+
 	// Sort data if required
 	bool sorted = true;
 	for (unsigned int i = 1; i < m_Vals.size(); i++) {
-		if (m_Vals[i].x <= m_Vals[i-1].x) sorted = false;
+		if (m_Vals[i].x <= m_Vals[i-1].x) {
+			sorted = false;
+		}
 	}
+
 	if (!sorted) {
 		std::sort(m_Vals.begin(), m_Vals.end(), DataSetValCMP);
 	}
+
 	// Check if dataset represents a function
 	m_IsFunction = true;
 	for (unsigned int i = 1; i < m_Vals.size(); i++) {
 		if (m_Vals[i].x == m_Vals[i-1].x) {
-			// Note: GLE can't combine different datasets if they don't represent functions in one let command
+			// Note: GLE can't combine different datasets if they don't
+			// represent functions in one let command
 			m_IsFunction = false;
 		}
 	}

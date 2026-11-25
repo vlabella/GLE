@@ -8,7 +8,7 @@ if(POLICY CMP0144)
   cmake_policy(SET CMP0144 NEW)  # upper case package root variables
 endif()
 
-project( gle-graphics VERSION 4.3.10 LANGUAGES CXX C)
+project( gle-graphics VERSION 4.4.0 LANGUAGES CXX C)
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -79,7 +79,8 @@ if(NOT DEFINED POPPLER_INTERFACE)
 	# vcpkg only installs the cpp interface for windows
 	set(POPPLER_INTERFACE_DEFAULT "CPP")
 	if(UNIX OR APPLE)
-		set(POPPLER_INTERFACE_DEFAULT "GLIB")
+		# remove default dependancy on glib for these platforms
+		# set(POPPLER_INTERFACE_DEFAULT "GLIB")
 	endif()
 	set(POPPLER_INTERFACE ${POPPLER_INTERFACE_DEFAULT} CACHE STRING "The poppler (PDFLibarary) interface to utilize GLIB or CPP")
 endif()
@@ -421,6 +422,36 @@ if(POPPLER_FOUND)
 endif()
 	message(STATUS "Poppler_INCLUDE_DIRS: ${Poppler_INCLUDE_DIRS}")
 endif()
+if(WIN32 AND Iconv_FOUND)
+    get_filename_component(_ICONV_LIBDIR "${Iconv_LIBRARIES}" DIRECTORY)
+    set_property(TARGET Iconv::Iconv PROPERTY
+        IMPORTED_CONFIGURATIONS "DEBUG;RELEASE"
+    )
+    set_property(TARGET Iconv::Iconv PROPERTY
+        IMPORTED_LOCATION_RELEASE
+        "${_ICONV_LIBDIR}/libiconv.lib"
+    )
+    set_property(TARGET Iconv::Iconv PROPERTY
+        IMPORTED_LOCATION_DEBUG
+        "${_ICONV_LIBDIR}/libiconvd.lib"
+    )
+    set_property(TARGET Iconv::Iconv PROPERTY INTERFACE_LINK_LIBRARIES
+ 	   "$<$<CONFIG:Debug>:${_ICONV_LIBDIR}/libiconvd.lib>"
+	   "$<$<NOT:$<CONFIG:Debug>>:${_ICONV_LIBDIR}/libiconv.lib>"
+	)
+    #debugging
+   	message(STATUS "Iconv_FOUND        = ${Iconv_FOUND}")
+	message(STATUS "Iconv_LIBRARIES    = ${Iconv_LIBRARIES}")
+	message(STATUS "Iconv_INCLUDE_DIRS = ${Iconv_INCLUDE_DIRS}")
+	get_target_property(_iconv_debug Iconv::Iconv IMPORTED_LOCATION_DEBUG)
+	get_target_property(_iconv_release Iconv::Iconv IMPORTED_LOCATION_RELEASE)
+	get_target_property(_iconv_location Iconv::Iconv IMPORTED_LOCATION)
+
+	message(STATUS "Iconv target DEBUG   = ${_iconv_debug}")
+	message(STATUS "Iconv target RELEASE = ${_iconv_release}")
+	message(STATUS "Iconv target LOCATION = ${_iconv_location}")
+endif()
+
 #
 # -- GHOSTscript or GHOSTPDL include directory only since gle links to installed version at runtime
 #
@@ -766,6 +797,7 @@ if(POPPLER_FOUND)
 	else()
 		message(STATUS "ERROR Unknown Poppler Interface ${POPPLER_INTERFACE}")
 	endif()
+	message(STATUS "ALL POPPLER LIBRARIES: ${POPPLER_LIBRARIES_GLE}")
 endif()
 if(NOT CONSOLE_COLORS)
 	add_compile_definitions(NO_CONSOLE_COLORS)

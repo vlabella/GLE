@@ -36,6 +36,7 @@ protected:
 	std::string m_varR;
 	GLECheckWindow m_window;
 	bool m_Materialize;
+	bool m_DataSetExpression;
 
 public:
 	GLELet();
@@ -86,7 +87,13 @@ public:
 	inline int getCodeLine() const { return m_codeLine; }
 	inline void setMaterialize(bool value) { m_Materialize = value;}
 	inline bool shouldMaterialize() const {return m_Materialize;}
+	inline void setDataSetExpression(bool value) {m_DataSetExpression = value;}
+	inline bool isDataSetExpression() const {return m_DataSetExpression;}
 };
+
+GLEDataSet* cloneDataSet(GLEDataSet* source);
+void assignDataSet(int targetID, GLEDataSet* source);
+void copyDataSet(int targetID, int sourceID);
 
 inline bool hasDataset(int di) {
 	return di > 0 && di <= ndata && dp[di] != NULL && !dp[di]->undefined();

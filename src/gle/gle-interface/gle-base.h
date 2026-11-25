@@ -39,13 +39,6 @@
 #ifndef __GLE_BASE__
 #define __GLE_BASE__
 
-// #include <iostream>
-
-// #include <stdlib.h>
-// #include <string.h>
-
-// using namespace std; should not reside in header file
-
 class GLERefCountObject {
 private:
 	int m_OwnerCount;
@@ -62,8 +55,9 @@ template <class T> class GLERC {
 private:
 	T* m_Object;
 public:
-	GLERC() {
-		m_Object = NULL;
+	GLERC():
+		m_Object(NULL)
+	{
 	}
 	GLERC(T* obj) {
 		m_Object = obj;
@@ -157,8 +151,9 @@ template <class T> class GLEAutoDelete {
 protected:
 	T* m_Object;
 public:
-	GLEAutoDelete() {
-		m_Object = NULL;
+	GLEAutoDelete():
+		m_Object(NULL)
+	{
 	}
 	GLEAutoDelete(T* data) {
 		m_Object = data;

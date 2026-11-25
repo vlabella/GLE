@@ -1306,6 +1306,8 @@ void load_one_file_sub(GLEScript* script, CmdLineObj& cmdline, size_t* exit_code
 #endif
 }
 
+
+
 void load_one_file(const char* name, CmdLineObj& cmdline, size_t* exit_code) {
 	if (cmdline.hasOption(GLE_OPT_PREVIEW)) {
 		GLEFileLocation loc;
@@ -1316,6 +1318,8 @@ void load_one_file(const char* name, CmdLineObj& cmdline, size_t* exit_code) {
 	try {
 		GLERC<GLEScript> script = load_gle_code_sub(name, cmdline);
 		load_one_file_sub(script.get(), cmdline, exit_code);
+	} catch (const GLEExitException& err) {
+        *exit_code = static_cast<size_t>(err.code());
 	} catch (ParserError& err) {
 		string err_str;
 		err.toString(err_str);
@@ -1329,6 +1333,8 @@ void load_one_file_stdin(CmdLineObj& cmdline, size_t* exit_code) {
 	try {
 		GLERC<GLEScript> script = load_gle_code_sub_stdin(cmdline);
 		load_one_file_sub(script.get(), cmdline, exit_code);
+	} catch (const GLEExitException& err) {
+        *exit_code = static_cast<size_t>(err.code());
 	} catch (ParserError& err) {
 		string err_str;
 		err.toString(err_str);

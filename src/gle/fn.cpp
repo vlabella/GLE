@@ -44,19 +44,19 @@
 using namespace std;
 
 /*-------------------------------------------------------------------*/
-/* Find the function called by *cp and return its function ID.        */
+/* Find the function called by *cp and return its function ID.       */
 /*-------------------------------------------------------------------*/
 
-/* To add a new function, place it in alphabetical order and assign   */
-/* it the next unused function ID.                                    */
+/* To add a new function, place it in alphabetical order and assign  */
+/* it the next unused function ID.                                   */
 
-/* ret = return type:          1 = number, 2 = string                 */
-/* np  = number of parameters expected                                */
+/* ret = return type:          1 = number, 2 = string                */
+/* np  = number of parameters expected                               */
 /* p0...p4 = parameter types:  0 = none, 1 = number, 2 = string      */
-/* For functions with no parameters (e.g. height()), set np to 0.     */
+/* For functions with no parameters (e.g. height()), set np to 0.    */
 
-/* Function IDs are defined in fn.h.                                  */
-/* See eval.cpp for the implementation of the built-in functions.     */
+/* Function IDs are defined in fn.h.                                 */
+/* See eval.cpp for the implementation of the built-in functions.    */
 
 #define NKEYS (sizeof keywfn / sizeof(struct keyw))
 
@@ -95,12 +95,14 @@ struct keyw keywfn[] = {
 	{ "CHEBYSHEV_SECOND",   	FN_CHEBYSHEV_SECOND,  	1,2, { 1,1,0,0,0 } },
 	{ "CHR$",        52,            2,1, { 1,0,0,0,0 } },
 	{ "CLAMP",       FN_CLAMP,       1,3, { 1,1,1,0,0 } },
+	{ "CLIP", FN_CLIP, FN_TYPE_DATASET, 3, { FN_TYPE_DATASET, FN_TYPE_NUMBER, FN_TYPE_NUMBER, 0, 0 } },
+	{ "CMYK",        FN_CMYK,        1,4, { 1,1,1,1,0 } },
 	{ "CODATA",             FN_CODATA,             1,1, { 2,0,0,0,0 } },
 	{ "CODATA_UNCERTAINTY", FN_CODATA_UNCERTAINTY, 1,1, { 2,0,0,0,0 } },
 	{ "CODATA_UNITS",       FN_CODATA_UNITS,       2,1, { 2,0,0,0,0 } },
-	{ "CMYK",        FN_CMYK,        1,4, { 1,1,1,1,0 } },
 	{ "COLOR_INTENSITY", FN_COLOR_INTENSITY, 1,1, { 1,0,0,0,0 } },
 	{ "COLORSCALE",   FN_COLOR_SCALE,   1,2, { 1,2,0,0,0 } },
+	{ "COPY",       FN_COPY,       FN_TYPE_DATASET,1, { FN_TYPE_DATASET,0,0,0,0 } },
 	{ "COS",         5,             1,1, { 1,0,0,0,0 } },
 	{ "COSH",        62,            1,1, { 1,0,0,0,0 } },
 	{ "COT",         59,            1,1, { 1,0,0,0,0 } },
@@ -116,6 +118,7 @@ struct keyw keywfn[] = {
 	{ "DATAXVALUE",  FN_DATAXVALUE, 1,2, { 2,1,0,0,0 } },
 	{ "DATAYVALUE",  FN_DATAYVALUE, 1,2, { 2,1,0,0,0 } },
 	{ "DATE$",       6,             2,0, { 0,0,0,0,0 } },
+	{ "DERIVATIVE", FN_DERIVATIVE, FN_TYPE_DATASET, 1,{ FN_TYPE_DATASET, 0, 0, 0, 0 } },
 	{ "DEVICE$",     51,            2,0, { 0,0,0,0,0 } },
 	{ "DOUBLE_FACTORIAL",   	FN_DOUBLE_FACTORIAL,  	1,1, { 1,0,0,0,0 } },
 	{ "EOF",         55,            1,1, { 1,0,0,0,0 } },
@@ -139,6 +142,8 @@ struct keyw keywfn[] = {
 	{ "HSV",         FN_HSV,         1,3, { 1,1,1,0,0 } },
 	{ "HYPOT",       FN_HYPOT,       1,2, { 1,1,0,0,0 } },
 	{ "INT",         10,            1,1, { 1,0,0,0,0 } },
+	{ "INTEGRAL", FN_INTEGRAL, FN_TYPE_NUMBER, 3,{ FN_TYPE_DATASET, FN_TYPE_NUMBER, FN_TYPE_NUMBER, 0, 0 } },
+	{ "INTEGRATE", FN_INTEGRATE, FN_TYPE_DATASET, 1,{ FN_TYPE_DATASET, 0, 0, 0, 0 } },
 	{ "ISCAIRO",     FN_ISCAIRO,       1,0, { 0,0,0,0,0 } },
 	{ "IS_CLOSE",     FN_IS_CLOSE,     1,3, { 1,1,1,0,0 } },
     { "IS_CLOSE_ABS", FN_IS_CLOSE_ABS, 1,3, { 1,1,1,0,0 } },
@@ -158,8 +163,9 @@ struct keyw keywfn[] = {
 	{ "MAX",         FN_MAX,        1,2, { 1,1,0,0,0 } },
 	{ "MIN",         FN_MIN,        1,2, { 1,1,0,0,0 } },
 	{ "NARGS",       FN_NARGS,      1,0, { 0,0,0,0,0 } },
-	{ "NDATA",       FN_NDATA,      1,1, { 2,0,0,0,0 } },
+	{ "NDATA",       FN_NDATA,      FN_TYPE_NUMBER,1, { FN_TYPE_STRING,0,0,0,0 } },
 	{ "NDATASETS",   FN_NDATASETS,  1,0, { 0,0,0,0,0 } },
+	{ "NORMALIZE", FN_NORMALIZE, FN_TYPE_DATASET, 1,{ FN_TYPE_DATASET, 0, 0, 0, 0 } },
 	{ "NOT",         15,            1,1, { 1,0,0,0,0 } },
 	{ "NUM$",        16,            2,1, { 1,0,0,0,0 } },
 	{ "NUM1$",       17,            2,1, { 1,0,0,0,0 } },
@@ -188,6 +194,8 @@ struct keyw keywfn[] = {
 	{ "SIN",         25,            1,1, { 1,0,0,0,0 } },
 	{ "SINC",        FN_SINC,        1,1, { 1,0,0,0,0 } },
 	{ "SINH",        63,             1,1, { 1,0,0,0,0 } },
+	{ "SLICE", FN_SLICE, FN_TYPE_DATASET, 3,{ FN_TYPE_DATASET, FN_TYPE_NUMBER, FN_TYPE_NUMBER, 0, 0 } },
+	{ "SMOOTH", FN_SMOOTH, FN_TYPE_DATASET, 2,{ FN_TYPE_DATASET, FN_TYPE_NUMBER, 0, 0, 0 } },
 	{ "SPHERICAL_BESSEL_FIRST", FN_SPHERICAL_BESSEL_FIRST, 1,2, { 1,1,0,0,0 } },
 	{ "SPHERICAL_BESSEL_SECOND", FN_SPHERICAL_BESSEL_SECOND, 1,2, { 1,1,0,0,0 } },
 	{ "SPHERICAL_HARMONIC",    FN_SPHERICAL_HARMONIC,   1,4, { 1,1,1,1,0 } },
@@ -197,7 +205,6 @@ struct keyw keywfn[] = {
 	{ "TAN",         28,            1,1, { 1,0,0,0,0 } },
 	{ "TANH",        64,            1,1, { 1,0,0,0,0 } },
 	{ "TDEPTH",      29,            1,1, { 2,0,0,0,0 } },
-	{ "TEST_PRINT",  FN_TEST_PRINT, 1,3, { 2,1,1,0,0 } },
 	{ "THEIGHT",     30,            1,1, { 2,0,0,0,0 } },
 	{ "TIME$",       31,            2,0, { 0,0,0,0,0 } },
 	{ "TODEG",       74,            1,1, { 1,0,0,0,0 } },
@@ -221,6 +228,9 @@ struct keyw keywfn[] = {
 	{ "YMAX",        42,            1,1, { 0,0,0,0,0 } },
 	{ "YMIN",        43,            1,1, { 0,0,0,0,0 } },
 	{ "YPOS",        44,            1,0, { 0,0,0,0,0 } }
+	#ifndef _NDEBUG
+	,{ "ZZDEBUG_TEST",  FN_ZZDEBUG_TEST, 1,3, { 2,1,1,0,0 } }
+	#endif
 };
 
 void find_un(char *cp, int *idx,int *ret,int *np,int **plist)

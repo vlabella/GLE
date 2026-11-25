@@ -41,8 +41,9 @@
 
 using namespace std;
 
-GLERefCountObject::GLERefCountObject() {
-	m_OwnerCount = 0;
+GLERefCountObject::GLERefCountObject()
+: m_OwnerCount(0)
+{
 }
 
 GLERefCountObject::~GLERefCountObject() {

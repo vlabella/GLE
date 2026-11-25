@@ -34,10 +34,10 @@ set(GLE_SOURCES
 	general.cpp
 	op_def.cpp
 	gprint.cpp
-	#leastsq.cpp
 	gle-fitls.cpp
 	GLECheckWindow.cpp
 	GLELetDataSet.cpp
+	GLEDataSetOps.cpp
 	DataFill.cpp
 	GLELet.cpp
 	graph.cpp

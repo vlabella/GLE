@@ -30,29 +30,107 @@ using namespace std;
 
 extern GLEAxis xx[];
 
+
+GLEDataSet* cloneDataSet(GLEDataSet* source)
+{
+	if (source == NULL) {
+		g_throw_parser_error("cannot copy a null dataset");
+	}
+
+	GLEDataPairs sourceData(source);
+
+	vector<double> x;
+	vector<double> y;
+	vector<int> missing;
+
+	x.reserve(sourceData.size());
+	y.reserve(sourceData.size());
+	missing.reserve(sourceData.size());
+
+	for (unsigned int i = 0; i < sourceData.size(); i++) {
+		x.push_back(sourceData.getX(i));
+		y.push_back(sourceData.getY(i));
+		missing.push_back(sourceData.getM(i));
+	}
+
+	GLEDataSet* result = new GLEDataSet(0);
+	result->fromData(x, y, missing);
+
+	return result;
+}
+
+void assignDataSet(int targetID, GLEDataSet* source)
+{
+	if (source == NULL) {
+		g_throw_parser_error("cannot assign a null dataset");
+	}
+	if (targetID <= 0 || targetID >= MAX_NB_DATA) {
+		ostringstream err;
+		err << "invalid target dataset: d" << targetID;
+		g_throw_parser_error(err.str());
+	}
+	/*
+	 * Copy the complete RHS before touching the target.  This is required
+	 * for assignments such as:
+	 *
+	 *     d1 = smooth(d1)
+	 *
+	 * where source may refer to dp[targetID].
+	 */
+	GLEDataPairs sourceData(source);
+	vector<double> x;
+	vector<double> y;
+	vector<int> missing;
+	x.reserve(sourceData.size());
+	y.reserve(sourceData.size());
+	missing.reserve(sourceData.size());
+	for (unsigned int i = 0; i < sourceData.size(); i++) {
+		x.push_back(sourceData.getX(i));
+		y.push_back(sourceData.getY(i));
+		missing.push_back(sourceData.getM(i));
+	}
+	if (ndata < targetID) {
+		ndata = targetID;
+	}
+	if (dp[targetID] == NULL) {
+		dp[targetID] = new GLEDataSet(targetID);
+		copy_default(targetID);
+	} else {
+		dp[targetID]->backup();
+	}
+	dp[targetID]->fromData(x, y, missing);
+}
+
+void copyDataSet(int targetID, int sourceID)
+{
+    GLEDataSet* source = getDataset(sourceID, "copy");
+    assignDataSet(targetID, source);
+}
+
 GLELet::GLELet() {
-    m_SubMap        = NULL;
-    m_LetFrom       = 0.0;
-    m_LetTo         = 0.0;
-    m_LetStep       = 0.0;
-    m_LetNSteps     = 0;
-    m_VarX          = -1;
-    m_NoFirst       = false;
-    m_FineTune      = false;
-    m_HasSteps      = false;
-    m_HasStepOption = false;
-    m_HasFrom       = false;
-    m_HasTo         = false;
-    m_Ds            = -1;
-    m_codeLine      = -1;
-    m_fitType       = "none";
-    m_HistDS        = -1;
-    m_nrBins        = -1;
-    m_FitDS         = -1;
-    m_limitDataX    = false;
-    m_limitDataY    = false;
-    m_limitData     = false;
-    m_Materialize   = false;
+    m_SubMap            = NULL;
+    m_LetFrom           = 0.0;
+    m_LetTo             = 0.0;
+    m_LetStep           = 0.0;
+    m_LetNSteps         = 0;
+    m_VarX              = -1;
+    m_NoFirst           = false;
+    m_FineTune          = false;
+    m_HasSteps          = false;
+    m_HasStepOption     = false;
+    m_HasFrom           = false;
+    m_HasTo             = false;
+    m_Ds                = -1;
+    m_codeLine          = -1;
+    m_fitType           = "none";
+    m_HistDS            = -1;
+    m_nrBins            = -1;
+    m_FitDS             = -1;
+    m_limitDataX        = false;
+    m_limitDataY        = false;
+    m_limitData         = false;
+    m_Materialize       = false;
+    m_DataSetExpression = false;
 }
 
 GLELet::~GLELet() {
@@ -234,6 +312,54 @@ void GLELet::complainAboutNoFunctions(GLEVectorAutoDelete<GLELetDataSet>& datase
 }
 
 void GLELet::doLet() {
+	/*
+	 * Direct assignment applies only to an RHS explicitly identified
+	 * during parsing as a dataset-returning function expression:
+	 *
+	 *     let d1 = copy(d2)
+	 *
+	 * A traditional expression such as:
+	 *
+	 *     let d1 = d2
+	 *
+	 * must continue through the existing DataFill path.
+	 */
+	if (isDataSetExpression()) {
+		if (m_HasFrom || m_HasTo || m_HasStepOption) {
+			g_throw_parser_error(
+				"FROM, TO, and STEP are not valid for a "
+				"dataset-returning LET expression"
+			);
+		}
+
+		if (m_Fcts.size() <= GLE_DIM_Y ||
+		    m_Fcts[GLE_DIM_Y].isNull()) {
+			g_throw_parser_error(
+				"missing dataset-returning LET expression"
+			);
+		}
+
+		GLERC<GLEArrayImpl> stack(new GLEArrayImpl());
+
+		GLEMemoryCell* result =
+			m_Fcts[GLE_DIM_Y]->evalGeneric(stack.get());
+
+		gle_memory_cell_check(
+			result,
+			GLEObjectTypeDataSet
+		);
+
+		GLEDataSet* source =
+			static_cast<GLEDataSet*>(
+				result->Entry.ObjectVal
+			);
+
+		assignDataSet(getDataSet(), source);
+		return;
+	}
+	/*
+	 * Existing scalar LET implementation begins here.
+	 */
 	if (m_LetTo <= m_LetFrom) {
 		stringstream ss;
 		ss << "illegal range for let expression: ";

@@ -56,6 +56,7 @@
 #include "key.h"
 #include "surface/gsurface.h"
 #include "run.h"
+#include "console_colors.h"
 
 using namespace std;
 
@@ -2017,8 +2018,8 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 				block->setOffset2(pcode.size());
 				pcode.addInt(0);
 				break;
-			  case 32 : /* print numexp,strexp,strexp */
-			  case 49 : /* write numexp,strexp,strexp */
+			  case GLE_KW_PRINT : /* print numexp,strexp,strexp */
+			  case GLE_KW_WRITE : /* write numexp,strexp,strexp */
 				while (not_at_end_command()) {
 					pcode.addInt(fctkey);
 					position = pcode.size();
@@ -2026,6 +2027,31 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 					pcode.setInt(position, get_anyexp(pcode));
 				}
 				break;
+				case GLE_KW_PRINT_COLOR: { /*  PRINT_COLOR color-name expression... */
+			    if (!not_at_end_command()){
+			        throw error("PRINT_COLOR requires a color name");
+			    }
+			    /*
+			     * Use the normal GLE color parser. This supports predefined
+			     * GLE colors, hexadecimal colors, grayscale values, and
+			     * color expressions using the same semantics as SET COLOR.
+			     */
+			    get_color(pcode);
+			    if (!not_at_end_command()) {
+			        throw error("PRINT_COLOR requires something to print");
+			    }
+			    while (not_at_end_command()) {
+			        /*
+			         * Store PRINT, rather than PRINT_COLOR, as the marker for each
+			         * expression so the existing runtime expression loop is reused.
+			         */
+			        pcode.addInt(GLE_KW_PRINT);
+			        position = pcode.size();
+			        pcode.addInt(0);
+			        pcode.setInt(position, get_anyexp(pcode));
+			    }
+			  }
+			  break;
 			  case 74 : /* tex */
 				get_strexp(pcode);
 				get_optional(op_tex, pcode);
@@ -2039,6 +2065,16 @@ void GLEParser::passt(GLESourceLine &SLine, GLEPcode& pcode) {
 				get_var(pcode);
 				get_var(pcode);
 				break;
+			  case GLE_KW_EXIT:
+				if (not_at_end_command()) {
+			        // EXIT <integer expression>
+			        pcode.addInt(1);
+			        get_exp(pcode);
+			   } else {
+			        // EXIT defaults to status 0.
+			        pcode.addInt(0);
+			   }
+			  	break;
 			  default:
 				throw error("unrecognised command {"+first+"}");
 			}

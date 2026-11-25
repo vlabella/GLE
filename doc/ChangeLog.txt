@@ -1,10 +1,10 @@
-4.3.10 (not released yet)
+4.4.0 (not released yet)
     - Added manpages for Linux distributions.
     - Prints to stdout instead of stderr for help, info, and version options as well as status message.
     - Removed unneeded and outdated hash_map in favor of STD C++ map.
     - Added range checking and error messages to some functions in graphutil.gle
     - Added a new MATERIALIZE option for LET statements that evaluates data series immediately rather than
-      deferring evaluation until the end of the graph block.
+      deferring evaluation until the end of the graph block which enables use of ndata() and datavalue() functions.
     - Added mathematical functions cbrt, ceil, erfc, expm1, floor,
       gamma, hypot, log1p, log_gamma, round, and sinc using the C++
       standard library and Boost.Math.
@@ -28,7 +28,7 @@
     - When using the Cairo render engine, texcmr is now the default font. A warning
         is issued only when a PostScript font is explicitly selected, in which case GLE
         falls back to texcmr. This eliminates the unsupported PostScript font warning
-        when no font is explicitly selected.
+        when no font is explicitly selected for the cairo render engine.
     - Added `clamp()` for constraining a value to a specified range.
     - Added `is_close()` and `is_close_abs()` for relative and absolute floating-point comparisons.
     - Added `color_intensity()` for calculating the perceived intensity of a color from its RGB components.
@@ -37,7 +37,25 @@
     - Added access to the complete SciPy CODATA physical constants database
         through codata(), codata_units(), and codata_uncertainty(), providing
         constant values, units, and standard uncertainties without a runtime
-        dependency on SciPy.
+        dependency on SciPy
+    - Added capability for built in functions to return dataseries "dn" for manipulating and analyzing datasets:
+        smooth() smooths Y values over a specified window.
+        normalize() normalizes Y values to the range 0–1.
+        clip() limits Y values to a specified range.
+        slice() extracts a range of points from a dataset.
+        derivative() calculates the numerical derivative of a dataset.
+        integrate() calculates the cumulative trapezoidal integral and returns a new dataset.
+        integral() calculates the definite integral between specified X coordinates.
+        - Data-series operations return new datasets and leave the source dataset unchanged, allowing operations to be safely nested and chained.
+        - Input data series must be materialized before they can be used by data-series operations.
+        - Dataset-returning operations are evaluated immediately and must be run on a MATERILIZED data series or one loaded from a file.
+        - Dataset-returning operations that produce a new data series are used on the right-hand side of a LET statement inside a graph block.
+    - Added the EXIT command for terminating script execution with an optional integer exit status. The default exit status is 0.
+    - Added the PRINT_COLOR command for colored console output. Color names use GLE’s existing predefined color definitions, allowing the full set of GLE named colors to be used for console messages when console-color support is enabled.
+    - added octogon markers in gle-library
+    - added dmaxy_x and dminy_x to gle-library graphutil.gle functions that return the x value of the max or min y value respectively.
+    - added console.gle to gle-library for printing colorized error and warning message and asserts for use in testing of GLE.
+    - Removed the GLib dependency from the default macOS and Linux builds. GLE now uses the Poppler C++ interface instead of the Poppler GLib interface for PDF support, reducing the required runtime dependencies.
 
 
 4.3.9 (January 2026)

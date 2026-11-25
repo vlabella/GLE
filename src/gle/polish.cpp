@@ -60,7 +60,7 @@ extern int gle_debug;
 using namespace std;
 
 /*---------------------------------------------------------------------------*/
-/* bin = 10..29  (now 31), binstr = 30..49, fn= 60...139, userfn=LOCAL_START_INDEX..nnn */
+/* bin = 10..29  (now 31), binstr = 30..49, fn=FN_BUILTIN_OFFSET...139, userfn=LOCAL_START_INDEX..nnn */
 #define stack_bin(i,p) stack_op(pcode, stk, stkp, &nstk, i + BINARY_OPERATOR_OFFSET, p + curpri)
 #define stack_fn(i)    stack_op(pcode, stk, stkp, &nstk, i + FN_BUILTIN_OFFSET, 10 + curpri)
 #define dbg if ((gle_debug & 4)>0)
@@ -106,7 +106,8 @@ void GLEPolish::get_array_index(GLEPcode& pcode) {
 	m_tokens.ensure_next_token("]");
 }
 
-int GLEPolish::get_params(GLEPcode& pcode, int np, int* plist, const string& name, int np_default ) {
+int GLEPolish::get_params(GLEPcode& pcode, int np, int* plist, const string& name, int np_default )
+{
 	// called when subroutine is a left hand argument => a = myfunc(4,5)
 	// returns the number of parameters found
 	int nb_param = 0;
@@ -137,7 +138,8 @@ int GLEPolish::get_params(GLEPcode& pcode, int np, int* plist, const string& nam
 	return nb_param;
 }
 
-void GLEPolish::polish(const char *expr, GLEPcode& pcode, int *rtype) {
+void GLEPolish::polish(const char *expr, GLEPcode& pcode, int *rtype)
+{
 	try {
 		internalPolish(expr, pcode, rtype);
 	} catch (ParserError& err) {
@@ -146,7 +148,8 @@ void GLEPolish::polish(const char *expr, GLEPcode& pcode, int *rtype) {
 	}
 }
 
-void GLEPolish::internalPolish(const char *expr, GLEPcode& pcode, int *rtype) {
+void GLEPolish::internalPolish(const char *expr, GLEPcode& pcode, int *rtype)
+{
 	#ifdef DEBUG_POLISH
 		gprint("==== Start of expression {%s} \n",expr);
 	#endif
@@ -154,7 +157,9 @@ void GLEPolish::internalPolish(const char *expr, GLEPcode& pcode, int *rtype) {
 	internalPolish(pcode, rtype);
 }
 
-void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
+void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype)
+{
+	const int expected_type = *rtype;
 	GLESub* sub;
 	string uc_token;
 	int idx, ret, np, *plist, term_bracket = false;
@@ -224,17 +229,18 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 				break;
 			}
 			str_to_uppercase(token, uc_token);
+
 			/* NOT a number, is it a built in function? */
 			find_un((char*)uc_token.c_str(), &idx, &ret, &np, &plist);
 			//cout << idx;
 			/* 1,2 = +,- */
 			if (idx > 3 && m_tokens.is_next_token("(")) {
 				//
-				// it is a built in function (do built in functions have default or optional arguments??)
+				// -- it is a built in function (do built in functions have default or optional arguments??)
 				//
 				dbg gprint("Found built in function\n");
 				get_params(pcode, np, plist, uc_token);
-				pcode.addFunction(idx + FN_BUILTIN_OFFSET);
+				pcode.addFunction(builtin_opcode(idx));
 				unary = 2;
 				break;
 			} else if (idx > 0 && idx <= 3) {
@@ -322,6 +328,19 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 				}
 				break;
 			}
+			// Only if it was NOT a variable, allow literal dN syntax
+			// when a dataset argument is expected.
+			// thisd allows dataset objects directly in pcode
+			if (expected_type == FN_TYPE_DATASET) {
+				if ((first_char != 'd' && first_char != 'D') ||
+        			token_len < 2 || !is_integer(token.substr(1))) {
+        			throw error(token_col, "expected a dataset");
+    			}
+    			int datasetID = atoi(token.c_str() + 1);
+    			pcode.addDataSet(datasetID);
+    			unary = 2;
+				break;
+			}
 			/* Is it a string */
 			if (first_char == '"' || first_char == '\'') {
 				dbg gprint("Found string \n");
@@ -332,8 +351,9 @@ void GLEPolish::internalPolish(GLEPcode& pcode, int *rtype) {
 				break;
 			}
 			if ((first_char == 'd' || first_char == 'D') && token_len == 1 && m_tokens.is_next_token("[")) {
+				// dn or d[n]  data series handled by eval
 				get_array_index(pcode);
-				pcode.addFunction(FN_DI + FN_BUILTIN_OFFSET);
+				pcode.addFunction(builtin_opcode(FN_DI));
 				unary = 2;
 				break;
 			}
@@ -703,6 +723,19 @@ void GLEPcode::addStringNoIDChar(const char* str) {
 	strcpy(str_target, str);
 }
 
+void GLEPcode::addObject(GLEDataObject* object)
+{
+    addInt(PCODE_OBJECT);
+    addInt(m_PCodeList->size());
+    m_PCodeList->push_back(object);
+}
+
+void GLEPcode::addDataSet(int datasetID)
+{
+	addInt(PCODE_DATASET);
+	addInt(datasetID);
+}
+
 void GLEPcode::show() {
 	show(0);
 }
@@ -737,26 +770,32 @@ void GLEPcode::show(int start) {
 GLEPcodeIndexed::GLEPcodeIndexed(GLEPcodeList* list) : GLEPcode(list) {
 }
 
-GLEFunctionParserPcode::GLEFunctionParserPcode() : m_Pcode(&m_PcodeList) {
+GLEFunctionParserPcode::GLEFunctionParserPcode()
+: m_Pcode(&m_PcodeList),
+m_ReturnType(0)
+{
 }
 
 GLEFunctionParserPcode::~GLEFunctionParserPcode() {
 }
 
-void GLEFunctionParserPcode::polish(const char* fct, StringIntHash* vars) {
+void GLEFunctionParserPcode::polish(const char* fct, StringIntHash* vars)
+{
 	GLEPolish* polish = get_global_polish();
 	if (polish != NULL) {
-		int rtype = 1;
+		m_ReturnType = 0;
 		polish->setExprVars(vars);
-		polish->polish(fct, m_Pcode, &rtype);
+		polish->polish(fct, m_Pcode, &m_ReturnType);
 		polish->setExprVars(NULL);
 	}
 }
 
-void GLEFunctionParserPcode::polishPos(const char* fct, int pos, StringIntHash* vars) {
+void GLEFunctionParserPcode::polishPos(const char* fct, int pos, StringIntHash* vars)
+{
 	GLEPolish* polish = get_global_polish();
 	if (polish != NULL) {
 		try {
+			m_ReturnType = 0;
 			int rtype = 1;
 			polish->setExprVars(vars);
 			polish->internalPolish(fct, m_Pcode, &rtype);
@@ -770,6 +809,12 @@ void GLEFunctionParserPcode::polishPos(const char* fct, int pos, StringIntHash* 
 
 void GLEFunctionParserPcode::polishX() {
 	polish("x", NULL);
+}
+
+GLEMemoryCell* GLEFunctionParserPcode::evalGeneric(GLEArrayImpl* stack)
+{
+	int cp = 0;
+	return ::evalGeneric(stack,m_Pcode.getPcodeList(),(int*)&m_Pcode[0],&cp);
 }
 
 double GLEFunctionParserPcode::evalDouble() {

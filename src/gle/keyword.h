@@ -36,7 +36,9 @@
  *                                                                      *
  ************************************************************************/
 
-#define GLE_KW_NB                             91
+// the maximum keyword number
+// after adding new keyword increment this
+#define GLE_KW_NB                             93
 
 #define GLE_KW_BLANK                          0
 #define GLE_KW_ABOUND                         87
@@ -71,6 +73,7 @@
 #define GLE_KW_ELLIPTICAL_NARC                72
 #define GLE_KW_ELSE                           13
 #define GLE_KW_END                            14
+#define GLE_KW_EXIT                           91
 #define GLE_KW_FCLOSE                         15
 #define GLE_KW_FGETLINE                       75
 #define GLE_KW_FILL                           16
@@ -102,6 +105,7 @@
 #define GLE_KW_PIE                            31
 #define GLE_KW_POSTSCRIPT                     55
 #define GLE_KW_PRINT                          32
+#define GLE_KW_PRINT_COLOR                    92
 #define GLE_KW_PSBBTWEAK                      66
 #define GLE_KW_PSCOMMENT                      65
 #define GLE_KW_RBEZIER                        33

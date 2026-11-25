@@ -67,6 +67,8 @@ const char* gle_object_type_to_string(GLEObjectType type) {
 		return "definition";
 	case GLEObjectTypeClassInstance:
 		return "instance";
+	case GLEObjectTypeDataSet:
+		return "dataset";
 	case GLEObjectTypeUnknown:
 		return "unknown";
 	}

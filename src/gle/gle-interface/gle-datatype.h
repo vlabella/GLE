@@ -56,7 +56,8 @@ typedef enum {
 	GLEObjectTypeObjectRep,
 	GLEObjectTypePoint,
 	GLEObjectTypeClassDefinition,
-	GLEObjectTypeClassInstance
+	GLEObjectTypeClassInstance,
+	GLEObjectTypeDataSet
 } GLEObjectType;
 
 const char* gle_object_type_to_string(GLEObjectType type);

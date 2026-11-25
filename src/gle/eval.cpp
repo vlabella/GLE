@@ -76,11 +76,11 @@
 using namespace std;
 
 colortyp colvar;
-//
-// set this to zero if your compiler complains about acosh atanh and asinh
-//
-// #define HAVE_INVERSE_HYP <== obsolete should be done in config.i V.L.
-//
+
+class GLEDataSet;
+GLEDataSet* cloneDataSet(GLEDataSet* source);
+
+
 #define true (!false)
 #define false 0
 char *eval_str();
@@ -97,7 +97,7 @@ double yg3d(double x, double y, double z);
 /*                                                                           */
 /*   binary numeric operators : 10 ... 29                                    */
 /*   binary string operators  : 30 ... 49                                    */
-/*   built-in functions       : FN_BUILTIN_OFFSET ... LOCAL_START_INDEX - 1  */
+/*   built-in functions       : FN_BUILTIN_OFFSET ...                        */
 /*   user-defined functions   : LOCAL_START_INDEX ...                        */
 /*                                                                           */
 /* Built-in function opcodes are formed by adding FN_BUILTIN_OFFSET to the   */
@@ -112,9 +112,23 @@ double yg3d(double x, double y, double z);
 
 // for debugging
 const char *binop[] = { "", "+", "-", "*", "/", "^", "=", "<", "<=", ">", ">=", "<>", ".AND.", ".OR.", "%", "+=", "-=", "*=" , "/=", "++", "--"};
-const char *pcodes[]= {"","PCODE_EXPR","PCODE_DOUBLE","PCODE_VAR","PCODE_STRVAR","PCODE_STRING","PCODE_OBJECT","PCODE_NEXT_CMD"};
-string pcode_to_string(int p){
-	if( p <= PCODE_NEXT_CMD ){
+
+const char* pcodes[] = {
+	"",
+	"PCODE_EXPR",
+	"PCODE_DOUBLE",
+	"PCODE_VAR",
+	"PCODE_STRVAR",
+	"PCODE_STRING",
+	"PCODE_OBJECT",
+	"PCODE_NEXT_CMD",
+	"",                 // value 8 is reserved
+	"PCODE_DATASET"
+};
+
+string pcode_to_string(int p)
+{
+	if (p >= 0 && p <= PCODE_DATASET) {
 		return pcodes[p];
 	}
 	return "";
@@ -251,6 +265,25 @@ GLEColor* getEvalStackColor(GLEArrayImpl* stk, int pos) {
 std::string getEvalStackStringStd(GLEArrayImpl* stk, int pos) {
 	stk->checkType(pos, GLEObjectTypeString);
 	return ((GLEString*)stk->getObject(pos))->toUTF8();
+}
+
+GLEDataObject* getEvalStackObject(GLEArrayImpl* stk, int pos)
+{
+    GLEDataObject* object = stk->getObject(pos);
+    if (object == NULL) {
+        g_throw_parser_error("expected an object but found null");
+    }
+    return object;
+}
+
+GLEDataSet* getEvalStackDataSet(GLEArrayImpl* stk, int pos)
+{
+    GLEDataObject* object = getEvalStackObject(stk, pos);
+    GLEDataSet* data = dynamic_cast<GLEDataSet*>(object);
+    if (data == NULL) {
+        g_throw_parser_error("expected a dataset");
+    }
+    return data;
 }
 
 void validateIntRange(int value, int from, int to) {
@@ -476,6 +509,17 @@ void eval_binary_operator(GLEArrayImpl* stk, int op) {
 	stk->decrementSize(1);
 }
 
+static unsigned int getEvalPositiveSeriesInt(GLEArrayImpl* stk, int pos, const char* error)
+{
+    const double value = getEvalStackDouble(stk, pos);
+    if (!std::isfinite(value) || value < 1.0 ||
+        value > static_cast<double>((std::numeric_limits<int>::max)()) ||
+        std::trunc(value) != value) {
+        g_throw_parser_error(error);
+    }
+    return static_cast<unsigned int>(value);
+}
+
 void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int plen) {
 	if (plen > 1000) {
 		gprint("Expression is suspiciously long %d \n",plen);
@@ -522,6 +566,30 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			stk->incrementSize(1);
 			setEvalStack(stk, stk->last(), pclist->get(i));
 			break;
+		case PCODE_DATASET:
+			{
+		    const int datasetID = *(pcode+(++c));
+		    if (datasetID <= 0 || datasetID >= MAX_NB_DATA || dp[datasetID] == NULL) {
+				ostringstream msg;
+				msg << "dataset d" << datasetID << " not defined";
+				g_throw_parser_error(msg.str());
+			}
+			// -- original  - crashes with nested functons that return data series
+		    // stk->incrementSize(1);
+		    // setEvalStack(stk,stk->last(), dp[datasetID]);
+		    //
+			// -- mod for nested data series return functions such as copy(copy(d1))
+			//
+		    // dp[] holds raw pointers, not counted references. Pushing dp[id]
+			// directly lets the evaluator delete it on the last release,
+			// leaving a dangling registry entry. Push a snapshot instead.
+			// TODO: Make dp[] hold counted references and replace direct deletes
+			// with releases before removing this copy-on-load.
+			GLERC<GLEDataSet> value(cloneDataSet(dp[datasetID]));
+			stk->incrementSize(1);
+			setEvalStack(stk, stk->last(), value.get());
+			}
+		    break;
 		/*
 			Binary operators 10..29 (now 31) -----------------------
 		*/
@@ -550,10 +618,14 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case BIN_OP_MINUS_MINUS + BINARY_OPERATOR_OFFSET:	 // 31
 			eval_unary_operator(stk, pcode[c] - BINARY_OPERATOR_OFFSET);
 			break;
-
-	    /* look in fn.c and start indexes with 1 */
-		/* Built in functions 60..199 ----------------------------- */
-		/* note add 60 to the index in fn.cpp */
+		//
+		// -- Built-in function evaluation
+		//
+		// Built-in function indices defined in fn.cpp and fn.h start at 1.
+		// In expression pcode, FN_BUILTIN_OFFSET is added to each index
+		// to distinguish built-in functions from other opcodes.
+		// FN_BUILTIN_OFFSET is historically 60.
+		//
 		case 61: /* unary plus */
 			break;
 		case 62: /* unary minus */
@@ -577,19 +649,19 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case 116: /* ACOT 56*/
 			setEvalStack(stk, stk->last(), 1.0/atan(getEvalStackDouble(stk, stk->last())));
 			break;
-		case 117: /*ASEC 57*/
+		case 117: /* ASEC 57*/
 			setEvalStack(stk, stk->last(), 1.0/acos(getEvalStackDouble(stk, stk->last())));
 			break;
-		case 118: /*ACSC 58*/
+		case 118: /* ACSC 58*/
 			setEvalStack(stk, stk->last(), 1.0/asin(getEvalStackDouble(stk, stk->last())));
 			break;
-		case 119: /*cot 59*/
+		case 119: /* cot 59*/
 			setEvalStack(stk, stk->last(), 1.0/tan(getEvalStackDouble(stk, stk->last())));
 			break;
-		case 120: /*sec 60*/
+		case 120: /* sec 60*/
 			setEvalStack(stk, stk->last(), 1.0/cos(getEvalStackDouble(stk, stk->last())));
 			break;
-		case 121: /*csc 61*/
+		case 121: /* csc 61*/
 			setEvalStack(stk, stk->last(), 1.0/sin(getEvalStackDouble(stk, stk->last())));
 			break;
 		case 122: /* cosh 62*/
@@ -610,7 +682,6 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case 127: /* csch 67*/
 			setEvalStack(stk, stk->last(), 1.0/sinh(getEvalStackDouble(stk, stk->last())));
 			break;
-		//#ifdef HAVE_INVERSE_HYP VL eliminated - in c++11 standard now
 		case 128: /* acosh 68*/
 			setEvalStack(stk, stk->last(), acosh(getEvalStackDouble(stk, stk->last())));
 			break;
@@ -629,38 +700,37 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		case 133: /* acsch 73*/
 			setEvalStack(stk, stk->last(), 1.0/asinh(getEvalStackDouble(stk, stk->last())));
 			break;
-		//#endif
 		case 134: /* todeg 74*/
 			setEvalStack(stk, stk->last(), getEvalStackDouble(stk, stk->last())*180.0/GLE_PI);
 			break;
 		case 135: /* torad 75*/
 			setEvalStack(stk, stk->last(), getEvalStackDouble(stk, stk->last())*GLE_PI/180.0);
 			break;
-		case FN_BUILTIN_OFFSET + FN_EVAL: /* eval */
+		case builtin_opcode(FN_EVAL): /* eval */
 			{
 				std::string toEval(getEvalStackStringStd(stk, stk->last()));
 				stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_ARG: /* arg */
+		case builtin_opcode(FN_ARG): /* arg */
 			setEvalStack(stk, stk->last(), eval_get_extra_arg_f((int)getEvalStackDouble(stk, stk->last())));
 			break;
-		case FN_BUILTIN_OFFSET + FN_ARGS: /* arg$ */
+		case builtin_opcode(FN_ARGS): /* arg$ */
 			setEvalStack(stk, stk->last(), (char*)eval_get_extra_arg_s((int)getEvalStackDouble(stk, stk->last())));
 			break;
-		case FN_BUILTIN_OFFSET + FN_NARGS: /* narg */
+		case builtin_opcode(FN_NARGS): /* narg */
 			stk->incrementSize(1);
 			setEvalStack(stk, stk->last(), g_CmdLine.getNbExtraArgs());
 			break;
-		case FN_BUILTIN_OFFSET + FN_MIN: /* min */
+		case builtin_opcode(FN_MIN): /* min */
 			stk->decrementSize(1);
 			if (getEvalStackDouble(stk, stk->last()+1) < getEvalStackDouble(stk, stk->last())) setEvalStack(stk, stk->last(), getEvalStackDouble(stk, stk->last()+1));
 			break;
-		case FN_BUILTIN_OFFSET + FN_MAX: /* max */
+		case builtin_opcode(FN_MAX): /* max */
 			stk->decrementSize(1);
 			if (getEvalStackDouble(stk, stk->last()+1) > getEvalStackDouble(stk, stk->last())) setEvalStack(stk, stk->last(), getEvalStackDouble(stk, stk->last()+1));
 			break;
-			case FN_BUILTIN_OFFSET + FN_CLAMP:
+		case builtin_opcode(FN_CLAMP):
 			{
 			const double value   = getEvalStackDouble(stk, stk->last() - 2);
 			const double minimum = getEvalStackDouble(stk, stk->last() - 1);
@@ -680,7 +750,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			setEvalStack(stk, stk->last(), result);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_IS_CLOSE:
+		case builtin_opcode(FN_IS_CLOSE):
 			{
                 const double a         = getEvalStackDouble(stk, stk->last() - 2);
                 const double b         = getEvalStackDouble(stk, stk->last() - 1);
@@ -697,7 +767,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStackBool(stk, stk->last(), result);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_IS_CLOSE_ABS:
+		case builtin_opcode(FN_IS_CLOSE_ABS):
 			{
                 const double a         = getEvalStackDouble(stk, stk->last() - 2);
                 const double b         = getEvalStackDouble(stk, stk->last() - 1);
@@ -712,7 +782,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStackBool(stk, stk->last(), result);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_LERP:
+		case builtin_opcode(FN_LERP):
 			{
                 const double a      = getEvalStackDouble(stk, stk->last() - 2);
                 const double b      = getEvalStackDouble(stk, stk->last() - 1);
@@ -722,7 +792,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), result);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_LINEAR_INTERPOLATE:
+		case builtin_opcode(FN_LINEAR_INTERPOLATE):
 			{
                 const double value = getEvalStackDouble(stk, stk->last() - 4);
                 const double x1    = getEvalStackDouble(stk, stk->last() - 3);
@@ -740,54 +810,54 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), result);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_SDIV: /* sdiv */
+		case builtin_opcode(FN_SDIV): /* sdiv */
 			if (getEvalStackDouble(stk, stk->last()) == 0.0) setEvalStack(stk, stk->last()-1, 0.0);
 			else setEvalStack(stk, stk->last()-1, getEvalStackDouble(stk, stk->last()-1) / getEvalStackDouble(stk, stk->last()));
 			stk->decrementSize(1);
 			break;
-		case FN_BUILTIN_OFFSET + FN_XBAR: /* bar x position */
+		case builtin_opcode(FN_XBAR): /* bar x position */
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), graph_bar_pos(getEvalStackDouble(stk, stk->last()), getEvalStackInt(stk, stk->last() + 1), 1));
 			break;
-		case FN_BUILTIN_OFFSET + FN_XY2ANGLE:
+		case builtin_opcode(FN_XY2ANGLE):
 			stk->decrementSize(1);
 			xy_polar(getEvalStackDouble(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1), &x1, &y1);
 			setEvalStack(stk, stk->last(), y1);
 			break;
-		case FN_BUILTIN_OFFSET + FN_ATAN2:
+		case builtin_opcode(FN_ATAN2):
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), myatan2(getEvalStackDouble(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_ISNAME:
+		case builtin_opcode(FN_ISNAME):
 			setEvalStackBool(stk, stk->last(), getGLERunInstance()->is_name(getEvalStackGLEString(stk, stk->last())));
 			break;
-		case FN_BUILTIN_OFFSET + FN_FACTORIAL:
+		case builtin_opcode(FN_FACTORIAL):
 			setEvalStack(stk, stk->last(), boost::math::factorial<double>(getEvalStackDouble(stk, stk->last())));
 			break;
-		case FN_BUILTIN_OFFSET + FN_DOUBLE_FACTORIAL:
+		case builtin_opcode(FN_DOUBLE_FACTORIAL):
 			setEvalStack(stk, stk->last(), boost::math::double_factorial<double>(getEvalStackDouble(stk, stk->last())));
 			break;
-		case FN_BUILTIN_OFFSET + FN_HERMITE:
+		case builtin_opcode(FN_HERMITE):
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::hermite(getEvalStackInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_LAGUERRE:
+		case builtin_opcode(FN_LAGUERRE):
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::laguerre(getEvalStackInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_ASSOCIATED_LAGUERRE:
+		case builtin_opcode(FN_ASSOCIATED_LAGUERRE):
 			stk->decrementSize(2);
 			setEvalStack(stk, stk->last(), boost::math::laguerre(getEvalStackInt(stk, stk->last()), getEvalStackInt(stk, stk->last()+1), getEvalStackDouble(stk, stk->last()+2)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_LEGENDRE:
+		case builtin_opcode(FN_LEGENDRE):
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::legendre_p(getEvalStackInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_ASSOCIATED_LEGENDRE:
+		case builtin_opcode(FN_ASSOCIATED_LEGENDRE):
 			stk->decrementSize(2);
 			setEvalStack(stk, stk->last(), boost::math::legendre_p(getEvalStackInt(stk, stk->last()), getEvalStackInt(stk, stk->last()+1), getEvalStackDouble(stk, stk->last()+2)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_BESSEL_FIRST:
+		case builtin_opcode(FN_BESSEL_FIRST):
 		    stk->decrementSize(1);
 		    setEvalStack(
 		        stk,
@@ -798,7 +868,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        )
 		    );
 		    break;
-		case FN_BUILTIN_OFFSET + FN_BESSEL_MODIFIED_FIRST:
+		case builtin_opcode(FN_BESSEL_MODIFIED_FIRST):
 		    stk->decrementSize(1);
 		    setEvalStack(
 		        stk,
@@ -809,7 +879,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        )
 		    );
 		    break;
-		case FN_BUILTIN_OFFSET + FN_BESSEL_MODIFIED_SECOND:
+		case builtin_opcode(FN_BESSEL_MODIFIED_SECOND):
 		    stk->decrementSize(1);
 		    setEvalStack(
 		        stk,
@@ -820,7 +890,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        )
 		    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_BESSEL_SECOND:
+		case builtin_opcode(FN_BESSEL_SECOND):
 		    stk->decrementSize(1);
 		    setEvalStack(
 		        stk,
@@ -831,7 +901,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        )
 		    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_SPHERICAL_BESSEL_FIRST:
+		case builtin_opcode(FN_SPHERICAL_BESSEL_FIRST):
 			{
 			stk->decrementSize(1);
 			int n = getEvalStackInt(stk, stk->last());
@@ -848,7 +918,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			);
 			}
 	    break;
-		case FN_BUILTIN_OFFSET + FN_SPHERICAL_BESSEL_SECOND:
+		case builtin_opcode(FN_SPHERICAL_BESSEL_SECOND):
 			{
 			int n = getEvalStackInt(stk, stk->last());
 			if (n < 0) {
@@ -864,7 +934,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			);
 			}
 	    break;
-		case FN_BUILTIN_OFFSET + FN_SPHERICAL_HARMONIC:
+		case builtin_opcode(FN_SPHERICAL_HARMONIC):
 			stk->decrementSize(3);
 			setEvalStack(stk, stk->last(),
 				boost::math::spherical_harmonic_r(
@@ -872,24 +942,24 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 					)
 				);
 			break;
-		case FN_BUILTIN_OFFSET + FN_ERF:
+		case builtin_opcode(FN_ERF):
 			setEvalStack(stk, stk->last(), erf(getEvalStackDouble(stk, stk->last())));
 			break;
-		case FN_BUILTIN_OFFSET + FN_AIRY_FIRST:
+		case builtin_opcode(FN_AIRY_FIRST):
 			setEvalStack(stk, stk->last(), boost::math::airy_ai( getEvalStackDouble(stk, stk->last()) ) );
 			break;
-		case FN_BUILTIN_OFFSET + FN_AIRY_SECOND:
+		case builtin_opcode(FN_AIRY_SECOND):
 			setEvalStack(stk, stk->last(), boost::math::airy_bi( getEvalStackDouble(stk, stk->last()) ) );
 			break;
-		case FN_BUILTIN_OFFSET + FN_CHEBYSHEV_FIRST:
+		case builtin_opcode(FN_CHEBYSHEV_FIRST):
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::chebyshev_t( getEvalStackUnsignedInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_CHEBYSHEV_SECOND:
+		case builtin_opcode(FN_CHEBYSHEV_SECOND):
 			stk->decrementSize(1);
 			setEvalStack(stk, stk->last(), boost::math::chebyshev_u( getEvalStackUnsignedInt(stk, stk->last()), getEvalStackDouble(stk, stk->last()+1)));
 			break;
-		case FN_BUILTIN_OFFSET + FN_CBRT:
+		case builtin_opcode(FN_CBRT):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -898,7 +968,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_CEIL:
+		case builtin_opcode(FN_CEIL):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -907,7 +977,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_ERFC:
+		case builtin_opcode(FN_ERFC):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -916,7 +986,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_EXPM1:
+		case builtin_opcode(FN_EXPM1):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -925,7 +995,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_FLOOR:
+		case builtin_opcode(FN_FLOOR):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -934,7 +1004,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_GAMMA:
+		case builtin_opcode(FN_GAMMA):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -943,7 +1013,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_HYPOT:
+		case builtin_opcode(FN_HYPOT):
 	    	stk->decrementSize(1);
 	    	setEvalStack(
 		        stk,
@@ -954,7 +1024,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_LOG1P:
+		case builtin_opcode(FN_LOG1P):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -963,7 +1033,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_LOG_GAMMA:
+		case builtin_opcode(FN_LOG_GAMMA):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -972,7 +1042,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_ROUND:
+		case builtin_opcode(FN_ROUND):
 		    setEvalStack(
 		        stk,
 	    	    stk->last(),
@@ -981,7 +1051,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_SINC:
+		case builtin_opcode(FN_SINC):
 	    	setEvalStack(
 	        stk,
 	        stk->last(),
@@ -990,7 +1060,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	        )
 	    );
 	    break;
-   		case FN_BUILTIN_OFFSET + FN_CODATA:
+   		case builtin_opcode(FN_CODATA):
 			setEvalStack(
 				stk,
 				stk->last(),
@@ -999,7 +1069,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				)
 			);
 			break;
-		case FN_BUILTIN_OFFSET + FN_CODATA_UNCERTAINTY:
+		case builtin_opcode(FN_CODATA_UNCERTAINTY):
 			setEvalStack(
 				stk,
 				stk->last(),
@@ -1008,7 +1078,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				)
 			);
 			break;
-		case FN_BUILTIN_OFFSET + FN_CODATA_UNITS:
+		case builtin_opcode(FN_CODATA_UNITS):
 			setEvalStack(
 				stk,
 				stk->last(),
@@ -1016,30 +1086,6 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 					getEvalStackStringStd(stk, stk->last())
 				)
 			);
-			break;
-		case FN_BUILTIN_OFFSET + FN_TEST_PRINT: // test_print
-			// simple for loop that evaluates a function that is passed to it
-			//{
-			//	std::string toEval(getEvalStackStringStd(stk, stk->last()));
-			//	stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
-			//}
-			cout << endl;
-			stk->decrementSize(2);
-			{
-			std::string toEval(getEvalStackStringStd(stk, stk->last()));
-			cout << toEval << endl;
-			stringstream ss;
-			ss << "x="<<getEvalStackDouble(stk, stk->last()+1);
-			cout << ss.str().c_str()<<endl;
-			cout << getEvalStackDouble(stk, stk->last()+2)<<endl;
-			double x;
-			//get_global_polish()->eval(stk, ss.str().c_str(),&x);
-			stk->set(stk->last(), get_global_polish()->evalGeneric(stk, ss.str().c_str() ));
-			//setEvalStack(stk, stk->last(),ss.str().c_str());
-			//setEvalStack(stk, stk->last(),"print x");
-			//get_global_polish()->evalString(stk, ss.str().c_str());
-			stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
-			}
 			break;
 		case 137: /* pointx */
 			{
@@ -1214,14 +1260,14 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), sbuf);
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_FILE: /* file$ */
+		case builtin_opcode(FN_FILE): /* file$ */
 			{
 				string tmp_s = getGLERunInstance()->getScript()->getLocation()->getMainName();
 				stk->incrementSize(1);
 				setEvalStack(stk, stk->last(), tmp_s.c_str());
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_PATH: /* path$ */
+		case builtin_opcode(FN_PATH): /* path$ */
 			stk->incrementSize(1);
 			setEvalStack(stk, stk->last(), getGLERunInstance()->getScript()->getLocation()->getDirectory().c_str());
 			break;
@@ -1292,7 +1338,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 			both.l[1] = 0;
 			setEvalStack(stk, stk->last(), both.d);
 			break;
-		case FN_BUILTIN_OFFSET + FN_JUSTIFY: /* JUSTIFY(m$) */
+		case builtin_opcode(FN_JUSTIFY): /* JUSTIFY(m$) */
 			both.l[0] = pass_justify(getEvalStackStringStd(stk, stk->last()));
 			both.l[1] = 0;
 			setEvalStack(stk, stk->last(), both.d);
@@ -1318,14 +1364,14 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), color.get());
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_RGBA:
+		case builtin_opcode(FN_RGBA):
 			{
 				GLERC<GLEColor> color(new GLEColor(getEvalStackDouble(stk, stk->last()-3), getEvalStackDouble(stk, stk->last()-2), getEvalStackDouble(stk, stk->last()-1), getEvalStackDouble(stk, stk->last())));
 				stk->decrementSize(3);
 				setEvalStack(stk, stk->last(), color.get());
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_RGBA255:
+		case builtin_opcode(FN_RGBA255):
 			{
 				GLERC<GLEColor> color(new GLEColor());
 				color->setRGBA255(getEvalStackDouble(stk, stk->last()-3), getEvalStackDouble(stk, stk->last()-2), getEvalStackDouble(stk, stk->last()-1), getEvalStackDouble(stk, stk->last()));
@@ -1333,7 +1379,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), color.get());
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_COLOR_SCALE:
+		case builtin_opcode(FN_COLOR_SCALE):
 		    {
 		        const double value = getEvalStackDouble(stk, stk->last() - 1);
 		        const std::string scale = getEvalStackStringStd(stk, stk->last());
@@ -1350,11 +1396,17 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
 	    break;
-		case FN_BUILTIN_OFFSET + FN_NDATA: /* Number of datapoints in a dateset */
+		case builtin_opcode(FN_NDATA): /* Number of datapoints in a dateset */
+	    	{
+	    	// original method - dtasereis is a string
 			i = get_dataset_identifier(getEvalStackStringStd(stk, stk->last()), false);
 			setEvalStack(stk, stk->last(), dp[i] == 0 ? 0 : (int)dp[i]->np);
+	    	// -- new formulation to see if new machinery works
+	    	//GLEDataSet* data = getEvalStackDataSet(stk, stk->last());
+    		//setEvalStack(stk, stk->last(), static_cast<int>(data->np));
+			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_DATAXVALUE: /* X value in a dateset */
+		case builtin_opcode(FN_DATAXVALUE): /* X value in a dateset */
 			stk->decrementSize(1);
 			i = get_dataset_identifier(getEvalStackStringStd(stk, stk->last()), true);
 			j = (int) getEvalStackDouble(stk, stk->last()+1);
@@ -1367,7 +1419,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				}
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_DATAYVALUE: /* Y value in a dateset */
+		case builtin_opcode(FN_DATAYVALUE): /* Y value in a dateset */
 			stk->decrementSize(1);
 			i = get_dataset_identifier(getEvalStackStringStd(stk, stk->last()), true);
 			j = (int) getEvalStackDouble(stk, stk->last()+1);
@@ -1380,11 +1432,99 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				}
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_NDATASETS:
+		case builtin_opcode(FN_COPY):
+			{
+			const int argPos = stk->last();
+			GLERC<GLEDataSet> source(getEvalStackDataSet(stk, argPos));
+    		//GLEDataSet* source = getEvalStackDataSet(stk, argPos);
+    		//i = get_dataset_identifier(getEvalStackStringStd(stk, argPos), true);
+		    //GLEDataSet* source = dp[i];
+		    //GLEDataSet* result = cloneDataSet(source);
+		    GLERC<GLEDataSet> result(cloneDataSet(source.get()));
+    		setEvalStack(stk, argPos, result.get());
+			}
+		    break;
+	    case builtin_opcode(FN_CLIP): {
+		    const int top = stk->last();
+		    const auto* series = getEvalStackDataSet(stk, top - 2);
+		    const double lo = getEvalStackDouble(stk, top - 1);
+		    const double hi = getEvalStackDouble(stk, top);
+
+		    auto result = series->clampY(lo, hi);
+		    stk->decrementSize(2);
+		    setEvalStack(stk, stk->last(), result.get());
+		    break;
+		}
+
+		case builtin_opcode(FN_DERIVATIVE): {
+		    const auto* series = getEvalStackDataSet(stk, stk->last());
+		    auto result = series->differentiateY();
+		    setEvalStack(stk, stk->last(), result.get());
+		    break;
+		}
+
+		case builtin_opcode(FN_INTEGRAL): {
+		    const int top = stk->last();
+		    const auto* series = getEvalStackDataSet(stk, top - 2);
+		    const double xFrom = getEvalStackDouble(stk, top - 1);
+		    const double xTo = getEvalStackDouble(stk, top);
+
+		    const double result = series->definiteIntegral(xFrom, xTo);
+		    stk->decrementSize(2);
+		    setEvalStack(stk, stk->last(), result);
+		    break;
+		}
+
+		case builtin_opcode(FN_INTEGRATE): {
+		    const auto* series = getEvalStackDataSet(stk, stk->last());
+		    auto result = series->cumulativeIntegral();
+		    setEvalStack(stk, stk->last(), result.get());
+		    break;
+		}
+
+		case builtin_opcode(FN_NORMALIZE): {
+		    const auto* series = getEvalStackDataSet(stk, stk->last());
+		    auto result = series->normalizeY();
+		    setEvalStack(stk, stk->last(), result.get());
+		    break;
+		}
+
+		case builtin_opcode(FN_SLICE): {
+		    const int top = stk->last();
+		    const auto* series = getEvalStackDataSet(stk, top - 2);
+		    const unsigned int first = getEvalPositiveSeriesInt(
+		        stk, top - 1, "slice: first must be a positive integer");
+		    const unsigned int last = getEvalPositiveSeriesInt(
+		        stk, top, "slice: last must be a positive integer");
+
+		    if (first > last || last > series->np) {
+		        g_throw_parser_error(
+		            "slice: require 1 <= first <= last <= dataset size");
+		    }
+
+		    // GLE: 1-based inclusive. C++: zero-based half-open.
+		    auto result = series->slice(first - 1, last);
+		    stk->decrementSize(2);
+		    setEvalStack(stk, stk->last(), result.get());
+		    break;
+		}
+
+		case builtin_opcode(FN_SMOOTH): {
+		    const int top = stk->last();
+		    const auto* series = getEvalStackDataSet(stk, top - 1);
+		    const unsigned int window = getEvalPositiveSeriesInt(
+		        stk, top, "smooth: window must be a positive integer");
+
+		    auto result = series->smoothY(window);
+		    stk->decrementSize(1);
+		    setEvalStack(stk, stk->last(), result.get());
+		    break;
+		}
+		case builtin_opcode(FN_NDATASETS):
 			stk->incrementSize(1);
 			setEvalStack(stk, stk->last(), ndata);
 			break;
-		case FN_BUILTIN_OFFSET + FN_DI:
+		case builtin_opcode(FN_DI):
 			{
 				sprintf(sbuf, "D%d", getEvalStackInt(stk, stk->last()));
 				GLEVars* vars = getVarsInstance();
@@ -1405,15 +1545,15 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				}
 			}
 			break;
-		case FN_BUILTIN_OFFSET + FN_XG3D:
+		case builtin_opcode(FN_XG3D):
 			setEvalStack(stk, stk->last() - 2, xg3d(getEvalStackDouble(stk, stk->last() - 2), getEvalStackDouble(stk, stk->last() - 1), getEvalStackDouble(stk, stk->last())));
 			stk->decrementSize(2);
 			break;
-		case FN_BUILTIN_OFFSET + FN_YG3D:
+		case builtin_opcode(FN_YG3D):
 			setEvalStack(stk, stk->last() - 2, yg3d(getEvalStackDouble(stk, stk->last() - 2), getEvalStackDouble(stk, stk->last() - 1), getEvalStackDouble(stk, stk->last())));
 			stk->decrementSize(2);
 			break;
-		case FN_BUILTIN_OFFSET + FN_HSV:
+		case builtin_opcode(FN_HSV):
 		    {
 		        GLERC<GLEColor> color(new GLEColor());
 
@@ -1427,7 +1567,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
 	    break;
-	    case FN_BUILTIN_OFFSET + FN_HSL:
+	    case builtin_opcode(FN_HSL):
 		    {
 		        GLERC<GLEColor> color(new GLEColor());
 		        color->setHSL(
@@ -1440,7 +1580,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
 	    break;
-	    case FN_BUILTIN_OFFSET + FN_CMYK:
+	    case builtin_opcode(FN_CMYK):
 		    {
 		        GLERC<GLEColor> color(new GLEColor());
 
@@ -1455,7 +1595,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
 	    break;
-	    case FN_BUILTIN_OFFSET + FN_ISCAIRO:
+	    case builtin_opcode(FN_ISCAIRO):
 		    stk->incrementSize(1);
 		    setEvalStackBool(
 		        stk,
@@ -1463,7 +1603,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        g_is_render_engine_cairo()
 		    );
 	    break;
-		case FN_BUILTIN_OFFSET + FN_ISGHOSTSCRIPT:
+		case builtin_opcode(FN_ISGHOSTSCRIPT):
 		    stk->incrementSize(1);
 		    setEvalStackBool(
 		        stk,
@@ -1471,7 +1611,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        g_is_render_engine_ghostscript()
 		    );
 		    break;
-		case FN_BUILTIN_OFFSET + FN_RENDER_ENGINE:
+		case builtin_opcode(FN_RENDER_ENGINE):
 		    stk->incrementSize(1);
 		    setEvalStack(
 		        stk,
@@ -1479,7 +1619,7 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        g_get_render_engine_name()
 		    );
 		    break;
-		case FN_BUILTIN_OFFSET + FN_COLOR_INTENSITY:
+		case builtin_opcode(FN_COLOR_INTENSITY):
 			{
 				GLEColor* color = getEvalStackColor(stk, stk->last());
 				const double red   = color->getRed();
@@ -1494,6 +1634,32 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 				setEvalStack(stk, stk->last(), intensity);
 			}
 			break;
+#ifndef _NDEBUG
+		case builtin_opcode(FN_ZZDEBUG_TEST): // zzdebug_test
+			// simple for loop that evaluates a function that is passed to it
+			//{
+			//	std::string toEval(getEvalStackStringStd(stk, stk->last()));
+			//	stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
+			//}
+			cout << endl;
+			stk->decrementSize(2);
+			{
+			std::string toEval(getEvalStackStringStd(stk, stk->last()));
+			cout << toEval << endl;
+			stringstream ss;
+			ss << "x="<<getEvalStackDouble(stk, stk->last()+1);
+			cout << ss.str().c_str()<<endl;
+			cout << getEvalStackDouble(stk, stk->last()+2)<<endl;
+			double x;
+			//get_global_polish()->eval(stk, ss.str().c_str(),&x);
+			stk->set(stk->last(), get_global_polish()->evalGeneric(stk, ss.str().c_str() ));
+			//setEvalStack(stk, stk->last(),ss.str().c_str());
+			//setEvalStack(stk, stk->last(),"print x");
+			//get_global_polish()->evalString(stk, ss.str().c_str());
+			stk->set(stk->last(), get_global_polish()->evalGeneric(stk, toEval.c_str()));
+			}
+			break;
+#endif
 		default:  /* User function, LOCAL_START_INDEX..nnn , or error */
 			/* Is it a user defined function */
 			if (*(pcode+c) >= LOCAL_START_INDEX) {

@@ -75,6 +75,30 @@ public:
     // Composite styles
     static constexpr const char* BOLD_RED         = COLOR("1;31");
     static constexpr const char* UNDERLINE_BLUE   = COLOR("4;34");
+
+    static inline std::string Paint(const std::string& text, const char* color = nullptr)
+    {
+        if (color == nullptr || *color == '\0') { return text; }
+        return std::string(color) + text + RESET;
+    }
+    static inline std::string Paint(const std::string& text,const std::string& color)
+    {
+        if (color.empty()) {
+            return text;
+        }
+        return color + text + RESET;
+    }
+    static inline std::string ForegroundRGB(int red, int green, int blue)
+    {
+    #ifdef NO_CONSOLE_COLORS
+        return "";
+    #else
+        return "\033[38;2;" +
+            std::to_string(red) + ";" +
+            std::to_string(green) + ";" +
+            std::to_string(blue) + "m";
+    #endif
+    }
 };
 //
 // -- Global GLE specific colors
@@ -93,22 +117,46 @@ const std::string GLELogoColor =
     std::string(ConsoleColor::RESET);
 
 // helper functions
-inline std::string ColorInputFile(const std::string s){
-    return InputFileColor + s + ConsoleColor::RESET;
+inline std::string ColorInputFile(const std::string& s) {
+    return ConsoleColor::Paint(s, InputFileColor);
 }
-inline std::string ColorOutputFile(const std::string s){
-    return OutputFileColor + s + ConsoleColor::RESET;
+inline std::string ColorOutputFile(const std::string& s) {
+    return ConsoleColor::Paint(s, OutputFileColor);
 }
-inline std::string ColorGLECode(const std::string s){
-    return GLECodeColor + s + ConsoleColor::RESET;
+inline std::string ColorGLECode(const std::string& s) {
+    return ConsoleColor::Paint(s, GLECodeColor);
 }
-inline std::string ColorLineNumber(const int i){
-    return LineNumberColor + std::to_string(i) + ConsoleColor::RESET;
+inline std::string ColorLineNumber(int i) {
+    return ConsoleColor::Paint(std::to_string(i), LineNumberColor);
 }
-inline std::string ColorErrorMessage(const std::string s){
-    return ErrorMessageColor + s + ConsoleColor::RESET;
+inline std::string ColorErrorMessage(const std::string& s) {
+    return ConsoleColor::Paint(s, ErrorMessageColor);
 }
-inline std::string ColorWarningMessage(const std::string s){
-    return WarningMessageColor + s + ConsoleColor::RESET;
+inline std::string ColorWarningMessage(const std::string& s) {
+    return ConsoleColor::Paint(s, WarningMessageColor);
 }
+inline const char* GetConsoleColor(const std::string& color)
+{
+    // shdoul support all teh colors GLE supports ...
+    if (color == "BLACK")          return ConsoleColor::BLACK;
+    if (color == "RED")            return ConsoleColor::RED;
+    if (color == "GREEN")          return ConsoleColor::GREEN;
+    if (color == "YELLOW")         return ConsoleColor::YELLOW;
+    if (color == "BLUE")           return ConsoleColor::BLUE;
+    if (color == "MAGENTA")        return ConsoleColor::MAGENTA;
+    if (color == "CYAN")           return ConsoleColor::CYAN;
+    if (color == "WHITE")          return ConsoleColor::WHITE;
+
+    if (color == "BRIGHT_BLACK")   return ConsoleColor::BRIGHT_BLACK;
+    if (color == "BRIGHT_RED")     return ConsoleColor::BRIGHT_RED;
+    if (color == "BRIGHT_GREEN")   return ConsoleColor::BRIGHT_GREEN;
+    if (color == "BRIGHT_YELLOW")  return ConsoleColor::BRIGHT_YELLOW;
+    if (color == "BRIGHT_BLUE")    return ConsoleColor::BRIGHT_BLUE;
+    if (color == "BRIGHT_MAGENTA") return ConsoleColor::BRIGHT_MAGENTA;
+    if (color == "BRIGHT_CYAN")    return ConsoleColor::BRIGHT_CYAN;
+    if (color == "BRIGHT_WHITE")   return ConsoleColor::BRIGHT_WHITE;
+
+    return nullptr;
+}
+
 #endif

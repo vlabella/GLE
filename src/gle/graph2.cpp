@@ -1501,6 +1501,47 @@ void deleteLet(GLELet* let) {
 	delete let;
 }
 
+static bool isTopLevelDataSetExpression(const std::string& expression)
+{
+	std::string value = expression;
+
+	/* Remove leading whitespace. */
+	std::string::size_type first =
+		value.find_first_not_of(" \t\r\n");
+
+	if (first == std::string::npos) {
+		return false;
+	}
+
+	value.erase(0, first);
+
+	/* The top-level expression must begin with a function call. */
+	std::string::size_type open = value.find('(');
+
+	if (open == std::string::npos) {
+		return false;
+	}
+
+	std::string name = value.substr(0, open);
+
+	/* Remove whitespace between the function name and '('. */
+	std::string::size_type last =
+		name.find_last_not_of(" \t\r\n");
+
+	if (last == std::string::npos) {
+		return false;
+	}
+
+	name.erase(last + 1);
+	str_to_uppercase(name);
+
+	/*
+	 * For now COPY is the only built-in function known to return
+	 * a complete dataset.
+	 */
+	return name == "COPY";
+}
+
 /*  LET d2 = exp(x) [ FROM exp TO exp [ STEP exp ] ]	*/
 /*  LET d3 = exp(dn,d...)				*/
 // added by V.L.
@@ -1522,8 +1563,20 @@ GLELet* parseLet(GLEParser* parser, int codeLine) {
 
 	// next token should be an equal sign
 	tokens->ensure_next_token("=");
-
 	string let_fct = tokens->next_multilevel_token();
+	/*
+	 * Record whether this LET has a complete dataset result.
+	 *
+	 * This is intentionally based on the top-level function call:
+	 *
+	 *     let d3 = d4        -> false
+	 *     let d3 = d4/45.6   -> false
+	 *     let d3 = copy(d4)  -> true
+	 */
+	let->setDataSetExpression(
+		isTopLevelDataSetExpression(let_fct)
+	);
+
 	if (str_i_equals(let_fct,"LINFIT")   ||
 	    str_i_equals(let_fct,"LOGEFIT")  ||
 	    str_i_equals(let_fct,"LOG10FIT") ||
@@ -2614,6 +2667,11 @@ GLEDataSet::GLEDataSet(int identifier) {
 
 GLEDataSet::~GLEDataSet() {
 	clearAll();
+}
+
+int GLEDataSet::getType() const
+{
+	return GLEObjectTypeDataSet;
 }
 
 void GLEDataSet::initBackup() {
