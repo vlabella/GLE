@@ -148,7 +148,169 @@ void GLECairoDevice::box_stroke(dbl x1, dbl y1, dbl x2, dbl y2, bool reverse) {
 	}
 }
 
+enum class GLECairoFontFamily {
+    Serif,
+    SansSerif,
+    Monospace
+};
+
+static const char* cairo_family_for_type(GLECairoFontFamily family)
+{
+#ifdef _WIN32
+    switch (family) {
+    case GLECairoFontFamily::Serif:
+        return "Times New Roman";
+    case GLECairoFontFamily::SansSerif:
+        return "Arial";
+    case GLECairoFontFamily::Monospace:
+        return "Courier New";
+    }
+#elif defined(__APPLE__)
+    switch (family) {
+    case GLECairoFontFamily::Serif:
+        return "Times";
+    case GLECairoFontFamily::SansSerif:
+        return "Helvetica";
+    case GLECairoFontFamily::Monospace:
+        return "Courier New";
+    }
+#else
+    switch (family) {
+    case GLECairoFontFamily::Serif:
+        return "Liberation Serif";
+    case GLECairoFontFamily::SansSerif:
+        return "Liberation Sans";
+    case GLECairoFontFamily::Monospace:
+        return "Liberation Mono";
+    }
+#endif
+    return nullptr;
+}
+
+// Map GLE PostScript fonts to built-in Cairo fonts.
+static bool cairo_font_for_gle_font(
+    int font,
+    GLECairoDevice::GLECairoFont* result)
+{
+    if (result == nullptr) {
+        return false;
+    }
+
+    const char* name = font_getname(font);
+    if (name == nullptr) {
+        return false;
+    }
+
+    GLECairoFontFamily family;
+    cairo_font_slant_t slant = CAIRO_FONT_SLANT_NORMAL;
+    cairo_font_weight_t weight = CAIRO_FONT_WEIGHT_NORMAL;
+
+    // Roman / serif
+    if (str_i_equals(name, "rm")) {
+        family = GLECairoFontFamily::Serif;
+    }
+    else if (str_i_equals(name, "rmb")) {
+        family = GLECairoFontFamily::Serif;
+        weight = CAIRO_FONT_WEIGHT_BOLD;
+    }
+    else if (str_i_equals(name, "rmi")) {
+        family = GLECairoFontFamily::Serif;
+        slant = CAIRO_FONT_SLANT_ITALIC;
+    }
+    else if (str_i_equals(name, "rmbi")) {
+        family = GLECairoFontFamily::Serif;
+        slant = CAIRO_FONT_SLANT_ITALIC;
+        weight = CAIRO_FONT_WEIGHT_BOLD;
+    }
+
+    // Sans serif
+    else if (str_i_equals(name, "ss")) {
+        family = GLECairoFontFamily::SansSerif;
+    }
+    else if (str_i_equals(name, "ssb")) {
+        family = GLECairoFontFamily::SansSerif;
+        weight = CAIRO_FONT_WEIGHT_BOLD;
+    }
+    else if (str_i_equals(name, "ssi")) {
+        family = GLECairoFontFamily::SansSerif;
+        slant = CAIRO_FONT_SLANT_ITALIC;
+    }
+    else if (str_i_equals(name, "ssbi")) {
+        family = GLECairoFontFamily::SansSerif;
+        slant = CAIRO_FONT_SLANT_ITALIC;
+        weight = CAIRO_FONT_WEIGHT_BOLD;
+    }
+
+    // Monospace
+    else if (str_i_equals(name, "tt")) {
+        family = GLECairoFontFamily::Monospace;
+    }
+    else if (str_i_equals(name, "ttb")) {
+        family = GLECairoFontFamily::Monospace;
+        weight = CAIRO_FONT_WEIGHT_BOLD;
+    }
+    else if (str_i_equals(name, "tti")) {
+        family = GLECairoFontFamily::Monospace;
+        slant = CAIRO_FONT_SLANT_ITALIC;
+    }
+    else if (str_i_equals(name, "ttbi")) {
+        family = GLECairoFontFamily::Monospace;
+        slant = CAIRO_FONT_SLANT_ITALIC;
+        weight = CAIRO_FONT_WEIGHT_BOLD;
+    }
+
+    // Not a GLE font handled by native Cairo rendering.
+    else {
+        return false;
+    }
+
+    result->family = cairo_family_for_type(family);
+    result->slant = slant;
+    result->weight = weight;
+
+    return result->family != nullptr;
+}
+
+void GLECairoDevice::drawCairoChar( const GLECairoDevice::GLECairoFont& font, double size,int character)
+{
+    if (character < 32 || character > 126) {
+        return;
+    }
+    double x, y;
+    g_get_xy(&x, &y);
+    char text[2] = {
+        static_cast<char>(character),
+        '\0'
+    };
+    cairo_save(m_cr);
+    cairo_select_font_face(
+        m_cr,
+        font.family,
+        font.slant,
+        font.weight
+    );
+    cairo_set_font_size(m_cr, size);
+    cairo_translate(m_cr, x, y);
+    // Cancel GLE's inverted Y axis for Cairo glyphs.
+    cairo_scale(m_cr, 1.0, -1.0);
+    cairo_move_to(m_cr, 0.0, 0.0);
+    cairo_show_text(m_cr, text);
+    cairo_restore(m_cr);
+}
+
 void GLECairoDevice::dochar(int font, int cc) {
+	// new font - substitue ps fonts for cairo built in fonts
+	GLECairoFont cairoFont;
+    if (cairo_font_for_gle_font(font, &cairoFont)) {
+        double height;
+        g_get_hei(&height);
+        drawCairoChar(
+            cairoFont,
+            height,
+            cc
+        );
+        return;
+    }
 	if (font_get_encoding(font) > 2) {
 		my_char(font, cc);
 	} else {

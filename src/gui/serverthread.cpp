@@ -32,7 +32,7 @@
 #define DIR_SEP "/"
 #include "mainwindow.h"
 #include "qgle_statics.h"
-#include "../config.h"
+// #include "../config.h"
 
 #include <sstream>
 

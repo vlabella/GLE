@@ -57,6 +57,7 @@
     - added dmaxy_x and dminy_x to gle-library graphutil.gle functions that return the x value of the max or min y value respectively.
     - added console.gle to gle-library for printing colorized error and warning message and asserts for use in testing of GLE.
     - Removed the GLib dependency from the default macOS and Linux builds. GLE now uses the Poppler C++ interface instead of the Poppler GLib interface for PDF support, reducing the required runtime dependencies.
+    - Added native Cairo rendering for the standard GLE Roman (rm), sans-serif (ss), and typewriter (tt) font families, including normal, bold, italic, and bold-italic variants. These fonts are now rendered using platform-appropriate system fonts instead of falling back to texcmr when using the Cairo render engine.
 
 
 4.3.9 (January 2026)

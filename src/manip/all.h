@@ -36,11 +36,11 @@
  *                                                                      *
  ************************************************************************/
 
-#ifdef HAVE_CONFIG_H
-	#include "../config.h"
-#else
-	#include "../config_noauto.h"
-#endif
+// #ifdef HAVE_CONFIG_H
+// 	#include "../config.h"
+// #else
+// 	#include "../config_noauto.h"
+// #endif
 
 #ifdef INT32
 typedef int int32;

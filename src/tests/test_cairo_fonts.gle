@@ -1,0 +1,50 @@
+size 15 12
+set hei 0.5
+
+set font rm
+amove 1 11.2
+write "Roman normal: ABC abc 123"
+
+set font rmb
+amove 1 10.2
+write "Roman bold: ABC abc 123"
+
+set font rmi
+amove 1 9.2
+write "Roman italic: ABC abc 123"
+
+set font rmbi
+amove 1 8.2
+write "Roman bold italic: ABC abc 123"
+
+set font ss
+amove 1 7.2
+write "Sans normal: ABC abc 123"
+
+set font ssb
+amove 1 6.2
+write "Sans bold: ABC abc 123"
+
+set font ssi
+amove 1 5.2
+write "Sans italic: ABC abc 123"
+
+set font ssbi
+amove 1 4.2
+write "Sans bold italic: ABC abc 123"
+
+set font tt
+amove 1 3.2
+write "TT normal: ABC abc 123"
+
+set font ttb
+amove 1 2.2
+write "TT bold: ABC abc 123"
+
+set font tti
+amove 1 1.2
+write "TT italic: ABC abc 123"
+
+set font ttbi
+amove 1 0.2
+write "TT bold italic: ABC abc 123"

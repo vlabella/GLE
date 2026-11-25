@@ -1,4 +1,6 @@
-
+#
+# -- CMakeLists.txt for gle cli application
+#
 set(GLE_SOURCES
 	bitmap/img2ps.cpp
 	bitmap/lzwencode.cpp
@@ -57,8 +59,7 @@ set(GLE_SOURCES
 	cutils.cpp
 	texinterface.cpp
 	d_ps.cpp
-	d_svg.cpp
-	d_x.cpp
+#	d_x.cpp
 	d_dummy.cpp
 	d_cairo.cpp
 	config.cpp
@@ -76,11 +77,11 @@ set(GLE_SOURCES
 	file_io.cpp
 )
 
-set( GLEBTOOL_SOURCES
-	cutils.cpp
-	file_io.cpp
-	glebtool.cpp
-)
+#set( GLEBTOOL_SOURCES
+#	cutils.cpp
+#	file_io.cpp
+#	glebtool.cpp
+#)
 
 # -- generate glerc
 add_custom_command(

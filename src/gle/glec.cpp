@@ -44,11 +44,11 @@
 #include <string>
 #include <iostream>
 
-#ifdef HAVE_CONFIG_H
-    #include "../config.h"
-#else
-    #include "../config_noauto.h"
-#endif
+// #ifdef HAVE_CONFIG_H
+//     #include "../config.h"
+// #else
+//     #include "../config_noauto.h"
+// #endif
 
 #ifdef _WIN32
 	#include <windows.h>

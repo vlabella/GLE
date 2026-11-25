@@ -19,11 +19,11 @@
  * Also add information on how to contact you by electronic and paper mail.        *
  ***********************************************************************************/
 
-#ifdef HAVE_CONFIG_H
+/*#ifdef HAVE_CONFIG_H
     #include "../config.h"
 #else
     #include "../config_noauto.h"
-#endif
+#endif*/
 
 // ghostscript headers
 #include <ierrors.h>

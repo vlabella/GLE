@@ -39,11 +39,11 @@
 #ifndef INCLUDE_BASICCONF_H
 #define INCLUDE_BASICCONF_H
 
-#ifdef HAVE_CONFIG_H
-    #include "../config.h"
-#else
-    #include "../config_noauto.h"
-#endif
+//#ifdef HAVE_CONFIG_H
+//    #include "../config.h"
+//#else
+//    #include "../config_noauto.h"
+//#endif
 
 #include <stdio.h>
 #if HAVE_SYS_TYPES_H

@@ -290,6 +290,14 @@ public:
 	virtual void bitmap(GLEBitmap* bitmap, GLEPoint* pos, GLEPoint* scale, int type);
 	virtual void getRecordedBytes(std::string* output);
 	void recordData(const unsigned char *data, unsigned int length);
+	// -- cairo fonts
+	struct GLECairoFont {
+	    const char* family;
+	    cairo_font_slant_t slant;
+	    cairo_font_weight_t weight;
+	};
+	void drawCairoChar( const GLECairoFont& font, double size,int character);
+
 protected:
 	void set_color_impl(const GLERC<GLEColor>& color);
 	void ddfill(GLERectangle* bounds = NULL);

@@ -45,11 +45,11 @@
 #include <string.h>
 #include <algorithm>
 
-#ifdef HAVE_CONFIG_H
-    #include "../config.h"
-#else
-    #include "../config_noauto.h"
-#endif
+// #ifdef HAVE_CONFIG_H
+//     #include "../config.h"
+// #else
+//     #include "../config_noauto.h"
+// #endif
 
 /*
 no needed anymore C++ defines these functions

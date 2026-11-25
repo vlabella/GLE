@@ -25,7 +25,7 @@
 #include <QDialog>
 #include <QTabWidget>
 #include "mainwindow.h"
-#include "../config.h"
+//#include "../config.h"
 
 //! Tab used to configure application settings
 class ApplicationTab : public QWidget

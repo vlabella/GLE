@@ -4100,6 +4100,22 @@ int g_font_fallback(int font) {
 		CmdLineObj* cmdLine = GLEGetInterfacePointer()->getCmdLine();
 		//if (cmdLine->hasOption(GLE_OPT_CAIRO)) {
 		if (g_is_render_engine_cairo()) {
+			// These PostScript font aliases are rendered natively
+            // by the Cairo backend.
+            if (str_i_equals(coreFont->name, "rm")   ||
+			    str_i_equals(coreFont->name, "rmb")  ||
+			    str_i_equals(coreFont->name, "rmi")  ||
+			    str_i_equals(coreFont->name, "rmbi") ||
+			    str_i_equals(coreFont->name, "ss")   ||
+			    str_i_equals(coreFont->name, "ssb")  ||
+			    str_i_equals(coreFont->name, "ssi")  ||
+			    str_i_equals(coreFont->name, "ssbi") ||
+			    str_i_equals(coreFont->name, "tt")   ||
+			    str_i_equals(coreFont->name, "ttb")  ||
+			    str_i_equals(coreFont->name, "tti")  ||
+			    str_i_equals(coreFont->name, "ttbi")) {
+			    return font;
+			}
 			GLECore* core = g_get_core();
 			if (core->isShowNoteAboutFallback()) {
 				core->setShowNoteAboutFallback(false);

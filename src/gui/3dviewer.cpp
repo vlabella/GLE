@@ -23,7 +23,7 @@
 #include <QtOpenGL>
 #include <QOpenGLWidget>
 #include "3dviewer.h"
-#include "../config.h"
+//#include "../config.h"
 #include "../gle/cutils.h"
 #include "../gle/gle-block.h"
 #include "../gle/surface/gsurface.h"
