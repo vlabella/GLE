@@ -120,8 +120,8 @@
 #define FN_HSL                         136
 #define FN_CMYK                        137
 #define FN_COLOR_SCALE                 138
-#define FN_ISCAIRO                     139
-#define FN_ISGHOSTSCRIPT               140
+#define FN_IS_CAIRO                    139
+#define FN_IS_GHOSTSCRIPT              140
 #define FN_RENDER_ENGINE               141
 #define FN_CLAMP                       142
 #define FN_IS_CLOSE                    143

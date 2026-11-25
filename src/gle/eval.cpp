@@ -1449,46 +1449,39 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		    const auto* series = getEvalStackDataSet(stk, top - 2);
 		    const double lo = getEvalStackDouble(stk, top - 1);
 		    const double hi = getEvalStackDouble(stk, top);
-
 		    auto result = series->clampY(lo, hi);
 		    stk->decrementSize(2);
 		    setEvalStack(stk, stk->last(), result.get());
+			}
 		    break;
-		}
-
 		case builtin_opcode(FN_DERIVATIVE): {
 		    const auto* series = getEvalStackDataSet(stk, stk->last());
 		    auto result = series->differentiateY();
 		    setEvalStack(stk, stk->last(), result.get());
+			}
 		    break;
-		}
-
 		case builtin_opcode(FN_INTEGRAL): {
 		    const int top = stk->last();
 		    const auto* series = getEvalStackDataSet(stk, top - 2);
 		    const double xFrom = getEvalStackDouble(stk, top - 1);
 		    const double xTo = getEvalStackDouble(stk, top);
-
 		    const double result = series->definiteIntegral(xFrom, xTo);
 		    stk->decrementSize(2);
 		    setEvalStack(stk, stk->last(), result);
+			}
 		    break;
-		}
-
 		case builtin_opcode(FN_INTEGRATE): {
 		    const auto* series = getEvalStackDataSet(stk, stk->last());
 		    auto result = series->cumulativeIntegral();
 		    setEvalStack(stk, stk->last(), result.get());
+			}
 		    break;
-		}
-
 		case builtin_opcode(FN_NORMALIZE): {
 		    const auto* series = getEvalStackDataSet(stk, stk->last());
 		    auto result = series->normalizeY();
 		    setEvalStack(stk, stk->last(), result.get());
+			}
 		    break;
-		}
-
 		case builtin_opcode(FN_SLICE): {
 		    const int top = stk->last();
 		    const auto* series = getEvalStackDataSet(stk, top - 2);
@@ -1501,14 +1494,12 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		        g_throw_parser_error(
 		            "slice: require 1 <= first <= last <= dataset size");
 		    }
-
 		    // GLE: 1-based inclusive. C++: zero-based half-open.
 		    auto result = series->slice(first - 1, last);
 		    stk->decrementSize(2);
 		    setEvalStack(stk, stk->last(), result.get());
+			}
 		    break;
-		}
-
 		case builtin_opcode(FN_SMOOTH): {
 		    const int top = stk->last();
 		    const auto* series = getEvalStackDataSet(stk, top - 1);
@@ -1562,7 +1553,6 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		            getEvalStackDouble(stk, stk->last()-1),
 		            getEvalStackDouble(stk, stk->last())
 		        );
-
 		        stk->decrementSize(2);
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
@@ -1575,7 +1565,6 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 		            getEvalStackDouble(stk, stk->last()-1),
 		            getEvalStackDouble(stk, stk->last())
 		        );
-
 		        stk->decrementSize(2);
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
@@ -1583,33 +1572,23 @@ void eval_pcode_loop(GLEArrayImpl* stk, GLEPcodeList* pclist, int *pcode, int pl
 	    case builtin_opcode(FN_CMYK):
 		    {
 		        GLERC<GLEColor> color(new GLEColor());
-
 		        color->setCMYK(
 		            getEvalStackDouble(stk, stk->last()-3),
 		            getEvalStackDouble(stk, stk->last()-2),
 		            getEvalStackDouble(stk, stk->last()-1),
 		            getEvalStackDouble(stk, stk->last())
 		        );
-
 		        stk->decrementSize(3);
 		        setEvalStack(stk, stk->last(), color.get());
 		    }
 	    break;
-	    case builtin_opcode(FN_ISCAIRO):
+	    case builtin_opcode(FN_IS_CAIRO):
 		    stk->incrementSize(1);
-		    setEvalStackBool(
-		        stk,
-		        stk->last(),
-		        g_is_render_engine_cairo()
-		    );
+		    setEvalStackBool(stk,stk->last(),g_is_render_engine_cairo());
 	    break;
-		case builtin_opcode(FN_ISGHOSTSCRIPT):
+		case builtin_opcode(FN_IS_GHOSTSCRIPT):
 		    stk->incrementSize(1);
-		    setEvalStackBool(
-		        stk,
-		        stk->last(),
-		        g_is_render_engine_ghostscript()
-		    );
+		    setEvalStackBool(stk,stk->last(),g_is_render_engine_ghostscript());
 		    break;
 		case builtin_opcode(FN_RENDER_ENGINE):
 		    stk->incrementSize(1);
