@@ -82,10 +82,11 @@ set( GLEBTOOL_SOURCES
 	glebtool.cpp
 )
 
+# -- generate glerc
 add_custom_command(
  	OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/glerc
  	COMMAND ${CMAKE_COMMAND} -E echo begin config gle > ${CMAKE_CURRENT_BINARY_DIR}/glerc
- 	COMMAND ${CMAKE_COMMAND} -E echo current = ${PROJECT_VERSION} >> ${CMAKE_CURRENT_BINARY_DIR}/glerc
+ 	COMMAND ${CMAKE_COMMAND} -E echo current = ${GLE_VERSION} >> ${CMAKE_CURRENT_BINARY_DIR}/glerc
  	COMMAND ${CMAKE_COMMAND} -E echo end config >> ${CMAKE_CURRENT_BINARY_DIR}/glerc
   	COMMENT "Generating glerc in ${CMAKE_CURRENT_BINARY_DIR}"
   	WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}

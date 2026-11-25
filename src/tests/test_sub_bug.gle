@@ -1,0 +1,1049 @@
+size 12 12
+
+! 256 parameterless user subroutines
+
+sub dummy001
+end sub
+sub dummy002
+end sub
+sub dummy003
+end sub
+sub dummy004
+end sub
+sub dummy005
+end sub
+sub dummy006
+end sub
+sub dummy007
+end sub
+sub dummy008
+end sub
+sub dummy009
+end sub
+sub dummy010
+end sub
+sub dummy011
+end sub
+sub dummy012
+end sub
+sub dummy013
+end sub
+sub dummy014
+end sub
+sub dummy015
+end sub
+sub dummy016
+end sub
+sub dummy017
+end sub
+sub dummy018
+end sub
+sub dummy019
+end sub
+sub dummy020
+end sub
+sub dummy021
+end sub
+sub dummy022
+end sub
+sub dummy023
+end sub
+sub dummy024
+end sub
+sub dummy025
+end sub
+sub dummy026
+end sub
+sub dummy027
+end sub
+sub dummy028
+end sub
+sub dummy029
+end sub
+sub dummy030
+end sub
+sub dummy031
+end sub
+sub dummy032
+end sub
+sub dummy033
+end sub
+sub dummy034
+end sub
+sub dummy035
+end sub
+sub dummy036
+end sub
+sub dummy037
+end sub
+sub dummy038
+end sub
+sub dummy039
+end sub
+sub dummy040
+end sub
+sub dummy041
+end sub
+sub dummy042
+end sub
+sub dummy043
+end sub
+sub dummy044
+end sub
+sub dummy045
+end sub
+sub dummy046
+end sub
+sub dummy047
+end sub
+sub dummy048
+end sub
+sub dummy049
+end sub
+sub dummy050
+end sub
+sub dummy051
+end sub
+sub dummy052
+end sub
+sub dummy053
+end sub
+sub dummy054
+end sub
+sub dummy055
+end sub
+sub dummy056
+end sub
+sub dummy057
+end sub
+sub dummy058
+end sub
+sub dummy059
+end sub
+sub dummy060
+end sub
+sub dummy061
+end sub
+sub dummy062
+end sub
+sub dummy063
+end sub
+sub dummy064
+end sub
+sub dummy065
+end sub
+sub dummy066
+end sub
+sub dummy067
+end sub
+sub dummy068
+end sub
+sub dummy069
+end sub
+sub dummy070
+end sub
+sub dummy071
+end sub
+sub dummy072
+end sub
+sub dummy073
+end sub
+sub dummy074
+end sub
+sub dummy075
+end sub
+sub dummy076
+end sub
+sub dummy077
+end sub
+sub dummy078
+end sub
+sub dummy079
+end sub
+sub dummy080
+end sub
+sub dummy081
+end sub
+sub dummy082
+end sub
+sub dummy083
+end sub
+sub dummy084
+end sub
+sub dummy085
+end sub
+sub dummy086
+end sub
+sub dummy087
+end sub
+sub dummy088
+end sub
+sub dummy089
+end sub
+sub dummy090
+end sub
+sub dummy091
+end sub
+sub dummy092
+end sub
+sub dummy093
+end sub
+sub dummy094
+end sub
+sub dummy095
+end sub
+sub dummy096
+end sub
+sub dummy097
+end sub
+sub dummy098
+end sub
+sub dummy099
+end sub
+sub dummy100
+end sub
+sub dummy101
+end sub
+sub dummy102
+end sub
+sub dummy103
+end sub
+sub dummy104
+end sub
+sub dummy105
+end sub
+sub dummy106
+end sub
+sub dummy107
+end sub
+sub dummy108
+end sub
+sub dummy109
+end sub
+sub dummy110
+end sub
+sub dummy111
+end sub
+sub dummy112
+end sub
+sub dummy113
+end sub
+sub dummy114
+end sub
+sub dummy115
+end sub
+sub dummy116
+end sub
+sub dummy117
+end sub
+sub dummy118
+end sub
+sub dummy119
+end sub
+sub dummy120
+end sub
+sub dummy121
+end sub
+sub dummy122
+end sub
+sub dummy123
+end sub
+sub dummy124
+end sub
+sub dummy125
+end sub
+sub dummy126
+end sub
+sub dummy127
+end sub
+sub dummy128
+end sub
+sub dummy129
+end sub
+sub dummy130
+end sub
+sub dummy131
+end sub
+sub dummy132
+end sub
+sub dummy133
+end sub
+sub dummy134
+end sub
+sub dummy135
+end sub
+sub dummy136
+end sub
+sub dummy137
+end sub
+sub dummy138
+end sub
+sub dummy139
+end sub
+sub dummy140
+end sub
+sub dummy141
+end sub
+sub dummy142
+end sub
+sub dummy143
+end sub
+sub dummy144
+end sub
+sub dummy145
+end sub
+sub dummy146
+end sub
+sub dummy147
+end sub
+sub dummy148
+end sub
+sub dummy149
+end sub
+sub dummy150
+end sub
+sub dummy151
+end sub
+sub dummy152
+end sub
+sub dummy153
+end sub
+sub dummy154
+end sub
+sub dummy155
+end sub
+sub dummy156
+end sub
+sub dummy157
+end sub
+sub dummy158
+end sub
+sub dummy159
+end sub
+sub dummy160
+end sub
+sub dummy161
+end sub
+sub dummy162
+end sub
+sub dummy163
+end sub
+sub dummy164
+end sub
+sub dummy165
+end sub
+sub dummy166
+end sub
+sub dummy167
+end sub
+sub dummy168
+end sub
+sub dummy169
+end sub
+sub dummy170
+end sub
+sub dummy171
+end sub
+sub dummy172
+end sub
+sub dummy173
+end sub
+sub dummy174
+end sub
+sub dummy175
+end sub
+sub dummy176
+end sub
+sub dummy177
+end sub
+sub dummy178
+end sub
+sub dummy179
+end sub
+sub dummy180
+end sub
+sub dummy181
+end sub
+sub dummy182
+end sub
+sub dummy183
+end sub
+sub dummy184
+end sub
+sub dummy185
+end sub
+sub dummy186
+end sub
+sub dummy187
+end sub
+sub dummy188
+end sub
+sub dummy189
+end sub
+sub dummy190
+end sub
+sub dummy191
+end sub
+sub dummy192
+end sub
+sub dummy193
+end sub
+sub dummy194
+end sub
+sub dummy195
+end sub
+sub dummy196
+end sub
+sub dummy197
+end sub
+sub dummy198
+end sub
+sub dummy199
+end sub
+sub dummy200
+end sub
+sub dummy201
+end sub
+sub dummy202
+end sub
+sub dummy203
+end sub
+sub dummy204
+end sub
+sub dummy205
+end sub
+sub dummy206
+end sub
+sub dummy207
+end sub
+sub dummy208
+end sub
+sub dummy209
+end sub
+sub dummy210
+end sub
+sub dummy211
+end sub
+sub dummy212
+end sub
+sub dummy213
+end sub
+sub dummy214
+end sub
+sub dummy215
+end sub
+sub dummy216
+end sub
+sub dummy217
+end sub
+sub dummy218
+end sub
+sub dummy219
+end sub
+sub dummy220
+end sub
+sub dummy221
+end sub
+sub dummy222
+end sub
+sub dummy223
+end sub
+sub dummy224
+end sub
+sub dummy225
+end sub
+sub dummy226
+end sub
+sub dummy227
+end sub
+sub dummy228
+end sub
+sub dummy229
+end sub
+sub dummy230
+end sub
+sub dummy231
+end sub
+sub dummy232
+end sub
+sub dummy233
+end sub
+sub dummy234
+end sub
+sub dummy235
+end sub
+sub dummy236
+end sub
+sub dummy237
+end sub
+sub dummy238
+end sub
+sub dummy239
+end sub
+sub dummy240
+end sub
+sub dummy241
+end sub
+sub dummy242
+end sub
+sub dummy243
+end sub
+sub dummy244
+end sub
+sub dummy245
+end sub
+sub dummy246
+end sub
+sub dummy247
+end sub
+sub dummy248
+end sub
+sub dummy249
+end sub
+sub dummy250
+end sub
+sub dummy251
+end sub
+sub dummy252
+end sub
+sub dummy253
+end sub
+sub dummy254
+end sub
+sub dummy255
+end sub
+sub dummy256
+end sub
+
+! Test only calls 59 through 61
+
+print "BEFORE dummy059"
+dummy059
+print "AFTER dummy059"
+
+print "BEFORE dummy060"
+dummy060
+print "AFTER dummy060"
+
+print "BEFORE dummy061"
+dummy061
+print "AFTER dummy061"
+
+print "SUCCESS"
+
+! Call every subroutine
+
+print "Calling dummy001"
+dummy001
+print "Calling dummy002"
+dummy002
+print "Calling dummy003"
+dummy003
+print "Calling dummy004"
+dummy004
+print "Calling dummy005"
+dummy005
+print "Calling dummy006"
+dummy006
+print "Calling dummy007"
+dummy007
+print "Calling dummy008"
+dummy008
+print "Calling dummy009"
+dummy009
+print "Calling dummy010"
+dummy010
+print "Calling dummy011"
+dummy011
+print "Calling dummy012"
+dummy012
+print "Calling dummy013"
+dummy013
+print "Calling dummy014"
+dummy014
+print "Calling dummy015"
+dummy015
+print "Calling dummy016"
+dummy016
+print "Calling dummy017"
+dummy017
+print "Calling dummy018"
+dummy018
+print "Calling dummy019"
+dummy019
+print "Calling dummy020"
+dummy020
+print "Calling dummy021"
+dummy021
+print "Calling dummy022"
+dummy022
+print "Calling dummy023"
+dummy023
+print "Calling dummy024"
+dummy024
+print "Calling dummy025"
+dummy025
+print "Calling dummy026"
+dummy026
+print "Calling dummy027"
+dummy027
+print "Calling dummy028"
+dummy028
+print "Calling dummy029"
+dummy029
+print "Calling dummy030"
+dummy030
+print "Calling dummy031"
+dummy031
+print "Calling dummy032"
+dummy032
+print "Calling dummy033"
+dummy033
+print "Calling dummy034"
+dummy034
+print "Calling dummy035"
+dummy035
+print "Calling dummy036"
+dummy036
+print "Calling dummy037"
+dummy037
+print "Calling dummy038"
+dummy038
+print "Calling dummy039"
+dummy039
+print "Calling dummy040"
+dummy040
+print "Calling dummy041"
+dummy041
+print "Calling dummy042"
+dummy042
+print "Calling dummy043"
+dummy043
+print "Calling dummy044"
+dummy044
+print "Calling dummy045"
+dummy045
+print "Calling dummy046"
+dummy046
+print "Calling dummy047"
+dummy047
+print "Calling dummy048"
+dummy048
+print "Calling dummy049"
+dummy049
+print "Calling dummy050"
+dummy050
+print "Calling dummy051"
+dummy051
+print "Calling dummy052"
+dummy052
+print "Calling dummy053"
+dummy053
+print "Calling dummy054"
+dummy054
+print "Calling dummy055"
+dummy055
+print "Calling dummy056"
+dummy056
+print "Calling dummy057"
+dummy057
+print "Calling dummy058"
+dummy058
+print "Calling dummy059"
+dummy059
+print "Calling dummy060"
+dummy060
+print "Calling dummy061"
+dummy061
+print "Calling dummy062"
+dummy062
+print "Calling dummy063"
+dummy063
+print "Calling dummy064"
+dummy064
+print "Calling dummy065"
+dummy065
+print "Calling dummy066"
+dummy066
+print "Calling dummy067"
+dummy067
+print "Calling dummy068"
+dummy068
+print "Calling dummy069"
+dummy069
+print "Calling dummy070"
+dummy070
+print "Calling dummy071"
+dummy071
+print "Calling dummy072"
+dummy072
+print "Calling dummy073"
+dummy073
+print "Calling dummy074"
+dummy074
+print "Calling dummy075"
+dummy075
+print "Calling dummy076"
+dummy076
+print "Calling dummy077"
+dummy077
+print "Calling dummy078"
+dummy078
+print "Calling dummy079"
+dummy079
+print "Calling dummy080"
+dummy080
+print "Calling dummy081"
+dummy081
+print "Calling dummy082"
+dummy082
+print "Calling dummy083"
+dummy083
+print "Calling dummy084"
+dummy084
+print "Calling dummy085"
+dummy085
+print "Calling dummy086"
+dummy086
+print "Calling dummy087"
+dummy087
+print "Calling dummy088"
+dummy088
+print "Calling dummy089"
+dummy089
+print "Calling dummy090"
+dummy090
+print "Calling dummy091"
+dummy091
+print "Calling dummy092"
+dummy092
+print "Calling dummy093"
+dummy093
+print "Calling dummy094"
+dummy094
+print "Calling dummy095"
+dummy095
+print "Calling dummy096"
+dummy096
+print "Calling dummy097"
+dummy097
+print "Calling dummy098"
+dummy098
+print "Calling dummy099"
+dummy099
+print "Calling dummy100"
+dummy100
+print "Calling dummy101"
+dummy101
+print "Calling dummy102"
+dummy102
+print "Calling dummy103"
+dummy103
+print "Calling dummy104"
+dummy104
+print "Calling dummy105"
+dummy105
+print "Calling dummy106"
+dummy106
+print "Calling dummy107"
+dummy107
+print "Calling dummy108"
+dummy108
+print "Calling dummy109"
+dummy109
+print "Calling dummy110"
+dummy110
+print "Calling dummy111"
+dummy111
+print "Calling dummy112"
+dummy112
+print "Calling dummy113"
+dummy113
+print "Calling dummy114"
+dummy114
+print "Calling dummy115"
+dummy115
+print "Calling dummy116"
+dummy116
+print "Calling dummy117"
+dummy117
+print "Calling dummy118"
+dummy118
+print "Calling dummy119"
+dummy119
+print "Calling dummy120"
+dummy120
+print "Calling dummy121"
+dummy121
+print "Calling dummy122"
+dummy122
+print "Calling dummy123"
+dummy123
+print "Calling dummy124"
+dummy124
+print "Calling dummy125"
+dummy125
+print "Calling dummy126"
+dummy126
+print "Calling dummy127"
+dummy127
+print "Calling dummy128"
+dummy128
+print "Calling dummy129"
+dummy129
+print "Calling dummy130"
+dummy130
+print "Calling dummy131"
+dummy131
+print "Calling dummy132"
+dummy132
+print "Calling dummy133"
+dummy133
+print "Calling dummy134"
+dummy134
+print "Calling dummy135"
+dummy135
+print "Calling dummy136"
+dummy136
+print "Calling dummy137"
+dummy137
+print "Calling dummy138"
+dummy138
+print "Calling dummy139"
+dummy139
+print "Calling dummy140"
+dummy140
+print "Calling dummy141"
+dummy141
+print "Calling dummy142"
+dummy142
+print "Calling dummy143"
+dummy143
+print "Calling dummy144"
+dummy144
+print "Calling dummy145"
+dummy145
+print "Calling dummy146"
+dummy146
+print "Calling dummy147"
+dummy147
+print "Calling dummy148"
+dummy148
+print "Calling dummy149"
+dummy149
+print "Calling dummy150"
+dummy150
+print "Calling dummy151"
+dummy151
+print "Calling dummy152"
+dummy152
+print "Calling dummy153"
+dummy153
+print "Calling dummy154"
+dummy154
+print "Calling dummy155"
+dummy155
+print "Calling dummy156"
+dummy156
+print "Calling dummy157"
+dummy157
+print "Calling dummy158"
+dummy158
+print "Calling dummy159"
+dummy159
+print "Calling dummy160"
+dummy160
+print "Calling dummy161"
+dummy161
+print "Calling dummy162"
+dummy162
+print "Calling dummy163"
+dummy163
+print "Calling dummy164"
+dummy164
+print "Calling dummy165"
+dummy165
+print "Calling dummy166"
+dummy166
+print "Calling dummy167"
+dummy167
+print "Calling dummy168"
+dummy168
+print "Calling dummy169"
+dummy169
+print "Calling dummy170"
+dummy170
+print "Calling dummy171"
+dummy171
+print "Calling dummy172"
+dummy172
+print "Calling dummy173"
+dummy173
+print "Calling dummy174"
+dummy174
+print "Calling dummy175"
+dummy175
+print "Calling dummy176"
+dummy176
+print "Calling dummy177"
+dummy177
+print "Calling dummy178"
+dummy178
+print "Calling dummy179"
+dummy179
+print "Calling dummy180"
+dummy180
+print "Calling dummy181"
+dummy181
+print "Calling dummy182"
+dummy182
+print "Calling dummy183"
+dummy183
+print "Calling dummy184"
+dummy184
+print "Calling dummy185"
+dummy185
+print "Calling dummy186"
+dummy186
+print "Calling dummy187"
+dummy187
+print "Calling dummy188"
+dummy188
+print "Calling dummy189"
+dummy189
+print "Calling dummy190"
+dummy190
+print "Calling dummy191"
+dummy191
+print "Calling dummy192"
+dummy192
+print "Calling dummy193"
+dummy193
+print "Calling dummy194"
+dummy194
+print "Calling dummy195"
+dummy195
+print "Calling dummy196"
+dummy196
+print "Calling dummy197"
+dummy197
+print "Calling dummy198"
+dummy198
+print "Calling dummy199"
+dummy199
+print "Calling dummy200"
+dummy200
+print "Calling dummy201"
+dummy201
+print "Calling dummy202"
+dummy202
+print "Calling dummy203"
+dummy203
+print "Calling dummy204"
+dummy204
+print "Calling dummy205"
+dummy205
+print "Calling dummy206"
+dummy206
+print "Calling dummy207"
+dummy207
+print "Calling dummy208"
+dummy208
+print "Calling dummy209"
+dummy209
+print "Calling dummy210"
+dummy210
+print "Calling dummy211"
+dummy211
+print "Calling dummy212"
+dummy212
+print "Calling dummy213"
+dummy213
+print "Calling dummy214"
+dummy214
+print "Calling dummy215"
+dummy215
+print "Calling dummy216"
+dummy216
+print "Calling dummy217"
+dummy217
+print "Calling dummy218"
+dummy218
+print "Calling dummy219"
+dummy219
+print "Calling dummy220"
+dummy220
+print "Calling dummy221"
+dummy221
+print "Calling dummy222"
+dummy222
+print "Calling dummy223"
+dummy223
+print "Calling dummy224"
+dummy224
+print "Calling dummy225"
+dummy225
+print "Calling dummy226"
+dummy226
+print "Calling dummy227"
+dummy227
+print "Calling dummy228"
+dummy228
+print "Calling dummy229"
+dummy229
+print "Calling dummy230"
+dummy230
+print "Calling dummy231"
+dummy231
+print "Calling dummy232"
+dummy232
+print "Calling dummy233"
+dummy233
+print "Calling dummy234"
+dummy234
+print "Calling dummy235"
+dummy235
+print "Calling dummy236"
+dummy236
+print "Calling dummy237"
+dummy237
+print "Calling dummy238"
+dummy238
+print "Calling dummy239"
+dummy239
+print "Calling dummy240"
+dummy240
+print "Calling dummy241"
+dummy241
+print "Calling dummy242"
+dummy242
+print "Calling dummy243"
+dummy243
+print "Calling dummy244"
+dummy244
+print "Calling dummy245"
+dummy245
+print "Calling dummy246"
+dummy246
+print "Calling dummy247"
+dummy247
+print "Calling dummy248"
+dummy248
+print "Calling dummy249"
+dummy249
+print "Calling dummy250"
+dummy250
+print "Calling dummy251"
+dummy251
+print "Calling dummy252"
+dummy252
+print "Calling dummy253"
+dummy253
+print "Calling dummy254"
+dummy254
+print "Calling dummy255"
+dummy255
+print "Calling dummy256"
+dummy256
+
+print "SUCCESS: all 256 user subroutines called"

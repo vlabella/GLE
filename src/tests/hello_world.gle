@@ -1,0 +1,7 @@
+size 10 10
+set font texcmss
+amove 4 4
+box 3 3 fill BLUE
+amove 5 1
+set just cc
+text Hello World

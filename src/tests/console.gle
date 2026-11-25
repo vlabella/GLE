@@ -1,0 +1,82 @@
+! console.gle
+! Console helpers for regression tests
+
+sub console_success message$
+    print_color green message$
+end sub
+
+sub console_error message$
+    print_color red message$
+end sub
+
+sub console_info message$
+    print_color cyan message$
+end sub
+
+sub console_warning message$
+    print_color yellow message$
+end sub
+
+
+
+! global counters
+n_tests = 0
+n_failed = 0
+
+!-----------------------------------------------------------------------------
+! assert_equal
+!
+! Test two values for exact equality.
+!-----------------------------------------------------------------------------
+
+sub assert_equal test_name$ actual expected
+    n_tests = n_tests + 1
+
+    if actual = expected then
+        console_success "PASS: "+test_name$
+    else
+        console_error "FAIL: "+test_name$
+        print "      expected = "+expected
+        print "      actual   = "+actual
+        n_failed = n_failed + 1
+    end if
+end sub
+
+
+!-----------------------------------------------------------------------------
+! assert_close
+!
+! Test two floating-point values using an absolute tolerance.
+!-----------------------------------------------------------------------------
+
+sub assert_close test_name$ actual expected tolerance
+    n_tests = n_tests + 1
+
+    if abs(actual - expected) <= tolerance then
+        console_success "PASS: "+test_name$
+    else
+        console_error "FAIL: "+test_name$
+        print "      expected  = "+expected
+        print "      actual    = "+actual
+        print "      tolerance = "+tolerance
+        print "      error     = "+abs(actual - expected)
+        n_failed = n_failed + 1
+    end if
+end sub
+
+sub test_summary
+    n_passed = n_tests - n_failed
+    if n_failed = 0 then
+        console_success "Tests passed: "+n_passed
+        console_success "Tests failed: "+n_failed
+        console_success "All regression tests passed"
+        exit 0
+    else
+        console_success "Tests passed: "+n_passed
+        console_error   "Tests failed: "+n_failed
+        console_error   "Regression tests failed"
+        exit 1
+    end if
+end sub
+
+

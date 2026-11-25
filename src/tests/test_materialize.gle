@@ -1,0 +1,91 @@
+!
+! -- test_materialize.gle
+!
+! Demonstrates the MATERIALIZE option for LET data series.
+!
+! Normally, a data series defined by LET within a graph block is
+! evaluated later during graph processing. Therefore, functions that
+! require access to the actual data points, such as ndata() or dmaxy(),
+! cannot operate on the series immediately after the LET statement.
+!
+! The MATERIALIZE option forces the data series to be evaluated
+! immediately, making its data points available to subsequent commands
+! within the graph block.
+!
+
+include "graphutil.gle"
+
+size 10 10
+
+begin graph
+    scale auto
+
+    !
+    ! Standard LET behavior
+    !
+    ! Define a data series containing 10 points. Without MATERIALIZE,
+    ! the series is not evaluated immediately.
+    !
+    let d1 = x from 1 to 10 step 1
+
+    d1 line color RED lwidth 0.1
+
+    ! At this point d1 has not yet been materialized, so ndata()
+    ! cannot see its data points. Although the series will eventually
+    ! contain 10 points, this currently returns 0.
+    nd = ndata(d1)
+    print nd
+
+    !
+    ! LET with MATERIALIZE
+    !
+    ! MATERIALIZE forces the series to be evaluated immediately.
+    ! The complete data set is therefore available to commands that
+    ! follow the LET statement.
+    !
+    let d2 = x from 1 to 10 step 1 materialize
+
+    d2 line color YELLOW lwidth 0.02
+
+    ! d2 is already materialized, so ndata() correctly returns 10.
+    nd = ndata(d2)
+    print nd
+
+    !
+    ! A materialized series can also be passed to functions that
+    ! inspect or operate on its data points.
+    !
+
+    ! Find the maximum y value using dmaxy() from graphutil.gle.
+    mx = dmaxy(d2)
+    print mx
+
+    ! Normalize the series by its maximum value.
+    let d3 = d2/mx
+
+    d3 line color GREEN lwidth 0.04
+
+    !
+    ! Data loaded from a file
+    !
+    ! A series created by DATA is already populated, so MATERIALIZE
+    ! is not required.
+    !
+    data "normalize.dat" d4=c1,c2
+
+    ! ndata() can immediately access the loaded data points.
+    nd = ndata(d4)
+    print nd
+
+    ! Functions such as dmaxy() can also operate on the series
+    ! immediately.
+    mx = dmaxy(d4)
+
+    d4 line color BLUE
+
+    ! Normalize the file-based data series.
+    let d5 = d4/mx
+
+    d5 line color RED
+
+end graph

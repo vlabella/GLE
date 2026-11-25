@@ -1,0 +1,44 @@
+!==============================================================================
+! test_console_colors.gle
+!
+! Regression / visual test for PRINT_COLOR.
+!
+! This test intentionally exercises all of the predefined ANSI-style names
+! used by console output plus several additional GLE named colors.  When GLE
+! is built with console colors disabled, the same text should print without
+! ANSI coloring.
+!==============================================================================
+
+print "Testing PRINT_COLOR"
+
+print ""
+print "Standard foreground colors:"
+print_color black   "BLACK"
+print_color red     "RED"
+print_color green   "GREEN"
+print_color yellow  "YELLOW"
+print_color blue    "BLUE"
+print_color magenta "MAGENTA"
+print_color cyan    "CYAN"
+print_color white   "WHITE"
+
+print ""
+print "GLE predefined colors converted to RGB ANSI colors:"
+print_color crimson        "CRIMSON"
+print_color darkorange     "DARKORANGE"
+print_color cornflowerblue "CORNFLOWERBLUE"
+print_color aquamarine     "AQUAMARINE"
+print_color violet         "VIOLET"
+print_color gray50         "GRAY50"
+
+print ""
+print "Expression handling:"
+value = 5
+print_color green "Numeric value:" value
+print_color cyan "Expression result:" value*2
+print_color yellow "Multiple values:" value value+1 value+2
+
+print ""
+print "Checking that PRINT_COLOR resets the console color:"
+print_color red "THIS LINE SHOULD BE RED"
+print "THIS LINE SHOULD USE THE DEFAULT CONSOLE COLOR"

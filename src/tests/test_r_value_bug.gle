@@ -1,0 +1,28 @@
+!
+! -- test which caused error for incorrect number of arguments when subroutine is
+!	 an r-value in an expression.
+!
+sub mysum a b c
+	default b 4
+	default c 5
+	return a+b
+end sub
+! try stand alone subroutine call
+mysum(2,6)
+! ok
+mysum(2)
+! ok
+mysum 2 4
+! ok
+mysum 2
+! now use subroutine as an r-value
+! ok
+e = mysum(2,3)
+print e
+!  the following threw this error but is now fixed
+!>> test.gle (24) |e = mysum(2)|
+!>>                           ^
+!>> Error: incorrect number of parameters in call to 'MYSUM': found 1, expected 2
+e = mysum(2)
+print e
+

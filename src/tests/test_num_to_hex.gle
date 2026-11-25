@@ -1,0 +1,6 @@
+a = pi
+print a
+print format$(a,"hex")
+print format$(10,"hex")
+print format$(1.234,"bin")
+print num$(a)

@@ -1,0 +1,17 @@
+! include "vplGLELib.gli"
+include "test_swap.gle"
+
+filename$ = "test_new_operators.gle"
+a = 4
+include filename$
+a = 4
+b = 5
+print a b
+swap a b
+print a b
+
+s1$ = "foo"
+s2$ = "bar"
+print s1$ s2$
+swap s1$ s2$
+print s1$ s2$

@@ -1,0 +1,136 @@
+!
+! -- test_dataseries_return.gle
+!
+
+include "graphutil.gle"
+
+size 10 10
+
+begin graph
+    scale auto
+
+    !
+    ! Deferred LET data series
+    !
+    ! Without MATERIALIZE, the series remains deferred.
+    !
+    let d1 = x from 1 to 10 step 1
+
+    nd = ndata(d1)
+    print "d1 ndata = " nd
+
+    if nd = 0 then
+        print "PASSED: deferred ndata(d1) = 0"
+    else
+        print "FAILED: deferred ndata(d1), expected 0, got " nd
+    end if
+
+    !
+    ! Materialized LET data series
+    !
+    let d2 = x from 1 to 10 step 1 materialize
+    d2 line color YELLOW lwidth 0.02
+
+    ! d2 is materialized, so ndata() should return 10.
+    nd = ndata(d2)
+    print "d2 ndata = " nd
+
+    if nd = 10 then
+        print "PASSED: ndata(d2) = 10"
+    else
+        print "FAILED: ndata(d2), expected 10, got " nd
+    end if
+
+    !
+    ! A materialized series can also be passed to functions that
+    ! inspect or operate on its data points.
+    !
+    ! Find the maximum y value using dmaxy() from graphutil.gle.
+    mx = dmaxy(d2)
+    print "d2 max = " mx
+
+    if mx = 10 then
+        print "PASSED: dmaxy(d2) = 10"
+    else
+        print "FAILED: dmaxy(d2), expected 10, got " mx
+    end if
+
+    ! Existing behavior: direct dataset expression
+    let d3 = d2
+    print "PASSED: let d3 = d2, ndata(d3) = " ndata(d3)
+
+    ! Existing behavior: numeric dataset transformation
+    let d3 = d2/45.6
+    print "PASSED: let d3 = d2/45.6, ndata(d3) = " ndata(d3)
+
+    ! New behavior: dataset-returning function
+    let d4 = copy(d2)
+    print "PASSED: let d4 = copy(d2), ndata(d4) = " ndata(d4)
+
+    if ndata(d4) = 10 then
+        PRINT "PASSED: copy(d2) materialized immediately"
+    else
+        PRINT "FAILED: copy(d2) was not materialized"
+    end if
+
+    ! Replace d2 after copying.
+    let d2 = 2*x from 1 to 4
+
+    if ndata(d4) = 10 then
+        PRINT "PASSED: copied dataset is independent of source"
+    else
+        PRINT "FAILED: copied dataset changed with source"
+    end if
+
+    ! Normalize the series by its maximum value.
+    let d3 = d2/mx
+    d3 line color GREEN lwidth 0.04
+
+    ! double copy
+    let d6 = copy(copy(d2))
+    print "PASSED: let d6 = copy(copy(d2)) ndata(d6) = " ndata(d6)
+
+
+    !print "loading data from file"
+    !
+    ! Data loaded from a file
+    !
+    ! A series created by DATA is already populated, so MATERIALIZE
+    ! is not required.
+    !
+    data "normalize.dat" d10=c1,c2
+
+    ! ndata() can immediately access the loaded data points.
+    nd = ndata(d10)
+    print "d10 ndata = " nd
+
+    if nd = 4 then
+        print "PASSED: ndata(d10) = 4"
+    else
+        print "FAILED: ndata(d10), expected 4, got " nd
+    end if
+
+    !
+    ! Functions such as dmaxy() can also operate on the series
+    ! immediately.
+    !
+    mx = dmaxy(d10)
+    print "d10 max = " mx
+
+    ! Normalize the file-based data series.
+    let d11 = d10/mx
+    d11 line color RED
+
+end graph
+
+! new copy smeantics  - works outside graph block - no let
+!d6 = copy(d3)
+print "-- outside graph block --"
+print "ndata(d1) " ndata(d1)
+print "ndata(d2) " ndata(d2)
+print "ndata(d3) " ndata(d3)
+print "ndata(d4) " ndata(d4)
+print "ndata(d5) " ndata(d5)
+print "ndata(d6) " ndata(d6)
+print "ndata(d10) " ndata(d10)
+print "ndata(d11) " ndata(d11)

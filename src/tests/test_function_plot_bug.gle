@@ -1,0 +1,13 @@
+size 10 10
+amove 0 0
+set font texcmss
+sub my_function a x
+	print x
+	return a*x^2+2*x+1/x
+end sub
+begin graph
+ 	size 10 10
+ 	scale auto
+ 	let d1 = my_function(2,x) from 1 to 10 step 2
+ 	d1 line color black
+end graph

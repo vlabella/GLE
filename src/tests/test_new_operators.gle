@@ -1,0 +1,97 @@
+!
+! -- test of new operators
+!
+!size 10 10
+!a=5
+a=5
+a+= 1
+print "a=" a
+a +=1
+print "a=" a
+a+=1
+print "a=" a
+a++
+print "a=" a
+a--
+print "a=" a
+a ++
+print "a=" a
+a --
+print "a=" a
+
+a++
+a++
+a --
+a--
+
+b=3
+a = a + 2
+a += 2
+
+a = a + b
+a += b
+
+sub foo r
+	return 5+78+r
+end sub
+
+ a=2
+ print "a =" a
+ b=2
+ print "b =" b
+ a = a + pi
+ print "a =" a
+ if a <> pi+2 then
+ 	print "ERROR a =" a "and should equal " pi+2
+ end if
+ a = 5
+ b = pi
+ print "a =" a
+ print "b =" b
+ print "a-b =" a-b
+ a -= b
+ print "a =" a
+ if ( a <> 5-pi ) then
+ 	print "ERROR a =" a "and should equal " 5-pi
+ end if
+ print "a =" a
+ 
+ a -= 4
+ print "a =" a
+ 
+ print sin(45)
+ a -= sin(45)
+ print "a =" a
+ 
+ a -= foo(-78)
+ print "a =" a
+ 
+ a *= b
+ print "a =" a
+ a /= pi
+ print "a =" a
+ a ++
+ print "a =" a
+ a --
+ print "a =" a
+
+ text foo bar
+
+ text \tex{$a=b^2$}
+
+ begin text
+ hello this is some text
+ \char{\expr{10}}
+ end text
+
+ include "../gletests/test_pp.gle"
+
+ bitmap "../gui/images/amove.png" 1 1
+ bitmap_info "../gui/images/amove.png"  a b
+ print a 
+ print b
+
+ begin graph
+ 	data "../../../gle-library/examples/2dsimple/normal.csv" d1
+ end graph
+

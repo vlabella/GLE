@@ -1,0 +1,5 @@
+size 10 10
+amove 1 1
+rline 1 0
+rline 0 1
+rline 1 3

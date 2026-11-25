@@ -1,0 +1,128 @@
+size 10 10
+
+print "CBRT"
+print cbrt(27)
+print cbrt(-8)
+
+print "ROUNDING"
+print floor(3.7)
+print floor(-3.7)
+print ceil(3.2)
+print ceil(-3.2)
+print round(3.5)
+print round(-3.5)
+
+print "ACCURATE ELEMENTARY FUNCTIONS"
+print log1p(1e-10)
+print expm1(1e-10)
+print hypot(3, 4)
+
+print "ERROR FUNCTIONS"
+print erf(1)
+print erfc(1)
+print erf(1) + erfc(1)
+
+print "GAMMA FUNCTIONS"
+print gamma(1)
+print gamma(5)
+print log_gamma(5)
+
+print "SINC"
+print sinc(0)
+print sinc(pi)
+print sinc(pi/2)
+
+print "MODIFIED BESSEL"
+print bessel_modified_first(0, 1)
+print bessel_modified_second(0, 1)
+
+print "SPHERICAL BESSEL"
+print spherical_bessel_first(0, 1)
+print spherical_bessel_second(0, 1)
+
+! - expected output
+! cbrt(27)                         = 3
+! cbrt(-8)                         = -2
+
+! floor(3.7)                       = 3
+! floor(-3.7)                      = -4
+! ceil(3.2)                        = 4
+! ceil(-3.2)                       = -3
+! round(3.5)                       = 4
+! round(-3.5)                      = -4
+
+! hypot(3,4)                       = 5
+
+! erf(1)                           ≈ 0.8427007929497149
+! erfc(1)                          ≈ 0.1572992070502851
+! erf(1) + erfc(1)                 ≈ 1
+
+! gamma(1)                         = 1
+! gamma(5)                         = 24
+! log_gamma(5)                     ≈ 3.1780538303479458
+
+! sinc(0)                          = 1
+! sinc(pi)                         ≈ 0
+! sinc(pi/2)                       ≈ 0.6366197723675813
+
+! bessel_modified_first(0,1)       ≈ 1.2660658777520082
+! bessel_modified_second(0,1)      ≈ 0.4210244382407083
+
+! spherical_bessel_first(0,1)      ≈ 0.8414709848078965
+! spherical_bessel_second(0,1)     ≈ -0.5403023058681397
+
+sub validate d$ a b
+	local r$ = "FAIL"
+	if(is_close(a,b)) then
+		r$ = "PASS"
+	end if
+	print d$ a b r$
+end sub
+
+! ------------------------------------------------------------
+! CLAMP
+! ------------------------------------------------------------
+
+validate "clamp: inside range       " clamp(5,0,10) 5
+validate "clamp: below range        " clamp(-2,0,10) 0
+validate "clamp: above range        " clamp(15,0,10) 10
+validate "clamp: lower boundary     " clamp(0,0,10) 0
+validate "clamp: upper boundary     " clamp(10,0,10) 10
+
+
+! ------------------------------------------------------------
+! IS_CLOSE
+! ------------------------------------------------------------
+
+validate "is_close: equal           " is_close(1,1) 1
+validate "is_close: close           " is_close(1.0000001,1) 1
+validate "is_close: not close       " is_close(1.001,1) 0
+
+validate "is_close_abs: equal       " is_close_abs(1,1) 1
+validate "is_close_abs: close       " is_close_abs(1.0000001,1) 1
+validate "is_close_abs: not close   " is_close_abs(1.001,1) 0
+
+
+! ------------------------------------------------------------
+! LERP
+! ------------------------------------------------------------
+
+validate "lerp: start               " lerp(10,20,0) 10
+validate "lerp: midpoint            " lerp(10,20,0.5) 15
+validate "lerp: end                 " lerp(10,20,1) 20
+validate "lerp: extrapolate high    " lerp(10,20,1.5) 25
+validate "lerp: extrapolate low     " lerp(10,20,-0.5) 5
+validate "lerp: reversed            " lerp(20,10,0.25) 17.5
+
+
+! ------------------------------------------------------------
+! REMAP
+! ------------------------------------------------------------
+
+validate "remap: midpoint           " remap(50,0,100,0,10) 5
+validate "remap: low endpoint       " remap(0,0,100,0,10) 0
+validate "remap: high endpoint      " remap(100,0,100,0,10) 10
+validate "remap: signed range       " remap(25,0,100,-1,1) -0.5
+validate "remap: extrapolate        " remap(125,0,100,0,10) 12.5
+validate "remap: reverse output     " remap(25,0,100,10,0) 7.5
+validate "remap: reverse input      " remap(75,100,0,0,10) 2.5

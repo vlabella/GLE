@@ -1,0 +1,32 @@
+!
+! -- test_color_scales.gle
+!
+size 12.5 12
+set font texcmss
+
+sub draw_scale scale$ y
+    gsave
+    set color black
+    amove 0.25 y+0.5
+    write scale$
+    for i = 0 to 100
+        x = i / 100
+        set color colorscale(x, scale$)
+        amove 0.25+12*x y
+        box 0.13 0.4 fill colorscale(x, scale$)
+    next i
+    grestore
+end sub
+
+draw_scale "GRAY"            11
+draw_scale "RED"             10
+draw_scale "GREEN"            9
+draw_scale "BLUE"             8
+draw_scale "VERDIGRIS"        7
+draw_scale "THERMAL"          6
+draw_scale "RAINBOW"          5
+draw_scale "VIRIDIS"          4
+draw_scale "PLASMA"           3
+draw_scale "INFERNO"          2
+draw_scale "MAGMA"            1
+draw_scale "BLUE WHITE RED"   0

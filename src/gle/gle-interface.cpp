@@ -2091,6 +2091,78 @@ static const GLEColorScalePoint redWhiteBlueScale[] = {
     { 1.00, 0.000, 0.000, 1.000 }
 };
 
+/*
+ * Cividis
+ *
+ * Source:
+ * https://github.com/pnnl/cmaputil
+ */
+static const GLEColorScalePoint cividisScale[] = {
+    { 0.00, 0.000000, 0.135112, 0.304751 },
+    { 0.10, 0.032110, 0.201199, 0.440785 },
+    { 0.20, 0.208926, 0.272546, 0.424809 },
+    { 0.30, 0.309601, 0.340399, 0.424790 },
+    { 0.40, 0.401418, 0.411790, 0.440708 },
+    { 0.50, 0.488697, 0.485318, 0.471008 },
+    { 0.60, 0.582087, 0.558670, 0.468118 },
+    { 0.70, 0.683950, 0.638793, 0.444251 },
+    { 0.80, 0.785965, 0.720438, 0.399613 },
+    { 0.90, 0.896818, 0.811030, 0.320982 },
+    { 1.00, 0.995737, 0.909344, 0.217772 }
+};
+
+/*
+ * Davos, Devon, and Oslo
+ *
+ * Source:
+ * http://www.fabiocrameri.ch/colourmaps.php
+ *
+ * References:
+ * Crameri, F. (2018). Scientific colour maps. Zenodo.
+ * https://doi.org/10.5281/zenodo.1243862
+ */
+static const GLEColorScalePoint davosScale[] = {
+    { 0.00, 0.172549, 0.101961, 0.298039 },
+    { 0.10, 0.156863, 0.231373, 0.431373 },
+    { 0.20, 0.164706, 0.368627, 0.592157 },
+    { 0.30, 0.266667, 0.458824, 0.756863 },
+    { 0.40, 0.376471, 0.537255, 0.745098 },
+    { 0.50, 0.490196, 0.611765, 0.709804 },
+    { 0.60, 0.607843, 0.686275, 0.674510 },
+    { 0.70, 0.729412, 0.768627, 0.639216 },
+    { 0.80, 0.843137, 0.850980, 0.631373 },
+    { 0.90, 0.929412, 0.925490, 0.807843 },
+    { 1.00, 1.000000, 1.000000, 1.000000 }
+};
+
+static const GLEColorScalePoint devonScale[] = {
+    { 0.00, 0.168627, 0.101961, 0.298039 },
+    { 0.10, 0.160784, 0.196078, 0.396078 },
+    { 0.20, 0.149020, 0.298039, 0.498039 },
+    { 0.30, 0.180392, 0.384314, 0.623529 },
+    { 0.40, 0.266667, 0.458824, 0.764706 },
+    { 0.50, 0.474510, 0.549020, 0.858824 },
+    { 0.60, 0.650980, 0.635294, 0.925490 },
+    { 0.70, 0.745098, 0.721569, 0.949020 },
+    { 0.80, 0.827451, 0.811765, 0.964706 },
+    { 0.90, 0.913725, 0.905882, 0.980392 },
+    { 1.00, 1.000000, 1.000000, 1.000000 }
+};
+
+static const GLEColorScalePoint osloScale[] = {
+    { 0.00, 0.000000, 0.003922, 0.000000 },
+    { 0.10, 0.043137, 0.098039, 0.152941 },
+    { 0.20, 0.066667, 0.188235, 0.301961 },
+    { 0.30, 0.105882, 0.286275, 0.458824 },
+    { 0.40, 0.180392, 0.384314, 0.627451 },
+    { 0.50, 0.305882, 0.490196, 0.780392 },
+    { 0.60, 0.435294, 0.572549, 0.792157 },
+    { 0.70, 0.564706, 0.650980, 0.788235 },
+    { 0.80, 0.690196, 0.725490, 0.784314 },
+    { 0.90, 0.843137, 0.843137, 0.847059 },
+    { 1.00, 1.000000, 1.000000, 1.000000 }
+};
+
 GLEColor::GLEColor() :
 	m_Name(0)
 {
@@ -2373,6 +2445,14 @@ bool GLEColor::setColorScale(
         interpolateColorScale(value, blueWhiteRedScale, red, green, blue);
     } else if (name == "RED_WHITE_BLUE") {
         interpolateColorScale(value, redWhiteBlueScale, red, green, blue);
+    } else if (name == "CIVIDIS") {
+	      interpolateColorScale(value, cividisScale, red, green, blue);
+	} else if (name == "DAVOS") {
+	      interpolateColorScale(value, davosScale, red, green, blue);
+	} else if (name == "DEVON") {
+	      interpolateColorScale(value, devonScale, red, green, blue);
+	} else if (name == "OSLO") {
+	      interpolateColorScale(value, osloScale, red, green, blue);
     } else {
         return false;
     }
