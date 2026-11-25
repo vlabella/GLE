@@ -455,8 +455,12 @@ if(WIN32 AND Iconv_FOUND)
 		set_property(TARGET Iconv::Iconv PROPERTY
 			IMPORTED_LOCATION_RELEASE "${ICONV_RELEASE}"
 		)
+	else()
+		# fallback
+		set_property(TARGET Iconv::Iconv PROPERTY
+			IMPORTED_LOCATION_RELEASE "${Iconv_LIBRARIES}"
+		)
 	endif()
-
 	#
 	# -- Configure Debug library if found.  If no separate Debug
 	#    library exists, use the Release library for Debug as well.
