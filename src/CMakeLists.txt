@@ -449,6 +449,16 @@ if(WIN32 AND Iconv_FOUND)
 		NO_DEFAULT_PATH
 	)
 	#
+	# -- Fall back to the library found by find_package(Iconv).
+	#
+	if(NOT ICONV_RELEASE)
+		set(ICONV_RELEASE "${Iconv_LIBRARIES}")
+	endif()
+
+	if(NOT ICONV_DEBUG)
+		set(ICONV_DEBUG "${Iconv_LIBRARIES}")
+	endif()
+	#
 	# -- Configure Release library if found.
 	#
 	if(ICONV_RELEASE)
